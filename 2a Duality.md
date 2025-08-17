@@ -98,3 +98,57 @@ $$
 - Duality gives **bounds** on performance and certificates of optimality.
 - Some problems are **easier** in the dual — fewer variables, simpler constraints.
 
+
+## Regularization as a Lagrangian Penalty
+
+Many learning problems can be written in two equivalent forms:
+
+- **Constrained form:**
+  $$
+  \min_{w} \; \text{Loss}(w) \quad \text{s.t.} \quad R(w) \le t
+  $$
+- **Penalized (regularized) form:**
+  $$
+  \min_{w} \; \text{Loss}(w) + \lambda R(w)
+  $$
+  Here, $\lambda \ge 0$ acts like a Lagrange multiplier.  
+  For convex problems, the two forms are equivalent up to a monotone (but possibly non-unique) mapping between $t$ and $\lambda$.
+
+
+## Ridge and Lasso
+
+### Ridge Regression
+- **Constrained form:**
+  $$
+  \min_w \frac12 \|y - Xw\|_2^2 \quad \text{s.t.} \quad \|w\|_2^2 \le t
+  $$
+- **Penalized form:**
+  $$
+  \min_w \frac12 \|y - Xw\|_2^2 + \frac{\lambda}{2} \|w\|_2^2
+  $$
+- **Closed form:**
+  $$
+  w^\star = (X^\top X + \lambda I)^{-1} X^\top y
+  $$
+- **Properties:** Smooth shrinkage of coefficients; no sparsity; always unique.
+
+### Lasso Regression
+- **Constrained form:**
+  $$
+  \min_w \frac12 \|y - Xw\|_2^2 \quad \text{s.t.} \quad \|w\|_1 \le t
+  $$
+- **Penalized form:**
+  $$
+  \min_w \frac12 \|y - Xw\|_2^2 + \lambda \|w\|_1
+  $$
+- **KKT (coordinate $j$)**:
+  $$
+  X_j^\top(y - Xw^\star) = \lambda s_j, \quad
+  s_j =
+  \begin{cases}
+  \operatorname{sign}(w_j^\star), & w_j^\star \neq 0 \\
+  \in [-1,1], & w_j^\star = 0
+  \end{cases}
+  $$
+- **Properties:** Encourages sparsity; solution may not be unique with collinear features.
+

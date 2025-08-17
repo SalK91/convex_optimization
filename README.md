@@ -1,6 +1,9 @@
 https://www.youtube.com/watch?v=d2jF3SXcFQ8
     1. https://web.stanford.edu/class/ee364a/lectures.html
+https://www.youtube.com/watch?v=N3V2AdTImJE&list=PLoROMvodv4rMJqxxviPa4AmDClvcbHi6h&index=10
 
+
+https://www.youtube.com/watch?v=trs0RI39uWI
 # Convex Optimization and Case Studies
 
 ## Overview
