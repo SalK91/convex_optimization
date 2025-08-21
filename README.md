@@ -4,6 +4,8 @@ https://www.youtube.com/watch?v=N3V2AdTImJE&list=PLoROMvodv4rMJqxxviPa4AmDClvcbH
 
 
 https://www.youtube.com/watch?v=trs0RI39uWI
+
+https://www.youtube.com/watch?v=t8sp9rv-Dqo
 # Convex Optimization and Case Studies
 
 ## Overview
