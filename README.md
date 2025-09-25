@@ -6,6 +6,11 @@ https://www.youtube.com/watch?v=N3V2AdTImJE&list=PLoROMvodv4rMJqxxviPa4AmDClvcbH
 https://www.youtube.com/watch?v=trs0RI39uWI
 
 https://www.youtube.com/watch?v=t8sp9rv-Dqo
+
+
+1. LP limitation and scalability
+2. Why postivie semi deifniate matrix
+
 # Convex Optimization and Case Studies
 
 ## Overview
@@ -17,6 +22,7 @@ We focus on:
 - **Real-world case studies** — demonstrating convex optimization in machine learning, control, finance, and beyond.
 
 
+---- 
 
 ### Why Convex Optimization?
 Convex optimization problems are those where the **objective function** is convex and the **feasible set** (set of points satisfying all constraints) is also convex.  
@@ -39,72 +45,6 @@ This makes convex optimization a **cornerstone** in:
 - Resource allocation problems
 
 
-
-## Basics: Convex Sets and Functions
-
-To understand convex optimization, we first need the building blocks: **convex sets** and **convex functions**.
-
-### Convex Sets
-A set $S \subseteq \mathbb{R}^n$ is **convex** if, for any two points $x_1, x_2 \in S$ and any $\theta$ with $0 \leq \theta \leq 1$:
-$$
-\theta x_1 + (1 - \theta) x_2 \in S
-$$
-**Intuition:** If you pick two points in the set and connect them with a straight line, the entire line segment stays inside the set.
-
-**Examples of convex sets:**
-- Half-spaces: $\{x \mid a^T x \leq b\}$
-- Balls: $\{x \mid \|x\|_2 \leq r\}$
-- Affine subspaces: $\{x \mid Ax = b\}$
-- Intersections of convex sets (including polyhedra)
-
-
-
-### Convex Functions
-A function $f : \mathbb{R}^n \to \mathbb{R}$ is **convex** if:
-$$
-f(\theta x_1 + (1 - \theta) x_2) \leq \theta f(x_1) + (1 - \theta) f(x_2),
-\quad \forall \; x_1, x_2, \; \theta \in [0,1]
-$$
-**Intuition:** The line segment between any two points on the graph lies **above** the graph — think “bowl-shaped.”
-
-**Examples of convex functions:**
-- Norms: $\|x\|_p$ for $p \geq 1$
-- Quadratics with positive semidefinite Hessian: $f(x) = x^T Q x + b^T x + c$, with $Q \succeq 0$
-- Exponential: $f(x) = e^x$
-- Negative logarithm: $f(x) = -\log(x)$ on $x > 0$
-
-
-
-### Why This Matters for Optimization
-If both:
-- The **feasible set** (constraints) is convex, and
-- The **objective function** is convex (for minimization)
-
-then:
-- **Every local optimum is global**
-- We can design algorithms with **predictable convergence**
-- The geometry of the problem is **well-behaved** (no “traps” from local minima)
-
-This is the foundation for everything else in convex optimization.
-
-## Formulating Convex Optimization Problems
-
-A **convex optimization problem** has the general form:
-$$
-\begin{aligned}
-& \min_{x \in \mathbb{R}^n} \quad & f_0(x) \\
-& \text{s.t.} \quad & f_i(x) \leq 0, \quad i = 1, \dots, m \\
-& & h_j(x) = 0, \quad j = 1, \dots, p
-\end{aligned}
-$$
-
-Where:
-- $f_0$ (objective) is a convex function.
-- Each $f_i$ (inequality constraint) is convex.
-- Each $h_j$ (equality constraint) is affine.
-
-**Key property:**  
-The feasible set $\{x \mid f_i(x) \leq 0, h_j(x) = 0 \}$ is convex, ensuring that **local minima are global minima**.
 
 ---
 
