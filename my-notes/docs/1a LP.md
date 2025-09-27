@@ -1,3 +1,4 @@
+
 # Linear Programming (LP) Problem
 
 Linear Programming (LP) is a **cornerstone of convex optimization**. It is used to find a decision vector $x$ that minimizes a **linear objective function** subject to **linear constraints**:

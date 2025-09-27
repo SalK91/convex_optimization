@@ -1,0 +1,81 @@
+# Project info
+site_name: Optimization Notes
+site_description: "A structured collection of notes on optimization, convex analysis, and algorithms."
+site_author: "Salman Khan"
+repo_url: "https://github.com/SalK91/convex_optimization"
+repo_name: "GitHub"
+
+# Theme
+theme:
+  name: material
+  palette:
+    - scheme: slate   
+      primary: teal
+      accent: indigo
+    - scheme: slate
+      primary: teal
+      accent: teal
+      toggle:
+        icon: material/weather-night
+        name: Switch to dark mode
+  font:
+    text: Roboto
+    code: Fira Code
+  features:
+    - navigation.instant
+    - navigation.tabs
+    - navigation.top
+    - search.suggest
+    - search.highlight
+    - toc.integrate
+    - content.code.copy
+    - content.action.edit
+    - content.action.view
+
+# Plugins
+plugins:
+  - search
+  - autorefs
+  - glightbox   # for image lightbox support
+
+# Markdown extensions
+markdown_extensions:
+  - admonition
+  - footnotes
+  - def_list
+  - pymdownx.details
+  - pymdownx.highlight
+  - pymdownx.superfences
+  - pymdownx.tasklist:
+      custom_checkbox: true
+  - toc:
+      permalink: true
+
+# Navigation (sidebar)
+nav:
+  - Home: index.md
+  - 0 Basics:
+      - Basics: "0 Basics.md"
+      - Optimization Algos: "0b Optimization Algos.md"
+      - Epigraphs: "0c Epigraphs.md"
+  - 1 Linear Programs:
+      - LP: "1a LP.md"
+      - QP: "1b QP.md"
+      - Least Squares: "1c Least Square.md"
+      - QCQP: "1d QCQP.md"
+      - SOCP: "1e SOCP.md"
+      - Geometric Interpretation: "1f GeometricInterpretation.md"
+      - GP: "1g GP.md"
+  - 2 Duality & Regularization:
+      - Duality: "2a Duality.md"
+      - Huber: "3a Huber.md"
+      - Penalty Functions: "3b Penalty Functions.md"
+      - Regularized: "3c Regularized.md"
+      - Robust Approximation: "3d Robust Approximation.md"
+      - MLE: "3e MLE.md"
+  - 4 Discrimination & Optimization:
+      - Linear Discrimination: "4a Linear Discrimination.md"
+      - First Order Optimization: "6a First Order Optimization.md"
+  - 7 Miscellaneous:
+      - Pareto Optimality: "7a pareto optimal.md"
+      - Example: "Example.md"

@@ -1,3 +1,8 @@
+---
+title: Epigraphs
+nav_order: 4
+---
+
 # Epigraphs and Convex Optimization
 
 ## 1. Definition of an Epigraph
