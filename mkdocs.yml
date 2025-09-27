@@ -1,5 +1,5 @@
 # Project info
-site_name: Optimization Notes
+site_name: Convex Optimization Notes
 site_description: "A structured collection of notes on optimization, convex analysis, and algorithms."
 site_author: "Salman Khan"
 repo_url: "https://github.com/SalK91/convex_optimization"
@@ -38,18 +38,13 @@ plugins:
   - autorefs
   - glightbox   # for image lightbox support
 
-# Markdown extensions
+extra_javascript: 
+    - https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML
+
 markdown_extensions:
-  - admonition
-  - footnotes
-  - def_list
-  - pymdownx.details
-  - pymdownx.highlight
-  - pymdownx.superfences
-  - pymdownx.tasklist:
-      custom_checkbox: true
-  - toc:
-      permalink: true
+    - mdx_math:
+        enable_dollar_delimiter: true
+
 
 # Navigation (sidebar)
 nav:

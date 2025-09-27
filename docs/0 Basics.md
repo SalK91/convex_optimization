@@ -1,14 +1,6 @@
----
-title: Introduction
-nav_order: 2
----
-
-# Introduction
-This is the intro chapter.
-
 # Convex Optimisation: The Basics
 
-Convex optimisation is one of the central pillars of modern applied mathematics, machine learning, and artificial intelligence. It provides a rich framework in which we can model problems, design algorithms, and guarantee performance. Unlike general non-convex optimisation, convex optimisation problems enjoy the key property that any local solution is also global. This makes them especially important in practice, where reliability, interpretability, and theoretical guarantees are valued.
+Convex optimisation is one of the central pillars of modern applied mathematics, machine learning, and artificial intelligence. It provides a rich framework in which we can model problems, design algorithms, and guarantee performance. Unlike general non-convex optimisation, convex optimisation problems enjoy the key property that any **local solution is also global**. This makes them especially important in practice, where reliability, interpretability, and theoretical guarantees are valued.
 
 ## Mathematical Prerequisites
 
@@ -16,7 +8,7 @@ Before we can build convex optimisation tools, we need to review some core mathe
 
 ### Linear Algebra Essentials
 
-- **Vector spaces and norms**: We work primarily in $\mathbb{R}^n$, the $n$-dimensional Euclidean space. The Euclidean norm is $\|x\|_2 = \sqrt{x^T x}$, but other norms, such as $\|x\|_1$ or $\|x\|_\infty$, are also important.
+- **Vector spaces and norms**: We work primarily in \(\mathbb{R}^n\), the $n$-dimensional Euclidean space. The Euclidean norm is $\|x\|_2 = \sqrt{x^T x}$, but other norms, such as $\|x\|_1$ or $\|x\|_\infty$, are also important.
 - **Inner products**: An inner product in $\mathbb{R}^n$ is $\langle x, y \rangle = x^T y$.  
 - **Affine sets**: A set of the form $\{x \in \mathbb{R}^n : Ax = b\}$, where $A$ is a matrix and $b$ is a vector. Affine sets are the natural generalisation of lines and planes.
 - **Positive semidefinite matrices**: A symmetric matrix $Q$ is positive semidefinite (PSD) if $x^T Q x \geq 0$ for all $x$. Quadratic forms with PSD matrices define convex functions.
@@ -30,7 +22,7 @@ Before we can build convex optimisation tools, we need to review some core mathe
 
 
 ## Convex Sets and Geometry
-
+ 
 ### Convex Combination
 
 A convex combination of $x_1, \dots, x_k$ is
