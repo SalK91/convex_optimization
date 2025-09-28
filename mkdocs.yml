@@ -1,5 +1,5 @@
 # Project info
-site_name: Convex Optimization Notes
+site_name: Convex Optimization -  Algorithms and Analysis
 site_description: "A structured collection of notes on optimization, convex analysis, and algorithms."
 site_author: "Salman Khan"
 repo_url: "https://github.com/SalK91/convex_optimization"
@@ -49,11 +49,11 @@ markdown_extensions:
 # Navigation (sidebar)
 nav:
   - Home: index.md
-  - 0 Basics:
-      - Basics: "0 Basics.md"
+  - Introduction:
+      - Mathematical Prerequisites: "0 Basics.md"
       - Optimization Algos: "0b Optimization Algos.md"
       - Epigraphs: "0c Epigraphs.md"
-  - 1 Linear Programs:
+  - Linear Programs:
       - LP: "1a LP.md"
       - QP: "1b QP.md"
       - Least Squares: "1c Least Square.md"

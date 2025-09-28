@@ -7,56 +7,6 @@ nav_order: 3
 
 Optimization is the **core of machine learning**: training a model is an optimization problem where we search for parameters $\theta$ that **minimize a loss or maximize a likelihood**. The choice of optimization algorithm depends on **problem type, scale, constraints, smoothness, and stochasticity**. 
 
-## Key Concepts
-
-### 1. Convexity
-- **Definition:** $f$ is convex if  
-$$
-f(\theta x + (1-\theta)y) \le \theta f(x) + (1-\theta)f(y), \quad \forall \theta \in [0,1].
-$$  
-- **Context:** Convexity ensures **global optimality**; local minima are also global minima.  
-- **ML relevance:** Linear/logistic regression, SVMs, GLMs. Nonconvex deep networks are harder but often “effectively convex” due to overparameterization.  
-- **Intuition:** “Bowl-shaped” function; no hidden valleys.
-
-
-
-### 2. Strong Convexity
-- **Definition:** $f$ is $\mu$-strongly convex if  
-$$
-f(y) \ge f(x) + \nabla f(x)^\top (y-x) + \frac{\mu}{2}\|y-x\|^2
-$$  
-- **Context:** Guarantees a unique minimum and **linear convergence** for gradient methods.  
-- **ML relevance:** Ridge/L2 regularization introduces strong convexity → more stable optimization.
-
-
-### 3. Smoothness (L-smooth)
-- **Definition:**  
-$$
-\|\nabla f(x) - \nabla f(y)\| \le L \|x-y\|
-$$  
-- **Context:** Smoothness ensures **gradients change gradually**, preventing abrupt jumps.  
-- **Impact:** Determines **safe step sizes**: $\alpha < 1/L$.  
-- **ML relevance:** Neural networks are locally smooth; fixed-step gradient descent is justified.
-
----
-
-### 4. Condition Number
-- **Definition:** $\kappa = L / \mu$  
-- **Context:** Measures problem difficulty: high $\kappa$ → zig-zagging; low $\kappa$ → fast convergence.  
-- **ML relevance:** Feature normalization, batch/layer norm, and preconditioning help improve conditioning.
-
-
-### 5. Subgradients & Proximal Operators
-- **Subgradient:** $g$ is a subgradient if  
-$$
-f(y) \ge f(x)+g^\top(y-x), \quad \forall y
-$$  
-- **Proximal operator:**  
-$$
-\text{prox}_{\alpha g}(v) = \arg\min_x \Big(g(x) + \frac{1}{2\alpha}\|x-v\|^2\Big)
-$$  
-- **Context:** Needed for **nonsmooth functions** (L1-regularization, hinge loss).  
-- **ML relevance:** SVM hinge loss, Lasso, sparse dictionary learning. Proximal methods efficiently handle shrinkage or projection steps.
 
 
 ## First-Order Gradient-Based Methods
