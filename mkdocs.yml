@@ -50,7 +50,9 @@ markdown_extensions:
 nav:
   - Home: index.md
   - Introduction:
-      - Mathematical Prerequisites: "0 Basics.md"
+      - LA Prerequisites: "0a LA.md"
+      - Convex Sets: "0b Convex Sets.md"
+      - Convex Functions: "0c Convex Functions.md"
       - Optimization Algos: "0b Optimization Algos.md"
       - Epigraphs: "0c Epigraphs.md"
   - Linear Programs:

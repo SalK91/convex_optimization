@@ -1,6 +1,3 @@
-# Convex Optimization and Case Studies
-
-## Overview
 This repository is a curated collection of **concepts**, **algorithms**, and **case studies** in **convex optimization** — a unifying framework that sits at the intersection of applied mathematics, computer science, and engineering.
 
 We focus on:
