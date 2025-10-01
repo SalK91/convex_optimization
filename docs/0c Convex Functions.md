@@ -61,57 +61,6 @@ Positive semidefinite Hessian means the function curves upward or is flat in all
 4. Negative logarithm: $f(x) = -\log(x)$ on $x > 0$.  
 5. Linear functions: $f(x) = a^T x + b$.  
 
-# Strong Convexity
-$f$ is $\mu$-strongly convex if  
-$$
-f(y) \ge f(x) + \nabla f(x)^\top (y-x) + \frac{\mu}{2}\|y-x\|^2
-$$  
-
-If twice differentiable, this is equivalent to
-  $$
-  \nabla^2 f(x) \succeq \mu I \quad\text{for all }x,
-  $$
-
-
-It guarantees a unique minimum and linear convergence for gradient-based methods. For example: Ridge/L2 regularization introduces strong convexity → more stable and faster optimization. 
-
-``` The “bowl” is curved enough everywhere i.e. no flat regions. The steeper the curvature, the faster you slide to the bottom.```
-
-The Extra term $\frac{\mu}{2} |y-x|^2$ ensures the function grows at least quadratically away from the tangent.
-
-Example:
-
-- $f(x) = x^2$ is 2-strongly convex with $\mu=2$.
-- $f(x) = x^4$ is convex but not strongly convex near $x=0$ (too flat).
- 
-### Smoothness (L-smooth)
-$$
-\|\nabla f(x) - \nabla f(y)\| \le L \|x-y\|
-$$  
-
-Smoothness ensures gradients change gradually, preventing abrupt jumps. If $f$ is twice differentiable, a sufficient (and often used) equivalent condition is
-  $$
-  \nabla^2 f(x) \preceq L I \quad\text{for all }x,
-  $$
-  i.e. the largest eigenvalue of the Hessian is at most $L$. Intuition: $L$ is the maximum curvature / steepness of $f$.
-
-
-
-
-
-It determines safe step sizes: $\alpha < 1/L$ for gradient descent. Neural networks are locally smooth; fixed-step gradient descent is justified.  
-```Think of a surface that is not too steep anywhere. You can move along the slope without risk of overshooting dramatically.```
-
-# Condition Number
-$\kappa = L / \mu$  
-
-Intuition: $\kappa$ measures the ratio between maximum and minimum curvature. 
-
-  - High $\kappa$ → narrow, elongated valleys → gradient descent zig-zags and converges slowly.  
-  - Low $\kappa$ → well-shaped valley → fast convergence.  
-- ML relevance: Feature normalization, batch/layer normalization, and preconditioning improve conditioning.  
-- Intuition: Condition number tells you how “twisted” the bowl is. A perfectly round bowl (low $\kappa$) is easy to slide down; a narrow steep valley (high $\kappa$) is tricky.
-
 # Subgradients & Proximal Operators
 Modern optimization in machine learning often deals with nonsmooth functions e.g., $L_1$ regularization, hinge loss in SVMs, indicator constraints. Gradients are not always defined at these nonsmooth points, so we need subgradients and proximal operators. For a differentiable convex function $f:\mathbb{R}^n \to \mathbb{R}$, the gradient $\nabla f(x)$ provides the slope for descent. But many convex functions are not differentiable everywhere:
 

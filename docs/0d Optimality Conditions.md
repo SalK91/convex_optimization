@@ -71,7 +71,7 @@ $$
 where $f$ is convex and $\mathcal{X} \subseteq \mathbb{R}^n$ is a convex feasible set.
 
 
-### Interior Point ($\hat{x} \in \text{interior}(\mathcal{X})$):
+### Interior Point:
 
 If $\hat{x}$ lies strictly inside the feasible set, then the unconstrained condition applies:
 
@@ -82,7 +82,7 @@ $$
 Intuition: There are no boundary restrictions, so the gradient (or subgradient) must vanish.
 
 
-### Boundary Point ($\hat{x} \in \partial \mathcal{X}$):
+### Boundary Point:
 
 If $\hat{x}$ lies on the boundary of $\mathcal{X}$, then for $\hat{x}$ to be optimal:
 

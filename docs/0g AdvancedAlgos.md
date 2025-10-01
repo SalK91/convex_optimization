@@ -1,13 +1,3 @@
----
-title: Optimization Algorithms
-nav_order: 3
----
-
-# Optimization:  Algos
-
-Optimization is the **core of machine learning**: training a model is an optimization problem where we search for parameters $\theta$ that **minimize a loss or maximize a likelihood**. The choice of optimization algorithm depends on **problem type, scale, constraints, smoothness, and stochasticity**. 
-
-
 
 ## First-Order Gradient-Based Methods
 

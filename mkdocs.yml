@@ -54,7 +54,9 @@ nav:
       - Convex Sets: "0b Convex Sets.md"
       - Convex Functions: "0c Convex Functions.md"
       - Optimality Conditions: "0d Optimality Conditions.md"
-      - Optimization Algos: "0b Optimization Algos.md"
+      - Optimization Algos: "0e Optimization Algos.md"
+      - Properties : "0f Convergence.md"
+      - Advanced Algos: "0g AdvancedAlgos.md"
       - Epigraphs: "0c Epigraphs.md"
   - Linear Programs:
       - LP: "1a LP.md"
