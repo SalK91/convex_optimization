@@ -1,0 +1,1536 @@
+<!DOCTYPE html><html lang="en" class="no-js"><head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="A structured collection of notes on optimization, convex analysis, and algorithms.">
+      
+      
+        <meta name="author" content="Salman Khan">
+      
+      
+      
+        <link rel="prev" href="../0a%20LA/">
+      
+      
+        <link rel="next" href="../0c%20Convex%20Functions/">
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.20">
+    
+    
+      
+        <title>Convex Sets - Convex Optimization -  Algorithms and Analysis</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.e53b48f4.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CFira+Code:400,400i,700,700i&amp;display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Fira Code"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  <link href="../assets/stylesheets/glightbox.min.css" rel="stylesheet"><script src="../assets/javascripts/glightbox.min.js"></script><style id="glightbox-style">
+            html.glightbox-open { overflow: initial; height: 100%; }
+            .gslide-title { margin-top: 0px; user-select: text; }
+            .gslide-desc { color: #666; user-select: text; }
+            .gslide-image img { background: white; }
+            .gscrollbar-fixer { padding-right: 15px; }
+            .gdesc-inner { font-size: 0.75rem; }
+            body[data-md-color-scheme="slate"] .gdesc-inner { background: var(--md-default-bg-color); }
+            body[data-md-color-scheme="slate"] .gslide-title { color: var(--md-default-fg-color); }
+            body[data-md-color-scheme="slate"] .gslide-desc { color: var(--md-default-fg-color); }
+        </style></head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="slate" data-md-color-primary="teal" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#convex-combination" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="Convex Optimization -  Algorithms and Analysis" class="md-header__button md-logo" aria-label="Convex Optimization -  Algorithms and Analysis" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"></path></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"></path></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Convex Optimization -  Algorithms and Analysis
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Convex Sets
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="teal" data-md-color-accent="indigo" aria-hidden="true" type="radio" name="__palette" id="__palette_0">
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="teal" data-md-color-accent="teal" aria-label="Switch to dark mode" type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3zm3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95zm-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31"></path></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"></path></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"></path></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"></path></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"></path></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/SalK91/convex_optimization" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.0.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"></path></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href=".." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Home
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../0a%20LA/" class="md-tabs__link">
+          
+  
+  
+  Introduction
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../1a%20LP/" class="md-tabs__link">
+          
+  
+  
+  Linear Programs
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../2a%20Duality/" class="md-tabs__link">
+          
+  
+  
+  2 Duality &amp; Regularization
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../4a%20Linear%20Discrimination/" class="md-tabs__link">
+          
+  
+  
+  4 Discrimination &amp; Optimization
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../7a%20pareto%20optimal/" class="md-tabs__link">
+          
+  
+  
+  7 Miscellaneous
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+  
+
+<nav class="md-nav md-nav--primary md-nav--lifted md-nav--integrated" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="Convex Optimization -  Algorithms and Analysis" class="md-nav__button md-logo" aria-label="Convex Optimization -  Algorithms and Analysis" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"></path></svg>
+
+    </a>
+    Convex Optimization -  Algorithms and Analysis
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/SalK91/convex_optimization" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.0.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"></path></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Home
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    Introduction
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            Introduction
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0a%20LA/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    LA Prerequisites
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    Convex Sets
+    
+  </span>
+  
+
+      </a>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0c%20Convex%20Functions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Convex Functions
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0d%20Optimality%20Conditions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Optimality Conditions
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0e%20Optimization%20Algos/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Optimization Algos
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0f%20Convergence/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Properties
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0g%20AdvancedAlgos/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Advanced Algos
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0c Epigraphs.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Epigraphs
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3">
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Linear Programs
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            Linear Programs
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../1a%20LP/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    LP
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../1b%20QP/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    QP
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../1c%20Least%20Square/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Least Squares
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../1d%20QCQP/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    QCQP
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../1e%20SOCP/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    SOCP
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../1f%20GeometricInterpretation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Geometric Interpretation
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../1g%20GP/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    GP
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4">
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    2 Duality &amp; Regularization
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            2 Duality &amp; Regularization
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../2a%20Duality/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Duality
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../3a%20Huber/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Huber
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../3b%20Penalty%20Functions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Penalty Functions
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../3c%20Regularized/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Regularized
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../3d%20Robust%20Approximation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Robust Approximation
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../3e%20MLE/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    MLE
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5">
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    4 Discrimination &amp; Optimization
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            4 Discrimination &amp; Optimization
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../4a%20Linear%20Discrimination/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Linear Discrimination
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../6a%20First%20Order%20Optimization/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    First Order Optimization
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6">
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    7 Miscellaneous
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            7 Miscellaneous
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../7a%20pareto%20optimal/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Pareto Optimality
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Example/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Example
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+    <a href="https://github.com/SalK91/convex_optimization/edit/master/docs/0b Convex Sets.md" title="Edit this page" class="md-content__button md-icon" rel="edit">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M10 20H6V4h7v5h5v3.1l2-2V8l-6-6H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h4zm10.2-7c.1 0 .3.1.4.2l1.3 1.3c.2.2.2.6 0 .8l-1 1-2.1-2.1 1-1c.1-.1.2-.2.4-.2m0 3.9L14.1 23H12v-2.1l6.1-6.1z"></path></svg>
+    </a>
+  
+  
+    
+      
+    
+    <a href="https://github.com/SalK91/convex_optimization/raw/master/docs/0b Convex Sets.md" title="View source of this page" class="md-content__button md-icon">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 18c.56 0 1 .44 1 1s-.44 1-1 1-1-.44-1-1 .44-1 1-1m0-3c-2.73 0-5.06 1.66-6 4 .94 2.34 3.27 4 6 4s5.06-1.66 6-4c-.94-2.34-3.27-4-6-4m0 6.5a2.5 2.5 0 0 1-2.5-2.5 2.5 2.5 0 0 1 2.5-2.5 2.5 2.5 0 0 1 2.5 2.5 2.5 2.5 0 0 1-2.5 2.5M9.27 20H6V4h7v5h5v4.07c.7.08 1.36.25 2 .49V8l-6-6H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h4.5a8.2 8.2 0 0 1-1.23-2"></path></svg>
+    </a>
+  
+
+
+<ul>
+<li>Convexity of sets: A set <script type="math/tex">C</script> is convex if for any <script type="math/tex">x_1, x_2 \in C</script> and <script type="math/tex">\theta \in [0,1]</script>, we have <script type="math/tex">\theta x_1 + (1-\theta) x_2 \in C</script>.</li>
+<li>Closed sets: A set is closed if it contains all its limit points. The closure of a set is the smallest closed set containing it.</li>
+<li>Extreme points: A point in a convex set is extreme if it cannot be expressed as a convex combination of two other distinct points in the set. For polyhedra, extreme points correspond to vertices.</li>
+</ul>
+<h1 id="convex-combination">Convex Combination</h1>
+<p>A convex combination of <script type="math/tex">x_1, \dots, x_k</script> is
+<script type="math/tex; mode=display">
+x = \sum_{i=1}^k \theta_i x_i, \quad \theta_i \geq 0, \quad \sum_{i=1}^k \theta_i = 1.
+</script>
+</p>
+<p>This is simply a weighted average where weights are nonnegative and sum to 1.</p>
+<h1 id="convex-hull">Convex Hull</h1>
+<p>The convex hull of a set <script type="math/tex">S</script> is the collection of all convex combinations of points in <script type="math/tex">S</script>. It is the smallest convex set containing <script type="math/tex">S</script>.</p>
+<p><code>Geometric intuition: Imagine stretching a rubber band around the points; the enclosed region is the convex hull.</code></p>
+<h1 id="cones">Cones</h1>
+<ul>
+<li>
+<p>A  cone is a set <script type="math/tex">K</script> such that if <script type="math/tex">x \in K</script> and <script type="math/tex">\alpha \geq 0</script>, then <script type="math/tex">\alpha x \in K</script>.<br>
+  In words: a cone is closed under nonnegative scalar multiplication.  </p>
+</li>
+<li>
+<p>The conic hull (or convex cone) of a set <script type="math/tex">S</script> is the collection of all conic combinations of points in <script type="math/tex">S</script>:<br>
+<script type="math/tex; mode=display">
+  \text{cone}(S) = \left\{ \sum_{i=1}^k \theta_i x_i \;\middle|\; x_i \in S, \; \theta_i \geq 0 \right\}.
+  </script>
+</p>
+</li>
+<li>
+<p>A cone is <strong>not necessarily a subspace</strong> (since a subspace allows all linear combinations, including negative multiples).<br>
+  However, every subspace is a cone (because it is closed under nonnegative scaling).  </p>
+</li>
+<li>
+<p>A cone is <strong>not necessarily convex</strong>. To be convex, a set must be closed under addition and convex combinations, which is not guaranteed for a general cone. A <strong>convex cone</strong> is a cone that is also convex, i.e., closed under nonnegative linear combinations.</p>
+</li>
+</ul>
+<h1 id="polar-cones">Polar Cones</h1>
+<ul>
+<li>
+<p>Given a cone <script type="math/tex">K \subseteq \mathbb{R}^n</script>, the <strong>polar cone</strong> of <script type="math/tex">K</script> is defined as<br>
+<script type="math/tex; mode=display">
+  K^\circ = \{ y \in \mathbb{R}^n \;\mid\; \langle y, x \rangle \leq 0 \;\; \forall x \in K \}.
+  </script>
+</p>
+</li>
+<li>
+<p>Intuitively, the polar cone consists of all vectors that form a <strong>non-acute angle</strong> (inner product <script type="math/tex">\leq 0</script>) with every vector in <script type="math/tex">K</script>.  </p>
+</li>
+<li>
+<p>The polar of any cone is always a <strong>closed convex cone</strong>, even if the original cone <script type="math/tex">K</script> is not convex or not closed.  </p>
+</li>
+<li>
+<p>If <script type="math/tex">K</script> is a subspace, then its polar cone <script type="math/tex">K^\circ</script> is the <strong>orthogonal complement</strong> of <script type="math/tex">K</script>.  </p>
+</li>
+<li>
+<p>A useful duality property: for a closed convex cone <script type="math/tex">K</script>,<br>
+<script type="math/tex; mode=display">
+  (K^\circ)^\circ = K.
+  </script>
+</p>
+</li>
+</ul>
+<h1 id="tangent-cone">Tangent Cone</h1>
+<ul>
+<li>Given a set <script type="math/tex">C \subseteq \mathbb{R}^n</script> and a point <script type="math/tex">x \in C</script>, the <strong>tangent cone</strong> (also called the contingent cone) at <script type="math/tex">x</script> is defined as<br>
+<script type="math/tex; mode=display">
+  T_C(x) = \left\{ d \in \mathbb{R}^n \;\middle|\; \exists \, t_k \downarrow 0, \; x_k \in C, \; x_k \to x, \; \frac{x_k - x}{t_k} \to d \right\}.
+  </script>
+</li>
+<li>Intuitively: <script type="math/tex">T_C(x)</script> is the set of all directions <script type="math/tex">d</script> in which you can “move infinitesimally” inside <script type="math/tex">C</script> starting from <script type="math/tex">x</script>.</li>
+<li>If <script type="math/tex">x</script> is in the <strong>interior</strong> of <script type="math/tex">C</script>, then <script type="math/tex">T_C(x) = \mathbb{R}^n</script>.  </li>
+<li>If <script type="math/tex">x</script> is on the <strong>boundary</strong>, <script type="math/tex">T_C(x)</script> consists of directions that keep you inside <script type="math/tex">C</script> locally.</li>
+</ul>
+<h1 id="normal-cone">Normal Cone</h1>
+<ul>
+<li>
+<p>For a convex set <script type="math/tex">C \subseteq \mathbb{R}^n</script> and a point <script type="math/tex">x \in C</script>, the <strong>normal cone</strong> at <script type="math/tex">x</script> is defined as<br>
+<script type="math/tex; mode=display">
+  N_C(x) = \{ v \in \mathbb{R}^n \;\mid\; \langle v, y - x \rangle \leq 0 \;\; \forall y \in C \}.
+  </script>
+</p>
+</li>
+<li>
+<p>Each <script type="math/tex">v \in N_C(x)</script> defines a <strong>supporting hyperplane</strong> to <script type="math/tex">C</script> at <script type="math/tex">x</script>:  </p>
+</li>
+</ul>
+<p>
+<script type="math/tex; mode=display">
+  v^T(y-x) \le 0, \quad \forall y \in C
+  </script>
+</p>
+<ul>
+<li>
+<p>Relationship: the normal cone is the <strong>polar cone</strong> of the tangent cone:<br>
+<script type="math/tex; mode=display">
+  N_C(x) = \big(T_C(x)\big)^\circ.
+  </script>
+</p>
+</li>
+<li>
+<p>
+<script type="math/tex">N_C(x)</script> is always a <strong>closed convex cone</strong>.</p>
+</li>
+<li>Intuitively: <script type="math/tex">N_C(x)</script> is the set of vectors pointing “outward” and supporting the set <script type="math/tex">C</script> at <script type="math/tex">x</script>.  </li>
+<li><strong>Interior point</strong> of <script type="math/tex">C</script>: <script type="math/tex">N_C(x) = \{0\}</script> (no outward direction, since <script type="math/tex">x</script> is surrounded).  </li>
+<li><strong>Boundary point</strong>: <script type="math/tex">N_C(x)</script> contains outward-pointing directions normal to the boundary.  </li>
+<li><strong>Corner/vertex</strong>: <script type="math/tex">N_C(x)</script> is a <strong>cone of outward normals</strong>, capturing multiple “faces” meeting at <script type="math/tex">x</script>.  </li>
+</ul>
+<h2 id="why-is-the-normal-cone-important">Why is the normal cone important?</h2>
+<h3 id="first-order-optimality-condition">First-order optimality condition</h3>
+<ul>
+<li>
+<p>For the problem <script type="math/tex">\min f(x)</script> subject to <script type="math/tex">x \in C</script>, a point <script type="math/tex">x^*</script> is optimal if:  </p>
+<p>
+<script type="math/tex; mode=display">
+ 0 \in \partial f(x^*) + N_C(x^*)
+ </script>
+</p>
+<p>This says the slope (subgradient) of <script type="math/tex">f</script> is exactly balanced by the “push back” of the constraint set.  </p>
+</li>
+</ul>
+<h3 id="connection-to-tangent-cone">Connection to tangent cone</h3>
+<ul>
+<li>
+<p>The normal cone is the polar cone of the tangent cone:  </p>
+<p>
+<script type="math/tex; mode=display">
+ N_C(x) = \big(T_C(x)\big)^\circ
+ </script>
+</p>
+<p>This duality links feasible directions (tangent cone) with blocking directions (normal cone).  </p>
+</li>
+</ul>
+<h3 id="geometric-interpretation">Geometric interpretation</h3>
+<ul>
+<li>Normals describe which directions leave the set if you try to move outward.  </li>
+<li>They capture the “boundary geometry” of <script type="math/tex">C</script>, generalizing the idea of perpendicular vectors to surfaces. </li>
+</ul>
+<h1 id="comparison-of-tangent-normal-and-polar-cones">Comparison of Tangent, Normal, and Polar Cones</h1>
+<table>
+<thead>
+<tr>
+<th>Cone</th>
+<th>Applies To</th>
+<th>Meaning</th>
+<th>Interior Point</th>
+<th>Boundary Point</th>
+<th>Key Facts</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Tangent</strong> <script type="math/tex">T_C(x)</script>
+</td>
+<td>Any set (convex nicer)</td>
+<td>Feasible move directions</td>
+<td>
+<script type="math/tex">T_C(x)=\mathbb{R}^n</script>
+</td>
+<td>Restricted to stay in <script type="math/tex">C</script>
+</td>
+<td>Local geometry of <script type="math/tex">C</script>
+</td>
+</tr>
+<tr>
+<td><strong>Normal</strong> <script type="math/tex">N_C(x)</script>
+</td>
+<td>Convex sets (gen. exist)</td>
+<td>Outward blocking dirs</td>
+<td>
+<script type="math/tex">N_C(x)=\{0\}</script>
+</td>
+<td>Outward rays/cones</td>
+<td>Closed, convex; <script type="math/tex">N_C(x)=(T_C(x))^\circ</script>
+</td>
+</tr>
+<tr>
+<td><strong>Polar</strong> <script type="math/tex">K^\circ</script>
+</td>
+<td>Any cone <script type="math/tex">K</script>
+</td>
+<td>Non-acute dirs wrt <script type="math/tex">K</script>
+</td>
+<td>Not point-specific</td>
+<td>Not point-specific</td>
+<td>Closed, convex; <script type="math/tex">(K^\circ)^\circ=K</script> if closed convex</td>
+</tr>
+</tbody>
+</table>
+<h1 id="hyperplanes-and-half-spaces">Hyperplanes and Half-spaces</h1>
+<ul>
+<li>A hyperplane is the solution set of <script type="math/tex">a^T x = b</script>.</li>
+<li>A half-space is one side of a hyperplane, defined as <script type="math/tex">a^T x \leq b</script> or <script type="math/tex">a^T x \geq b</script>.</li>
+<li>These objects are convex and serve as building blocks in constraints.</li>
+</ul>
+<p>Separation and Supporting Hyperplanes: One of the most powerful results in convex geometry is the separating hyperplane theorem: two disjoint convex sets can be separated by a hyperplane. For a convex set <script type="math/tex">C</script> and a point <script type="math/tex">x \notin C</script>, there exists a hyperplane that separates <script type="math/tex">x</script> from <script type="math/tex">C</script>. This underpins duality theory in optimisation. A supporting hyperplane touches a convex set at one or more points but does not cut through it.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"></path></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      <script id="__config" type="application/json">{"base": "..", "features": ["navigation.instant", "navigation.tabs", "navigation.top", "search.suggest", "search.highlight", "toc.integrate", "content.code.copy", "content.action.edit", "content.action.view"], "search": "../assets/javascripts/workers/search.973d3a69.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.f55a23d4.min.js"></script>
+      
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+      
+    
+  
+<script id="init-glightbox">const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});
+document$.subscribe(()=>{ lightbox.reload(); });
+</script></body></html>
