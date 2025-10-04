@@ -1,0 +1,1658 @@
+<!DOCTYPE html><html lang="en" class="no-js"><head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="A structured collection of notes on optimization, convex analysis, and algorithms.">
+      
+      
+        <meta name="author" content="Salman Khan">
+      
+      
+      
+        <link rel="prev" href="..">
+      
+      
+        <link rel="next" href="../0b%20Convex%20Sets/">
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.20">
+    
+    
+      
+        <title>LA Prerequisites - Convex Optimization -  Algorithms and Analysis</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.e53b48f4.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CFira+Code:400,400i,700,700i&amp;display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Fira Code"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  <link href="../assets/stylesheets/glightbox.min.css" rel="stylesheet"><script src="../assets/javascripts/glightbox.min.js"></script><style id="glightbox-style">
+            html.glightbox-open { overflow: initial; height: 100%; }
+            .gslide-title { margin-top: 0px; user-select: text; }
+            .gslide-desc { color: #666; user-select: text; }
+            .gslide-image img { background: white; }
+            .gscrollbar-fixer { padding-right: 15px; }
+            .gdesc-inner { font-size: 0.75rem; }
+            body[data-md-color-scheme="slate"] .gdesc-inner { background: var(--md-default-bg-color); }
+            body[data-md-color-scheme="slate"] .gslide-title { color: var(--md-default-fg-color); }
+            body[data-md-color-scheme="slate"] .gslide-desc { color: var(--md-default-fg-color); }
+        </style></head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="slate" data-md-color-primary="teal" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#linear-algebra-prerequisites" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="Convex Optimization -  Algorithms and Analysis" class="md-header__button md-logo" aria-label="Convex Optimization -  Algorithms and Analysis" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"></path></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"></path></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Convex Optimization -  Algorithms and Analysis
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              LA Prerequisites
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="teal" data-md-color-accent="indigo" aria-hidden="true" type="radio" name="__palette" id="__palette_0">
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="teal" data-md-color-accent="teal" aria-label="Switch to dark mode" type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3zm3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95zm-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31"></path></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"></path></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"></path></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"></path></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"></path></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/SalK91/convex_optimization" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.0.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"></path></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href=".." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Home
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="./" class="md-tabs__link">
+          
+  
+  
+  Introduction
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../1a%20LP/" class="md-tabs__link">
+          
+  
+  
+  Linear Programs
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../2a%20Duality/" class="md-tabs__link">
+          
+  
+  
+  2 Duality &amp; Regularization
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../4a%20Linear%20Discrimination/" class="md-tabs__link">
+          
+  
+  
+  4 Discrimination &amp; Optimization
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../7a%20pareto%20optimal/" class="md-tabs__link">
+          
+  
+  
+  7 Miscellaneous
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+  
+
+<nav class="md-nav md-nav--primary md-nav--lifted md-nav--integrated" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="Convex Optimization -  Algorithms and Analysis" class="md-nav__button md-logo" aria-label="Convex Optimization -  Algorithms and Analysis" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"></path></svg>
+
+    </a>
+    Convex Optimization -  Algorithms and Analysis
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/SalK91/convex_optimization" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.0.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"></path></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Home
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    Introduction
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            Introduction
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    LA Prerequisites
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    LA Prerequisites
+    
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#matrix-concepts" class="md-nav__link">
+    <span class="md-ellipsis">
+      Matrix Concepts
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#subspaces-and-related-concepts" class="md-nav__link">
+    <span class="md-ellipsis">
+      Subspaces and Related Concepts
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#eigenvalues-eigenvectors-and-symmetric-matrices" class="md-nav__link">
+    <span class="md-ellipsis">
+      Eigenvalues, Eigenvectors, and Symmetric Matrices
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#continuity-and-lipschitz-continuity" class="md-nav__link">
+    <span class="md-ellipsis">
+      Continuity and Lipschitz Continuity
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#gradient-and-hessian" class="md-nav__link">
+    <span class="md-ellipsis">
+      Gradient and Hessian
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0b%20Convex%20Sets/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Convex Sets
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0c%20Convex%20Functions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Convex Functions
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0d%20Optimality%20Conditions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Optimality Conditions
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0e%20Optimization%20Algos/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Optimization Algos
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0f%20Convergence/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Properties
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0g%20AdvancedAlgos/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Advanced Algos
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0c Epigraphs.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Epigraphs
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3">
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Linear Programs
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            Linear Programs
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../1a%20LP/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    LP
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../1b%20QP/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    QP
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../1c%20Least%20Square/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Least Squares
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../1d%20QCQP/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    QCQP
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../1e%20SOCP/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    SOCP
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../1f%20GeometricInterpretation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Geometric Interpretation
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../1g%20GP/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    GP
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4">
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    2 Duality &amp; Regularization
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            2 Duality &amp; Regularization
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../2a%20Duality/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Duality
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../3a%20Huber/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Huber
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../3b%20Penalty%20Functions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Penalty Functions
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../3c%20Regularized/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Regularized
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../3d%20Robust%20Approximation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Robust Approximation
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../3e%20MLE/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    MLE
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5">
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    4 Discrimination &amp; Optimization
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            4 Discrimination &amp; Optimization
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../4a%20Linear%20Discrimination/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Linear Discrimination
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../6a%20First%20Order%20Optimization/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    First Order Optimization
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6">
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    7 Miscellaneous
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            7 Miscellaneous
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../7a%20pareto%20optimal/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Pareto Optimality
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Example/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Example
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+    <a href="https://github.com/SalK91/convex_optimization/edit/master/docs/0a LA.md" title="Edit this page" class="md-content__button md-icon" rel="edit">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M10 20H6V4h7v5h5v3.1l2-2V8l-6-6H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h4zm10.2-7c.1 0 .3.1.4.2l1.3 1.3c.2.2.2.6 0 .8l-1 1-2.1-2.1 1-1c.1-.1.2-.2.4-.2m0 3.9L14.1 23H12v-2.1l6.1-6.1z"></path></svg>
+    </a>
+  
+  
+    
+      
+    
+    <a href="https://github.com/SalK91/convex_optimization/raw/master/docs/0a LA.md" title="View source of this page" class="md-content__button md-icon">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 18c.56 0 1 .44 1 1s-.44 1-1 1-1-.44-1-1 .44-1 1-1m0-3c-2.73 0-5.06 1.66-6 4 .94 2.34 3.27 4 6 4s5.06-1.66 6-4c-.94-2.34-3.27-4-6-4m0 6.5a2.5 2.5 0 0 1-2.5-2.5 2.5 2.5 0 0 1 2.5-2.5 2.5 2.5 0 0 1 2.5 2.5 2.5 2.5 0 0 1-2.5 2.5M9.27 20H6V4h7v5h5v4.07c.7.08 1.36.25 2 .49V8l-6-6H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h4.5a8.2 8.2 0 0 1-1.23-2"></path></svg>
+    </a>
+  
+
+
+<h1 id="linear-algebra-prerequisites">Linear Algebra Prerequisites</h1>
+<ul>
+<li>
+<p>Vector spaces and norms: We work primarily in <script type="math/tex">\mathbb{R}^n</script>, the <script type="math/tex">n</script>-dimensional Euclidean space. The Euclidean norm is <script type="math/tex">\|x\|_2 = \sqrt{x^T x}</script>, but other norms, such as <script type="math/tex">\|x\|_1</script> or <script type="math/tex">\|x\|_\infty</script>, are also important.</p>
+</li>
+<li>
+<p>Inner products: An inner product in <script type="math/tex">\mathbb{R}^n</script> is <script type="math/tex">\langle x, y \rangle = x^T y</script>.</p>
+</li>
+<li>
+<p>Angle in inner product: The angle <script type="math/tex">\theta</script> between two nonzero vectors <script type="math/tex">x, y \in \mathbb{R}^n</script> is defined via<br>
+<script type="math/tex">\cos \theta = \dfrac{\langle x, y \rangle}{\|x\|_2 \, \|y\|_2}</script>.</p>
+</li>
+<li>
+<p>Affine sets: A set of the form  <script type="math/tex">\{x \in \mathbb{R}^n : Ax = b\}</script>, where <script type="math/tex">A</script> is a matrix and <script type="math/tex">b</script> is a vector. Affine sets are the natural generalisation of lines and planes.</p>
+</li>
+<li>
+<p>Linear independence: A set of vectors <script type="math/tex">\{v_1, v_2, \dots, v_k\}</script> is linearly independent if    <script type="math/tex">\alpha_1 v_1 + \alpha_2 v_2 + \cdots + \alpha_k v_k = 0</script>
+<br>
+  implies <script type="math/tex">\alpha_1 = \alpha_2 = \cdots = \alpha_k = 0</script>.</p>
+</li>
+<li>
+<p>Outer product: Given vectors <script type="math/tex">u, v \in \mathbb{R}^n</script>, their outer product is   <script type="math/tex">u v^T</script>, which is an <script type="math/tex">n \times n</script> matrix.  (Contrast with the inner product <script type="math/tex">u^T v</script>, which is a scalar.)</p>
+</li>
+<li>
+<p>Cauchy–Schwarz inequality: For any <script type="math/tex">x, y \in \mathbb{R}^n</script>, <script type="math/tex">|\langle x, y \rangle| \leq \|x\|_2 \, \|y\|_2</script>.<br>
+  Equality holds iff <script type="math/tex">x</script> and <script type="math/tex">y</script> are linearly dependent.</p>
+</li>
+<li>
+<p>Projection onto a vector: The projection of <script type="math/tex">x</script> onto <script type="math/tex">y</script> (with <script type="math/tex">y \neq 0</script>) is  <script type="math/tex">\text{proj}_y(x) = \dfrac{\langle x, y \rangle}{\langle y, y \rangle} y</script>. This gives the component of <script type="math/tex">x</script> in the direction of <script type="math/tex">y</script>.</p>
+</li>
+<li>
+<p>Subspace spanned by <script type="math/tex">k</script> perpendicular (orthogonal) vectors: If <script type="math/tex">\{u_1, u_2, \dots, u_k\}</script> are mutually perpendicular (orthogonal) and nonzero, then they form an orthogonal basis for their span. The subspace is <script type="math/tex">U = \text{span}\{u_1, u_2, \dots, u_k\}</script>,  and any <script type="math/tex">x \in U</script> can be uniquely written as <script type="math/tex">x = \alpha_1 u_1 + \alpha_2 u_2 + \cdots + \alpha_k u_k</script> with coefficients <script type="math/tex">\alpha_i = \dfrac{\langle x, u_i \rangle}{\langle u_i, u_i \rangle}</script>.</p>
+</li>
+<li>
+<p>Projection onto a subspace:  Let <script type="math/tex">U = \text{span}\{u_1, u_2, \dots, u_k\}</script>, where the vectors are linearly independent. If <script type="math/tex">U</script> has orthonormal basis <script type="math/tex">\{q_1, q_2, \dots, q_k\}</script>, then the projection of <script type="math/tex">x</script> onto <script type="math/tex">U</script> is   <script type="math/tex">\text{proj}_U(x) = \sum_{i=1}^k \langle x, q_i \rangle q_i</script>. In matrix form, if <script type="math/tex">Q = [q_1 \; q_2 \; \dots \; q_k]</script>, then<br>
+<script type="math/tex">\text{proj}_U(x) = QQ^T x</script>.</p>
+</li>
+<li>
+<p>Projection onto a convex set:  Projecting two points on convex set is not expansive i.e. the distance between projection of points is always less than equal to the original distance between the points.</p>
+</li>
+</ul>
+<h2 id="matrix-concepts">Matrix Concepts</h2>
+<ul>
+<li>
+<p>Rank:  The rank of a matrix <script type="math/tex">A \in \mathbb{R}^{m \times n}</script>, denoted <script type="math/tex">\text{rank}(A)</script>, is the dimension of its column space (or equivalently, row space). It is the number of linearly independent columns (or rows). <script type="math/tex">\text{rank}(A) \leq \min(m,n)</script>.  </p>
+</li>
+<li>
+<p>Null space (kernel): The null space of <script type="math/tex">A \in \mathbb{R}^{m \times n}</script> is / <script type="math/tex">
+  \mathcal{N}(A) = \{x \in \mathbb{R}^n : Ax = 0\}.</script> It contains all solutions to the homogeneous system <script type="math/tex">Ax=0</script>. Its dimension is called the <em>nullity</em> of <script type="math/tex">A</script>. By the <em>rank–nullity theorem</em> <script type="math/tex">\text{rank}(A) + \text{nullity}(A) = n.</script>
+</p>
+</li>
+<li>
+<p>Determinant:  For a square matrix <script type="math/tex">A \in \mathbb{R}^{n \times n}</script>, the determinant <script type="math/tex">\det(A)</script> is a scalar with these properties:  </p>
+<ul>
+<li>
+<script type="math/tex">\det(A) = 0 \iff A</script> is singular (non-invertible).  </li>
+<li>
+<script type="math/tex">\det(AB) = \det(A)\det(B)</script>.  </li>
+<li>
+<script type="math/tex">\det(A^T) = \det(A)</script>.  </li>
+<li>Geometric meaning: <script type="math/tex">|\det(A)|</script> gives the volume scaling factor of the linear map <script type="math/tex">x \mapsto Ax</script>.</li>
+</ul>
+</li>
+<li>
+<p>Range (column space): The range of <script type="math/tex">A \in \mathbb{R}^{m \times n}</script> is <script type="math/tex">\mathcal{R}(A) = \{Ax : x \in \mathbb{R}^n\} \subseteq \mathbb{R}^m.</script> It is the span of the columns of <script type="math/tex">A</script>. <script type="math/tex">\dim(\mathcal{R}(A)) = \text{rank}(A)</script>.  </p>
+</li>
+</ul>
+<h2 id="subspaces-and-related-concepts">Subspaces and Related Concepts</h2>
+<ul>
+<li>
+<p>Subspace: A subset <script type="math/tex">U \subseteq \mathbb{R}^n</script> is a subspace if it satisfies:  </p>
+<ol>
+<li>
+<script type="math/tex">0 \in U</script> (contains the zero vector)  </li>
+<li>Closed under addition: <script type="math/tex">u, v \in U \implies u+v \in U</script>
+</li>
+<li>Closed under scalar multiplication: <script type="math/tex">u \in U, \alpha \in \mathbb{R} \implies \alpha u \in U</script>
+</li>
+</ol>
+<p>Examples: column space of a matrix, null space of a matrix, <script type="math/tex">\mathbb{R}^n</script> itself.  </p>
+</li>
+<li>
+<p>Orthogonal complement: For a subspace <script type="math/tex">U \subseteq \mathbb{R}^n</script>, the orthogonal complement <script type="math/tex">U^\perp</script> is<br>
+<script type="math/tex; mode=display">
+  U^\perp = \{v \in \mathbb{R}^n : \langle v, u \rangle = 0 \;\text{for all}\; u \in U \}.
+  </script>
+</p>
+<ul>
+<li>
+<script type="math/tex">U^\perp</script> is a subspace.  </li>
+<li>
+<script type="math/tex">\dim(U) + \dim(U^\perp) = n</script>.  </li>
+<li>
+<script type="math/tex">(U^\perp)^\perp = U</script>.  </li>
+</ul>
+</li>
+<li>
+<p>Affine subspace:  An affine subspace is a translation of a subspace. Formally,<br>
+<script type="math/tex; mode=display">
+  A = \{x_0 + u : u \in U\}
+  </script>
+<br>
+  where <script type="math/tex">U</script> is a subspace and <script type="math/tex">x_0 \in \mathbb{R}^n</script> is a fixed point.  </p>
+<ul>
+<li>Examples: lines or planes that do not pass through the origin.  </li>
+<li>If <script type="math/tex">x_0 = 0</script>, the affine subspace is just a subspace.</li>
+</ul>
+</li>
+</ul>
+<h2 id="eigenvalues-eigenvectors-and-symmetric-matrices">Eigenvalues, Eigenvectors, and Symmetric Matrices</h2>
+<ul>
+<li>
+<p>Eigenvalue and Eigenvector: For a square matrix <script type="math/tex">A \in \mathbb{R}^{n \times n}</script>, a scalar <script type="math/tex">\lambda \in \mathbb{R}</script> (or <script type="math/tex">\mathbb{C}</script>) is an eigenvalue if there exists a nonzero vector <script type="math/tex">v \in \mathbb{R}^n</script> such that<br>
+<script type="math/tex; mode=display">
+  A v = \lambda v.
+  </script>
+<br>
+  The vector <script type="math/tex">v</script> is called an eigenvector corresponding to <script type="math/tex">\lambda</script>.  </p>
+<ul>
+<li>
+<script type="math/tex">v \neq 0</script>
+</li>
+<li>
+<script type="math/tex">\det(A - \lambda I) = 0</script> gives the characteristic equation to find eigenvalues.  </li>
+</ul>
+</li>
+<li>
+<p>Symmetric matrix:  A matrix <script type="math/tex">A \in \mathbb{R}^{n \times n}</script> is symmetric if<br>
+<script type="math/tex; mode=display">
+  A = A^T.
+  </script>
+</p>
+<ol>
+<li>All eigenvalues of a symmetric matrix are real.  Eigenvectors of symmetric matrices are orthogonal. </li>
+<li>There exists an orthonormal set of eigenvectors that spans <script type="math/tex">\mathbb{R}^n</script>.  </li>
+<li>
+<script type="math/tex">A</script> can be diagonalized as<br>
+<script type="math/tex; mode=display">
+  A = Q \Lambda Q^T,
+  </script>
+<br>
+  where <script type="math/tex">Q</script> is an orthogonal matrix of eigenvectors (<script type="math/tex">Q^T Q = I</script>) and <script type="math/tex">\Lambda</script> is a diagonal matrix of eigenvalues.  </li>
+</ol>
+</li>
+<li>
+<p>Positive Semidefinite Matrices
+  A symmetric matrix <script type="math/tex">A \in \mathbb{R}^{n \times n}</script> is positive semidefinite (PSD) if<br>
+<script type="math/tex; mode=display">
+  x^T A x \geq 0 \quad \text{for all } x \in \mathbb{R}^n.
+  </script>
+</p>
+<ol>
+<li>
+<script type="math/tex">A</script> is symmetric: <script type="math/tex">A = A^T</script>.  </li>
+<li>All eigenvalues of <script type="math/tex">A</script> are non-negative: <script type="math/tex">\lambda_i \ge 0</script>.  </li>
+<li>If <script type="math/tex">x^T A x > 0</script> for all <script type="math/tex">x \neq 0</script>, then <script type="math/tex">A</script> is positive definite (PD).  </li>
+<li>
+<script type="math/tex">A</script> can be diagonalized as<br>
+<script type="math/tex; mode=display">
+  A = Q \Lambda Q^T,
+  </script>
+<br>
+  where <script type="math/tex">Q</script> is orthogonal and <script type="math/tex">\Lambda</script> is a diagonal matrix with <script type="math/tex">\lambda_i \ge 0</script>.  </li>
+<li>
+<script type="math/tex">x^T A x \geq 0</script> if A is PSD. </li>
+<li>for any matrix A, <script type="math/tex">A^TA</script> and <script type="math/tex">AA^T</script> are PSD.</li>
+</ol>
+</li>
+</ul>
+<h2 id="continuity-and-lipschitz-continuity">Continuity and Lipschitz Continuity</h2>
+<ul>
+<li>
+<p>Continuity: A function <script type="math/tex">f : \mathbb{R}^n \to \mathbb{R}^m</script> is continuous at <script type="math/tex">x_0</script> if<br>
+<script type="math/tex; mode=display">
+  \lim_{x \to x_0} f(x) = f(x_0).
+  </script>
+<br>
+  Equivalently, for every <script type="math/tex">\varepsilon > 0</script> there exists <script type="math/tex">\delta > 0</script> such that<br>
+<script type="math/tex; mode=display">
+  \|x - x_0\| < \delta \;\; \implies \;\; \|f(x) - f(x_0)\| < \varepsilon.
+  </script>
+<br>
+  If this holds for all <script type="math/tex">x_0</script>, then <script type="math/tex">f</script> is continuous on its domain.  </p>
+</li>
+<li>
+<p>Lipschitz continuity:  A function <script type="math/tex">f : \mathbb{R}^n \to \mathbb{R}^m</script> is Lipschitz continuous if there exists a constant <script type="math/tex">L \geq 0</script> such that<br>
+<script type="math/tex; mode=display">
+  \|f(x) - f(y)\| \leq L \|x - y\| \quad \text{for all } x, y.
+  </script>
+</p>
+<ul>
+<li>The smallest such <script type="math/tex">L</script> is called the Lipschitz constant.  </li>
+<li>Lipschitz continuity <script type="math/tex">\implies</script> continuity (but not vice versa).  </li>
+<li>If <script type="math/tex">f</script> is differentiable and <script type="math/tex">\|\nabla f(x)\| \leq L</script> for all <script type="math/tex">x</script>, then <script type="math/tex">f</script> is Lipschitz continuous with constant <script type="math/tex">L</script>.  </li>
+</ul>
+</li>
+</ul>
+<h2 id="gradient-and-hessian">Gradient and Hessian</h2>
+<ul>
+<li>
+<p>Gradient:  Let <script type="math/tex">f : \mathbb{R}^n \to \mathbb{R}</script> be differentiable.<br>
+  The gradient of <script type="math/tex">f</script> at <script type="math/tex">x</script> is the vector of partial derivatives:<br>
+<script type="math/tex; mode=display">
+  \nabla f(x) =
+  \begin{bmatrix}
+  \frac{\partial f}{\partial x_1}(x) \\
+  \frac{\partial f}{\partial x_2}(x) \\
+  \vdots \\
+  \frac{\partial f}{\partial x_n}(x)
+  \end{bmatrix} \in \mathbb{R}^n.
+  </script>
+</p>
+<ul>
+<li>It points in the direction of steepest ascent of <script type="math/tex">f</script>.  </li>
+<li>The magnitude <script type="math/tex">\|\nabla f(x)\|</script> gives the rate of increase in that direction.  </li>
+</ul>
+</li>
+<li>
+<p>Hessian:  If <script type="math/tex">f</script> is twice differentiable, the Hessian matrix at <script type="math/tex">x</script> is the matrix of second-order partial derivatives:<br>
+<script type="math/tex; mode=display">
+  \nabla^2 f(x) =
+  \begin{bmatrix}
+  \frac{\partial^2 f}{\partial x_1^2}(x) & \frac{\partial^2 f}{\partial x_1 \partial x_2}(x) & \cdots & \frac{\partial^2 f}{\partial x_1 \partial x_n}(x) \\
+  \frac{\partial^2 f}{\partial x_2 \partial x_1}(x) & \frac{\partial^2 f}{\partial x_2^2}(x) & \cdots & \frac{\partial^2 f}{\partial x_2 \partial x_n}(x) \\
+  \vdots & \vdots & \ddots & \vdots \\
+  \frac{\partial^2 f}{\partial x_n \partial x_1}(x) & \frac{\partial^2 f}{\partial x_n \partial x_2}(x) & \cdots & \frac{\partial^2 f}{\partial x_n^2}(x)
+  \end{bmatrix}.
+  </script>
+</p>
+<ul>
+<li>The Hessian is symmetric if <script type="math/tex">f</script> is twice continuously differentiable.  </li>
+<li>It describes the curvature of <script type="math/tex">f</script>:  <ul>
+<li>
+<script type="math/tex">\nabla^2 f(x) \succeq 0</script> (PSD) <script type="math/tex">\implies f</script> is locally convex.  </li>
+<li>
+<script type="math/tex">\nabla^2 f(x) \succ 0</script> (PD) <script type="math/tex">\implies f</script> is locally strictly convex.  </li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"></path></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      <script id="__config" type="application/json">{"base": "..", "features": ["navigation.instant", "navigation.tabs", "navigation.top", "search.suggest", "search.highlight", "toc.integrate", "content.code.copy", "content.action.edit", "content.action.view"], "search": "../assets/javascripts/workers/search.973d3a69.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.f55a23d4.min.js"></script>
+      
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+      
+    
+  
+<script id="init-glightbox">const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});
+document$.subscribe(()=>{ lightbox.reload(); });
+</script></body></html>

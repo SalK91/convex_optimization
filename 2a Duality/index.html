@@ -1,0 +1,1798 @@
+<!DOCTYPE html><html lang="en" class="no-js"><head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="A structured collection of notes on optimization, convex analysis, and algorithms.">
+      
+      
+        <meta name="author" content="Salman Khan">
+      
+      
+      
+        <link rel="prev" href="../1g%20GP/">
+      
+      
+        <link rel="next" href="../3a%20Huber/">
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.20">
+    
+    
+      
+        <title>Duality - Convex Optimization -  Algorithms and Analysis</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.e53b48f4.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CFira+Code:400,400i,700,700i&amp;display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Fira Code"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  <link href="../assets/stylesheets/glightbox.min.css" rel="stylesheet"><script src="../assets/javascripts/glightbox.min.js"></script><style id="glightbox-style">
+            html.glightbox-open { overflow: initial; height: 100%; }
+            .gslide-title { margin-top: 0px; user-select: text; }
+            .gslide-desc { color: #666; user-select: text; }
+            .gslide-image img { background: white; }
+            .gscrollbar-fixer { padding-right: 15px; }
+            .gdesc-inner { font-size: 0.75rem; }
+            body[data-md-color-scheme="slate"] .gdesc-inner { background: var(--md-default-bg-color); }
+            body[data-md-color-scheme="slate"] .gslide-title { color: var(--md-default-fg-color); }
+            body[data-md-color-scheme="slate"] .gslide-desc { color: var(--md-default-fg-color); }
+        </style></head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="slate" data-md-color-primary="teal" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#duality-theory-kkt-conditions-and-duality-gap" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="Convex Optimization -  Algorithms and Analysis" class="md-header__button md-logo" aria-label="Convex Optimization -  Algorithms and Analysis" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"></path></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"></path></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Convex Optimization -  Algorithms and Analysis
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Duality
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="teal" data-md-color-accent="indigo" aria-hidden="true" type="radio" name="__palette" id="__palette_0">
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="teal" data-md-color-accent="teal" aria-label="Switch to dark mode" type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3zm3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95zm-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31"></path></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"></path></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"></path></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"></path></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"></path></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/SalK91/convex_optimization" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.0.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"></path></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href=".." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Home
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../0a%20LA/" class="md-tabs__link">
+          
+  
+  
+  Introduction
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../1a%20LP/" class="md-tabs__link">
+          
+  
+  
+  Linear Programs
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="./" class="md-tabs__link">
+          
+  
+  
+  2 Duality &amp; Regularization
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../4a%20Linear%20Discrimination/" class="md-tabs__link">
+          
+  
+  
+  4 Discrimination &amp; Optimization
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../7a%20pareto%20optimal/" class="md-tabs__link">
+          
+  
+  
+  7 Miscellaneous
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+  
+
+<nav class="md-nav md-nav--primary md-nav--lifted md-nav--integrated" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="Convex Optimization -  Algorithms and Analysis" class="md-nav__button md-logo" aria-label="Convex Optimization -  Algorithms and Analysis" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"></path></svg>
+
+    </a>
+    Convex Optimization -  Algorithms and Analysis
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/SalK91/convex_optimization" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.0.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"></path></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Home
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2">
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Introduction
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            Introduction
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0a%20LA/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    LA Prerequisites
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0b%20Convex%20Sets/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Convex Sets
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0c%20Convex%20Functions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Convex Functions
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0d%20Optimality%20Conditions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Optimality Conditions
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0e%20Optimization%20Algos/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Optimization Algos
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0f%20Convergence/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Properties
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0g%20AdvancedAlgos/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Advanced Algos
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0c Epigraphs.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Epigraphs
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3">
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Linear Programs
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            Linear Programs
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../1a%20LP/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    LP
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../1b%20QP/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    QP
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../1c%20Least%20Square/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Least Squares
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../1d%20QCQP/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    QCQP
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../1e%20SOCP/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    SOCP
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../1f%20GeometricInterpretation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Geometric Interpretation
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../1g%20GP/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    GP
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    2 Duality &amp; Regularization
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            2 Duality &amp; Regularization
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    Duality
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    Duality
+    
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1-convex-optimization-problem" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. Convex Optimization Problem
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-lagrangian-function" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. Lagrangian Function
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-dual-function-and-infimum" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. Dual Function and Infimum
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. Dual Function and Infimum">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#31-infimum" class="md-nav__link">
+    <span class="md-ellipsis">
+      3.1 Infimum
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#32-supremum" class="md-nav__link">
+    <span class="md-ellipsis">
+      3.2 Supremum
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#33-why-the-dual-function-provides-a-lower-bound" class="md-nav__link">
+    <span class="md-ellipsis">
+      3.3 Why the Dual Function Provides a Lower Bound
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-the-dual-problem" class="md-nav__link">
+    <span class="md-ellipsis">
+      4. The Dual Problem
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-duality-gap" class="md-nav__link">
+    <span class="md-ellipsis">
+      5. Duality Gap
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5. Duality Gap">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#51-causes-of-positive-gap" class="md-nav__link">
+    <span class="md-ellipsis">
+      5.1 Causes of Positive Gap
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#52-example" class="md-nav__link">
+    <span class="md-ellipsis">
+      5.2 Example
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-karushkuhntucker-kkt-conditions" class="md-nav__link">
+    <span class="md-ellipsis">
+      6. Karush–Kuhn–Tucker (KKT) Conditions
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-applications-in-machine-learning" class="md-nav__link">
+    <span class="md-ellipsis">
+      7. Applications in Machine Learning
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="7. Applications in Machine Learning">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#71-ridge-regression" class="md-nav__link">
+    <span class="md-ellipsis">
+      7.1 Ridge Regression
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#72-lasso-regression" class="md-nav__link">
+    <span class="md-ellipsis">
+      7.2 Lasso Regression
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#73-support-vector-machines-svms" class="md-nav__link">
+    <span class="md-ellipsis">
+      7.3 Support Vector Machines (SVMs)
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#8-constrained-vs-penalized-optimization" class="md-nav__link">
+    <span class="md-ellipsis">
+      8. Constrained vs. Penalized Optimization
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#9-summary" class="md-nav__link">
+    <span class="md-ellipsis">
+      9. Summary
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../3a%20Huber/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Huber
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../3b%20Penalty%20Functions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Penalty Functions
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../3c%20Regularized/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Regularized
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../3d%20Robust%20Approximation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Robust Approximation
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../3e%20MLE/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    MLE
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5">
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    4 Discrimination &amp; Optimization
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            4 Discrimination &amp; Optimization
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../4a%20Linear%20Discrimination/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Linear Discrimination
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../6a%20First%20Order%20Optimization/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    First Order Optimization
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6">
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    7 Miscellaneous
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            7 Miscellaneous
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../7a%20pareto%20optimal/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Pareto Optimality
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Example/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Example
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+    <a href="https://github.com/SalK91/convex_optimization/edit/master/docs/2a Duality.md" title="Edit this page" class="md-content__button md-icon" rel="edit">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M10 20H6V4h7v5h5v3.1l2-2V8l-6-6H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h4zm10.2-7c.1 0 .3.1.4.2l1.3 1.3c.2.2.2.6 0 .8l-1 1-2.1-2.1 1-1c.1-.1.2-.2.4-.2m0 3.9L14.1 23H12v-2.1l6.1-6.1z"></path></svg>
+    </a>
+  
+  
+    
+      
+    
+    <a href="https://github.com/SalK91/convex_optimization/raw/master/docs/2a Duality.md" title="View source of this page" class="md-content__button md-icon">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 18c.56 0 1 .44 1 1s-.44 1-1 1-1-.44-1-1 .44-1 1-1m0-3c-2.73 0-5.06 1.66-6 4 .94 2.34 3.27 4 6 4s5.06-1.66 6-4c-.94-2.34-3.27-4-6-4m0 6.5a2.5 2.5 0 0 1-2.5-2.5 2.5 2.5 0 0 1 2.5-2.5 2.5 2.5 0 0 1 2.5 2.5 2.5 2.5 0 0 1-2.5 2.5M9.27 20H6V4h7v5h5v4.07c.7.08 1.36.25 2 .49V8l-6-6H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h4.5a8.2 8.2 0 0 1-1.23-2"></path></svg>
+    </a>
+  
+
+
+<h1 id="duality-theory-kkt-conditions-and-duality-gap">Duality Theory, KKT Conditions, and Duality Gap</h1>
+<p>Duality theory is a central tool in optimization and machine learning. It provides alternative perspectives on problems, certificates of optimality, and insights into algorithm design. Applications include Support Vector Machines (SVMs), Lasso, and ridge regression.</p>
+<h2 id="1-convex-optimization-problem">1. Convex Optimization Problem</h2>
+<p>Consider the standard convex optimization problem:</p>
+<p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+& \min_{x \in \mathbb{R}^n} & f_0(x) \\
+& \text{s.t.} & f_i(x) \le 0, \quad i = 1, \dots, m \\
+& & h_j(x) = 0, \quad j = 1, \dots, p
+\end{aligned}
+</script>
+</p>
+<ul>
+<li>
+<script type="math/tex">f_0</script>: objective function.  </li>
+<li>
+<script type="math/tex">f_i</script>: convex inequality constraints.  </li>
+<li>
+<script type="math/tex">h_j</script>: affine equality constraints.  </li>
+</ul>
+<p>Feasible set:</p>
+<p>
+<script type="math/tex; mode=display">
+\mathcal{D} = \{ x \in \mathbb{R}^n \mid f_i(x) \le 0, \ h_j(x) = 0 \}.
+</script>
+</p>
+<h2 id="2-lagrangian-function">2. Lagrangian Function</h2>
+<p>The <strong>Lagrangian</strong> incorporates constraints into the objective:</p>
+<p>
+<script type="math/tex; mode=display">
+\mathcal{L}(x, \lambda, \nu) = f_0(x) + \sum_{i=1}^m \lambda_i f_i(x) + \sum_{j=1}^p \nu_j h_j(x)
+</script>
+</p>
+<ul>
+<li>
+<script type="math/tex">\lambda_i \ge 0</script>: dual variables for inequalities.  </li>
+<li>
+<script type="math/tex">\nu_j</script>: dual variables for equalities.  </li>
+</ul>
+<p><strong>Intuition:</strong> <script type="math/tex">\lambda_i</script> represents the “price” of violating constraint <script type="math/tex">f_i(x) \le 0</script>. Larger <script type="math/tex">\lambda_i</script> penalizes violations more.</p>
+<h2 id="3-dual-function-and-infimum">3. Dual Function and Infimum</h2>
+<p>The <strong>dual function</strong> is:</p>
+<p>
+<script type="math/tex; mode=display">
+g(\lambda, \nu) = \inf_x \mathcal{L}(x, \lambda, \nu), \quad \lambda \ge 0
+</script>
+</p>
+<h3 id="31-infimum">3.1 Infimum</h3>
+<ul>
+<li>The <strong>infimum</strong> (inf) of a function is its <strong>greatest lower bound</strong>: the largest number that is less than or equal to all function values.  </li>
+<li>Formally, for <script type="math/tex">f(x)</script>:</li>
+</ul>
+<p>
+<script type="math/tex; mode=display">
+\inf_x f(x) = \sup \{ y \in \mathbb{R} \mid f(x) \ge y, \ \forall x \}.
+</script>
+</p>
+<ul>
+<li><strong>Intuition:</strong>  </li>
+<li>If <script type="math/tex">f(x)</script> has a minimum, the infimum equals the minimum.  </li>
+<li>If no minimum exists, the infimum is the value approached but never reached.</li>
+</ul>
+<p><strong>Examples:</strong></p>
+<ol>
+<li>
+<script type="math/tex">f(x) = x^2</script>, <script type="math/tex">x \in \mathbb{R}</script> → <script type="math/tex">\inf f(x) = 0</script> at <script type="math/tex">x = 0</script>.  </li>
+<li>
+<script type="math/tex">f(x) = 1/x</script>, <script type="math/tex">x > 0</script> → <script type="math/tex">\inf f(x) = 0</script>, never attained.  </li>
+</ol>
+<h3 id="32-supremum">3.2 Supremum</h3>
+<ul>
+<li>The <strong>supremum</strong> (sup) of a set <script type="math/tex">S \subset \mathbb{R}</script> is the <strong>least upper bound</strong>: the smallest number greater than or equal to all elements of <script type="math/tex">S</script>.</li>
+</ul>
+<p>
+<script type="math/tex; mode=display">
+\sup S = \inf \{ y \in \mathbb{R} \mid y \ge s, \ \forall s \in S \}
+</script>
+</p>
+<p><strong>Example:</strong> <script type="math/tex">S = \{ x \in \mathbb{R} \mid x < 1 \}</script> → <script type="math/tex">\sup S = 1</script>, although no maximum exists.</p>
+<h3 id="33-why-the-dual-function-provides-a-lower-bound">3.3 Why the Dual Function Provides a Lower Bound</h3>
+<p>For any feasible <script type="math/tex">x \in \mathcal{D}</script> and <script type="math/tex">\lambda \ge 0</script>, <script type="math/tex">\nu</script>:</p>
+<p>
+<script type="math/tex; mode=display">
+\lambda_i f_i(x) \le 0, \quad \nu_j h_j(x) = 0 \implies \mathcal{L}(x, \lambda, \nu) \le f_0(x)
+</script>
+</p>
+<p>Taking the infimum over all <script type="math/tex">x</script>:</p>
+<p>
+<script type="math/tex; mode=display">
+g(\lambda, \nu) = \inf_x \mathcal{L}(x, \lambda, \nu) \le f_0(x), \quad \forall x \in \mathcal{D}
+</script>
+</p>
+<p>Thus, for any dual variables:</p>
+<p>
+<script type="math/tex; mode=display">
+g(\lambda, \nu) \le p^\star
+</script>
+</p>
+<ul>
+<li><strong>Interpretation:</strong> The dual function is always a <strong>lower bound</strong> on the primal optimum.  </li>
+<li><strong>Geometric intuition:</strong> Think of the dual as the <strong>highest “floor”</strong> under the primal objective that supports the feasible region.  </li>
+</ul>
+<h2 id="4-the-dual-problem">4. The Dual Problem</h2>
+<p>The <strong>dual problem</strong> seeks the tightest lower bound:</p>
+<p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+\max_{\lambda, \nu} \quad & g(\lambda, \nu) \\
+\text{s.t.} \quad & \lambda \ge 0
+\end{aligned}
+</script>
+</p>
+<ul>
+<li>Dual optimal value: <script type="math/tex">d^\star = \max_{\lambda \ge 0, \nu} g(\lambda, \nu)</script>.  </li>
+<li>Always satisfies <strong>weak duality</strong>: <script type="math/tex">d^\star \le p^\star</script>.  </li>
+<li>If convexity + Slater's condition hold, <strong>strong duality</strong>: <script type="math/tex">d^\star = p^\star</script>.</li>
+</ul>
+<h2 id="5-duality-gap">5. Duality Gap</h2>
+<p>The <strong>duality gap</strong> measures the difference between primal and dual optima:</p>
+<p>
+<script type="math/tex; mode=display">
+\text{Gap} = p^\star - d^\star \ge 0
+</script>
+</p>
+<ul>
+<li><strong>Zero gap</strong>: strong duality (common in convex ML problems).  </li>
+<li><strong>Positive gap</strong>: weak duality only; dual provides only a lower bound.  </li>
+</ul>
+<h3 id="51-causes-of-positive-gap">5.1 Causes of Positive Gap</h3>
+<ol>
+<li>Nonconvex objective.  </li>
+<li>Constraint qualification fails (e.g., Slater’s condition not satisfied).  </li>
+<li>Dual problem is infeasible or unbounded.</li>
+</ol>
+<h3 id="52-example">5.2 Example</h3>
+<p>Primal problem:</p>
+<p>
+<script type="math/tex; mode=display">
+\min_x -x^2 \quad \text{s.t. } x \ge 1
+</script>
+</p>
+<ul>
+<li>Primal optimum: <script type="math/tex">p^\star = -1</script> at <script type="math/tex">x^\star = 1</script>
+</li>
+<li>Dual problem: <script type="math/tex">d^\star = -\infty</script> (unbounded below)  </li>
+<li>Gap: <script type="math/tex">p^\star - d^\star = \infty</script> → positive duality gap.</li>
+</ul>
+<p><strong>Interpretation:</strong> dual gives a guaranteed lower bound but may not achieve the primal optimum.</p>
+<h2 id="6-karushkuhntucker-kkt-conditions">6. Karush–Kuhn–Tucker (KKT) Conditions</h2>
+<p>For convex problems with strong duality, KKT conditions fully characterize optimality.</p>
+<p>Let <script type="math/tex">x^\star</script> be primal optimal and <script type="math/tex">(\lambda^\star, \nu^\star)</script> dual optimal:</p>
+<ol>
+<li>
+<p><strong>Primal feasibility</strong>:<br>
+<script type="math/tex; mode=display">
+f_i(x^\star) \le 0, \quad h_j(x^\star) = 0
+</script>
+</p>
+</li>
+<li>
+<p><strong>Dual feasibility</strong>:<br>
+<script type="math/tex; mode=display">
+\lambda^\star \ge 0
+</script>
+</p>
+</li>
+<li>
+<p><strong>Stationarity</strong>:<br>
+<script type="math/tex; mode=display">
+0 \in \nabla f_0(x^\star) + \sum_i \lambda_i^\star \nabla f_i(x^\star) + \sum_j \nu_j^\star \nabla h_j(x^\star)
+</script>
+</p>
+</li>
+<li>
+<p>Use <strong>subgradients</strong> for nonsmooth problems (e.g., Lasso).  </p>
+</li>
+<li>
+<p><strong>Complementary slackness</strong>:<br>
+<script type="math/tex; mode=display">
+\lambda_i^\star f_i(x^\star) = 0, \quad \forall i
+</script>
+</p>
+</li>
+</ol>
+<p><strong>Intuition:</strong> Only active constraints contribute; the “forces” of objective and constraints balance.</p>
+<h2 id="7-applications-in-machine-learning">7. Applications in Machine Learning</h2>
+<h3 id="71-ridge-regression">7.1 Ridge Regression</h3>
+<p>
+<script type="math/tex; mode=display">
+\min_w \frac12 \|y - Xw\|_2^2 + \frac{\lambda}{2} \|w\|_2^2
+</script>
+</p>
+<ul>
+<li>Smooth shrinkage, unique solution.  </li>
+<li>Dual view useful in <strong>kernelized ridge regression</strong>.</li>
+</ul>
+<h3 id="72-lasso-regression">7.2 Lasso Regression</h3>
+<p>
+<script type="math/tex; mode=display">
+\min_w \frac12 \|y - Xw\|_2^2 + \lambda \|w\|_1
+</script>
+</p>
+<ul>
+<li>KKT conditions explain sparsity:</li>
+</ul>
+<p>
+<script type="math/tex; mode=display">
+X_j^\top (y - Xw^\star) = \lambda s_j, \quad
+s_j \in 
+\begin{cases}
+\{\text{sign}(w_j^\star)\}, & w_j^\star \neq 0 \\
+[-1,1], & w_j^\star = 0
+\end{cases}
+</script>
+</p>
+<ul>
+<li>Basis for <strong>coordinate descent and soft-thresholding algorithms</strong>.</li>
+</ul>
+<h3 id="73-support-vector-machines-svms">7.3 Support Vector Machines (SVMs)</h3>
+<ul>
+<li>Dual depends only on inner products <script type="math/tex">x_i^\top x_j</script>, enabling <strong>kernel methods</strong>.  </li>
+<li>Often more efficient if number of features <script type="math/tex">d</script> exceeds number of data points <script type="math/tex">n</script>.</li>
+</ul>
+<hr>
+<h2 id="8-constrained-vs-penalized-optimization">8. Constrained vs. Penalized Optimization</h2>
+<ul>
+<li><strong>Constrained form</strong>:</li>
+</ul>
+<p>
+<script type="math/tex; mode=display">
+\min_w \text{Loss}(w) \quad \text{s.t. } R(w) \le t
+</script>
+</p>
+<ul>
+<li><strong>Penalized form</strong>:</li>
+</ul>
+<p>
+<script type="math/tex; mode=display">
+\min_w \text{Loss}(w) + \lambda R(w)
+</script>
+</p>
+<ul>
+<li>Lagrange multiplier <script type="math/tex">\lambda</script> acts as a “price” on the constraint.  </li>
+<li>Equivalence holds for convex problems, but mapping <script type="math/tex">t \leftrightarrow \lambda</script> may be non-unique.</li>
+</ul>
+<h2 id="9-summary">9. Summary</h2>
+<ol>
+<li><strong>Infimum and supremum:</strong> greatest lower bound and least upper bound.  </li>
+<li><strong>Dual function:</strong> <script type="math/tex">g(\lambda, \nu) = \inf_x \mathcal{L}(x, \lambda, \nu)</script> always provides a <strong>lower bound</strong>.  </li>
+<li><strong>Duality gap:</strong> <script type="math/tex">p^\star - d^\star</script>, zero under strong duality, positive when dual does not attain primal optimum.  </li>
+<li><strong>KKT conditions:</strong> necessary and sufficient for convex problems with strong duality.  </li>
+<li><strong>ML connections:</strong> Ridge, Lasso, and SVM exploit duality for <strong>computation, sparsity, and kernelization</strong>.</li>
+</ol>
+<p><strong>Key intuition:</strong> The dual function can be visualized as the <strong>highest supporting “floor”</strong> under the primal objective. Maximizing it gives the tightest lower bound, and when strong duality holds, it meets the primal optimum exactly.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"></path></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      <script id="__config" type="application/json">{"base": "..", "features": ["navigation.instant", "navigation.tabs", "navigation.top", "search.suggest", "search.highlight", "toc.integrate", "content.code.copy", "content.action.edit", "content.action.view"], "search": "../assets/javascripts/workers/search.973d3a69.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.f55a23d4.min.js"></script>
+      
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+      
+    
+  
+<script id="init-glightbox">const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});
+document$.subscribe(()=>{ lightbox.reload(); });
+</script></body></html>
