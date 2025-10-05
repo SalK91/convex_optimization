@@ -10,10 +10,10 @@
       
       
       
-        <link rel="prev" href="../2a%20Duality/">
+        <link rel="prev" href="../0f%20Convergence/">
       
       
-        <link rel="next" href="../3b%20Penalty%20Functions/">
+        <link rel="next" href="../0h%20AdvancedAlgos/">
       
       
       <link rel="icon" href="../assets/images/favicon.png">
@@ -21,7 +21,7 @@
     
     
       
-        <title>Huber - Convex Optimization -  Algorithms and Analysis</title>
+        <title>Projections and Proximal Operators - Convex Optimization -  Algorithms and Analysis</title>
       
     
     
@@ -83,7 +83,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#huber-penalty-loss" class="md-skip">
+        <a href="#projections-and-proximal-operators-in-constrained-convex-optimization" class="md-skip">
           Skip to content
         </a>
       
@@ -117,7 +117,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Huber
+              Projections and Proximal Operators
             
           </span>
         </div>
@@ -243,10 +243,12 @@
   
   
   
+    
+  
   
     
     
-      <li class="md-tabs__item">
+      <li class="md-tabs__item md-tabs__item--active">
         <a href="../0a%20LA/" class="md-tabs__link">
           
   
@@ -283,12 +285,10 @@
   
   
   
-    
-  
   
     
     
-      <li class="md-tabs__item md-tabs__item--active">
+      <li class="md-tabs__item">
         <a href="../2a%20Duality/" class="md-tabs__link">
           
   
@@ -414,24 +414,29 @@
       
   
   
+    
   
   
+  
     
     
     
     
-      
-      
-    
-    
-    <li class="md-nav__item md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2">
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
         
           
-          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
             
   
   
@@ -444,7 +449,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_2">
             <span class="md-nav__icon md-icon"></span>
             Introduction
@@ -593,10 +598,30 @@
                 
   
   
+    
   
   
-    <li class="md-nav__item">
-      <a href="../0g%20Proximal%20and%20Projected%20Gradient%20Descent/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    Projections and Proximal Operators
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         
   
   
@@ -607,6 +632,75 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#projections-and-proximal-operators-in-constrained-convex-optimization" class="md-nav__link">
+    <span class="md-ellipsis">
+      Projections and Proximal Operators in Constrained Convex Optimization
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Projections and Proximal Operators in Constrained Convex Optimization">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#from-projections-to-proximal-operators" class="md-nav__link">
+    <span class="md-ellipsis">
+      From Projections to Proximal Operators
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#intuition-and-role-in-optimization" class="md-nav__link">
+    <span class="md-ellipsis">
+      Intuition and Role in Optimization
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#example" class="md-nav__link">
+    <span class="md-ellipsis">
+      Example
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#summary" class="md-nav__link">
+    <span class="md-ellipsis">
+      Summary
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -878,29 +972,24 @@
       
   
   
-    
   
   
-  
     
     
     
     
       
-        
-        
-      
       
     
     
-    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" checked>
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4">
         
           
-          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="">
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
             
   
   
@@ -913,7 +1002,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="true">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_4">
             <span class="md-nav__icon md-icon"></span>
             2 Duality &amp; Regularization
@@ -947,30 +1036,10 @@
                 
   
   
-    
   
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          
-  
-  
-  <span class="md-ellipsis">
-    Huber
-    
-  </span>
-  
-
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../3a%20Huber/" class="md-nav__link">
         
   
   
@@ -981,57 +1050,6 @@
   
 
       </a>
-      
-        
-
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
-  
-  
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#huber-penalty-loss" class="md-nav__link">
-    <span class="md-ellipsis">
-      Huber Penalty Loss
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Huber Penalty Loss">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#key-properties" class="md-nav__link">
-    <span class="md-ellipsis">
-      Key Properties
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#use" class="md-nav__link">
-    <span class="md-ellipsis">
-      Use
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
     </li>
   
 
@@ -1340,7 +1358,7 @@
 
 
   
-    <a href="https://github.com/SalK91/convex_optimization/edit/master/docs/3a Huber.md" title="Edit this page" class="md-content__button md-icon" rel="edit">
+    <a href="https://github.com/SalK91/convex_optimization/edit/master/docs/0g Proximal and Projected Gradient Descent.md" title="Edit this page" class="md-content__button md-icon" rel="edit">
       
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M10 20H6V4h7v5h5v3.1l2-2V8l-6-6H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h4zm10.2-7c.1 0 .3.1.4.2l1.3 1.3c.2.2.2.6 0 .8l-1 1-2.1-2.1 1-1c.1-.1.2-.2.4-.2m0 3.9L14.1 23H12v-2.1l6.1-6.1z"></path></svg>
     </a>
@@ -1349,38 +1367,114 @@
     
       
     
-    <a href="https://github.com/SalK91/convex_optimization/raw/master/docs/3a Huber.md" title="View source of this page" class="md-content__button md-icon">
+    <a href="https://github.com/SalK91/convex_optimization/raw/master/docs/0g Proximal and Projected Gradient Descent.md" title="View source of this page" class="md-content__button md-icon">
       
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 18c.56 0 1 .44 1 1s-.44 1-1 1-1-.44-1-1 .44-1 1-1m0-3c-2.73 0-5.06 1.66-6 4 .94 2.34 3.27 4 6 4s5.06-1.66 6-4c-.94-2.34-3.27-4-6-4m0 6.5a2.5 2.5 0 0 1-2.5-2.5 2.5 2.5 0 0 1 2.5-2.5 2.5 2.5 0 0 1 2.5 2.5 2.5 2.5 0 0 1-2.5 2.5M9.27 20H6V4h7v5h5v4.07c.7.08 1.36.25 2 .49V8l-6-6H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h4.5a8.2 8.2 0 0 1-1.23-2"></path></svg>
     </a>
   
 
 
-  <h1>Huber</h1>
+  <h1>Projections and Proximal Operators</h1>
 
-<h2 id="huber-penalty-loss">Huber Penalty Loss</h2>
-<p>The <strong>Huber loss</strong> is a robust loss function that combines the advantages of <strong>squared loss</strong> and <strong>absolute loss</strong>, making it less sensitive to outliers while remaining convex. It is defined as:</p>
+<h2 id="projections-and-proximal-operators-in-constrained-convex-optimization"><strong>Projections and Proximal Operators in Constrained Convex Optimization</strong></h2>
+<p>In many convex optimization problems, we aim to minimize a differentiable convex function <script type="math/tex">f(x)</script> over a closed convex set <script type="math/tex">\mathcal{X} \subseteq \mathbb{R}^n</script>:</p>
 <p>
 <script type="math/tex; mode=display">
-L_\delta(r) = 
-\begin{cases} 
-\frac{1}{2} r^2 & \text{if } |r| \le \delta, \\
-\delta (|r| - \frac{1}{2}\delta) & \text{if } |r| > \delta,
-\end{cases}
+\min_{x \in \mathcal{X}} f(x)
 </script>
 </p>
-<p>where <script type="math/tex">r = y - \hat{y}</script> is the residual, and <script type="math/tex">\delta > 0</script> is a threshold parameter.  </p>
-<h3 id="key-properties">Key Properties</h3>
+<p>A simple gradient step of the form</p>
+<p>
+<script type="math/tex; mode=display">
+x_{t+1} = x_t - \eta \nabla f(x_t)
+</script>
+</p>
+<p>may produce a point that lies <strong>outside</strong> the feasible region <script type="math/tex">\mathcal{X}</script>. To ensure feasibility, we introduce the <strong>projection operator</strong> onto <script type="math/tex">\mathcal{X}</script>:</p>
+<p>
+<script type="math/tex; mode=display">
+\text{Proj}_{\mathcal{X}}(y) = \arg\min_{x \in \mathcal{X}} \|x - y\|^2
+</script>
+</p>
+<p>The <strong>projected gradient descent</strong> update is then written as:</p>
+<p>
+<script type="math/tex; mode=display">
+x_{t+1} = \text{Proj}_{\mathcal{X}}(x_t - \eta \nabla f(x_t))
+</script>
+</p>
+<p>This projection step ensures that each iterate remains within <script type="math/tex">\mathcal{X}</script> while still following the descent direction of <script type="math/tex">f</script>.<br>
+Geometrically, it “pulls” the point back to the nearest feasible position in the set after taking a gradient step.<br>
+This is especially important when <script type="math/tex">\mathcal{X}</script> encodes constraints such as non-negativity, norm bounds, or affine restrictions.</p>
+<hr>
+<h3 id="from-projections-to-proximal-operators"><strong>From Projections to Proximal Operators</strong></h3>
+<p>While projection handles explicit <em>set constraints</em>, many optimization problems involve <strong>non-smooth regularization terms</strong> instead.<br>
+For such cases, the idea of projection generalizes to the <strong>proximal operator</strong>.</p>
+<p>For a convex (possibly non-differentiable) function <script type="math/tex">g(x)</script>, the <strong>proximal operator</strong> is defined as:</p>
+<p>
+<script type="math/tex; mode=display">
+\text{prox}_{\lambda g}(y) = \arg\min_x \Big( g(x) + \frac{1}{2\lambda} \|x - y\|^2 \Big)
+</script>
+</p>
+<p>If <script type="math/tex">g</script> is the <strong>indicator function</strong> of a convex set <script type="math/tex">\mathcal{X}</script>—that is, <script type="math/tex">g(x) = 0</script> for <script type="math/tex">x \in \mathcal{X}</script> and <script type="math/tex">+\infty</script> otherwise—then the proximal operator reduces exactly to the projection operator:</p>
+<p>
+<script type="math/tex; mode=display">
+\text{prox}_{\lambda g}(y) = \text{Proj}_{\mathcal{X}}(y)
+</script>
+</p>
+<p>Hence, projections are a <strong>special case</strong> of proximal operators.</p>
+<hr>
+<h3 id="intuition-and-role-in-optimization"><strong>Intuition and Role in Optimization</strong></h3>
+<p>Both operators serve as <strong>correction mechanisms</strong> during iterative optimization:</p>
 <ul>
-<li>Quadratic for small residuals (<script type="math/tex">|r| \le \delta</script>) → behaves like least squares.  </li>
-<li>Linear for large residuals (<script type="math/tex">|r| > \delta</script>) → reduces the influence of outliers.  </li>
-<li>Convex, so standard convex optimization techniques apply.  </li>
+<li>The <strong>projection operator</strong> ensures <strong>feasibility</strong> with respect to constraints.  </li>
+<li>The <strong>proximal operator</strong> enforces <strong>regularization</strong> or <strong>penalty structure</strong> when dealing with non-smooth functions.</li>
 </ul>
-<h3 id="use">Use</h3>
-<ul>
-<li>Commonly used in <strong>robust regression</strong> to estimate parameters in the presence of outliers.</li>
-<li>Balances <strong>efficiency</strong> (like least squares) and <strong>robustness</strong> (like absolute loss).</li>
-</ul>
+<p>Intuitively, these operators help balance <em>descent direction</em> with <em>constraint or regularization structure</em>, maintaining the geometry required for convergence in convex optimization.</p>
+<hr>
+<h3 id="example"><strong>Example</strong></h3>
+<p>If <script type="math/tex">\mathcal{X} = \{x \mid \|x\|_2 \le 1\}</script>, the projection onto <script type="math/tex">\mathcal{X}</script> is:</p>
+<p>
+<script type="math/tex; mode=display">
+\text{Proj}_{\mathcal{X}}(y) = \frac{y}{\max(1, \|y\|_2)}
+</script>
+</p>
+<p>Similarly, if <script type="math/tex">g(x) = \lambda \|x\|_1</script>, then the proximal operator corresponds to the <strong>soft-thresholding</strong> function:</p>
+<p>
+<script type="math/tex; mode=display">
+\text{prox}_{\lambda \| \cdot \|_1}(y)_i = \text{sign}(y_i) \cdot \max(|y_i| - \lambda, 0)
+</script>
+</p>
+<hr>
+<h3 id="summary"><strong>Summary</strong></h3>
+<table>
+<thead>
+<tr>
+<th>Concept</th>
+<th>Mathematical Definition</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Projection <script type="math/tex">\text{Proj}_{\mathcal{X}}(y)</script>
+</td>
+<td>
+<script type="math/tex">\arg\min_{x \in \mathcal{X}} \|x - y\|^2</script>
+</td>
+<td>Keeps iterates within the feasible set</td>
+</tr>
+<tr>
+<td>Proximal operator <script type="math/tex">\text{prox}_{\lambda g}(y)</script>
+</td>
+<td>
+<script type="math/tex">\arg\min_x \big( g(x) + \frac{1}{2\lambda}\|x - y\|^2 \big)</script>
+</td>
+<td>Handles non-smooth penalties or implicit constraints</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<p><strong>Figure:</strong> <em>Illustration of a projected gradient step.</em><br>
+After taking a gradient descent step that moves <script type="math/tex">x_t</script> outside the feasible set <script type="math/tex">\mathcal{X}</script>, the projection operator maps it back to the nearest point in <script type="math/tex">\mathcal{X}</script>, ensuring feasibility of the next iterate.</p>
 
 
 
