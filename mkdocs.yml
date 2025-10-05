@@ -1,52 +1,106 @@
-# Project info
-site_name: Convex Optimization -  Algorithms and Analysis
-site_description: "A structured collection of notes on optimization, convex analysis, and algorithms."
+# ==========================================================
+# Project Information
+# ==========================================================
+site_name: Convex Optimization — Algorithms and Analysis
+site_description: "Structured lecture notes on optimization, convex analysis, and algorithms."
 site_author: "Salman Khan"
 repo_url: "https://github.com/SalK91/convex_optimization"
 repo_name: "GitHub"
+site_url: "https://salk91.github.io/convex_optimization"
+copyright: "© 2025 Salman Khan — Educational Use Only"
 
-# Theme
+# ==========================================================
+# Theme Configuration (Material)
+# ==========================================================
 theme:
   name: material
+  language: en
+  icon:
+    logo: material/school
+    repo: fontawesome/brands/github
+  favicon: assets/favicon.png
+  logo: assets/logo.png
+
+  # ---- Color Palette ----
   palette:
-    - scheme: slate   
+    - scheme: slate     # dark academic background
       primary: teal
       accent: indigo
-    - scheme: slate
-      primary: teal
-      accent: teal
       toggle:
         icon: material/weather-night
+        name: Switch to light mode
+    - scheme: default   # optional light mode
+      primary: teal
+      accent: indigo
+      toggle:
+        icon: material/white-balance-sunny
         name: Switch to dark mode
+
+  # ---- Fonts ----
   font:
-    text: Roboto
-    code: Fira Code
+    text: "Merriweather"
+    code: "Fira Code"
+
+  # ---- Features ----
   features:
     - navigation.instant
     - navigation.tabs
     - navigation.top
+    - navigation.expand       # show only main pages, not subheadings
+    - header.autohide
     - search.suggest
     - search.highlight
-    - toc.integrate
     - content.code.copy
     - content.action.edit
     - content.action.view
 
+# ==========================================================
 # Plugins
+# ==========================================================
 plugins:
   - search
   - autorefs
-  - glightbox   # for image lightbox support
+  - glightbox       # image lightbox support
 
-extra_javascript: 
-    - https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML
-
+# ==========================================================
+# Markdown Extensions
+# ==========================================================
 markdown_extensions:
-    - mdx_math:
-        enable_dollar_delimiter: true
+  - admonition
+  - footnotes
+  - def_list
+  - attr_list
+  - mdx_math:
+      enable_dollar_delimiter: true
+  - pymdownx.details
+  - pymdownx.superfences
+  - pymdownx.arithmatex:
+      generic: true
+  - toc:
+      permalink: true
+      toc_depth: 1   # only top-level headings in sidebar
 
+# ==========================================================
+# Extra JavaScript and Styling
+# ==========================================================
+extra_javascript:
+  - https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML
 
-# Navigation (sidebar)
+extra_css:
+  - styles/extra.css
+
+# ==========================================================
+# Footer and Social Links
+# ==========================================================
+extra:
+  social:
+    - icon: fontawesome/brands/github
+      link: https://github.com/SalK91/convex_optimization
+  generator: false
+
+# ==========================================================
+# Navigation
+# ==========================================================
 nav:
   - Home: index.md
   - Introduction:
@@ -54,11 +108,12 @@ nav:
       - Convex Sets: "0b Convex Sets.md"
       - Convex Functions: "0c Convex Functions.md"
       - Optimality Conditions: "0d Optimality Conditions.md"
-      - Optimization Algos: "0e Optimization Algos.md"
-      - Properties : "0f Convergence.md"
-      - Projections and Proximal Operators : "0g Proximal and Projected Gradient Descent.md"
-      - Advanced Algos: "0h AdvancedAlgos.md"
+      - Optimization Algorithms: "0e Optimization Algos.md"
+      - Convergence Properties: "0f Convergence.md"
+      - Projections & Proximal Operators: "0g Proximal and Projected Gradient Descent.md"
+      - Advanced Algorithms: "0h AdvancedAlgos.md"
       - Epigraphs: "0c Epigraphs.md"
+
   - Linear Programs:
       - LP: "1a LP.md"
       - QP: "1b QP.md"
@@ -67,16 +122,19 @@ nav:
       - SOCP: "1e SOCP.md"
       - Geometric Interpretation: "1f GeometricInterpretation.md"
       - GP: "1g GP.md"
-  - 2 Duality & Regularization:
+
+  - Duality & Regularization:
       - Duality: "2a Duality.md"
       - Huber: "3a Huber.md"
       - Penalty Functions: "3b Penalty Functions.md"
-      - Regularized: "3c Regularized.md"
+      - Regularized Problems: "3c Regularized.md"
       - Robust Approximation: "3d Robust Approximation.md"
       - MLE: "3e MLE.md"
-  - 4 Discrimination & Optimization:
+
+  - Discrimination & Optimization:
       - Linear Discrimination: "4a Linear Discrimination.md"
       - First Order Optimization: "6a First Order Optimization.md"
-  - 7 Miscellaneous:
+
+  - Miscellaneous:
       - Pareto Optimality: "7a pareto optimal.md"
       - Example: "Example.md"
