@@ -87,7 +87,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#optimization-algos" class="md-skip">
+        <a href="#optimization-algorithms" class="md-skip">
           Skip to content
         </a>
       
@@ -1325,36 +1325,59 @@
   
 
 
-<h1 id="optimization-algos">Optimization:  Algos<a class="headerlink" href="#optimization-algos" title="Permanent link">¶</a></h1>
+<h1 id="optimization-algorithms">Optimization Algorithms<a class="headerlink" href="#optimization-algorithms" title="Permanent link">¶</a></h1>
 <p>Optimization is the <strong>core of machine learning</strong>: training a model is an optimization problem where we search for parameters <span class="arithmatex">\(\theta\)</span> that <strong>minimize a loss or maximize a likelihood</strong>. The choice of optimization algorithm depends on <strong>problem type, scale, constraints, smoothness, and stochasticity</strong>. </p>
-<h2 id="gradient-descent">Gradient descent<a class="headerlink" href="#gradient-descent" title="Permanent link">¶</a></h2>
-<p>We want to minimize a function over a feasible set:</p>
+<h2 id="gradient-descent">Gradient Descent<a class="headerlink" href="#gradient-descent" title="Permanent link">¶</a></h2>
+<p>We aim to minimize a differentiable function <span class="arithmatex">\(f\)</span> over a feasible set <span class="arithmatex">\(\mathcal{X}\)</span>:</p>
 <div class="arithmatex">\[
 \min_{x \in \mathcal{X}} f(x).
 \]</div>
-<p>At iteration <span class="arithmatex">\(t\)</span>, given the current point <span class="arithmatex">\(x_t\)</span>, we approximate <span class="arithmatex">\(f\)</span> around <span class="arithmatex">\(x_t\)</span> using a first-order Taylor expansion plus a quadratic regularization term. The square term penalizes moving too far from the current point <span class="arithmatex">\(x_t\)</span>. You can think of it as saying: “I trust my first-order approximation, but only locally. If I move too far, the approximation might be bad — so I add a cost for large steps.”</p>
+<p>At iteration <span class="arithmatex">\(t\)</span>, we have the current point <span class="arithmatex">\(x_t\)</span>.<br>
+Because directly minimizing <span class="arithmatex">\(f\)</span> might be hard, we instead build a <strong>local model</strong> of <span class="arithmatex">\(f\)</span> around <span class="arithmatex">\(x_t\)</span>.</p>
+<h3 id="1-local-approximation">1. Local Approximation<a class="headerlink" href="#1-local-approximation" title="Permanent link">¶</a></h3>
+<p>We approximate <span class="arithmatex">\(f\)</span> using its <strong>first-order Taylor expansion</strong> around <span class="arithmatex">\(x_t\)</span>:</p>
 <div class="arithmatex">\[
-f(x) \approx f(x_t) + \langle \nabla f(x_t), x - x_t \rangle + \frac{1}{2\eta}\|x - x_t\|^2,
+f(x) \approx f(x_t) + \langle \nabla f(x_t),\, x - x_t \rangle.
 \]</div>
-<p>where <span class="arithmatex">\(\eta &gt; 0\)</span> is the step size (also called the learning rate).</p>
-<p>Thus, the update rule is defined as the solution of:</p>
+<p>This gives a <strong>linear</strong> model of the function — a plane tangent to <span class="arithmatex">\(f\)</span> at <span class="arithmatex">\(x_t\)</span>.<br>
+However, a linear function is unbounded below: if we tried to minimize this directly, it would push <span class="arithmatex">\(x\)</span> infinitely far in the direction of the negative gradient.</p>
+<h3 id="2-adding-a-quadratic-regularization-term">2. Adding a Quadratic Regularization Term<a class="headerlink" href="#2-adding-a-quadratic-regularization-term" title="Permanent link">¶</a></h3>
+<p>To prevent taking arbitrarily large steps, we introduce a <strong>quadratic penalty</strong> that discourages moving too far from <span class="arithmatex">\(x_t\)</span>:</p>
 <div class="arithmatex">\[
-x_{t+1} = \arg\min_{x \in \mathcal{X}} \Big[ f(x_t) + \langle \nabla f(x_t), x - x_t \rangle + \tfrac{1}{2\eta} \|x - x_t\|^2 \Big].
+f(x) \approx f(x_t) + \langle \nabla f(x_t),\, x - x_t \rangle + \frac{1}{2\eta}\|x - x_t\|^2,
 \]</div>
-<p>To find <span class="arithmatex">\(x_{t+1}\)</span>, take the derivative of the objective inside the brackets with respect to <span class="arithmatex">\(x\)</span>:</p>
+<p>where <span class="arithmatex">\(\eta &gt; 0\)</span> is the <strong>step size (learning rate)</strong>.</p>
+<p>This quadratic term plays a crucial conceptual role:</p>
+<ul>
+<li>It <strong>limits trust</strong> in the linear approximation — we assume it’s accurate only <em>locally</em>.  </li>
+<li>It <strong>creates a trade-off</strong> between decreasing the linear approximation and staying near <span class="arithmatex">\(x_t\)</span>.  </li>
+<li>The factor <span class="arithmatex">\(\frac{1}{2\eta}\)</span> determines how strongly we penalize large moves:  </li>
+<li>Small <span class="arithmatex">\(\eta\)</span> → strong penalty → conservative, small steps.  </li>
+<li>Large <span class="arithmatex">\(\eta\)</span> → weak penalty → bolder, larger steps.</li>
+</ul>
+<p>In optimization, this is known as a <strong>proximal</strong> or <strong>trust-region</strong> regularization.</p>
+<h3 id="3-deriving-the-gradient-descent-update">3. Deriving the Gradient Descent Update<a class="headerlink" href="#3-deriving-the-gradient-descent-update" title="Permanent link">¶</a></h3>
+<p>The next iterate <span class="arithmatex">\(x_{t+1}\)</span> minimizes this local quadratic model:</p>
+<div class="arithmatex">\[
+x_{t+1} = \arg\min_{x \in \mathcal{X}} 
+\Big[ f(x_t) + \langle \nabla f(x_t),\, x - x_t \rangle + \tfrac{1}{2\eta}\|x - x_t\|^2 \Big].
+\]</div>
+<p>Since <span class="arithmatex">\(f(x_t)\)</span> is constant with respect to <span class="arithmatex">\(x\)</span>, we can ignore it in the minimization.<br>
+Taking the gradient of the remaining terms and setting it to zero:</p>
 <div class="arithmatex">\[
 \nabla f(x_t) + \frac{1}{\eta}(x - x_t) = 0.
 \]</div>
-<p>Rearranging gives:</p>
+<p>Solving for <span class="arithmatex">\(x\)</span>:</p>
 <div class="arithmatex">\[
-x - x_t = -\eta \nabla f(x_t).
+x - x_t = -\eta \nabla f(x_t),
 \]</div>
-<p>Therefore, the update rule is:</p>
-<p>
-<script type="math/tex; mode=display">
-x_{t+1} = x_t - \eta \nabla f(x_t).
-</script>
-- Under smoothness and strong convexity, <strong>gradient descent converges linearly</strong>, improving by a fixed fraction at each iteration.</p>
+<p>which gives the familiar <strong>gradient descent update rule</strong>:</p>
+<div class="arithmatex">\[
+\boxed{x_{t+1} = x_t - \eta \nabla f(x_t)}.
+\]</div>
+<h3 id="4-convergence">4. Convergence<a class="headerlink" href="#4-convergence" title="Permanent link">¶</a></h3>
+<p>Under standard assumptions — <strong>smoothness</strong> (Lipschitz-continuous gradient) and <strong>strong convexity</strong> — gradient descent converges <strong>linearly</strong> to the optimal solution.<br>
+That means each iteration reduces the optimality gap by a constant fraction.</p>
 <h2 id="subgradient-method">Subgradient Method<a class="headerlink" href="#subgradient-method" title="Permanent link">¶</a></h2>
 <p>We want to minimize a convex (possibly nonsmooth) function:</p>
 <div class="arithmatex">\[

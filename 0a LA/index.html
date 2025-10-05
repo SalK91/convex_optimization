@@ -1326,16 +1326,10 @@
 
 
 <h1 id="linear-algebra-prerequisites">Linear Algebra Prerequisites<a class="headerlink" href="#linear-algebra-prerequisites" title="Permanent link">¶</a></h1>
+<h3 id="vector-spaces-and-norms">Vector spaces and norms:<a class="headerlink" href="#vector-spaces-and-norms" title="Permanent link">¶</a></h3>
 <ul>
 <li>
-<p>Vector spaces and norms: We work primarily in <span class="arithmatex">\(\mathbb{R}^n\)</span>, the <span class="arithmatex">\(n\)</span>-dimensional Euclidean space. The Euclidean norm is <span class="arithmatex">\(\|x\|_2 = \sqrt{x^T x}\)</span>, but other norms, such as <span class="arithmatex">\(\|x\|_1\)</span> or <span class="arithmatex">\(\|x\|_\infty\)</span>, are also important.</p>
-</li>
-<li>
-<p>Inner products: An inner product in <span class="arithmatex">\(\mathbb{R}^n\)</span> is <span class="arithmatex">\(\langle x, y \rangle = x^T y\)</span>.</p>
-</li>
-<li>
-<p>Angle in inner product: The angle <span class="arithmatex">\(\theta\)</span> between two nonzero vectors <span class="arithmatex">\(x, y \in \mathbb{R}^n\)</span> is defined via<br>
-<span class="arithmatex">\(\cos \theta = \dfrac{\langle x, y \rangle}{\|x\|_2 \, \|y\|_2}\)</span>.</p>
+<p>We work primarily in <span class="arithmatex">\(\mathbb{R}^n\)</span>, the <span class="arithmatex">\(n\)</span>-dimensional Euclidean space. The Euclidean norm is <span class="arithmatex">\(\|x\|_2 = \sqrt{x^T x}\)</span>, but other norms, such as <span class="arithmatex">\(\|x\|_1\)</span> or <span class="arithmatex">\(\|x\|_\infty\)</span>, are also important.</p>
 </li>
 <li>
 <p>Affine sets: A set of the form  <span class="arithmatex">\(\{x \in \mathbb{R}^n : Ax = b\}\)</span>, where <span class="arithmatex">\(A\)</span> is a matrix and <span class="arithmatex">\(b\)</span> is a vector. Affine sets are the natural generalisation of lines and planes.</p>
@@ -1344,15 +1338,24 @@
 <p>Linear independence: A set of vectors <span class="arithmatex">\(\{v_1, v_2, \dots, v_k\}\)</span> is linearly independent if    <span class="arithmatex">\(\alpha_1 v_1 + \alpha_2 v_2 + \cdots + \alpha_k v_k = 0\)</span><br>
   implies <span class="arithmatex">\(\alpha_1 = \alpha_2 = \cdots = \alpha_k = 0\)</span>.</p>
 </li>
+</ul>
+<h3 id="inner-outer-products-projection">Inner &amp; Outer products &amp; Projection<a class="headerlink" href="#inner-outer-products-projection" title="Permanent link">¶</a></h3>
+<ul>
 <li>
-<p>Outer product: Given vectors <span class="arithmatex">\(u, v \in \mathbb{R}^n\)</span>, their outer product is   <span class="arithmatex">\(u v^T\)</span>, which is an <span class="arithmatex">\(n \times n\)</span> matrix.  (Contrast with the inner product <span class="arithmatex">\(u^T v\)</span>, which is a scalar.)</p>
+<p>An inner product in <span class="arithmatex">\(\mathbb{R}^n\)</span> is <span class="arithmatex">\(\langle x, y \rangle = x^T y\)</span>.</p>
 </li>
 <li>
-<p>Cauchy–Schwarz inequality: For any <span class="arithmatex">\(x, y \in \mathbb{R}^n\)</span>, <span class="arithmatex">\(|\langle x, y \rangle| \leq \|x\|_2 \, \|y\|_2\)</span>.<br>
-  Equality holds iff <span class="arithmatex">\(x\)</span> and <span class="arithmatex">\(y\)</span> are linearly dependent.</p>
+<p>The angle <span class="arithmatex">\(\theta\)</span> between two nonzero vectors <span class="arithmatex">\(x, y \in \mathbb{R}^n\)</span> is defined as@  </p>
+<p><span class="arithmatex">\(\cos \theta = \dfrac{\langle x, y \rangle}{\|x\|_2 \, \|y\|_2}\)</span></p>
 </li>
 <li>
-<p>Projection onto a vector: The projection of <span class="arithmatex">\(x\)</span> onto <span class="arithmatex">\(y\)</span> (with <span class="arithmatex">\(y \neq 0\)</span>) is  <span class="arithmatex">\(\text{proj}_y(x) = \dfrac{\langle x, y \rangle}{\langle y, y \rangle} y\)</span>. This gives the component of <span class="arithmatex">\(x\)</span> in the direction of <span class="arithmatex">\(y\)</span>.</p>
+<p>Given vectors <span class="arithmatex">\(u, v \in \mathbb{R}^n\)</span>, their outer product is   <span class="arithmatex">\(u v^T\)</span>, which is an <span class="arithmatex">\(n \times n\)</span> matrix.  (Contrast with the inner product <span class="arithmatex">\(u^T v\)</span>, which is a scalar.)</p>
+</li>
+<li>
+<p>Cauchy–Schwarz inequality: For any <span class="arithmatex">\(x, y \in \mathbb{R}^n\)</span>, <span class="arithmatex">\(|\langle x, y \rangle| \leq \|x\|_2 \, \|y\|_2\)</span>. Equality holds iff <span class="arithmatex">\(x\)</span> and <span class="arithmatex">\(y\)</span> are linearly dependent.</p>
+</li>
+<li>
+<p>The projection of <span class="arithmatex">\(x\)</span> onto <span class="arithmatex">\(y\)</span> (with <span class="arithmatex">\(y \neq 0\)</span>) is  <span class="arithmatex">\(\text{proj}_y(x) = \dfrac{\langle x, y \rangle}{\langle y, y \rangle} y\)</span>. This gives the component of <span class="arithmatex">\(x\)</span> in the direction of <span class="arithmatex">\(y\)</span>.</p>
 </li>
 <li>
 <p>Subspace spanned by <span class="arithmatex">\(k\)</span> perpendicular (orthogonal) vectors: If <span class="arithmatex">\(\{u_1, u_2, \dots, u_k\}\)</span> are mutually perpendicular (orthogonal) and nonzero, then they form an orthogonal basis for their span. The subspace is <span class="arithmatex">\(U = \text{span}\{u_1, u_2, \dots, u_k\}\)</span>,  and any <span class="arithmatex">\(x \in U\)</span> can be uniquely written as <span class="arithmatex">\(x = \alpha_1 u_1 + \alpha_2 u_2 + \cdots + \alpha_k u_k\)</span> with coefficients <span class="arithmatex">\(\alpha_i = \dfrac{\langle x, u_i \rangle}{\langle u_i, u_i \rangle}\)</span>.</p>
