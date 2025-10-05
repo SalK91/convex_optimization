@@ -56,7 +56,8 @@ nav:
       - Optimality Conditions: "0d Optimality Conditions.md"
       - Optimization Algos: "0e Optimization Algos.md"
       - Properties : "0f Convergence.md"
-      - Advanced Algos: "0g AdvancedAlgos.md"
+      - Projections and Proximal Operators : "0g Proximal and Projected Gradient Descent.md"
+      - Advanced Algos: "0h AdvancedAlgos.md"
       - Epigraphs: "0c Epigraphs.md"
   - Linear Programs:
       - LP: "1a LP.md"
