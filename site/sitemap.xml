@@ -2,114 +2,130 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
          <loc>https://salk91.github.io/convex_optimization/</loc>
-         <lastmod>2025-10-05</lastmod>
-    </url>
-    <url>
-         <loc>https://salk91.github.io/convex_optimization/0%20d%20Algos/</loc>
-         <lastmod>2025-10-05</lastmod>
+         <lastmod>2025-10-06</lastmod>
     </url>
     <url>
          <loc>https://salk91.github.io/convex_optimization/0a%20LA/</loc>
-         <lastmod>2025-10-05</lastmod>
+         <lastmod>2025-10-06</lastmod>
     </url>
     <url>
          <loc>https://salk91.github.io/convex_optimization/0b%20Convex%20Sets/</loc>
-         <lastmod>2025-10-05</lastmod>
+         <lastmod>2025-10-06</lastmod>
     </url>
     <url>
          <loc>https://salk91.github.io/convex_optimization/0c%20Convex%20Functions/</loc>
-         <lastmod>2025-10-05</lastmod>
+         <lastmod>2025-10-06</lastmod>
+    </url>
+    <url>
+         <loc>https://salk91.github.io/convex_optimization/0d%20Algos/</loc>
+         <lastmod>2025-10-06</lastmod>
     </url>
     <url>
          <loc>https://salk91.github.io/convex_optimization/0d%20Optimality%20Conditions/</loc>
-         <lastmod>2025-10-05</lastmod>
+         <lastmod>2025-10-06</lastmod>
     </url>
     <url>
          <loc>https://salk91.github.io/convex_optimization/0e%20Optimization%20Algos/</loc>
-         <lastmod>2025-10-05</lastmod>
+         <lastmod>2025-10-06</lastmod>
+    </url>
+    <url>
+         <loc>https://salk91.github.io/convex_optimization/0e1%20Gradient%20Descent/</loc>
+         <lastmod>2025-10-06</lastmod>
+    </url>
+    <url>
+         <loc>https://salk91.github.io/convex_optimization/0e2%20subgradient%20method/</loc>
+         <lastmod>2025-10-06</lastmod>
+    </url>
+    <url>
+         <loc>https://salk91.github.io/convex_optimization/0e3%20accelerated%20gs/</loc>
+         <lastmod>2025-10-06</lastmod>
     </url>
     <url>
          <loc>https://salk91.github.io/convex_optimization/0f%20Convergence/</loc>
-         <lastmod>2025-10-05</lastmod>
+         <lastmod>2025-10-06</lastmod>
     </url>
     <url>
          <loc>https://salk91.github.io/convex_optimization/0g%20Proximal%20and%20Projected%20Gradient%20Descent/</loc>
-         <lastmod>2025-10-05</lastmod>
+         <lastmod>2025-10-06</lastmod>
+    </url>
+    <url>
+         <loc>https://salk91.github.io/convex_optimization/0g1%20proximal%20ga/</loc>
+         <lastmod>2025-10-06</lastmod>
     </url>
     <url>
          <loc>https://salk91.github.io/convex_optimization/0h%20AdvancedAlgos/</loc>
-         <lastmod>2025-10-05</lastmod>
+         <lastmod>2025-10-06</lastmod>
     </url>
     <url>
          <loc>https://salk91.github.io/convex_optimization/0ssc%20Epigraphs/</loc>
-         <lastmod>2025-10-05</lastmod>
+         <lastmod>2025-10-06</lastmod>
     </url>
     <url>
          <loc>https://salk91.github.io/convex_optimization/1a%20LP/</loc>
-         <lastmod>2025-10-05</lastmod>
+         <lastmod>2025-10-06</lastmod>
     </url>
     <url>
          <loc>https://salk91.github.io/convex_optimization/1b%20QP/</loc>
-         <lastmod>2025-10-05</lastmod>
+         <lastmod>2025-10-06</lastmod>
     </url>
     <url>
          <loc>https://salk91.github.io/convex_optimization/1c%20Least%20Square/</loc>
-         <lastmod>2025-10-05</lastmod>
+         <lastmod>2025-10-06</lastmod>
     </url>
     <url>
          <loc>https://salk91.github.io/convex_optimization/1d%20QCQP/</loc>
-         <lastmod>2025-10-05</lastmod>
+         <lastmod>2025-10-06</lastmod>
     </url>
     <url>
          <loc>https://salk91.github.io/convex_optimization/1e%20SOCP/</loc>
-         <lastmod>2025-10-05</lastmod>
+         <lastmod>2025-10-06</lastmod>
     </url>
     <url>
          <loc>https://salk91.github.io/convex_optimization/1f%20GeometricInterpretation/</loc>
-         <lastmod>2025-10-05</lastmod>
+         <lastmod>2025-10-06</lastmod>
     </url>
     <url>
          <loc>https://salk91.github.io/convex_optimization/1g%20GP/</loc>
-         <lastmod>2025-10-05</lastmod>
+         <lastmod>2025-10-06</lastmod>
     </url>
     <url>
          <loc>https://salk91.github.io/convex_optimization/2a%20Duality/</loc>
-         <lastmod>2025-10-05</lastmod>
+         <lastmod>2025-10-06</lastmod>
     </url>
     <url>
          <loc>https://salk91.github.io/convex_optimization/3a%20Huber/</loc>
-         <lastmod>2025-10-05</lastmod>
+         <lastmod>2025-10-06</lastmod>
     </url>
     <url>
          <loc>https://salk91.github.io/convex_optimization/3b%20Penalty%20Functions/</loc>
-         <lastmod>2025-10-05</lastmod>
+         <lastmod>2025-10-06</lastmod>
     </url>
     <url>
          <loc>https://salk91.github.io/convex_optimization/3c%20Regularized/</loc>
-         <lastmod>2025-10-05</lastmod>
+         <lastmod>2025-10-06</lastmod>
     </url>
     <url>
          <loc>https://salk91.github.io/convex_optimization/3d%20Robust%20Approximation/</loc>
-         <lastmod>2025-10-05</lastmod>
+         <lastmod>2025-10-06</lastmod>
     </url>
     <url>
          <loc>https://salk91.github.io/convex_optimization/3e%20MLE/</loc>
-         <lastmod>2025-10-05</lastmod>
+         <lastmod>2025-10-06</lastmod>
     </url>
     <url>
          <loc>https://salk91.github.io/convex_optimization/4a%20Linear%20Discrimination/</loc>
-         <lastmod>2025-10-05</lastmod>
+         <lastmod>2025-10-06</lastmod>
     </url>
     <url>
          <loc>https://salk91.github.io/convex_optimization/6a%20First%20Order%20Optimization/</loc>
-         <lastmod>2025-10-05</lastmod>
+         <lastmod>2025-10-06</lastmod>
     </url>
     <url>
          <loc>https://salk91.github.io/convex_optimization/7a%20pareto%20optimal/</loc>
-         <lastmod>2025-10-05</lastmod>
+         <lastmod>2025-10-06</lastmod>
     </url>
     <url>
          <loc>https://salk91.github.io/convex_optimization/Example/</loc>
-         <lastmod>2025-10-05</lastmod>
+         <lastmod>2025-10-06</lastmod>
     </url>
 </urlset>

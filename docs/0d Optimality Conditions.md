@@ -24,7 +24,7 @@ Intuition: The gradient points in the direction of steepest increase, so a zero 
 Examples:
 
 a) Quadratic function:
-$$f(x) = x^2 - 4x + 7$$  
+$f(x) = x^2 - 4x + 7$  
 $\nabla f(x) = 2x - 4$ → set to 0 → $\hat{x} = 2$
 
 b) Sum of Squared Errors
@@ -120,18 +120,7 @@ This is a **general convex optimality condition for constrained problems**, vali
 
 ### Intution
 Imagine a region of allowed points, called the feasible set 
-𝑋
-X. Points strictly inside the region form the interior, where movement in any direction is possible without leaving the set. The edges and corners of the region form the boundary, where movement is restricted because you can only move along directions that remain feasible. Consider standing at a point 
-𝑥
-^
-x
-^
- on this boundary. From here, you cannot move freely in all directions; you can only move along directions that stay inside the feasible set. These allowable directions form what is called the tangent cone at 
-𝑥
-^
-x
-^
-, encompassing movements along the boundary or slightly into the interior.
+$\mathcal{X}$. Points strictly inside the region form the interior, where movement in any direction is possible without leaving the set. The edges and corners of the region form the boundary, where movement is restricted because you can only move along directions that remain feasible. Consider standing at a point 𝑥 on this boundary. From here, you cannot move freely in all directions; you can only move along directions that stay inside the feasible set. These allowable directions form what is called the tangent cone at x, encompassing movements along the boundary or slightly into the interior.
 
 Opposing these feasible directions is the normal cone, which consists of vectors that point outward from the feasible region, effectively “blocking” any movement that would stay inside. At an optimal boundary point, the gradient of the objective function points outward, lying within the normal cone. This means that moving along any feasible direction — whether along the boundary or slightly into the interior — cannot decrease the objective function. The gradient “pushes against” all allowable moves, so any small displacement that respects the constraints either increases the objective or leaves it unchanged.
 

@@ -1,3 +1,4 @@
+# Convex Set
 - Convexity of sets: A set $C$ is convex if for any $x_1, x_2 \in C$ and $\theta \in [0,1]$, we have $\theta x_1 + (1-\theta) x_2 \in C$.
 - Closed sets: A set is closed if it contains all its limit points. The closure of a set is the smallest closed set containing it.
 - Extreme points: A point in a convex set is extreme if it cannot be expressed as a convex combination of two other distinct points in the set. For polyhedra, extreme points correspond to vertices.
@@ -27,8 +28,7 @@ The convex hull of a set $S$ is the collection of all convex combinations of poi
   \text{cone}(S) = \left\{ \sum_{i=1}^k \theta_i x_i \;\middle|\; x_i \in S, \; \theta_i \geq 0 \right\}.
   $$
 
-- A cone is **not necessarily a subspace** (since a subspace allows all linear combinations, including negative multiples).  
-  However, every subspace is a cone (because it is closed under nonnegative scaling).  
+- A cone is **not necessarily a subspace** (since a subspace allows all linear combinations, including negative multiples). However, every subspace is a cone (because it is closed under nonnegative scaling).  
 
 - A cone is **not necessarily convex**. To be convex, a set must be closed under addition and convex combinations, which is not guaranteed for a general cone. A **convex cone** is a cone that is also convex, i.e., closed under nonnegative linear combinations.
 

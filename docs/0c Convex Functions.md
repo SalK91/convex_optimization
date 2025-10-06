@@ -1,3 +1,4 @@
+# Convex Function
 A function $f: \mathbb{R}^n \to \mathbb{R}$ is **convex** if its domain $\mathrm{dom}(f) \subseteq \mathbb{R}^n$ is convex and, for all $x_1, x_2 \in \mathrm{dom}(f)$ and all $\theta \in [0,1]$:
 
 $$

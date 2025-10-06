@@ -103,14 +103,20 @@ extra:
 # ==========================================================
 nav:
   - Home: index.md
-  - Introduction:
+  - Introduction: 
       - LA Prerequisites: "0a LA.md"
       - Convex Sets: "0b Convex Sets.md"
       - Convex Functions: "0c Convex Functions.md"
       - Optimality Conditions: "0d Optimality Conditions.md"
+
+  - Optimization Algorithms: 
       - Optimization Algorithms: "0e Optimization Algos.md"
+      - Gradient Descent: "0e1 Gradient Descent.md"
+      - Subgradient Method: "0e2 subgradient method.md"
+      - Accelerated GD: "0e3 accelerated gs.md"
       - Convergence Properties: "0f Convergence.md"
       - Projections & Proximal Operators: "0g Proximal and Projected Gradient Descent.md"
+      - Proximal Gradient Algorithm: "0g1 proximal ga.md"
       - Advanced Algorithms: "0h AdvancedAlgos.md"
       - Epigraphs: "0c Epigraphs.md"
 

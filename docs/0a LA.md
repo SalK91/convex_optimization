@@ -1,11 +1,8 @@
 # Linear Algebra Prerequisites
 
-- Vector spaces and norms: We work primarily in $\mathbb{R}^n$, the $n$-dimensional Euclidean space. The Euclidean norm is $\|x\|_2 = \sqrt{x^T x}$, but other norms, such as $\|x\|_1$ or $\|x\|_\infty$, are also important.
+### Vector spaces and norms: 
 
-- Inner products: An inner product in $\mathbb{R}^n$ is $\langle x, y \rangle = x^T y$.
-
-- Angle in inner product: The angle $\theta$ between two nonzero vectors $x, y \in \mathbb{R}^n$ is defined via  
-  $\cos \theta = \dfrac{\langle x, y \rangle}{\|x\|_2 \, \|y\|_2}$.
+- We work primarily in $\mathbb{R}^n$, the $n$-dimensional Euclidean space. The Euclidean norm is $\|x\|_2 = \sqrt{x^T x}$, but other norms, such as $\|x\|_1$ or $\|x\|_\infty$, are also important.
 
 - Affine sets: A set of the form  $\{x \in \mathbb{R}^n : Ax = b\}$, where $A$ is a matrix and $b$ is a vector. Affine sets are the natural generalisation of lines and planes.
 
@@ -13,12 +10,20 @@
 - Linear independence: A set of vectors $\{v_1, v_2, \dots, v_k\}$ is linearly independent if    $\alpha_1 v_1 + \alpha_2 v_2 + \cdots + \alpha_k v_k = 0$  
   implies $\alpha_1 = \alpha_2 = \cdots = \alpha_k = 0$.
 
-- Outer product: Given vectors $u, v \in \mathbb{R}^n$, their outer product is   $u v^T$, which is an $n \times n$ matrix.  (Contrast with the inner product $u^T v$, which is a scalar.)
 
-- Cauchy–Schwarz inequality: For any $x, y \in \mathbb{R}^n$, $|\langle x, y \rangle| \leq \|x\|_2 \, \|y\|_2$.  
-  Equality holds iff $x$ and $y$ are linearly dependent.
+### Inner & Outer products & Projection
+-  An inner product in $\mathbb{R}^n$ is $\langle x, y \rangle = x^T y$.
 
-- Projection onto a vector: The projection of $x$ onto $y$ (with $y \neq 0$) is  $\text{proj}_y(x) = \dfrac{\langle x, y \rangle}{\langle y, y \rangle} y$. This gives the component of $x$ in the direction of $y$.
+- The angle $\theta$ between two nonzero vectors $x, y \in \mathbb{R}^n$ is defined as@  
+  
+    $\cos \theta = \dfrac{\langle x, y \rangle}{\|x\|_2 \, \|y\|_2}$
+
+
+- Given vectors $u, v \in \mathbb{R}^n$, their outer product is   $u v^T$, which is an $n \times n$ matrix.  (Contrast with the inner product $u^T v$, which is a scalar.)
+
+- Cauchy–Schwarz inequality: For any $x, y \in \mathbb{R}^n$, $|\langle x, y \rangle| \leq \|x\|_2 \, \|y\|_2$. Equality holds iff $x$ and $y$ are linearly dependent.
+
+- The projection of $x$ onto $y$ (with $y \neq 0$) is  $\text{proj}_y(x) = \dfrac{\langle x, y \rangle}{\langle y, y \rangle} y$. This gives the component of $x$ in the direction of $y$.
 
 - Subspace spanned by $k$ perpendicular (orthogonal) vectors: If $\{u_1, u_2, \dots, u_k\}$ are mutually perpendicular (orthogonal) and nonzero, then they form an orthogonal basis for their span. The subspace is $U = \text{span}\{u_1, u_2, \dots, u_k\}$,  and any $x \in U$ can be uniquely written as $x = \alpha_1 u_1 + \alpha_2 u_2 + \cdots + \alpha_k u_k$ with coefficients $\alpha_i = \dfrac{\langle x, u_i \rangle}{\langle u_i, u_i \rangle}$.
 

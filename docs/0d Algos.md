@@ -22,9 +22,9 @@ $$
 #### Convergence
 - If $f$ is convex and $\nabla f$ is Lipschitz continuous with constant $L$:
   - With fixed step $\alpha \le \tfrac{1}{L}$, we have:
-    $$
+    $
     f(x^k) - f(x^*) = \mathcal{O}\left(\tfrac{1}{k}\right)
-    $$
+    $
 - If $f$ is **$\mu$-strongly convex**:
     $$
     f(x^k) - f(x^*) \le \left(1 - \tfrac{\mu}{L}\right)^k \big(f(x^0) - f(x^*)\big)
