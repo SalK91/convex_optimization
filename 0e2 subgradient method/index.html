@@ -9,13 +9,13 @@
         <meta name="author" content="Salman Khan">
       
       
-        <link rel="canonical" href="https://salk91.github.io/convex_optimization/0c%20Convex%20Functions/">
+        <link rel="canonical" href="https://salk91.github.io/convex_optimization/0e2%20subgradient%20method/">
       
       
-        <link rel="prev" href="../0b%20Convex%20Sets/">
+        <link rel="prev" href="../0e1%20Gradient%20Descent/">
       
       
-        <link rel="next" href="../0d%20Optimality%20Conditions/">
+        <link rel="next" href="../0e3%20accelerated%20gs/">
       
       
       <link rel="icon" href="../assets/favicon.png">
@@ -23,7 +23,7 @@
     
     
       
-        <title>Convex Functions - Convex Optimization — Algorithms and Analysis</title>
+        <title>Subgradient Method - Convex Optimization — Algorithms and Analysis</title>
       
     
     
@@ -87,7 +87,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#convex-function" class="md-skip">
+        <a href="#subgradient-method-derivation-and-convergence" class="md-skip">
           Skip to content
         </a>
       
@@ -120,7 +120,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Convex Functions
+              Subgradient Method
             
           </span>
         </div>
@@ -250,12 +250,10 @@
   
   
   
-    
-  
   
     
     
-      <li class="md-tabs__item md-tabs__item--active">
+      <li class="md-tabs__item">
         <a href="../0a%20LA/" class="md-tabs__link">
           
   
@@ -272,10 +270,12 @@
   
   
   
+    
+  
   
     
     
-      <li class="md-tabs__item">
+      <li class="md-tabs__item md-tabs__item--active">
         <a href="../0e%20Optimization%20Algos/" class="md-tabs__link">
           
   
@@ -438,29 +438,26 @@
       
   
   
-    
   
   
-  
     
     
     
     
       
-        
-        
-      
       
     
     
-    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--nested">
       
         
-        
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
         
           
-          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2">
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
             
   
   
@@ -473,7 +470,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_2">
             <span class="md-nav__icon md-icon"></span>
             Introduction
@@ -530,19 +527,10 @@
                 
   
   
-    
   
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../0c%20Convex%20Functions/" class="md-nav__link">
         
   
   
@@ -553,7 +541,6 @@
   
 
       </a>
-      
     </li>
   
 
@@ -593,26 +580,29 @@
       
   
   
+    
   
   
+  
     
     
     
     
-      
-      
-    
-    
-    <li class="md-nav__item md-nav__item--nested">
       
         
+        
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
         
           
-        
-        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3">
-        
-          
-          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
             
   
   
@@ -625,7 +615,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_3">
             <span class="md-nav__icon md-icon"></span>
             Optimization Algorithms
@@ -682,10 +672,19 @@
                 
   
   
+    
   
   
-    <li class="md-nav__item">
-      <a href="../0e2%20subgradient%20method/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         
   
   
@@ -696,6 +695,7 @@
   
 
       </a>
+      
     </li>
   
 
@@ -1471,7 +1471,7 @@
 
 
   
-    <a href="https://github.com/SalK91/convex_optimization/edit/master/docs/0c Convex Functions.md" title="Edit this page" class="md-content__button md-icon" rel="edit">
+    <a href="https://github.com/SalK91/convex_optimization/edit/master/docs/0e2 subgradient method.md" title="Edit this page" class="md-content__button md-icon" rel="edit">
       
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M10 20H6V4h7v5h5v3.1l2-2V8l-6-6H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h4zm10.2-7c.1 0 .3.1.4.2l1.3 1.3c.2.2.2.6 0 .8l-1 1-2.1-2.1 1-1c.1-.1.2-.2.4-.2m0 3.9L14.1 23H12v-2.1l6.1-6.1z"></path></svg>
     </a>
@@ -1480,241 +1480,124 @@
     
       
     
-    <a href="https://github.com/SalK91/convex_optimization/raw/master/docs/0c Convex Functions.md" title="View source of this page" class="md-content__button md-icon">
+    <a href="https://github.com/SalK91/convex_optimization/raw/master/docs/0e2 subgradient method.md" title="View source of this page" class="md-content__button md-icon">
       
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 18c.56 0 1 .44 1 1s-.44 1-1 1-1-.44-1-1 .44-1 1-1m0-3c-2.73 0-5.06 1.66-6 4 .94 2.34 3.27 4 6 4s5.06-1.66 6-4c-.94-2.34-3.27-4-6-4m0 6.5a2.5 2.5 0 0 1-2.5-2.5 2.5 2.5 0 0 1 2.5-2.5 2.5 2.5 0 0 1 2.5 2.5 2.5 2.5 0 0 1-2.5 2.5M9.27 20H6V4h7v5h5v4.07c.7.08 1.36.25 2 .49V8l-6-6H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h4.5a8.2 8.2 0 0 1-1.23-2"></path></svg>
     </a>
   
 
 
-<h1 id="convex-function">Convex Function<a class="headerlink" href="#convex-function" title="Permanent link">¶</a></h1>
-<p>A function <span class="arithmatex">\(f: \mathbb{R}^n \to \mathbb{R}\)</span> is <strong>convex</strong> if its domain <span class="arithmatex">\(\mathrm{dom}(f) \subseteq \mathbb{R}^n\)</span> is convex and, for all <span class="arithmatex">\(x_1, x_2 \in \mathrm{dom}(f)\)</span> and all <span class="arithmatex">\(\theta \in [0,1]\)</span>:</p>
+<h1 id="subgradient-method-derivation-and-convergence">Subgradient Method: Derivation and Convergence<a class="headerlink" href="#subgradient-method-derivation-and-convergence" title="Permanent link">¶</a></h1>
+<p>We aim to minimize a <strong>convex</strong> function <span class="arithmatex">\(f\)</span>, which may be <strong>nonsmooth</strong>:</p>
 <div class="arithmatex">\[
-f(\theta x_1 + (1-\theta)x_2) \le \theta f(x_1) + (1-\theta) f(x_2)
+\min_{x \in \mathcal{X}} f(x),
 \]</div>
+<p>where <span class="arithmatex">\(f\)</span> is convex but may not be differentiable everywhere.</p>
+<h2 id="1-subgradients">1. Subgradients<a class="headerlink" href="#1-subgradients" title="Permanent link">¶</a></h2>
+<p>For nonsmooth convex functions, we use a <strong>subgradient</strong> <span class="arithmatex">\(g_t \in \partial f(x_t)\)</span> at iteration <span class="arithmatex">\(t\)</span>, where <span class="arithmatex">\(\partial f(x_t)\)</span> is the <strong>subdifferential</strong> at <span class="arithmatex">\(x_t\)</span>.</p>
 <ul>
-<li><strong>Convex domain:</strong> For any <span class="arithmatex">\(x_1, x_2 \in \mathrm{dom}(f)\)</span>, the line segment connecting them lies entirely in <span class="arithmatex">\(\mathrm{dom}(f)\)</span>.  </li>
-<li>The graph of <span class="arithmatex">\(f\)</span> lies below or on the straight line connecting any two points on it (“bowl-shaped”).</li>
-</ul>
-<h1 id="first-order-condition">First-order condition:<a class="headerlink" href="#first-order-condition" title="Permanent link">¶</a></h1>
-<p>For a convex function <span class="arithmatex">\(f: \mathbb{R}^n \to \mathbb{R}\)</span> defined on a convex domain <span class="arithmatex">\(\mathrm{dom}(f)\)</span>:</p>
-<h2 id="1-differentiable-case">1. Differentiable case<a class="headerlink" href="#1-differentiable-case" title="Permanent link">¶</a></h2>
-<p>If <span class="arithmatex">\(f\)</span> is differentiable at <span class="arithmatex">\(x\)</span>, the <strong>gradient</strong> <span class="arithmatex">\(\nabla f(x)\)</span> satisfies, for all <span class="arithmatex">\(y \in \mathrm{dom}(f)\)</span>:</p>
-<div class="arithmatex">\[
-f(y) \ge f(x) + \nabla f(x)^T (y - x)
-\]</div>
-<ul>
-<li>Geometric meaning: The tangent hyperplane at <span class="arithmatex">\(x\)</span> lies below the graph of <span class="arithmatex">\(f\)</span> at all points.  </li>
-<li>Domain of gradient: <span class="arithmatex">\(\nabla f(x)\)</span> exists for all <span class="arithmatex">\(x \in \mathrm{dom}(f)\)</span>.</li>
-</ul>
-<h2 id="2-non-differentiable-case-subgradients">2. Non-differentiable case (subgradients)<a class="headerlink" href="#2-non-differentiable-case-subgradients" title="Permanent link">¶</a></h2>
-<p>If <span class="arithmatex">\(f\)</span> is convex but not differentiable at <span class="arithmatex">\(x\)</span>, a <strong>subgradient</strong> <span class="arithmatex">\(g \in \mathbb{R}^n\)</span> satisfies:</p>
-<div class="arithmatex">\[
-f(y) \ge f(x) + g^T (y - x), \quad \forall y \in \mathrm{dom}(f)
-\]</div>
-<ul>
-<li>The set of all such <span class="arithmatex">\(g\)</span> is called the <strong>subdifferential</strong> at <span class="arithmatex">\(x\)</span>:  </li>
+<li>For differentiable <span class="arithmatex">\(f\)</span>, <span class="arithmatex">\(\partial f(x_t) = \{\nabla f(x_t)\}\)</span>.</li>
+<li>For nonsmooth <span class="arithmatex">\(f\)</span>, <span class="arithmatex">\(\partial f(x_t)\)</span> is a set of vectors satisfying:</li>
 </ul>
 <div class="arithmatex">\[
-\partial f(x) = \{ g \in \mathbb{R}^n \mid f(y) \ge f(x) + g^T (y - x), \ \forall y \in \mathrm{dom}(f) \}
+f(y) \ge f(x_t) + \langle g_t, y - x_t \rangle, \quad \forall y \in \mathcal{X}.
 \]</div>
-<ul>
-<li>Geometric meaning: Even at a "kink," there exists a hyperplane (with slope <span class="arithmatex">\(g\)</span>) that lies below the graph at all points.  </li>
-<li>If <span class="arithmatex">\(f\)</span> is differentiable at <span class="arithmatex">\(x\)</span>, <span class="arithmatex">\(\partial f(x) = \{\nabla f(x)\}\)</span>.</li>
-</ul>
-<h1 id="second-order-hessian-condition">Second-order (Hessian) condition:<a class="headerlink" href="#second-order-hessian-condition" title="Permanent link">¶</a></h1>
-<p>If <span class="arithmatex">\(f\)</span> is twice differentiable, <span class="arithmatex">\(f\)</span> is convex if and only if its Hessian matrix <span class="arithmatex">\(\nabla^2 f(x)\)</span> is positive semidefinite for all <span class="arithmatex">\(x \in \mathrm{dom}(f)\)</span>:</p>
+<blockquote>
+<p><strong>Intuition</strong>: A subgradient generalizes the concept of gradient for nonsmooth convex functions. It points in a direction that does not decrease the function.</p>
+</blockquote>
+<h2 id="2-subgradient-update-rule">2. Subgradient Update Rule<a class="headerlink" href="#2-subgradient-update-rule" title="Permanent link">¶</a></h2>
+<p>The <strong>projected subgradient method</strong> updates:</p>
 <div class="arithmatex">\[
-\nabla^2 f(x) \succeq 0
+x_{t+1} = \Pi_{\mathcal{X}} \big( x_t - \eta_t g_t \big),
 \]</div>
-<p>Positive semidefinite Hessian means the function curves upward or is flat in all directions, never downward.  </p>
-<p><code>“Curvature is nonnegative in all directions.”</code></p>
-<h1 id="examples-of-convex-functions">Examples of Convex Functions<a class="headerlink" href="#examples-of-convex-functions" title="Permanent link">¶</a></h1>
+<p>where:</p>
+<ul>
+<li><span class="arithmatex">\(g_t \in \partial f(x_t)\)</span> is a subgradient,  </li>
+<li><span class="arithmatex">\(\eta_t &gt; 0\)</span> is the step size (may vary with <span class="arithmatex">\(t\)</span>),  </li>
+<li><span class="arithmatex">\(\Pi_{\mathcal{X}}\)</span> denotes the projection onto the feasible set <span class="arithmatex">\(\mathcal{X}\)</span>.</li>
+</ul>
+<p>If <span class="arithmatex">\(\mathcal{X} = \mathbb{R}^n\)</span> (unconstrained), this reduces to:</p>
+<div class="arithmatex">\[
+x_{t+1} = x_t - \eta_t g_t.
+\]</div>
+<h2 id="3-distance-recurrence">3. Distance Recurrence<a class="headerlink" href="#3-distance-recurrence" title="Permanent link">¶</a></h2>
+<p>Let <span class="arithmatex">\(x^\star\)</span> be an optimal solution. Consider the squared distance to the optimum:</p>
+<div class="arithmatex">\[
+\|x_{t+1} - x^\star\|^2 = \|x_t - \eta_t g_t - x^\star\|^2
+\]</div>
+<p>Expanding:</p>
+<div class="arithmatex">\[
+\|x_{t+1} - x^\star\|^2 = \|x_t - x^\star\|^2 - 2\eta_t \langle g_t, x_t - x^\star \rangle + \eta_t^2 \|g_t\|^2
+\]</div>
+<p>Since <span class="arithmatex">\(g_t\)</span> is a subgradient of convex <span class="arithmatex">\(f\)</span>:</p>
+<div class="arithmatex">\[
+f(x_t) - f(x^\star) \le \langle g_t, x_t - x^\star \rangle
+\]</div>
+<p>Substitute into the distance expansion:</p>
+<div class="arithmatex">\[
+\|x_{t+1} - x^\star\|^2 \le \|x_t - x^\star\|^2 - 2\eta_t \big(f(x_t) - f(x^\star)\big) + \eta_t^2 \|g_t\|^2
+\]</div>
+<h2 id="4-rearranging-for-function-suboptimality">4. Rearranging for Function Suboptimality<a class="headerlink" href="#4-rearranging-for-function-suboptimality" title="Permanent link">¶</a></h2>
+<p>Rewriting:</p>
+<div class="arithmatex">\[
+f(x_t) - f(x^\star) \le \frac{\|x_t - x^\star\|^2 - \|x_{t+1} - x^\star\|^2}{2 \eta_t} + \frac{\eta_t}{2} \|g_t\|^2
+\]</div>
+<blockquote>
+<p><strong>Intuition</strong>: The suboptimality is bounded by:</p>
 <ol>
-<li>Quadratic functions: <span class="arithmatex">\(f(x) = \frac{1}{2} x^T Q x + b^T x + c\)</span>, where <span class="arithmatex">\(Q \succeq 0\)</span> (positive semidefinite).  </li>
-<li>Norms: <span class="arithmatex">\(\|x\|_p\)</span> for <span class="arithmatex">\(p \ge 1\)</span>.  </li>
-<li>Exponential function: <span class="arithmatex">\(f(x) = e^x\)</span>.  </li>
-<li>Negative logarithm: <span class="arithmatex">\(f(x) = -\log(x)\)</span> on <span class="arithmatex">\(x &gt; 0\)</span>.  </li>
-<li>Linear functions: <span class="arithmatex">\(f(x) = a^T x + b\)</span>.  </li>
+<li>The decrease in squared distance to the optimum.  </li>
+<li>A term depending on step size and the subgradient norm.</li>
 </ol>
-<h1 id="subgradients-proximal-operators">Subgradients &amp; Proximal Operators<a class="headerlink" href="#subgradients-proximal-operators" title="Permanent link">¶</a></h1>
-<p>Modern optimization in machine learning often deals with nonsmooth functions e.g., <span class="arithmatex">\(L_1\)</span> regularization, hinge loss in SVMs, indicator constraints. Gradients are not always defined at these nonsmooth points, so we need subgradients and proximal operators. For a differentiable convex function <span class="arithmatex">\(f:\mathbb{R}^n \to \mathbb{R}\)</span>, the gradient <span class="arithmatex">\(\nabla f(x)\)</span> provides the slope for descent. But many convex functions are not differentiable everywhere:</p>
-<ul>
-<li>Absolute value: <span class="arithmatex">\(f(x) = |x|\)</span>    (non-differentiable at <span class="arithmatex">\(x=0\)</span>)  </li>
-<li>Hinge loss: <span class="arithmatex">\(f(x) = \max(0, 1-x)\)</span>  </li>
-<li><span class="arithmatex">\(L_1\)</span> norm: <span class="arithmatex">\(f(x) = \|x\|_1 = \sum_i |x_i|\)</span>  </li>
-</ul>
-<p>At kinks/corners, derivatives don’t exist.  </p>
-<p>A vector <span class="arithmatex">\(g \in \mathbb{R}^n\)</span> is a subgradient of a convex function <span class="arithmatex">\(f\)</span> at point <span class="arithmatex">\(x\)</span> if:</p>
-<div class="arithmatex">\[f(y) \;\ge\; f(x) + g^\top (y-x), \quad \forall y \in \mathbb{R}^n\]</div>
-<ul>
-<li>Geometric meaning: <span class="arithmatex">\(g\)</span> defines a supporting hyperplane at <span class="arithmatex">\((x, f(x))\)</span> that lies below the function everywhere.  </li>
-<li>The set of all subgradients at <span class="arithmatex">\(x\)</span> is called the subdifferential, written:
-  <script type="math/tex; mode=display">
-  \partial f(x) = \{ g \in \mathbb{R}^n \;|\; f(y) \ge f(x) + g^\top (y-x), \;\forall y \}.
-  </script>
-</li>
-</ul>
-<h2 id="example-1-absolute-value">Example 1: Absolute value<a class="headerlink" href="#example-1-absolute-value" title="Permanent link">¶</a></h2>
-<p>Take <span class="arithmatex">\(f(x) = |x|\)</span>.  </p>
-<ul>
-<li>If <span class="arithmatex">\(x &gt; 0\)</span>: <span class="arithmatex">\(\nabla f(x) = 1\)</span>.  </li>
-<li>If <span class="arithmatex">\(x &lt; 0\)</span>: <span class="arithmatex">\(\nabla f(x) = -1\)</span>.  </li>
-<li>If <span class="arithmatex">\(x = 0\)</span>: derivative doesn’t exist. But<br>
-<script type="math/tex; mode=display">
-  \partial f(0) = \{ g \in [-1, 1] \}.
-  </script>
-Any slope between <span class="arithmatex">\(-1\)</span> and <span class="arithmatex">\(1\)</span> is a valid subgradient at the kink.
- Intuition: At <span class="arithmatex">\(x=0\)</span>, instead of one tangent line, there’s a whole fan of supporting lines.</li>
-</ul>
-<h2 id="example-2-hinge-loss">Example 2: Hinge loss<a class="headerlink" href="#example-2-hinge-loss" title="Permanent link">¶</a></h2>
-<p><span class="arithmatex">\(f(x) = \max(0, 1-x)\)</span>.  </p>
-<ul>
-<li>If <span class="arithmatex">\(x &lt; 1\)</span>: <span class="arithmatex">\(\nabla f(x) = -1\)</span>.  </li>
-<li>If <span class="arithmatex">\(x &gt; 1\)</span>: <span class="arithmatex">\(\nabla f(x) = 0\)</span>.  </li>
-<li>If <span class="arithmatex">\(x = 1\)</span>:<br>
-<script type="math/tex; mode=display">
-  \partial f(1) = [-1, 0].
-  </script>
-</li>
-</ul>
-<h2 id="why-subgradients-matter">Why subgradients matter<a class="headerlink" href="#why-subgradients-matter" title="Permanent link">¶</a></h2>
-<ul>
-<li>They generalize gradients to nonsmooth convex functions.  </li>
-<li>Subgradient descent update:
-  <script type="math/tex; mode=display">
-  x_{k+1} = x_k - \alpha_k g_k, \quad g_k \in \partial f(x_k).
-  </script>
-</li>
-<li>Convergence is guaranteed, though slower than gradient descent:</li>
-<li>Smooth case: <span class="arithmatex">\(O(1/k)\)</span> rate  </li>
-<li>Nonsmooth case: <span class="arithmatex">\(O(1/\sqrt{k})\)</span> rate  </li>
-</ul>
-<h2 id="proximal-operators">Proximal Operators<a class="headerlink" href="#proximal-operators" title="Permanent link">¶</a></h2>
-<p>Nonsmooth penalties (like <span class="arithmatex">\(L_1\)</span> norm, indicator functions) appear frequently:<br>
-- Lasso: <span class="arithmatex">\(\min_x \tfrac{1}{2}\|Ax-b\|^2 + \lambda \|x\|_1\)</span>  (L1 norm is nonsmooth)
-- SVM: hinge loss <span class="arithmatex">\(\max(0, 1-y\langle w,x\rangle)\)</span><br>
-- Constraints: e.g., <span class="arithmatex">\(x \in C\)</span> for some convex set <span class="arithmatex">\(C\)</span></p>
-<p>Plain gradient descent cannot directly handle the nonsmooth part.</p>
-<p>The proximal operator of a function <span class="arithmatex">\(g\)</span> with step size <span class="arithmatex">\(\alpha &gt; 0\)</span> is:</p>
+</blockquote>
+<h2 id="5-summing-over-iterations">5. Summing Over Iterations<a class="headerlink" href="#5-summing-over-iterations" title="Permanent link">¶</a></h2>
+<p>Sum over <span class="arithmatex">\(t = 0, \dots, T-1\)</span>:</p>
 <div class="arithmatex">\[
-\text{prox}_{\alpha g}(v) 
-= \arg\min_x \Big( g(x) + \frac{1}{2\alpha}\|x-v\|^2 \Big).
+\sum_{t=0}^{T-1} \big(f(x_t) - f(x^\star)\big) \le \frac{\|x_0 - x^\star\|^2}{2\eta} + \frac{\eta}{2} \sum_{t=0}^{T-1} \|g_t\|^2
+\]</div>
+<p>Assume <span class="arithmatex">\(\|g_t\| \le G\)</span> and <strong>constant step size</strong> <span class="arithmatex">\(\eta\)</span>:</p>
+<div class="arithmatex">\[
+\sum_{t=0}^{T-1} \big(f(x_t) - f(x^\star)\big) \le \frac{\|x_0 - x^\star\|^2}{2\eta} + \frac{\eta G^2 T}{2}
+\]</div>
+<p>Divide by <span class="arithmatex">\(T\)</span> to bound the <strong>average iterate</strong> <span class="arithmatex">\(\bar{x}_T = \frac{1}{T} \sum_{t=0}^{T-1} x_t\)</span>:</p>
+<div class="arithmatex">\[
+f(\bar{x}_T) - f(x^\star) \le \frac{\|x_0 - x^\star\|^2}{2 \eta T} + \frac{\eta G^2}{2}
+\]</div>
+<h2 id="6-step-size-choice-and-convergence-rate">6. Step Size Choice and Convergence Rate<a class="headerlink" href="#6-step-size-choice-and-convergence-rate" title="Permanent link">¶</a></h2>
+<p>Choosing a <strong>diminishing step size</strong>:</p>
+<div class="arithmatex">\[
+\eta_t = \frac{R}{G \sqrt{T}}, \quad R = \|x_0 - x^\star\|
+\]</div>
+<p>gives the classic subgradient <strong>sublinear convergence rate</strong>:</p>
+<div class="arithmatex">\[
+f(\bar{x}_T) - f(x^\star) \le \frac{R G}{\sqrt{T}}
 \]</div>
 <ul>
-<li>Interpretation:  </li>
-<li>Stay close to <span class="arithmatex">\(v\)</span> (the quadratic term)  </li>
+<li><span class="arithmatex">\(x^\star\)</span> is an optimal solution.  </li>
+<li><span class="arithmatex">\(\bar{x}_T = \frac{1}{T}\sum_{t=0}^{T-1} x_t\)</span> is the average iterate.  </li>
+<li><span class="arithmatex">\(R = \|x_0 - x^\star\|\)</span>, distance to optimum.  </li>
+<li><span class="arithmatex">\(G\)</span> bounds the subgradients: <span class="arithmatex">\(\|g_t\| \le G\)</span>.</li>
+</ul>
+<blockquote>
+<p><strong>Implication</strong>: The convergence rate is <strong>sublinear</strong>, <span class="arithmatex">\(O(1/\sqrt{T})\)</span>.<br>
+Unlike gradient descent, subgradient method <strong>cannot achieve linear convergence</strong> without additional assumptions (like strong convexity and smoothness).</p>
+</blockquote>
+<h2 id="7-practical-remarks">7. Practical Remarks<a class="headerlink" href="#7-practical-remarks" title="Permanent link">¶</a></h2>
+<ol>
+<li><strong>Step size selection</strong> is crucial:</li>
+<li>Diminishing step sizes ensure convergence.  </li>
 <li>
-<p>While reducing the penalty <span class="arithmatex">\(g(x)\)</span>  </p>
+<p>Constant step size may lead to oscillations near optimum.</p>
 </li>
 <li>
-<p>Geometric meaning: A regularized projection of <span class="arithmatex">\(v\)</span> onto a region encouraged by <span class="arithmatex">\(g\)</span>.  </p>
-</li>
-</ul>
-<h2 id="example-1-l_1-norm-soft-thresholding">Example 1: <span class="arithmatex">\(L_1\)</span> norm (soft-thresholding)<a class="headerlink" href="#example-1-l_1-norm-soft-thresholding" title="Permanent link">¶</a></h2>
-<p>Let <span class="arithmatex">\(g(x) = \lambda \|x\|_1 = \lambda \sum_i |x_i|\)</span>.<br>
-Then:</p>
-<div class="arithmatex">\[
-\text{prox}_{\alpha g}(v)_i = 
-\begin{cases}
-v_i - \alpha\lambda, &amp; v_i &gt; \alpha \lambda \\
-0, &amp; |v_i| \le \alpha \lambda \\
-v_i + \alpha\lambda, &amp; v_i &lt; -\alpha \lambda
-\end{cases}
-\]</div>
-<p>This is the soft-thresholding operator:</p>
-<ul>
-<li>Shrinks small entries of <span class="arithmatex">\(v\)</span> to zero → sparsity.  </li>
-<li>Reduces magnitude of large entries but keeps their sign.  </li>
-</ul>
-<p>👉 This is the key step in Lasso regression and compressed sensing.</p>
-<h2 id="example-2-indicator-function">Example 2: Indicator function<a class="headerlink" href="#example-2-indicator-function" title="Permanent link">¶</a></h2>
-<p>Let <span class="arithmatex">\(g(x) = I_C(x)\)</span>, where <span class="arithmatex">\(I_C(x)=0\)</span> if <span class="arithmatex">\(x \in C\)</span>, and <span class="arithmatex">\(\infty\)</span> otherwise.<br>
-Then:</p>
-<div class="arithmatex">\[
-\text{prox}_{\alpha g}(v) = \Pi_C(v),
-\]</div>
-<p>the Euclidean projection of <span class="arithmatex">\(v\)</span> onto <span class="arithmatex">\(C\)</span>.  </p>
-<p>Example: if <span class="arithmatex">\(C\)</span> is the unit ball <span class="arithmatex">\(\{x: \|x\|\le 1\}\)</span>, prox just normalizes <span class="arithmatex">\(v\)</span> if it’s outside.</p>
-<h2 id="example-3-squared-ell_2-norm">Example 3: Squared <span class="arithmatex">\(\ell_2\)</span> norm<a class="headerlink" href="#example-3-squared-ell_2-norm" title="Permanent link">¶</a></h2>
-<p>If <span class="arithmatex">\(g(x) = \frac{\lambda}{2}\|x\|^2\)</span>, then</p>
-<div class="arithmatex">\[
-\text{prox}_{\alpha g}(v) = \frac{1}{1+\alpha\lambda} v.
-\]</div>
-<p>This is just a shrinkage toward the origin.</p>
-<hr>
-<h2 id="why-proximal-operators-matter">Why proximal operators matter<a class="headerlink" href="#why-proximal-operators-matter" title="Permanent link">¶</a></h2>
-<p>They allow efficient algorithms for composite objectives:</p>
-<div class="arithmatex">\[
-\min_x f(x) + g(x),
-\]</div>
-<p>where:
-- <span class="arithmatex">\(f\)</span> is smooth (differentiable with Lipschitz gradient)<br>
-- <span class="arithmatex">\(g\)</span> is convex but possibly nonsmooth  </p>
-<p>Proximal gradient method (ISTA):
-<script type="math/tex; mode=display">
-x_{k+1} = \text{prox}_{\alpha g}\big(x_k - \alpha \nabla f(x_k)\big).
-</script>
-</p>
-<p>This generalizes gradient descent by replacing the plain update with a proximal step that handles <span class="arithmatex">\(g\)</span>.</p>
-<ul>
-<li>If <span class="arithmatex">\(g=0\)</span>: reduces to gradient descent  </li>
-<li>If <span class="arithmatex">\(f=0\)</span>: reduces to proximal operator (e.g. projection, shrinkage)  </li>
-</ul>
-<h2 id="3-intuition-summary">3. Intuition Summary<a class="headerlink" href="#3-intuition-summary" title="Permanent link">¶</a></h2>
-<ul>
-<li>Subgradients:  </li>
-<li>Generalized “slopes” for nonsmooth convex functions.  </li>
-<li>At corners, we have a set of possible slopes (subdifferential).  </li>
-<li>
-<p>Enable subgradient descent with convergence guarantees.  </p>
+<p><strong>Averaging iterates</strong> (<span class="arithmatex">\(\bar{x}_T\)</span>) improves convergence guarantees.  </p>
 </li>
 <li>
-<p>Proximal operators:  </p>
+<p><strong>Robustness</strong>: Works for nonsmooth convex functions where gradient does not exist.</p>
 </li>
-<li>Generalized update steps for nonsmooth regularizers.  </li>
-<li>Combine a gradient-like move with a “correction” that enforces structure (sparsity, constraints).  </li>
-<li>Core of algorithms like ISTA, FISTA, ADMM.  </li>
-</ul>
-<hr>
-<h2 id="4-big-picture-in-ml">4. Big Picture in ML<a class="headerlink" href="#4-big-picture-in-ml" title="Permanent link">¶</a></h2>
-<ul>
-<li>Subgradients: Let us train models with nonsmooth losses (SVM hinge loss, <span class="arithmatex">\(L_1\)</span>).  </li>
-<li>Proximal operators: Let us efficiently solve regularized problems (Lasso, group sparsity, constrained optimization).  </li>
-<li>Intuition:  </li>
-<li>Subgradient = "any slope that supports the function"  </li>
-<li>Proximal = "soft move toward minimizing the nonsmooth part"  </li>
-</ul>
-<hr>
-<h3 id="subgradients-proximal-operators_1">Subgradients &amp; Proximal Operators<a class="headerlink" href="#subgradients-proximal-operators_1" title="Permanent link">¶</a></h3>
-<ul>
-<li>Subgradient: <span class="arithmatex">\(g\)</span> is a subgradient if<br>
-<script type="math/tex; mode=display">
-f(y) \ge f(x)+g^\top(y-x), \quad \forall y
-</script>
+<li>
+<p><strong>Slower than gradient descent</strong>: <span class="arithmatex">\(O(1/\sqrt{T})\)</span> vs <span class="arithmatex">\(O(1/T)\)</span> or linear for smooth strongly convex functions.</p>
 </li>
-<li>Proximal operator:<br>
-<script type="math/tex; mode=display">
-\text{prox}_{\alpha g}(v) = \arg\min_x \Big(g(x) + \frac{1}{2\alpha}\|x-v\|^2\Big)
-</script>
-</li>
-<li>Context: Needed for nonsmooth functions (e.g., L1-regularization, hinge loss).  </li>
-<li>ML relevance: SVM hinge loss, Lasso, sparse dictionary learning. Proximal methods handle shrinkage or projection efficiently.  </li>
-<li>Intuition:  </li>
-<li>Subgradient: Like a tangent for a function that isn’t smooth—provides a direction to descend.  </li>
-<li>Proximal operator: Think of it as a “soft step” toward minimizing a nonsmooth function, like gently nudging a point toward a feasible or sparse region.</li>
-</ul>
-<h2 id="convex-optimisation-problems">Convex Optimisation Problems<a class="headerlink" href="#convex-optimisation-problems" title="Permanent link">¶</a></h2>
-<p>A convex optimisation problem has the form:</p>
-<p>
-<script type="math/tex; mode=display">
-\begin{aligned}
-& \min_x \quad & f_0(x) \\
-& \text{s.t.} \quad & f_i(x) \leq 0, \quad i=1, \dots, m \\
-& & h_j(x) = 0, \quad j=1, \dots, p,
-\end{aligned}
-</script>
-where <span class="arithmatex">\(f_0\)</span> and <span class="arithmatex">\(f_i\)</span> are convex functions, and <span class="arithmatex">\(h_j\)</span> are affine. The feasible set is convex, and any local minimum is a global minimum.</p>
+</ol>
 
 
 
