@@ -122,8 +122,6 @@ $$
 x^\star = \text{prox}_{g}(x^\star - \eta \nabla f(x^\star)) \quad \Longleftrightarrow \quad 0 \in \nabla f(x^\star) + \partial g(x^\star)
 $$
 
-This shows that proximal gradient fixed points correspond to **optimality conditions** for composite convex functions.
-
 #### **Translation property:**
 
 $$
@@ -164,4 +162,52 @@ $$
 
 - Accelerated variants (like **FISTA**) improve the rate to $\mathcal{O}(1/t^2)$.  
 - Requires convexity and Lipschitz continuity of $\nabla f$.
+
+---
+
+## 9. Fast Iterative Shrinkage-Thresholding Algorithm (FISTA)
+
+While ISTA converges at **$\mathcal{O}(1/t)$**, **FISTA** introduces a clever **momentum / extrapolation term** that accelerates convergence to **$\mathcal{O}(1/t^2)$**.
+
+**Algorithm (FISTA):**
+
+Initialize $x_0$, set $y_0 = x_0$, $t_0 = 1$.
+
+For $k = 0, 1, 2, \dots$:
+
+1. Gradient and proximal update:
+
+$$
+x_{k+1} = \text{prox}_{\eta g}(y_k - \eta \nabla f(y_k))
+$$
+
+2. Update momentum parameter:
+
+$$
+t_{k+1} = \frac{1 + \sqrt{1 + 4t_k^2}}{2}
+$$
+
+3. Extrapolation (Nesterov acceleration):
+
+$$
+y_{k+1} = x_{k+1} + \frac{t_k - 1}{t_{k+1}}(x_{k+1} - x_k)
+$$
+
+---
+
+### **Key Insight**
+
+- **ISTA** updates only based on $x_k$.  
+- **FISTA** introduces a **look-ahead point** $y_k$ that combines past iterates, similar to **momentum methods** in deep learning.
+- This **extrapolation step** dramatically speeds up convergence **without changing the proximal operator**.
+
+---
+
+### **Comparison Summary**
+
+| Method | Update Uses | Convergence Rate |
+|--------|------------|------------------|
+| Gradient Descent ($g = 0$) | $\nabla f(x_t)$ | $\mathcal{O}(1/t)$ |
+| ISTA | $\nabla f(x_t)$ + prox | $\mathcal{O}(1/t)$ |
+| **FISTA** | $\nabla f(y_t)$ + prox + **momentum** | **$\mathcal{O}(1/t^2)$** ✅ |
  

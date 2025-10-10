@@ -117,6 +117,8 @@ nav:
       - Convergence Properties: "0f Convergence.md"
       - Projections & Proximal Operators: "0g Proximal and Projected Gradient Descent.md"
       - Proximal Gradient Algorithm: "0g1 proximal ga.md"
+      - LASSO: "0h lasso.md"
+      - Mirror Descent: "0k mirror.md"
       - Advanced Algorithms: "0h AdvancedAlgos.md"
       - Epigraphs: "0c Epigraphs.md"
 
