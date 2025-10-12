@@ -9,13 +9,13 @@
         <meta name="author" content="Salman Khan">
       
       
-        <link rel="canonical" href="https://salk91.github.io/convex_optimization/0e2%20subgradient%20method/">
+        <link rel="canonical" href="https://salk91.github.io/convex_optimization/0o%20quasi_n/">
       
       
-        <link rel="prev" href="../0e1%20Gradient%20Descent/">
+        <link rel="prev" href="../0n%20newtons/">
       
       
-        <link rel="next" href="../0e3%20accelerated%20gs/">
+        <link rel="next" href="../0q%20interior/">
       
       
       <link rel="icon" href="../assets/favicon.png">
@@ -23,7 +23,7 @@
     
     
       
-        <title>Subgradient Method - Convex Optimization — Algorithms and Analysis</title>
+        <title>Quasi-Newton Methods - Convex Optimization — Algorithms and Analysis</title>
       
     
     
@@ -87,7 +87,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#subgradient-method-derivation-and-convergence" class="md-skip">
+        <a href="#quasi-newton-methods" class="md-skip">
           Skip to content
         </a>
       
@@ -120,7 +120,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Subgradient Method
+              Quasi-Newton Methods
             
           </span>
         </div>
@@ -695,19 +695,10 @@
                 
   
   
-    
   
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../0e2%20subgradient%20method/" class="md-nav__link">
         
   
   
@@ -718,7 +709,6 @@
   
 
       </a>
-      
     </li>
   
 
@@ -912,10 +902,19 @@
                 
   
   
+    
   
   
-    <li class="md-nav__item">
-      <a href="../0o%20quasi_n/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         
   
   
@@ -926,6 +925,7 @@
   
 
       </a>
+      
     </li>
   
 
@@ -1609,7 +1609,7 @@
 
 
   
-    <a href="https://github.com/SalK91/convex_optimization/edit/master/docs/0e2 subgradient method.md" title="Edit this page" class="md-content__button md-icon" rel="edit">
+    <a href="https://github.com/SalK91/convex_optimization/edit/master/docs/0o quasi_n.md" title="Edit this page" class="md-content__button md-icon" rel="edit">
       
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M10 20H6V4h7v5h5v3.1l2-2V8l-6-6H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h4zm10.2-7c.1 0 .3.1.4.2l1.3 1.3c.2.2.2.6 0 .8l-1 1-2.1-2.1 1-1c.1-.1.2-.2.4-.2m0 3.9L14.1 23H12v-2.1l6.1-6.1z"></path></svg>
     </a>
@@ -1618,124 +1618,148 @@
     
       
     
-    <a href="https://github.com/SalK91/convex_optimization/raw/master/docs/0e2 subgradient method.md" title="View source of this page" class="md-content__button md-icon">
+    <a href="https://github.com/SalK91/convex_optimization/raw/master/docs/0o quasi_n.md" title="View source of this page" class="md-content__button md-icon">
       
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 18c.56 0 1 .44 1 1s-.44 1-1 1-1-.44-1-1 .44-1 1-1m0-3c-2.73 0-5.06 1.66-6 4 .94 2.34 3.27 4 6 4s5.06-1.66 6-4c-.94-2.34-3.27-4-6-4m0 6.5a2.5 2.5 0 0 1-2.5-2.5 2.5 2.5 0 0 1 2.5-2.5 2.5 2.5 0 0 1 2.5 2.5 2.5 2.5 0 0 1-2.5 2.5M9.27 20H6V4h7v5h5v4.07c.7.08 1.36.25 2 .49V8l-6-6H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h4.5a8.2 8.2 0 0 1-1.23-2"></path></svg>
     </a>
   
 
 
-<h1 id="subgradient-method-derivation-and-convergence">Subgradient Method: Derivation and Convergence<a class="headerlink" href="#subgradient-method-derivation-and-convergence" title="Permanent link">¶</a></h1>
-<p>We aim to minimize a <strong>convex</strong> function <span class="arithmatex">\(f\)</span>, which may be <strong>nonsmooth</strong>:</p>
-<div class="arithmatex">\[
-\min_{x \in \mathcal{X}} f(x),
-\]</div>
-<p>where <span class="arithmatex">\(f\)</span> is convex but may not be differentiable everywhere.</p>
-<h2 id="1-subgradients">1. Subgradients<a class="headerlink" href="#1-subgradients" title="Permanent link">¶</a></h2>
-<p>For nonsmooth convex functions, we use a <strong>subgradient</strong> <span class="arithmatex">\(g_t \in \partial f(x_t)\)</span> at iteration <span class="arithmatex">\(t\)</span>, where <span class="arithmatex">\(\partial f(x_t)\)</span> is the <strong>subdifferential</strong> at <span class="arithmatex">\(x_t\)</span>.</p>
-<ul>
-<li>For differentiable <span class="arithmatex">\(f\)</span>, <span class="arithmatex">\(\partial f(x_t) = \{\nabla f(x_t)\}\)</span>.</li>
-<li>For nonsmooth <span class="arithmatex">\(f\)</span>, <span class="arithmatex">\(\partial f(x_t)\)</span> is a set of vectors satisfying:</li>
-</ul>
-<div class="arithmatex">\[
-f(y) \ge f(x_t) + \langle g_t, y - x_t \rangle, \quad \forall y \in \mathcal{X}.
-\]</div>
+<h1 id="quasi-newton-methods">Quasi-Newton Methods<a class="headerlink" href="#quasi-newton-methods" title="Permanent link">¶</a></h1>
+<p>Optimization often struggles not because of bad algorithms but because <strong>the geometry of the loss landscape is distorted</strong> — stretched, skewed, ill-conditioned.</p>
+<p>Newton’s method fixes this by using curvature, but computing full Hessians is expensive.</p>
 <blockquote>
-<p><strong>Intuition</strong>: A subgradient generalizes the concept of gradient for nonsmooth convex functions. It points in a direction that does not decrease the function.</p>
+<p><strong>Quasi-Newton methods are a clever hack:</strong><br>
+They <em>learn</em> curvature from past gradients <strong>without ever computing second derivatives explicitly</strong>.</p>
 </blockquote>
-<h2 id="2-subgradient-update-rule">2. Subgradient Update Rule<a class="headerlink" href="#2-subgradient-update-rule" title="Permanent link">¶</a></h2>
-<p>The <strong>projected subgradient method</strong> updates:</p>
+<h2 id="newtons-update">Newton's Update<a class="headerlink" href="#newtons-update" title="Permanent link">¶</a></h2>
+<p>The classical Newton update is:</p>
 <div class="arithmatex">\[
-x_{t+1} = \Pi_{\mathcal{X}} \big( x_t - \eta_t g_t \big),
-\]</div>
-<p>where:</p>
-<ul>
-<li><span class="arithmatex">\(g_t \in \partial f(x_t)\)</span> is a subgradient,  </li>
-<li><span class="arithmatex">\(\eta_t &gt; 0\)</span> is the step size (may vary with <span class="arithmatex">\(t\)</span>),  </li>
-<li><span class="arithmatex">\(\Pi_{\mathcal{X}}\)</span> denotes the projection onto the feasible set <span class="arithmatex">\(\mathcal{X}\)</span>.</li>
-</ul>
-<p>If <span class="arithmatex">\(\mathcal{X} = \mathbb{R}^n\)</span> (unconstrained), this reduces to:</p>
-<div class="arithmatex">\[
-x_{t+1} = x_t - \eta_t g_t.
-\]</div>
-<h2 id="3-distance-recurrence">3. Distance Recurrence<a class="headerlink" href="#3-distance-recurrence" title="Permanent link">¶</a></h2>
-<p>Let <span class="arithmatex">\(x^\star\)</span> be an optimal solution. Consider the squared distance to the optimum:</p>
-<div class="arithmatex">\[
-\|x_{t+1} - x^\star\|^2 = \|x_t - \eta_t g_t - x^\star\|^2
-\]</div>
-<p>Expanding:</p>
-<div class="arithmatex">\[
-\|x_{t+1} - x^\star\|^2 = \|x_t - x^\star\|^2 - 2\eta_t \langle g_t, x_t - x^\star \rangle + \eta_t^2 \|g_t\|^2
-\]</div>
-<p>Since <span class="arithmatex">\(g_t\)</span> is a subgradient of convex <span class="arithmatex">\(f\)</span>:</p>
-<div class="arithmatex">\[
-f(x_t) - f(x^\star) \le \langle g_t, x_t - x^\star \rangle
-\]</div>
-<p>Substitute into the distance expansion:</p>
-<div class="arithmatex">\[
-\|x_{t+1} - x^\star\|^2 \le \|x_t - x^\star\|^2 - 2\eta_t \big(f(x_t) - f(x^\star)\big) + \eta_t^2 \|g_t\|^2
-\]</div>
-<h2 id="4-rearranging-for-function-suboptimality">4. Rearranging for Function Suboptimality<a class="headerlink" href="#4-rearranging-for-function-suboptimality" title="Permanent link">¶</a></h2>
-<p>Rewriting:</p>
-<div class="arithmatex">\[
-f(x_t) - f(x^\star) \le \frac{\|x_t - x^\star\|^2 - \|x_{t+1} - x^\star\|^2}{2 \eta_t} + \frac{\eta_t}{2} \|g_t\|^2
-\]</div>
-<blockquote>
-<p><strong>Intuition</strong>: The suboptimality is bounded by:</p>
-<ol>
-<li>The decrease in squared distance to the optimum.  </li>
-<li>A term depending on step size and the subgradient norm.</li>
-</ol>
-</blockquote>
-<h2 id="5-summing-over-iterations">5. Summing Over Iterations<a class="headerlink" href="#5-summing-over-iterations" title="Permanent link">¶</a></h2>
-<p>Sum over <span class="arithmatex">\(t = 0, \dots, T-1\)</span>:</p>
-<div class="arithmatex">\[
-\sum_{t=0}^{T-1} \big(f(x_t) - f(x^\star)\big) \le \frac{\|x_0 - x^\star\|^2}{2\eta} + \frac{\eta}{2} \sum_{t=0}^{T-1} \|g_t\|^2
-\]</div>
-<p>Assume <span class="arithmatex">\(\|g_t\| \le G\)</span> and <strong>constant step size</strong> <span class="arithmatex">\(\eta\)</span>:</p>
-<div class="arithmatex">\[
-\sum_{t=0}^{T-1} \big(f(x_t) - f(x^\star)\big) \le \frac{\|x_0 - x^\star\|^2}{2\eta} + \frac{\eta G^2 T}{2}
-\]</div>
-<p>Divide by <span class="arithmatex">\(T\)</span> to bound the <strong>average iterate</strong> <span class="arithmatex">\(\bar{x}_T = \frac{1}{T} \sum_{t=0}^{T-1} x_t\)</span>:</p>
-<div class="arithmatex">\[
-f(\bar{x}_T) - f(x^\star) \le \frac{\|x_0 - x^\star\|^2}{2 \eta T} + \frac{\eta G^2}{2}
-\]</div>
-<h2 id="6-step-size-choice-and-convergence-rate">6. Step Size Choice and Convergence Rate<a class="headerlink" href="#6-step-size-choice-and-convergence-rate" title="Permanent link">¶</a></h2>
-<p>Choosing a <strong>diminishing step size</strong>:</p>
-<div class="arithmatex">\[
-\eta_t = \frac{R}{G \sqrt{T}}, \quad R = \|x_0 - x^\star\|
-\]</div>
-<p>gives the classic subgradient <strong>sublinear convergence rate</strong>:</p>
-<div class="arithmatex">\[
-f(\bar{x}_T) - f(x^\star) \le \frac{R G}{\sqrt{T}}
+x_{t+1} = x_t - H^{-1}(x_t) \, \nabla f(x_t)
 \]</div>
 <ul>
-<li><span class="arithmatex">\(x^\star\)</span> is an optimal solution.  </li>
-<li><span class="arithmatex">\(\bar{x}_T = \frac{1}{T}\sum_{t=0}^{T-1} x_t\)</span> is the average iterate.  </li>
-<li><span class="arithmatex">\(R = \|x_0 - x^\star\|\)</span>, distance to optimum.  </li>
-<li><span class="arithmatex">\(G\)</span> bounds the subgradients: <span class="arithmatex">\(\|g_t\| \le G\)</span>.</li>
+<li><span class="arithmatex">\(H(x_t)\)</span> is the Hessian (curvature matrix).</li>
+<li>Fast convergence but <strong>requires computing and inverting <span class="arithmatex">\(H\)</span></strong>.</li>
+<li>For dimension <span class="arithmatex">\(d\)</span>, storing <span class="arithmatex">\(H\)</span> costs <span class="arithmatex">\(O(d^2)\)</span> and inverting costs <span class="arithmatex">\(O(d^3)\)</span> → <strong>impractical at scale</strong>.</li>
+</ul>
+<h2 id="key-idea-of-quasi-newton-methods">Key Idea of Quasi-Newton Methods<a class="headerlink" href="#key-idea-of-quasi-newton-methods" title="Permanent link">¶</a></h2>
+<p>Instead of computing <span class="arithmatex">\(H^{-1}\)</span>, <strong>build an approximation</strong>, call it <span class="arithmatex">\(B_t \approx H^{-1}(x_t)\)</span>.</p>
+<p>We extract curvature information <strong>from how gradients change</strong> after each step.</p>
+<p>Define:</p>
+<ul>
+<li><strong>Step vector:</strong>
+  <script type="math/tex; mode=display">
+  s_t = x_{t+1} - x_t
+  </script>
+</li>
+<li><strong>Gradient change:</strong>
+  <script type="math/tex; mode=display">
+  y_t = \nabla f(x_{t+1}) - \nabla f(x_t)
+  </script>
+</li>
+</ul>
+<p>Then we impose the <strong>secant condition</strong>:</p>
+<div class="arithmatex">\[
+B_{t+1} \, y_t = s_t
+\]</div>
+<blockquote>
+<p>💬 Interpretation: <em>"If moving by <span class="arithmatex">\(s_t\)</span> caused gradient to change by <span class="arithmatex">\(y_t\)</span>, then our internal curvature model should map <span class="arithmatex">\(y_t \mapsto s_t\)</span>."</em></p>
+</blockquote>
+<p>This <strong>imitates Newton's relation</strong> without computing actual Hessians.</p>
+<h2 id="bfgs-the-core-quasi-newton-algorithm">BFGS — The Core Quasi-Newton Algorithm<a class="headerlink" href="#bfgs-the-core-quasi-newton-algorithm" title="Permanent link">¶</a></h2>
+<p>BFGS maintains and updates an approximation of the <strong>inverse Hessian</strong>.</p>
+<p>The update rule is:</p>
+<div class="arithmatex">\[
+B_{t+1} = \left(I - \frac{s_t y_t^\top}{y_t^\top s_t}\right) B_t 
+\left(I - \frac{y_t s_t^\top}{y_t^\top s_t}\right) 
++ \frac{s_t s_t^\top}{y_t^\top s_t}
+\]</div>
+<p>Properties:
+- <strong>Rank-2 update</strong> → efficient
+- Preserves <strong>symmetry and positive definiteness</strong>
+- <strong>No Hessian needed</strong> — only gradients</p>
+<p>Update the parameters using:</p>
+<div class="arithmatex">\[
+x_{t+1} = x_t - B_{t+1} \nabla f(x_t)
+\]</div>
+<h2 id="intuitive-geometry">Intuitive Geometry<a class="headerlink" href="#intuitive-geometry" title="Permanent link">¶</a></h2>
+<ul>
+<li><strong>Gradient Descent</strong> assumes the world is a <strong>sphere</strong> → same learning rate in all directions.</li>
+<li><strong>Newton</strong> knows the <strong>true ellipse shape</strong> of level sets and <strong>reshapes space</strong> so it becomes spherical.</li>
+<li><strong>BFGS</strong> starts blind like GD but <strong>learns to reshape space</strong> gradually based on past gradient motion.</li>
 </ul>
 <blockquote>
-<p><strong>Implication</strong>: The convergence rate is <strong>sublinear</strong>, <span class="arithmatex">\(O(1/\sqrt{T})\)</span>.<br>
-Unlike gradient descent, subgradient method <strong>cannot achieve linear convergence</strong> without additional assumptions (like strong convexity and smoothness).</p>
+<p>Think of BFGS as an optimizer that <strong>reconstructs a mental map of terrain curvature from memory</strong>.</p>
 </blockquote>
-<h2 id="7-practical-remarks">7. Practical Remarks<a class="headerlink" href="#7-practical-remarks" title="Permanent link">¶</a></h2>
-<ol>
-<li><strong>Step size selection</strong> is crucial:</li>
-<li>Diminishing step sizes ensure convergence.  </li>
-<li>
-<p>Constant step size may lead to oscillations near optimum.</p>
-</li>
-<li>
-<p><strong>Averaging iterates</strong> (<span class="arithmatex">\(\bar{x}_T\)</span>) improves convergence guarantees.  </p>
-</li>
-<li>
-<p><strong>Robustness</strong>: Works for nonsmooth convex functions where gradient does not exist.</p>
-</li>
-<li>
-<p><strong>Slower than gradient descent</strong>: <span class="arithmatex">\(O(1/\sqrt{T})\)</span> vs <span class="arithmatex">\(O(1/T)\)</span> or linear for smooth strongly convex functions.</p>
-</li>
-</ol>
+<hr>
+<h2 id="why-bfgs-works-memory-of-curvature">Why BFGS Works — Memory of Curvature<a class="headerlink" href="#why-bfgs-works-memory-of-curvature" title="Permanent link">¶</a></h2>
+<p>Each <span class="arithmatex">\((s_t, y_t)\)</span> pair captures <strong>1D curvature information in the direction of motion</strong>.</p>
+<p>Storing many of these directions lets <span class="arithmatex">\(B_t\)</span> approximate <strong>true curvature</strong> more and more accurately.<br>
+Eventually, the loss surface <strong>feels spherical</strong>, and optimization becomes <strong>fast and direct</strong>.</p>
+<h2 id="l-bfgs-making-bfgs-scalable">L-BFGS — Making BFGS Scalable<a class="headerlink" href="#l-bfgs-making-bfgs-scalable" title="Permanent link">¶</a></h2>
+<p>Storing full <span class="arithmatex">\(B_t\)</span> takes <span class="arithmatex">\(O(d^2)\)</span> memory → too large when <span class="arithmatex">\(d\)</span> is in millions.</p>
+<p><strong>Limited-memory BFGS (L-BFGS):</strong>
+- Keep only the <strong>last <span class="arithmatex">\(m\)</span> pairs</strong> <span class="arithmatex">\((s_t, y_t)\)</span> (with <span class="arithmatex">\(m \ll d\)</span>)
+- Reconstruct the <strong>vector product</strong> <span class="arithmatex">\(B_t \cdot \nabla f(x_t)\)</span> using a <strong>two-loop recursion</strong>
+- <strong>Memory: <span class="arithmatex">\(O(md)\)</span> instead of <span class="arithmatex">\(O(d^2)\)</span></strong></p>
+<p>This makes L-BFGS <strong>practical for high-dimensional problems</strong> — used in:
+- <strong>Logistic regression</strong>
+- <strong>NLP models</strong>
+- <strong>Deep learning fine-tuning</strong>
+- <strong>SciPy &amp; PyTorch optimizers</strong></p>
+<h2 id="comparison-table">Comparison Table<a class="headerlink" href="#comparison-table" title="Permanent link">¶</a></h2>
+<table>
+<thead>
+<tr>
+<th>Method</th>
+<th>Memory</th>
+<th>Uses Hessian?</th>
+<th>Update Direction</th>
+<th>Convergence Speed</th>
+<th>Affine-Aware?</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Gradient Descent</td>
+<td><span class="arithmatex">\(O(d)\)</span></td>
+<td>❌</td>
+<td><span class="arithmatex">\(-\nabla f\)</span></td>
+<td>Linear</td>
+<td>❌</td>
+</tr>
+<tr>
+<td>Newton</td>
+<td><span class="arithmatex">\(O(d^2)\)</span></td>
+<td>✅ Full</td>
+<td><span class="arithmatex">\(-H^{-1} \nabla f\)</span></td>
+<td>Quadratic</td>
+<td>✅</td>
+</tr>
+<tr>
+<td>BFGS</td>
+<td><span class="arithmatex">\(O(d^2)\)</span></td>
+<td>✅ Approx.</td>
+<td><span class="arithmatex">\(-B_t \nabla f\)</span></td>
+<td>Superlinear</td>
+<td>✅ (approx)</td>
+</tr>
+<tr>
+<td><strong>L-BFGS</strong></td>
+<td><span class="arithmatex">\(O(md)\)</span></td>
+<td>✅ Approx. (limited)</td>
+<td>Fast via recursion</td>
+<td>Superlinear</td>
+<td>✅ (approx)</td>
+</tr>
+</tbody>
+</table>
+<h2 id="final-mental-model">Final Mental Model<a class="headerlink" href="#final-mental-model" title="Permanent link">¶</a></h2>
+<blockquote>
+<p><strong>Gradient Descent</strong>: Walks downhill with <strong>fixed stride</strong> — doesn't care about terrain shape.<br>
+<strong>Newton</strong>: Has a <strong>full curvature map</strong> — picks the fastest path, but expensive.<br>
+<strong>BFGS/L-BFGS</strong>: Starts blind like GD but <strong>learns terrain structure from past steps</strong>, gradually adapting stride and direction like Newton — <strong>without ever seeing the actual Hessian</strong>.</p>
+</blockquote>
 
 
 

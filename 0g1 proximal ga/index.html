@@ -15,7 +15,7 @@
         <link rel="prev" href="../0g%20Proximal%20and%20Projected%20Gradient%20Descent/">
       
       
-        <link rel="next" href="../0h%20AdvancedAlgos/">
+        <link rel="next" href="../0h%20lasso/">
       
       
       <link rel="icon" href="../assets/favicon.png">
@@ -569,6 +569,29 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0c Epigraphs.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Epigraphs
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -800,12 +823,12 @@
   
   
     <li class="md-nav__item">
-      <a href="../0h%20AdvancedAlgos/" class="md-nav__link">
+      <a href="../0h%20lasso/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
-    Advanced Algorithms
+    LASSO
     
   </span>
   
@@ -823,12 +846,127 @@
   
   
     <li class="md-nav__item">
-      <a href="../0c Epigraphs.md" class="md-nav__link">
+      <a href="../0k%20mirror/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
-    Epigraphs
+    Mirror Descent
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0m%20sgd/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Stochastic Gradient Descent
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0n%20newtons/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Newton's Method
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0o%20quasi_n/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Quasi-Newton Methods
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0q%20interior/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Interior Point Methods
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0h AdvancedAlgos.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Advanced Algorithms
     
   </span>
   
@@ -1603,7 +1741,6 @@ x_{t+1} = \text{prox}_{\eta g}(y_t)
 <div class="arithmatex">\[
 x^\star = \text{prox}_{g}(x^\star - \eta \nabla f(x^\star)) \quad \Longleftrightarrow \quad 0 \in \nabla f(x^\star) + \partial g(x^\star)
 \]</div>
-<p>This shows that proximal gradient fixed points correspond to <strong>optimality conditions</strong> for composite convex functions.</p>
 <h4 id="translation-property"><strong>Translation property:</strong><a class="headerlink" href="#translation-property" title="Permanent link">¶</a></h4>
 <div class="arithmatex">\[
 \text{prox}_{g}(x + c) = \text{prox}_{g(\cdot - c)}(x) + c
@@ -1638,6 +1775,65 @@ F(x_t) - F(x^\star) = \mathcal{O}\Big(\frac{1}{t}\Big)
 <li>Accelerated variants (like <strong>FISTA</strong>) improve the rate to <span class="arithmatex">\(\mathcal{O}(1/t^2)\)</span>.  </li>
 <li>Requires convexity and Lipschitz continuity of <span class="arithmatex">\(\nabla f\)</span>.</li>
 </ul>
+<hr>
+<h2 id="9-fast-iterative-shrinkage-thresholding-algorithm-fista">9. Fast Iterative Shrinkage-Thresholding Algorithm (FISTA)<a class="headerlink" href="#9-fast-iterative-shrinkage-thresholding-algorithm-fista" title="Permanent link">¶</a></h2>
+<p>While ISTA converges at <strong><span class="arithmatex">\(\mathcal{O}(1/t)\)</span></strong>, <strong>FISTA</strong> introduces a clever <strong>momentum / extrapolation term</strong> that accelerates convergence to <strong><span class="arithmatex">\(\mathcal{O}(1/t^2)\)</span></strong>.</p>
+<p><strong>Algorithm (FISTA):</strong></p>
+<p>Initialize <span class="arithmatex">\(x_0\)</span>, set <span class="arithmatex">\(y_0 = x_0\)</span>, <span class="arithmatex">\(t_0 = 1\)</span>.</p>
+<p>For <span class="arithmatex">\(k = 0, 1, 2, \dots\)</span>:</p>
+<ol>
+<li>Gradient and proximal update:</li>
+</ol>
+<div class="arithmatex">\[
+x_{k+1} = \text{prox}_{\eta g}(y_k - \eta \nabla f(y_k))
+\]</div>
+<ol>
+<li>Update momentum parameter:</li>
+</ol>
+<div class="arithmatex">\[
+t_{k+1} = \frac{1 + \sqrt{1 + 4t_k^2}}{2}
+\]</div>
+<ol>
+<li>Extrapolation (Nesterov acceleration):</li>
+</ol>
+<div class="arithmatex">\[
+y_{k+1} = x_{k+1} + \frac{t_k - 1}{t_{k+1}}(x_{k+1} - x_k)
+\]</div>
+<hr>
+<h3 id="key-insight"><strong>Key Insight</strong><a class="headerlink" href="#key-insight" title="Permanent link">¶</a></h3>
+<ul>
+<li><strong>ISTA</strong> updates only based on <span class="arithmatex">\(x_k\)</span>.  </li>
+<li><strong>FISTA</strong> introduces a <strong>look-ahead point</strong> <span class="arithmatex">\(y_k\)</span> that combines past iterates, similar to <strong>momentum methods</strong> in deep learning.</li>
+<li>This <strong>extrapolation step</strong> dramatically speeds up convergence <strong>without changing the proximal operator</strong>.</li>
+</ul>
+<hr>
+<h3 id="comparison-summary"><strong>Comparison Summary</strong><a class="headerlink" href="#comparison-summary" title="Permanent link">¶</a></h3>
+<table>
+<thead>
+<tr>
+<th>Method</th>
+<th>Update Uses</th>
+<th>Convergence Rate</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Gradient Descent (<span class="arithmatex">\(g = 0\)</span>)</td>
+<td><span class="arithmatex">\(\nabla f(x_t)\)</span></td>
+<td><span class="arithmatex">\(\mathcal{O}(1/t)\)</span></td>
+</tr>
+<tr>
+<td>ISTA</td>
+<td><span class="arithmatex">\(\nabla f(x_t)\)</span> + prox</td>
+<td><span class="arithmatex">\(\mathcal{O}(1/t)\)</span></td>
+</tr>
+<tr>
+<td><strong>FISTA</strong></td>
+<td><span class="arithmatex">\(\nabla f(y_t)\)</span> + prox + <strong>momentum</strong></td>
+<td><strong><span class="arithmatex">\(\mathcal{O}(1/t^2)\)</span></strong> ✅</td>
+</tr>
+</tbody>
+</table>
 
 
 
