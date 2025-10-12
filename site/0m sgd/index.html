@@ -9,13 +9,13 @@
         <meta name="author" content="Salman Khan">
       
       
-        <link rel="canonical" href="https://salk91.github.io/convex_optimization/0h%20AdvancedAlgos/">
+        <link rel="canonical" href="https://salk91.github.io/convex_optimization/0m%20sgd/">
       
       
-        <link rel="prev" href="../0g1%20proximal%20ga/">
+        <link rel="prev" href="../0k%20mirror/">
       
       
-        <link rel="next" href="../1a%20LP/">
+        <link rel="next" href="../0n%20newtons/">
       
       
       <link rel="icon" href="../assets/favicon.png">
@@ -23,7 +23,7 @@
     
     
       
-        <title>Advanced Algorithms - Convex Optimization — Algorithms and Analysis</title>
+        <title>Stochastic Gradient Descent - Convex Optimization — Algorithms and Analysis</title>
       
     
     
@@ -115,7 +115,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Advanced Algorithms
+              Stochastic Gradient Descent
             
           </span>
         </div>
@@ -564,6 +564,29 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0c Epigraphs.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Epigraphs
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -782,6 +805,52 @@
                 
   
   
+  
+  
+    <li class="md-nav__item">
+      <a href="../0h%20lasso/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    LASSO
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0k%20mirror/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Mirror Descent
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
     
   
   
@@ -797,7 +866,7 @@
   
   
   <span class="md-ellipsis">
-    Advanced Algorithms
+    Stochastic Gradient Descent
     
   </span>
   
@@ -816,12 +885,81 @@
   
   
     <li class="md-nav__item">
-      <a href="../0c Epigraphs.md" class="md-nav__link">
+      <a href="../0n%20newtons/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
-    Epigraphs
+    Newton's Method
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0o%20quasi_n/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Quasi-Newton Methods
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0q%20interior/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Interior Point Methods
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0h AdvancedAlgos.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Advanced Algorithms
     
   </span>
   
@@ -1462,7 +1600,7 @@
 
 
   
-    <a href="https://github.com/SalK91/convex_optimization/edit/master/docs/0h AdvancedAlgos.md" title="Edit this page" class="md-content__button md-icon" rel="edit">
+    <a href="https://github.com/SalK91/convex_optimization/edit/master/docs/0m sgd.md" title="Edit this page" class="md-content__button md-icon" rel="edit">
       
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M10 20H6V4h7v5h5v3.1l2-2V8l-6-6H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h4zm10.2-7c.1 0 .3.1.4.2l1.3 1.3c.2.2.2.6 0 .8l-1 1-2.1-2.1 1-1c.1-.1.2-.2.4-.2m0 3.9L14.1 23H12v-2.1l6.1-6.1z"></path></svg>
     </a>
@@ -1471,366 +1609,289 @@
     
       
     
-    <a href="https://github.com/SalK91/convex_optimization/raw/master/docs/0h AdvancedAlgos.md" title="View source of this page" class="md-content__button md-icon">
+    <a href="https://github.com/SalK91/convex_optimization/raw/master/docs/0m sgd.md" title="View source of this page" class="md-content__button md-icon">
       
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 18c.56 0 1 .44 1 1s-.44 1-1 1-1-.44-1-1 .44-1 1-1m0-3c-2.73 0-5.06 1.66-6 4 .94 2.34 3.27 4 6 4s5.06-1.66 6-4c-.94-2.34-3.27-4-6-4m0 6.5a2.5 2.5 0 0 1-2.5-2.5 2.5 2.5 0 0 1 2.5-2.5 2.5 2.5 0 0 1 2.5 2.5 2.5 2.5 0 0 1-2.5 2.5M9.27 20H6V4h7v5h5v4.07c.7.08 1.36.25 2 .49V8l-6-6H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h4.5a8.2 8.2 0 0 1-1.23-2"></path></svg>
     </a>
   
 
 
-  <h1>Advanced Algorithms</h1>
+  <h1>Stochastic Gradient Descent</h1>
 
-<h2 id="first-order-gradient-based-methods">First-Order Gradient-Based Methods<a class="headerlink" href="#first-order-gradient-based-methods" title="Permanent link">¶</a></h2>
-<p><strong>Used when:</strong> Only gradient information is available; scalable to high-dimensional problems.</p>
-<h3 id="gradient-descent-gd">Gradient Descent (GD)<a class="headerlink" href="#gradient-descent-gd" title="Permanent link">¶</a></h3>
-<ul>
-<li><strong>Problem:</strong> Minimize smooth or convex functions.  </li>
-<li><strong>Update:</strong> 
-<script type="math/tex; mode=display">
-x^{k+1} = x^k - \alpha \nabla f(x^k)
-</script>
+<p>So far, all optimization methods we have discussed, including Gradient Descent (GD) and Mirror Descent (MD), assume exact evaluation of gradients or subgradients. In practice, however, computing exact gradients is often impossible or computationally expensive. Stochastic Gradient Descent (SGD) and related methods address this by using noisy or approximate gradients, enabling scalable optimization in large-scale or complex settings</p>
+<h2 id="1-motivation">1. Motivation<a class="headerlink" href="#1-motivation" title="Permanent link">¶</a></h2>
+<p>Classical optimization relies on computing the exact gradient <span class="arithmatex">\(\nabla f(x)\)</span> at each iteration. However, in many real-world scenarios, this is impractical:</p>
+<ol>
+<li><strong>Exact gradient unavailable</strong>  </li>
+<li>Some functions are non-differentiable or analytically intractable.  </li>
+<li>
+<p>Example: complex composite objectives or non-smooth loss functions.</p>
 </li>
-<li><strong>Convergence:</strong> Convex → <span class="arithmatex">\(O(1/k)\)</span>; Strongly convex → linear.  </li>
-<li><strong>Use case:</strong> Small convex problems, theoretical baseline.  </li>
-<li><strong>Pitfalls:</strong> Step size too small → slow; too large → divergence.</li>
-</ul>
-<h3 id="stochastic-gradient-descent-sgd">Stochastic Gradient Descent (SGD)<a class="headerlink" href="#stochastic-gradient-descent-sgd" title="Permanent link">¶</a></h3>
-<ul>
-<li><strong>Problem:</strong> Minimize empirical risk over large datasets.  </li>
-<li><strong>Update:</strong> 
-<script type="math/tex; mode=display">
-x^{k+1} = x^k - \alpha \nabla f_B(x^k)
-</script> 
-(mini-batch gradient)  </li>
-<li><strong>Pros:</strong> Scales to huge datasets; cheap per iteration.  </li>
-<li><strong>Cons:</strong> Noisy updates → requires learning rate schedules.  </li>
-<li><strong>ML use:</strong> Deep learning, large-scale logistic regression.  </li>
-</ul>
-<p><strong>Best Practices:</strong> Learning rate warmup, linear scaling with batch size, momentum to stabilize updates, cyclic learning rates for exploration.</p>
-<h3 id="momentum-nesterov-accelerated-gradient">Momentum &amp; Nesterov Accelerated Gradient<a class="headerlink" href="#momentum-nesterov-accelerated-gradient" title="Permanent link">¶</a></h3>
-<ul>
-<li><strong>Problem:</strong> Reduce oscillations and accelerate convergence in ill-conditioned problems.  </li>
-<li><strong>Momentum:</strong> 
-<script type="math/tex; mode=display">
-v_{t+1} = \beta v_t + \nabla f_B(x_t), \quad x_{t+1} = x_t - \alpha v_{t+1}
-</script>
+<li>
+<p><strong>Computational cost is prohibitive</strong>  </p>
 </li>
-<li><strong>Nesterov:</strong> Gradient computed at lookahead point → theoretically optimal for convex problems.  </li>
-<li><strong>ML use:</strong> CNNs, ResNets, EfficientNet.  </li>
-<li><strong>Pitfalls:</strong> High momentum → oscillations; careful learning rate tuning required.</li>
-</ul>
-<h3 id="adaptive-methods-adagrad-rmsprop-adam-adamw">Adaptive Methods (AdaGrad, RMSProp, Adam, AdamW)<a class="headerlink" href="#adaptive-methods-adagrad-rmsprop-adam-adamw" title="Permanent link">¶</a></h3>
-<ul>
-<li><strong>Problem:</strong> Adjust learning rate per parameter for fast/stable convergence.  </li>
-<li><strong>Behavior:</strong>  </li>
-<li>AdaGrad → aggressive decay, good for sparse features.  </li>
-<li>RMSProp → fixes AdaGrad’s rapid decay.  </li>
-<li>Adam → RMSProp + momentum.  </li>
-<li>AdamW → decouples weight decay for better generalization.  </li>
-<li><strong>ML use:</strong> Transformers, NLP, sparse models.  </li>
-<li><strong>Pitfalls:</strong> Adam may converge to sharp minima → worse generalization than SGD in CNNs.  </li>
-<li><strong>Best Practices:</strong> Warmup, cosine LR decay, weight decay with AdamW.</li>
-</ul>
-<h2 id="second-order-curvature-aware-methods">Second-Order &amp; Curvature-Aware Methods<a class="headerlink" href="#second-order-curvature-aware-methods" title="Permanent link">¶</a></h2>
-<p><strong>Used when:</strong> Hessian or curvature information improves convergence; mostly for small/medium models.</p>
-<h3 id="newtons-method">Newton’s Method<a class="headerlink" href="#newtons-method" title="Permanent link">¶</a></h3>
-<ul>
-<li><strong>Problem:</strong> Solve <script type="math/tex"> \min f(x) </script> with smooth Hessian.  </li>
-<li><strong>Update:</strong> 
-<script type="math/tex; mode=display">
-x^{k+1} = x^k - [\nabla^2 f(x^k)]^{-1} \nabla f(x^k)
-</script>
+<li>Large datasets make full gradient computation expensive.  </li>
+<li>
+<p>Neural networks require backpropagation over all samples per step, which can be infeasible.</p>
 </li>
-<li><strong>Pros:</strong> Quadratic convergence.  </li>
-<li><strong>Cons:</strong> Hessian expensive in high dimensions.  </li>
-<li><strong>ML use:</strong> GLMs, small convex models.</li>
-</ul>
-<h3 id="quasi-newton-bfgs-l-bfgs">Quasi-Newton (BFGS, L-BFGS)<a class="headerlink" href="#quasi-newton-bfgs-l-bfgs" title="Permanent link">¶</a></h3>
-<ul>
-<li><strong>Problem:</strong> Approximate Hessian using low-rank updates.  </li>
-<li><strong>Pros:</strong> Efficient for medium-scale problems.  </li>
-<li><strong>Cons:</strong> BFGS memory-heavy; L-BFGS preferred.  </li>
-<li><strong>ML use:</strong> Logistic regression, Cox models.</li>
-</ul>
-<h3 id="conjugate-gradient">Conjugate Gradient<a class="headerlink" href="#conjugate-gradient" title="Permanent link">¶</a></h3>
-<ul>
-<li><strong>Problem:</strong> Solve large linear/quadratic problems efficiently.  </li>
-<li><strong>ML use:</strong> Hessian-free optimization; combined with Pearlmutter trick for Hessian-vector products.</li>
-</ul>
-<h3 id="natural-gradient-k-fac">Natural Gradient &amp; K-FAC<a class="headerlink" href="#natural-gradient-k-fac" title="Permanent link">¶</a></h3>
-<ul>
-<li><strong>Problem:</strong> Precondition gradients using Fisher Information → invariant to parameterization.  </li>
-<li><strong>ML use:</strong> Large CNNs, transformers; improves convergence in distributed training.</li>
-</ul>
-<h2 id="constrained-specialized-optimization">Constrained &amp; Specialized Optimization<a class="headerlink" href="#constrained-specialized-optimization" title="Permanent link">¶</a></h2>
-<h3 id="interior-point">Interior-Point<a class="headerlink" href="#interior-point" title="Permanent link">¶</a></h3>
-<ul>
-<li><strong>Problem:</strong> Constrained optimization via barrier functions.  </li>
-<li><strong>ML use:</strong> Structured convex problems, LP/QP.</li>
-</ul>
-<h3 id="admm-augmented-lagrangian">ADMM / Augmented Lagrangian<a class="headerlink" href="#admm-augmented-lagrangian" title="Permanent link">¶</a></h3>
-<ul>
-<li><strong>Problem:</strong> Split constraints into easier subproblems with dual updates.  </li>
-<li><strong>ML use:</strong> Distributed optimization, structured sparsity.  </li>
-</ul>
-<h3 id="frankwolfe">Frank–Wolfe<a class="headerlink" href="#frankwolfe" title="Permanent link">¶</a></h3>
-<ul>
-<li><strong>Problem:</strong> Projection-free constrained optimization; linear subproblem instead of projection.  </li>
-<li><strong>ML use:</strong> Simplex, nuclear norm problems.</li>
-</ul>
-<h3 id="coordinate-descent">Coordinate Descent<a class="headerlink" href="#coordinate-descent" title="Permanent link">¶</a></h3>
-<ul>
-<li><strong>Problem:</strong> Update one variable at a time.  </li>
-<li><strong>ML use:</strong> Lasso, GLMs, sparse regression.</li>
-</ul>
-<h3 id="proximal-methods">Proximal Methods<a class="headerlink" href="#proximal-methods" title="Permanent link">¶</a></h3>
-<ul>
-<li><strong>Problem:</strong> Efficiently handle nonsmooth penalties.  </li>
-<li><strong>Algorithms:</strong> ISTA (<span class="arithmatex">\(O(1/k)\)</span>), FISTA (<span class="arithmatex">\(O(1/k^2)\)</span>)  </li>
-<li><strong>ML use:</strong> Sparse coding, Lasso, elastic net.</li>
-</ul>
-<h3 id="derivative-free-black-box">Derivative-Free / Black-Box<a class="headerlink" href="#derivative-free-black-box" title="Permanent link">¶</a></h3>
-<ul>
-<li><strong>Problem:</strong> Optimize when gradients unavailable or unreliable.  </li>
-<li><strong>Algorithms:</strong> Nelder–Mead, CMA-ES, Bayesian Optimization  </li>
-<li><strong>ML use:</strong> Hyperparameter tuning, neural architecture search, small networks.</li>
-</ul>
-<h2 id="optimization-problem-styles">Optimization Problem Styles<a class="headerlink" href="#optimization-problem-styles" title="Permanent link">¶</a></h2>
-<h3 id="maximum-likelihood-estimation-mle">Maximum Likelihood Estimation (MLE)<a class="headerlink" href="#maximum-likelihood-estimation-mle" title="Permanent link">¶</a></h3>
-<ul>
-<li><strong>Problem:</strong> Maximize likelihood or minimize negative log-likelihood:<br>
-<script type="math/tex; mode=display">
-\hat{\theta} = \arg\max_\theta \sum_i \log p(x_i|\theta)
-</script>
+<li>
+<p><strong>Stochastic optimization naturally arises</strong>  </p>
 </li>
-<li><strong>Algorithms:</strong> Newton/Fisher scoring, L-BFGS, SGD, EM, Proximal/Coordinate.  </li>
-<li><strong>ML use:</strong> Logistic regression, GLMs, Gaussian mixture models, HMMs.  </li>
-<li><strong>Notes:</strong> EM guarantees monotonic likelihood increase; Fisher scoring uses expected curvature → stable.</li>
-</ul>
-<h3 id="empirical-risk-minimization-erm">Empirical Risk Minimization (ERM)<a class="headerlink" href="#empirical-risk-minimization-erm" title="Permanent link">¶</a></h3>
+<li><strong>Data scale:</strong> Objective involves a sum or expectation over massive datasets.  </li>
+<li><strong>Intrinsic randomness:</strong> Objective defined as an expectation over a stochastic process, e.g., in reinforcement learning, online optimization, or probabilistic modeling.</li>
+</ol>
+<h2 id="2-stochastic-gradient-descent-sgd">2. Stochastic Gradient Descent (SGD)<a class="headerlink" href="#2-stochastic-gradient-descent-sgd" title="Permanent link">¶</a></h2>
+<p>Instead of computing the full gradient, SGD uses a <strong>stochastic estimate</strong> <span class="arithmatex">\(g_t\)</span> such that:</p>
+<div class="arithmatex">\[
+\mathbb{E}[g_t \mid x_t] = \nabla f(x_t)
+\]</div>
+<p>The update rule becomes:</p>
+<div class="arithmatex">\[
+x_{t+1} = x_t - \eta g_t
+\]</div>
+<p>where:</p>
 <ul>
-<li><strong>Problem:</strong> Minimize average loss with optional regularization:<br>
-<script type="math/tex; mode=display">
-\min_\theta \frac{1}{n} \sum_i \mathcal{L}(f_\theta(x_i),y_i) + R(\theta)
-</script>
-</li>
-<li><strong>Algorithms:</strong> GD, SGD, Momentum, Adam, L-BFGS, Proximal.  </li>
-<li><strong>ML use:</strong> Regression, classification, deep learning.</li>
+<li><span class="arithmatex">\(g_t\)</span> is a <strong>stochastic (noisy) gradient</strong>,  </li>
+<li><span class="arithmatex">\(\eta\)</span> is the step size or learning rate.</li>
 </ul>
-<h3 id="regularized-penalized-optimization">Regularized / Penalized Optimization<a class="headerlink" href="#regularized-penalized-optimization" title="Permanent link">¶</a></h3>
+<blockquote>
+<p><strong>Intuition:</strong> We follow a “noisy compass” that points roughly in the right direction instead of computing the exact gradient at every step.</p>
+</blockquote>
+<h3 id="21-sources-of-gradient-noise">2.1 Sources of Gradient Noise<a class="headerlink" href="#21-sources-of-gradient-noise" title="Permanent link">¶</a></h3>
 <ul>
-<li><strong>Problem:</strong> Add penalties to encourage sparsity or smoothness:<br>
-<script type="math/tex; mode=display">
-\min_\theta f(\theta)+\lambda g(\theta)
-</script>
-</li>
-<li><strong>Algorithms:</strong> Proximal gradient, ADMM, Coordinate Descent, ISTA/FISTA.  </li>
-<li><strong>ML use:</strong> Lasso, Elastic Net, sparse dictionary learning.</li>
+<li><strong>Finite datasets:</strong> Only a subset (mini-batch) of data is used.  </li>
+<li><strong>Random sampling:</strong> Randomly select samples to approximate the full gradient.  </li>
+<li><strong>Inherent stochasticity:</strong> In reinforcement learning or simulation-based optimization, gradients are intrinsically noisy.</li>
 </ul>
-<h3 id="constrained-optimization">Constrained Optimization<a class="headerlink" href="#constrained-optimization" title="Permanent link">¶</a></h3>
+<p><strong>Example: Empirical Risk Minimization (ERM)</strong></p>
+<p>For a dataset <span class="arithmatex">\(\{z_1, \dots, z_n\}\)</span> and loss function <span class="arithmatex">\(\ell(x; z_i)\)</span>:</p>
+<div class="arithmatex">\[
+f(x) = \frac{1}{n} \sum_{i=1}^n \ell(x; z_i)
+\]</div>
 <ul>
-<li><strong>Problem:</strong> Minimize with equality/inequality constraints.  </li>
-<li><strong>Algorithms:</strong> Interior-point, ADMM, Frank–Wolfe, penalty/barrier methods.  </li>
-<li><strong>ML use:</strong> Fairness constraints, structured prediction.</li>
+<li>Exact gradient: <span class="arithmatex">\(\nabla f(x) = \frac{1}{n} \sum_i \nabla \ell(x; z_i)\)</span>  </li>
+<li>SGD gradient: <span class="arithmatex">\(g_t = \nabla \ell(x; z_{i_t})\)</span>, where <span class="arithmatex">\(i_t\)</span> is randomly sampled</li>
 </ul>
-<h3 id="bayesian-map-optimization">Bayesian / MAP Optimization<a class="headerlink" href="#bayesian-map-optimization" title="Permanent link">¶</a></h3>
+<blockquote>
+<p>✅ Reduces per-step computation from <span class="arithmatex">\(O(n)\)</span> to <span class="arithmatex">\(O(1)\)</span> or <span class="arithmatex">\(O(\text{batch size})\)</span>.</p>
+</blockquote>
+<h3 id="22-sgd-update-rule">2.2 SGD Update Rule<a class="headerlink" href="#22-sgd-update-rule" title="Permanent link">¶</a></h3>
+<ol>
+<li>Sample a stochastic gradient <span class="arithmatex">\(g_t\)</span> (single sample or mini-batch).  </li>
+<li>Update:</li>
+</ol>
+<div class="arithmatex">\[
+x_{t+1} = x_t - \eta g_t
+\]</div>
 <ul>
-<li><strong>Problem:</strong> Maximize posterior:<br>
-<script type="math/tex; mode=display">
-\min_\theta -\log p(X|\theta) - \log p(\theta)
-</script>
-</li>
-<li><strong>Algorithms:</strong> Gradient-based, Laplace approximation, Variational Inference, MCMC.  </li>
-<li><strong>ML use:</strong> Bayesian neural networks, probabilistic models.</li>
+<li>Converges <strong>in expectation</strong> under standard assumptions (convexity, bounded variance).  </li>
+<li>Simple, yet highly effective for large-scale optimization.</li>
 </ul>
-<h3 id="minimax-adversarial-optimization">Minimax / Adversarial Optimization<a class="headerlink" href="#minimax-adversarial-optimization" title="Permanent link">¶</a></h3>
-<ul>
-<li><strong>Problem:</strong> 
-<script type="math/tex; mode=display">
-\min_\theta \max_\phi f(\theta,\phi)
-</script>
-</li>
-<li><strong>Algorithms:</strong> Gradient descent/ascent, extragradient, mirror descent.  </li>
-<li><strong>ML use:</strong> GANs, adversarial training, robust optimization.</li>
-</ul>
-<h3 id="reinforcement-learning-policy-optimization">Reinforcement Learning / Policy Optimization<a class="headerlink" href="#reinforcement-learning-policy-optimization" title="Permanent link">¶</a></h3>
-<ul>
-<li><strong>Problem:</strong> Maximize expected cumulative reward:<br>
-<script type="math/tex; mode=display">
-\max_\theta \mathbb{E}_{\tau\sim\pi_\theta}\Big[\sum_t r(s_t,a_t)\Big]
-</script>
-</li>
-<li><strong>Algorithms:</strong> Policy gradient, Actor-Critic, Natural Gradient.  </li>
-<li><strong>ML use:</strong> RL agents, sequential decision-making.</li>
-</ul>
-<h3 id="multi-objective-optimization">Multi-Objective Optimization<a class="headerlink" href="#multi-objective-optimization" title="Permanent link">¶</a></h3>
-<ul>
-<li><strong>Problem:</strong> Optimize multiple competing objectives → Pareto front.  </li>
-<li><strong>Algorithms:</strong> Scalarization, weighted sum, evolutionary algorithms.  </li>
-<li><strong>ML use:</strong> Multi-task learning, accuracy vs fairness trade-offs.</li>
-</ul>
-<h3 id="metric-embedding-learning">Metric / Embedding Learning<a class="headerlink" href="#metric-embedding-learning" title="Permanent link">¶</a></h3>
-<ul>
-<li><strong>Problem:</strong> Learn embeddings preserving similarity/distance:<br>
-<script type="math/tex; mode=display">
-\min_\theta \sum_{i,j}\ell(d(f_\theta(x_i),f_\theta(x_j)),y_{ij})
-</script>
-</li>
-<li><strong>Algorithms:</strong> SGD/Adam with careful sampling.  </li>
-<li><strong>ML use:</strong> Contrastive learning, triplet loss, Siamese networks.</li>
-</ul>
-<h3 id="combinatorial-discrete-optimization">Combinatorial / Discrete Optimization<a class="headerlink" href="#combinatorial-discrete-optimization" title="Permanent link">¶</a></h3>
-<ul>
-<li><strong>Problem:</strong> Optimize discrete/integer variables.  </li>
-<li><strong>Algorithms:</strong> Branch-and-bound, integer programming, RL-based relaxation, Gumbel-softmax.  </li>
-<li><strong>ML use:</strong> Feature selection, neural architecture search, graph matching.</li>
-</ul>
-<h3 id="derivative-free-black-box_1">Derivative-Free / Black-Box<a class="headerlink" href="#derivative-free-black-box_1" title="Permanent link">¶</a></h3>
-<ul>
-<li><strong>Problem:</strong> Gradients unavailable or noisy.  </li>
-<li><strong>Algorithms:</strong> Bayesian Optimization, CMA-ES, Nelder–Mead.  </li>
-<li><strong>ML use:</strong> Hyperparameter tuning, neural architecture search, small networks.</li>
-</ul>
-<hr>
-<h2 id="learning-rate-practical-tips">Learning Rate &amp; Practical Tips<a class="headerlink" href="#learning-rate-practical-tips" title="Permanent link">¶</a></h2>
-<ul>
-<li>Step decay, cosine annealing, OneCycle, warmup.  </li>
-<li>Gradient clipping (global norm 1–5), batch/layer normalization, FP16 mixed precision.  </li>
-<li>Decouple weight decay from Adam (AdamW).</li>
-</ul>
-<hr>
-<h2 id="summary">Summary<a class="headerlink" href="#summary" title="Permanent link">¶</a></h2>
+<h3 id="23-comparison-gd-vs-sgd">2.3 Comparison: GD vs SGD<a class="headerlink" href="#23-comparison-gd-vs-sgd" title="Permanent link">¶</a></h3>
 <table>
 <thead>
 <tr>
-<th>Algorithm</th>
-<th>Problem Type</th>
-<th>ML / AI Use Case</th>
+<th>Feature</th>
+<th>Gradient Descent</th>
+<th>Stochastic Gradient Descent</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Gradient</td>
+<td>Full / exact</td>
+<td>Noisy / approximate</td>
+</tr>
+<tr>
+<td>Step cost</td>
+<td>High (entire dataset)</td>
+<td>Low (single sample / mini-batch)</td>
+</tr>
+<tr>
+<td>Update direction</td>
+<td>Accurate</td>
+<td>Approximate, stochastic</td>
+</tr>
+<tr>
+<td>Trajectory</td>
+<td>Smooth</td>
+<td>Noisy, zig-zag</td>
+</tr>
+<tr>
+<td>Convergence</td>
+<td>Deterministic</td>
+<td>In expectation, slower per iteration, but scalable</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>Visual intuition: SGD zig-zags along the gradient surface but gradually converges toward a minimum.</p>
+</blockquote>
+<h2 id="3-practical-considerations">3. Practical Considerations<a class="headerlink" href="#3-practical-considerations" title="Permanent link">¶</a></h2>
+<h3 id="31-step-size-learning-rate">3.1 Step Size / Learning Rate<a class="headerlink" href="#31-step-size-learning-rate" title="Permanent link">¶</a></h3>
+<ul>
+<li>Constant or decaying <span class="arithmatex">\(\eta_t\)</span>  </li>
+<li>Too large → divergence or oscillation  </li>
+<li>Too small → slow convergence</li>
+</ul>
+<h3 id="32-mini-batching">3.2 Mini-batching<a class="headerlink" href="#32-mini-batching" title="Permanent link">¶</a></h3>
+<ul>
+<li>Trades off <strong>variance</strong> vs <strong>computation</strong>:  </li>
+<li>Smaller batches → noisier but cheaper updates  </li>
+<li>Larger batches → smoother updates but more computation</li>
+</ul>
+<h3 id="33-momentum-and-variants">3.3 Momentum and Variants<a class="headerlink" href="#33-momentum-and-variants" title="Permanent link">¶</a></h3>
+<ul>
+<li><strong>Momentum, RMSProp, Adam</strong>: reduce stochastic noise, improve convergence.</li>
+</ul>
+<h3 id="34-noise-as-a-feature">3.4 Noise as a Feature<a class="headerlink" href="#34-noise-as-a-feature" title="Permanent link">¶</a></h3>
+<ul>
+<li>Noise can help <strong>escape shallow local minima</strong>.  </li>
+<li>SGD is more robust in non-convex landscapes, e.g., deep neural networks.</li>
+</ul>
+<h2 id="4-convergence-guarantees">4. Convergence Guarantees<a class="headerlink" href="#4-convergence-guarantees" title="Permanent link">¶</a></h2>
+<p>For convex <span class="arithmatex">\(f\)</span> with bounded gradient variance:</p>
+<div class="arithmatex">\[
+\mathbb{E}[f(\bar{x}_T)] - f(x^*) \le O\left(\frac{1}{\sqrt{T}}\right)
+\]</div>
+<ul>
+<li><span class="arithmatex">\(\bar{x}_T = \frac{1}{T} \sum_{t=1}^T x_t\)</span>  </li>
+<li><span class="arithmatex">\(T\)</span> = number of iterations  </li>
+</ul>
+<blockquote>
+<p>Slower than exact GD (<span class="arithmatex">\(O(1/T)\)</span> for smooth convex problems), but much cheaper per iteration.</p>
+</blockquote>
+<h2 id="5-example-stochastic-optimization-in-regression">5. Example: Stochastic Optimization in Regression<a class="headerlink" href="#5-example-stochastic-optimization-in-regression" title="Permanent link">¶</a></h2>
+<p>Consider minimizing expected squared error:</p>
+<div class="arithmatex">\[
+\min_x \mathbb{E}_\xi \big[ (y - x^\top \xi)^2 \big]
+\]</div>
+<p>Given a dataset <span class="arithmatex">\(\{(y_1, \xi_1), \dots, (y_n, \xi_n)\}\)</span>, the <strong>empirical risk</strong> is:</p>
+<div class="arithmatex">\[
+\hat{F}(x) = \frac{1}{n} \sum_{i=1}^n (y_i - x^\top \xi_i)^2
+\]</div>
+<h3 id="51-gradient-descent-gd">5.1 Gradient Descent (GD)<a class="headerlink" href="#51-gradient-descent-gd" title="Permanent link">¶</a></h3>
+<div class="arithmatex">\[
+x_{t+1} = x_t - \eta \nabla \hat{F}(x_t) 
+= x_t - \eta \frac{1}{n} \sum_{i=1}^n \nabla f_i(x_t)
+\]</div>
+<ul>
+<li>Full gradient requires a pass over all <span class="arithmatex">\(n\)</span> samples → expensive for large datasets.</li>
+</ul>
+<h3 id="52-stochastic-gradient-descent-sgd">5.2 Stochastic Gradient Descent (SGD)<a class="headerlink" href="#52-stochastic-gradient-descent-sgd" title="Permanent link">¶</a></h3>
+<p>Randomly sample an index <span class="arithmatex">\(i_t \in \{1, \dots, n\}\)</span> and compute:</p>
+<div class="arithmatex">\[
+g_t = \nabla f_{i_t}(x_t)
+\]</div>
+<p>Update rule:</p>
+<div class="arithmatex">\[
+x_{t+1} = x_t - \eta_t g_t
+\]</div>
+<ul>
+<li>Key property:</li>
+</ul>
+<div class="arithmatex">\[
+\mathbb{E}[g_t] = \nabla \hat{F}(x_t)
+\]</div>
+<p>Thus, <span class="arithmatex">\(g_t\)</span> is an <strong>unbiased estimate</strong> of the true gradient.</p>
+<h2 id="6-randomized-coordinate-descent-rcd">6. Randomized Coordinate Descent (RCD)<a class="headerlink" href="#6-randomized-coordinate-descent-rcd" title="Permanent link">¶</a></h2>
+<p>Another approach to reduce computational cost is <strong>Randomized Coordinate Descent (RCD)</strong>. Instead of computing the full gradient, RCD updates <strong>only a randomly selected coordinate</strong> (or block of coordinates) at each iteration:</p>
+<div class="arithmatex">\[
+x_{t+1}^{(i)} = x_t^{(i)} - \eta \frac{\partial f(x_t)}{\partial x^{(i)}}, \quad i \sim \text{Uniform}(\{1, \dots, d\})
+\]</div>
+<ul>
+<li><strong>Key idea:</strong> Update only a subset of coordinates to reduce per-iteration cost from <span class="arithmatex">\(O(d)\)</span> to <span class="arithmatex">\(O(1)\)</span> (or <span class="arithmatex">\(O(\text{block size})\)</span>).  </li>
+<li><strong>Connection to SGD:</strong> Both are stochastic approximations of full gradient descent:</li>
+<li>SGD introduces randomness via data sampling.  </li>
+<li>RCD introduces randomness via coordinate selection.  </li>
+</ul>
+<h3 id="61-benefits-of-rcd">6.1 Benefits of RCD<a class="headerlink" href="#61-benefits-of-rcd" title="Permanent link">¶</a></h3>
+<ul>
+<li>Efficient for <strong>high-dimensional problems</strong>.  </li>
+<li>Exploits <strong>sparsity</strong> in variables.  </li>
+<li>Supports <strong>parallel and distributed updates</strong> through block-coordinate schemes.</li>
+</ul>
+<h3 id="62-variants">6.2 Variants<a class="headerlink" href="#62-variants" title="Permanent link">¶</a></h3>
+<ul>
+<li><strong>Cyclic coordinate descent:</strong> systematically updates each coordinate in order.  </li>
+<li><strong>Importance sampling:</strong> selects coordinates with probability proportional to the magnitude of partial derivatives to accelerate convergence.</li>
+</ul>
+<h3 id="63-comparison-to-gd-and-sgd">6.3 Comparison to GD and SGD<a class="headerlink" href="#63-comparison-to-gd-and-sgd" title="Permanent link">¶</a></h3>
+<table>
+<thead>
+<tr>
+<th>Method</th>
+<th>Gradient Computation</th>
+<th>Iteration Cost</th>
+<th>Convergence Behavior</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td>GD</td>
-<td>Smooth / convex</td>
-<td>Small convex models, baseline</td>
+<td>Full gradient</td>
+<td>High (<span class="arithmatex">\(O(d)\)</span>)</td>
+<td>Deterministic, fast for small-scale problems</td>
 </tr>
 <tr>
 <td>SGD</td>
-<td>Large-scale ERM</td>
-<td>Deep learning, logistic regression</td>
+<td>Stochastic gradient</td>
+<td>Low (<span class="arithmatex">\(O(\text{mini-batch})\)</span>)</td>
+<td>Noisy updates, scalable for large datasets</td>
 </tr>
 <tr>
-<td>SGD + Momentum</td>
-<td>Ill-conditioned / deep nets</td>
-<td>CNNs (ResNet, EfficientNet)</td>
-</tr>
-<tr>
-<td>Nesterov Accelerated GD</td>
-<td>Convex / ill-conditioned</td>
-<td>CNNs, small convex models</td>
-</tr>
-<tr>
-<td>AdaGrad</td>
-<td>Sparse features</td>
-<td>NLP, sparse embeddings</td>
-</tr>
-<tr>
-<td>RMSProp</td>
-<td>Stabilized adaptive LR</td>
-<td>RNNs, sequence models</td>
-</tr>
-<tr>
-<td>Adam</td>
-<td>Adaptive large-scale</td>
-<td>Transformers, small nets</td>
-</tr>
-<tr>
-<td>AdamW</td>
-<td>Adaptive + weight decay</td>
-<td>Transformers, NLP</td>
-</tr>
-<tr>
-<td>Newton / Fisher Scoring</td>
-<td>Smooth convex</td>
-<td>GLMs, small MLE</td>
-</tr>
-<tr>
-<td>BFGS / L-BFGS</td>
-<td>Medium convex</td>
-<td>Logistic regression, Cox models</td>
-</tr>
-<tr>
-<td>Conjugate Gradient</td>
-<td>Linear / quadratic</td>
-<td>Hessian-free optimization, linear regression</td>
-</tr>
-<tr>
-<td>Natural Gradient / K-FAC</td>
-<td>Deep nets</td>
-<td>CNNs, transformers</td>
-</tr>
-<tr>
-<td>Proximal / ISTA / FISTA</td>
-<td>Nonsmooth / sparse</td>
-<td>Lasso, sparse coding, elastic net</td>
-</tr>
-<tr>
-<td>Coordinate Descent</td>
-<td>Separable / sparse</td>
-<td>Lasso, GLMs</td>
-</tr>
-<tr>
-<td>Interior-Point</td>
-<td>Constrained convex</td>
-<td>LP/QP problems</td>
-</tr>
-<tr>
-<td>ADMM</td>
-<td>Distributed convex</td>
-<td>Sparse or structured optimization</td>
-</tr>
-<tr>
-<td>Frank–Wolfe</td>
-<td>Projection-free constraints</td>
-<td>Simplex, nuclear norm problems</td>
-</tr>
-<tr>
-<td>EM Algorithm</td>
-<td>Latent variable MLE</td>
-<td>GMM, HMM, LDA</td>
-</tr>
-<tr>
-<td>Policy Gradient / Actor-Critic</td>
-<td>Sequential / RL</td>
-<td>RL agents</td>
-</tr>
-<tr>
-<td>Bayesian Optimization</td>
-<td>Black-box / derivative-free</td>
-<td>Hyperparameter tuning, NAS</td>
-</tr>
-<tr>
-<td>CMA-ES / Nelder-Mead</td>
-<td>Black-box</td>
-<td>Small networks, continuous black-box</td>
-</tr>
-<tr>
-<td>Minimax / Gradient Ascent-Descent</td>
-<td>Adversarial</td>
-<td>GANs, robust optimization</td>
-</tr>
-<tr>
-<td>Multi-Objective / Evolutionary</td>
-<td>Multiple objectives</td>
-<td>Multi-task learning, fairness</td>
-</tr>
-<tr>
-<td>Metric Learning / Triplet Loss</td>
-<td>Similarity embedding</td>
-<td>Contrastive learning, Siamese nets</td>
+<td>RCD</td>
+<td>Partial gradient (coordinate)</td>
+<td>Very low (<span class="arithmatex">\(O(1)\)</span> or block)</td>
+<td>Stochastic, efficient for high-dimensional sparse problems</td>
 </tr>
 </tbody>
 </table>
+<blockquote>
+<p>RCD and SGD illustrate a <strong>unified principle</strong>: use a cheaper, stochastic approximation of the true gradient to achieve scalable optimization.</p>
+</blockquote>
+<h2 id="7-mini-batching-and-variance-reduction">7. Mini-batching and Variance Reduction<a class="headerlink" href="#7-mini-batching-and-variance-reduction" title="Permanent link">¶</a></h2>
+<h3 id="71-mini-batch-sgd">7.1 Mini-batch SGD<a class="headerlink" href="#71-mini-batch-sgd" title="Permanent link">¶</a></h3>
+<p>Compute the gradient over a small subset (mini-batch) of size <span class="arithmatex">\(b\)</span>:</p>
+<div class="arithmatex">\[
+g_t = \frac{1}{b} \sum_{i \in \mathcal{B}_t} \nabla f_i(x_t)
+\]</div>
+<ul>
+<li><strong>Benefits:</strong>  </li>
+<li>Reduces variance of the gradient estimate.  </li>
+<li>Parallelizable on GPUs/TPUs.  </li>
+<li>
+<p>Smoother update trajectory than single-sample SGD.</p>
+</li>
+<li>
+<p><strong>Trade-offs:</strong>  </p>
+</li>
+<li>Smaller batch → cheaper but noisier updates.  </li>
+<li>Larger batch → more computation, lower variance.</li>
+</ul>
+<h3 id="72-variance-reduced-gradient-methods-svrg">7.2 Variance-Reduced Gradient Methods (SVRG)<a class="headerlink" href="#72-variance-reduced-gradient-methods-svrg" title="Permanent link">¶</a></h3>
+<p><strong>SVRG (Stochastic Variance Reduced Gradient)</strong> improves convergence by correcting stochastic gradients:</p>
+<div class="arithmatex">\[
+g_t = \nabla f_{i_t}(x_t) - \nabla f_{i_t}(\tilde{x}) + \nabla f(\tilde{x})
+\]</div>
+<p>where:</p>
+<ul>
+<li><span class="arithmatex">\(i_t\)</span> is a random index,  </li>
+<li>
+<p><span class="arithmatex">\(\tilde{x}\)</span> is a reference point with precomputed full gradient <span class="arithmatex">\(\nabla f(\tilde{x}) = \frac{1}{n} \sum_{i=1}^n \nabla f_i(\tilde{x})\)</span>.</p>
+</li>
+<li>
+<p><strong>Benefits:</strong>  </p>
+</li>
+<li>Faster convergence than standard SGD for strongly convex problems.  </li>
+<li>Maintains low per-iteration cost similar to SGD.  </li>
+<li>
+<p>Reduces stochastic oscillations by anchoring gradients around a reference.</p>
+</li>
+<li>
+<p><strong>Intuition:</strong> Standard SGD “wanders” due to noise; SVRG periodically corrects it using a reference full gradient.</p>
+</li>
+</ul>
 
 
 

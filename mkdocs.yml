@@ -108,6 +108,7 @@ nav:
       - Convex Sets: "0b Convex Sets.md"
       - Convex Functions: "0c Convex Functions.md"
       - Optimality Conditions: "0d Optimality Conditions.md"
+      - Epigraphs: "0c Epigraphs.md"
 
   - Optimization Algorithms: 
       - Optimization Algorithms: "0e Optimization Algos.md"
@@ -121,8 +122,9 @@ nav:
       - Mirror Descent: "0k mirror.md"
       - Stochastic Gradient Descent : "0m sgd.md"
       - Newton's Method: "0n newtons.md"
+      - Quasi-Newton Methods: "0o quasi_n.md"
+      - Interior Point Methods: "0q interior.md"
       - Advanced Algorithms: "0h AdvancedAlgos.md"
-      - Epigraphs: "0c Epigraphs.md"
 
   - Linear Programs:
       - LP: "1a LP.md"
