@@ -1,7 +1,7 @@
 # ==========================================================
 # Project Information
 # ==========================================================
-site_name: Convex Optimization — Algorithms and Analysis
+site_name: Convex Optimization
 site_description: "Structured lecture notes on optimization, convex analysis, and algorithms."
 site_author: "Salman Khan"
 repo_url: "https://github.com/SalK91/convex_optimization"
@@ -15,11 +15,6 @@ copyright: "© 2025 Salman Khan — Educational Use Only"
 theme:
   name: material
   language: en
-  icon:
-    logo: material/school
-    repo: fontawesome/brands/github
-  favicon: assets/favicon.png
-  logo: assets/logo.png
 
   # ---- Color Palette ----
   palette:
@@ -44,7 +39,7 @@ theme:
   # ---- Features ----
   features:
     - navigation.instant
-    - navigation.tabs
+    #- navigation.tabs
     - navigation.top
     - navigation.expand       # show only main pages, not subheadings
     - header.autohide
@@ -102,8 +97,8 @@ extra:
 # Navigation
 # ==========================================================
 nav:
-  - Home: index.md
-  - Introduction: 
+  - Introduction: index.md
+  - Basics:
       - LA Prerequisites: "0a LA.md"
       - Convex Sets: "0b Convex Sets.md"
       - Convex Functions: "0c Convex Functions.md"
