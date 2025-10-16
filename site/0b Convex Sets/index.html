@@ -23,7 +23,7 @@
     
     
       
-        <title>Convex Sets - Convex Optimization</title>
+        <title>Convex Sets and Related Concepts - Convex Optimization</title>
       
     
     
@@ -87,7 +87,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#convex-set" class="md-skip">
+        <a href="#convex-sets-and-related-concepts" class="md-skip">
           Skip to content
         </a>
       
@@ -123,7 +123,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Convex Sets
+              Convex Sets and Related Concepts
             
           </span>
         </div>
@@ -338,7 +338,7 @@
   
   
   <span class="md-ellipsis">
-    LA Prerequisites
+    Mathematical Foundations
     
   </span>
   
@@ -370,7 +370,7 @@
   
   
   <span class="md-ellipsis">
-    Convex Sets
+    Convex Sets and Related Concepts
     
   </span>
   
@@ -418,29 +418,6 @@
   
   <span class="md-ellipsis">
     Optimality Conditions
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../0c Epigraphs.md" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    Epigraphs
     
   </span>
   
@@ -1456,189 +1433,138 @@
   
 
 
-<h1 id="convex-set">Convex Set<a class="headerlink" href="#convex-set" title="Permanent link">¶</a></h1>
+<h1 id="convex-sets-and-related-concepts">Convex Sets and Related Concepts<a class="headerlink" href="#convex-sets-and-related-concepts" title="Permanent link">¶</a></h1>
+<p>Understanding convex sets and their associated geometric structures is <strong>central to convex optimization</strong>. These objects define <strong>feasible regions, constraints, and the geometry that algorithms navigate</strong>. In machine learning, they appear everywhere: in feasible weight sets, regularizers, polyhedral constraints, and in dual formulations.</p>
+<h2 id="convex-set">Convex Set<a class="headerlink" href="#convex-set" title="Permanent link">¶</a></h2>
+<p>A set <span class="arithmatex">\(C \subseteq \mathbb{R}^n\)</span> is <strong>convex</strong> if, for any two points <span class="arithmatex">\(x_1, x_2 \in C\)</span>, the line segment joining them lies entirely within the set:</p>
+<div class="arithmatex">\[
+\theta x_1 + (1-\theta) x_2 \in C, \quad \forall \theta \in [0,1].
+\]</div>
 <ul>
-<li>Convexity of sets: A set <span class="arithmatex">\(C\)</span> is convex if for any <span class="arithmatex">\(x_1, x_2 \in C\)</span> and <span class="arithmatex">\(\theta \in [0,1]\)</span>, we have <span class="arithmatex">\(\theta x_1 + (1-\theta) x_2 \in C\)</span>.</li>
-<li>Closed sets: A set is closed if it contains all its limit points. The closure of a set is the smallest closed set containing it.</li>
-<li>Extreme points: A point in a convex set is extreme if it cannot be expressed as a convex combination of two other distinct points in the set. For polyhedra, extreme points correspond to vertices.</li>
+<li><strong>Closed sets:</strong> A set is closed if it contains all its limit points. Closed sets ensure that sequences of feasible points do not “escape” the set, which is important for guarantees on convergence in optimization.  </li>
+<li><strong>Extreme points:</strong> An extreme point of a convex set cannot be written as a convex combination of other points. For polyhedra, these correspond to vertices, and in optimization, <strong>optimal solutions of linear programs lie at extreme points</strong>.</li>
 </ul>
-<h1 id="convex-combination">Convex Combination<a class="headerlink" href="#convex-combination" title="Permanent link">¶</a></h1>
-<p>A convex combination of <span class="arithmatex">\(x_1, \dots, x_k\)</span> is
-<script type="math/tex; mode=display">
-x = \sum_{i=1}^k \theta_i x_i, \quad \theta_i \geq 0, \quad \sum_{i=1}^k \theta_i = 1.
-</script>
-</p>
-<p>This is simply a weighted average where weights are nonnegative and sum to 1.</p>
-<h1 id="convex-hull">Convex Hull<a class="headerlink" href="#convex-hull" title="Permanent link">¶</a></h1>
-<p>The convex hull of a set <span class="arithmatex">\(S\)</span> is the collection of all convex combinations of points in <span class="arithmatex">\(S\)</span>. It is the smallest convex set containing <span class="arithmatex">\(S\)</span>.</p>
-<p><code>Geometric intuition: Imagine stretching a rubber band around the points; the enclosed region is the convex hull.</code></p>
-<h1 id="cones">Cones<a class="headerlink" href="#cones" title="Permanent link">¶</a></h1>
+<h2 id="convex-combination">Convex Combination<a class="headerlink" href="#convex-combination" title="Permanent link">¶</a></h2>
+<p>A <strong>convex combination</strong> of points <span class="arithmatex">\(x_1, \dots, x_k\)</span> is:</p>
+<div class="arithmatex">\[
+x = \sum_{i=1}^k \theta_i x_i, \quad \theta_i \ge 0, \quad \sum_{i=1}^k \theta_i = 1.
+\]</div>
 <ul>
-<li>
-<p>A  cone is a set <span class="arithmatex">\(K\)</span> such that if <span class="arithmatex">\(x \in K\)</span> and <span class="arithmatex">\(\alpha \geq 0\)</span>, then <span class="arithmatex">\(\alpha x \in K\)</span>.<br>
-  In words: a cone is closed under nonnegative scalar multiplication.  </p>
-</li>
-<li>
-<p>The conic hull (or convex cone) of a set <span class="arithmatex">\(S\)</span> is the collection of all conic combinations of points in <span class="arithmatex">\(S\)</span>:<br>
-<script type="math/tex; mode=display">
-  \text{cone}(S) = \left\{ \sum_{i=1}^k \theta_i x_i \;\middle|\; x_i \in S, \; \theta_i \geq 0 \right\}.
-  </script>
-</p>
-</li>
-<li>
-<p>A cone is <strong>not necessarily a subspace</strong> (since a subspace allows all linear combinations, including negative multiples). However, every subspace is a cone (because it is closed under nonnegative scaling).  </p>
-</li>
-<li>
-<p>A cone is <strong>not necessarily convex</strong>. To be convex, a set must be closed under addition and convex combinations, which is not guaranteed for a general cone. A <strong>convex cone</strong> is a cone that is also convex, i.e., closed under nonnegative linear combinations.</p>
-</li>
+<li>Think of it as a <strong>weighted average</strong> where weights sum to 1.  </li>
+<li>Convex combinations <strong>never leave the convex hull</strong>, which is the “safe zone” defined by your points.</li>
 </ul>
-<h1 id="polar-cones">Polar Cones<a class="headerlink" href="#polar-cones" title="Permanent link">¶</a></h1>
+<p><strong>ML Intuition:</strong> Gradient-based updates can be seen as <strong>small convex combinations</strong> between the current point and a target direction.</p>
+<h2 id="convex-hull">Convex Hull<a class="headerlink" href="#convex-hull" title="Permanent link">¶</a></h2>
+<p>The <strong>convex hull</strong> of a set <span class="arithmatex">\(S\)</span> is the set of all convex combinations of points in <span class="arithmatex">\(S\)</span>. It is the <strong>smallest convex set containing <span class="arithmatex">\(S\)</span></strong>.  </p>
 <ul>
-<li>
-<p>Given a cone <span class="arithmatex">\(K \subseteq \mathbb{R}^n\)</span>, the <strong>polar cone</strong> of <span class="arithmatex">\(K\)</span> is defined as<br>
-<script type="math/tex; mode=display">
-  K^\circ = \{ y \in \mathbb{R}^n \;\mid\; \langle y, x \rangle \leq 0 \;\; \forall x \in K \}.
-  </script>
-</p>
-</li>
-<li>
-<p>Intuitively, the polar cone consists of all vectors that form a <strong>non-acute angle</strong> (inner product <span class="arithmatex">\(\leq 0\)</span>) with every vector in <span class="arithmatex">\(K\)</span>.  </p>
-</li>
-<li>
-<p>The polar of any cone is always a <strong>closed convex cone</strong>, even if the original cone <span class="arithmatex">\(K\)</span> is not convex or not closed.  </p>
-</li>
-<li>
-<p>If <span class="arithmatex">\(K\)</span> is a subspace, then its polar cone <span class="arithmatex">\(K^\circ\)</span> is the <strong>orthogonal complement</strong> of <span class="arithmatex">\(K\)</span>.  </p>
-</li>
-<li>
-<p>A useful duality property: for a closed convex cone <span class="arithmatex">\(K\)</span>,<br>
-<script type="math/tex; mode=display">
-  (K^\circ)^\circ = K.
-  </script>
-</p>
+<li><strong>Geometric intuition:</strong> Imagine stretching a rubber band around the points — the shape it forms is the convex hull.  </li>
+<li><strong>ML Relevance:</strong> Convex hulls appear in support vector machines (margin between classes) and in approximating non-convex feasible sets using convex relaxations.</li>
+</ul>
+<h2 id="cones">Cones<a class="headerlink" href="#cones" title="Permanent link">¶</a></h2>
+<p>A <strong>cone</strong> is a set <span class="arithmatex">\(K \subseteq \mathbb{R}^n\)</span> such that if <span class="arithmatex">\(x \in K\)</span> and <span class="arithmatex">\(\alpha \ge 0\)</span>, then <span class="arithmatex">\(\alpha x \in K\)</span>.  </p>
+<ul>
+<li>Cones are closed under <strong>nonnegative scaling</strong>, but not necessarily addition.  </li>
+<li><strong>Conic hull (convex cone):</strong> Collection of all conic combinations of points in <span class="arithmatex">\(S\)</span>:  </li>
+</ul>
+<div class="arithmatex">\[
+\text{cone}(S) = \Big\{ \sum_{i=1}^k \theta_i x_i \;\Big|\; x_i \in S, \; \theta_i \ge 0 \Big\}.
+\]</div>
+<ul>
+<li>A cone is not necessarily a subspace (negative multiples may not be included).  </li>
+<li>A convex cone is closed under addition and nonnegative scaling.  </li>
+</ul>
+<h2 id="polar-cones">Polar Cones<a class="headerlink" href="#polar-cones" title="Permanent link">¶</a></h2>
+<p>Given a cone <span class="arithmatex">\(K \subseteq \mathbb{R}^n\)</span>, the <strong>polar cone</strong> is:</p>
+<div class="arithmatex">\[
+K^\circ = \{ y \in \mathbb{R}^n \mid \langle y, x \rangle \le 0, \; \forall x \in K \}.
+\]</div>
+<ul>
+<li>Intuition: polar cone vectors form <strong>non-acute angles</strong> with every vector in <span class="arithmatex">\(K\)</span>.  </li>
+<li>Properties:  <ul>
+<li>Always a <strong>closed convex cone</strong>.  </li>
+<li>If <span class="arithmatex">\(K\)</span> is a subspace, <span class="arithmatex">\(K^\circ\)</span> is the <strong>orthogonal complement</strong>.  </li>
+<li>Duality: <span class="arithmatex">\((K^\circ)^\circ = K\)</span> for closed convex cones.  </li>
+</ul>
 </li>
 </ul>
-<h1 id="tangent-cone">Tangent Cone<a class="headerlink" href="#tangent-cone" title="Permanent link">¶</a></h1>
+<p><strong>ML relevance:</strong> Polar cones naturally appear in <strong>dual problems</strong> and in the derivation of <strong>optimality conditions</strong>.</p>
+<h2 id="tangent-cone">Tangent Cone<a class="headerlink" href="#tangent-cone" title="Permanent link">¶</a></h2>
+<p>For a set <span class="arithmatex">\(C\)</span> and point <span class="arithmatex">\(x \in C\)</span>, the <strong>tangent cone</strong> <span class="arithmatex">\(T_C(x)\)</span> contains all directions in which one can “move infinitesimally” while remaining in <span class="arithmatex">\(C\)</span>:</p>
+<div class="arithmatex">\[
+T_C(x) = \Big\{ d \in \mathbb{R}^n \;\Big|\; \exists t_k \downarrow 0, \; x_k \in C, \; x_k \to x, \; \frac{x_k - x}{t_k} \to d \Big\}.
+\]</div>
 <ul>
-<li>Given a set <span class="arithmatex">\(C \subseteq \mathbb{R}^n\)</span> and a point <span class="arithmatex">\(x \in C\)</span>, the <strong>tangent cone</strong> (also called the contingent cone) at <span class="arithmatex">\(x\)</span> is defined as<br>
-<script type="math/tex; mode=display">
-  T_C(x) = \left\{ d \in \mathbb{R}^n \;\middle|\; \exists \, t_k \downarrow 0, \; x_k \in C, \; x_k \to x, \; \frac{x_k - x}{t_k} \to d \right\}.
-  </script>
-</li>
-<li>Intuitively: <span class="arithmatex">\(T_C(x)\)</span> is the set of all directions <span class="arithmatex">\(d\)</span> in which you can “move infinitesimally” inside <span class="arithmatex">\(C\)</span> starting from <span class="arithmatex">\(x\)</span>.</li>
-<li>If <span class="arithmatex">\(x\)</span> is in the <strong>interior</strong> of <span class="arithmatex">\(C\)</span>, then <span class="arithmatex">\(T_C(x) = \mathbb{R}^n\)</span>.  </li>
-<li>If <span class="arithmatex">\(x\)</span> is on the <strong>boundary</strong>, <span class="arithmatex">\(T_C(x)\)</span> consists of directions that keep you inside <span class="arithmatex">\(C\)</span> locally.</li>
+<li><strong>Interior point:</strong> <span class="arithmatex">\(T_C(x) = \mathbb{R}^n\)</span>.  </li>
+<li><strong>Boundary point:</strong> <span class="arithmatex">\(T_C(x)\)</span> restricts movement to directions staying inside <span class="arithmatex">\(C\)</span>.  </li>
 </ul>
-<h1 id="normal-cone">Normal Cone<a class="headerlink" href="#normal-cone" title="Permanent link">¶</a></h1>
+<p><strong>ML intuition:</strong> Tangent cones define <strong>feasible directions</strong> for projected gradient steps or constrained optimization.</p>
+<h2 id="normal-cone">Normal Cone<a class="headerlink" href="#normal-cone" title="Permanent link">¶</a></h2>
+<p>For a convex set <span class="arithmatex">\(C\)</span> at point <span class="arithmatex">\(x \in C\)</span>:</p>
+<div class="arithmatex">\[
+N_C(x) = \{ v \in \mathbb{R}^n \mid \langle v, y - x \rangle \le 0, \; \forall y \in C \}.
+\]</div>
 <ul>
-<li>
-<p>For a convex set <span class="arithmatex">\(C \subseteq \mathbb{R}^n\)</span> and a point <span class="arithmatex">\(x \in C\)</span>, the <strong>normal cone</strong> at <span class="arithmatex">\(x\)</span> is defined as<br>
-<script type="math/tex; mode=display">
-  N_C(x) = \{ v \in \mathbb{R}^n \;\mid\; \langle v, y - x \rangle \leq 0 \;\; \forall y \in C \}.
-  </script>
-</p>
-</li>
-<li>
-<p>Each <span class="arithmatex">\(v \in N_C(x)\)</span> defines a <strong>supporting hyperplane</strong> to <span class="arithmatex">\(C\)</span> at <span class="arithmatex">\(x\)</span>:  </p>
-</li>
+<li>Each <span class="arithmatex">\(v \in N_C(x)\)</span> defines a <strong>supporting hyperplane</strong> at <span class="arithmatex">\(x\)</span>.  </li>
+<li>Relation: <span class="arithmatex">\(N_C(x) = \big(T_C(x)\big)^\circ\)</span> — polar of tangent cone.  </li>
+<li><strong>Interior point:</strong> <span class="arithmatex">\(N_C(x) = \{0\}\)</span>.  </li>
+<li><strong>Boundary/corner:</strong> <span class="arithmatex">\(N_C(x)\)</span> is a cone of outward normals.  </li>
 </ul>
-<p>
-<script type="math/tex; mode=display">
-  v^T(y-x) \le 0, \quad \forall y \in C
-  </script>
-</p>
-<ul>
-<li>
-<p>Relationship: the normal cone is the <strong>polar cone</strong> of the tangent cone:<br>
-<script type="math/tex; mode=display">
-  N_C(x) = \big(T_C(x)\big)^\circ.
-  </script>
-</p>
-</li>
-<li>
-<p><span class="arithmatex">\(N_C(x)\)</span> is always a <strong>closed convex cone</strong>.</p>
-</li>
-<li>Intuitively: <span class="arithmatex">\(N_C(x)\)</span> is the set of vectors pointing “outward” and supporting the set <span class="arithmatex">\(C\)</span> at <span class="arithmatex">\(x\)</span>.  </li>
-<li><strong>Interior point</strong> of <span class="arithmatex">\(C\)</span>: <span class="arithmatex">\(N_C(x) = \{0\}\)</span> (no outward direction, since <span class="arithmatex">\(x\)</span> is surrounded).  </li>
-<li><strong>Boundary point</strong>: <span class="arithmatex">\(N_C(x)\)</span> contains outward-pointing directions normal to the boundary.  </li>
-<li><strong>Corner/vertex</strong>: <span class="arithmatex">\(N_C(x)\)</span> is a <strong>cone of outward normals</strong>, capturing multiple “faces” meeting at <span class="arithmatex">\(x\)</span>.  </li>
-</ul>
-<h2 id="why-is-the-normal-cone-important">Why is the normal cone important?<a class="headerlink" href="#why-is-the-normal-cone-important" title="Permanent link">¶</a></h2>
-<h3 id="first-order-optimality-condition">First-order optimality condition<a class="headerlink" href="#first-order-optimality-condition" title="Permanent link">¶</a></h3>
-<ul>
-<li>
-<p>For the problem <span class="arithmatex">\(\min f(x)\)</span> subject to <span class="arithmatex">\(x \in C\)</span>, a point <span class="arithmatex">\(x^*\)</span> is optimal if:  </p>
-<p>
-<script type="math/tex; mode=display">
- 0 \in \partial f(x^*) + N_C(x^*)
- </script>
-</p>
-<p>This says the slope (subgradient) of <span class="arithmatex">\(f\)</span> is exactly balanced by the “push back” of the constraint set.  </p>
-</li>
-</ul>
-<h3 id="connection-to-tangent-cone">Connection to tangent cone<a class="headerlink" href="#connection-to-tangent-cone" title="Permanent link">¶</a></h3>
-<ul>
-<li>
-<p>The normal cone is the polar cone of the tangent cone:  </p>
-<p>
-<script type="math/tex; mode=display">
- N_C(x) = \big(T_C(x)\big)^\circ
- </script>
-</p>
-<p>This duality links feasible directions (tangent cone) with blocking directions (normal cone).  </p>
-</li>
-</ul>
-<h3 id="geometric-interpretation">Geometric interpretation<a class="headerlink" href="#geometric-interpretation" title="Permanent link">¶</a></h3>
-<ul>
-<li>Normals describe which directions leave the set if you try to move outward.  </li>
-<li>They capture the “boundary geometry” of <span class="arithmatex">\(C\)</span>, generalizing the idea of perpendicular vectors to surfaces. </li>
-</ul>
-<h1 id="comparison-of-tangent-normal-and-polar-cones">Comparison of Tangent, Normal, and Polar Cones<a class="headerlink" href="#comparison-of-tangent-normal-and-polar-cones" title="Permanent link">¶</a></h1>
+<p><strong>ML relevance:</strong> Appears in <strong>first-order optimality conditions</strong>:</p>
+<div class="arithmatex">\[
+0 \in \partial f(x^*) + N_C(x^*),
+\]</div>
+<p>where the subgradient of <span class="arithmatex">\(f\)</span> is balanced by the “push-back” of constraints.</p>
+<h2 id="comparison-of-tangent-normal-and-polar-cones">Comparison of Tangent, Normal, and Polar Cones<a class="headerlink" href="#comparison-of-tangent-normal-and-polar-cones" title="Permanent link">¶</a></h2>
 <table>
 <thead>
 <tr>
 <th>Cone</th>
 <th>Applies To</th>
 <th>Meaning</th>
-<th>Interior Point</th>
-<th>Boundary Point</th>
+<th>Interior</th>
+<th>Boundary</th>
 <th>Key Facts</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td><strong>Tangent</strong> <span class="arithmatex">\(T_C(x)\)</span></td>
-<td>Any set (convex nicer)</td>
-<td>Feasible move directions</td>
-<td><span class="arithmatex">\(T_C(x)=\mathbb{R}^n\)</span></td>
-<td>Restricted to stay in <span class="arithmatex">\(C\)</span></td>
-<td>Local geometry of <span class="arithmatex">\(C\)</span></td>
+<td>Any set</td>
+<td>Feasible directions</td>
+<td><span class="arithmatex">\(\mathbb{R}^n\)</span></td>
+<td>Restricted</td>
+<td>Local geometry</td>
 </tr>
 <tr>
 <td><strong>Normal</strong> <span class="arithmatex">\(N_C(x)\)</span></td>
-<td>Convex sets (gen. exist)</td>
-<td>Outward blocking dirs</td>
-<td><span class="arithmatex">\(N_C(x)=\{0\}\)</span></td>
-<td>Outward rays/cones</td>
-<td>Closed, convex; <span class="arithmatex">\(N_C(x)=(T_C(x))^\circ\)</span></td>
+<td>Convex sets</td>
+<td>Outward blocking directions</td>
+<td><span class="arithmatex">\(\{0\}\)</span></td>
+<td>Outward cone</td>
+<td>Closed, convex; <span class="arithmatex">\(N_C = T^\circ\)</span></td>
 </tr>
 <tr>
 <td><strong>Polar</strong> <span class="arithmatex">\(K^\circ\)</span></td>
-<td>Any cone <span class="arithmatex">\(K\)</span></td>
-<td>Non-acute dirs wrt <span class="arithmatex">\(K\)</span></td>
-<td>Not point-specific</td>
-<td>Not point-specific</td>
-<td>Closed, convex; <span class="arithmatex">\((K^\circ)^\circ=K\)</span> if closed convex</td>
+<td>Any cone</td>
+<td>Non-acute directions</td>
+<td>N/A</td>
+<td>N/A</td>
+<td>Closed, convex; <span class="arithmatex">\((K^\circ)^\circ = K\)</span></td>
 </tr>
 </tbody>
 </table>
-<h1 id="hyperplanes-and-half-spaces">Hyperplanes and Half-spaces<a class="headerlink" href="#hyperplanes-and-half-spaces" title="Permanent link">¶</a></h1>
+<hr>
+<h2 id="hyperplanes-and-half-spaces">Hyperplanes and Half-Spaces<a class="headerlink" href="#hyperplanes-and-half-spaces" title="Permanent link">¶</a></h2>
 <ul>
-<li>A hyperplane is the solution set of <span class="arithmatex">\(a^T x = b\)</span>.</li>
-<li>A half-space is one side of a hyperplane, defined as <span class="arithmatex">\(a^T x \leq b\)</span> or <span class="arithmatex">\(a^T x \geq b\)</span>.</li>
-<li>These objects are convex and serve as building blocks in constraints.</li>
+<li><strong>Hyperplane:</strong> <span class="arithmatex">\(a^T x = b\)</span>.  </li>
+<li><strong>Half-space:</strong> One side of a hyperplane, <span class="arithmatex">\(a^T x \le b\)</span> or <span class="arithmatex">\(a^T x \ge b\)</span>.  </li>
+<li>Convex sets can be <strong>built from intersections of half-spaces</strong>, which is why linear constraints are convex.  </li>
 </ul>
-<p>Separation and Supporting Hyperplanes: One of the most powerful results in convex geometry is the separating hyperplane theorem: two disjoint convex sets can be separated by a hyperplane. For a convex set <span class="arithmatex">\(C\)</span> and a point <span class="arithmatex">\(x \notin C\)</span>, there exists a hyperplane that separates <span class="arithmatex">\(x\)</span> from <span class="arithmatex">\(C\)</span>. This underpins duality theory in optimisation. A supporting hyperplane touches a convex set at one or more points but does not cut through it.</p>
+<p><strong>Separation &amp; Supporting Hyperplanes:</strong></p>
+<ul>
+<li><strong>Separating hyperplane theorem:</strong> Two disjoint convex sets can be separated by a hyperplane.  </li>
+<li><strong>Supporting hyperplane:</strong> Touches a convex set at a point (or face) without cutting through.  </li>
+</ul>
 
 
 

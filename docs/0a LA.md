@@ -1,22 +1,22 @@
-# Linear Algebra Prerequisites
+Modern optimization is geometric at heart. When we optimize a loss function, we are navigating through a high-dimensional landscape defined by vectors, matrices, subspaces, projections, and curvature. Without a strong grasp of these structures, optimization algorithms feel like “black boxes.” With right intuition you can start to see gradient descent not as a formula, but as a geometric motion toward feasibility or optimality.
 
 ### Vector spaces and norms: 
+In ML, parameter vectors $ \mathbf{w} \in \mathbb{R}^n $ live in a space where distance and direction matter. Norms allow us to measure distances and magnitudes in this space, defining what “large” or “small” changes mean. For example, L2 regularization penalizes large Euclidean norms of weights, encouraging smaller steps, whereas L1 encourages sparsity by reshaping the geometry into diamond-like constraints.
 
 - We work primarily in $\mathbb{R}^n$, the $n$-dimensional Euclidean space. The Euclidean norm is $\|x\|_2 = \sqrt{x^T x}$, but other norms, such as $\|x\|_1$ or $\|x\|_\infty$, are also important.
 
-- Affine sets: A set of the form  $\{x \in \mathbb{R}^n : Ax = b\}$, where $A$ is a matrix and $b$ is a vector. Affine sets are the natural generalisation of lines and planes.
+- **Affine sets:** A set of the form  $\{x \in \mathbb{R}^n : Ax = b\}$, where $A$ is a matrix and $b$ is a vector. Affine sets are the natural generalisation of lines and planes.
 
 
-- Linear independence: A set of vectors $\{v_1, v_2, \dots, v_k\}$ is linearly independent if    $\alpha_1 v_1 + \alpha_2 v_2 + \cdots + \alpha_k v_k = 0$  
-  implies $\alpha_1 = \alpha_2 = \cdots = \alpha_k = 0$.
+- **Linear independence:** A set of vectors $\{v_1, v_2, \dots, v_k\}$ is linearly independent if    $\alpha_1 v_1 + \alpha_2 v_2 + \cdots + \alpha_k v_k = 0$  implies $\alpha_1 = \alpha_2 = \cdots = \alpha_k = 0$.
 
 
 ### Inner & Outer products & Projection
+Geometrically, the inner product tells us how aligned two vectors are, while outer products and projections allow us to reason about subspace components and constrained updates. These operations appear in gradient updates, Hessians, covariance matrices, kernel methods, and proximal operators.
+
 -  An inner product in $\mathbb{R}^n$ is $\langle x, y \rangle = x^T y$.
 
-- The angle $\theta$ between two nonzero vectors $x, y \in \mathbb{R}^n$ is defined as@  
-  
-    $\cos \theta = \dfrac{\langle x, y \rangle}{\|x\|_2 \, \|y\|_2}$
+- The angle $\theta$ between two nonzero vectors $x, y \in \mathbb{R}^n$ is defined as: $\cos \theta = \dfrac{\langle x, y \rangle}{\|x\|_2 \, \|y\|_2}$
 
 
 - Given vectors $u, v \in \mathbb{R}^n$, their outer product is   $u v^T$, which is an $n \times n$ matrix.  (Contrast with the inner product $u^T v$, which is a scalar.)
@@ -32,9 +32,10 @@
   $\text{proj}_U(x) = QQ^T x$.
 
 
-- Projection onto a convex set:  Projecting two points on convex set is not expansive i.e. the distance between projection of points is always less than equal to the original distance between the points.
+- Projecting two points on convex set is not expansive i.e. the distance between projection of points is always less than equal to the original distance between the points.
 
 ## Matrix Concepts
+Matrices represent data, linear transformations, and parameters. Knowing rank, null space, determinants, and range is critical for understanding solution uniqueness, redundancy, and conditioning.
 
 - Rank:  The rank of a matrix $A \in \mathbb{R}^{m \times n}$, denoted $\text{rank}(A)$, is the dimension of its column space (or equivalently, row space). It is the number of linearly independent columns (or rows). $\text{rank}(A) \leq \min(m,n)$.  
 
@@ -51,6 +52,7 @@
 
 
 ## Subspaces and Related Concepts
+Subspaces define allowed movement directions. Orthogonal complements help us separate constrained and free directions, essential in projected gradient descent and KKT conditions.
 
 - Subspace: A subset $U \subseteq \mathbb{R}^n$ is a subspace if it satisfies:  
     1. $0 \in U$ (contains the zero vector)  
@@ -79,6 +81,7 @@
     - If $x_0 = 0$, the affine subspace is just a subspace.
 
 ## Eigenvalues, Eigenvectors, and Symmetric Matrices
+Eigenvalues reveal curvature directions: large eigenvalues indicate steep directions, small eigenvalues indicate flat directions. Symmetric matrices (Hessians, covariances) are especially well-behaved — they can be diagonalized with orthogonal eigenvectors, which simplifies analysis and algorithms.
 
 - Eigenvalue and Eigenvector: For a square matrix $A \in \mathbb{R}^{n \times n}$, a scalar $\lambda \in \mathbb{R}$ (or $\mathbb{C}$) is an eigenvalue if there exists a nonzero vector $v \in \mathbb{R}^n$ such that  
   $$
@@ -102,8 +105,8 @@
       where $Q$ is an orthogonal matrix of eigenvectors ($Q^T Q = I$) and $\Lambda$ is a diagonal matrix of eigenvalues.  
   
 
-- Positive Semidefinite Matrices
-  A symmetric matrix $A \in \mathbb{R}^{n \times n}$ is positive semidefinite (PSD) if  
+## Positive Semidefinite Matrices
+PSD matrices are the formal signature of convexity. If a function has a PSD Hessian everywhere, it is convex. Covariance matrices, kernel Gram matrices, and Fisher information matrices are PSD — ensuring optimization stability. A symmetric matrix $A \in \mathbb{R}^{n \times n}$ is positive semidefinite (PSD) if  
   $$
   x^T A x \geq 0 \quad \text{for all } x \in \mathbb{R}^n.
   $$
@@ -119,6 +122,7 @@
     6. for any matrix A, $A^TA$ and $AA^T$ are PSD.
 
 ## Continuity and Lipschitz Continuity
+Continuity ensures small changes in input lead to small changes in output, crucial for stability in optimization. Lipschitz continuity bounds how fast the function can change, which informs step size selection in gradient methods.
 
 - Continuity: A function $f : \mathbb{R}^n \to \mathbb{R}^m$ is continuous at $x_0$ if  
   $$
@@ -141,6 +145,7 @@
     - If $f$ is differentiable and $\|\nabla f(x)\| \leq L$ for all $x$, then $f$ is Lipschitz continuous with constant $L$.  
  
 ## Gradient and Hessian
+Gradients define the direction of steepest ascent, and Hessians describe curvature. Understanding them is essential for gradient descent, Newton methods, and second-order optimization algorithms.
 
 - Gradient:  Let $f : \mathbb{R}^n \to \mathbb{R}$ be differentiable.  
   The gradient of $f$ at $x$ is the vector of partial derivatives:  

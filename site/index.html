@@ -339,7 +339,7 @@
   
   
   <span class="md-ellipsis">
-    LA Prerequisites
+    Mathematical Foundations
     
   </span>
   
@@ -362,7 +362,7 @@
   
   
   <span class="md-ellipsis">
-    Convex Sets
+    Convex Sets and Related Concepts
     
   </span>
   
@@ -409,29 +409,6 @@
   
   <span class="md-ellipsis">
     Optimality Conditions
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="0c Epigraphs.md" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    Epigraphs
     
   </span>
   
@@ -1447,7 +1424,26 @@
 
   <h1>Introduction</h1>
 
-<p>Convex optimisation is one of the central pillars of modern applied mathematics, machine learning, and artificial intelligence. It provides a rich framework in which we can model problems, design algorithms, and guarantee performance. Unlike general non-convex optimisation, convex optimisation problems enjoy the key property that any <strong>local solution is also global</strong>. This makes them especially important in practice, where reliability, interpretability, and theoretical guarantees are valued.</p>
+<p>Convex optimization is a cornerstone of modern applied mathematics, machine learning, and artificial intelligence. At its heart, it is about finding the best point in a structured space — for example, the weights of a neural network or the coefficients of a regression model — while guaranteeing that any local solution is globally optimal. This property makes convex optimization particularly powerful in practice, where reliability, interpretability, and provable guarantees are critical.</p>
+<p>For machine learning practitioners, convex optimization is far more than theory. It underpins algorithms like Lasso, Ridge Regression, Logistic Regression, Support Vector Machines, Principal Component Analysis, and many convex relaxations of probabilistic models. By understanding convex optimization, you gain tools to:</p>
+<ul>
+<li>Recognize whether a problem is convex and tractable.</li>
+<li>Choose the right algorithm for a given ML task.</li>
+<li>Predict the behavior of your optimization process, including convergence rates.</li>
+<li>Design models and regularizers with guaranteed properties.</li>
+</ul>
+<p>This articles here will guide through three tightly connected dimensions:</p>
+<ol>
+<li>
+<p>What is convex optimization? Geometry of convex sets, convex functions, and landscapes that allow global guarantees.</p>
+</li>
+<li>
+<p>Algorithms to solve convex problems: Gradient methods, proximal operators, dual optimization, and first-order/second-order methods.</p>
+</li>
+<li>
+<p>Common ML convex problems: Sparse regression, SVMs, PCA, convex relaxations of probabilistic models, and more.</p>
+</li>
+</ol>
 
 
 

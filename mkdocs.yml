@@ -99,11 +99,10 @@ extra:
 nav:
   - Introduction: index.md
   - Basics:
-      - LA Prerequisites: "0a LA.md"
-      - Convex Sets: "0b Convex Sets.md"
+      - Mathematical Foundations: "0a LA.md"
+      - Convex Sets and Related Concepts: "0b Convex Sets.md"
       - Convex Functions: "0c Convex Functions.md"
       - Optimality Conditions: "0d Optimality Conditions.md"
-      - Epigraphs: "0c Epigraphs.md"
 
   - Optimization Algorithms: 
       - Optimization Algorithms: "0e Optimization Algos.md"

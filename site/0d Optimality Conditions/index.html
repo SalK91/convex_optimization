@@ -338,7 +338,7 @@
   
   
   <span class="md-ellipsis">
-    LA Prerequisites
+    Mathematical Foundations
     
   </span>
   
@@ -361,7 +361,7 @@
   
   
   <span class="md-ellipsis">
-    Convex Sets
+    Convex Sets and Related Concepts
     
   </span>
   
@@ -423,29 +423,6 @@
 
       </a>
       
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../0c Epigraphs.md" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    Epigraphs
-    
-  </span>
-  
-
-      </a>
     </li>
   
 
@@ -1458,8 +1435,8 @@
 
 <h1 id="optimality-conditions-for-convex-optimization-problems">Optimality Conditions for Convex Optimization Problems<a class="headerlink" href="#optimality-conditions-for-convex-optimization-problems" title="Permanent link">¶</a></h1>
 <p>Convex optimization problems have the important property that any local minimum is also a global minimum. Depending on whether the problem is unconstrained or constrained, and whether the function is differentiable or not, the optimality conditions differ.</p>
-<h2 id="1-unconstrained-problems">1. Unconstrained Problems<a class="headerlink" href="#1-unconstrained-problems" title="Permanent link">¶</a></h2>
-<h3 id="11-differentiable-convex-functions">1.1 Differentiable Convex Functions<a class="headerlink" href="#11-differentiable-convex-functions" title="Permanent link">¶</a></h3>
+<h2 id="unconstrained-problems">Unconstrained Problems<a class="headerlink" href="#unconstrained-problems" title="Permanent link">¶</a></h2>
+<h3 id="differentiable-convex-functions">Differentiable Convex Functions<a class="headerlink" href="#differentiable-convex-functions" title="Permanent link">¶</a></h3>
 <p>For a differentiable convex function <span class="arithmatex">\(f:\mathbb{R}^n \to \mathbb{R}\)</span>:</p>
 <div class="arithmatex">\[
 \min_{x \in \mathbb{R}^n} f(x)
@@ -1473,10 +1450,11 @@
 <p>a) Quadratic function:
 <span class="arithmatex">\(f(x) = x^2 - 4x + 7\)</span><br>
 <span class="arithmatex">\(\nabla f(x) = 2x - 4\)</span> → set to 0 → <span class="arithmatex">\(\hat{x} = 2\)</span></p>
-<p>b) Sum of Squared Errors
-<span class="arithmatex">\(<span class="arithmatex">\(f(x) = \sum_{i=1}^{n} (x - y_i)^2\)</span>\)</span><br>
-<span class="arithmatex">\(\nabla f(x) = 2\sum_{i=1}^{n} (x - y_i)\)</span> → set to 0 → <span class="arithmatex">\(\hat{x} = \frac{1}{n}\sum_{i=1}^{n} y_i\)</span> (the <strong>mean</strong>)</p>
-<h3 id="12-non-differentiable-convex-functions">1.2 Non-Differentiable Convex Functions<a class="headerlink" href="#12-non-differentiable-convex-functions" title="Permanent link">¶</a></h3>
+<p>b) Sum of Squared Errors:</p>
+<p><span class="arithmatex">\(f(x) = \sum_{i=1}^{n} (x - y_i)^2\)</span> 
+<span class="arithmatex">\(\nabla f(x) = 2\sum_{i=1}^{n} (x - y_i)\)</span> → set to 0 </p>
+<p>→ <span class="arithmatex">\(\hat{x} = \frac{1}{n}\sum_{i=1}^{n} y_i\)</span> (the <strong>mean</strong>)</p>
+<h3 id="non-differentiable-convex-functions">Non-Differentiable Convex Functions<a class="headerlink" href="#non-differentiable-convex-functions" title="Permanent link">¶</a></h3>
 <p>For convex but non-differentiable functions:</p>
 <div class="arithmatex">\[
 \min_{x \in \mathbb{R}^n} f(x)
@@ -1488,12 +1466,12 @@
 <p>Intuition: The subgradient generalizes the derivative for functions with "kinks."</p>
 <p>Examples:</p>
 <p>a) Sum of Absolute Errors (SAE):
-<span class="arithmatex">\(<span class="arithmatex">\(f(x) = \sum_{i=1}^{n} |x - y_i|\)</span>\)</span><br>
+<span class="arithmatex">\(f(x) = \sum_{i=1}^{n} |x - y_i|\)</span> 
 <span class="arithmatex">\(\hat{x}\)</span> = <strong>median</strong> of the data points.</p>
 <p>b) Maximum function:
-<span class="arithmatex">\(<span class="arithmatex">\(f(x) = \max(x-1, 2-x)\)</span>\)</span><br>
+<span class="arithmatex">\(f(x) = \max(x-1, 2-x)\)</span>
 Subgradient: <span class="arithmatex">\(\partial f(x) = \begin{cases} 1, &amp; x &gt; 1.5 \\ [-1,1], &amp; x = 1.5 \\ -1, &amp; x &lt; 1.5 \end{cases}\)</span> → minimum at <span class="arithmatex">\(x = 1.5\)</span></p>
-<h2 id="2-constrained-problems">2. Constrained Problems<a class="headerlink" href="#2-constrained-problems" title="Permanent link">¶</a></h2>
+<h2 id="constrained-problems">Constrained Problems<a class="headerlink" href="#constrained-problems" title="Permanent link">¶</a></h2>
 <p>Consider a convex optimization problem:</p>
 <div class="arithmatex">\[
 \min_{x \in \mathbb{R}^n} f(x) \quad \text{s.t.} \quad x \in \mathcal{X}
@@ -1537,7 +1515,7 @@ Subgradient: <span class="arithmatex">\(\partial f(x) = \begin{cases} 1, &amp; x
 <span class="arithmatex">\(\mathcal{X}\)</span>. Points strictly inside the region form the interior, where movement in any direction is possible without leaving the set. The edges and corners of the region form the boundary, where movement is restricted because you can only move along directions that remain feasible. Consider standing at a point 𝑥 on this boundary. From here, you cannot move freely in all directions; you can only move along directions that stay inside the feasible set. These allowable directions form what is called the tangent cone at x, encompassing movements along the boundary or slightly into the interior.</p>
 <p>Opposing these feasible directions is the normal cone, which consists of vectors that point outward from the feasible region, effectively “blocking” any movement that would stay inside. At an optimal boundary point, the gradient of the objective function points outward, lying within the normal cone. This means that moving along any feasible direction — whether along the boundary or slightly into the interior — cannot decrease the objective function. The gradient “pushes against” all allowable moves, so any small displacement that respects the constraints either increases the objective or leaves it unchanged.</p>
 <p>This behavior contrasts with an interior optimum, where the gradient is zero and movement in any direction does not change the objective. At a boundary optimum, the gradient is non-zero but oriented such that all feasible directions are blocked from reducing the objective. Even though the gradient is not zero, the point is still optimal because the boundary restricts movement: every allowed step either raises the objective or keeps it the same. In this way, a boundary point can be a true optimum, and the outward-pointing gradient is the formal expression of the intuitive idea that you cannot “go downhill” without leaving the feasible region.</p>
-<h3 id="23-example-quadratic-with-constraint">2.3 Example: Quadratic with Constraint<a class="headerlink" href="#23-example-quadratic-with-constraint" title="Permanent link">¶</a></h3>
+<h3 id="example-quadratic-with-constraint">Example: Quadratic with Constraint<a class="headerlink" href="#example-quadratic-with-constraint" title="Permanent link">¶</a></h3>
 <div class="arithmatex">\[
 \min f(x) = x^2 \quad \text{s.t. } x \ge 1
 \]</div>

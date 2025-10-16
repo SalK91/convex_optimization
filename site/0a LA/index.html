@@ -23,7 +23,7 @@
     
     
       
-        <title>LA Prerequisites - Convex Optimization</title>
+        <title>Mathematical Foundations - Convex Optimization</title>
       
     
     
@@ -86,11 +86,6 @@
     <label class="md-overlay" for="__drawer"></label>
     <div data-md-component="skip">
       
-        
-        <a href="#linear-algebra-prerequisites" class="md-skip">
-          Skip to content
-        </a>
-      
     </div>
     <div data-md-component="announce">
       
@@ -123,7 +118,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              LA Prerequisites
+              Mathematical Foundations
             
           </span>
         </div>
@@ -339,15 +334,13 @@
       <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
       
       
-        
-      
       
       <a href="./" class="md-nav__link md-nav__link--active">
         
   
   
   <span class="md-ellipsis">
-    LA Prerequisites
+    Mathematical Foundations
     
   </span>
   
@@ -371,7 +364,7 @@
   
   
   <span class="md-ellipsis">
-    Convex Sets
+    Convex Sets and Related Concepts
     
   </span>
   
@@ -418,29 +411,6 @@
   
   <span class="md-ellipsis">
     Optimality Conditions
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../0c Epigraphs.md" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    Epigraphs
     
   </span>
   
@@ -1423,8 +1393,6 @@
   
   
   
-    
-  
   
 </nav>
                   </div>
@@ -1456,28 +1424,30 @@
   
 
 
-<h1 id="linear-algebra-prerequisites">Linear Algebra Prerequisites<a class="headerlink" href="#linear-algebra-prerequisites" title="Permanent link">¶</a></h1>
+  <h1>Mathematical Foundations</h1>
+
+<p>Modern optimization is geometric at heart. When we optimize a loss function, we are navigating through a high-dimensional landscape defined by vectors, matrices, subspaces, projections, and curvature. Without a strong grasp of these structures, optimization algorithms feel like “black boxes.” With right intuition you can start to see gradient descent not as a formula, but as a geometric motion toward feasibility or optimality.</p>
 <h3 id="vector-spaces-and-norms">Vector spaces and norms:<a class="headerlink" href="#vector-spaces-and-norms" title="Permanent link">¶</a></h3>
+<p>In ML, parameter vectors <script type="math/tex"> \mathbf{w} \in \mathbb{R}^n </script> live in a space where distance and direction matter. Norms allow us to measure distances and magnitudes in this space, defining what “large” or “small” changes mean. For example, L2 regularization penalizes large Euclidean norms of weights, encouraging smaller steps, whereas L1 encourages sparsity by reshaping the geometry into diamond-like constraints.</p>
 <ul>
 <li>
 <p>We work primarily in <span class="arithmatex">\(\mathbb{R}^n\)</span>, the <span class="arithmatex">\(n\)</span>-dimensional Euclidean space. The Euclidean norm is <span class="arithmatex">\(\|x\|_2 = \sqrt{x^T x}\)</span>, but other norms, such as <span class="arithmatex">\(\|x\|_1\)</span> or <span class="arithmatex">\(\|x\|_\infty\)</span>, are also important.</p>
 </li>
 <li>
-<p>Affine sets: A set of the form  <span class="arithmatex">\(\{x \in \mathbb{R}^n : Ax = b\}\)</span>, where <span class="arithmatex">\(A\)</span> is a matrix and <span class="arithmatex">\(b\)</span> is a vector. Affine sets are the natural generalisation of lines and planes.</p>
+<p><strong>Affine sets:</strong> A set of the form  <span class="arithmatex">\(\{x \in \mathbb{R}^n : Ax = b\}\)</span>, where <span class="arithmatex">\(A\)</span> is a matrix and <span class="arithmatex">\(b\)</span> is a vector. Affine sets are the natural generalisation of lines and planes.</p>
 </li>
 <li>
-<p>Linear independence: A set of vectors <span class="arithmatex">\(\{v_1, v_2, \dots, v_k\}\)</span> is linearly independent if    <span class="arithmatex">\(\alpha_1 v_1 + \alpha_2 v_2 + \cdots + \alpha_k v_k = 0\)</span><br>
-  implies <span class="arithmatex">\(\alpha_1 = \alpha_2 = \cdots = \alpha_k = 0\)</span>.</p>
+<p><strong>Linear independence:</strong> A set of vectors <span class="arithmatex">\(\{v_1, v_2, \dots, v_k\}\)</span> is linearly independent if    <span class="arithmatex">\(\alpha_1 v_1 + \alpha_2 v_2 + \cdots + \alpha_k v_k = 0\)</span>  implies <span class="arithmatex">\(\alpha_1 = \alpha_2 = \cdots = \alpha_k = 0\)</span>.</p>
 </li>
 </ul>
 <h3 id="inner-outer-products-projection">Inner &amp; Outer products &amp; Projection<a class="headerlink" href="#inner-outer-products-projection" title="Permanent link">¶</a></h3>
+<p>Geometrically, the inner product tells us how aligned two vectors are, while outer products and projections allow us to reason about subspace components and constrained updates. These operations appear in gradient updates, Hessians, covariance matrices, kernel methods, and proximal operators.</p>
 <ul>
 <li>
 <p>An inner product in <span class="arithmatex">\(\mathbb{R}^n\)</span> is <span class="arithmatex">\(\langle x, y \rangle = x^T y\)</span>.</p>
 </li>
 <li>
-<p>The angle <span class="arithmatex">\(\theta\)</span> between two nonzero vectors <span class="arithmatex">\(x, y \in \mathbb{R}^n\)</span> is defined as@  </p>
-<p><span class="arithmatex">\(\cos \theta = \dfrac{\langle x, y \rangle}{\|x\|_2 \, \|y\|_2}\)</span></p>
+<p>The angle <span class="arithmatex">\(\theta\)</span> between two nonzero vectors <span class="arithmatex">\(x, y \in \mathbb{R}^n\)</span> is defined as: <span class="arithmatex">\(\cos \theta = \dfrac{\langle x, y \rangle}{\|x\|_2 \, \|y\|_2}\)</span></p>
 </li>
 <li>
 <p>Given vectors <span class="arithmatex">\(u, v \in \mathbb{R}^n\)</span>, their outer product is   <span class="arithmatex">\(u v^T\)</span>, which is an <span class="arithmatex">\(n \times n\)</span> matrix.  (Contrast with the inner product <span class="arithmatex">\(u^T v\)</span>, which is a scalar.)</p>
@@ -1496,10 +1466,11 @@
 <span class="arithmatex">\(\text{proj}_U(x) = QQ^T x\)</span>.</p>
 </li>
 <li>
-<p>Projection onto a convex set:  Projecting two points on convex set is not expansive i.e. the distance between projection of points is always less than equal to the original distance between the points.</p>
+<p>Projecting two points on convex set is not expansive i.e. the distance between projection of points is always less than equal to the original distance between the points.</p>
 </li>
 </ul>
 <h2 id="matrix-concepts">Matrix Concepts<a class="headerlink" href="#matrix-concepts" title="Permanent link">¶</a></h2>
+<p>Matrices represent data, linear transformations, and parameters. Knowing rank, null space, determinants, and range is critical for understanding solution uniqueness, redundancy, and conditioning.</p>
 <ul>
 <li>
 <p>Rank:  The rank of a matrix <span class="arithmatex">\(A \in \mathbb{R}^{m \times n}\)</span>, denoted <span class="arithmatex">\(\text{rank}(A)\)</span>, is the dimension of its column space (or equivalently, row space). It is the number of linearly independent columns (or rows). <span class="arithmatex">\(\text{rank}(A) \leq \min(m,n)\)</span>.  </p>
@@ -1522,6 +1493,7 @@
 </li>
 </ul>
 <h2 id="subspaces-and-related-concepts">Subspaces and Related Concepts<a class="headerlink" href="#subspaces-and-related-concepts" title="Permanent link">¶</a></h2>
+<p>Subspaces define allowed movement directions. Orthogonal complements help us separate constrained and free directions, essential in projected gradient descent and KKT conditions.</p>
 <ul>
 <li>
 <p>Subspace: A subset <span class="arithmatex">\(U \subseteq \mathbb{R}^n\)</span> is a subspace if it satisfies:  </p>
@@ -1558,6 +1530,7 @@
 </li>
 </ul>
 <h2 id="eigenvalues-eigenvectors-and-symmetric-matrices">Eigenvalues, Eigenvectors, and Symmetric Matrices<a class="headerlink" href="#eigenvalues-eigenvectors-and-symmetric-matrices" title="Permanent link">¶</a></h2>
+<p>Eigenvalues reveal curvature directions: large eigenvalues indicate steep directions, small eigenvalues indicate flat directions. Symmetric matrices (Hessians, covariances) are especially well-behaved — they can be diagonalized with orthogonal eigenvectors, which simplifies analysis and algorithms.</p>
 <ul>
 <li>
 <p>Eigenvalue and Eigenvector: For a square matrix <span class="arithmatex">\(A \in \mathbb{R}^{n \times n}\)</span>, a scalar <span class="arithmatex">\(\lambda \in \mathbb{R}\)</span> (or <span class="arithmatex">\(\mathbb{C}\)</span>) is an eigenvalue if there exists a nonzero vector <span class="arithmatex">\(v \in \mathbb{R}^n\)</span> such that<br>
@@ -1588,29 +1561,25 @@
   where <span class="arithmatex">\(Q\)</span> is an orthogonal matrix of eigenvectors (<span class="arithmatex">\(Q^T Q = I\)</span>) and <span class="arithmatex">\(\Lambda\)</span> is a diagonal matrix of eigenvalues.  </li>
 </ol>
 </li>
-<li>
-<p>Positive Semidefinite Matrices
-  A symmetric matrix <span class="arithmatex">\(A \in \mathbb{R}^{n \times n}\)</span> is positive semidefinite (PSD) if<br>
+</ul>
+<h2 id="positive-semidefinite-matrices">Positive Semidefinite Matrices<a class="headerlink" href="#positive-semidefinite-matrices" title="Permanent link">¶</a></h2>
+<p>PSD matrices are the formal signature of convexity. If a function has a PSD Hessian everywhere, it is convex. Covariance matrices, kernel Gram matrices, and Fisher information matrices are PSD — ensuring optimization stability. A symmetric matrix <span class="arithmatex">\(A \in \mathbb{R}^{n \times n}\)</span> is positive semidefinite (PSD) if<br>
 <script type="math/tex; mode=display">
   x^T A x \geq 0 \quad \text{for all } x \in \mathbb{R}^n.
   </script>
-</p>
-<ol>
-<li><span class="arithmatex">\(A\)</span> is symmetric: <span class="arithmatex">\(A = A^T\)</span>.  </li>
-<li>All eigenvalues of <span class="arithmatex">\(A\)</span> are non-negative: <span class="arithmatex">\(\lambda_i \ge 0\)</span>.  </li>
-<li>If <span class="arithmatex">\(x^T A x &gt; 0\)</span> for all <span class="arithmatex">\(x \neq 0\)</span>, then <span class="arithmatex">\(A\)</span> is positive definite (PD).  </li>
-<li><span class="arithmatex">\(A\)</span> can be diagonalized as<br>
+    1. <span class="arithmatex">\(A\)</span> is symmetric: <span class="arithmatex">\(A = A^T\)</span>.<br>
+    2. All eigenvalues of <span class="arithmatex">\(A\)</span> are non-negative: <span class="arithmatex">\(\lambda_i \ge 0\)</span>.<br>
+    3. If <span class="arithmatex">\(x^T A x &gt; 0\)</span> for all <span class="arithmatex">\(x \neq 0\)</span>, then <span class="arithmatex">\(A\)</span> is positive definite (PD).<br>
+    4. <span class="arithmatex">\(A\)</span> can be diagonalized as<br>
 <script type="math/tex; mode=display">
-  A = Q \Lambda Q^T,
-  </script>
+      A = Q \Lambda Q^T,
+      </script>
 <br>
-  where <span class="arithmatex">\(Q\)</span> is orthogonal and <span class="arithmatex">\(\Lambda\)</span> is a diagonal matrix with <span class="arithmatex">\(\lambda_i \ge 0\)</span>.  </li>
-<li><span class="arithmatex">\(x^T A x \geq 0\)</span> if A is PSD. </li>
-<li>for any matrix A, <span class="arithmatex">\(A^TA\)</span> and <span class="arithmatex">\(AA^T\)</span> are PSD.</li>
-</ol>
-</li>
-</ul>
+      where <span class="arithmatex">\(Q\)</span> is orthogonal and <span class="arithmatex">\(\Lambda\)</span> is a diagonal matrix with <span class="arithmatex">\(\lambda_i \ge 0\)</span>.<br>
+    5. <span class="arithmatex">\(x^T A x \geq 0\)</span> if A is PSD. 
+    6. for any matrix A, <span class="arithmatex">\(A^TA\)</span> and <span class="arithmatex">\(AA^T\)</span> are PSD.</p>
 <h2 id="continuity-and-lipschitz-continuity">Continuity and Lipschitz Continuity<a class="headerlink" href="#continuity-and-lipschitz-continuity" title="Permanent link">¶</a></h2>
+<p>Continuity ensures small changes in input lead to small changes in output, crucial for stability in optimization. Lipschitz continuity bounds how fast the function can change, which informs step size selection in gradient methods.</p>
 <ul>
 <li>
 <p>Continuity: A function <span class="arithmatex">\(f : \mathbb{R}^n \to \mathbb{R}^m\)</span> is continuous at <span class="arithmatex">\(x_0\)</span> if<br>
@@ -1639,6 +1608,7 @@
 </li>
 </ul>
 <h2 id="gradient-and-hessian">Gradient and Hessian<a class="headerlink" href="#gradient-and-hessian" title="Permanent link">¶</a></h2>
+<p>Gradients define the direction of steepest ascent, and Hessians describe curvature. Understanding them is essential for gradient descent, Newton methods, and second-order optimization algorithms.</p>
 <ul>
 <li>
 <p>Gradient:  Let <span class="arithmatex">\(f : \mathbb{R}^n \to \mathbb{R}\)</span> be differentiable.<br>

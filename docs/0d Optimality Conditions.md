@@ -3,9 +3,9 @@
 Convex optimization problems have the important property that any local minimum is also a global minimum. Depending on whether the problem is unconstrained or constrained, and whether the function is differentiable or not, the optimality conditions differ.
 
 
-## 1. Unconstrained Problems
+##  Unconstrained Problems
 
-### 1.1 Differentiable Convex Functions
+### Differentiable Convex Functions
 
 For a differentiable convex function $f:\mathbb{R}^n \to \mathbb{R}$:
 
@@ -27,12 +27,15 @@ a) Quadratic function:
 $f(x) = x^2 - 4x + 7$  
 $\nabla f(x) = 2x - 4$ → set to 0 → $\hat{x} = 2$
 
-b) Sum of Squared Errors
-$$f(x) = \sum_{i=1}^{n} (x - y_i)^2$$  
-$\nabla f(x) = 2\sum_{i=1}^{n} (x - y_i)$ → set to 0 → $\hat{x} = \frac{1}{n}\sum_{i=1}^{n} y_i$ (the **mean**)
+b) Sum of Squared Errors:
+
+$f(x) = \sum_{i=1}^{n} (x - y_i)^2$ 
+$\nabla f(x) = 2\sum_{i=1}^{n} (x - y_i)$ → set to 0 
+
+→ $\hat{x} = \frac{1}{n}\sum_{i=1}^{n} y_i$ (the **mean**)
 
 
-### 1.2 Non-Differentiable Convex Functions
+### Non-Differentiable Convex Functions
 
 For convex but non-differentiable functions:
 
@@ -51,16 +54,16 @@ Intuition: The subgradient generalizes the derivative for functions with "kinks.
 Examples:
 
 a) Sum of Absolute Errors (SAE):
-$$f(x) = \sum_{i=1}^{n} |x - y_i|$$  
+$f(x) = \sum_{i=1}^{n} |x - y_i|$ 
 $\hat{x}$ = **median** of the data points.
 
 b) Maximum function:
-$$f(x) = \max(x-1, 2-x)$$  
+$f(x) = \max(x-1, 2-x)$
 Subgradient: $\partial f(x) = \begin{cases} 1, & x > 1.5 \\ [-1,1], & x = 1.5 \\ -1, & x < 1.5 \end{cases}$ → minimum at $x = 1.5$
 
 
 
-## 2. Constrained Problems
+## Constrained Problems
 
 Consider a convex optimization problem:
 
@@ -126,7 +129,7 @@ Opposing these feasible directions is the normal cone, which consists of vectors
 
 This behavior contrasts with an interior optimum, where the gradient is zero and movement in any direction does not change the objective. At a boundary optimum, the gradient is non-zero but oriented such that all feasible directions are blocked from reducing the objective. Even though the gradient is not zero, the point is still optimal because the boundary restricts movement: every allowed step either raises the objective or keeps it the same. In this way, a boundary point can be a true optimum, and the outward-pointing gradient is the formal expression of the intuitive idea that you cannot “go downhill” without leaving the feasible region.
 
-### 2.3 Example: Quadratic with Constraint
+### Example: Quadratic with Constraint
 
 $$
 \min f(x) = x^2 \quad \text{s.t. } x \ge 1
