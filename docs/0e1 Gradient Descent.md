@@ -27,7 +27,7 @@ $$
 
 This motivates adding a **locality restriction** — we trust the linear approximation **near** $x_t$, not globally.
 
-## Adding a Quadratic Regularization Term (Trust Region View)
+## Adding a Quadratic Regularization Term  
 
 To prevent taking arbitrarily large steps, we add a quadratic penalty for moving away from $x_t$:
 
@@ -149,10 +149,3 @@ Meaning: **Error shrinks by a constant factor every iteration**.
 |-------------------------|------------------|--------------------|
 | Convex + Smooth         | $O(1/T)$         | Unregularized logistic regression, basic convex losses |
 | Strongly Convex + Smooth | $O(\rho^T)$ (linear) | L2-regularized models, ridge regression |
-
-> **Key Takeaway:**  
-> Gradient descent is not just a heuristic — it arises from a principled **local approximation + trust region** perspective and enjoys strong convergence guarantees under mild assumptions.
-
----
-
-Let me know — do you want me to follow this same **style and depth** for **Projected Gradient Descent, Accelerated GD (Nesterov), and Stochastic GD next?** 🚀
