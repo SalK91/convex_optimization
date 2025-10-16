@@ -338,7 +338,7 @@
   
   
   <span class="md-ellipsis">
-    LA Prerequisites
+    Mathematical Foundations
     
   </span>
   
@@ -361,7 +361,7 @@
   
   
   <span class="md-ellipsis">
-    Convex Sets
+    Convex Sets and Related Concepts
     
   </span>
   
@@ -408,29 +408,6 @@
   
   <span class="md-ellipsis">
     Optimality Conditions
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../0c Epigraphs.md" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    Epigraphs
     
   </span>
   
@@ -1457,121 +1434,129 @@
 
 
 <h1 id="gradient-descent-derivation-and-convergence">Gradient Descent: Derivation and Convergence<a class="headerlink" href="#gradient-descent-derivation-and-convergence" title="Permanent link">¶</a></h1>
-<p>We aim to minimize a differentiable function <span class="arithmatex">\(f\)</span> over a feasible set <span class="arithmatex">\(\mathcal{X}\)</span>:</p>
+<p>Gradient descent is one of the most fundamental algorithms in optimization and machine learning. It forms the backbone of training neural networks, logistic regression, matrix factorization, and many other models.</p>
+<h2 id="problem-setup">Problem Setup<a class="headerlink" href="#problem-setup" title="Permanent link">¶</a></h2>
+<p>We aim to minimize a differentiable function over a feasible convex set <span class="arithmatex">\(\mathcal{X}\)</span>:</p>
 <div class="arithmatex">\[
 \min_{x \in \mathcal{X}} f(x).
 \]</div>
-<h2 id="1-local-approximation">1. Local Approximation<a class="headerlink" href="#1-local-approximation" title="Permanent link">¶</a></h2>
-<p>At iteration <span class="arithmatex">\(t\)</span>, we have the current point <span class="arithmatex">\(x_t\)</span>.<br>
-To make optimization tractable, we build a <strong>first-order Taylor approximation</strong> of <span class="arithmatex">\(f\)</span> around <span class="arithmatex">\(x_t\)</span>:</p>
+<p>At each iteration <span class="arithmatex">\(t\)</span>, we hold a current iterate <span class="arithmatex">\(x_t\)</span> and wish to take a step that reduces the objective. But instead of minimizing <span class="arithmatex">\(f\)</span> directly (which may be complex), we construct a <strong>local surrogate model</strong>.</p>
+<h2 id="local-linear-approximation-first-order-model">Local Linear Approximation (First-order Model)<a class="headerlink" href="#local-linear-approximation-first-order-model" title="Permanent link">¶</a></h2>
+<p>Around <span class="arithmatex">\(x_t\)</span>, we approximate <span class="arithmatex">\(f\)</span> using its Taylor expansion:</p>
 <div class="arithmatex">\[
 f(x) \approx f(x_t) + \langle \nabla f(x_t), x - x_t \rangle.
 \]</div>
-<ul>
-<li>This is a <strong>linear approximation</strong> of <span class="arithmatex">\(f\)</span> at <span class="arithmatex">\(x_t\)</span>.  </li>
-<li>Directly minimizing this linear model is unbounded below; it would push <span class="arithmatex">\(x\)</span> infinitely in the negative gradient direction.</li>
-</ul>
-<h2 id="2-adding-a-quadratic-regularization-term">2. Adding a Quadratic Regularization Term<a class="headerlink" href="#2-adding-a-quadratic-regularization-term" title="Permanent link">¶</a></h2>
-<p>To prevent taking arbitrarily large steps, we add a <strong>quadratic penalty</strong> that discourages moving far from <span class="arithmatex">\(x_t\)</span>:</p>
+<p><strong>Intuition:</strong><br>
+- We assume <span class="arithmatex">\(f\)</span> behaves approximately like its tangent plane near <span class="arithmatex">\(x_t\)</span>.<br>
+- If we were to minimize just this linear model, we would move <strong>infinitely far</strong> in the direction of <strong>steepest descent</strong> <span class="arithmatex">\(-\nabla f(x_t)\)</span>, which is not realistic or stable.</p>
+<p>This motivates adding a <strong>locality restriction</strong> — we trust the linear approximation <strong>near</strong> <span class="arithmatex">\(x_t\)</span>, not globally.</p>
+<h2 id="adding-a-quadratic-regularization-term-trust-region-view">Adding a Quadratic Regularization Term (Trust Region View)<a class="headerlink" href="#adding-a-quadratic-regularization-term-trust-region-view" title="Permanent link">¶</a></h2>
+<p>To prevent taking arbitrarily large steps, we add a quadratic penalty for moving away from <span class="arithmatex">\(x_t\)</span>:</p>
 <div class="arithmatex">\[
 f(x) \approx f(x_t) + \langle \nabla f(x_t), x - x_t \rangle + \frac{1}{2\eta} \|x - x_t\|^2,
 \]</div>
-<p>where <span class="arithmatex">\(\eta &gt; 0\)</span> is the <strong>step size (learning rate)</strong>.</p>
-<blockquote>
-<p><strong>Intuition</strong>:<br>
-- Limits trust in the linear approximation (local approximation only).<br>
-- Creates a trade-off between decreasing the linear term and staying near <span class="arithmatex">\(x_t\)</span>.<br>
-- <span class="arithmatex">\(\frac{1}{2\eta}\)</span> controls the strength of the penalty:<br>
-  - Small <span class="arithmatex">\(\eta\)</span>: conservative, small steps.<br>
-  - Large <span class="arithmatex">\(\eta\)</span>: aggressive, larger steps.  </p>
-</blockquote>
-<p>This is conceptually related to <strong>proximal methods</strong> or <strong>trust-region approaches</strong> in optimization.</p>
-<h2 id="3-deriving-the-gradient-descent-update">3. Deriving the Gradient Descent Update<a class="headerlink" href="#3-deriving-the-gradient-descent-update" title="Permanent link">¶</a></h2>
-<p>We update <span class="arithmatex">\(x_{t+1}\)</span> by minimizing the quadratic model:</p>
+<p>where <span class="arithmatex">\(\eta &gt; 0\)</span> is the <strong>learning rate</strong> or <strong>step size</strong>.</p>
+<p><strong>Geometric Interpretation:</strong>
+- The linear term pulls <span class="arithmatex">\(x\)</span> in the steepest descent direction.
+- The quadratic term acts like a <strong>trust region</strong>, discouraging large deviations from <span class="arithmatex">\(x_t\)</span>.
+- <span class="arithmatex">\(\eta\)</span> trades off <strong>aggressive progress</strong> vs <strong>stability</strong>:
+  - Small <span class="arithmatex">\(\eta\)</span> → cautious updates.
+  - Large <span class="arithmatex">\(\eta\)</span> → bold updates (risk of divergence).</p>
+<h2 id="deriving-the-gradient-descent-update">Deriving the Gradient Descent Update<a class="headerlink" href="#deriving-the-gradient-descent-update" title="Permanent link">¶</a></h2>
+<p>We define the next iterate as the minimizer of the surrogate objective:</p>
 <div class="arithmatex">\[
 x_{t+1} = \arg\min_{x \in \mathcal{X}} \Big[ f(x_t) + \langle \nabla f(x_t), x - x_t \rangle + \frac{1}{2\eta} \|x - x_t\|^2 \Big].
 \]</div>
-<ul>
-<li>Ignore <span class="arithmatex">\(f(x_t)\)</span> since it's constant with respect to <span class="arithmatex">\(x\)</span>.  </li>
-<li>Take the gradient of the remaining terms and set it to zero:</li>
-</ul>
+<p>Ignoring the constant term <span class="arithmatex">\(f(x_t)\)</span> and differentiating w.r.t. <span class="arithmatex">\(x\)</span>:</p>
 <div class="arithmatex">\[
 \nabla f(x_t) + \frac{1}{\eta}(x - x_t) = 0
 \]</div>
-<p>Solve for <span class="arithmatex">\(x\)</span>:</p>
+<p>Solving:</p>
 <div class="arithmatex">\[
-x - x_t = -\eta \nabla f(x_t)
+x_{t+1} = x_t - \eta \nabla f(x_t)
 \]</div>
-<p>Hence the <strong>gradient descent update</strong>:</p>
-<div class="arithmatex">\[
+<blockquote>
+<p><strong>Gradient Descent Update:</strong>
+<script type="math/tex; mode=display">
 \boxed{x_{t+1} = x_t - \eta \nabla f(x_t)}
+</script>
+</p>
+</blockquote>
+<h2 id="convergence-analysis">Convergence Analysis<a class="headerlink" href="#convergence-analysis" title="Permanent link">¶</a></h2>
+<p>To analyze convergence, we assume:</p>
+<h3 id="smoothness-lipschitz-gradient">Smoothness (Lipschitz Gradient)<a class="headerlink" href="#smoothness-lipschitz-gradient" title="Permanent link">¶</a></h3>
+<div class="arithmatex">\[
+\|\nabla f(x) - \nabla f(y)\| \le L \|x - y\|, \quad \forall x, y.
 \]</div>
+<p>This says the gradient does not change too abruptly. Most ML objectives satisfy this.</p>
+<h3 id="strong-convexity">Strong Convexity<a class="headerlink" href="#strong-convexity" title="Permanent link">¶</a></h3>
+<p>If, in addition, <span class="arithmatex">\(f\)</span> is <strong><span class="arithmatex">\(\mu\)</span>-strongly convex</strong>, then:</p>
+<div class="arithmatex">\[
+f(y) \ge f(x) + \langle \nabla f(x), y-x \rangle + \frac{\mu}{2} \|y-x\|^2.
+\]</div>
+<p>This implies <span class="arithmatex">\(f\)</span> has a <strong>unique minimizer <span class="arithmatex">\(x^\*\)</span></strong> and its level sets are <strong>bowl-shaped</strong>, not flat.</p>
+<h2 id="descent-lemma-why-gradient-descent-decreases-f">Descent Lemma: Why Gradient Descent Decreases <span class="arithmatex">\(f\)</span><a class="headerlink" href="#descent-lemma-why-gradient-descent-decreases-f" title="Permanent link">¶</a></h2>
+<p>For an <span class="arithmatex">\(L\)</span>-smooth function,</p>
+<div class="arithmatex">\[
+f(x_{t+1}) \le f(x_t) + \langle \nabla f(x_t), x_{t+1}-x_t \rangle + \frac{L}{2} \|x_{t+1}-x_t\|^2.
+\]</div>
+<p>Using <span class="arithmatex">\(x_{t+1} = x_t - \eta \nabla f(x_t)\)</span>:</p>
+<div class="arithmatex">\[
+\begin{aligned}
+f(x_{t+1}) 
+&amp;\le f(x_t) - \eta \|\nabla f(x_t)\|^2 + \frac{L \eta^2}{2} \|\nabla f(x_t)\|^2 \\
+&amp;= f(x_t) - \left( \eta - \frac{L\eta^2}{2} \right) \|\nabla f(x_t)\|^2.
+\end{aligned}
+\]</div>
+<blockquote>
+<p>If <span class="arithmatex">\(\eta \le \frac{1}{L}\)</span>, then the decrease term is positive ⇒ <strong>every step reduces the objective</strong>.</p>
+</blockquote>
+<h2 id="convergence-rates">Convergence Rates<a class="headerlink" href="#convergence-rates" title="Permanent link">¶</a></h2>
+<h3 id="convex-but-not-strongly-convex">Convex but not strongly convex<a class="headerlink" href="#convex-but-not-strongly-convex" title="Permanent link">¶</a></h3>
+<div class="arithmatex">\[
+f(x_T) - f(x^*) \le \frac{L \|x_0 - x^*\|^2}{2T} \quad \Rightarrow \quad O(1/T) \text{ convergence}.
+\]</div>
+<p>This is called <strong>sublinear convergence</strong>.</p>
+<h3 id="strongly-convex-case-linear-convergence">Strongly Convex Case: Linear Convergence<a class="headerlink" href="#strongly-convex-case-linear-convergence" title="Permanent link">¶</a></h3>
+<p>If <span class="arithmatex">\(f\)</span> is <span class="arithmatex">\(\mu\)</span>-strongly convex and <span class="arithmatex">\(\eta = \frac{2}{\mu + L}\)</span>:</p>
+<div class="arithmatex">\[
+\|x_{t+1} - x^*\| \le \left( \frac{L - \mu}{L + \mu} \right) \|x_t - x^*\|
+\]</div>
+<p>This gives:</p>
+<blockquote>
+<div class="arithmatex">\[
+\|x_T - x^*\| \le \left( \frac{L - \mu}{L + \mu} \right)^T \|x_0 - x^*\| \quad \Rightarrow \quad \text{Linear (geometric) convergence}.
+\]</div>
+</blockquote>
+<p>Meaning: <strong>Error shrinks by a constant factor every iteration</strong>.</p>
+<h2 id="summary-and-ml-interpretation">Summary and ML Interpretation<a class="headerlink" href="#summary-and-ml-interpretation" title="Permanent link">¶</a></h2>
+<table>
+<thead>
+<tr>
+<th>Assumption on <span class="arithmatex">\(f\)</span></th>
+<th>Convergence Rate</th>
+<th>Typical ML Scenario</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Convex + Smooth</td>
+<td><span class="arithmatex">\(O(1/T)\)</span></td>
+<td>Unregularized logistic regression, basic convex losses</td>
+</tr>
+<tr>
+<td>Strongly Convex + Smooth</td>
+<td><span class="arithmatex">\(O(\rho^T)\)</span> (linear)</td>
+<td>L2-regularized models, ridge regression</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p><strong>Key Takeaway:</strong><br>
+Gradient descent is not just a heuristic — it arises from a principled <strong>local approximation + trust region</strong> perspective and enjoys strong convergence guarantees under mild assumptions.</p>
+</blockquote>
 <hr>
-<h2 id="4-convergence-analysis">4. Convergence Analysis<a class="headerlink" href="#4-convergence-analysis" title="Permanent link">¶</a></h2>
-<h3 id="assumptions">Assumptions<a class="headerlink" href="#assumptions" title="Permanent link">¶</a></h3>
-<p>We assume:</p>
-<ol>
-<li><strong><span class="arithmatex">\(L\)</span>-smoothness (Lipschitz-continuous gradient):</strong></li>
-</ol>
-<div class="arithmatex">\[
-\|\nabla f(x) - \nabla f(y)\| \le L \|x - y\|, \quad \forall x, y
-\]</div>
-<ol>
-<li><strong><span class="arithmatex">\(\mu\)</span>-strong convexity</strong>:</li>
-</ol>
-<div class="arithmatex">\[
-f(y) \ge f(x) + \langle \nabla f(x), y-x \rangle + \frac{\mu}{2} \|y-x\|^2, \quad \forall x, y
-\]</div>
-<h3 id="41-descent-lemma">4.1 Descent Lemma<a class="headerlink" href="#41-descent-lemma" title="Permanent link">¶</a></h3>
-<p>For <span class="arithmatex">\(L\)</span>-smooth functions, we have:</p>
-<div class="arithmatex">\[
-f(x_{t+1}) \le f(x_t) + \langle \nabla f(x_t), x_{t+1}-x_t \rangle + \frac{L}{2} \|x_{t+1}-x_t\|^2
-\]</div>
-<p>Substitute <span class="arithmatex">\(x_{t+1} = x_t - \eta \nabla f(x_t)\)</span>:</p>
-<div class="arithmatex">\[
-\begin{aligned}
-f(x_{t+1}) &amp;\le f(x_t) + \langle \nabla f(x_t), -\eta \nabla f(x_t) \rangle + \frac{L}{2} \|\eta \nabla f(x_t)\|^2 \\
-&amp;= f(x_t) - \eta \|\nabla f(x_t)\|^2 + \frac{L \eta^2}{2} \|\nabla f(x_t)\|^2 \\
-&amp;= f(x_t) - \left( \eta - \frac{L\eta^2}{2} \right) \|\nabla f(x_t)\|^2
-\end{aligned}
-\]</div>
-<blockquote>
-<p><strong>Implication</strong>: If <span class="arithmatex">\(\eta \le \frac{1}{L}\)</span>, the term <span class="arithmatex">\(\eta - \frac{L\eta^2}{2} &gt; 0\)</span>, so <span class="arithmatex">\(f(x_{t+1}) \le f(x_t)\)</span>. Each step decreases the function value.</p>
-</blockquote>
-<h3 id="42-convergence-for-strongly-convex-functions">4.2 Convergence for Strongly Convex Functions<a class="headerlink" href="#42-convergence-for-strongly-convex-functions" title="Permanent link">¶</a></h3>
-<p>If <span class="arithmatex">\(f\)</span> is <span class="arithmatex">\(\mu\)</span>-strongly convex, gradient descent converges <strong>linearly</strong>. Specifically:</p>
-<div class="arithmatex">\[
-\begin{aligned}
-\|x_{t+1} - x^*\|^2 &amp;= \|x_t - \eta \nabla f(x_t) - x^*\|^2 \\
-&amp;= \|x_t - x^*\|^2 - 2\eta \langle \nabla f(x_t), x_t - x^* \rangle + \eta^2 \|\nabla f(x_t)\|^2
-\end{aligned}
-\]</div>
-<p>From strong convexity:</p>
-<div class="arithmatex">\[
-\langle \nabla f(x_t), x_t - x^* \rangle \ge \frac{\mu L}{\mu + L} \|x_t - x^*\|^2 + \frac{1}{\mu + L} \|\nabla f(x_t)\|^2
-\]</div>
-<p>Choosing step size <span class="arithmatex">\(\eta = \frac{2}{\mu + L}\)</span> yields:</p>
-<div class="arithmatex">\[
-\|x_{t+1} - x^*\|^2 \le \left( \frac{L - \mu}{L + \mu} \right)^2 \|x_t - x^*\|^2
-\]</div>
-<blockquote>
-<p><strong>Linear convergence</strong>: Distance to optimum shrinks by a constant factor each step.</p>
-</blockquote>
-<h3 id="43-convergence-rate-summary">4.3 Convergence Rate Summary<a class="headerlink" href="#43-convergence-rate-summary" title="Permanent link">¶</a></h3>
-<ul>
-<li>For <span class="arithmatex">\(L\)</span>-smooth <strong>convex</strong> (not strongly convex):</li>
-</ul>
-<div class="arithmatex">\[
-f(x_T) - f(x^*) \le \frac{L \|x_0 - x^*\|^2}{2T}
-\]</div>
-<p>Sublinear rate <span class="arithmatex">\(O(1/T)\)</span>.</p>
-<ul>
-<li>For <span class="arithmatex">\(L\)</span>-smooth <strong><span class="arithmatex">\(\mu\)</span>-strongly convex</strong>:</li>
-</ul>
-<div class="arithmatex">\[
-\|x_T - x^*\| \le \left( \frac{L - \mu}{L + \mu} \right)^T \|x_0 - x^*\|
-\]</div>
-<p>Linear rate <span class="arithmatex">\(O(\rho^T)\)</span>, <span class="arithmatex">\(\rho &lt; 1\)</span>.</p>
+<p>Let me know — do you want me to follow this same <strong>style and depth</strong> for <strong>Projected Gradient Descent, Accelerated GD (Nesterov), and Stochastic GD next?</strong> 🚀</p>
 
 
 
