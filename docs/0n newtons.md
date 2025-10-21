@@ -122,7 +122,7 @@ $$
 - Non-damped Newton is extremely fast but potentially unstable.
 - Damped Newton trades some speed for **robustness during early iterations**.
 
----
+
 
 ## 5. Affine Transformation Perspective — Geometry Matters
 

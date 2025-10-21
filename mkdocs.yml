@@ -99,10 +99,31 @@ extra:
 nav:
   - Introduction: index.md
   - Basics:
-      - Mathematical Foundations: "0a LA.md"
-      - Convex Sets and Related Concepts: "0b Convex Sets.md"
-      - Convex Functions: "0c Convex Functions.md"
-      - Optimality Conditions: "0d Optimality Conditions.md"
+      - Introduction: "0a 0intro.md"
+      - Linear Algebra Review: "0a 1la_foundations.md"
+      - Inner Products: "0a 2innerproducts.md"
+      - Norms: "0a 3norms.md"
+      - Linear Operators: "0a 4operators.md"
+      - Eigenvalues and Eigenvectors: "0a 5eigenvalues.md"
+      - Projections: "0a 6projections.md"
+      - Calculus Review: "0a 7calculus.md"
+      - Smoothness and Convexity: "0a 8convexity.md"
+      - Convex Sets and Related Concepts: "0a 9Convex Sets.md"
+      - Convex Functions: "0a 10Convex Functions.md"
+
+  - Convex Analysis:
+      - Separation Theorems: "0b 1Separation Theorems.md"
+      - Support Functions: "0b 2Support Functions.md"
+      - Convex Conjugates: "0b 3Convex Conjugates.md"
+      - Subgradients: "0b 4Subgradients.md"
+      - Fenchel Duality: "0b 5Fenchel Duality.md"
+      - Moreau Envelopes & Proximal Operators: "0b 6Moreau and Proximal.md"
+      - Indicator & Distance Functions: "0b 7Indicator and Distance.md"
+
+  - Identifying Convex Problems and Tractability:
+      - Convex Problems: "0c 1Convex Problems.md"
+      - Optimality Conditions: "0c 2Optimality Conditions.md"
+      - Tractable Problems: "0c 3Tractable Problems.md"
 
   - Optimization Algorithms: 
       - Optimization Algorithms: "0e Optimization Algos.md"
@@ -119,6 +140,10 @@ nav:
       - Quasi-Newton Methods: "0o quasi_n.md"
       - Interior Point Methods: "0q interior.md"
       - Advanced Algorithms: "0h AdvancedAlgos.md"
+
+  - Common Convex Optimization Problems:
+      - Overview: "Common Convex Optimization Problems.md"
+    
 
   - Linear Programs:
       - LP: "1a LP.md"

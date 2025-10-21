@@ -115,7 +115,7 @@ This makes L-BFGS **practical for high-dimensional problems** — used in:
 | Gradient Descent | $O(d)$ | ❌ | $-\nabla f$ | Linear | ❌ |
 | Newton | $O(d^2)$ | ✅ Full | $-H^{-1} \nabla f$ | Quadratic | ✅ |
 | BFGS | $O(d^2)$ | ✅ Approx. | $-B_t \nabla f$ | Superlinear | ✅ (approx) |
-| **L-BFGS** | $O(md)$ | ✅ Approx. (limited) | Fast via recursion | Superlinear | ✅ (approx) |
+| L-BFGS| $O(md)$ | ✅ Approx. (limited) | Fast via recursion | Superlinear | ✅ (approx) |
 
  
 ## Final Mental Model

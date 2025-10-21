@@ -8,8 +8,7 @@ $$
 
 where $f$ may not be differentiable everywhere (e.g., hinge loss, $L_1$ norm, ReLU penalties—common in ML). Classical gradient descent cannot be applied directly, so we use **subgradients**.
 
----
-
+ 
 ### Subgradients and Geometric Meaning
 
 A **subgradient** $g_t \in \partial f(x_t)$ is any vector that supports the function from below:
@@ -24,7 +23,7 @@ $$
 
 This generalization allows us to move in a **descent direction** even when a unique gradient does not exist.
 
----
+ 
 
 ### Subgradient Update and Projection View
 
@@ -47,7 +46,7 @@ $$
 
 > **Geometric insight:** we move in the direction of a subgradient and then "snap back" to the feasible region if needed. This is analogous to gradient descent but more flexible, tolerating kinks in the objective.
 
----
+ 
 
 ### Distance Analysis and Role of Convexity
 
@@ -75,7 +74,7 @@ $$
 \|x_{t+1} - x^\star\|^2 \le \|x_t - x^\star\|^2 - 2\eta_t \big(f(x_t) - f(x^\star)\big) + \eta_t^2 \|g_t\|^2.
 $$
 
----
+ 
 
 ### Bounding Suboptimality
 
