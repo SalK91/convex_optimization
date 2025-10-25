@@ -9,13 +9,13 @@
         <meta name="author" content="Salman Khan">
       
       
-        <link rel="canonical" href="https://salk91.github.io/convex_optimization/0b%20Convex%20Sets/">
+        <link rel="canonical" href="https://salk91.github.io/convex_optimization/0a%204operators/">
       
       
-        <link rel="prev" href="../0a%20LA/">
+        <link rel="prev" href="../0a%203norms/">
       
       
-        <link rel="next" href="../0c%20Convex%20Functions/">
+        <link rel="next" href="../0a%205eigenvalues/">
       
       
       <link rel="icon" href="../assets/images/favicon.png">
@@ -23,7 +23,7 @@
     
     
       
-        <title>Convex Sets and Related Concepts - Convex Optimization</title>
+        <title>Linear Operators - Convex Optimization</title>
       
     
     
@@ -87,7 +87,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#convex-sets-and-related-concepts" class="md-skip">
+        <a href="#linear-operators-and-operator-norms" class="md-skip">
           Skip to content
         </a>
       
@@ -123,7 +123,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Convex Sets and Related Concepts
+              Linear Operators
             
           </span>
         </div>
@@ -333,12 +333,265 @@
   
   
     <li class="md-nav__item">
-      <a href="../0a%20LA/" class="md-nav__link">
+      <a href="../1_0_intro/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
-    Mathematical Foundations
+    Basics
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../1_1_vector/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    1. Vector Spaces and Linear Mappings
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../1_2_innerproducts/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    2. Inner Product Spaces and Orthogonality
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../1_3_norms/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    3. Norms and Metric Geometry
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../1_4_linearoperator/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    4. Linear Operators, Spectral Norms, and SVD
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../1_5_eigenvalues/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    5. Eigenvalues, Positive Definiteness, and Quadratic Forms
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../1_6_projections/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    6. Projections onto Subspaces and Convex Sets
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../1_7_calculus/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    7. Calculus Essentials -  Gradients, Jacobians, and Hessians
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0a%200intro/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Introduction
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0a%201la_foundations/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Linear Algebra Review
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0a%202innerproducts/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Inner Products
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0a%203norms/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Norms
     
   </span>
   
@@ -370,7 +623,7 @@
   
   
   <span class="md-ellipsis">
-    Convex Sets and Related Concepts
+    Linear Operators
     
   </span>
   
@@ -389,12 +642,12 @@
   
   
     <li class="md-nav__item">
-      <a href="../0c%20Convex%20Functions/" class="md-nav__link">
+      <a href="../0a%205eigenvalues/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
-    Convex Functions
+    Eigenvalues and Eigenvectors
     
   </span>
   
@@ -412,12 +665,104 @@
   
   
     <li class="md-nav__item">
-      <a href="../0d%20Optimality%20Conditions/" class="md-nav__link">
+      <a href="../0a%206projections/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
-    Optimality Conditions
+    Projections
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0a%207calculus/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Calculus Review
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0a%208convexity/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Smoothness and Convexity
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0a%209Convex%20Sets/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Convex Sets and Related Concepts
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0a%2010Convex%20Functions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Convex Functions
     
   </span>
   
@@ -460,7 +805,7 @@
   
   
   <span class="md-ellipsis">
-    Optimization Algorithms
+    Convex Analysis
     
   </span>
   
@@ -470,6 +815,330 @@
         
         <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            Convex Analysis
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0b%201Separation%20Theorems/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Separation Theorems
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0b%202Support%20Functions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Support Functions
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0b%203Convex%20Conjugates/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Convex Conjugates
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0b%204Subgradients/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Subgradients
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0b%205Fenchel%20Duality/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Fenchel Duality
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0b%206Moreau%20and%20Proximal/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Moreau Envelopes &amp; Proximal Operators
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0b%207Indicator%20and%20Distance/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Indicator &amp; Distance Functions
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4">
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Identifying Convex Problems and Tractability
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            Identifying Convex Problems and Tractability
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0c%201Convex%20Problems/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Convex Problems
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0c%202Optimality%20Conditions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Optimality Conditions
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0c%203Tractable%20Problems/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Tractable Problems
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_5">
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Optimization Algorithms
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
             <span class="md-nav__icon md-icon"></span>
             Optimization Algorithms
           </label>
@@ -821,15 +1490,15 @@
         
           
         
-        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4">
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_6">
         
           
-          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
             
   
   
   <span class="md-ellipsis">
-    Linear Programs
+    Common Convex Optimization Problems
     
   </span>
   
@@ -837,10 +1506,10 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_4">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
             <span class="md-nav__icon md-icon"></span>
-            Linear Programs
+            Common Convex Optimization Problems
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
             
@@ -851,12 +1520,12 @@
   
   
     <li class="md-nav__item">
-      <a href="../1a%20LP/" class="md-nav__link">
+      <a href="../Common Convex Optimization Problems.md" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
-    LP
+    Overview
     
   </span>
   
@@ -874,12 +1543,12 @@
   
   
     <li class="md-nav__item">
-      <a href="../1b%20QP/" class="md-nav__link">
+      <a href="../1a%20LP/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
-    QP
+    Linear Programming
     
   </span>
   
@@ -903,6 +1572,29 @@
   
   <span class="md-ellipsis">
     Least Squares
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../1b%20QP/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    QP
     
   </span>
   
@@ -1029,10 +1721,10 @@
         
           
         
-        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_5">
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_7">
         
           
-          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="0">
             
   
   
@@ -1045,8 +1737,8 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_5">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7">
             <span class="md-nav__icon md-icon"></span>
             Duality &amp; Regularization
           </label>
@@ -1214,10 +1906,10 @@
         
           
         
-        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_6">
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_8">
         
           
-          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
+          <label class="md-nav__link" for="__nav_8" id="__nav_8_label" tabindex="0">
             
   
   
@@ -1230,8 +1922,8 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_6">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_8">
             <span class="md-nav__icon md-icon"></span>
             Discrimination &amp; Optimization
           </label>
@@ -1307,10 +1999,10 @@
         
           
         
-        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_7">
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_9">
         
           
-          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="0">
+          <label class="md-nav__link" for="__nav_9" id="__nav_9_label" tabindex="0">
             
   
   
@@ -1323,8 +2015,8 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_7">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_9_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_9">
             <span class="md-nav__icon md-icon"></span>
             Miscellaneous
           </label>
@@ -1417,7 +2109,7 @@
 
 
   
-    <a href="https://github.com/SalK91/convex_optimization/edit/master/docs/0b Convex Sets.md" title="Edit this page" class="md-content__button md-icon" rel="edit">
+    <a href="https://github.com/SalK91/convex_optimization/edit/master/docs/0a 4operators.md" title="Edit this page" class="md-content__button md-icon" rel="edit">
       
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M10 20H6V4h7v5h5v3.1l2-2V8l-6-6H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h4zm10.2-7c.1 0 .3.1.4.2l1.3 1.3c.2.2.2.6 0 .8l-1 1-2.1-2.1 1-1c.1-.1.2-.2.4-.2m0 3.9L14.1 23H12v-2.1l6.1-6.1z"></path></svg>
     </a>
@@ -1426,144 +2118,62 @@
     
       
     
-    <a href="https://github.com/SalK91/convex_optimization/raw/master/docs/0b Convex Sets.md" title="View source of this page" class="md-content__button md-icon">
+    <a href="https://github.com/SalK91/convex_optimization/raw/master/docs/0a 4operators.md" title="View source of this page" class="md-content__button md-icon">
       
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 18c.56 0 1 .44 1 1s-.44 1-1 1-1-.44-1-1 .44-1 1-1m0-3c-2.73 0-5.06 1.66-6 4 .94 2.34 3.27 4 6 4s5.06-1.66 6-4c-.94-2.34-3.27-4-6-4m0 6.5a2.5 2.5 0 0 1-2.5-2.5 2.5 2.5 0 0 1 2.5-2.5 2.5 2.5 0 0 1 2.5 2.5 2.5 2.5 0 0 1-2.5 2.5M9.27 20H6V4h7v5h5v4.07c.7.08 1.36.25 2 .49V8l-6-6H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h4.5a8.2 8.2 0 0 1-1.23-2"></path></svg>
     </a>
   
 
 
-<h1 id="convex-sets-and-related-concepts">Convex Sets and Related Concepts<a class="headerlink" href="#convex-sets-and-related-concepts" title="Permanent link">¶</a></h1>
-<p>Understanding convex sets and their associated geometric structures is <strong>central to convex optimization</strong>. These objects define <strong>feasible regions, constraints, and the geometry that algorithms navigate</strong>. In machine learning, they appear everywhere: in feasible weight sets, regularizers, polyhedral constraints, and in dual formulations.</p>
-<h2 id="convex-set">Convex Set<a class="headerlink" href="#convex-set" title="Permanent link">¶</a></h2>
-<p>A set <span class="arithmatex">\(C \subseteq \mathbb{R}^n\)</span> is <strong>convex</strong> if, for any two points <span class="arithmatex">\(x_1, x_2 \in C\)</span>, the line segment joining them lies entirely within the set:</p>
+<h1 id="linear-operators-and-operator-norms">Linear Operators and Operator Norms<a class="headerlink" href="#linear-operators-and-operator-norms" title="Permanent link">¶</a></h1>
+<p>Linear operators and their norms quantify how matrices or linear maps amplify vectors. Understanding these concepts is crucial for step size selection, conditioning, low-rank approximations, and stability of optimization algorithms. This chapter introduces operator norms, special cases, and the singular value decomposition, highlighting their role in convex optimization and machine learning.</p>
+<h2 id="operator-norms">Operator Norms<a class="headerlink" href="#operator-norms" title="Permanent link">¶</a></h2>
+<p>Let <span class="arithmatex">\(A: \mathbb{R}^n \to \mathbb{R}^m\)</span> be a linear operator (matrix). The operator norm induced by vector norms <span class="arithmatex">\(\|\cdot\|_p\)</span> and <span class="arithmatex">\(\|\cdot\|_q\)</span> is defined as</p>
 <div class="arithmatex">\[
-\theta x_1 + (1-\theta) x_2 \in C, \quad \forall \theta \in [0,1].
+\|A\|_{p \to q} = \sup_{x \neq 0} \frac{\|Ax\|_q}{\|x\|_p} = \sup_{\|x\|_p \le 1} \|Ax\|_q.
 \]</div>
+<p>Intuition: <span class="arithmatex">\(\|A\|_{p \to q}\)</span> measures the maximum <strong>amplification factor</strong> of a vector under <span class="arithmatex">\(A\)</span> from <span class="arithmatex">\(\ell_p\)</span> space to <span class="arithmatex">\(\ell_q\)</span> space.</p>
+<p>Special cases:</p>
 <ul>
-<li><strong>Closed sets:</strong> A set is closed if it contains all its limit points. Closed sets ensure that sequences of feasible points do not “escape” the set, which is important for guarantees on convergence in optimization.  </li>
-<li><strong>Extreme points:</strong> An extreme point of a convex set cannot be written as a convex combination of other points. For polyhedra, these correspond to vertices, and in optimization, <strong>optimal solutions of linear programs lie at extreme points</strong>.</li>
+<li><span class="arithmatex">\(\|A\|_{1 \to 1} = \max_{j} \sum_{i} |A_{ij}|\)</span> (maximum absolute column sum)  </li>
+<li><span class="arithmatex">\(\|A\|_{\infty \to \infty} = \max_{i} \sum_{j} |A_{ij}|\)</span> (maximum absolute row sum)  </li>
+<li><span class="arithmatex">\(\|A\|_{2 \to 2} = \sigma_{\max}(A)\)</span>, the largest singular value of <span class="arithmatex">\(A\)</span>  </li>
 </ul>
-<h2 id="convex-combination">Convex Combination<a class="headerlink" href="#convex-combination" title="Permanent link">¶</a></h2>
-<p>A <strong>convex combination</strong> of points <span class="arithmatex">\(x_1, \dots, x_k\)</span> is:</p>
+<h2 id="singular-value-decomposition-svd">Singular Value Decomposition (SVD)<a class="headerlink" href="#singular-value-decomposition-svd" title="Permanent link">¶</a></h2>
+<p>Any matrix <span class="arithmatex">\(A \in \mathbb{R}^{m \times n}\)</span> admits a singular value decomposition:</p>
 <div class="arithmatex">\[
-x = \sum_{i=1}^k \theta_i x_i, \quad \theta_i \ge 0, \quad \sum_{i=1}^k \theta_i = 1.
+A = U \Sigma V^\top,
 \]</div>
+<p>where:</p>
 <ul>
-<li>Think of it as a <strong>weighted average</strong> where weights sum to 1.  </li>
-<li>Convex combinations <strong>never leave the convex hull</strong>, which is the “safe zone” defined by your points.</li>
+<li><span class="arithmatex">\(U \in \mathbb{R}^{m \times m}\)</span> and <span class="arithmatex">\(V \in \mathbb{R}^{n \times n}\)</span> are orthogonal matrices  </li>
+<li><span class="arithmatex">\(\Sigma \in \mathbb{R}^{m \times n}\)</span> is diagonal with non-negative entries <span class="arithmatex">\(\sigma_1 \ge \sigma_2 \ge \dots \ge 0\)</span>, called <strong>singular values</strong></li>
 </ul>
-<p><strong>ML Intuition:</strong> Gradient-based updates can be seen as <strong>small convex combinations</strong> between the current point and a target direction.</p>
-<h2 id="convex-hull">Convex Hull<a class="headerlink" href="#convex-hull" title="Permanent link">¶</a></h2>
-<p>The <strong>convex hull</strong> of a set <span class="arithmatex">\(S\)</span> is the set of all convex combinations of points in <span class="arithmatex">\(S\)</span>. It is the <strong>smallest convex set containing <span class="arithmatex">\(S\)</span></strong>.  </p>
+<p>Interpretation:</p>
 <ul>
-<li><strong>Geometric intuition:</strong> Imagine stretching a rubber band around the points — the shape it forms is the convex hull.  </li>
-<li><strong>ML Relevance:</strong> Convex hulls appear in support vector machines (margin between classes) and in approximating non-convex feasible sets using convex relaxations.</li>
+<li><span class="arithmatex">\(V^\top\)</span> rotates coordinates in the input space  </li>
+<li><span class="arithmatex">\(\Sigma\)</span> scales each coordinate along its principal direction  </li>
+<li><span class="arithmatex">\(U\)</span> rotates coordinates in the output space</li>
 </ul>
-<h2 id="cones">Cones<a class="headerlink" href="#cones" title="Permanent link">¶</a></h2>
-<p>A <strong>cone</strong> is a set <span class="arithmatex">\(K \subseteq \mathbb{R}^n\)</span> such that if <span class="arithmatex">\(x \in K\)</span> and <span class="arithmatex">\(\alpha \ge 0\)</span>, then <span class="arithmatex">\(\alpha x \in K\)</span>.  </p>
+<p>Geometric intuition: The action of <span class="arithmatex">\(A\)</span> on the unit sphere in <span class="arithmatex">\(\mathbb{R}^n\)</span> produces an <strong>ellipsoid</strong> in <span class="arithmatex">\(\mathbb{R}^m\)</span>, with axes given by singular vectors and lengths given by singular values.</p>
+<h2 id="applications-in-optimization-and-machine-learning">Applications in Optimization and Machine Learning<a class="headerlink" href="#applications-in-optimization-and-machine-learning" title="Permanent link">¶</a></h2>
 <ul>
-<li>Cones are closed under <strong>nonnegative scaling</strong>, but not necessarily addition.  </li>
-<li><strong>Conic hull (convex cone):</strong> Collection of all conic combinations of points in <span class="arithmatex">\(S\)</span>:  </li>
+<li><strong>Conditioning:</strong> The ratio <span class="arithmatex">\(\kappa(A) = \sigma_{\max}(A) / \sigma_{\min}(A)\)</span> determines sensitivity of linear systems <span class="arithmatex">\(Ax = b\)</span> and least-squares problems to perturbations. Poor conditioning slows convergence.  </li>
+<li><strong>Low-rank approximations:</strong> The best rank-<span class="arithmatex">\(k\)</span> approximation of <span class="arithmatex">\(A\)</span> (in Frobenius or spectral norm) is obtained by truncating its SVD. This is widely used in PCA and collaborative filtering.  </li>
+<li><strong>Preconditioning:</strong> Linear transformations can be preconditioned using SVD to accelerate gradient-based methods.  </li>
+<li><strong>Step amplification:</strong> For gradient descent on quadratic objectives <span class="arithmatex">\(f(x) = \frac{1}{2}x^\top A x - b^\top x\)</span>, the largest singular value <span class="arithmatex">\(\sigma_{\max}(A)\)</span> determines the safe step size <span class="arithmatex">\(\alpha \le 2 / \sigma_{\max}(A)^2\)</span>.</li>
 </ul>
-<div class="arithmatex">\[
-\text{cone}(S) = \Big\{ \sum_{i=1}^k \theta_i x_i \;\Big|\; x_i \in S, \; \theta_i \ge 0 \Big\}.
-\]</div>
+<h2 id="numerical-considerations">Numerical Considerations<a class="headerlink" href="#numerical-considerations" title="Permanent link">¶</a></h2>
 <ul>
-<li>A cone is not necessarily a subspace (negative multiples may not be included).  </li>
-<li>A convex cone is closed under addition and nonnegative scaling.  </li>
+<li>Computing full SVD is expensive for large matrices; truncated SVD or randomized SVD is preferred in high dimensions.  </li>
+<li>Operator norms help identify <strong>directions of largest amplification</strong> and potential instability.  </li>
+<li>Column scaling or whitening of matrices improves conditioning and convergence of iterative optimization algorithms.</li>
 </ul>
-<h2 id="polar-cones">Polar Cones<a class="headerlink" href="#polar-cones" title="Permanent link">¶</a></h2>
-<p>Given a cone <span class="arithmatex">\(K \subseteq \mathbb{R}^n\)</span>, the <strong>polar cone</strong> is:</p>
-<div class="arithmatex">\[
-K^\circ = \{ y \in \mathbb{R}^n \mid \langle y, x \rangle \le 0, \; \forall x \in K \}.
-\]</div>
+<h2 id="summary-and-optimization-connections">Summary and Optimization Connections<a class="headerlink" href="#summary-and-optimization-connections" title="Permanent link">¶</a></h2>
 <ul>
-<li>Intuition: polar cone vectors form <strong>non-acute angles</strong> with every vector in <span class="arithmatex">\(K\)</span>.  </li>
-<li>Properties:  <ul>
-<li>Always a <strong>closed convex cone</strong>.  </li>
-<li>If <span class="arithmatex">\(K\)</span> is a subspace, <span class="arithmatex">\(K^\circ\)</span> is the <strong>orthogonal complement</strong>.  </li>
-<li>Duality: <span class="arithmatex">\((K^\circ)^\circ = K\)</span> for closed convex cones.  </li>
-</ul>
-</li>
-</ul>
-<p><strong>ML relevance:</strong> Polar cones naturally appear in <strong>dual problems</strong> and in the derivation of <strong>optimality conditions</strong>.</p>
-<h2 id="tangent-cone">Tangent Cone<a class="headerlink" href="#tangent-cone" title="Permanent link">¶</a></h2>
-<p>For a set <span class="arithmatex">\(C\)</span> and point <span class="arithmatex">\(x \in C\)</span>, the <strong>tangent cone</strong> <span class="arithmatex">\(T_C(x)\)</span> contains all directions in which one can “move infinitesimally” while remaining in <span class="arithmatex">\(C\)</span>:</p>
-<div class="arithmatex">\[
-T_C(x) = \Big\{ d \in \mathbb{R}^n \;\Big|\; \exists t_k \downarrow 0, \; x_k \in C, \; x_k \to x, \; \frac{x_k - x}{t_k} \to d \Big\}.
-\]</div>
-<ul>
-<li><strong>Interior point:</strong> <span class="arithmatex">\(T_C(x) = \mathbb{R}^n\)</span>.  </li>
-<li><strong>Boundary point:</strong> <span class="arithmatex">\(T_C(x)\)</span> restricts movement to directions staying inside <span class="arithmatex">\(C\)</span>.  </li>
-</ul>
-<p><strong>ML intuition:</strong> Tangent cones define <strong>feasible directions</strong> for projected gradient steps or constrained optimization.</p>
-<h2 id="normal-cone">Normal Cone<a class="headerlink" href="#normal-cone" title="Permanent link">¶</a></h2>
-<p>For a convex set <span class="arithmatex">\(C\)</span> at point <span class="arithmatex">\(x \in C\)</span>:</p>
-<div class="arithmatex">\[
-N_C(x) = \{ v \in \mathbb{R}^n \mid \langle v, y - x \rangle \le 0, \; \forall y \in C \}.
-\]</div>
-<ul>
-<li>Each <span class="arithmatex">\(v \in N_C(x)\)</span> defines a <strong>supporting hyperplane</strong> at <span class="arithmatex">\(x\)</span>.  </li>
-<li>Relation: <span class="arithmatex">\(N_C(x) = \big(T_C(x)\big)^\circ\)</span> — polar of tangent cone.  </li>
-<li><strong>Interior point:</strong> <span class="arithmatex">\(N_C(x) = \{0\}\)</span>.  </li>
-<li><strong>Boundary/corner:</strong> <span class="arithmatex">\(N_C(x)\)</span> is a cone of outward normals.  </li>
-</ul>
-<p><strong>ML relevance:</strong> Appears in <strong>first-order optimality conditions</strong>:</p>
-<div class="arithmatex">\[
-0 \in \partial f(x^*) + N_C(x^*),
-\]</div>
-<p>where the subgradient of <span class="arithmatex">\(f\)</span> is balanced by the “push-back” of constraints.</p>
-<h2 id="comparison-of-tangent-normal-and-polar-cones">Comparison of Tangent, Normal, and Polar Cones<a class="headerlink" href="#comparison-of-tangent-normal-and-polar-cones" title="Permanent link">¶</a></h2>
-<table>
-<thead>
-<tr>
-<th>Cone</th>
-<th>Applies To</th>
-<th>Meaning</th>
-<th>Interior</th>
-<th>Boundary</th>
-<th>Key Facts</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><strong>Tangent</strong> <span class="arithmatex">\(T_C(x)\)</span></td>
-<td>Any set</td>
-<td>Feasible directions</td>
-<td><span class="arithmatex">\(\mathbb{R}^n\)</span></td>
-<td>Restricted</td>
-<td>Local geometry</td>
-</tr>
-<tr>
-<td><strong>Normal</strong> <span class="arithmatex">\(N_C(x)\)</span></td>
-<td>Convex sets</td>
-<td>Outward blocking directions</td>
-<td><span class="arithmatex">\(\{0\}\)</span></td>
-<td>Outward cone</td>
-<td>Closed, convex; <span class="arithmatex">\(N_C = T^\circ\)</span></td>
-</tr>
-<tr>
-<td><strong>Polar</strong> <span class="arithmatex">\(K^\circ\)</span></td>
-<td>Any cone</td>
-<td>Non-acute directions</td>
-<td>N/A</td>
-<td>N/A</td>
-<td>Closed, convex; <span class="arithmatex">\((K^\circ)^\circ = K\)</span></td>
-</tr>
-</tbody>
-</table>
-<hr>
-<h2 id="hyperplanes-and-half-spaces">Hyperplanes and Half-Spaces<a class="headerlink" href="#hyperplanes-and-half-spaces" title="Permanent link">¶</a></h2>
-<ul>
-<li><strong>Hyperplane:</strong> <span class="arithmatex">\(a^T x = b\)</span>.  </li>
-<li><strong>Half-space:</strong> One side of a hyperplane, <span class="arithmatex">\(a^T x \le b\)</span> or <span class="arithmatex">\(a^T x \ge b\)</span>.  </li>
-<li>Convex sets can be <strong>built from intersections of half-spaces</strong>, which is why linear constraints are convex.  </li>
-</ul>
-<p><strong>Separation &amp; Supporting Hyperplanes:</strong></p>
-<ul>
-<li><strong>Separating hyperplane theorem:</strong> Two disjoint convex sets can be separated by a hyperplane.  </li>
-<li><strong>Supporting hyperplane:</strong> Touches a convex set at a point (or face) without cutting through.  </li>
+<li>Operator norms quantify maximum amplification of vectors under linear transformations.  </li>
+<li>Singular values provide geometric insight into the shape of linear maps and determine condition numbers.  </li>
+<li>These tools are essential for step size selection, preconditioning, and low-rank modeling in convex optimization and ML.</li>
 </ul>
 
 

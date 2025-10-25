@@ -9,9 +9,13 @@
         <meta name="author" content="Salman Khan">
       
       
-        <link rel="canonical" href="https://salk91.github.io/convex_optimization/0d%20Algos/">
+        <link rel="canonical" href="https://salk91.github.io/convex_optimization/0a%205eigenvalues/">
       
       
+        <link rel="prev" href="../0a%204operators/">
+      
+      
+        <link rel="next" href="../0a%206projections/">
       
       
       <link rel="icon" href="../assets/images/favicon.png">
@@ -19,7 +23,7 @@
     
     
       
-        <title>0d Algos - Convex Optimization</title>
+        <title>Eigenvalues and Eigenvectors - Convex Optimization</title>
       
     
     
@@ -82,6 +86,11 @@
     <label class="md-overlay" for="__drawer"></label>
     <div data-md-component="skip">
       
+        
+        <a href="#eigenvalues-symmetric-matrices-and-psdpd-matrices" class="md-skip">
+          Skip to content
+        </a>
+      
     </div>
     <div data-md-component="announce">
       
@@ -114,7 +123,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              0d Algos
+              Eigenvalues and Eigenvectors
             
           </span>
         </div>
@@ -281,20 +290,20 @@
       
   
   
+    
   
   
+  
     
     
     
     
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
       
         
         
-          
-        
-        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2">
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
         
           
           <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
@@ -310,7 +319,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_2">
             <span class="md-nav__icon md-icon"></span>
             Basics
@@ -324,12 +333,12 @@
   
   
     <li class="md-nav__item">
-      <a href="../0a%20LA/" class="md-nav__link">
+      <a href="../1_0_intro/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
-    Mathematical Foundations
+    Basics
     
   </span>
   
@@ -347,7 +356,385 @@
   
   
     <li class="md-nav__item">
-      <a href="../0b%20Convex%20Sets/" class="md-nav__link">
+      <a href="../1_1_vector/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    1. Vector Spaces and Linear Mappings
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../1_2_innerproducts/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    2. Inner Product Spaces and Orthogonality
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../1_3_norms/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    3. Norms and Metric Geometry
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../1_4_linearoperator/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    4. Linear Operators, Spectral Norms, and SVD
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../1_5_eigenvalues/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    5. Eigenvalues, Positive Definiteness, and Quadratic Forms
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../1_6_projections/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    6. Projections onto Subspaces and Convex Sets
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../1_7_calculus/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    7. Calculus Essentials -  Gradients, Jacobians, and Hessians
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0a%200intro/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Introduction
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0a%201la_foundations/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Linear Algebra Review
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0a%202innerproducts/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Inner Products
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0a%203norms/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Norms
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0a%204operators/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Linear Operators
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    Eigenvalues and Eigenvectors
+    
+  </span>
+  
+
+      </a>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0a%206projections/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Projections
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0a%207calculus/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Calculus Review
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0a%208convexity/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Smoothness and Convexity
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0a%209Convex%20Sets/" class="md-nav__link">
         
   
   
@@ -370,35 +757,12 @@
   
   
     <li class="md-nav__item">
-      <a href="../0c%20Convex%20Functions/" class="md-nav__link">
+      <a href="../0a%2010Convex%20Functions/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     Convex Functions
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../0d%20Optimality%20Conditions/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    Optimality Conditions
     
   </span>
   
@@ -441,7 +805,7 @@
   
   
   <span class="md-ellipsis">
-    Optimization Algorithms
+    Convex Analysis
     
   </span>
   
@@ -451,6 +815,330 @@
         
         <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            Convex Analysis
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0b%201Separation%20Theorems/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Separation Theorems
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0b%202Support%20Functions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Support Functions
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0b%203Convex%20Conjugates/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Convex Conjugates
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0b%204Subgradients/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Subgradients
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0b%205Fenchel%20Duality/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Fenchel Duality
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0b%206Moreau%20and%20Proximal/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Moreau Envelopes &amp; Proximal Operators
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0b%207Indicator%20and%20Distance/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Indicator &amp; Distance Functions
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4">
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Identifying Convex Problems and Tractability
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            Identifying Convex Problems and Tractability
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0c%201Convex%20Problems/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Convex Problems
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0c%202Optimality%20Conditions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Optimality Conditions
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0c%203Tractable%20Problems/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Tractable Problems
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_5">
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Optimization Algorithms
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
             <span class="md-nav__icon md-icon"></span>
             Optimization Algorithms
           </label>
@@ -802,15 +1490,15 @@
         
           
         
-        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4">
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_6">
         
           
-          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
             
   
   
   <span class="md-ellipsis">
-    Linear Programs
+    Common Convex Optimization Problems
     
   </span>
   
@@ -818,10 +1506,10 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_4">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
             <span class="md-nav__icon md-icon"></span>
-            Linear Programs
+            Common Convex Optimization Problems
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
             
@@ -832,12 +1520,12 @@
   
   
     <li class="md-nav__item">
-      <a href="../1a%20LP/" class="md-nav__link">
+      <a href="../Common Convex Optimization Problems.md" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
-    LP
+    Overview
     
   </span>
   
@@ -855,12 +1543,12 @@
   
   
     <li class="md-nav__item">
-      <a href="../1b%20QP/" class="md-nav__link">
+      <a href="../1a%20LP/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
-    QP
+    Linear Programming
     
   </span>
   
@@ -884,6 +1572,29 @@
   
   <span class="md-ellipsis">
     Least Squares
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../1b%20QP/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    QP
     
   </span>
   
@@ -1010,10 +1721,10 @@
         
           
         
-        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_5">
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_7">
         
           
-          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="0">
             
   
   
@@ -1026,8 +1737,8 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_5">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7">
             <span class="md-nav__icon md-icon"></span>
             Duality &amp; Regularization
           </label>
@@ -1195,10 +1906,10 @@
         
           
         
-        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_6">
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_8">
         
           
-          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
+          <label class="md-nav__link" for="__nav_8" id="__nav_8_label" tabindex="0">
             
   
   
@@ -1211,8 +1922,8 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_6">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_8">
             <span class="md-nav__icon md-icon"></span>
             Discrimination &amp; Optimization
           </label>
@@ -1288,10 +1999,10 @@
         
           
         
-        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_7">
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_9">
         
           
-          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="0">
+          <label class="md-nav__link" for="__nav_9" id="__nav_9_label" tabindex="0">
             
   
   
@@ -1304,8 +2015,8 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_7">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_9_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_9">
             <span class="md-nav__icon md-icon"></span>
             Miscellaneous
           </label>
@@ -1381,6 +2092,8 @@
   
   
   
+    
+  
   
 </nav>
                   </div>
@@ -1396,7 +2109,7 @@
 
 
   
-    <a href="https://github.com/SalK91/convex_optimization/edit/master/docs/0d Algos.md" title="Edit this page" class="md-content__button md-icon" rel="edit">
+    <a href="https://github.com/SalK91/convex_optimization/edit/master/docs/0a 5eigenvalues.md" title="Edit this page" class="md-content__button md-icon" rel="edit">
       
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M10 20H6V4h7v5h5v3.1l2-2V8l-6-6H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h4zm10.2-7c.1 0 .3.1.4.2l1.3 1.3c.2.2.2.6 0 .8l-1 1-2.1-2.1 1-1c.1-.1.2-.2.4-.2m0 3.9L14.1 23H12v-2.1l6.1-6.1z"></path></svg>
     </a>
@@ -1405,229 +2118,60 @@
     
       
     
-    <a href="https://github.com/SalK91/convex_optimization/raw/master/docs/0d Algos.md" title="View source of this page" class="md-content__button md-icon">
+    <a href="https://github.com/SalK91/convex_optimization/raw/master/docs/0a 5eigenvalues.md" title="View source of this page" class="md-content__button md-icon">
       
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 18c.56 0 1 .44 1 1s-.44 1-1 1-1-.44-1-1 .44-1 1-1m0-3c-2.73 0-5.06 1.66-6 4 .94 2.34 3.27 4 6 4s5.06-1.66 6-4c-.94-2.34-3.27-4-6-4m0 6.5a2.5 2.5 0 0 1-2.5-2.5 2.5 2.5 0 0 1 2.5-2.5 2.5 2.5 0 0 1 2.5 2.5 2.5 2.5 0 0 1-2.5 2.5M9.27 20H6V4h7v5h5v4.07c.7.08 1.36.25 2 .49V8l-6-6H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h4.5a8.2 8.2 0 0 1-1.23-2"></path></svg>
     </a>
   
 
 
-  <h1>0d Algos</h1>
-
-<h2 id="algorithms-for-convex-optimisation">Algorithms for Convex Optimisation<a class="headerlink" href="#algorithms-for-convex-optimisation" title="Permanent link">¶</a></h2>
-<p>Convex optimization algorithms exploit the geometry of convex sets and functions.<br>
-Because every local minimum is global, algorithms can <strong>converge reliably</strong> without worrying about bad local minima.</p>
-<p>We divide algorithms into three main families:</p>
-<ol>
-<li><strong>First-order methods</strong> – use gradients (scalable, but slower convergence).  </li>
-<li><strong>Second-order methods</strong> – use Hessians (faster convergence, more expensive).  </li>
-<li><strong>Interior-point methods</strong> – general-purpose, highly accurate solvers.</li>
-</ol>
-<h3 id="gradient-descent-first-order-method">Gradient Descent (First-Order Method)<a class="headerlink" href="#gradient-descent-first-order-method" title="Permanent link">¶</a></h3>
-<h4 id="algorithm">Algorithm<a class="headerlink" href="#algorithm" title="Permanent link">¶</a></h4>
-<p>For step size <span class="arithmatex">\(\alpha &gt; 0\)</span>:
-<script type="math/tex; mode=display">
-x^{k+1} = x^k - \alpha \nabla f(x^k)
-</script>
-</p>
-<h4 id="convergence">Convergence<a class="headerlink" href="#convergence" title="Permanent link">¶</a></h4>
-<ul>
-<li>If <span class="arithmatex">\(f\)</span> is convex and <span class="arithmatex">\(\nabla f\)</span> is Lipschitz continuous with constant <span class="arithmatex">\(L\)</span>:</li>
-<li>With fixed step <span class="arithmatex">\(\alpha \le \tfrac{1}{L}\)</span>, we have:
-    <script type="math/tex">
-    f(x^k) - f(x^*) = \mathcal{O}\left(\tfrac{1}{k}\right)
-    </script>
-</li>
-<li>If <span class="arithmatex">\(f\)</span> is <strong><span class="arithmatex">\(\mu\)</span>-strongly convex</strong>:
-    <script type="math/tex; mode=display">
-    f(x^k) - f(x^*) \le \left(1 - \tfrac{\mu}{L}\right)^k \big(f(x^0) - f(x^*)\big)
-    </script>
-    (linear convergence).</li>
-</ul>
-<h4 id="pros-cons">Pros &amp; Cons<a class="headerlink" href="#pros-cons" title="Permanent link">¶</a></h4>
-<ul>
-<li>✅ Simple, scalable to very high dimensions.  </li>
-<li>❌ Slow convergence compared to higher-order methods.</li>
-</ul>
-<h3 id="accelerated-gradient-methods">Accelerated Gradient Methods<a class="headerlink" href="#accelerated-gradient-methods" title="Permanent link">¶</a></h3>
-<ul>
-<li><strong>Nesterov’s Accelerated Gradient (NAG):</strong> Improves convergence rate from <span class="arithmatex">\(\mathcal{O}(1/k)\)</span> to <span class="arithmatex">\(\mathcal{O}(1/k^2)\)</span>.  </li>
-<li>Widely used in <strong>machine learning</strong> (e.g., training deep neural networks).  </li>
-</ul>
-<h3 id="newtons-method-second-order-method">Newton’s Method (Second-Order Method)<a class="headerlink" href="#newtons-method-second-order-method" title="Permanent link">¶</a></h3>
-<h4 id="algorithm_1">Algorithm<a class="headerlink" href="#algorithm_1" title="Permanent link">¶</a></h4>
-<p>Update rule:
-<script type="math/tex; mode=display">
-x^{k+1} = x^k - [\nabla^2 f(x^k)]^{-1} \nabla f(x^k)
-</script>
-</p>
-<h4 id="convergence_1">Convergence<a class="headerlink" href="#convergence_1" title="Permanent link">¶</a></h4>
-<ul>
-<li>Quadratic near optimum:<br>
-<script type="math/tex; mode=display">
-  \|x^{k+1} - x^*\| \approx \mathcal{O}(\|x^k - x^*\|^2)
-  </script>
-</li>
-<li>Very fast, but requires Hessian and solving linear systems.</li>
-</ul>
-<h4 id="damped-newton">Damped Newton<a class="headerlink" href="#damped-newton" title="Permanent link">¶</a></h4>
-<p>To maintain global convergence:
-<script type="math/tex; mode=display">
-x^{k+1} = x^k - \alpha_k [\nabla^2 f(x^k)]^{-1} \nabla f(x^k), \quad \alpha_k \in (0,1]
-</script>
-</p>
-<h3 id="quasi-newton-methods">Quasi-Newton Methods<a class="headerlink" href="#quasi-newton-methods" title="Permanent link">¶</a></h3>
-<p>Approximate the Hessian to reduce cost.</p>
-<ul>
-<li><strong>BFGS</strong> and <strong>L-BFGS</strong> (limited memory version).  </li>
-<li>Used in large-scale optimization (e.g., machine learning, statistics).  </li>
-<li>Convergence: superlinear.  </li>
-</ul>
-<h3 id="subgradient-methods">Subgradient Methods<a class="headerlink" href="#subgradient-methods" title="Permanent link">¶</a></h3>
-<p>For <strong>nondifferentiable convex functions</strong> (e.g., <span class="arithmatex">\(f(x) = \|x\|_1\)</span>).</p>
-<p>Update rule:
-<script type="math/tex; mode=display">
-x^{k+1} = x^k - \alpha_k g^k, \quad g^k \in \partial f(x^k)
-</script>
-</p>
-<ul>
-<li><span class="arithmatex">\(\partial f(x)\)</span>: subdifferential (set of all subgradients).  </li>
-<li>Convergence: <span class="arithmatex">\(\mathcal{O}(1/\sqrt{k})\)</span> with diminishing step sizes.  </li>
-<li>Useful in <strong>large-scale, nonsmooth optimization</strong>.</li>
-</ul>
-<h3 id="proximal-methods">Proximal Methods<a class="headerlink" href="#proximal-methods" title="Permanent link">¶</a></h3>
-<p>For composite problems:<br>
-<script type="math/tex; mode=display">
-\min_x f(x) + g(x)
-</script>
-where <span class="arithmatex">\(f\)</span> is smooth convex, <span class="arithmatex">\(g\)</span> convex but possibly nonsmooth.</p>
-<p><strong>Proximal operator:</strong>
-<script type="math/tex; mode=display">
-\text{prox}_g(v) = \arg\min_x \left( g(x) + \tfrac{1}{2}\|x-v\|_2^2 \right)
-</script>
-</p>
-<ul>
-<li><strong>Proximal gradient descent:</strong><br>
-<script type="math/tex; mode=display">
-  x^{k+1} = \text{prox}_{\alpha g}(x^k - \alpha \nabla f(x^k))
-  </script>
-</li>
-<li>Widely used in sparse optimization (e.g., Lasso).</li>
-</ul>
-<h3 id="interior-point-methods">Interior-Point Methods<a class="headerlink" href="#interior-point-methods" title="Permanent link">¶</a></h3>
-<p>Transform constrained problem into a sequence of unconstrained problems using <strong>barrier functions</strong>.</p>
-<p>For constraint <span class="arithmatex">\(g_i(x) \le 0\)</span>, replace with barrier:
-<script type="math/tex; mode=display">
-\phi(x) = -\sum_{i=1}^m \log(-g_i(x))
-</script>
-</p>
-<p>Solve:
-<script type="math/tex; mode=display">
-\min_x \; f(x) + \tfrac{1}{t} \phi(x)
-</script>
-for increasing <span class="arithmatex">\(t\)</span>.</p>
-<h4 id="properties">Properties<a class="headerlink" href="#properties" title="Permanent link">¶</a></h4>
-<ul>
-<li>Polynomial-time complexity for convex problems.  </li>
-<li>Extremely accurate solutions.  </li>
-<li>Basis of general-purpose solvers (e.g., CVX, MOSEK, Gurobi).  </li>
-</ul>
-<h3 id="coordinate-descent">Coordinate Descent<a class="headerlink" href="#coordinate-descent" title="Permanent link">¶</a></h3>
-<p>At each iteration, optimize w.r.t. one coordinate (or block of coordinates):</p>
+<h1 id="eigenvalues-symmetric-matrices-and-psdpd-matrices">Eigenvalues, Symmetric Matrices, and PSD/PD Matrices<a class="headerlink" href="#eigenvalues-symmetric-matrices-and-psdpd-matrices" title="Permanent link">¶</a></h1>
+<p>Eigenvalues and positive semidefinite/definite matrices play a central role in convex optimization. They provide insight into curvature, conditioning, step scaling, and uniqueness of solutions. This chapter develops the theory of eigenpairs, diagonalization of symmetric matrices, and properties of PSD/PD matrices, with direct applications to optimization algorithms and machine learning.</p>
+<h2 id="eigenpairs-and-diagonalization-of-symmetric-matrices">Eigenpairs and Diagonalization of Symmetric Matrices<a class="headerlink" href="#eigenpairs-and-diagonalization-of-symmetric-matrices" title="Permanent link">¶</a></h2>
+<p>Let <span class="arithmatex">\(A \in \mathbb{R}^{n \times n}\)</span>. A scalar <span class="arithmatex">\(\lambda \in \mathbb{R}\)</span> is an eigenvalue of <span class="arithmatex">\(A\)</span> if there exists a nonzero vector <span class="arithmatex">\(v \in \mathbb{R}^n\)</span> such that</p>
 <div class="arithmatex">\[
-x_i^{k+1} = \arg\min_{z} f(x_1^k, \dots, x_{i-1}^k, z, x_{i+1}^k, \dots, x_n^k)
+A v = \lambda v.
 \]</div>
+<p>The vector <span class="arithmatex">\(v\)</span> is called an eigenvector associated with <span class="arithmatex">\(\lambda\)</span>.</p>
+<p>For symmetric matrices <span class="arithmatex">\(A = A^\top\)</span>, several important properties hold:</p>
 <ul>
-<li>Works well for high-dimensional problems.  </li>
-<li>Used in Lasso, logistic regression, and large-scale ML problems.</li>
+<li>All eigenvalues are real: <span class="arithmatex">\(\lambda_i \in \mathbb{R}\)</span>  </li>
+<li>Eigenvectors corresponding to distinct eigenvalues are orthogonal  </li>
+<li><span class="arithmatex">\(A\)</span> can be diagonalized by an orthogonal matrix <span class="arithmatex">\(Q\)</span>:  </li>
 </ul>
-<h3 id="primal-dual-and-splitting-methods">Primal-Dual and Splitting Methods<a class="headerlink" href="#primal-dual-and-splitting-methods" title="Permanent link">¶</a></h3>
+<div class="arithmatex">\[
+A = Q \Lambda Q^\top,
+\]</div>
+<p>where <span class="arithmatex">\(\Lambda = \text{diag}(\lambda_1, \dots, \lambda_n)\)</span> and <span class="arithmatex">\(Q^\top Q = I\)</span>.</p>
+<p>Geometric intuition: Symmetric matrices act as stretching or compressing along orthogonal directions, where the eigenvectors indicate the principal directions and eigenvalues the scaling factors.</p>
+<p>In optimization, the eigenvalues of the Hessian <span class="arithmatex">\(\nabla^2 f(x)\)</span> determine curvature along different directions. Positive eigenvalues indicate convexity along that direction, while negative eigenvalues indicate concavity.</p>
+<h2 id="positive-semidefinite-and-positive-definite-matrices">Positive Semidefinite and Positive Definite Matrices<a class="headerlink" href="#positive-semidefinite-and-positive-definite-matrices" title="Permanent link">¶</a></h2>
+<p>A symmetric matrix <span class="arithmatex">\(A\)</span> is positive semidefinite (PSD) if</p>
+<div class="arithmatex">\[
+x^\top A x \ge 0 \quad \forall x \in \mathbb{R}^n,
+\]</div>
+<p>and <strong>positive definite (PD)</strong> if</p>
+<div class="arithmatex">\[
+x^\top A x &gt; 0 \quad \forall x \neq 0.
+\]</div>
+<p>Equivalently:</p>
 <ul>
-<li>
-<p><strong>ADMM (Alternating Direction Method of Multipliers):</strong><br>
-  Splits problem into subproblems, solves in parallel.<br>
-  Popular in distributed optimization and ML.  </p>
-</li>
-<li>
-<p><strong>Primal-dual interior-point methods:</strong><br>
-  Solve both primal and dual simultaneously.  </p>
-</li>
+<li>PSD: all eigenvalues <span class="arithmatex">\(\lambda_i \ge 0\)</span>  </li>
+<li>PD: all eigenvalues <span class="arithmatex">\(\lambda_i &gt; 0\)</span></li>
 </ul>
-<hr>
-<h3 id="summary-of-convergence-rates">Summary of Convergence Rates<a class="headerlink" href="#summary-of-convergence-rates" title="Permanent link">¶</a></h3>
-<table>
-<thead>
-<tr>
-<th>Method</th>
-<th>Smooth Convex</th>
-<th>Strongly Convex</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Gradient Descent</td>
-<td><span class="arithmatex">\(\mathcal{O}(1/k)\)</span></td>
-<td>Linear</td>
-</tr>
-<tr>
-<td>Accelerated Gradient</td>
-<td><span class="arithmatex">\(\mathcal{O}(1/k^2)\)</span></td>
-<td>Linear</td>
-</tr>
-<tr>
-<td>Subgradient</td>
-<td><span class="arithmatex">\(\mathcal{O}(1/\sqrt{k})\)</span></td>
-<td>–</td>
-</tr>
-<tr>
-<td>Newton’s Method</td>
-<td>Quadratic (local)</td>
-<td>Quadratic</td>
-</tr>
-<tr>
-<td>Interior-Point</td>
-<td>Polynomial-time</td>
-<td>Polynomial-time</td>
-</tr>
-</tbody>
-</table>
-<h3 id="choosing-an-algorithm">Choosing an Algorithm<a class="headerlink" href="#choosing-an-algorithm" title="Permanent link">¶</a></h3>
+<p>Properties:</p>
 <ul>
-<li><strong>Small problems, high accuracy:</strong> Newton, Interior-point.  </li>
-<li><strong>Large-scale smooth problems:</strong> Gradient descent, Nesterov acceleration, L-BFGS.  </li>
-<li><strong>Large-scale nonsmooth problems:</strong> Subgradient, Proximal, ADMM.  </li>
-<li><strong>Sparse / structured constraints:</strong> Coordinate descent, Proximal methods.  </li>
+<li><span class="arithmatex">\(A \succeq 0 \implies\)</span> quadratic form <span class="arithmatex">\(x^\top A x\)</span> is convex  </li>
+<li><span class="arithmatex">\(A \succ 0 \implies\)</span> quadratic form is strictly convex with a unique minimizer</li>
 </ul>
-<h2 id="log-concavity-and-log-convexity">Log-concavity and Log-convexity<a class="headerlink" href="#log-concavity-and-log-convexity" title="Permanent link">¶</a></h2>
-<p>A function <span class="arithmatex">\(f: \mathbb{R}^n \to \mathbb{R}_{++}\)</span> is:</p>
-<ul>
-<li><strong>Log-concave</strong> if <span class="arithmatex">\(\log f(x)\)</span> is concave.</li>
-<li><strong>Log-convex</strong> if <span class="arithmatex">\(\log f(x)\)</span> is convex.</li>
-</ul>
-<h3 id="relevance">Relevance<a class="headerlink" href="#relevance" title="Permanent link">¶</a></h3>
-<ul>
-<li>Log-concave functions appear in probability (many common distributions have log-concave densities, such as Gaussian, exponential, and uniform). This ensures tractability of maximum likelihood estimation.</li>
-<li>Log-convexity is useful in geometric programming, where monomials and posynomials are log-convex.</li>
-</ul>
-<h3 id="examples">Examples<a class="headerlink" href="#examples" title="Permanent link">¶</a></h3>
-<ul>
-<li>Gaussian density is log-concave.</li>
-<li>Exponential function is log-convex.</li>
-</ul>
-<h2 id="geometric-programming">Geometric Programming<a class="headerlink" href="#geometric-programming" title="Permanent link">¶</a></h2>
-<p>Geometric programming (GP) is a class of problems of the form:
-<script type="math/tex; mode=display">
-\begin{aligned}
-& \min_x \quad & f_0(x) \\
-& \text{s.t.} \quad & f_i(x) \leq 1, \quad i=1, \dots, m,
-\end{aligned}
-</script>
-where each <span class="arithmatex">\(f_i\)</span> is a posynomial.</p>
-<ul>
-<li><strong>Monomial</strong>: <span class="arithmatex">\(f(x) = c x_1^{a_1} x_2^{a_2} \dots x_n^{a_n}\)</span>, with <span class="arithmatex">\(c &gt; 0\)</span>, exponents real.</li>
-<li><strong>Posynomial</strong>: Sum of monomials.</li>
-</ul>
-<p>By applying the log transformation <span class="arithmatex">\(y_i = \log x_i\)</span>, the problem becomes convex.</p>
+<p>In convex optimization, PD Hessians guarantee unique minimizers and enable Newton-type methods with reliable step scaling. PSD matrices appear in quadratic programming and covariance matrices in statistics and machine learning.</p>
+<h2 id="spectral-connections-to-optimization">Spectral Connections to Optimization<a class="headerlink" href="#spectral-connections-to-optimization" title="Permanent link">¶</a></h2>
+<ol>
+<li>Step size selection: For gradient descent on <span class="arithmatex">\(f(x) = \frac{1}{2} x^\top A x - b^\top x\)</span>, the largest eigenvalue <span class="arithmatex">\(\lambda_{\max}(A)\)</span> determines the maximum safe step size <span class="arithmatex">\(\alpha \le 2/\lambda_{\max}(A)\)</span>.  </li>
+<li>Conditioning: The condition number <span class="arithmatex">\(\kappa(A) = \lambda_{\max}/\lambda_{\min}\)</span> controls the convergence rate of gradient descent and other iterative methods.  </li>
+<li>Curvature analysis: Eigenvectors of the Hessian indicate directions of fastest or slowest curvature, guiding preconditioning and variable rescaling.  </li>
+<li>Low-rank approximations: PSD matrices can be truncated along small eigenvalues to reduce dimensionality in ML applications such as PCA.</li>
+</ol>
 
 
 
