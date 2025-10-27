@@ -18,8 +18,6 @@ $$
 - $G \in \mathbb{R}^{m \times n}, \; h \in \mathbb{R}^m$ — inequality constraints,  
 - $A \in \mathbb{R}^{p \times n}, \; b \in \mathbb{R}^p$ — equality constraints.  
 
----
-
 ## Why LPs Are Convex Optimization Problems
 
 A problem is convex if:
@@ -44,7 +42,7 @@ $$
 Hence, the feasible region is a **convex polyhedron**.
 
 
-## 📐 Geometric Intuition
+## Geometric Intuition
 
 - Inequalities act like **flat walls**, keeping feasible points on one side.  
 - Equalities act like **flat sheets**, slicing through space.  
@@ -71,7 +69,7 @@ $$
 Any LP can be transformed into one of these forms via **slack variables** and **variable splitting**.
 
 
-## ⚖️ Duality in Linear Programming
+## Duality in Linear Programming
 
 Every LP has a **dual problem**:
 

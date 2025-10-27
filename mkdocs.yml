@@ -1,7 +1,7 @@
 # ==========================================================
 # Project Information
 # ==========================================================
-site_name: Convex Optimization
+site_name: Mathematics for Machine Learning
 site_description: "Structured lecture notes on optimization, convex analysis, and algorithms."
 site_author: "Salman Khan"
 repo_url: "https://github.com/SalK91/convex_optimization"
@@ -97,75 +97,18 @@ extra:
 # Navigation
 # ==========================================================
 nav:
-  - Introduction: index.md
-  - Basics:
-      - Introduction: "0a 0intro.md"
-      - Linear Algebra Review: "0a 1la_foundations.md"
-      - Inner Products: "0a 2innerproducts.md"
-      - Norms: "0a 3norms.md"
-      - Linear Operators: "0a 4operators.md"
-      - Eigenvalues and Eigenvectors: "0a 5eigenvalues.md"
-      - Projections: "0a 6projections.md"
-      - Calculus Review: "0a 7calculus.md"
-      - Smoothness and Convexity: "0a 8convexity.md"
-      - Convex Sets and Related Concepts: "0a 9Convex Sets.md"
-      - Convex Functions: "0a 10Convex Functions.md"
-
-  - Convex Analysis:
-      - Separation Theorems: "0b 1Separation Theorems.md"
-      - Support Functions: "0b 2Support Functions.md"
-      - Convex Conjugates: "0b 3Convex Conjugates.md"
-      - Subgradients: "0b 4Subgradients.md"
-      - Fenchel Duality: "0b 5Fenchel Duality.md"
-      - Moreau Envelopes & Proximal Operators: "0b 6Moreau and Proximal.md"
-      - Indicator & Distance Functions: "0b 7Indicator and Distance.md"
-
-  - Identifying Convex Problems and Tractability:
-      - Convex Problems: "0c 1Convex Problems.md"
-      - Optimality Conditions: "0c 2Optimality Conditions.md"
-      - Tractable Problems: "0c 3Tractable Problems.md"
-
-  - Optimization Algorithms: 
-      - Optimization Algorithms: "0e Optimization Algos.md"
-      - Gradient Descent: "0e1 Gradient Descent.md"
-      - Subgradient Method: "0e2 subgradient method.md"
-      - Accelerated GD: "0e3 accelerated gs.md"
-      - Convergence Properties: "0f Convergence.md"
-      - Projections & Proximal Operators: "0g Proximal and Projected Gradient Descent.md"
-      - Proximal Gradient Algorithm: "0g1 proximal ga.md"
-      - LASSO: "0h lasso.md"
-      - Mirror Descent: "0k mirror.md"
-      - Stochastic Gradient Descent : "0m sgd.md"
-      - Newton's Method: "0n newtons.md"
-      - Quasi-Newton Methods: "0o quasi_n.md"
-      - Interior Point Methods: "0q interior.md"
-      - Advanced Algorithms: "0h AdvancedAlgos.md"
-
-  - Common Convex Optimization Problems:
-      - Overview: "Common Convex Optimization Problems.md"
-    
-
-  - Linear Programs:
-      - LP: "1a LP.md"
-      - QP: "1b QP.md"
-      - Least Squares: "1c Least Square.md"
-      - QCQP: "1d QCQP.md"
-      - SOCP: "1e SOCP.md"
-      - Geometric Interpretation: "1f GeometricInterpretation.md"
-      - GP: "1g GP.md"
-
-  - Duality & Regularization:
-      - Duality: "2a Duality.md"
-      - Huber: "3a Huber.md"
-      - Penalty Functions: "3b Penalty Functions.md"
-      - Regularized Problems: "3c Regularized.md"
-      - Robust Approximation: "3d Robust Approximation.md"
-      - MLE: "3e MLE.md"
-
-  - Discrimination & Optimization:
-      - Linear Discrimination: "4a Linear Discrimination.md"
-      - First Order Optimization: "6a First Order Optimization.md"
-
-  - Miscellaneous:
-      - Pareto Optimality: "7a pareto optimal.md"
-      - Example: "Example.md"
+  - Convex Optimization:: 
+      - 1. Introduction and Overview: "1_0_intro.md"
+      - 2. Linear Algebra Foundations: "1_1_vector.md"
+      - 3. Multivariable Calculus for Optimization: "1_7_calculus.md"
+      - 4. Convex Sets and Geometric Fundamentals: "1_8_convexsets.md"
+      - 5. Convex Functions: "1_9_convexfunctions.md"
+      - 6. Nonsmooth Convex Optimization – Subgradients: "1_7a_subgradients.md"
+      - 7. Optimization Principles – From Gradient Descent to KKT: "1_12_kkt.md"
+      - 8. Lagrange Duality Theory: "1_13_duality.md"
+      - 9. Algorithms for Convex Optimization: "3_0_optimizationalgo.md"
+      - 10. Advanced Large-Scale and Structured Methods: "3_7_advanced.md"
+      - 11. Modelling Patterns and Algorithm Selection in Practice: "3_8_models.md"
+      - Appendix A - Common Inequalities and Identities: "1_10_ineqaulities.md"
+      - Appendix B - Support Functions and Dual Geometry (Advanced): "1_11_support.md"
+  

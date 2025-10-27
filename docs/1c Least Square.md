@@ -1,6 +1,6 @@
-# 🔹 Least Squares (LS) Problem
+# Least Squares Problem
 
-Least Squares (LS) is one of the **canonical convex optimization problems** in statistics, machine learning, and signal processing. It seeks the vector $x \in \mathbb{R}^n$ that minimizes the **sum of squared errors**:
+Least Squares is one of the canonical convex optimization problems in statistics, machine learning, and signal processing. It seeks the vector $x \in \mathbb{R}^n$ that minimizes the sum of squared errors:
 
 $$
 \min_{x \in \mathbb{R}^n} \; \|A x - b\|_2^2
@@ -32,7 +32,7 @@ $$
 Q = 2 A^T A, \quad c = -2 A^T b, \quad d = b^T b
 $$
 
-## ✅ Convexity
+## Convexity
 
 - $Q = 2 A^T A \succeq 0$ since for any $z$:  
 
@@ -44,7 +44,7 @@ $$
 - If $A$ has full column rank, then $A^T A \succ 0$, making the problem **strictly convex** with a **unique minimizer**.  
 
 
-## 📐 Geometric Intuition
+##  Geometric Intuition
 
 - When $m > n$ (overdetermined system), the equations $A x = b$ may not be solvable.  
 - LS finds $x^\star$ such that $A x^\star$ is the **orthogonal projection** of $b$ onto the column space of $A$.  
@@ -55,7 +55,7 @@ A^T (b - A x^\star) = 0
 $$
 
 
-## 🧮 Solutions
+## Solutions
 
 - **Normal Equations (full-rank case):**
 
@@ -76,7 +76,7 @@ Normal equations can be ill-conditioned. In practice:
   - **SVD** (stable, gives pseudoinverse).  
 
 
-# 🔒 Constrained Least Squares (CLS)
+# Constrained Least Squares (CLS)
 
 Many practical problems require **constraints** on the solution. A general CLS formulation is:
 
@@ -118,7 +118,7 @@ $$
 
 This yields a **CLS problem** with linear inequality constraints, hence a **QP**.  
 
----
+-
 
 ## 💡 Example 2: Energy Consumption Fitting (CLS with Box Constraints)
 
@@ -141,7 +141,7 @@ $$
 
 This is a **QP with box constraints**, often solved efficiently by projected gradient or interior-point methods.  
 
-# 🔧 Regularized Least Squares (Ridge Regression)
+# Regularized Least Squares (Ridge Regression)
 
 A common extension in ML is **regularized LS**, e.g., **ridge regression**:
 
@@ -157,13 +157,3 @@ $$
 x^\star = (A^T A + \lambda I)^{-1} A^T b
 $$
 
-
-# 📊 Summary
-
-- **Unconstrained LS:** convex quadratic, closed form via pseudoinverse.  
-- **CLS:** convex quadratic + linear constraints → **QP**.  
-- **Regularized LS:** stabilizes solution, improves generalization.  
-- **Geometry:** LS = orthogonal projection; CLS = projection with constraints.  
-- **Solvers:**  
-  - Small problems: QR/SVD (LS) or active-set (CLS).  
-  - Large problems: iterative methods (CG, projected gradient).  
