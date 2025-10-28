@@ -12,10 +12,10 @@
         <link rel="canonical" href="https://salk91.github.io/convex_optimization/1_7_calculus/">
       
       
-        <link rel="prev" href="../1_6_projections/">
+        <link rel="prev" href="../1_1_vector/">
       
       
-        <link rel="next" href="../0a%200intro/">
+        <link rel="next" href="../1_8_convexsets/">
       
       
       <link rel="icon" href="../assets/images/favicon.png">
@@ -23,7 +23,7 @@
     
     
       
-        <title>7. Calculus Essentials - Gradients, Jacobians, and Hessians - Convex Optimization</title>
+        <title>3. Multivariable Calculus for Optimization - Mathematics for Machine Learning</title>
       
     
     
@@ -86,6 +86,11 @@
     <label class="md-overlay" for="__drawer"></label>
     <div data-md-component="skip">
       
+        
+        <a href="#chapter-3-multivariable-calculus-for-optimization" class="md-skip">
+          Skip to content
+        </a>
+      
     </div>
     <div data-md-component="announce">
       
@@ -98,7 +103,7 @@
 
 <header class="md-header md-header--shadow" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="Header">
-    <a href=".." title="Convex Optimization" class="md-header__button md-logo" aria-label="Convex Optimization" data-md-component="logo">
+    <a href=".." title="Mathematics for Machine Learning" class="md-header__button md-logo" aria-label="Mathematics for Machine Learning" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"></path></svg>
@@ -112,13 +117,13 @@
       <div class="md-header__ellipsis">
         <div class="md-header__topic">
           <span class="md-ellipsis">
-            Convex Optimization
+            Mathematics for Machine Learning
           </span>
         </div>
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              7. Calculus Essentials -  Gradients, Jacobians, and Hessians
+              3. Multivariable Calculus for Optimization
             
           </span>
         </div>
@@ -236,13 +241,13 @@
 
 <nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href=".." title="Convex Optimization" class="md-nav__button md-logo" aria-label="Convex Optimization" data-md-component="logo">
+    <a href=".." title="Mathematics for Machine Learning" class="md-nav__button md-logo" aria-label="Mathematics for Machine Learning" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"></path></svg>
 
     </a>
-    Convex Optimization
+    Mathematics for Machine Learning
   </label>
   
     <div class="md-nav__source">
@@ -263,28 +268,6 @@
       
   
   
-  
-  
-    <li class="md-nav__item">
-      <a href=".." class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    Introduction
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-    
-      
-      
-  
-  
     
   
   
@@ -298,15 +281,15 @@
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_1" checked>
         
           
-          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+          <label class="md-nav__link" for="__nav_1" id="__nav_1_label" tabindex="0">
             
   
   
   <span class="md-ellipsis">
-    Basics
+    Convex Optimization:
     
   </span>
   
@@ -314,10 +297,10 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
-          <label class="md-nav__title" for="__nav_2">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_1_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_1">
             <span class="md-nav__icon md-icon"></span>
-            Basics
+            Convex Optimization:
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
             
@@ -333,7 +316,7 @@
   
   
   <span class="md-ellipsis">
-    Basics
+    1. Introduction and Overview
     
   </span>
   
@@ -356,122 +339,7 @@
   
   
   <span class="md-ellipsis">
-    1. Vector Spaces and Linear Mappings
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../1_2_innerproducts/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    2. Inner Product Spaces and Orthogonality
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../1_3_norms/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    3. Norms and Metric Geometry
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../1_4_linearoperator/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    4. Linear Operators, Spectral Norms, and SVD
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../1_5_eigenvalues/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    5. Eigenvalues, Positive Definiteness, and Quadratic Forms
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../1_6_projections/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    6. Projections onto Subspaces and Convex Sets
+    2. Linear Algebra Foundations
     
   </span>
   
@@ -495,13 +363,15 @@
       <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
       
       
+        
+      
       
       <a href="./" class="md-nav__link md-nav__link--active">
         
   
   
   <span class="md-ellipsis">
-    7. Calculus Essentials -  Gradients, Jacobians, and Hessians
+    3. Multivariable Calculus for Optimization
     
   </span>
   
@@ -520,12 +390,12 @@
   
   
     <li class="md-nav__item">
-      <a href="../0a%200intro/" class="md-nav__link">
+      <a href="../1_8_convexsets/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
-    Introduction
+    4. Convex Sets and Geometric Fundamentals
     
   </span>
   
@@ -543,12 +413,12 @@
   
   
     <li class="md-nav__item">
-      <a href="../0a%201la_foundations/" class="md-nav__link">
+      <a href="../1_9_convexfunctions/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
-    Linear Algebra Review
+    5. Convex Functions
     
   </span>
   
@@ -566,12 +436,12 @@
   
   
     <li class="md-nav__item">
-      <a href="../0a%202innerproducts/" class="md-nav__link">
+      <a href="../1_7a_subgradients/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
-    Inner Products
+    6. Nonsmooth Convex Optimization – Subgradients
     
   </span>
   
@@ -589,12 +459,12 @@
   
   
     <li class="md-nav__item">
-      <a href="../0a%203norms/" class="md-nav__link">
+      <a href="../1_12_kkt/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
-    Norms
+    7. Optimization Principles – From Gradient Descent to KKT
     
   </span>
   
@@ -612,12 +482,12 @@
   
   
     <li class="md-nav__item">
-      <a href="../0a%204operators/" class="md-nav__link">
+      <a href="../1_13_duality/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
-    Linear Operators
+    8. Lagrange Duality Theory
     
   </span>
   
@@ -635,12 +505,12 @@
   
   
     <li class="md-nav__item">
-      <a href="../0a%205eigenvalues/" class="md-nav__link">
+      <a href="../3_0_optimizationalgo/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
-    Eigenvalues and Eigenvectors
+    9. Algorithms for Convex Optimization
     
   </span>
   
@@ -658,12 +528,12 @@
   
   
     <li class="md-nav__item">
-      <a href="../0a%206projections/" class="md-nav__link">
+      <a href="../3_7_advanced/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
-    Projections
+    10. Advanced Large-Scale and Structured Methods
     
   </span>
   
@@ -681,12 +551,12 @@
   
   
     <li class="md-nav__item">
-      <a href="../0a%207calculus/" class="md-nav__link">
+      <a href="../3_8_models/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
-    Calculus Review
+    11. Modelling Patterns and Algorithm Selection in Practice
     
   </span>
   
@@ -704,12 +574,12 @@
   
   
     <li class="md-nav__item">
-      <a href="../0a%208convexity/" class="md-nav__link">
+      <a href="../1_10_ineqaulities/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
-    Smoothness and Convexity
+    Appendix A - Common Inequalities and Identities
     
   </span>
   
@@ -727,1330 +597,12 @@
   
   
     <li class="md-nav__item">
-      <a href="../0a%209Convex%20Sets/" class="md-nav__link">
+      <a href="../1_11_support/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
-    Convex Sets and Related Concepts
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../0a%2010Convex%20Functions/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    Convex Functions
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-          </ul>
-        </nav>
-      
-    </li>
-  
-
-    
-      
-      
-  
-  
-  
-  
-    
-    
-    
-    
-    
-    <li class="md-nav__item md-nav__item--nested">
-      
-        
-        
-          
-        
-        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3">
-        
-          
-          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
-            
-  
-  
-  <span class="md-ellipsis">
-    Convex Analysis
-    
-  </span>
-  
-
-            <span class="md-nav__icon md-icon"></span>
-          </label>
-        
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_3">
-            <span class="md-nav__icon md-icon"></span>
-            Convex Analysis
-          </label>
-          <ul class="md-nav__list" data-md-scrollfix>
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../0b%201Separation%20Theorems/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    Separation Theorems
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../0b%202Support%20Functions/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    Support Functions
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../0b%203Convex%20Conjugates/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    Convex Conjugates
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../0b%204Subgradients/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    Subgradients
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../0b%205Fenchel%20Duality/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    Fenchel Duality
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../0b%206Moreau%20and%20Proximal/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    Moreau Envelopes &amp; Proximal Operators
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../0b%207Indicator%20and%20Distance/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    Indicator &amp; Distance Functions
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-          </ul>
-        </nav>
-      
-    </li>
-  
-
-    
-      
-      
-  
-  
-  
-  
-    
-    
-    
-    
-    
-    <li class="md-nav__item md-nav__item--nested">
-      
-        
-        
-          
-        
-        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4">
-        
-          
-          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
-            
-  
-  
-  <span class="md-ellipsis">
-    Identifying Convex Problems and Tractability
-    
-  </span>
-  
-
-            <span class="md-nav__icon md-icon"></span>
-          </label>
-        
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_4">
-            <span class="md-nav__icon md-icon"></span>
-            Identifying Convex Problems and Tractability
-          </label>
-          <ul class="md-nav__list" data-md-scrollfix>
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../0c%201Convex%20Problems/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    Convex Problems
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../0c%202Optimality%20Conditions/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    Optimality Conditions
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../0c%203Tractable%20Problems/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    Tractable Problems
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-          </ul>
-        </nav>
-      
-    </li>
-  
-
-    
-      
-      
-  
-  
-  
-  
-    
-    
-    
-    
-    
-    <li class="md-nav__item md-nav__item--nested">
-      
-        
-        
-          
-        
-        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_5">
-        
-          
-          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
-            
-  
-  
-  <span class="md-ellipsis">
-    Optimization Algorithms
-    
-  </span>
-  
-
-            <span class="md-nav__icon md-icon"></span>
-          </label>
-        
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_5">
-            <span class="md-nav__icon md-icon"></span>
-            Optimization Algorithms
-          </label>
-          <ul class="md-nav__list" data-md-scrollfix>
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../0e%20Optimization%20Algos/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    Optimization Algorithms
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../0e1%20Gradient%20Descent/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    Gradient Descent
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../0e2%20subgradient%20method/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    Subgradient Method
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../0e3%20accelerated%20gs/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    Accelerated GD
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../0f%20Convergence/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    Convergence Properties
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../0g%20Proximal%20and%20Projected%20Gradient%20Descent/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    Projections &amp; Proximal Operators
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../0g1%20proximal%20ga/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    Proximal Gradient Algorithm
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../0h%20lasso/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    LASSO
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../0k%20mirror/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    Mirror Descent
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../0m%20sgd/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    Stochastic Gradient Descent
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../0n%20newtons/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    Newton's Method
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../0o%20quasi_n/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    Quasi-Newton Methods
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../0q%20interior/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    Interior Point Methods
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../0h AdvancedAlgos.md" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    Advanced Algorithms
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-          </ul>
-        </nav>
-      
-    </li>
-  
-
-    
-      
-      
-  
-  
-  
-  
-    
-    
-    
-    
-    
-    <li class="md-nav__item md-nav__item--nested">
-      
-        
-        
-          
-        
-        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_6">
-        
-          
-          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
-            
-  
-  
-  <span class="md-ellipsis">
-    Common Convex Optimization Problems
-    
-  </span>
-  
-
-            <span class="md-nav__icon md-icon"></span>
-          </label>
-        
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_6">
-            <span class="md-nav__icon md-icon"></span>
-            Common Convex Optimization Problems
-          </label>
-          <ul class="md-nav__list" data-md-scrollfix>
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../Common Convex Optimization Problems.md" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    Overview
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../1a%20LP/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    Linear Programming
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../1c%20Least%20Square/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    Least Squares
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../1b%20QP/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    QP
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../1d%20QCQP/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    QCQP
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../1e%20SOCP/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    SOCP
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../1f%20GeometricInterpretation/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    Geometric Interpretation
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../1g%20GP/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    GP
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-          </ul>
-        </nav>
-      
-    </li>
-  
-
-    
-      
-      
-  
-  
-  
-  
-    
-    
-    
-    
-    
-    <li class="md-nav__item md-nav__item--nested">
-      
-        
-        
-          
-        
-        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_7">
-        
-          
-          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="0">
-            
-  
-  
-  <span class="md-ellipsis">
-    Duality &amp; Regularization
-    
-  </span>
-  
-
-            <span class="md-nav__icon md-icon"></span>
-          </label>
-        
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_7">
-            <span class="md-nav__icon md-icon"></span>
-            Duality &amp; Regularization
-          </label>
-          <ul class="md-nav__list" data-md-scrollfix>
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../2a%20Duality/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    Duality
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../3a%20Huber/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    Huber
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../3b%20Penalty%20Functions/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    Penalty Functions
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../3c%20Regularized/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    Regularized Problems
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../3d%20Robust%20Approximation/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    Robust Approximation
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../3e%20MLE/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    MLE
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-          </ul>
-        </nav>
-      
-    </li>
-  
-
-    
-      
-      
-  
-  
-  
-  
-    
-    
-    
-    
-    
-    <li class="md-nav__item md-nav__item--nested">
-      
-        
-        
-          
-        
-        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_8">
-        
-          
-          <label class="md-nav__link" for="__nav_8" id="__nav_8_label" tabindex="0">
-            
-  
-  
-  <span class="md-ellipsis">
-    Discrimination &amp; Optimization
-    
-  </span>
-  
-
-            <span class="md-nav__icon md-icon"></span>
-          </label>
-        
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_8">
-            <span class="md-nav__icon md-icon"></span>
-            Discrimination &amp; Optimization
-          </label>
-          <ul class="md-nav__list" data-md-scrollfix>
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../4a%20Linear%20Discrimination/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    Linear Discrimination
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../6a%20First%20Order%20Optimization/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    First Order Optimization
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-          </ul>
-        </nav>
-      
-    </li>
-  
-
-    
-      
-      
-  
-  
-  
-  
-    
-    
-    
-    
-    
-    <li class="md-nav__item md-nav__item--nested">
-      
-        
-        
-          
-        
-        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_9">
-        
-          
-          <label class="md-nav__link" for="__nav_9" id="__nav_9_label" tabindex="0">
-            
-  
-  
-  <span class="md-ellipsis">
-    Miscellaneous
-    
-  </span>
-  
-
-            <span class="md-nav__icon md-icon"></span>
-          </label>
-        
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_9_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_9">
-            <span class="md-nav__icon md-icon"></span>
-            Miscellaneous
-          </label>
-          <ul class="md-nav__list" data-md-scrollfix>
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../7a%20pareto%20optimal/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    Pareto Optimality
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../Example/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    Example
+    Appendix B - Support Functions and Dual Geometry (Advanced)
     
   </span>
   
@@ -2085,6 +637,8 @@
   
   
   
+    
+  
   
 </nav>
                   </div>
@@ -2116,125 +670,203 @@
   
 
 
-  <h1>7. Calculus Essentials -  Gradients, Jacobians, and Hessians</h1>
+<h1 id="chapter-3-multivariable-calculus-for-optimization">Chapter 3: Multivariable Calculus for Optimization<a class="headerlink" href="#chapter-3-multivariable-calculus-for-optimization" title="Permanent link">¶</a></h1>
+<p>Optimisation is about finding points that minimise (or maximise) a function. To do that analytically, we need to understand gradients, Hessians, Taylor expansions, and first-/second-order optimality conditions.</p>
+<p>We work in <span class="arithmatex">\(\mathbb{R}^n\)</span>.</p>
+<hr>
+<h2 id="31-gradients-jacobians-and-hessians">3.1 Gradients, Jacobians, and Hessians<a class="headerlink" href="#31-gradients-jacobians-and-hessians" title="Permanent link">¶</a></h2>
+<p>Let <span class="arithmatex">\(f : \mathbb{R}^n \to \mathbb{R}\)</span>.<br>
+The <strong>gradient</strong> of <span class="arithmatex">\(f\)</span> at <span class="arithmatex">\(x\)</span> is the column vector
+<script type="math/tex; mode=display">
+\nabla f(x) =
+\begin{bmatrix}
+\frac{\partial f}{\partial x_1}(x) \\
+\vdots \\
+\frac{\partial f}{\partial x_n}(x)
+\end{bmatrix}.
+</script>
+It points in the direction of steepest increase of <span class="arithmatex">\(f\)</span>.</p>
+<p>If <span class="arithmatex">\(F : \mathbb{R}^n \to \mathbb{R}^m\)</span>, the <strong>Jacobian</strong> <span class="arithmatex">\(J_F(x)\)</span> is the <span class="arithmatex">\(m \times n\)</span> matrix of partial derivatives.</p>
+<p>The <strong>Hessian</strong> of <span class="arithmatex">\(f\)</span> is the <span class="arithmatex">\(n \times n\)</span> matrix of second partial derivatives:
+<script type="math/tex; mode=display">
+\nabla^2 f(x) =
+\begin{bmatrix}
+\frac{\partial^2 f}{\partial x_1^2} & \cdots & \frac{\partial^2 f}{\partial x_1 \partial x_n} \\
+\vdots & \ddots & \vdots \\
+\frac{\partial^2 f}{\partial x_n \partial x_1} & \cdots & \frac{\partial^2 f}{\partial x_n^2}
+\end{bmatrix}.
+</script>
+</p>
+<p>If <span class="arithmatex">\(f\)</span> is twice continuously differentiable, then <span class="arithmatex">\(\nabla^2 f(x)\)</span> is symmetric (Clairaut’s theorem).</p>
+<hr>
+<h2 id="32-first-order-taylor-approximation">3.2 First-order Taylor approximation<a class="headerlink" href="#32-first-order-taylor-approximation" title="Permanent link">¶</a></h2>
+<p>For differentiable <span class="arithmatex">\(f\)</span>, we have the first-order Taylor expansion around <span class="arithmatex">\(x\)</span>:
+<script type="math/tex; mode=display">
+f(x + d) \approx f(x) + \nabla f(x)^\top d~.
+</script>
+</p>
+<p>Interpretation:</p>
+<ul>
+<li><span class="arithmatex">\(\nabla f(x)\)</span> gives the best linear approximation.</li>
+<li>The linear model predicts how <span class="arithmatex">\(f\)</span> changes if we move by <span class="arithmatex">\(d\)</span>.</li>
+</ul>
+<p>This is the basis of first-order optimisation methods like gradient descent.</p>
+<hr>
+<h2 id="33-second-order-taylor-approximation">3.3 Second-order Taylor approximation<a class="headerlink" href="#33-second-order-taylor-approximation" title="Permanent link">¶</a></h2>
+<p>If <span class="arithmatex">\(f\)</span> is twice differentiable, then
+<script type="math/tex; mode=display">
+f(x + d) \approx f(x)
++ \nabla f(x)^\top d
++ \frac{1}{2} d^\top \nabla^2 f(x) d~.
+</script>
+</p>
+<p>If <span class="arithmatex">\(\nabla^2 f(x)\)</span> is positive semidefinite, the quadratic term is always <span class="arithmatex">\(\ge 0\)</span>. Locally, <span class="arithmatex">\(x\)</span> is in a “bowl”. If <span class="arithmatex">\(\nabla^2 f(x)\)</span> is indefinite, the landscape can curve up in some directions and down in others — typical of saddle points.</p>
+<hr>
+<h2 id="34-unconstrained-optimality-conditions">3.4 Unconstrained optimality conditions<a class="headerlink" href="#34-unconstrained-optimality-conditions" title="Permanent link">¶</a></h2>
+<p>Suppose we want to solve
+<script type="math/tex; mode=display">
+\min_x f(x)
+</script>
+with no constraints.</p>
+<p>A point <span class="arithmatex">\(x^*\)</span> is called a <strong>critical point</strong> if <span class="arithmatex">\(\nabla f(x^*) = 0\)</span>.</p>
+<ul>
+<li>
+<p><strong>First-order necessary condition</strong>:<br>
+  If <span class="arithmatex">\(x^*\)</span> is a (local) minimiser and <span class="arithmatex">\(f\)</span> is differentiable, then
+  <script type="math/tex; mode=display">
+  \nabla f(x^*) = 0~.
+  </script>
+</p>
+</li>
+<li>
+<p><strong>Second-order necessary condition</strong>:<br>
+  If <span class="arithmatex">\(x^*\)</span> is a (local) minimiser and <span class="arithmatex">\(f\)</span> is twice differentiable,
+  <script type="math/tex; mode=display">
+  \nabla f(x^*) = 0,
+  \quad
+  \nabla^2 f(x^*) \succeq 0
+  \quad\text{(i.e. PSD).}
+  </script>
+</p>
+</li>
+<li>
+<p><strong>Second-order sufficient condition</strong>:<br>
+  If
+  <script type="math/tex; mode=display">
+  \nabla f(x^*) = 0,
+  \quad
+  \nabla^2 f(x^*) \succ 0
+  \quad\text{(i.e. PD),}
+  </script>
+  then <span class="arithmatex">\(x^*\)</span> is a strict local minimiser.</p>
+</li>
+</ul>
+<p>Now, here is where convexity changes everything.</p>
+<blockquote>
+<p>If <span class="arithmatex">\(f\)</span> is convex, then <strong>any</strong> point <span class="arithmatex">\(x^*\)</span> with <span class="arithmatex">\(\nabla f(x^*) = 0\)</span> is not just a local minimiser — it is a <strong>global minimiser</strong> (Boyd and Vandenberghe, 2004). No second-order check is even needed.</p>
+</blockquote>
+<hr>
+<h2 id="35-gradients-as-normals-to-level-sets">3.5 Gradients as normals to level sets<a class="headerlink" href="#35-gradients-as-normals-to-level-sets" title="Permanent link">¶</a></h2>
+<p>A <strong>level set</strong> of a differentiable function <span class="arithmatex">\(f\)</span> is
+<script type="math/tex; mode=display">
+L_c = \{ x : f(x) = c \}.
+</script>
+</p>
+<p>At any point <span class="arithmatex">\(x\)</span> with <span class="arithmatex">\(\nabla f(x) \ne 0\)</span>, the gradient <span class="arithmatex">\(\nabla f(x)\)</span> is orthogonal to the level set <span class="arithmatex">\(L_{f(x)}\)</span>. Intuitively, the level set is like a contour line, and the gradient is perpendicular to it, pointing toward larger values of <span class="arithmatex">\(f\)</span>.</p>
+<p>In optimisation, if we want to decrease <span class="arithmatex">\(f\)</span>, we move roughly in direction <span class="arithmatex">\(-\nabla f(x)\)</span>.</p>
+<p>This geometric fact recurs later in constrained optimisation and KKT: at optimality, the gradient of the objective lies in the span of gradients of active constraints.</p>
+<hr>
+<h2 id="36-convexity-and-the-hessian">3.6 Convexity and the Hessian<a class="headerlink" href="#36-convexity-and-the-hessian" title="Permanent link">¶</a></h2>
+<p>If <span class="arithmatex">\(f : \mathbb{R}^n \to \mathbb{R}\)</span> is twice differentiable, then:</p>
+<ul>
+<li><span class="arithmatex">\(f\)</span> is <strong>convex</strong> if and only if <span class="arithmatex">\(\nabla^2 f(x)\)</span> is positive semidefinite for all <span class="arithmatex">\(x\)</span> in its domain (Boyd and Vandenberghe, 2004).</li>
+<li><span class="arithmatex">\(f\)</span> is <strong>strictly convex</strong> if <span class="arithmatex">\(\nabla^2 f(x)\)</span> is positive definite for all <span class="arithmatex">\(x\)</span>.</li>
+</ul>
+<hr>
+<h2 id="37-takeaways">3.7 Takeaways<a class="headerlink" href="#37-takeaways" title="Permanent link">¶</a></h2>
+<ol>
+<li>Gradients and Hessians describe local behaviour.</li>
+<li>In unconstrained problems, <span class="arithmatex">\(\nabla f(x^*)=0\)</span> is necessary for optimality.</li>
+<li>For convex <span class="arithmatex">\(f\)</span>, <span class="arithmatex">\(\nabla f(x^*)=0\)</span> is also sufficient for <em>global</em> optimality.</li>
+<li>The Hessian being PSD everywhere is the smooth-test for convexity.</li>
+</ol>
+<p>In the next chapter, we step back from calculus and talk about <em>sets</em>. Convex sets give us the language to talk about feasible regions, constraints, and geometry of optimisation.</p>
+<!-- 
+---
 
-<p>Calculus provides the analytical tools to optimize functions: it describes how functions change when we tweak the input. In convex optimization we often assume differentiability (at least for the objective, if not constraints), so we rely on gradients and Hessians to characterize optimal points and design algorithms.</p>
-<p><strong>Gradient and directional derivative:</strong> Let <span class="arithmatex">\(f: \mathbb{R}^n \to \mathbb{R}\)</span> be differentiable. The gradient <span class="arithmatex">\(\nabla f(x)\)</span> is the vector of partial derivatives</p>
-<div class="arithmatex">\[
+## References (Chapter 3)
+
+- Boyd, S. and Vandenberghe, L. (2004). *Convex Optimization*. Cambridge University Press.  
+- Nesterov, Y. (2018). *Lectures on Convex Optimization*. Springer.
+
+Calculus provides the analytical tools to optimize functions: it describes how functions change when we tweak the input. In convex optimization we often assume differentiability (at least for the objective, if not constraints), so we rely on gradients and Hessians to characterize optimal points and design algorithms.
+
+**Gradient and directional derivative:** Let $f: \mathbb{R}^n \to \mathbb{R}$ be differentiable. The gradient $\nabla f(x)$ is the vector of partial derivatives
+
+$$
 \nabla f(x) =
 \begin{bmatrix}
 \dfrac{\partial f}{\partial x_1} \\
 \vdots \\
 \dfrac{\partial f}{\partial x_n}
 \end{bmatrix}
-\]</div>
-<p>so that for a small step <span class="arithmatex">\(h\)</span>, <span class="arithmatex">\(f(x+h) \approx f(x) + \langle \nabla f(x),h\rangle\)</span>. This linear approximation is the first-order Taylor expansion. The gradient <span class="arithmatex">\(\nabla f(x)\)</span> points in the direction of steepest increase of <span class="arithmatex">\(f\)</span>; <span class="arithmatex">\(-\nabla f(x)\)</span> is the direction of steepest decrease. Specifically, <span class="arithmatex">\(\nabla f(x)\)</span> is orthogonal to level sets of <span class="arithmatex">\(f\)</span> at <span class="arithmatex">\(x\)</span>. In optimization, setting <span class="arithmatex">\(\nabla f(x) = 0\)</span> finds stationary points (candidates for optima). Gradient descent uses the update <span class="arithmatex">\(x_{k+1} = x_k - \alpha \nabla f(x_k)\)</span>, taking a small step opposite the gradient to reduce <span class="arithmatex">\(f\)</span>. The magnitude <span class="arithmatex">\(|\nabla f(x)|\)</span> indicates how steep <span class="arithmatex">\(f\)</span> is; when <span class="arithmatex">\(\nabla f(\hat{x})=0\)</span>, the function is flat to first order at <span class="arithmatex">\(\hat{x}\)</span>. For convex <span class="arithmatex">\(f\)</span>, any stationary point is a global minimum.</p>
-<p>The <strong>directional derivative</strong> in direction <span class="arithmatex">\(u\)</span> is <span class="arithmatex">\(D_u f(x) = \lim_{t\to0} \frac{f(x+tu)-f(x)}{t} = \langle \nabla f(x), u\rangle\)</span>. This shows how the gradient inner product with <span class="arithmatex">\(u\)</span> gives the instantaneous rate of change of <span class="arithmatex">\(f\)</span> along <span class="arithmatex">\(u\)</span>. In particular, <span class="arithmatex">\(D_u f(x)\)</span> is maximized when <span class="arithmatex">\(u\)</span> points along <span class="arithmatex">\(\nabla f(x)\)</span> (steepest ascent) and minimized when <span class="arithmatex">\(u\)</span> is opposite.</p>
-<p><strong>Jacobian for vector-valued mappings:</strong> If <span class="arithmatex">\(g: \mathbb{R}^n \to \mathbb{R}^m\)</span> (with <span class="arithmatex">\(m&gt;1\)</span> outputs), the Jacobian matrix <span class="arithmatex">\(J_g(x)\)</span> is the <span class="arithmatex">\(m \times n\)</span> matrix of partial derivatives: its <span class="arithmatex">\((i,j)\)</span> entry is <span class="arithmatex">\(\partial g_i/\partial x_j\)</span>. The <span class="arithmatex">\(i\)</span> th row is <span class="arithmatex">\((\nabla g_i(x))^T\)</span>. For example, if <span class="arithmatex">\(g(x) = Ax\)</span> (linear map), then <span class="arithmatex">\(J_g(x)=A\)</span> constant. If <span class="arithmatex">\(g(x) = (f(x), h(x))\)</span> combines two scalars, the Jacobian has two rows: <span class="arithmatex">\(\nabla f(x)^T\)</span> and <span class="arithmatex">\(\nabla h(x)^T\)</span>. The Jacobian represents the best linear approximation of <span class="arithmatex">\(g\)</span> near <span class="arithmatex">\(x\)</span>: <span class="arithmatex">\(g(x+h) \approx g(x) + J_g(x),h\)</span>. When <span class="arithmatex">\(m=n\)</span> and <span class="arithmatex">\(J_g(x)\)</span> is invertible, <span class="arithmatex">\(g\)</span> is locally invertible (by the Inverse Function Theorem) and the Jacobian’s determinant indicates how volumes scale under <span class="arithmatex">\(g\)</span>. In optimization, Jacobians appear in constraints: if we have vector constraints <span class="arithmatex">\(g(x)=0\)</span>, <span class="arithmatex">\(J_g(x)\)</span> is the constraint Jacobian matrix used in KKT conditions. They also appear when optimizing compositions of functions (via chain rule, below). In machine learning, the Jacobian of a network’s layers is used to propagate gradients backward (backpropagation is an application of chain rule on a composed function).</p>
-<p><strong>Chain rule:</strong> If <span class="arithmatex">\(h(x) = f(g(x))\)</span> is a composition <span class="arithmatex">\(\mathbb{R}^n \xrightarrow{g} \mathbb{R}^m \xrightarrow{f} \mathbb{R}\)</span>, then by the chain rule the gradient is</p>
-<div class="arithmatex">\[
+$$
+
+
+so that for a small step $h$, $f(x+h) \approx f(x) + \langle \nabla f(x),h\rangle$. This linear approximation is the first-order Taylor expansion. The gradient $\nabla f(x)$ points in the direction of steepest increase of $f$; $-\nabla f(x)$ is the direction of steepest decrease. Specifically, $\nabla f(x)$ is orthogonal to level sets of $f$ at $x$. In optimization, setting $\nabla f(x) = 0$ finds stationary points (candidates for optima). Gradient descent uses the update $x_{k+1} = x_k - \alpha \nabla f(x_k)$, taking a small step opposite the gradient to reduce $f$. The magnitude $|\nabla f(x)|$ indicates how steep $f$ is; when $\nabla f(\hat{x})=0$, the function is flat to first order at $\hat{x}$. For convex $f$, any stationary point is a global minimum.
+
+The **directional derivative** in direction $u$ is $D_u f(x) = \lim_{t\to0} \frac{f(x+tu)-f(x)}{t} = \langle \nabla f(x), u\rangle$. This shows how the gradient inner product with $u$ gives the instantaneous rate of change of $f$ along $u$. In particular, $D_u f(x)$ is maximized when $u$ points along $\nabla f(x)$ (steepest ascent) and minimized when $u$ is opposite.
+
+**Jacobian for vector-valued mappings:** If $g: \mathbb{R}^n \to \mathbb{R}^m$ (with $m>1$ outputs), the Jacobian matrix $J_g(x)$ is the $m \times n$ matrix of partial derivatives: its $(i,j)$ entry is $\partial g_i/\partial x_j$. The $i$ th row is $(\nabla g_i(x))^T$. For example, if $g(x) = Ax$ (linear map), then $J_g(x)=A$ constant. If $g(x) = (f(x), h(x))$ combines two scalars, the Jacobian has two rows: $\nabla f(x)^T$ and $\nabla h(x)^T$. The Jacobian represents the best linear approximation of $g$ near $x$: $g(x+h) \approx g(x) + J_g(x),h$. When $m=n$ and $J_g(x)$ is invertible, $g$ is locally invertible (by the Inverse Function Theorem) and the Jacobian’s determinant indicates how volumes scale under $g$. In optimization, Jacobians appear in constraints: if we have vector constraints $g(x)=0$, $J_g(x)$ is the constraint Jacobian matrix used in KKT conditions. They also appear when optimizing compositions of functions (via chain rule, below). In machine learning, the Jacobian of a network’s layers is used to propagate gradients backward (backpropagation is an application of chain rule on a composed function).
+
+**Chain rule:** If $h(x) = f(g(x))$ is a composition $\mathbb{R}^n \xrightarrow{g} \mathbb{R}^m \xrightarrow{f} \mathbb{R}$, then by the chain rule the gradient is
+
+
+$$
 \nabla h(x) = J_g(x)^\top \, \nabla f(g(x))
-\]</div>
-<p>In coordinates, <span class="arithmatex">\(\frac{\partial h}{\partial x_j} = \sum_{i=1}^m \frac{\partial f}{\partial y_i}(g(x)) \frac{\partial g_i}{\partial x_j}(x)\)</span>. This general rule shows that to compute the gradient of a nested function, we multiply the Jacobians going backward. For example, if <span class="arithmatex">\(f(y)\)</span> is scalar and <span class="arithmatex">\(g(x)\)</span> yields features, <span class="arithmatex">\(\nabla_x f(g(x)) = J_g(x)^T \nabla f(y)|_{y=g(x)}\)</span>. This is exactly how backpropagation in neural networks works: the gradient w.r.t. inputs is obtained by propagating the output error gradient through each layer’s Jacobian (which are often simple elementwise operations or linear weight matrices). Thus, the chain rule is fundamental for efficient gradient calculations. In convex optimization, if <span class="arithmatex">\(g(x)\)</span> is an affine function and <span class="arithmatex">\(f\)</span> is convex and differentiable, then <span class="arithmatex">\(h(x)=f(g(x))\)</span> is convex and <span class="arithmatex">\(\nabla h(x) = J_g(x)^T \nabla f(g(x))\)</span> provides the needed gradient for algorithms.</p>
-<p>Hessian and second-order derivatives: The Hessian of <span class="arithmatex">\(f:\mathbb{R}^n\to\mathbb{R}\)</span> is the <span class="arithmatex">\(n \times n\)</span> symmetric matrix of second partials, <span class="arithmatex">\(\nabla^2 f(x)\)</span>, where <span class="arithmatex">\((\nabla^2 f(x))_{ij} = \frac{\partial^2 f}{\partial x_i \partial x_j}\)</span>. The Hessian matrix captures the quadratic curvature of <span class="arithmatex">\(f\)</span> around <span class="arithmatex">\(x\)</span>. Specifically, the second-order Taylor expansion is</p>
-<p>𝑓
-(
-𝑥
-+
-ℎ
-)
-≈
-𝑓
-(
-𝑥
-)
-+
-⟨
-∇
-𝑓
-(
-𝑥
-)
-,
-ℎ
-⟩
-+
-1
-2
-ℎ
-𝑇
-(
-∇
-2
-𝑓
-(
-𝑥
-)
-)
- 
-ℎ
-.
-f(x+h)≈f(x)+⟨∇f(x),h⟩+
-2
-1
-    ​</p>
-<p>h
-T
-(∇
-2
-f(x))h.</p>
-<p>The quadratic term <span class="arithmatex">\(h^T \nabla^2 f(x) h / 2\)</span> approximates how the gradient itself changes with <span class="arithmatex">\(h\)</span>. Properties of Hessian: if <span class="arithmatex">\(\nabla^2 f(x) \succeq 0\)</span> (PSD) for all <span class="arithmatex">\(x\)</span> in a region, <span class="arithmatex">\(f\)</span> is convex on that region. If <span class="arithmatex">\(\nabla^2 f(x) \succ 0\)</span> (PD) for all <span class="arithmatex">\(x\)</span>, <span class="arithmatex">\(f\)</span> is strictly convex (one minimizer). On the other hand, if <span class="arithmatex">\(\nabla^2 f(x)\)</span> has a negative eigenvalue, <span class="arithmatex">\(f\)</span> is locally concave in that direction (not convex). Thus Hessian definiteness is a local convexity test. Many convex functions have constant Hessians (e.g. <span class="arithmatex">\(f(x)=\frac{1}{2}x^TQx\)</span> has <span class="arithmatex">\(\nabla^2 f = Q\)</span>).</p>
-<p>In optimization algorithms, Hessians are used in Newton’s method, which iteratively updates</p>
-<p>𝑥
-𝑘
-+
-1
-=
-𝑥
-𝑘
-−
-[
-∇
-2
-𝑓
-(
-𝑥
-𝑘
-)
-]
-−
-1
- 
-∇
-𝑓
-(
-𝑥
-𝑘
-)
-.
-x
-k+1
-    ​</p>
-<p>=x
-k
-    ​</p>
-<p>−[∇
-2
-f(x
-k
-    ​</p>
-<p>)]
-−1
-∇f(x
-k
-    ​</p>
-<p>).</p>
-<p>This uses the Hessian inverse as a linear approximation to the curvature, jumping to where the gradient would be zero if the quadratic model were exact. Newton’s method converges in a few iterations for quadratic objectives and generally superlinearly for well-behaved convex functions, but it requires solving linear systems involving <span class="arithmatex">\(\nabla^2 f(x)\)</span>, which can be expensive for large <span class="arithmatex">\(n\)</span>. Quasi-Newton methods (like BFGS) build approximations to the Hessian on the fly. Regardless, understanding Hessian is crucial for high-dimensional convex optimization: it tells us how sensitive the gradient is to changes in <span class="arithmatex">\(x\)</span>, which directly affects step sizes and convergence.</p>
-<p>Example – quadratic function: <span class="arithmatex">\(f(x) = \frac{1}{2}x^TQx - b^T x\)</span>. Here <span class="arithmatex">\(\nabla f(x) = Qx - b\)</span> (linear), and <span class="arithmatex">\(\nabla^2 f(x) = Q\)</span>. Solving <span class="arithmatex">\(\nabla f=0\)</span> yields <span class="arithmatex">\(Qx=b\)</span>, so if <span class="arithmatex">\(Q \succ 0\)</span> the unique minimizer is <span class="arithmatex">\(x^* = Q^{-1}b\)</span>. The Hessian being <span class="arithmatex">\(Q \succ 0\)</span> confirms convexity. If <span class="arithmatex">\(Q\)</span> has large eigenvalues, gradient <span class="arithmatex">\(Qx - b\)</span> changes rapidly in some directions (steep narrow valley); if some eigenvalues are tiny, gradient hardly changes in those directions (flat valley). This aligns with earlier discussions: condition number of <span class="arithmatex">\(Q\)</span> controls difficulty of minimizing <span class="arithmatex">\(f\)</span>.</p>
-<p>Optimality conditions (unconstrained): For an unconstrained differentiable problem <span class="arithmatex">\(\min_x f(x)\)</span>, the first-order necessary condition is <span class="arithmatex">\(\nabla f(x^) = 0\)</span>. If <span class="arithmatex">\(f\)</span> is convex, this is also sufficient: any <span class="arithmatex">\(x\)</span> with <span class="arithmatex">\(\nabla f(x)=0\)</span> is a global minimizer. If <span class="arithmatex">\(f\)</span> is twice differentiable, second-order conditions say: <span class="arithmatex">\(\nabla f(x^)=0\)</span> and <span class="arithmatex">\(\nabla^2 f(x^*) \succeq 0\)</span> for a local minimum. In convex problems the Hessian condition is automatically satisfied everywhere (since convex <span class="arithmatex">\(f\)</span> has PSD Hessian throughout), so checking <span class="arithmatex">\(\nabla f(x)=0\)</span> is enough.</p>
-<p>Gradient Lipschitz continuity: A concept often used in convergence analysis is Lipschitz continuity of the gradient. If there exists <span class="arithmatex">\(L\)</span> such that <span class="arithmatex">\(|\nabla f(x) - \nabla f(y)| \le L |x-y|\)</span> for all <span class="arithmatex">\(x,y\)</span>, we say the gradient is <span class="arithmatex">\(L\)</span>-Lipschitz (or <span class="arithmatex">\(f\)</span> is <span class="arithmatex">\(L\)</span>-smooth). <span class="arithmatex">\(L\)</span> is essentially an upper bound on the Hessian eigenvalues (for <span class="arithmatex">\(\ell_2\)</span> norm): <span class="arithmatex">\(L \ge \lambda_{\max}(\nabla^2 f(x))\)</span> for all <span class="arithmatex">\(x\)</span>. Smoothness is important because it ensures gradient descent with step <span class="arithmatex">\(\alpha = 1/L\)</span> converges, and it gives a bound <span class="arithmatex">\(f(x_{k+1}) \le f(x_k) - \frac{1}{2L}|\nabla f(x_k)|^2\)</span> (so the function value decreases at least proportionally to the squared gradient norm). Many convex functions in optimization are <span class="arithmatex">\(L\)</span>-smooth (e.g. quadratic forms with <span class="arithmatex">\(\lambda_{\max}(Q)=L\)</span>). Smoothness together with strong convexity (defined shortly) yields linear convergence rates for gradient descent.</p>
-<p>Strong convexity: A differentiable function <span class="arithmatex">\(f\)</span> is <span class="arithmatex">\(\mu\)</span>-strongly convex if <span class="arithmatex">\(f(y) \ge f(x) + \langle \nabla f(x), y-x \rangle + \frac{\mu}{2}|y-x|^2\)</span> for all <span class="arithmatex">\(x,y\)</span>. Equivalently, <span class="arithmatex">\(f(x) - \frac{\mu}{2}|x|^2\)</span> is convex, which implies <span class="arithmatex">\(\nabla^2 f(x) \succeq \mu I\)</span> (Hessian bounded below by <span class="arithmatex">\(\mu\)</span>) when <span class="arithmatex">\(f\)</span> is twice differentiable. Strong convexity means <span class="arithmatex">\(f\)</span> has a quadratic curvature of at least <span class="arithmatex">\(\mu\)</span> – it grows at least as fast as a parabola. Strongly convex functions have unique minimizers (the bowl can’t flatten out). They also yield much faster convergence: for <span class="arithmatex">\(\mu\)</span>-strongly convex and <span class="arithmatex">\(L\)</span>-smooth <span class="arithmatex">\(f\)</span>, gradient descent with <span class="arithmatex">\(\alpha=1/L\)</span> converges like <span class="arithmatex">\((1-\mu/L)^k\)</span> (linear rate). Intuitively, the condition number <span class="arithmatex">\(\kappa = L/\mu\)</span> comes into play. Examples: the quadratic form above is strongly convex with <span class="arithmatex">\(\mu = \lambda_{\min}(Q)\)</span>. Adding a small ridge term <span class="arithmatex">\(\frac{\mu}{2}|x|^2\)</span> to any convex <span class="arithmatex">\(f\)</span> makes it <span class="arithmatex">\(\mu\)</span>-strongly convex and improves conditioning at the cost of bias.</p>
-<p>In summary, the tools of calculus — gradients for direction of improvement, Hessians for curvature, Jacobians for constraint and composite mappings, and inequalities like Lipschitz bounds — all feed into understanding and solving convex optimization problems. The optimality conditions formalize the simple idea: at optimum, the gradient must vanish or be balanced by constraints. The next chapter will build on this by considering those constraints explicitly and introducing Lagrange multipliers and duality, giving deeper insight into optimality in constrained problems.</p>
+$$
+
+
+
+
+In coordinates, $\frac{\partial h}{\partial x_j} = \sum_{i=1}^m \frac{\partial f}{\partial y_i}(g(x)) \frac{\partial g_i}{\partial x_j}(x)$. This general rule shows that to compute the gradient of a nested function, we multiply the Jacobians going backward. For example, if $f(y)$ is scalar and $g(x)$ yields features, $\nabla_x f(g(x)) = J_g(x)^T \nabla f(y)|_{y=g(x)}$. This is exactly how backpropagation in neural networks works: the gradient w.r.t. inputs is obtained by propagating the output error gradient through each layer’s Jacobian (which are often simple elementwise operations or linear weight matrices). Thus, the chain rule is fundamental for efficient gradient calculations. In convex optimization, if $g(x)$ is an affine function and $f$ is convex and differentiable, then $h(x)=f(g(x))$ is convex and $\nabla h(x) = J_g(x)^T \nabla f(g(x))$ provides the needed gradient for algorithms.
+
+**Hessian and second-order derivatives:** The Hessian of $f:\mathbb{R}^n\to\mathbb{R}$ is the $n \times n$ symmetric matrix of second partials, $\nabla^2 f(x)$, where $(\nabla^2 f(x))_{ij} = \frac{\partial^2 f}{\partial x_i \partial x_j}$. The Hessian matrix captures the quadratic curvature of $f$ around $x$. Specifically, the second-order Taylor expansion is
+
+$$
+f(x + h) \approx f(x)
++ \langle \nabla f(x), h \rangle
++ \tfrac{1}{2} \, h^\top (\nabla^2 f(x)) \, h
+$$
+
+The quadratic term $h^T \nabla^2 f(x) h / 2$ approximates how the gradient itself changes with $h$. 
+
+**Properties of Hessian:**
+
+- if $\nabla^2 f(x) \succeq 0$ (PSD) for all $x$ in a region, $f$ is convex on that region.
+
+- If $\nabla^2 f(x) \succ 0$ (PD) for all $x$, $f$ is strictly convex (one minimizer). 
+
+- On the other hand, if $\nabla^2 f(x)$ has a negative eigenvalue, $f$ is locally concave in that direction (not convex). Thus Hessian definiteness is a local convexity test. Many convex functions have constant Hessians (e.g. $f(x)=\frac{1}{2}x^TQx$ has $\nabla^2 f = Q$).
+
+In optimization algorithms, Hessians are used in Newton’s method, which iteratively updates
+
+$$
+x_{k+1} = x_k - [\nabla^2 f(x_k)]^{-1} \, \nabla f(x_k)
+$$
+
+
+This uses the Hessian inverse as a linear approximation to the curvature, jumping to where the gradient would be zero if the quadratic model were exact. Newton’s method converges in a few iterations for quadratic objectives and generally superlinearly for well-behaved convex functions, but it requires solving linear systems involving $\nabla^2 f(x)$, which can be expensive for large $n$. Quasi-Newton methods (like BFGS) build approximations to the Hessian on the fly. Regardless, understanding Hessian is crucial for high-dimensional convex optimization: it tells us how sensitive the gradient is to changes in $x$, which directly affects step sizes and convergence.
+
+**Example – quadratic function:** $f(x) = \frac{1}{2}x^TQx - b^T x$. Here $\nabla f(x) = Qx - b$ (linear), and $\nabla^2 f(x) = Q$. Solving $\nabla f=0$ yields $Qx=b$, so if $Q \succ 0$ the unique minimizer is $x^* = Q^{-1}b$. The Hessian being $Q \succ 0$ confirms convexity. If $Q$ has large eigenvalues, gradient $Qx - b$ changes rapidly in some directions (steep narrow valley); if some eigenvalues are tiny, gradient hardly changes in those directions (flat valley). This aligns with earlier discussions: condition number of $Q$ controls difficulty of minimizing $f$.
+
+**Optimality conditions (unconstrained):** For an unconstrained differentiable problem $\min_x f(x)$, the first-order necessary condition is $\nabla f(x^) = 0$. If $f$ is convex, this is also sufficient: any $x$ with $\nabla f(x)=0$ is a global minimizer. If $f$ is twice differentiable, second-order conditions say: $\nabla f(x^)=0$ and $\nabla^2 f(x^*) \succeq 0$ for a local minimum. In convex problems the Hessian condition is automatically satisfied everywhere (since convex $f$ has PSD Hessian throughout), so checking $\nabla f(x)=0$ is enough.
+
+**Gradient Lipschitz continuity:** A concept often used in convergence analysis is Lipschitz continuity of the gradient. If there exists $L$ such that $|\nabla f(x) - \nabla f(y)| \le L |x-y|$ for all $x,y$, we say the gradient is $L$-Lipschitz (or $f$ is $L$-smooth). $L$ is essentially an upper bound on the Hessian eigenvalues (for $\ell_2$ norm): $L \ge \lambda_{\max}(\nabla^2 f(x))$ for all $x$. Smoothness is important because it ensures gradient descent with step $\alpha = 1/L$ converges, and it gives a bound $f(x_{k+1}) \le f(x_k) - \frac{1}{2L}|\nabla f(x_k)|^2$ (so the function value decreases at least proportionally to the squared gradient norm). Many convex functions in optimization are $L$-smooth (e.g. quadratic forms with $\lambda_{\max}(Q)=L$). Smoothness together with strong convexity (defined shortly) yields linear convergence rates for gradient descent.
+
+**Strong convexity:** A differentiable function $f$ is $\mu$-strongly convex if $f(y) \ge f(x) + \langle \nabla f(x), y-x \rangle + \frac{\mu}{2}|y-x|^2$ for all $x,y$. Equivalently, $f(x) - \frac{\mu}{2}|x|^2$ is convex, which implies $\nabla^2 f(x) \succeq \mu I$ (Hessian bounded below by $\mu$) when $f$ is twice differentiable. Strong convexity means $f$ has a quadratic curvature of at least $\mu$ – it grows at least as fast as a parabola. Strongly convex functions have unique minimizers (the bowl can’t flatten out). They also yield much faster convergence: for $\mu$-strongly convex and $L$-smooth $f$, gradient descent with $\alpha=1/L$ converges like $(1-\mu/L)^k$ (linear rate). Intuitively, the condition number $\kappa = L/\mu$ comes into play. Examples: the quadratic form above is strongly convex with $\mu = \lambda_{\min}(Q)$. Adding a small ridge term $\frac{\mu}{2}|x|^2$ to any convex $f$ makes it $\mu$-strongly convex and improves conditioning at the cost of bias.
+
+In summary, the tools of calculus — gradients for direction of improvement, Hessians for curvature, Jacobians for constraint and composite mappings, and inequalities like Lipschitz bounds — all feed into understanding and solving convex optimization problems. The optimality conditions formalize the simple idea: at optimum, the gradient must vanish or be balanced by constraints. The next chapter will build on this by considering those constraints explicitly and introducing Lagrange multipliers and duality, giving deeper insight into optimality in constrained problems. -->
 
 
 
