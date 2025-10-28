@@ -1,0 +1,773 @@
+<!DOCTYPE html><html lang="en" class="no-js"><head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Structured lecture notes on optimization, convex analysis, and algorithms.">
+      
+      
+        <meta name="author" content="Salman Khan">
+      
+      
+        <link rel="canonical" href="https://salk91.github.io/convex_optimization/3_3_newton/">
+      
+      
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.20">
+    
+    
+      
+        <title>3 3 newton - Mathematics for Machine Learning</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.e53b48f4.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Merriweather:300,300i,400,400i,700,700i%7CFira+Code:400,400i,700,700i&amp;display=fallback">
+        <style>:root{--md-text-font:"Merriweather";--md-code-font:"Fira Code"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../styles/extra.css">
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  <link href="../assets/stylesheets/glightbox.min.css" rel="stylesheet"><script src="../assets/javascripts/glightbox.min.js"></script><style id="glightbox-style">
+            html.glightbox-open { overflow: initial; height: 100%; }
+            .gslide-title { margin-top: 0px; user-select: text; }
+            .gslide-desc { color: #666; user-select: text; }
+            .gslide-image img { background: white; }
+            .gscrollbar-fixer { padding-right: 15px; }
+            .gdesc-inner { font-size: 0.75rem; }
+            body[data-md-color-scheme="slate"] .gdesc-inner { background: var(--md-default-bg-color); }
+            body[data-md-color-scheme="slate"] .gslide-title { color: var(--md-default-fg-color); }
+            body[data-md-color-scheme="slate"] .gslide-desc { color: var(--md-default-fg-color); }
+        </style></head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="slate" data-md-color-primary="teal" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="Mathematics for Machine Learning" class="md-header__button md-logo" aria-label="Mathematics for Machine Learning" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"></path></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"></path></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Mathematics for Machine Learning
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              3 3 newton
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="teal" data-md-color-accent="indigo" aria-label="Switch to light mode" type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3zm3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95zm-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31"></path></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="teal" data-md-color-accent="indigo" aria-label="Switch to dark mode" type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m3.55 19.09 1.41 1.41 1.8-1.79-1.42-1.42M12 6c-3.31 0-6 2.69-6 6s2.69 6 6 6 6-2.69 6-6c0-3.32-2.69-6-6-6m8 7h3v-2h-3m-2.76 7.71 1.8 1.79 1.41-1.41-1.79-1.8M20.45 5l-1.41-1.4-1.8 1.79 1.42 1.42M13 1h-2v3h2M6.76 5.39 4.96 3.6 3.55 5l1.79 1.81zM1 13h3v-2H1m12 9h-2v3h2"></path></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"></path></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"></path></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"></path></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"></path></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/SalK91/convex_optimization" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.0.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"></path></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="Mathematics for Machine Learning" class="md-nav__button md-logo" aria-label="Mathematics for Machine Learning" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"></path></svg>
+
+    </a>
+    Mathematics for Machine Learning
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/SalK91/convex_optimization" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.0.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"></path></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_1">
+        
+          
+          <label class="md-nav__link" for="__nav_1" id="__nav_1_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Convex Optimization:
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_1">
+            <span class="md-nav__icon md-icon"></span>
+            Convex Optimization:
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../1_0_intro/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    1. Introduction and Overview
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../1_1_vector/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    2. Linear Algebra Foundations
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../1_7_calculus/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    3. Multivariable Calculus for Optimization
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../1_8_convexsets/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    4. Convex Sets and Geometric Fundamentals
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../1_9_convexfunctions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    5. Convex Functions
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../1_7a_subgradients/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    6. Nonsmooth Convex Optimization – Subgradients
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../1_12_kkt/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    7. Optimization Principles – From Gradient Descent to KKT
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../1_13_duality/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    8. Lagrange Duality Theory
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../3_0_optimizationalgo/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    9. Algorithms for Convex Optimization
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../3_7_advanced/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    10. Advanced Large-Scale and Structured Methods
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../3_8_models/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    11. Modelling Patterns and Algorithm Selection in Practice
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../1_10_ineqaulities/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Appendix A - Common Inequalities and Identities
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../1_11_support/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Appendix B - Support Functions and Dual Geometry (Advanced)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+    <a href="https://github.com/SalK91/convex_optimization/edit/master/docs/3_3_newton.md" title="Edit this page" class="md-content__button md-icon" rel="edit">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M10 20H6V4h7v5h5v3.1l2-2V8l-6-6H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h4zm10.2-7c.1 0 .3.1.4.2l1.3 1.3c.2.2.2.6 0 .8l-1 1-2.1-2.1 1-1c.1-.1.2-.2.4-.2m0 3.9L14.1 23H12v-2.1l6.1-6.1z"></path></svg>
+    </a>
+  
+  
+    
+      
+    
+    <a href="https://github.com/SalK91/convex_optimization/raw/master/docs/3_3_newton.md" title="View source of this page" class="md-content__button md-icon">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 18c.56 0 1 .44 1 1s-.44 1-1 1-1-.44-1-1 .44-1 1-1m0-3c-2.73 0-5.06 1.66-6 4 .94 2.34 3.27 4 6 4s5.06-1.66 6-4c-.94-2.34-3.27-4-6-4m0 6.5a2.5 2.5 0 0 1-2.5-2.5 2.5 2.5 0 0 1 2.5-2.5 2.5 2.5 0 0 1 2.5 2.5 2.5 2.5 0 0 1-2.5 2.5M9.27 20H6V4h7v5h5v4.07c.7.08 1.36.25 2 .49V8l-6-6H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h4.5a8.2 8.2 0 0 1-1.23-2"></path></svg>
+    </a>
+  
+
+
+  <h1>3 3 newton</h1>
+
+<p>First-order methods (gradient descent and its variants) use only gradient information and can be slow on ill-conditioned problems. Newton’s method is a second-order algorithm that uses the Hessian (matrix of second derivatives) to curvature-correct the steps. Newton’s method can converge in far fewer iterations — often quadratically fast near the optimum — by taking into account how the gradient changes, not just its value.</p>
+<h3 id="newtons-method-using-second-order-information">Newton’s Method: Using Second-Order Information<a class="headerlink" href="#newtons-method-using-second-order-information" title="Permanent link">¶</a></h3>
+<p>Newton’s method is derived from the second-order Taylor approximation of <span class="arithmatex">\(f\)</span> around the current point <span class="arithmatex">\(x_k\)</span>. We approximate:</p>
+<div class="arithmatex">\[
+f(x_k + d) \approx f(x_k)
++ \nabla f(x_k)^\top d
++ \tfrac{1}{2} \, d^\top \nabla^2 f(x_k) \, d
+\]</div>
+<p>where <span class="arithmatex">\(\nabla^2 f(x_k)\)</span> (the Hessian matrix <span class="arithmatex">\(H_k\)</span>) captures the local curvature. This quadratic model of <span class="arithmatex">\(f\)</span> is minimized (setting derivative to zero) by solving <span class="arithmatex">\(H_k,d = -\nabla f(x_k)\)</span>. Thus the Newton step is</p>
+<div class="arithmatex">\[
+d_{\text{newton}} = -[\nabla^2 f(x_k)]^{-1} \, \nabla f(x_k)
+\]</div>
+<p>and the update becomes <span class="arithmatex">\(x_{k+1} = x_k + d_{\text{newton}} = x_k - H_k^{-1}\nabla f(x_k)\)</span>. In other words, we scale the gradient by the inverse Hessian, which adjusts the step length in each direction according to curvature. Directions in which the function curves gently (small Hessian eigenvalues) get a larger step, and directions of steep curvature (large eigenvalues) get a smaller step. This preconditioning by <span class="arithmatex">\(H_k^{-1}\)</span> leads to much more isotropic progress toward the optimum.</p>
+<p><strong>Geometric interpretation:</strong> Newton’s method is effectively performing gradient descent in a re-scaled space where the metric is defined by the Hessian. At <span class="arithmatex">\(x_k\)</span>, consider the local quadratic approximation <span class="arithmatex">\(q_k(d) = f(x_k) + \nabla f(x_k)^\top d + \frac{1}{2}d^\top H_k d\)</span>. This is a bowl-shaped function (assuming <span class="arithmatex">\(H_k\)</span> is positive-definite, which is true if <span class="arithmatex">\(f\)</span> is locally convex). The minimizer of <span class="arithmatex">\(q_k\)</span> is <span class="arithmatex">\(d_{\text{newton}}\)</span> as above. Newton’s method jumps directly to the bottom of this local quadratic model. If the model were exact (as it would be for a quadratic <span class="arithmatex">\(f\)</span>), Newton’s step would land at the exact minimizer in one iteration. For non-quadratic <span class="arithmatex">\(f\)</span>, the step is only approximate, but as <span class="arithmatex">\(x_k\)</span> approaches <span class="arithmatex">\(x^*\)</span>, the quadratic model becomes very accurate and Newton steps become nearly exact.</p>
+<p>One way to view Newton’s update is as iterative refinement: the update <span class="arithmatex">\(x_{k+1} = x_k - H_k^{-1}\nabla f(x_k)\)</span> solves the linear system <span class="arithmatex">\(\nabla^2 f(x_k), (x_{k+1}-x_k) = -\nabla f(x_k)\)</span>, which is the Newton condition for a stationary point of the second-order model. Thus Newton’s method finds where the gradient would be zero if the current local curvature remained constant. This typically yields a huge improvement in <span class="arithmatex">\(f\)</span>. In effect, Newton’s method stretches/scales space so that in the new coordinates the function looks like a unit ball shape (equal curvature in all directions), then it makes a standard step. After each step, a new linearization occurs at the new point.</p>
+<h3 id="convergence-properties-and-affine-invariance">Convergence Properties and Affine Invariance<a class="headerlink" href="#convergence-properties-and-affine-invariance" title="Permanent link">¶</a></h3>
+<p>When <span class="arithmatex">\(f\)</span> is strongly convex with a Lipschitz-continuous Hessian, Newton’s method exhibits quadratic convergence in a neighborhood of the optimum. This means once <span class="arithmatex">\(x_k\)</span> is sufficiently close to <span class="arithmatex">\(x^*\)</span>, the error shrinks squared at each step: <span class="arithmatex">\(|x_{k+1}-x^*| = O(|x_k - x^*|^2)\)</span>. Equivalently, the number of correct digits in the solution roughly doubles every iteration. In terms of <span class="arithmatex">\(f(x_k) - f(x^*)\)</span>, if gradient descent was <span class="arithmatex">\(O(c^k)\)</span> and accelerated gradient <span class="arithmatex">\(O(1/k^2)\)</span>, Newton’s local rate is on the order of <span class="arithmatex">\(O(c^{2^k})\)</span> – extremely fast. For example, if you are 1% away from optimum at iteration <span class="arithmatex">\(k\)</span>, Newton’s method might be 0.01% away at iteration <span class="arithmatex">\(k+1\)</span>. This fast convergence is what makes Newton’s method so powerful for well-behaved problems. (Formally, one can show near <span class="arithmatex">\(x^*\)</span>: <span class="arithmatex">\(f(x_{k+1})-f(x^*) \le C [f(x_k)-f(x^*)]^2\)</span> under appropriate conditions, hence the log of the error drops exponentially.)</p>
+<p>However, global convergence is not guaranteed without modifications: if started far from the optimum or if <span class="arithmatex">\(H_k\)</span> is not positive-definite, the Newton step might not even be a descent direction (e.g., on nonconvex or badly scaled functions, Newton’s step can overshoot or go to a saddle). To address this, in practice one uses a damped Newton method: incorporate a step size <span class="arithmatex">\(\lambda_k\in(0,1]\)</span> and update <span class="arithmatex">\(x_{k+1} = x_k - \lambda_k H_k^{-1}\nabla f(x_k)\)</span>. Typically <span class="arithmatex">\(\lambda_k\)</span> is chosen by a line search to ensure <span class="arithmatex">\(f(x_{k+1})&lt;f(x_k)\)</span>. Early on, <span class="arithmatex">\(\lambda_k\)</span> might be small (cautious steps) while <span class="arithmatex">\(x_k\)</span> is far from optimum, but eventually <span class="arithmatex">\(\lambda_k\)</span> can be taken as 1 (full Newton steps) in the vicinity of the solution, recovering the rapid quadratic convergence. This strategy ensures global convergence: from any starting point in a convex problem, damped Newton will converge to <span class="arithmatex">\(x^*\)</span>.</p>
+<p>A remarkable property of Newton’s method is affine invariance. This means the trajectory of Newton’s method is independent of linear coordinate transformations of the problem. If we apply an invertible affine mapping <span class="arithmatex">\(y = A^{-1}x\)</span> to the variables and solve in <span class="arithmatex">\(y\)</span>-space, Newton’s steps in <span class="arithmatex">\(y\)</span> map exactly to Newton’s steps in <span class="arithmatex">\(x\)</span>-space under <span class="arithmatex">\(A\)</span>. In contrast, gradient descent is not affine invariant (scaling coordinates stretches the gradient in those directions, affecting the path and convergence speed). Affine invariance highlights that Newton’s method automatically handles conditioning and scaling: by using <span class="arithmatex">\(H_k^{-1}\)</span> it “preconditions” the problem optimally for the local quadratic structure. Another way to say this: Newton’s method is invariant to quadratic change of coordinates, because the Hessian provides the curvature metric. This is why Newton’s method is extremely effective on ill-conditioned problems; it essentially neutralizes the condition number by working in the Hessian’s eigenbasis where the function looks round.</p>
+<p>Cost per iteration: The main drawback of Newton’s method is the cost of computing and inverting the <span class="arithmatex">\(n \times n\)</span> Hessian. This is <span class="arithmatex">\(O(n^3)\)</span> in general for matrix inversion or solving <span class="arithmatex">\(H_k d = -\nabla f\)</span> (though exploiting structure or approximations can reduce this). For very high-dimensional problems (like <span class="arithmatex">\(n\)</span> in the millions), Newton’s method becomes impractical. It’s mainly used when <span class="arithmatex">\(n\)</span> is moderate (up to a few thousands perhaps), or <span class="arithmatex">\(H_k\)</span> has special structure (sparse or low-rank updates). Each Newton iteration is expensive, but ideally you need far fewer iterations than first-order methods. There is a trade-off between doing more cheap steps (gradient descent) versus fewer expensive steps (Newton).</p>
+<h3 id="quasi-newton-methods-bfgs-l-bfgs">Quasi-Newton Methods (BFGS, L-BFGS)<a class="headerlink" href="#quasi-newton-methods-bfgs-l-bfgs" title="Permanent link">¶</a></h3>
+<p>Quasi-Newton methods aim to retain the fast convergence of Newton’s method without having to compute the exact Hessian. They do this by building up an approximate Hessian inverse from successive gradient evaluations. The most famous is the Broyden–Fletcher–Goldfarb–Shanno (BFGS) algorithm, which iteratively updates a matrix <span class="arithmatex">\(H_k\)</span> intended to approximate <span class="arithmatex">\([\nabla^2 f(x_k)]^{-1}\)</span> (the inverse Hessian). At each iteration, after computing <span class="arithmatex">\(\nabla f(x_k)\)</span>, the difference in gradients <span class="arithmatex">\(\Delta g = \nabla f(x_k) - \nabla f(x_{k-1})\)</span> and the step <span class="arithmatex">\(\Delta x = x_k - x_{k-1}\)</span> are used to adjust the previous estimate <span class="arithmatex">\(H_{k-1}\)</span> into a new matrix <span class="arithmatex">\(H_k\)</span> that satisfies the secant condition: <span class="arithmatex">\(H_k, \Delta g = \Delta x\)</span>. This condition ensures <span class="arithmatex">\(H_k\)</span> captures the curvature along the most recent step. The BFGS update formula (a specific symmetric rank-two update) guarantees that <span class="arithmatex">\(H_k\)</span> remains positive-definite and tends to become a better approximation over time
+stat.cmu.edu
+. In simplified terms, BFGS “learns” the curvature of <span class="arithmatex">\(f\)</span> as the iterations progress, by observing how the gradient changes with steps.</p>
+<p>BFGS updates have the form:
+​
+<script type="math/tex; mode=display">
+H_k =
+\left(I - \frac{\Delta x \, \Delta g^\top}{\Delta g^\top \Delta x}\right)
+H_{k-1}
+\left(I - \frac{\Delta g \, \Delta x^\top}{\Delta g^\top \Delta x}\right)
++ \frac{\Delta x \, \Delta x^\top}{\Delta g^\top \Delta x}
+</script>
+</p>
+<p>which is efficient to compute (rank-2 update on the matrix). One can show (under certain assumptions) that these updates lead <span class="arithmatex">\(H_k\)</span> to converge to the true inverse Hessian as <span class="arithmatex">\(k\)</span> grows. Practically, after enough iterations, the direction <span class="arithmatex">\(p_k = -H_k \nabla f(x_k)\)</span> behaves like the Newton direction. BFGS with an appropriate line search is known to achieve superlinear convergence (faster than any geometric rate, though not quite quadratic) once in the neighborhood of the optimum, for strongly convex functions. It’s a very effective compromise: each iteration is only <span class="arithmatex">\(O(n^2)\)</span> to update the <span class="arithmatex">\(H_k\)</span> and compute <span class="arithmatex">\(p_k\)</span> (much cheaper than <span class="arithmatex">\(O(n^3)\)</span> for solving Newton equations), but the iteration count remains low.</p>
+<p>For very large <span class="arithmatex">\(n\)</span>, storing the full <span class="arithmatex">\(H_k\)</span> becomes memory-intensive (<span class="arithmatex">\(n^2\)</span> elements). L-BFGS (Limited-memory BFGS) addresses this by never storing the full matrix; instead it maintains a history of only the last <span class="arithmatex">\(m\)</span> updates <span class="arithmatex">\((\Delta x, \Delta g)\)</span> and implicitly defines <span class="arithmatex">\(H_k\)</span> via this limited history. The user specifies a small memory parameter (say <span class="arithmatex">\(m=5\)</span> or <span class="arithmatex">\(10\)</span>), so L-BFGS uses only the last <span class="arithmatex">\(m\)</span> gradient evaluations to build a compressed approximate Hessian. Each iteration then costs <span class="arithmatex">\(O(nm)\)</span>, which is only linear in <span class="arithmatex">\(n\)</span>. L-BFGS is very popular for large-scale convex optimization because it often provides a good acceleration over plain gradient descent with minimal overhead in memory/computation.</p>
+<p><strong>Quasi-Newton vs Newton:</strong> Quasi-Newton methods, especially BFGS, often approach the performance of Newton’s method without needing an analytic Hessian. They are not affine invariant (scaling the inputs can affect the updates), but they are far more robust than simple gradient descent on difficult problems. Since they rely only on gradient evaluations, they can be applied in situations where Hessians are unavailable or too expensive. In machine learning, BFGS/L-BFGS were historically popular for training logistic regression, CRFs, and other convex models before first-order stochastic methods became dominant for extremely large data. They are still used for moderate-scale problems or as subsolvers in higher-level algorithms.</p>
+<p><strong>BFGS in action:</strong> One way to appreciate BFGS is that it preconditions gradient descent on the fly. Early iterations of BFGS behave like a quick learning phase: the algorithm figures out an effective metric to apply to the gradients. After a while, the <span class="arithmatex">\(H_k\)</span> matrix it builds “whitens” the Hessian of <span class="arithmatex">\(f\)</span> – making the level sets more spherical – so that subsequent updates take nearly optimal routes to <span class="arithmatex">\(x^*\)</span>. Indeed, BFGS determines the descent direction by preconditioning the gradient with curvature information accumulated from past steps. It’s like doing Newton’s method with an approximate Hessian that is refined over time.</p>
+<p><strong>Summary:</strong> Newton’s method uses second-order derivatives to achieve rapid (quadratic) convergence, at the expense of heavy per-iteration work. Quasi-Newton methods like BFGS approximate the second-order info with smart updating rules, achieving superlinear convergence in practice with much lower computational cost per iteration. They strike a balance between first-order and second-order methods and are often the fastest methods for smooth convex optimization when the problem size permits. The geometric insight is that both Newton and quasi-Newton are curvature-aware: they scale gradient directions according to the problem’s geometry, which dramatically improves convergence especially on ill-conditioned problems (where gradients alone struggle).</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"></path></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      © 2025 Salman Khan — Educational Use Only
+    </div>
+  
+  
+</div>
+      
+        
+<div class="md-social">
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://github.com/SalK91/convex_optimization" target="_blank" rel="noopener" title="github.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.0.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"></path></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      <script id="__config" type="application/json">{"base": "..", "features": ["navigation.instant", "navigation.top", "navigation.expand", "header.autohide", "search.suggest", "search.highlight", "content.code.copy", "content.action.edit", "content.action.view"], "search": "../assets/javascripts/workers/search.973d3a69.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.f55a23d4.min.js"></script>
+      
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+      
+    
+  
+<script id="init-glightbox">const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});
+document$.subscribe(()=>{ lightbox.reload(); });
+</script></body></html>
