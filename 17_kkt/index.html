@@ -12,7 +12,7 @@
         <link rel="canonical" href="https://salk91.github.io/convex_optimization/17_kkt/">
       
       
-        <link rel="prev" href="../16_subgradients/">
+        <link rel="prev" href="../16a_optimality_conditions/">
       
       
         <link rel="next" href="../18_duality/">
@@ -23,7 +23,7 @@
     
     
       
-        <title>7. Optimization Principles – From Gradient Descent to KKT - Mathematics for Machine Learning</title>
+        <title>8. Optimization Principles – From Gradient Descent to KKT - Mathematics for Machine Learning</title>
       
     
     
@@ -78,7 +78,7 @@
     
     
     
-    <body dir="ltr" data-md-color-scheme="slate" data-md-color-primary="teal" data-md-color-accent="indigo">
+    <body dir="ltr" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="cyan">
   
     
     <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
@@ -87,7 +87,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#chapter-7-optimization-principles-from-gradient-descent-to-kkt" class="md-skip">
+        <a href="#chapter-8-optimization-principles-from-gradient-descent-to-kkt" class="md-skip">
           Skip to content
         </a>
       
@@ -123,7 +123,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              7. Optimization Principles – From Gradient Descent to KKT
+              8. Optimization Principles – From Gradient Descent to KKT
             
           </span>
         </div>
@@ -136,7 +136,7 @@
     
     
     
-    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="teal" data-md-color-accent="indigo" aria-label="Switch to light mode" type="radio" name="__palette" id="__palette_0">
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="cyan" aria-label="Switch to light mode" type="radio" name="__palette" id="__palette_0">
     
       <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_1" hidden>
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3zm3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95zm-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31"></path></svg>
@@ -146,7 +146,7 @@
     
     
     
-    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="teal" data-md-color-accent="indigo" aria-label="Switch to dark mode" type="radio" name="__palette" id="__palette_1">
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="cyan" aria-label="Switch to dark mode" type="radio" name="__palette" id="__palette_1">
     
       <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_0" hidden>
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m3.55 19.09 1.41 1.41 1.8-1.79-1.42-1.42M12 6c-3.31 0-6 2.69-6 6s2.69 6 6 6 6-2.69 6-6c0-3.32-2.69-6-6-6m8 7h3v-2h-3m-2.76 7.71 1.8 1.79 1.41-1.41-1.79-1.8M20.45 5l-1.41-1.4-1.8 1.79 1.42 1.42M13 1h-2v3h2M6.76 5.39 4.96 3.6 3.55 5l1.79 1.81zM1 13h3v-2H1m12 9h-2v3h2"></path></svg>
@@ -239,7 +239,9 @@
 
 
 
-<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  
+
+<nav class="md-nav md-nav--primary md-nav--integrated" aria-label="Navigation" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
     <a href=".." title="Mathematics for Machine Learning" class="md-nav__button md-logo" aria-label="Mathematics for Machine Learning" data-md-component="logo">
       
@@ -289,7 +291,7 @@
   
   
   <span class="md-ellipsis">
-    Convex Optimization:
+    Convex Optimization
     
   </span>
   
@@ -300,7 +302,7 @@
         <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_1_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_1">
             <span class="md-nav__icon md-icon"></span>
-            Convex Optimization:
+            Convex Optimization
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
             
@@ -446,6 +448,29 @@
                 
   
   
+  
+  
+    <li class="md-nav__item">
+      <a href="../16a_optimality_conditions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    7. First-Order Optimality Conditions in Convex Optimization
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
     
   
   
@@ -463,7 +488,7 @@
   
   
   <span class="md-ellipsis">
-    7. Optimization Principles – From Gradient Descent to KKT
+    8. Optimization Principles – From Gradient Descent to KKT
     
   </span>
   
@@ -487,7 +512,53 @@
   
   
   <span class="md-ellipsis">
-    8. Lagrange Duality Theory
+    9. Lagrange Duality Theory
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../18a_pareto/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    10. Pareto Optimality and Multi-Objective Convex Optimization
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../18b_regularization/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    11. Regularized Approximation – Balancing Fit and Complexity
     
   </span>
   
@@ -510,7 +581,7 @@
   
   
   <span class="md-ellipsis">
-    9. Algorithms for Convex Optimization
+    12. Algorithms for Convex Optimization
     
   </span>
   
@@ -533,7 +604,7 @@
   
   
   <span class="md-ellipsis">
-    10. Advanced Large-Scale and Structured Methods
+    13. Advanced Large-Scale and Structured Methods
     
   </span>
   
@@ -556,7 +627,7 @@
   
   
   <span class="md-ellipsis">
-    11. Modelling Patterns and Algorithm Selection in Practice
+    14. Modelling Patterns and Algorithm Selection in Practice
     
   </span>
   
@@ -566,6 +637,142 @@
   
 
               
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../30_canonical_problems/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    15. Canonical Problems in Convex Optimization
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2">
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Cheat Sheets
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            Cheat Sheets
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../20a_cheatsheet/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Optimization Algos - Cheat Sheet
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3">
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Appendices
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            Appendices
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
             
               
                 
@@ -636,6 +843,144 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../160_conjugates/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Appendix D - Convex Conjugates and Fenchel Duality (Advanced)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../170_probability/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Appendix E - Convexity in Probability and Statistics (Advanced)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../180_subgradient%20method/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Appendix F - Subgradient Method and Variants (Advanced)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../190_proximal/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Appendix G - Proximal Operators
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../200_mirror/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Appendix H - Mirror Descent and Bregman Geometry
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../300_matrixfactorization/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Appendix I - Matrix Factorization
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -649,24 +994,6 @@
                 </div>
               </div>
             
-            
-              
-              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc">
-                <div class="md-sidebar__scrollwrap">
-                  <div class="md-sidebar__inner">
-                    
-
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
-  
-  
-  
-    
-  
-  
-</nav>
-                  </div>
-                </div>
-              </div>
             
           
           
@@ -693,7 +1020,7 @@
   
 
 
-<h1 id="chapter-7-optimization-principles-from-gradient-descent-to-kkt">Chapter 7: Optimization Principles – From Gradient Descent to KKT<a class="headerlink" href="#chapter-7-optimization-principles-from-gradient-descent-to-kkt" title="Permanent link">¶</a></h1>
+<h1 id="chapter-8-optimization-principles-from-gradient-descent-to-kkt">Chapter 8: Optimization Principles – From Gradient Descent to KKT<a class="headerlink" href="#chapter-8-optimization-principles-from-gradient-descent-to-kkt" title="Permanent link">¶</a></h1>
 <p>At this point we understand:</p>
 <ul>
 <li>how to recognise convex functions,</li>
@@ -701,8 +1028,7 @@
 <li>how to describe optimality with gradients or subgradients.</li>
 </ul>
 <p>Now we turn to <em>constrained</em> optimisation. We first recall unconstrained optimisation and gradient descent, then develop the Karush–Kuhn–Tucker (KKT) conditions, which are the first-order optimality conditions for constrained convex optimisation (Boyd and Vandenberghe, 2004).</p>
-<hr>
-<h2 id="71-unconstrained-convex-minimisation">7.1 Unconstrained convex minimisation<a class="headerlink" href="#71-unconstrained-convex-minimisation" title="Permanent link">¶</a></h2>
+<h2 id="81-unconstrained-convex-minimisation">8.1 Unconstrained convex minimisation<a class="headerlink" href="#81-unconstrained-convex-minimisation" title="Permanent link">¶</a></h2>
 <p>Consider
 <script type="math/tex; mode=display">
 \min_x f(x),
@@ -719,8 +1045,7 @@ for some step size <span class="arithmatex">\(\alpha_k &gt; 0\)</span>.</p>
 <li>Under suitable conditions on step size (e.g. Lipschitz gradient), this converges to a global minimiser if <span class="arithmatex">\(f\)</span> is convex.</li>
 </ul>
 <p>If <span class="arithmatex">\(f\)</span> is strongly convex, we get uniqueness of the minimiser and faster convergence.</p>
-<hr>
-<h2 id="72-equality-constrained-optimisation-and-lagrange-multipliers">7.2 Equality-constrained optimisation and Lagrange multipliers<a class="headerlink" href="#72-equality-constrained-optimisation-and-lagrange-multipliers" title="Permanent link">¶</a></h2>
+<h2 id="82-equality-constrained-optimisation-and-lagrange-multipliers">8.2 Equality-constrained optimisation and Lagrange multipliers<a class="headerlink" href="#82-equality-constrained-optimisation-and-lagrange-multipliers" title="Permanent link">¶</a></h2>
 <p>Consider
 <script type="math/tex; mode=display">
 \begin{array}{ll}
@@ -729,31 +1054,30 @@ for some step size <span class="arithmatex">\(\alpha_k &gt; 0\)</span>.</p>
 \end{array}
 </script>
 where <span class="arithmatex">\(f\)</span> and each <span class="arithmatex">\(h_j\)</span> are differentiable.</p>
-<p>We define the <strong>Lagrangian</strong>
+<p>We define the Lagrangian
 <script type="math/tex; mode=display">
 L(x,\lambda)
 =
 f(x) + \sum_{j=1}^p \lambda_j h_j(x),
 </script>
-where <span class="arithmatex">\(\lambda_j\)</span> are the <strong>Lagrange multipliers</strong>.</p>
+where <span class="arithmatex">\(\lambda_j\)</span> are the Lagrange multipliers.</p>
 <p>A necessary condition for <span class="arithmatex">\(x^*\)</span> to be optimal (under suitable regularity assumptions) is:</p>
 <ol>
-<li><strong>Stationarity</strong>:
+<li>Stationarity:
    <script type="math/tex; mode=display">
    \nabla_x L(x^*, \lambda^*) = 0
    \quad \Longleftrightarrow \quad
    \nabla f(x^*) + \sum_j \lambda_j^* \nabla h_j(x^*) = 0.
    </script>
 </li>
-<li><strong>Primal feasibility</strong>:
+<li>Primal feasibility:
    <script type="math/tex; mode=display">
    h_j(x^*) = 0 \quad \text{for all } j.
    </script>
 </li>
 </ol>
 <p>Geometrically, stationarity says: the gradient of <span class="arithmatex">\(f\)</span> at <span class="arithmatex">\(x^*\)</span> lies in the span of the gradients of the active constraints. In words, you cannot move in any feasible direction without increasing <span class="arithmatex">\(f\)</span>.</p>
-<hr>
-<h2 id="73-inequality-constraints-and-kkt">7.3 Inequality constraints and KKT<a class="headerlink" href="#73-inequality-constraints-and-kkt" title="Permanent link">¶</a></h2>
+<h2 id="83-inequality-constraints-and-kkt">8.3 Inequality constraints and KKT<a class="headerlink" href="#83-inequality-constraints-and-kkt" title="Permanent link">¶</a></h2>
 <p>Now consider the general problem:
 <script type="math/tex; mode=display">
 \begin{array}{ll}
@@ -772,10 +1096,10 @@ f(x)
 + \sum_{i=1}^m \mu_i g_i(x),
 </script>
 with multipliers <span class="arithmatex">\(\lambda \in \mathbb{R}^p\)</span> (unrestricted) and <span class="arithmatex">\(\mu \in \mathbb{R}^m\)</span> with <span class="arithmatex">\(\mu_i \ge 0\)</span>.</p>
-<p>The <strong>Karush–Kuhn–Tucker (KKT) conditions</strong> consist of:</p>
+<p>The Karush–Kuhn–Tucker (KKT) conditions consist of:</p>
 <ol>
 <li>
-<p><strong>Primal feasibility</strong>:
+<p>Primal feasibility:
    <script type="math/tex; mode=display">
    g_i(x^*) \le 0,\quad i=1,\dots,m,
    \qquad
@@ -784,26 +1108,26 @@ with multipliers <span class="arithmatex">\(\lambda \in \mathbb{R}^p\)</span> (u
 </p>
 </li>
 <li>
-<p><strong>Dual feasibility</strong>:
+<p>Dual feasibility:
    <script type="math/tex; mode=display">
    \mu_i^* \ge 0,\quad i=1,\dots,m.
    </script>
 </p>
 </li>
 <li>
-<p><strong>Stationarity</strong>:</p>
+<p>Stationarity:</p>
+<p><span class="arithmatex">\(\nabla f(x^*) 
+  + \sum_{j=1}^p \lambda_j^* \nabla h_j(x^*)
+  + \sum_{i=1}^m \mu_i^* \nabla g_i(x^*)
+  = 0\)</span></p>
 </li>
-</ol>
-<div class="arithmatex">\[\nabla f(x^*) 
-   + \sum_{j=1}^p \lambda_j^* \nabla h_j(x^*)
-   + \sum_{i=1}^m \mu_i^* \nabla g_i(x^*)
-   = 0\]</div>
-<ol>
-<li><strong>Complementary slackness</strong>:
+<li>
+<p>Complementary slackness:
    <script type="math/tex; mode=display">
    \mu_i^* g_i(x^*) = 0
    \quad \text{for all } i.
    </script>
+</p>
 </li>
 </ol>
 <p>Complementary slackness means:</p>
@@ -812,40 +1136,27 @@ with multipliers <span class="arithmatex">\(\lambda \in \mathbb{R}^p\)</span> (u
 <li>If <span class="arithmatex">\(\mu_i^* &gt; 0\)</span>, then the constraint is tight: <span class="arithmatex">\(g_i(x^*) = 0\)</span>.</li>
 </ul>
 <p>This matches geometric intuition: only active constraints can “push back” on the optimiser.</p>
-<hr>
-<h2 id="74-kkt-and-convexity">7.4 KKT and convexity<a class="headerlink" href="#74-kkt-and-convexity" title="Permanent link">¶</a></h2>
-<p>For general nonlinear problems, KKT conditions are <em>necessary</em> under regularity assumptions. For convex problems, KKT conditions are often <strong>necessary and sufficient</strong> for optimality (Boyd and Vandenberghe, 2004). In other words, if the problem is convex and a point satisfies KKT, that point is globally optimal.</p>
+<h2 id="84-kkt-and-convexity">8.4 KKT and convexity<a class="headerlink" href="#84-kkt-and-convexity" title="Permanent link">¶</a></h2>
+<p>For general nonlinear problems, KKT conditions are <em>necessary</em> under regularity assumptions. For convex problems, KKT conditions are often necessary and sufficient for optimality. In other words, if the problem is convex and a point satisfies KKT, that point is globally optimal.</p>
 <p>This is extremely powerful:</p>
 <ul>
 <li>You can certify optimality (and thus global optimality) just by finding multipliers <span class="arithmatex">\(\lambda^*, \mu^*\)</span> that satisfy KKT.</li>
 <li>KKT conditions are constructive: they are what solvers try to satisfy.</li>
 </ul>
-<hr>
-<h2 id="75-geometric-picture">7.5 Geometric picture<a class="headerlink" href="#75-geometric-picture" title="Permanent link">¶</a></h2>
+<h2 id="85-geometric-picture">8.5 Geometric picture<a class="headerlink" href="#85-geometric-picture" title="Permanent link">¶</a></h2>
 <p>At the optimal point <span class="arithmatex">\(x^*\)</span>:</p>
 <ul>
 <li><span class="arithmatex">\(\nabla f(x^*)\)</span> is balanced by a conic combination of the normals of the active inequality constraints plus a linear combination of the equality constraint normals.</li>
 <li>The objective cannot be decreased by moving in any feasible direction.</li>
 </ul>
 <p>Visually: the contour of <span class="arithmatex">\(f\)</span> is “tangent” to the feasible region. The Lagrange multipliers encode the direction and strength of that tangency.</p>
-<hr>
-<h2 id="76-constraint-qualifications-brief-note">7.6 Constraint qualifications (brief note)<a class="headerlink" href="#76-constraint-qualifications-brief-note" title="Permanent link">¶</a></h2>
-<p>To guarantee that KKT multipliers exist and KKT conditions apply cleanly, we usually need a mild regularity condition called a <strong>constraint qualification</strong>. The most common is <strong>Slater’s condition</strong> for convex problems:</p>
+<h2 id="86-constraint-qualifications">8.6 Constraint qualifications<a class="headerlink" href="#86-constraint-qualifications" title="Permanent link">¶</a></h2>
+<p>To guarantee that KKT multipliers exist and KKT conditions apply cleanly, we usually need a mild regularity condition called a constraint qualification. The most common is Slater’s condition for convex problems:</p>
 <blockquote>
 <p>If the problem is convex and there exists a strictly feasible point <span class="arithmatex">\(\tilde{x}\)</span> such that<br>
 <span class="arithmatex">\(g_i(\tilde{x}) &lt; 0\)</span> for all <span class="arithmatex">\(i\)</span> and <span class="arithmatex">\(h_j(\tilde{x}) = 0\)</span> for all <span class="arithmatex">\(j\)</span>,<br>
 then strong duality holds and KKT conditions are necessary and sufficient (Boyd and Vandenberghe, 2004).</p>
 </blockquote>
-<hr>
-<h2 id="77-summary">7.7 Summary<a class="headerlink" href="#77-summary" title="Permanent link">¶</a></h2>
-<ul>
-<li>Gradient descent solves unconstrained convex problems.</li>
-<li>Lagrange multipliers extend optimality to equality constraints.</li>
-<li>KKT generalises this to inequality constraints.</li>
-<li>In convex optimisation, KKT is not just necessary, it is sufficient.</li>
-<li>Slater’s condition guarantees everything behaves nicely.</li>
-</ul>
-<p>In the next chapter, we go deeper: duality. The dual problem gives us lower bounds, certificates of optimality, and interpretation of multipliers as “prices”.</p>
 
 
 
@@ -863,6 +1174,8 @@ then strong duality holds and KKT conditions are necessary and sufficient (Boyd 
             </div>
           
           
+  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var labels=set.querySelector(".tabbed-labels");for(var tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+
 <script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
         </div>
         
@@ -915,7 +1228,7 @@ then strong duality holds and KKT conditions are necessary and sufficient (Boyd 
     
     
       
-      <script id="__config" type="application/json">{"base": "..", "features": ["navigation.instant", "navigation.top", "navigation.expand", "header.autohide", "search.suggest", "search.highlight", "content.code.copy", "content.action.edit", "content.action.view"], "search": "../assets/javascripts/workers/search.973d3a69.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+      <script id="__config" type="application/json">{"base": "..", "features": ["navigation.top", "toc.integrate", "content.code.copy", "content.code.annotate", "content.action.edit", "content.action.view", "content.tabs.link", "search.suggest", "search.highlight"], "search": "../assets/javascripts/workers/search.973d3a69.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
     
     
       <script src="../assets/javascripts/bundle.f55a23d4.min.js"></script>

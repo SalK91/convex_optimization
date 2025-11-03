@@ -12,7 +12,7 @@
         <link rel="canonical" href="https://salk91.github.io/convex_optimization/120_ineqaulities/">
       
       
-        <link rel="prev" href="../21_models/">
+        <link rel="prev" href="../20a_cheatsheet/">
       
       
         <link rel="next" href="../130_projections/">
@@ -78,7 +78,7 @@
     
     
     
-    <body dir="ltr" data-md-color-scheme="slate" data-md-color-primary="teal" data-md-color-accent="indigo">
+    <body dir="ltr" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="cyan">
   
     
     <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
@@ -136,7 +136,7 @@
     
     
     
-    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="teal" data-md-color-accent="indigo" aria-label="Switch to light mode" type="radio" name="__palette" id="__palette_0">
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="cyan" aria-label="Switch to light mode" type="radio" name="__palette" id="__palette_0">
     
       <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_1" hidden>
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3zm3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95zm-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31"></path></svg>
@@ -146,7 +146,7 @@
     
     
     
-    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="teal" data-md-color-accent="indigo" aria-label="Switch to dark mode" type="radio" name="__palette" id="__palette_1">
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="cyan" aria-label="Switch to dark mode" type="radio" name="__palette" id="__palette_1">
     
       <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_0" hidden>
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m3.55 19.09 1.41 1.41 1.8-1.79-1.42-1.42M12 6c-3.31 0-6 2.69-6 6s2.69 6 6 6 6-2.69 6-6c0-3.32-2.69-6-6-6m8 7h3v-2h-3m-2.76 7.71 1.8 1.79 1.41-1.41-1.79-1.8M20.45 5l-1.41-1.4-1.8 1.79 1.42 1.42M13 1h-2v3h2M6.76 5.39 4.96 3.6 3.55 5l1.79 1.81zM1 13h3v-2H1m12 9h-2v3h2"></path></svg>
@@ -239,7 +239,9 @@
 
 
 
-<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  
+
+<nav class="md-nav md-nav--primary md-nav--integrated" aria-label="Navigation" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
     <a href=".." title="Mathematics for Machine Learning" class="md-nav__button md-logo" aria-label="Mathematics for Machine Learning" data-md-component="logo">
       
@@ -268,20 +270,18 @@
       
   
   
-    
   
   
-  
     
     
     
     
     
-    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_1" checked>
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_1">
         
           
           <label class="md-nav__link" for="__nav_1" id="__nav_1_label" tabindex="0">
@@ -289,7 +289,7 @@
   
   
   <span class="md-ellipsis">
-    Convex Optimization:
+    Convex Optimization
     
   </span>
   
@@ -297,10 +297,10 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_1_label" aria-expanded="true">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_1_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_1">
             <span class="md-nav__icon md-icon"></span>
-            Convex Optimization:
+            Convex Optimization
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
             
@@ -449,12 +449,35 @@
   
   
     <li class="md-nav__item">
+      <a href="../16a_optimality_conditions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    7. First-Order Optimality Conditions in Convex Optimization
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../17_kkt/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
-    7. Optimization Principles – From Gradient Descent to KKT
+    8. Optimization Principles – From Gradient Descent to KKT
     
   </span>
   
@@ -477,7 +500,53 @@
   
   
   <span class="md-ellipsis">
-    8. Lagrange Duality Theory
+    9. Lagrange Duality Theory
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../18a_pareto/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    10. Pareto Optimality and Multi-Objective Convex Optimization
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../18b_regularization/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    11. Regularized Approximation – Balancing Fit and Complexity
     
   </span>
   
@@ -500,7 +569,7 @@
   
   
   <span class="md-ellipsis">
-    9. Algorithms for Convex Optimization
+    12. Algorithms for Convex Optimization
     
   </span>
   
@@ -523,7 +592,7 @@
   
   
   <span class="md-ellipsis">
-    10. Advanced Large-Scale and Structured Methods
+    13. Advanced Large-Scale and Structured Methods
     
   </span>
   
@@ -546,7 +615,7 @@
   
   
   <span class="md-ellipsis">
-    11. Modelling Patterns and Algorithm Selection in Practice
+    14. Modelling Patterns and Algorithm Selection in Practice
     
   </span>
   
@@ -556,6 +625,144 @@
   
 
               
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../30_canonical_problems/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    15. Canonical Problems in Convex Optimization
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2">
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Cheat Sheets
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            Cheat Sheets
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../20a_cheatsheet/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Optimization Algos - Cheat Sheet
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Appendices
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            Appendices
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
             
               
                 
@@ -636,6 +843,144 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../160_conjugates/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Appendix D - Convex Conjugates and Fenchel Duality (Advanced)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../170_probability/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Appendix E - Convexity in Probability and Statistics (Advanced)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../180_subgradient%20method/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Appendix F - Subgradient Method and Variants (Advanced)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../190_proximal/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Appendix G - Proximal Operators
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../200_mirror/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Appendix H - Mirror Descent and Bregman Geometry
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../300_matrixfactorization/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Appendix I - Matrix Factorization
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -649,24 +994,6 @@
                 </div>
               </div>
             
-            
-              
-              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc">
-                <div class="md-sidebar__scrollwrap">
-                  <div class="md-sidebar__inner">
-                    
-
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
-  
-  
-  
-    
-  
-  
-</nav>
-                  </div>
-                </div>
-              </div>
             
           
           
@@ -695,7 +1022,6 @@
 
 <h1 id="appendix-a-common-inequalities-and-identities">Appendix A: Common Inequalities and Identities<a class="headerlink" href="#appendix-a-common-inequalities-and-identities" title="Permanent link">¶</a></h1>
 <p>This appendix collects important inequalities used throughout convex analysis and optimisation. These are the “algebraic tools” you reach for in proofs, optimality arguments, and convergence analysis (Boyd and Vandenberghe, 2004; Hiriart-Urruty and Lemaréchal, 2001).</p>
-<hr>
 <h2 id="a1-cauchyschwarz-inequality">A.1 Cauchy–Schwarz inequality<a class="headerlink" href="#a1-cauchyschwarz-inequality" title="Permanent link">¶</a></h2>
 <p>For any <span class="arithmatex">\(x,y \in \mathbb{R}^n\)</span>,
 <script type="math/tex; mode=display">
@@ -708,7 +1034,6 @@
 <li>Defines the notion of angle between vectors.</li>
 <li>Justifies dual norms.</li>
 </ul>
-<hr>
 <h2 id="a2-jensens-inequality">A.2 Jensen’s inequality<a class="headerlink" href="#a2-jensens-inequality" title="Permanent link">¶</a></h2>
 <p>Let <span class="arithmatex">\(f\)</span> be convex, and let <span class="arithmatex">\(X\)</span> be a random variable. Then
 <script type="math/tex; mode=display">
@@ -723,7 +1048,6 @@ f\!\left(\sum_i \theta_i x_i\right)
 </script>
 </p>
 <p>Jensen’s inequality is equivalent to convexity: it says “the function at the average is no more than the average of the function values.” It is used constantly to prove convexity of expectations and log-sum-exp.</p>
-<hr>
 <h2 id="a3-amgm-inequality">A.3 AM–GM inequality<a class="headerlink" href="#a3-amgm-inequality" title="Permanent link">¶</a></h2>
 <p>For <span class="arithmatex">\(x_1,\dots,x_n \ge 0\)</span>,
 <script type="math/tex; mode=display">
@@ -733,7 +1057,6 @@ f\!\left(\sum_i \theta_i x_i\right)
 </script>
 </p>
 <p>This can be proved using Jensen’s inequality with <span class="arithmatex">\(f(t) = \log t\)</span>, which is concave. AM–GM appears frequently in inequality-constrained optimisation, e.g. bounding products by sums.</p>
-<hr>
 <h2 id="a4-holders-inequality-generalised-cauchyschwarz">A.4 Hölder’s inequality (generalised Cauchy–Schwarz)<a class="headerlink" href="#a4-holders-inequality-generalised-cauchyschwarz" title="Permanent link">¶</a></h2>
 <p>For <span class="arithmatex">\(p,q \ge 1\)</span> with <span class="arithmatex">\(\frac{1}{p} + \frac{1}{q} = 1\)</span> (conjugate exponents),
 <script type="math/tex; mode=display">
@@ -747,7 +1070,6 @@ f\!\left(\sum_i \theta_i x_i\right)
 <li>When <span class="arithmatex">\(p=q=2\)</span>, Hölder becomes Cauchy–Schwarz.</li>
 <li>Hölder underlies dual norms: the dual of <span class="arithmatex">\(\ell_p\)</span> is <span class="arithmatex">\(\ell_q\)</span>.</li>
 </ul>
-<hr>
 <h2 id="a5-youngs-inequality">A.5 Young’s inequality<a class="headerlink" href="#a5-youngs-inequality" title="Permanent link">¶</a></h2>
 <p>For <span class="arithmatex">\(a,b \ge 0\)</span> and <span class="arithmatex">\(p,q &gt; 1\)</span> with <span class="arithmatex">\(\frac{1}{p} + \frac{1}{q} = 1\)</span>,
 <script type="math/tex; mode=display">
@@ -755,7 +1077,6 @@ ab \le \frac{a^p}{p} + \frac{b^q}{q}.
 </script>
 </p>
 <p>This is useful in bounding cross terms in convergence proofs.</p>
-<hr>
 <h2 id="a6-fenchels-inequality">A.6 Fenchel’s inequality<a class="headerlink" href="#a6-fenchels-inequality" title="Permanent link">¶</a></h2>
 <p>Let <span class="arithmatex">\(f\)</span> be a convex function and let <span class="arithmatex">\(f^*\)</span> be its convex conjugate:
 <script type="math/tex; mode=display">
@@ -768,7 +1089,6 @@ f(x) + f^*(y) \ge y^\top x.
 </script>
 </p>
 <p>Fenchel’s inequality is at the heart of convex duality. In fact, weak duality in Chapter 8 is essentially an application of Fenchel’s inequality.</p>
-<hr>
 <h2 id="a7-supporting-hyperplane-inequality">A.7 Supporting hyperplane inequality<a class="headerlink" href="#a7-supporting-hyperplane-inequality" title="Permanent link">¶</a></h2>
 <p>If <span class="arithmatex">\(f\)</span> is convex, then for any <span class="arithmatex">\(x\)</span> and any <span class="arithmatex">\(g \in \partial f(x)\)</span>,
 <script type="math/tex; mode=display">
@@ -777,7 +1097,6 @@ f(y) \ge f(x) + g^\top (y-x)
 </script>
 </p>
 <p>This can be viewed as “<span class="arithmatex">\(f\)</span> lies above all its tangent hyperplanes,” even when it’s not differentiable. This is both a characterisation of convexity and the definition of subgradients.</p>
-<hr>
 <h2 id="a8-summary">A.8 Summary<a class="headerlink" href="#a8-summary" title="Permanent link">¶</a></h2>
 <ul>
 <li>Cauchy–Schwarz and Hölder bound inner products.</li>
@@ -786,61 +1105,6 @@ f(y) \ge f(x) + g^\top (y-x)
 <li>Supporting hyperplane inequality is the geometry of convexity.</li>
 </ul>
 <p>These inequalities are used implicitly all over convex optimisation.</p>
-<!-- Throughout convex optimization theory, certain inequalities appear repeatedly to bound quantities or prove convexity. We collect a few fundamental ones that every practitioner should know, emphasizing their intuitive meaning and use cases.
-
-**Cauchy–Schwarz Inequality:** For any vectors $x, y \in \mathbb{R}^n$
-
-$$
-|\langle x, y \rangle| \le \|x\|_2 \, \|y\|_2
-$$
-
-
-with equality if and only if $x$ and $y$ are collinear (one is a scalar multiple of the other). This inequality is a cornerstone of Euclidean geometry. It can be seen as a statement that the projection of $x$ onto $y$ cannot exceed the lengths product, or that the cosine of the angle between $x,y$ is at most 1. In optimization, Cauchy–Schwarz justifies many step-size bounds and duality relations. For example, in gradient descent: $f(x_{k+1}) = f(x_k) + \langle \nabla f(x_k), x_{k+1}-x_k\rangle + \cdots$ and choosing $x_{k+1}-x_k = -\alpha \nabla f(x_k)$ gives the maximal decrease in the linear approximation sense because it negates the gradient direction. Cauchy–Schwarz is also used to derive error bounds: $|g^T(x - \hat{x})| \le |g|_2 |x-\hat{x}|_2$, which plugged into optimality conditions yields, for example, primal-dual gap bounds or sensitivity analysis results.
-
-**Triangle Inequality (Minkowski’s inequality):** For any vectors $x,y$ in a normed space,
-
-$$
-\|x + y\| \le \|x\| + \|y\|
-$$
-
-
-Geometrically, the direct path from 0 to $x+y$ is no longer than going from 0 to $x$ and then $x$ to $x+y$ (which is same as 0 to $y$ after shifting origin to $x$). In $\ell_2$, this is the everyday triangle rule. In $\ell_1$, it says $|x_1+y_1| + \cdots + |x_n+y_n| \le (|x_1|+\cdots+|x_n|)+(|y_1|+\cdots+|y_n|)$, obvious since term by term it's true. In $\ell_\infty$, $\max_i |x_i+y_i| \le \max_i |x_i| + \max_i |y_i|$. The triangle inequality ensures that norm balls are convex (their defining inequality is linear in two points). In optimization algorithms, the triangle inequality is often used to decompose error terms: $|x_k - \hat{x}| \le |x_k - \bar{x}| + |\bar{x} - \hat{x}|$ for some intermediate $\bar{x}$, or to prove convergence by bounding how far the current iterate is after one step plus how far that step could overshoot. Minkowski’s inequality is a generalization: for $p\ge1$, $|x+y|_p^p \le |x|_p^p + |y|_p^p +$ cross terms (which lead to the basic form above after taking pth root).
-
-**Jensen’s Inequality:** If $f$ is convex and $x_1,\dots,x_m$ are points with weights $\lambda_i \ge 0$, $\sum \lambda_i=1$, then
-
-$$
-f\!\left(\sum_i \lambda_i x_i\right)
-\le
-\sum_i \lambda_i f(x_i)
-$$
-
-
-Equivalently, $f(\mathbb{E}[X]) \le \mathbb{E}[f(X)]$. We introduced this in the convex function chapter. It’s extremely useful for expectations and probabilistic analysis. A common application: AM–GM inequality: take $f(x) = e^x$ convex, and $x_i = \ln a_i$, $\lambda_i = 1/n$. Then Jensen gives $e^{\frac{1}{n}\sum \ln a_i} \le \frac{1}{n}\sum e^{\ln a_i}$, i.e. $(\prod_{i} a_i)^{1/n} \le \frac{1}{n}\sum a_i$. This is the statement that the geometric mean is at most the arithmetic mean. Equality holds if all $a_i$ equal (so logs equal, function is linear segment). Another: using $f(x)=x^2$ convex and weights, one shows RMS-AM: $\sqrt{\frac{1}{n}\sum a_i^2} \ge \frac{1}{n}\sum a_i$. Jensen’s inequality is often used in convex optimization proofs to move expectation inside a function or vice versa. For instance, in demonstrating convexity of a function that is defined as an expectation: $F(\theta) = \mathbb{E}_\xi[\phi(\theta,\xi)]$ is convex in $\theta$ if each $\phi(\theta,\xi)$ is convex, because $F(\lambda \theta_1+(1-\lambda)\theta_2) = \mathbb{E}[\phi(\lambda \theta_1+(1-\lambda)\theta_2,\xi)] \le \mathbb{E}[\lambda \phi(\theta_1,\xi)+(1-\lambda)\phi(\theta_2,\xi)] = \lambda F(\theta_1) + (1-\lambda) F(\theta_2)$. This is Jensen in action with probability weights. In stochastic gradient methods, one often uses Jensen to argue that the expected objective is decreased even if each step only guarantees decrease in expectation, etc.
-
-**Hölder’s Inequality:** This generalizes Cauchy–Schwarz to $\ell_p$ and $\ell_q$ spaces. If $\frac{1}{p} + \frac{1}{q} = 1$ (with $p,q\ge1$), then for vectors (or sequences) $a,b$ of appropriate dimension,
-
-$$
-\sum_i |a_i b_i|
-\le
-\left(\sum_i |a_i|^p\right)^{1/p}
-\left(\sum_i |b_i|^q\right)^{1/q}
-$$
-
-
-For example, with $p=2,q=2$, this is Cauchy–Schwarz. With $p=1,q=\infty$, it says $\sum |a_i b_i| \le (\sum |a_i|)|b|\infty$ (makes sense: $|b|\infty$ is the max component, factor it out). With $p=q=4/3$ and $q=4$, it’s something more exotic. Hölder’s inequality is very useful in analysis and dual norms: it exactly shows that the dual norm of $\ell_p$ is $\ell_q$. Indeed, take $x$ with $|x|_p=1$, then maximize $\sum x_i y_i$ over such $x$. Setting $x_i = |y_i|^{q-2} y_i / |y|_q^{q-1}$ (the extremizer found by equality case) yields $\sum_i x_i y_i = |y|q$. So $\sup{|x|_p\le1} x^T y = |y|_q$. This is why in Chapter 3 we stated dual norm formula and that $\ell_p$ dual is $\ell_q$; the proof is Hölder’s inequality. In optimization, Hölder is often used to bound sums or integrals when dealing with error terms. For instance, in optimizing integrals or in mirror descent analysis, one often gets a term like $\int g(x) h(x),dx$ and uses Hölder to split it into $|g|_p |h|_q$. In linear programming, Hölder’s inequality appears in the derivation of LP duality: maximizing $c^T x$ subject to $Ax \le b$, $x\ge0$ and its dual $b^T y$ s.t. $A^T y \ge c, y\ge0$. Weak duality follows from $c^T x \le y^T A x \le y^T b$ by $x\ge0$, $A^T y\ge c$, which is essentially an instance of Hölder: $c^T x \le (A^T y)^T x = y^T (Ax) \le y^T b$. Here we used $\sum_i c_i x_i \le \sum_i y_i (A x)_i$ since $c_i \le (A^T y)_i$ and $x_i\ge0$. That step is like $c_i x_i \le y_i (A x)_i$ summing yields the inequality. It’s a discrete form but conceptually related to Hölder’s type argument of splitting products.
-
-**Other inequalities:** There are many more (Markov, Chebyshev, Chernoff – probabilistic; Young’s inequality for products; Lipschitz implies bounded differences, etc.), but the ones above are most directly tied to convex analysis. Another notable one is Fenchel’s inequality: for any convex $f$ and its convex conjugate $\hat{f}$, $f(x) + \hat{f}(y) \ge x^T y$. This is essentially a consequence of the definition of conjugate (supremum form) and is used in deriving duality gaps.
-
-
-To tie it together: suppose we have a suboptimal point $x$ and optimum $x^*$. Then using a subgradient $g\in\partial f(x)$, convexity (first-order condition) gives $f(x) - f(x^*) \le g^T(x - x^*)$. Now Cauchy–Schwarz (or Hölder for appropriate norm choices) gives $g^T(x-x^*) \le |g| |x-x^*|$. Thus
-
-
-$$
-f(x) - f(x^*) \le \|g\| \, \|x - x^*\|
-$$
-
-
-This inequality is often used: it relates suboptimality to a dual norm of subgradient and distance to solution. If we have a bound on $|g|$ (say by optimality conditions or Lipschitz continuity), then we get a residual bound on $f(x)-f(x^*)$. This is one small example of how combining convexity with Cauchy–Schwarz yields useful insights. -->
 
 
 
@@ -858,6 +1122,8 @@ This inequality is often used: it relates suboptimality to a dual norm of subgra
             </div>
           
           
+  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var labels=set.querySelector(".tabbed-labels");for(var tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+
 <script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
         </div>
         
@@ -910,7 +1176,7 @@ This inequality is often used: it relates suboptimality to a dual norm of subgra
     
     
       
-      <script id="__config" type="application/json">{"base": "..", "features": ["navigation.instant", "navigation.top", "navigation.expand", "header.autohide", "search.suggest", "search.highlight", "content.code.copy", "content.action.edit", "content.action.view"], "search": "../assets/javascripts/workers/search.973d3a69.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+      <script id="__config" type="application/json">{"base": "..", "features": ["navigation.top", "toc.integrate", "content.code.copy", "content.code.annotate", "content.action.edit", "content.action.view", "content.tabs.link", "search.suggest", "search.highlight"], "search": "../assets/javascripts/workers/search.973d3a69.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
     
     
       <script src="../assets/javascripts/bundle.f55a23d4.min.js"></script>

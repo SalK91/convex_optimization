@@ -15,7 +15,7 @@
         <link rel="prev" href="../17_kkt/">
       
       
-        <link rel="next" href="../19_optimizationalgo/">
+        <link rel="next" href="../18a_pareto/">
       
       
       <link rel="icon" href="../assets/images/favicon.png">
@@ -23,7 +23,7 @@
     
     
       
-        <title>8. Lagrange Duality Theory - Mathematics for Machine Learning</title>
+        <title>9. Lagrange Duality Theory - Mathematics for Machine Learning</title>
       
     
     
@@ -78,7 +78,7 @@
     
     
     
-    <body dir="ltr" data-md-color-scheme="slate" data-md-color-primary="teal" data-md-color-accent="indigo">
+    <body dir="ltr" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="cyan">
   
     
     <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
@@ -87,7 +87,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#chapter-8-lagrange-duality-theory" class="md-skip">
+        <a href="#chapter-9-lagrange-duality-theory" class="md-skip">
           Skip to content
         </a>
       
@@ -123,7 +123,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              8. Lagrange Duality Theory
+              9. Lagrange Duality Theory
             
           </span>
         </div>
@@ -136,7 +136,7 @@
     
     
     
-    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="teal" data-md-color-accent="indigo" aria-label="Switch to light mode" type="radio" name="__palette" id="__palette_0">
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="cyan" aria-label="Switch to light mode" type="radio" name="__palette" id="__palette_0">
     
       <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_1" hidden>
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3zm3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95zm-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31"></path></svg>
@@ -146,7 +146,7 @@
     
     
     
-    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="teal" data-md-color-accent="indigo" aria-label="Switch to dark mode" type="radio" name="__palette" id="__palette_1">
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="cyan" aria-label="Switch to dark mode" type="radio" name="__palette" id="__palette_1">
     
       <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_0" hidden>
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m3.55 19.09 1.41 1.41 1.8-1.79-1.42-1.42M12 6c-3.31 0-6 2.69-6 6s2.69 6 6 6 6-2.69 6-6c0-3.32-2.69-6-6-6m8 7h3v-2h-3m-2.76 7.71 1.8 1.79 1.41-1.41-1.79-1.8M20.45 5l-1.41-1.4-1.8 1.79 1.42 1.42M13 1h-2v3h2M6.76 5.39 4.96 3.6 3.55 5l1.79 1.81zM1 13h3v-2H1m12 9h-2v3h2"></path></svg>
@@ -239,7 +239,9 @@
 
 
 
-<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  
+
+<nav class="md-nav md-nav--primary md-nav--integrated" aria-label="Navigation" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
     <a href=".." title="Mathematics for Machine Learning" class="md-nav__button md-logo" aria-label="Mathematics for Machine Learning" data-md-component="logo">
       
@@ -289,7 +291,7 @@
   
   
   <span class="md-ellipsis">
-    Convex Optimization:
+    Convex Optimization
     
   </span>
   
@@ -300,7 +302,7 @@
         <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_1_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_1">
             <span class="md-nav__icon md-icon"></span>
-            Convex Optimization:
+            Convex Optimization
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
             
@@ -449,12 +451,35 @@
   
   
     <li class="md-nav__item">
+      <a href="../16a_optimality_conditions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    7. First-Order Optimality Conditions in Convex Optimization
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../17_kkt/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
-    7. Optimization Principles – From Gradient Descent to KKT
+    8. Optimization Principles – From Gradient Descent to KKT
     
   </span>
   
@@ -486,7 +511,7 @@
   
   
   <span class="md-ellipsis">
-    8. Lagrange Duality Theory
+    9. Lagrange Duality Theory
     
   </span>
   
@@ -505,12 +530,58 @@
   
   
     <li class="md-nav__item">
+      <a href="../18a_pareto/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    10. Pareto Optimality and Multi-Objective Convex Optimization
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../18b_regularization/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    11. Regularized Approximation – Balancing Fit and Complexity
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../19_optimizationalgo/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
-    9. Algorithms for Convex Optimization
+    12. Algorithms for Convex Optimization
     
   </span>
   
@@ -533,7 +604,7 @@
   
   
   <span class="md-ellipsis">
-    10. Advanced Large-Scale and Structured Methods
+    13. Advanced Large-Scale and Structured Methods
     
   </span>
   
@@ -556,7 +627,7 @@
   
   
   <span class="md-ellipsis">
-    11. Modelling Patterns and Algorithm Selection in Practice
+    14. Modelling Patterns and Algorithm Selection in Practice
     
   </span>
   
@@ -566,6 +637,142 @@
   
 
               
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../30_canonical_problems/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    15. Canonical Problems in Convex Optimization
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2">
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Cheat Sheets
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            Cheat Sheets
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../20a_cheatsheet/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Optimization Algos - Cheat Sheet
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3">
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Appendices
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            Appendices
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
             
               
                 
@@ -636,6 +843,144 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../160_conjugates/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Appendix D - Convex Conjugates and Fenchel Duality (Advanced)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../170_probability/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Appendix E - Convexity in Probability and Statistics (Advanced)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../180_subgradient%20method/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Appendix F - Subgradient Method and Variants (Advanced)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../190_proximal/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Appendix G - Proximal Operators
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../200_mirror/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Appendix H - Mirror Descent and Bregman Geometry
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../300_matrixfactorization/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Appendix I - Matrix Factorization
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -649,24 +994,6 @@
                 </div>
               </div>
             
-            
-              
-              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc">
-                <div class="md-sidebar__scrollwrap">
-                  <div class="md-sidebar__inner">
-                    
-
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
-  
-  
-  
-    
-  
-  
-</nav>
-                  </div>
-                </div>
-              </div>
             
           
           
@@ -693,17 +1020,16 @@
   
 
 
-<h1 id="chapter-8-lagrange-duality-theory">Chapter 8: Lagrange Duality Theory<a class="headerlink" href="#chapter-8-lagrange-duality-theory" title="Permanent link">¶</a></h1>
-<p>Duality is one of the most beautiful and useful ideas in convex optimisation. Every constrained optimisation problem (the <strong>primal</strong>) has an associated <strong>dual</strong> problem. The dual problem:</p>
+<h1 id="chapter-9-lagrange-duality-theory">Chapter 9: Lagrange Duality Theory<a class="headerlink" href="#chapter-9-lagrange-duality-theory" title="Permanent link">¶</a></h1>
+<p>Duality is one of the most beautiful and useful ideas in convex optimisation. Every constrained optimisation problem (the primal) has an associated dual problem. The dual problem:</p>
 <ul>
 <li>provides a lower bound on the optimal primal value,</li>
 <li>often has structure that is easier to analyse,</li>
 <li>gives certificates of optimality,</li>
 <li>interprets multipliers as “prices” of constraints.</li>
 </ul>
-<p>In convex optimisation, under mild assumptions, the primal and dual optimal values are equal (Boyd and Vandenberghe, 2004; Rockafellar, 1970).</p>
-<hr>
-<h2 id="81-the-primal-problem">8.1 The primal problem<a class="headerlink" href="#81-the-primal-problem" title="Permanent link">¶</a></h2>
+<p>In convex optimisation, under mild assumptions, the primal and dual optimal values are equal.</p>
+<h2 id="91-the-primal-problem">9.1 The primal problem<a class="headerlink" href="#91-the-primal-problem" title="Permanent link">¶</a></h2>
 <p>We consider the general problem:
 <script type="math/tex; mode=display">
 \begin{array}{ll}
@@ -722,9 +1048,8 @@ f^\star = \inf \{ f(x) : g_i(x) \le 0,\ h_j(x) = 0 \}.
 <blockquote>
 <p>Infimum (inf): the greatest lower bound of a set — the smallest value a function can approach, even if it is not attained.</p>
 </blockquote>
-<hr>
-<h2 id="82-the-lagrangian">8.2 The Lagrangian<a class="headerlink" href="#82-the-lagrangian" title="Permanent link">¶</a></h2>
-<p>We define the <strong>Lagrangian</strong>:
+<h2 id="92-the-lagrangian">9.2 The Lagrangian<a class="headerlink" href="#92-the-lagrangian" title="Permanent link">¶</a></h2>
+<p>We define the Lagrangian:
 <script type="math/tex; mode=display">
 L(x,\lambda,\mu)
 =
@@ -734,9 +1059,8 @@ f(x)
 </script>
 with multipliers <span class="arithmatex">\(\mu \in \mathbb{R}^m\)</span> and <span class="arithmatex">\(\lambda \in \mathbb{R}^p\)</span>. For inequality constraints, we will later require <span class="arithmatex">\(\mu_i \ge 0\)</span>.</p>
 <p>Think of <span class="arithmatex">\(\mu_i\)</span> and <span class="arithmatex">\(\lambda_j\)</span> as “penalties” for violating the constraints.</p>
-<hr>
-<h2 id="83-the-dual-function">8.3 The dual function<a class="headerlink" href="#83-the-dual-function" title="Permanent link">¶</a></h2>
-<p>For fixed multipliers <span class="arithmatex">\((\lambda,\mu)\)</span>, define the <strong>dual function</strong>:
+<h2 id="93-the-dual-function">9.3 The dual function<a class="headerlink" href="#93-the-dual-function" title="Permanent link">¶</a></h2>
+<p>For fixed multipliers <span class="arithmatex">\((\lambda,\mu)\)</span>, define the dual function:
 <script type="math/tex; mode=display">
 \theta(\lambda,\mu)
 =
@@ -745,14 +1069,14 @@ with multipliers <span class="arithmatex">\(\mu \in \mathbb{R}^m\)</span> and <s
 </p>
 <p>Important:</p>
 <ul>
-<li><span class="arithmatex">\(\theta(\lambda,\mu)\)</span> is always <strong>concave</strong> in <span class="arithmatex">\((\lambda,\mu)\)</span>, even if <span class="arithmatex">\(f\)</span> is not convex.</li>
+<li><span class="arithmatex">\(\theta(\lambda,\mu)\)</span> is always concave in <span class="arithmatex">\((\lambda,\mu)\)</span>, even if <span class="arithmatex">\(f\)</span> is not convex.</li>
 <li>For any <span class="arithmatex">\(\mu \ge 0\)</span>,
 <script type="math/tex; mode=display">
 \theta(\lambda,\mu) \le f^\star.
 </script>
 </li>
 </ul>
-<p>This last fact is called <strong>weak duality</strong>:</p>
+<p>This last fact is called weak duality:</p>
 <blockquote>
 <p>The dual function gives lower bounds on the primal optimum.</p>
 </blockquote>
@@ -769,9 +1093,8 @@ f(x)
 because <span class="arithmatex">\(g_i(x) \le 0\)</span> and <span class="arithmatex">\(\mu_i \ge 0\)</span>.<br>
 So <span class="arithmatex">\(\theta(\lambda,\mu) = \inf_x L(x,\lambda,\mu) \le f(x)\)</span> for all feasible <span class="arithmatex">\(x\)</span>.<br>
 Taking the infimum over feasible <span class="arithmatex">\(x\)</span> gives <span class="arithmatex">\(\theta(\lambda,\mu) \le f^\star\)</span>.</p>
-<hr>
-<h2 id="84-the-dual-problem">8.4 The dual problem<a class="headerlink" href="#84-the-dual-problem" title="Permanent link">¶</a></h2>
-<p>We now <strong>maximise</strong> the lower bound. The <strong>Lagrange dual problem</strong> is:
+<h2 id="94-the-dual-problem">9.4 The dual problem<a class="headerlink" href="#94-the-dual-problem" title="Permanent link">¶</a></h2>
+<p>We now maximise the lower bound. The Lagrange dual problem is:
 <script type="math/tex; mode=display">
 \begin{array}{ll}
 \text{maximise}_{\lambda,\mu} & \theta(\lambda,\mu) \\
@@ -779,13 +1102,12 @@ Taking the infimum over feasible <span class="arithmatex">\(x\)</span> gives <sp
 \end{array}
 </script>
 </p>
-<p>Because <span class="arithmatex">\(\theta\)</span> is concave and we are maximising it, the dual problem is always a <strong>concave maximisation problem</strong> (i.e. a convex optimisation problem in standard form).</p>
+<p>Because <span class="arithmatex">\(\theta\)</span> is concave and we are maximising it, the dual problem is always a concave maximisation problem (i.e. a convex optimisation problem in standard form).</p>
 <p>Let <span class="arithmatex">\(d^\star\)</span> denote the optimal dual value.<br>
 From weak duality, <span class="arithmatex">\(d^\star \le f^\star\)</span> always.</p>
-<hr>
-<h2 id="85-strong-duality-and-slaters-condition">8.5 Strong duality and Slater’s condition<a class="headerlink" href="#85-strong-duality-and-slaters-condition" title="Permanent link">¶</a></h2>
-<p>If <span class="arithmatex">\(d^\star = f^\star\)</span>, we say <strong>strong duality</strong> holds.</p>
-<p>For convex problems, strong duality typically holds under a mild regularity condition known as <strong>Slater’s condition</strong> (Boyd and Vandenberghe, 2004):</p>
+<h2 id="95-strong-duality-and-slaters-condition">9.5 Strong duality and Slater’s condition<a class="headerlink" href="#95-strong-duality-and-slaters-condition" title="Permanent link">¶</a></h2>
+<p>If <span class="arithmatex">\(d^\star = f^\star\)</span>, we say strong duality holds.</p>
+<p>For convex problems, strong duality typically holds under a mild regularity condition known as Slater’s condition (Boyd and Vandenberghe, 2004):</p>
 <blockquote>
 <p>If the problem is convex and there exists a strictly feasible point <span class="arithmatex">\(\tilde{x}\)</span> such that<br>
 <span class="arithmatex">\(g_i(\tilde{x}) &lt; 0\)</span> for all <span class="arithmatex">\(i\)</span> and <span class="arithmatex">\(h_j(\tilde{x}) = 0\)</span> for all <span class="arithmatex">\(j\)</span>,<br>
@@ -797,8 +1119,7 @@ then strong duality holds.</p>
 <li>There exist optimal multipliers <span class="arithmatex">\((\lambda^*, \mu^*)\)</span>.</li>
 <li>KKT conditions hold and characterise optimality.</li>
 </ul>
-<hr>
-<h2 id="86-kkt-revisited-via-duality">8.6 KKT revisited via duality<a class="headerlink" href="#86-kkt-revisited-via-duality" title="Permanent link">¶</a></h2>
+<h2 id="96-kkt-revisited-via-duality">9.6 KKT revisited via duality<a class="headerlink" href="#96-kkt-revisited-via-duality" title="Permanent link">¶</a></h2>
 <p>The Karush–Kuhn–Tucker (KKT) conditions from Chapter 7 can also be seen as the conditions under which:</p>
 <ol>
 <li><span class="arithmatex">\(x^*\)</span> minimises the Lagrangian over <span class="arithmatex">\(x\)</span>,</li>
@@ -806,7 +1127,7 @@ then strong duality holds.</p>
 <li>complementary slackness holds,</li>
 <li>primal feasibility and dual feasibility hold.</li>
 </ol>
-<p>Under convexity + Slater, a point is optimal <strong>if and only if</strong> it satisfies KKT (Boyd and Vandenberghe, 2004). So KKT is both necessary and sufficient.</p>
+<p>Under convexity + Slater, a point is optimal if and only if it satisfies KKT (Boyd and Vandenberghe, 2004). So KKT is both necessary and sufficient.</p>
 <p>This is the unification:</p>
 <ul>
 <li>primal feasibility,</li>
@@ -814,16 +1135,14 @@ then strong duality holds.</p>
 <li>complementary slackness,</li>
 <li>stationarity (zero subgradient of <span class="arithmatex">\(L\)</span> w.r.t. <span class="arithmatex">\(x\)</span>).</li>
 </ul>
-<hr>
-<h2 id="87-interpretation-of-multipliers">8.7 Interpretation of multipliers<a class="headerlink" href="#87-interpretation-of-multipliers" title="Permanent link">¶</a></h2>
+<h2 id="97-interpretation-of-multipliers">9.7 Interpretation of multipliers<a class="headerlink" href="#97-interpretation-of-multipliers" title="Permanent link">¶</a></h2>
 <p>The dual variables <span class="arithmatex">\(\mu_i^*\)</span> and <span class="arithmatex">\(\lambda_j^*\)</span> have interpretations:</p>
 <ul>
 <li><span class="arithmatex">\(\mu_i^*\)</span> can be seen as the “shadow price” of relaxing constraint <span class="arithmatex">\(g_i(x) \le 0\)</span>. If <span class="arithmatex">\(\mu_i^*\)</span> is large, then constraint <span class="arithmatex">\(i\)</span> is “expensive” to satisfy — it is strongly active.</li>
 <li><span class="arithmatex">\(\lambda_j^*\)</span> plays a similar role for equality constraints.</li>
 </ul>
 <p>In resource allocation problems, these multipliers act like market prices. In regularised estimation, they act like trade-off coefficients chosen by the optimisation itself.</p>
-<hr>
-<h2 id="88-example-linear-programming-dual">8.8 Example: Linear programming dual<a class="headerlink" href="#88-example-linear-programming-dual" title="Permanent link">¶</a></h2>
+<h2 id="98-example-linear-programming-dual">9.8 Example: Linear programming dual<a class="headerlink" href="#98-example-linear-programming-dual" title="Permanent link">¶</a></h2>
 <p>Consider a linear program in standard form:
 <script type="math/tex; mode=display">
 \begin{array}{ll}
@@ -842,19 +1161,8 @@ then strong duality holds.</p>
 </script>
 </p>
 <p>This is a classical primal–dual pair. Linear programming is convex, Slater’s condition typically holds (assuming strict feasibility), and therefore strong duality holds. The LP duality theory you may have seen in undergraduate optimisation is just a special case of Lagrange duality (Boyd and Vandenberghe, 2004; Rockafellar, 1970).</p>
-<hr>
-<h2 id="89-duality-as-geometry">8.9 Duality as geometry<a class="headerlink" href="#89-duality-as-geometry" title="Permanent link">¶</a></h2>
+<h2 id="99-duality-as-geometry">9.9 Duality as geometry<a class="headerlink" href="#99-duality-as-geometry" title="Permanent link">¶</a></h2>
 <p>Duality is geometry in disguise. The dual problem is finding the “best supporting hyperplane” that underestimates the primal objective over the feasible set. This is exactly the picture of supporting hyperplanes from Chapter 4, and exactly the subgradient picture from Chapter 6. Appendix B makes this geometric relationship precise in terms of support functions.</p>
-<hr>
-<h2 id="810-summary">8.10 Summary<a class="headerlink" href="#810-summary" title="Permanent link">¶</a></h2>
-<ol>
-<li>The Lagrangian builds a bridge between constrained problems and unconstrained ones.</li>
-<li>The dual function gives lower bounds (weak duality).</li>
-<li>Maximising the dual function gives the dual problem.</li>
-<li>Under Slater’s condition, strong duality holds: no duality gap.</li>
-<li>KKT conditions fall naturally out of duality.</li>
-<li>Dual variables are interpretable and useful in analysis, sensitivity, and economics.</li>
-</ol>
 
 
 
@@ -872,6 +1180,8 @@ then strong duality holds.</p>
             </div>
           
           
+  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var labels=set.querySelector(".tabbed-labels");for(var tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+
 <script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
         </div>
         
@@ -924,7 +1234,7 @@ then strong duality holds.</p>
     
     
       
-      <script id="__config" type="application/json">{"base": "..", "features": ["navigation.instant", "navigation.top", "navigation.expand", "header.autohide", "search.suggest", "search.highlight", "content.code.copy", "content.action.edit", "content.action.view"], "search": "../assets/javascripts/workers/search.973d3a69.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+      <script id="__config" type="application/json">{"base": "..", "features": ["navigation.top", "toc.integrate", "content.code.copy", "content.code.annotate", "content.action.edit", "content.action.view", "content.tabs.link", "search.suggest", "search.highlight"], "search": "../assets/javascripts/workers/search.973d3a69.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
     
     
       <script src="../assets/javascripts/bundle.f55a23d4.min.js"></script>

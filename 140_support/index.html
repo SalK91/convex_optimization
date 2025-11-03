@@ -15,6 +15,8 @@
         <link rel="prev" href="../130_projections/">
       
       
+        <link rel="next" href="../160_conjugates/">
+      
       
       <link rel="icon" href="../assets/images/favicon.png">
       <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.20">
@@ -76,7 +78,7 @@
     
     
     
-    <body dir="ltr" data-md-color-scheme="slate" data-md-color-primary="teal" data-md-color-accent="indigo">
+    <body dir="ltr" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="cyan">
   
     
     <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
@@ -134,7 +136,7 @@
     
     
     
-    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="teal" data-md-color-accent="indigo" aria-label="Switch to light mode" type="radio" name="__palette" id="__palette_0">
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="cyan" aria-label="Switch to light mode" type="radio" name="__palette" id="__palette_0">
     
       <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_1" hidden>
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3zm3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95zm-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31"></path></svg>
@@ -144,7 +146,7 @@
     
     
     
-    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="teal" data-md-color-accent="indigo" aria-label="Switch to dark mode" type="radio" name="__palette" id="__palette_1">
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="cyan" aria-label="Switch to dark mode" type="radio" name="__palette" id="__palette_1">
     
       <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_0" hidden>
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m3.55 19.09 1.41 1.41 1.8-1.79-1.42-1.42M12 6c-3.31 0-6 2.69-6 6s2.69 6 6 6 6-2.69 6-6c0-3.32-2.69-6-6-6m8 7h3v-2h-3m-2.76 7.71 1.8 1.79 1.41-1.41-1.79-1.8M20.45 5l-1.41-1.4-1.8 1.79 1.42 1.42M13 1h-2v3h2M6.76 5.39 4.96 3.6 3.55 5l1.79 1.81zM1 13h3v-2H1m12 9h-2v3h2"></path></svg>
@@ -237,7 +239,9 @@
 
 
 
-<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  
+
+<nav class="md-nav md-nav--primary md-nav--integrated" aria-label="Navigation" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
     <a href=".." title="Mathematics for Machine Learning" class="md-nav__button md-logo" aria-label="Mathematics for Machine Learning" data-md-component="logo">
       
@@ -266,20 +270,18 @@
       
   
   
-    
   
   
-  
     
     
     
     
     
-    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_1" checked>
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_1">
         
           
           <label class="md-nav__link" for="__nav_1" id="__nav_1_label" tabindex="0">
@@ -287,7 +289,7 @@
   
   
   <span class="md-ellipsis">
-    Convex Optimization:
+    Convex Optimization
     
   </span>
   
@@ -295,10 +297,10 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_1_label" aria-expanded="true">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_1_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_1">
             <span class="md-nav__icon md-icon"></span>
-            Convex Optimization:
+            Convex Optimization
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
             
@@ -447,12 +449,35 @@
   
   
     <li class="md-nav__item">
+      <a href="../16a_optimality_conditions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    7. First-Order Optimality Conditions in Convex Optimization
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../17_kkt/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
-    7. Optimization Principles – From Gradient Descent to KKT
+    8. Optimization Principles – From Gradient Descent to KKT
     
   </span>
   
@@ -475,7 +500,53 @@
   
   
   <span class="md-ellipsis">
-    8. Lagrange Duality Theory
+    9. Lagrange Duality Theory
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../18a_pareto/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    10. Pareto Optimality and Multi-Objective Convex Optimization
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../18b_regularization/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    11. Regularized Approximation – Balancing Fit and Complexity
     
   </span>
   
@@ -498,7 +569,7 @@
   
   
   <span class="md-ellipsis">
-    9. Algorithms for Convex Optimization
+    12. Algorithms for Convex Optimization
     
   </span>
   
@@ -521,7 +592,7 @@
   
   
   <span class="md-ellipsis">
-    10. Advanced Large-Scale and Structured Methods
+    13. Advanced Large-Scale and Structured Methods
     
   </span>
   
@@ -544,7 +615,7 @@
   
   
   <span class="md-ellipsis">
-    11. Modelling Patterns and Algorithm Selection in Practice
+    14. Modelling Patterns and Algorithm Selection in Practice
     
   </span>
   
@@ -554,6 +625,144 @@
   
 
               
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../30_canonical_problems/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    15. Canonical Problems in Convex Optimization
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2">
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Cheat Sheets
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            Cheat Sheets
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../20a_cheatsheet/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Optimization Algos - Cheat Sheet
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Appendices
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            Appendices
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
             
               
                 
@@ -634,6 +843,144 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../160_conjugates/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Appendix D - Convex Conjugates and Fenchel Duality (Advanced)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../170_probability/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Appendix E - Convexity in Probability and Statistics (Advanced)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../180_subgradient%20method/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Appendix F - Subgradient Method and Variants (Advanced)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../190_proximal/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Appendix G - Proximal Operators
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../200_mirror/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Appendix H - Mirror Descent and Bregman Geometry
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../300_matrixfactorization/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Appendix I - Matrix Factorization
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -647,24 +994,6 @@
                 </div>
               </div>
             
-            
-              
-              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc">
-                <div class="md-sidebar__scrollwrap">
-                  <div class="md-sidebar__inner">
-                    
-
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
-  
-  
-  
-    
-  
-  
-</nav>
-                  </div>
-                </div>
-              </div>
             
           
           
@@ -695,7 +1024,7 @@
 <p>This appendix develops a geometric viewpoint on duality using support functions, hyperplane separation, and polarity.</p>
 <hr>
 <h2 id="b1-support-functions">B.1 Support functions<a class="headerlink" href="#b1-support-functions" title="Permanent link">¶</a></h2>
-<p>Let <span class="arithmatex">\(C \subseteq \mathbb{R}^n\)</span> be a nonempty set. The <strong>support function</strong> of <span class="arithmatex">\(C\)</span> is
+<p>Let <span class="arithmatex">\(C \subseteq \mathbb{R}^n\)</span> be a nonempty set. The support function of <span class="arithmatex">\(C\)</span> is
 <script type="math/tex; mode=display">
 \sigma_C(y) = \sup_{x \in C} y^\top x.
 </script>
@@ -734,7 +1063,7 @@ then
 =
 \|y\|_*,
 </script>
-the <strong>dual norm</strong> of <span class="arithmatex">\(\|\cdot\|\)</span>.</p>
+the dual norm of <span class="arithmatex">\(\|\cdot\|\)</span>.</p>
 <p>Example:</p>
 <ul>
 <li>For <span class="arithmatex">\(\ell_2\)</span>, <span class="arithmatex">\(\|\cdot\|_2\)</span> is self-dual, so <span class="arithmatex">\(\|y\|_2^* = \|y\|_2\)</span>.</li>
@@ -744,7 +1073,7 @@ the <strong>dual norm</strong> of <span class="arithmatex">\(\|\cdot\|\)</span>.
 <p>This shows that dual norms are just support functions of norm balls.</p>
 <hr>
 <h2 id="b3-indicator-functions-and-conjugates">B.3 Indicator functions and conjugates<a class="headerlink" href="#b3-indicator-functions-and-conjugates" title="Permanent link">¶</a></h2>
-<p>Define the <strong>indicator function</strong> of a set <span class="arithmatex">\(C\)</span>:
+<p>Define the indicator function of a set <span class="arithmatex">\(C\)</span>:
 <script type="math/tex; mode=display">
 \delta_C(x) =
 \begin{cases}
@@ -834,7 +1163,7 @@ f(x) + \delta_C(x).
 </ul>
 <!-- # F.2 Support Functions and Dual Geometry
 
-Support functions are one of the most elegant bridges between convex sets and linear optimization. For any convex set, they describe its **extent in a given direction** — and thus appear naturally in:
+Support functions are one of the most elegant bridges between convex sets and linear optimization. For any convex set, they describe its extent in a given direction — and thus appear naturally in:
 
 - Duality theory and convex conjugates (see Section D.1)  
 - Norm analysis and dual norms (Section A.4 and A.5)  
@@ -848,7 +1177,7 @@ Geometrically, a support function tells you:
 
 ## Definition and Geometry
 
-Let $C \subseteq \mathbb{R}^n$ be a nonempty convex set. The **support function** $\sigma_C : \mathbb{R}^n \to \mathbb{R}$ is defined as:
+Let $C \subseteq \mathbb{R}^n$ be a nonempty convex set. The support function $\sigma_C : \mathbb{R}^n \to \mathbb{R}$ is defined as:
 
 $$
 \sigma_C(y) = \sup_{x \in C} \langle y, x \rangle
@@ -856,24 +1185,24 @@ $$
 
 - $y$ is the direction vector.  
 - $\langle y, x \rangle$ is the inner product (see Section A.2).  
-- $\sigma_C(y)$ gives the **maximum projection** of $C$ along direction $y$.
+- $\sigma_C(y)$ gives the maximum projection of $C$ along direction $y$.
 
-It corresponds to the **furthest point of $C$** in direction $y$, and hence defines a **supporting hyperplane** to the set.
+It corresponds to the furthest point of $C$ in direction $y$, and hence defines a supporting hyperplane to the set.
 
 ---
 
 ## Key Properties
 
-- **Positive Homogeneity**:  
+- Positive Homogeneity:  
   $$
   \sigma_C(\alpha y) = \alpha \sigma_C(y) \quad \text{for } \alpha \ge 0
   $$
-- **Convexity**:  
+- Convexity:  
   $$
   \sigma_C(y_1 + y_2) \le \sigma_C(y_1) + \sigma_C(y_2)
   $$
-- **Attainment**: If $C$ is closed and bounded (compact), the supremum is attained — the max is reached at some $x^\star \in C$.  
-- **Set Representation**:  
+- Attainment: If $C$ is closed and bounded (compact), the supremum is attained — the max is reached at some $x^\star \in C$.  
+- Set Representation:  
   Every closed convex set can be recovered from its support function:
   $$
   C = \{ x \in \mathbb{R}^n \mid \langle y, x \rangle \le \sigma_C(y) \quad \forall y \in \mathbb{R}^n \}
@@ -885,15 +1214,15 @@ It corresponds to the **furthest point of $C$** in direction $y$, and hence defi
 
 To compute $\sigma_C(y)$:
 
-1. **Specify the convex set** $C$ (e.g., a ball, polytope, or feasible region).
-2. **Fix the direction** $y \in \mathbb{R}^n$.
-3. **Maximize the dot product** $\langle y, x \rangle$ over $x \in C$.
+1. Specify the convex set $C$ (e.g., a ball, polytope, or feasible region).
+2. Fix the direction $y \in \mathbb{R}^n$.
+3. Maximize the dot product $\langle y, x \rangle$ over $x \in C$.
 
-This is a **linear program** over $C$.
+This is a linear program over $C$.
 
 ### Links to Optimization:
 - In duality theory (Section D.1), linear functionals $\langle y, x \rangle$ are used to lower-bound convex functions — support functions arise naturally.
-- For constraint sets defined by indicator functions (Section A.8), the support function is their **convex conjugate**:
+- For constraint sets defined by indicator functions (Section A.8), the support function is their convex conjugate:
   $$
   \sigma_C = \delta_C^*
   $$
@@ -912,9 +1241,9 @@ $$
 \sigma_C(y) = \sup_{\|x\|_2 \le 1} \langle y, x \rangle = \|y\|_2
 $$
 
-**Interpretation**: the farthest point in direction $y$ lies on the boundary and aligns with $y$.
+Interpretation: the farthest point in direction $y$ lies on the boundary and aligns with $y$.
 
-👉 This reveals that the support function of a norm ball gives the **dual norm** — see Section A.4.
+👉 This reveals that the support function of a norm ball gives the dual norm — see Section A.4.
 
 ---
 
@@ -928,9 +1257,9 @@ $$
 \sigma_C(y) = \|y\|_\infty
 $$
 
-**Intuition**: in direction $y$, the maximal point in $C$ aligns with the coordinate having largest magnitude.
+Intuition: in direction $y$, the maximal point in $C$ aligns with the coordinate having largest magnitude.
 
-This dual norm relationship is fundamental in **sparsity-inducing optimization** (e.g., LASSO in Section F.1).
+This dual norm relationship is fundamental in sparsity-inducing optimization (e.g., LASSO in Section F.1).
 
 ---
 
@@ -944,7 +1273,7 @@ $$
 \sigma_C(y) = \max_{i=1,\dots,m} \langle y, v_i \rangle
 $$
 
-**Interpretation**: the maximum projection occurs at one of the vertices of the polytope.
+Interpretation: the maximum projection occurs at one of the vertices of the polytope.
 
 In LP problems (see Section C.3), this is how extreme points determine optimal solutions.
 
@@ -954,51 +1283,51 @@ In LP problems (see Section C.3), this is how extreme points determine optimal s
 
 ### 🔄 Duality and Convex Conjugates
 
-The support function is the **Fenchel conjugate** of an indicator function:
+The support function is the Fenchel conjugate of an indicator function:
 
 $$
 \sigma_C(y) = \delta_C^*(y)
 $$
 
-This connection underpins many dual optimization frameworks, including **saddle-point methods**, **dual norms**, and **variational formulations**.
+This connection underpins many dual optimization frameworks, including saddle-point methods, dual norms, and variational formulations.
 
 ---
 
 ### 📐 Dual Norms
 
-For any norm $\|\cdot\|$, the support function of its unit ball gives the **dual norm**:
+For any norm $\|\cdot\|$, the support function of its unit ball gives the dual norm:
 
 $$
 \sigma_{B}(y) = \sup_{\|x\| \le 1} \langle y, x \rangle = \|y\|_*
 $$
 
-See Section A.5 for the definition of dual norms, and Section C.1 for how they affect **step sizes and convergence geometry**.
+See Section A.5 for the definition of dual norms, and Section C.1 for how they affect step sizes and convergence geometry.
 
 ---
 
 ### 📏 Geometric Use Cases
 
-- Compute **distances to sets** via duality.  
-- Generate **separating hyperplanes** for convex sets.  
-- Implement **projection algorithms** (e.g., mirror descent in Section K.1).  
-- Construct **robust constraints** and worst-case bounds in uncertainty modeling (see Section E.2).
+- Compute distances to sets via duality.  
+- Generate separating hyperplanes for convex sets.  
+- Implement projection algorithms (e.g., mirror descent in Section K.1).  
+- Construct robust constraints and worst-case bounds in uncertainty modeling (see Section E.2).
 
 ---
 
 ## Summary and Takeaways
 
-- The support function $\sigma_C(y)$ measures **how far a convex set extends in direction $y$**.
-- It is always **convex, positively homogeneous, and subadditive**.
+- The support function $\sigma_C(y)$ measures how far a convex set extends in direction $y$.
+- It is always convex, positively homogeneous, and subadditive.
 - Support functions appear in:
-  - **Duality theory** via convex conjugates  
-  - **Norm analysis** via dual norms  
-  - **Subgradients and projections**  
-  - **Constraint representations** and recovery of convex sets
-- For **norm balls**, $\sigma_C$ gives the **dual norm**.  
-- For **polytopes**, $\sigma_C$ is the max over vertices.  
-- For **machine learning**, support functions help model constraints, regularization penalties, and geometric algorithms.
+  - Duality theory via convex conjugates  
+  - Norm analysis via dual norms  
+  - Subgradients and projections  
+  - Constraint representations and recovery of convex sets
+- For norm balls, $\sigma_C$ gives the dual norm.  
+- For polytopes, $\sigma_C$ is the max over vertices.  
+- For machine learning, support functions help model constraints, regularization penalties, and geometric algorithms.
 
-**Mental model**:  
+Mental model:  
 Think of a support function as a “radar scan” — it tells you the furthest point of a convex set in any given direction.
  -->
 
@@ -1018,6 +1347,8 @@ Think of a support function as a “radar scan” — it tells you the furthest 
             </div>
           
           
+  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var labels=set.querySelector(".tabbed-labels");for(var tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+
 <script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
         </div>
         
@@ -1070,7 +1401,7 @@ Think of a support function as a “radar scan” — it tells you the furthest 
     
     
       
-      <script id="__config" type="application/json">{"base": "..", "features": ["navigation.instant", "navigation.top", "navigation.expand", "header.autohide", "search.suggest", "search.highlight", "content.code.copy", "content.action.edit", "content.action.view"], "search": "../assets/javascripts/workers/search.973d3a69.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+      <script id="__config" type="application/json">{"base": "..", "features": ["navigation.top", "toc.integrate", "content.code.copy", "content.code.annotate", "content.action.edit", "content.action.view", "content.tabs.link", "search.suggest", "search.highlight"], "search": "../assets/javascripts/workers/search.973d3a69.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
     
     
       <script src="../assets/javascripts/bundle.f55a23d4.min.js"></script>

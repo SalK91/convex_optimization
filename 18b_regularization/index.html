@@ -9,13 +9,13 @@
         <meta name="author" content="Salman Khan">
       
       
-        <link rel="canonical" href="https://salk91.github.io/convex_optimization/14_convexsets/">
+        <link rel="canonical" href="https://salk91.github.io/convex_optimization/18b_regularization/">
       
       
-        <link rel="prev" href="../13_calculus/">
+        <link rel="prev" href="../18a_pareto/">
       
       
-        <link rel="next" href="../15_convexfunctions/">
+        <link rel="next" href="../19_optimizationalgo/">
       
       
       <link rel="icon" href="../assets/images/favicon.png">
@@ -23,7 +23,7 @@
     
     
       
-        <title>4. Convex Sets and Geometric Fundamentals - Mathematics for Machine Learning</title>
+        <title>11. Regularized Approximation – Balancing Fit and Complexity - Mathematics for Machine Learning</title>
       
     
     
@@ -87,7 +87,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#chapter-4-convex-sets-and-geometric-fundamentals" class="md-skip">
+        <a href="#chapter-11-regularized-approximation-balancing-fit-and-complexity" class="md-skip">
           Skip to content
         </a>
       
@@ -123,7 +123,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              4. Convex Sets and Geometric Fundamentals
+              11. Regularized Approximation – Balancing Fit and Complexity
             
           </span>
         </div>
@@ -379,19 +379,10 @@
                 
   
   
-    
   
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../14_convexsets/" class="md-nav__link">
         
   
   
@@ -402,7 +393,6 @@
   
 
       </a>
-      
     </li>
   
 
@@ -550,10 +540,19 @@
                 
   
   
+    
   
   
-    <li class="md-nav__item">
-      <a href="../18b_regularization/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         
   
   
@@ -564,6 +563,7 @@
   
 
       </a>
+      
     </li>
   
 
@@ -1004,7 +1004,7 @@
 
 
   
-    <a href="https://github.com/SalK91/convex_optimization/edit/master/docs/14_convexsets.md" title="Edit this page" class="md-content__button md-icon" rel="edit">
+    <a href="https://github.com/SalK91/convex_optimization/edit/master/docs/18b_regularization.md" title="Edit this page" class="md-content__button md-icon" rel="edit">
       
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M10 20H6V4h7v5h5v3.1l2-2V8l-6-6H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h4zm10.2-7c.1 0 .3.1.4.2l1.3 1.3c.2.2.2.6 0 .8l-1 1-2.1-2.1 1-1c.1-.1.2-.2.4-.2m0 3.9L14.1 23H12v-2.1l6.1-6.1z"></path></svg>
     </a>
@@ -1013,175 +1013,279 @@
     
       
     
-    <a href="https://github.com/SalK91/convex_optimization/raw/master/docs/14_convexsets.md" title="View source of this page" class="md-content__button md-icon">
+    <a href="https://github.com/SalK91/convex_optimization/raw/master/docs/18b_regularization.md" title="View source of this page" class="md-content__button md-icon">
       
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 18c.56 0 1 .44 1 1s-.44 1-1 1-1-.44-1-1 .44-1 1-1m0-3c-2.73 0-5.06 1.66-6 4 .94 2.34 3.27 4 6 4s5.06-1.66 6-4c-.94-2.34-3.27-4-6-4m0 6.5a2.5 2.5 0 0 1-2.5-2.5 2.5 2.5 0 0 1 2.5-2.5 2.5 2.5 0 0 1 2.5 2.5 2.5 2.5 0 0 1-2.5 2.5M9.27 20H6V4h7v5h5v4.07c.7.08 1.36.25 2 .49V8l-6-6H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h4.5a8.2 8.2 0 0 1-1.23-2"></path></svg>
     </a>
   
 
 
-<h1 id="chapter-4-convex-sets-and-geometric-fundamentals">Chapter 4: Convex Sets and Geometric Fundamentals<a class="headerlink" href="#chapter-4-convex-sets-and-geometric-fundamentals" title="Permanent link">¶</a></h1>
-<p>Optimisation problems almost always include constraints. The feasible region, the set of points allowed by those constraints, is often a convex set. This chapter builds geometric intuition for convex sets, affine sets, hyperplanes, polyhedra, and supporting hyperplanes.</p>
-<h2 id="41-convex-sets">4.1 Convex sets<a class="headerlink" href="#41-convex-sets" title="Permanent link">¶</a></h2>
-<p>A set <span class="arithmatex">\(C \subseteq \mathbb{R}^n\)</span> is convex if for any <span class="arithmatex">\(x,y \in C\)</span> and any <span class="arithmatex">\(\theta \in [0,1]\)</span>,
+<h1 id="chapter-11-regularized-approximation-balancing-fit-and-complexity">Chapter 11: Regularized Approximation – Balancing Fit and Complexity<a class="headerlink" href="#chapter-11-regularized-approximation-balancing-fit-and-complexity" title="Permanent link">¶</a></h1>
+<p>Many practical optimization problems involve a trade-off between fitting observed data and controlling model complexity.<br>
+Regularization formalizes this trade-off as a convex optimization problem that balances these two competing goals.  </p>
+<p>Building on Chapter 10 (Pareto Optimality), this chapter shows that regularized models correspond to specific points on a Pareto frontier between data fidelity and simplicity.<br>
+We also connect regularization to duality (Chapter 9), KKT conditions, and probabilistic interpretations.</p>
+<hr>
+<h2 id="111-motivation-fit-vs-complexity">11.1 Motivation: Fit vs. Complexity<a class="headerlink" href="#111-motivation-fit-vs-complexity" title="Permanent link">¶</a></h2>
+<p>When fitting a model, we want both:
+1. Data fidelity: minimize the loss or error <span class="arithmatex">\(f(x)\)</span>,<br>
+2. Model simplicity: penalize unnecessary complexity <span class="arithmatex">\(R(x)\)</span>.</p>
+<p>This yields a bicriterion problem:
 <script type="math/tex; mode=display">
-\theta x + (1-\theta) y \in C~.
+\min_{x \in \mathbb{R}^n} (f(x), R(x)).
 </script>
 </p>
+<p>Since improving both simultaneously is typically impossible, we form a scalarized problem:
+<script type="math/tex; mode=display">
+\min_x \; f(x) + \lambda R(x), \qquad \lambda > 0.
+</script>
+</p>
+<ul>
+<li><span class="arithmatex">\(f(x)\)</span> — data-fitting term (e.g. <span class="arithmatex">\(\|Ax-b\|_2^2\)</span>)  </li>
+<li><span class="arithmatex">\(R(x)\)</span> — regularizer (e.g. <span class="arithmatex">\(\|x\|_1\)</span>, <span class="arithmatex">\(\|x\|_2^2\)</span>, total variation)  </li>
+<li><span class="arithmatex">\(\lambda\)</span> — trade-off parameter controlling bias–variance or fit–complexity balance.</li>
+</ul>
+<p>Small <span class="arithmatex">\(\lambda\)</span> → better fit, possible overfitting.<br>
+Large <span class="arithmatex">\(\lambda\)</span> → simpler, possibly underfit model.</p>
+<hr>
+<h2 id="112-bicriterion-optimization-and-the-pareto-frontier">11.2 Bicriterion Optimization and the Pareto Frontier<a class="headerlink" href="#112-bicriterion-optimization-and-the-pareto-frontier" title="Permanent link">¶</a></h2>
+<p>Regularization is a scalarised multi-objective problem (Chapter 10).<br>
+A solution <span class="arithmatex">\(x^*\)</span> is Pareto optimal if no other feasible <span class="arithmatex">\(x\)</span> can reduce <span class="arithmatex">\(f(x)\)</span> without increasing <span class="arithmatex">\(R(x)\)</span>.</p>
+<ul>
+<li>For convex <span class="arithmatex">\(f\)</span> and <span class="arithmatex">\(R\)</span>, every Pareto-optimal solution can be obtained for some <span class="arithmatex">\(\lambda \ge 0\)</span>.  </li>
+<li>The mapping between <span class="arithmatex">\(\lambda\)</span> and the constraint level <span class="arithmatex">\(R(x) \le t\)</span> is monotonic (though not one-to-one).  </li>
+<li>Nonconvex objectives may yield Pareto frontiers that cannot be fully recovered by weighted sums.</li>
+</ul>
 <blockquote>
-<p>For any two feasible points, the entire line segment between them is also feasible. No “indentations.”</p>
+<p>Regularization thus selects one point on the fit–complexity Pareto frontier.</p>
 </blockquote>
-<h3 id="examples">Examples<a class="headerlink" href="#examples" title="Permanent link">¶</a></h3>
-<ul>
-<li>An affine subspace: <span class="arithmatex">\(\{ x : Ax = b \}\)</span>.</li>
-<li>A halfspace: <span class="arithmatex">\(\{ x : a^\top x \le b \}\)</span>.</li>
-<li>An <span class="arithmatex">\(\ell_2\)</span> ball: <span class="arithmatex">\(\{ x : \|x\|_2 \le r \}\)</span>.</li>
-<li>An <span class="arithmatex">\(\ell_\infty\)</span> ball: <span class="arithmatex">\(\{ x : \|x\|_\infty \le r \}\)</span>, which is a box.</li>
-<li>The probability simplex: <span class="arithmatex">\(\{ x \in \mathbb{R}^n : x \ge 0, \sum_i x_i = 1 \}\)</span>.</li>
-</ul>
-<blockquote>
-<p>A set that is not convex: a crescent shape or annulus. The defining failure is: there exist <span class="arithmatex">\(x,y\)</span> in the set such that some convex combination leaves the set.</p>
-</blockquote>
-<h2 id="42-affine-sets-hyperplanes-and-halfspaces">4.2 Affine sets, hyperplanes, and halfspaces<a class="headerlink" href="#42-affine-sets-hyperplanes-and-halfspaces" title="Permanent link">¶</a></h2>
-<p>An affine set is a translate of a subspace:
+<hr>
+<h2 id="113-why-keep-x-small">11.3 Why Keep <span class="arithmatex">\(x\)</span> Small?<a class="headerlink" href="#113-why-keep-x-small" title="Permanent link">¶</a></h2>
+<p>Ill-posed or noisy inverse problems (<span class="arithmatex">\(Ax \approx b\)</span> with ill-conditioned <span class="arithmatex">\(A\)</span>) often admit many unstable solutions.<br>
+Large <span class="arithmatex">\(\|x\|\)</span> values tend to overfit noise.</p>
+<p>Regularization — especially <span class="arithmatex">\(\ell_2\)</span> — stabilizes the solution by shrinking <span class="arithmatex">\(x\)</span>.</p>
+<p>Example: Ridge Regression
 <script type="math/tex; mode=display">
-\{ x_0 + v : v \in S \},
+\min_x \|Ax - b\|_2^2 + \lambda \|x\|_2^2.
 </script>
-where <span class="arithmatex">\(S\)</span> is a subspace. Affine sets are convex.</p>
-<p>A hyperplane in <span class="arithmatex">\(\mathbb{R}^n\)</span> is a set of the form
+The optimality condition (normal equations):
 <script type="math/tex; mode=display">
-H = \{ x : a^\top x = b \}
+(A^\top A + \lambda I)x = A^\top b.
 </script>
-for some nonzero <span class="arithmatex">\(a \in \mathbb{R}^n\)</span>.</p>
-<p>A halfspace is
+- The matrix <span class="arithmatex">\(A^\top A + \lambda I\)</span> is positive definite for <span class="arithmatex">\(\lambda&gt;0\)</span>.<br>
+- Even if <span class="arithmatex">\(A\)</span> is rank-deficient, the solution is unique and stable.<br>
+- Larger <span class="arithmatex">\(\lambda\)</span> improves conditioning but increases bias.</p>
+<hr>
+<h2 id="114-constrained-and-lagrangian-forms">11.4 Constrained and Lagrangian Forms<a class="headerlink" href="#114-constrained-and-lagrangian-forms" title="Permanent link">¶</a></h2>
+<p>Regularized problems can be equivalently written as constrained convex programs:
 <script type="math/tex; mode=display">
-\{ x : a^\top x \le b \}.
+\min_x f(x) \quad \text{s.t. } R(x) \le t.
 </script>
 </p>
-<blockquote>
-<p>Halfspaces are convex; intersections of halfspaces are convex. Linear inequality constraints define intersections of halfspaces, and therefore give convex feasible regions.</p>
-</blockquote>
-<h2 id="43-convex-combinations-convex-hulls">4.3 Convex combinations, convex hulls<a class="headerlink" href="#43-convex-combinations-convex-hulls" title="Permanent link">¶</a></h2>
-<p>A convex combination of points <span class="arithmatex">\(x_1,\dots,x_k\)</span> is
+<h3 id="lagrangian-formulation">Lagrangian Formulation<a class="headerlink" href="#lagrangian-formulation" title="Permanent link">¶</a></h3>
+<p>The Lagrangian is
 <script type="math/tex; mode=display">
-\sum_{i=1}^k \theta_i x_i
-\quad\text{with}\quad
-\theta_i \ge 0,\ \sum_{i=1}^k \theta_i = 1.
+\mathcal{L}(x,\lambda) = f(x) + \lambda (R(x)-t).
 </script>
-</p>
-<p>The convex hull of a set <span class="arithmatex">\(S\)</span> is the set of all convex combinations of finitely many points of <span class="arithmatex">\(S\)</span>. It is the “smallest” convex set containing <span class="arithmatex">\(S\)</span>.</p>
-<p>Convex hulls matter because:</p>
-<ul>
-<li>Polytopes (bounded polyhedra) can be described as convex hulls of finitely many points (their vertices).</li>
-<li>Many relaxations in optimisation replace a complicated nonconvex feasible set by its convex hull.</li>
-</ul>
-<h2 id="44-polyhedra-and-polytopes">4.4 Polyhedra and polytopes<a class="headerlink" href="#44-polyhedra-and-polytopes" title="Permanent link">¶</a></h2>
-<p>A polyhedron is an intersection of finitely many halfspaces:
+The associated penalized form
 <script type="math/tex; mode=display">
-P = \{ x : Ax \le b \}.
+\min_x f(x) + \lambda R(x)
 </script>
-Polyhedra are convex and cane be unbounded. If <span class="arithmatex">\(P\)</span> is also bounded, it is called a polytope.</p>
-<p>In linear programming, we minimise a linear objective <span class="arithmatex">\(c^\top x\)</span> over a polyhedron. The optimal solution, if it exists, is always attained at an extreme point (vertex) of the feasible polyhedron (Boyd and Vandenberghe, 2004).</p>
-<h2 id="45-extreme-points">4.5 Extreme points<a class="headerlink" href="#45-extreme-points" title="Permanent link">¶</a></h2>
-<p>Let <span class="arithmatex">\(C\)</span> be a convex set. A point <span class="arithmatex">\(x \in C\)</span> is an extreme point if it cannot be expressed as a strict convex combination of two other distinct points in <span class="arithmatex">\(C\)</span>. Formally, <span class="arithmatex">\(x\)</span> is extreme in <span class="arithmatex">\(C\)</span> if whenever
+corresponds to solving the constrained problem for some <span class="arithmatex">\(t&gt;0\)</span>.</p>
+<h3 id="kkt-and-duality-connection">KKT and Duality Connection<a class="headerlink" href="#kkt-and-duality-connection" title="Permanent link">¶</a></h3>
+<p>Under convexity and Slater’s condition:
 <script type="math/tex; mode=display">
-x = \theta y + (1-\theta) z,
-\quad
-0<\theta<1,
-\quad
-y,z \in C,
-</script>
-then <span class="arithmatex">\(y = z = x\)</span>.</p>
-<p>Geometric meaning:</p>
-<ul>
-<li>Extreme points are the “corners.”</li>
-<li>In a polytope, extreme points are precisely the vertices.</li>
-</ul>
-<p>This is why linear programming solutions are found at vertices.</p>
-<h2 id="46-cones">4.6 Cones<a class="headerlink" href="#46-cones" title="Permanent link">¶</a></h2>
-<p>A set <span class="arithmatex">\(K\)</span> is a cone if for any <span class="arithmatex">\(x \in K\)</span> and <span class="arithmatex">\(\alpha \ge 0\)</span>, <span class="arithmatex">\(\alpha x \in K\)</span>. A cone is convex if additionally <span class="arithmatex">\(x,y\in K\)</span> implies <span class="arithmatex">\(x+y \in K\)</span>. Convex cones are important (e.g. nonnegative orthant, PSD matrices cone) because many optimization problems can be cast as cone programs. Cones have extreme rays instead of points (directions that generate edges of the cone). For instance, the extreme rays of the positive orthant in <span class="arithmatex">\(\mathbb{R}^n\)</span> are the coordinate axes (each axis direction can’t be formed by positive combos of others).</p>
-<ul>
-<li>Cones are closed under nonnegative scaling, but not necessarily addition.  </li>
-<li>Conic hull (convex cone): Collection of all conic combinations of points in <span class="arithmatex">\(S\)</span>.</li>
-<li>A cone is not necessarily a subspace (negative multiples may not be included).  </li>
-<li>A convex cone is closed under addition and nonnegative scaling.  </li>
-<li>
-<p>Polar Cones: Given a cone <span class="arithmatex">\(K \subseteq \mathbb{R}^n\)</span>, the polar cone is:</p>
-<div class="arithmatex">\[
-K^\circ = \{ y \in \mathbb{R}^n \mid \langle y, x \rangle \le 0, \; \forall x \in K \}.
-\]</div>
-<ul>
-<li>Intuition: polar cone vectors form non-acute angles with every vector in <span class="arithmatex">\(K\)</span>.  </li>
-<li>Properties:  <ul>
-<li>Always a closed convex cone.  </li>
-<li>If <span class="arithmatex">\(K\)</span> is a subspace, <span class="arithmatex">\(K^\circ\)</span> is the orthogonal complement.  </li>
-<li>Duality: <span class="arithmatex">\((K^\circ)^\circ = K\)</span> for closed convex cones.  </li>
-</ul>
-</li>
-</ul>
-</li>
-<li>
-<p>Tangent Cone: For a set <span class="arithmatex">\(C\)</span> and point <span class="arithmatex">\(x \in C\)</span>, the tangent cone <span class="arithmatex">\(T_C(x)\)</span> contains all directions in which one can “move infinitesimally” while remaining in <span class="arithmatex">\(C\)</span>:</p>
-<div class="arithmatex">\[
-T_C(x) = \Big\{ d \in \mathbb{R}^n \;\Big|\; \exists t_k \downarrow 0, \; x_k \in C, \; x_k \to x, \; \frac{x_k - x}{t_k} \to d \Big\}.
-\]</div>
-<ul>
-<li>Interior point: <span class="arithmatex">\(T_C(x) = \mathbb{R}^n\)</span>.  </li>
-<li>Boundary point: <span class="arithmatex">\(T_C(x)\)</span> restricts movement to directions staying inside <span class="arithmatex">\(C\)</span>. </li>
-<li>Tangent cones define feasible directions for projected gradient steps or constrained optimization.</li>
-</ul>
-</li>
-<li>
-<p>Normal Cone: For a convex set <span class="arithmatex">\(C\)</span> at point <span class="arithmatex">\(x \in C\)</span>:
-    <script type="math/tex; mode=display">
-    N_C(x) = \{ v \in \mathbb{R}^n \mid \langle v, y - x \rangle \le 0, \; \forall y \in C \}.
-    </script>
-</p>
-<ul>
-<li>Each <span class="arithmatex">\(v \in N_C(x)\)</span> defines a supporting hyperplane at <span class="arithmatex">\(x\)</span>.  </li>
-<li>Relation: <span class="arithmatex">\(N_C(x) = \big(T_C(x)\big)^\circ\)</span> — polar of tangent cone.  </li>
-<li>Interior point: <span class="arithmatex">\(N_C(x) = \{0\}\)</span>.  </li>
-<li>Boundary/corner: <span class="arithmatex">\(N_C(x)\)</span> is a cone of outward normals.- Appears in first-order optimality conditions:
-<script type="math/tex; mode=display">
-0 \in \partial f(x^) + N_C(x^),
-</script>
-where the subgradient of <span class="arithmatex">\(f\)</span> is balanced by the “push-back” of constraints.</li>
-</ul>
-</li>
-</ul>
-<h2 id="47-supporting-hyperplanes-and-separation">4.7 Supporting hyperplanes and separation<a class="headerlink" href="#47-supporting-hyperplanes-and-separation" title="Permanent link">¶</a></h2>
-<p>Convex sets can be “touched” or “separated” by hyperplanes.</p>
-<h3 id="supporting-hyperplane-theorem">Supporting hyperplane theorem<a class="headerlink" href="#supporting-hyperplane-theorem" title="Permanent link">¶</a></h3>
-<p>Let <span class="arithmatex">\(C \subseteq \mathbb{R}^n\)</span> be a nonempty closed convex set, and let <span class="arithmatex">\(x_0\)</span> be a boundary point of <span class="arithmatex">\(C\)</span>. Then there exists a nonzero <span class="arithmatex">\(a\)</span> such that
-<script type="math/tex; mode=display">
-a^\top x \le a^\top x_0 \quad \text{for all } x \in C~.
-</script>
-In words, there is a hyperplane <span class="arithmatex">\(a^\top x = a^\top x_0\)</span> that “supports” <span class="arithmatex">\(C\)</span> at <span class="arithmatex">\(x_0\)</span>: it touches <span class="arithmatex">\(C\)</span> but does not cut through it.</p>
-<h3 id="separating-hyperplane-theorem">Separating hyperplane theorem<a class="headerlink" href="#separating-hyperplane-theorem" title="Permanent link">¶</a></h3>
-<p>If <span class="arithmatex">\(C\)</span> and <span class="arithmatex">\(D\)</span> are two disjoint nonempty convex sets, then there exists a hyperplane that separates them: some nonzero <span class="arithmatex">\(a\)</span> and scalar <span class="arithmatex">\(b\)</span> such that
-<script type="math/tex; mode=display">
-a^\top x \le b \quad \forall x \in C,
-\qquad
-a^\top y \ge b \quad \forall y \in D~.
-</script>
-</p>
-<p>Why do we care?</p>
-<ul>
-<li>These theorems are the geometric heart of duality.</li>
-<li>KKT conditions can be interpreted as existence of a supporting hyperplane that is simultaneously aligned with objective and constraints.</li>
-<li>Subgradients of convex functions correspond to supporting hyperplanes of epigraphs.</li>
-</ul>
-<h2 id="47-feasible-regions-in-convex-optimisation">4.7 Feasible regions in convex optimisation<a class="headerlink" href="#47-feasible-regions-in-convex-optimisation" title="Permanent link">¶</a></h2>
-<p>In convex optimisation, the feasible set is typically something like
-<script type="math/tex; mode=display">
-\{ x : g_i(x) \le 0,\ i=1,\dots,m,\ h_j(x)=0,\ j=1,\dots,p \}.
+0 \in \partial f(x^*) + \lambda^* \partial R(x^*), \quad
+\lambda^* \ge 0, \quad
+R(x^*) \le t, \quad
+\lambda^*(R(x^*)-t)=0.
 </script>
 </p>
 <ul>
-<li>If each <span class="arithmatex">\(g_i\)</span> is convex and each <span class="arithmatex">\(h_j\)</span> is affine, then the feasible set is convex.</li>
-<li>If <span class="arithmatex">\(f\)</span> is also convex, then the entire problem is a convex optimisation problem.</li>
+<li>Penalized and constrained forms yield the same optimality structure.  </li>
+<li>The mapping <span class="arithmatex">\(\lambda \leftrightarrow t\)</span> is monotonic but not bijective.  </li>
+<li>Regularization parameters thus act as Lagrange multipliers, weighting one objective against another (Chapter 10).</li>
 </ul>
-<p>Thus, convex sets formalise “what it means for feasible directions to be allowed,” and this is what gives us global optimality guarantees later.</p>
+<hr>
+<h2 id="115-common-regularizers">11.5 Common Regularizers<a class="headerlink" href="#115-common-regularizers" title="Permanent link">¶</a></h2>
+<h3 id="a-l2-regularization-ridge">(a) L2 Regularization (Ridge)<a class="headerlink" href="#a-l2-regularization-ridge" title="Permanent link">¶</a></h3>
+<p>
+<script type="math/tex; mode=display">
+R(x)=\|x\|_2^2.
+</script>
+- Smooth, strongly convex → unique minimizer.<br>
+- Shrinks coefficients uniformly; improves numerical conditioning.<br>
+- Bayesian view: corresponds to Gaussian prior <span class="arithmatex">\(x\sim \mathcal{N}(0,\tau^2I)\)</span>.</p>
+<h3 id="b-l1-regularization-lasso">(b) L1 Regularization (Lasso)<a class="headerlink" href="#b-l1-regularization-lasso" title="Permanent link">¶</a></h3>
+<p>
+<script type="math/tex; mode=display">
+R(x)=\|x\|_1 = \sum_i |x_i|.
+</script>
+- Convex but not smooth → promotes sparsity.<br>
+- The <span class="arithmatex">\(\ell_1\)</span> ball’s corners align with coordinate axes, leading to zeros in the solution.<br>
+- Proximal operator (soft-thresholding):
+  <script type="math/tex; mode=display">
+  \operatorname{prox}_{\tau\|\cdot\|_1}(v)
+  = \operatorname{sign}(v)\max(|v|-\tau,0).
+  </script>
+- Bayesian view: Laplace prior <span class="arithmatex">\(\sim e^{-|x_i|/\tau}\)</span>.</p>
+<h3 id="c-elastic-net">(c) Elastic Net<a class="headerlink" href="#c-elastic-net" title="Permanent link">¶</a></h3>
+<p>
+<script type="math/tex; mode=display">
+R(x)=\alpha\|x\|_1+(1-\alpha)\|x\|_2^2.
+</script>
+- Combines sparsity (L1) with stability (L2).<br>
+- Ensures uniqueness under correlated features.</p>
+<h3 id="d-beyond-l1l2">(d) Beyond L1/L2<a class="headerlink" href="#d-beyond-l1l2" title="Permanent link">¶</a></h3>
+<table>
+<thead>
+<tr>
+<th>Regularizer</th>
+<th>Definition</th>
+<th>Effect</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>General Tikhonov</td>
+<td><span class="arithmatex">\(R(x)=\|Lx\|_2^2\)</span></td>
+<td>smoothness via linear operator <span class="arithmatex">\(L\)</span></td>
+</tr>
+<tr>
+<td>Total Variation (TV)</td>
+<td><span class="arithmatex">\(R(x)=\|\nabla x\|_1\)</span></td>
+<td>piecewise-constant signals</td>
+</tr>
+<tr>
+<td>Group Lasso</td>
+<td><span class="arithmatex">\(R(x)=\sum_g \|x_g\|_2\)</span></td>
+<td>structured sparsity</td>
+</tr>
+<tr>
+<td>Nuclear Norm</td>
+<td><span class="arithmatex">\(R(X)=\|X\|_* = \sum_i \sigma_i(X)\)</span></td>
+<td>low-rank matrix recovery</td>
+</tr>
+</tbody>
+</table>
+<p>Each regularizer defines a geometry of simplicity, shaping the solution’s structure.</p>
+<hr>
+<h2 id="116-choosing-the-regularization-parameter-lambda">11.6 Choosing the Regularization Parameter <span class="arithmatex">\(\lambda\)</span><a class="headerlink" href="#116-choosing-the-regularization-parameter-lambda" title="Permanent link">¶</a></h2>
+<h3 id="a-trade-off-behavior">(a) Trade-off Behavior<a class="headerlink" href="#a-trade-off-behavior" title="Permanent link">¶</a></h3>
+<ul>
+<li>Small <span class="arithmatex">\(\lambda\)</span> → high fit, high variance.  </li>
+<li>Large <span class="arithmatex">\(\lambda\)</span> → smoother, more biased solution.<br>
+<span class="arithmatex">\(\lambda\)</span> determines the location on the Pareto frontier.</li>
+</ul>
+<h3 id="b-cross-validation-cv">(b) Cross-Validation (CV)<a class="headerlink" href="#b-cross-validation-cv" title="Permanent link">¶</a></h3>
+<p>Most common selection strategy:
+1. Split data into <span class="arithmatex">\(k\)</span> folds.<br>
+2. Train on <span class="arithmatex">\(k-1\)</span> folds, validate on the remaining one.<br>
+3. Average validation error, choose <span class="arithmatex">\(\lambda\)</span> minimizing it.</p>
+<p>Best practices
+- Standardize features for L1/Elastic Net.<br>
+- For time series: use blocked or rolling CV.<br>
+- Use nested CV for fair model comparison.<br>
+- One-standard-error rule: choose simplest model within 1 SE of best error.</p>
+<h3 id="c-analytical-heuristic-alternatives">(c) Analytical / Heuristic Alternatives<a class="headerlink" href="#c-analytical-heuristic-alternatives" title="Permanent link">¶</a></h3>
+<ul>
+<li>Closed-form rules (ridge shrinkage factor).  </li>
+<li>Information criteria (AIC/BIC for Lasso).  </li>
+<li>Regularization paths: trace <span class="arithmatex">\(x^*(\lambda)\)</span> as <span class="arithmatex">\(\lambda\)</span> varies.  </li>
+<li>Inverse problems: discrepancy principle or L-curve method.</li>
+</ul>
+<hr>
+<h2 id="117-algorithmic-perspective">11.7 Algorithmic Perspective<a class="headerlink" href="#117-algorithmic-perspective" title="Permanent link">¶</a></h2>
+<p>Regularized convex problems typically take the form
+<script type="math/tex; mode=display">
+\min_x f(x) + R(x),
+</script>
+where <span class="arithmatex">\(f\)</span> is smooth convex and <span class="arithmatex">\(R\)</span> convex, possibly nonsmooth.</p>
+<p>Key algorithms:</p>
+<table>
+<thead>
+<tr>
+<th>Method</th>
+<th>Idea</th>
+<th>Suitable For</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Proximal Gradient (ISTA/FISTA)</td>
+<td>Gradient step on <span class="arithmatex">\(f\)</span>, prox step on <span class="arithmatex">\(R\)</span></td>
+<td>L1, TV, nuclear norm</td>
+</tr>
+<tr>
+<td>Coordinate Descent</td>
+<td>Update one coordinate at a time</td>
+<td>Lasso, Elastic Net</td>
+</tr>
+<tr>
+<td>ADMM</td>
+<td>Split <span class="arithmatex">\(f\)</span> and <span class="arithmatex">\(R\)</span> for parallel structure</td>
+<td>Large-scale structured problems</td>
+</tr>
+</tbody>
+</table>
+<p>Proximal operators (Appendix G) handle the nonsmooth term efficiently:
+- L2 → scaling (shrinkage)<br>
+- L1 → soft-thresholding<br>
+- TV/Nuclear → more advanced proximal maps</p>
+<hr>
+<h2 id="118-bayesian-interpretation">11.8 Bayesian Interpretation<a class="headerlink" href="#118-bayesian-interpretation" title="Permanent link">¶</a></h2>
+<p>Regularization corresponds to MAP estimation in probabilistic models.</p>
+<p>Assume data model <span class="arithmatex">\( b = A x + \varepsilon \)</span> with Gaussian noise<br>
+<span class="arithmatex">\(\varepsilon \sim \mathcal{N}(0,\sigma^2 I)\)</span>,<br>
+and prior <span class="arithmatex">\( x \sim \mathcal{N}(0,\tau^2 I) \)</span>. Then:
+<script type="math/tex; mode=display">
+\min_x \frac{1}{2\sigma^2}\|Ax - b\|_2^2 + \frac{1}{2\tau^2}\|x\|_2^2
+</script>
+is the MAP estimator, with <span class="arithmatex">\(\lambda = \sigma^2/(2\tau^2)\)</span>.<br>
+- Gaussian prior → L2 penalty<br>
+- Laplace prior → L1 penalty (sparse MAP estimate)</p>
+<hr>
+<h2 id="119-summary-and-outlook">11.9 Summary and Outlook<a class="headerlink" href="#119-summary-and-outlook" title="Permanent link">¶</a></h2>
+<table>
+<thead>
+<tr>
+<th>Concept</th>
+<th>Key Idea</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Regularization</td>
+<td>scalarisation of fit–complexity trade-off</td>
+</tr>
+<tr>
+<td>Penalized vs constrained</td>
+<td>linked by duality and KKT</td>
+</tr>
+<tr>
+<td>Ridge / Lasso / Elastic Net</td>
+<td>canonical convex regularizers</td>
+</tr>
+<tr>
+<td>Proximal gradient, ADMM</td>
+<td>scalable solution methods</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(\lambda\)</span> selection</td>
+<td>via CV or analytical heuristics</td>
+</tr>
+<tr>
+<td>Bayesian view</td>
+<td>priors ↔ regularizers</td>
+</tr>
+</tbody>
+</table>
+<p>Summary:<br>
+Regularized approximation formalizes the balance between data fit and model simplicity — a practical manifestation of Pareto optimality.<br>
+Its convex structure enables efficient algorithms and strong theoretical guarantees.</p>
+<hr>
+<p>Next:<br>
+In Chapter 12, we study first-order algorithms — gradient, proximal, and accelerated methods — that efficiently solve large-scale regularized convex problems.</p>
 
 
 
