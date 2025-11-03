@@ -1,9 +1,9 @@
-# Chapter 9: Algorithms for Convex Optimization
+# Chapter 12: Algorithms for Convex Optimization
 In Chapters 2–8 we built the mathematics of convex optimization: linear algebra (Chapter 2), gradients and Hessians (Chapter 3), convex sets (Chapter 4), convex functions (Chapter 5), subgradients (Chapter 6), KKT conditions (Chapter 7), and duality (Chapter 8). 
 
 Now we answer the practical question:
 
-**How do we actually solve convex optimization problems in practice?**
+How do we actually solve convex optimization problems in practice?
 
 This chapter develops the major algorithmic families used to solve convex problems. Our goal is not only to describe each method, but to explain:
 
@@ -12,8 +12,7 @@ This chapter develops the major algorithmic families used to solve convex proble
 - when you should use it,
 - how it connects to the modelling choices you make.
 
----
-
+ 
 ## 9.1 Problem classes vs method classes
 
 Before we dive into algorithms, we need a map. Different algorithms are natural for different convex problem structures.
@@ -48,9 +47,9 @@ where $\mathcal{X}$ is a “simple” closed convex set such as a box, a norm ba
 
 | Constraint Type | Explanation | Example | Meaning |
 |------------------|--------------|----------|----------|
-| **Box** | Each variable is bounded independently within lower and upper limits. | \( 0 \le x_i \le 1 \) | Parameters are restricted to a fixed range (e.g., pixel intensities, control limits). |
-| **Norm Ball** | All feasible points lie within a fixed radius from a center under some norm. | \( \|x - x_0\|_2 \le 1 \) | Keeps the solution close to a reference point — controls total magnitude or deviation. |
-| **Simplex** | Nonnegative variables that sum to one. | \( x_i \ge 0,\ \sum_i x_i = 1 \) | Represents valid probability distributions or normalized weights (e.g., portfolio allocations). |
+| Box | Each variable is bounded independently within lower and upper limits. | \( 0 \le x_i \le 1 \) | Parameters are restricted to a fixed range (e.g., pixel intensities, control limits). |
+| Norm Ball | All feasible points lie within a fixed radius from a center under some norm. | \( \|x - x_0\|_2 \le 1 \) | Keeps the solution close to a reference point — controls total magnitude or deviation. |
+| Simplex | Nonnegative variables that sum to one. | \( x_i \ge 0,\ \sum_i x_i = 1 \) | Represents valid probability distributions or normalized weights (e.g., portfolio allocations). |
 
 
 Typical method:
@@ -104,17 +103,16 @@ Information required:
 - Gradients and Hessians of the barrier-augmented objective,
 - ability to solve linear systems arising from Newton steps.
 
----
 
 ### 9.1.5 The moral
 There is no single “best” algorithm.  
-There is a best algorithm **for the structure you have**.
+There is a best algorithm for the structure you have.
 
 - First-order methods scale to huge problems but converge relatively slowly.
 - Newton and interior-point methods converge extremely fast in iterations but each iteration is more expensive (they solve linear systems involving Hessians).
 - Proximal methods are designed for nonsmooth regularisers and constraints that appear everywhere in statistics and machine learning.
 - Interior-point methods are the workhorse for general convex programs (including linear programs, quadratic programs, conic programs) and deliver high-accuracy solutions with strong certificates of optimality 
----
+
 
 ## 9.2 First-order methods: Gradient descent
 
@@ -135,6 +133,51 @@ $$
 x_{k+1} = x_k - \alpha_k \nabla f(x_k),
 $$
 where $\alpha_k>0$ is the step size (also called learning rate in machine learning). A common choice is a constant $\alpha_k = 1/L$ when $L$ is known, or a backtracking line search when it is not.
+
+
+> Derivation: Around $x_t$, we approximate $f$ using its Taylor expansion:
+
+> $$
+f(x) \approx f(x_t) + \langle \nabla f(x_t), x - x_t \rangle.
+$$
+
+
+> - We assume $f$ behaves approximately like its tangent plane near $x_t$.  
+> - If we were to minimize just this linear model, we would move **infinitely far** in the direction of **steepest descent** $-\nabla f(x_t)$, which is not realistic or stable.
+
+> This motivates adding a **locality restriction** — we trust the linear approximation **near** $x_t$, not globally. To prevent taking arbitrarily large steps, we add a quadratic penalty for moving away from $x_t$:
+
+> $$
+f(x) \approx f(x_t) + \langle \nabla f(x_t), x - x_t \rangle + \frac{1}{2\eta} \|x - x_t\|^2,
+$$
+
+> where $\eta > 0$ is the **learning rate** or **step size**.
+
+> - The linear term pulls $x$ in the steepest descent direction.
+> - The quadratic term acts like a **trust region**, discouraging large deviations from $x_t$.
+> - $\eta$ trades off **aggressive progress** vs **stability**:
+>     - Small $\eta$ → cautious updates.
+>     - Large $\eta$ → bold updates (risk of divergence).
+
+
+> We define the next iterate as the minimizer of the surrogate objective:
+
+> $$
+x_{t+1} = \arg\min_{x \in \mathcal{X}} \Big[ f(x_t) + \langle \nabla f(x_t), x - x_t \rangle + \frac{1}{2\eta} \|x - x_t\|^2 \Big].
+$$
+
+> Ignoring the constant term $f(x_t)$ and differentiating w.r.t. $x$:
+
+> $$
+\nabla f(x_t) + \frac{1}{\eta}(x - x_t) = 0
+$$
+
+> Solving:
+
+> $$
+x_{t+1} = x_t - \eta \nabla f(x_t)
+$$
+
 
 ### 9.2.3 Geometric meaning
 From Chapter 3, the first-order Taylor model is
@@ -158,8 +201,7 @@ where $f^\star$ is the global minimum. This $O(1/k)$ sublinear rate is slow comp
 
 Gradient descent is the baseline first-order method. But we can do better.
 
----
-
+ 
 ## 9.3 Accelerated first-order methods
 
 Plain gradient descent has an $O(1/k)$ rate for smooth convex problems. Remarkably, we can do better — and in fact, provably optimal — by adding *momentum*.
@@ -194,8 +236,7 @@ which is *optimal* for any algorithm that uses only gradient information and not
 
 Acceleration is the default upgrade from vanilla gradient descent in many smooth convex machine learning problems.
 
----
-
+ 
 ## 9.4 Newton’s method and second-order methods
 
 First-order methods only use gradient information. Newton’s method uses curvature (the Hessian) to take smarter steps.
@@ -210,7 +251,7 @@ f(x_k)
 + \tfrac{1}{2} d^\top \nabla^2 f(x_k) d.
 $$
 
-If we (temporarily) trust this model, we choose $d$ to minimise the RHS. Differentiating w.r.t. $d$ and setting to zero gives the **Newton step**:
+If we (temporarily) trust this model, we choose $d$ to minimise the RHS. Differentiating w.r.t. $d$ and setting to zero gives the Newton step:
 $$
 \nabla^2 f(x_k) \, d_{\text{newton}}
 = - \nabla f(x_k).
@@ -223,7 +264,7 @@ x_{k+1} = x_k + d_{\text{newton}}.
 $$
 
 ### 9.4.2 Convergence behaviour
-- Near the minimiser of a strictly convex, twice-differentiable $f$, Newton’s method converges **quadratically**: roughly, the number of correct digits doubles every iteration.
+- Near the minimiser of a strictly convex, twice-differentiable $f$, Newton’s method converges quadratically: roughly, the number of correct digits doubles every iteration.
 - This is dramatically faster than $O(1/k)$ or $O(1/k^2)$, but only once you’re in the “basin of attraction.”
 - Far from the minimiser, Newton can misbehave, so we pair it with a line search or trust region.
 
@@ -245,11 +286,11 @@ When Hessians are too expensive, we can build low-rank approximations of $\nabla
 - The dimension is moderate, or Hessian systems can be solved efficiently (e.g. via sparse linear algebra).
 
 
----
+ 
 
 ## 9.5 Constraints and nonsmooth terms: projection and proximal methods
 
-In practice, most convex objectives are **not** just “nice smooth $f(x)$”. They often have:
+In practice, most convex objectives are not just “nice smooth $f(x)$”. They often have:
 
 - constraints $x \in \mathcal{X}$,
 - nonsmooth regularisers like $\|x\|_1$,
@@ -259,10 +300,11 @@ Two core ideas handle this: projected gradient and proximal gradient.
 
 ### 9.5.1 Projected gradient descent
 
-**Setting:**  
+Setting:  
 Minimise convex, differentiable $f(x)$ subject to $x \in \mathcal{X}$, where $\mathcal{X}$ is a simple closed convex set (Chapter 4).
 
-**Algorithm:**
+Algorithm:
+
 1. Gradient step:
    $$
    y_k = x_k - \alpha \nabla f(x_k).
@@ -291,7 +333,7 @@ Projected gradient is the constrained version of gradient descent. It maintains 
 
 ### 9.5.2 Proximal gradient (forward–backward splitting)
 
-**Setting:**  
+Setting:  
 Composite convex minimisation
 $$
 \min_x \; F(x) := f(x) + R(x),
@@ -307,7 +349,7 @@ Typical choices of $R(x)$:
 - $R(x) = \lambda \|x\|_2^2$ (ridge),
 - $R(x)$ is the indicator function of a convex set $\mathcal{X}$, i.e. $R(x)=0$ if $x \in \mathcal{X}$ and $+\infty$ otherwise — this encodes a hard constraint.
 
-Define the **proximal operator** of $R$:
+Define the proximal operator of $R$:
 $$
 \mathrm{prox}_{\alpha R}(y)
 =
@@ -317,7 +359,8 @@ R(x) + \frac{1}{2\alpha} \|x-y\|_2^2
 \right).
 $$
 
-**Proximal gradient method:**
+Proximal gradient method:
+
 1. Gradient step on $f$:
    $$
    y_k = x_k - \alpha \nabla f(x_k).
@@ -331,7 +374,7 @@ This is also called forward–backward splitting: “forward” = gradient step,
 
 #### Interpretation:
 - The prox step “handles” the nonsmooth or constrained part exactly.
-- For $R(x)=\lambda \|x\|_1$, $\mathrm{prox}_{\alpha R}$ is **soft-thresholding**, which promotes sparsity in $x$.  
+- For $R(x)=\lambda \|x\|_1$, $\mathrm{prox}_{\alpha R}$ is soft-thresholding, which promotes sparsity in $x$.  
   This is the heart of $\ell_1$-regularised least-squares (LASSO) and many sparse recovery problems.
 - For $R$ as an indicator of $\mathcal{X}$, $\mathrm{prox}_{\alpha R} = \Pi_\mathcal{X}$, so projected gradient is a special case of proximal gradient.
 
@@ -345,7 +388,6 @@ This unifies constraints and regularisation.
 
 This is the standard tool for modern large-scale convex learning problems.
 
----
 
 ## 9.6 Penalties, barriers, and interior-point methods
 
@@ -359,7 +401,7 @@ Enter penalty methods, barrier methods, and (ultimately) interior-point methods.
 
 ### 9.6.1 Penalty methods
 
-**Idea:** Turn constrained optimisation into unconstrained optimisation by adding a penalty for violating constraints.
+Turn constrained optimisation into unconstrained optimisation by adding a penalty for violating constraints.
 
 Suppose we want
 $$
@@ -390,7 +432,7 @@ Penalty methods are closely linked to robust formulations and Huber-like losses:
 
 Penalty methods penalise violation *after* you cross the boundary. Barrier methods make it impossible to even touch the boundary.
 
-For inequality constraints $g_i(x) \le 0$, define the **logarithmic barrier**
+For inequality constraints $g_i(x) \le 0$, define the logarithmic barrier
 $$
 b(x) = - \sum_{i=1}^m \log(-g_i(x)).
 $$
@@ -402,7 +444,7 @@ $$
 $$
 subject to strict feasibility $g_i(x)<0$.
 
-As $t \to \infty$, minimisers of $F_t$ approach the true constrained optimum. The path of minimisers $x^*(t)$ is called the **central path**.
+As $t \to \infty$, minimisers of $F_t$ approach the true constrained optimum. The path of minimisers $x^*(t)$ is called the central path.
 
 Key points:
 
@@ -411,7 +453,7 @@ Key points:
 - Each Newton step solves a linear system involving the Hessian of $F_t$, so the inner loop looks like a damped Newton method.
 - Increasing $t$ tightens the approximation; we “home in” on the boundary of feasibility.
 
-This is the core idea of **interior-point methods**.
+This is the core idea of interior-point methods.
 
 ### 9.6.3 Interior-point methods in practice
 
@@ -420,7 +462,7 @@ Interior-point methods:
 - Are globally convergent for convex problems under mild assumptions (Slater’s condition; see Chapter 8).
 - Solve a series of smooth, strictly feasible subproblems.
 - Use Newton-like steps to update primal (and, implicitly, dual) variables.
-- Produce both primal and dual iterates — so they naturally produce a **duality gap**, which certifies how close you are to optimality (Chapter 8).
+- Produce both primal and dual iterates — so they naturally produce a duality gap, which certifies how close you are to optimality (Chapter 8).
 
 Interior-point methods are the engine behind modern general-purpose convex solvers for:
 
@@ -431,29 +473,40 @@ Interior-point methods are the engine behind modern general-purpose convex solve
 
 They give high-accuracy answers and KKT-based optimality certificates. They are more expensive per iteration than gradient methods, but need far fewer iterations, and they handle fully general convex constraints.
 
+
+**Summary: Penalty vs Barrier vs Interior-Point**
+
+| Method | Feasibility During Iteration | Mechanism | Typical Behavior |
+|--------|------------------------------|------------|------------------|
+| Penalty | May violate constraints | Adds large penalty outside feasible region | Easy to implement but can be ill-conditioned |
+| Barrier | Stays strictly feasible | Adds infinite cost near constraint boundary | Smooth approximation to constrained problem |
+| Interior-Point | Always feasible (uses barrier) | Solves a sequence of barrier problems with increasing precision | Follows central path to true optimum |
+
+
+
 ## 9.8 Choosing the right method in practice
 
 Let’s summarise the chapter in the form of a decision guide.
 
-**Case A. Smooth, unconstrained, very high dimensional.**  
+Case A. Smooth, unconstrained, very high dimensional.  
 Example: logistic regression on millions of samples.  
 Use: gradient descent or (better) accelerated gradient.  
 Why: cheap iterations, easy to implement, scales.  
  
-**Case B. Smooth, unconstrained, moderate dimensional, need high accuracy.**  
+Case B. Smooth, unconstrained, moderate dimensional, need high accuracy.  
 Example: convex nonlinear fitting with well-behaved Hessian.  
 Use: Newton or quasi-Newton.  
 Why: quadratic (or near-quadratic) convergence near optimum.  
  
-**Case C. Convex with simple feasible set $x \in \mathcal{X}$ (box, ball, simplex).**  
+Case C. Convex with simple feasible set $x \in \mathcal{X}$ (box, ball, simplex).  
 Use: projected gradient.  
 Why: projection is easy, maintains feasibility at each step.  
  
-**Case D. Composite objective $f(x) + R(x)$ where $R$ is nonsmooth (e.g. $\ell_1$, indicator of a constraint set).**  
+Case D. Composite objective $f(x) + R(x)$ where $R$ is nonsmooth (e.g. $\ell_1$, indicator of a constraint set).  
 Use: proximal gradient.  
 Why: prox handles nonsmooth/constraint part exactly each step.  
  
-**Case E. General convex program with inequalities $g_i(x)\le 0$.**  
+Case E. General convex program with inequalities $g_i(x)\le 0$.  
 Use: interior-point methods.  
 Why: they solve smooth barrier subproblems via Newton steps and give primal–dual certificates through KKT and duality (Chapters 7–8).  
   

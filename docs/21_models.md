@@ -1,36 +1,36 @@
-# Chapter 11: Modelling Patterns and Algorithm Selection
+# Chapter 14: Modelling Patterns and Algorithm Selection
 
-Real-world modelling starts not with algorithms but with **data, assumptions, and design goals**.  We choose a loss function from statistical assumptions (e.g. noise model, likelihood) and a complexity penalty or constraints from design preferences (simplicity, robustness, etc.).  The resulting convex (or nonconvex) optimization problem often *tells* us which solver class to use.  In practice, solving machine learning problems looks like: **modeling → recognize structure → pick solver**.  Familiar ML models (linear regression, logistic regression, etc.) can be viewed as convex programs.  Below we survey common patterns (convex and some nonconvex) and the recommended algorithms/tricks for each.
+Real-world modelling starts not with algorithms but with data, assumptions, and design goals.  We choose a loss function from statistical assumptions (e.g. noise model, likelihood) and a complexity penalty or constraints from design preferences (simplicity, robustness, etc.).  The resulting convex (or nonconvex) optimization problem often *tells* us which solver class to use.  In practice, solving machine learning problems looks like: modeling → recognize structure → pick solver.  Familiar ML models (linear regression, logistic regression, etc.) can be viewed as convex programs.  Below we survey common patterns (convex and some nonconvex) and the recommended algorithms/tricks for each.
 
 ## 11.1 Regularized estimation and the accuracy–simplicity tradeoff
 
-Many learning tasks use a **regularized risk minimization** form:
+Many learning tasks use a regularized risk minimization form:
 \[
 \min_x \; \underbrace{\text{loss}(x)}_{\text{data-fit}} \;+\; \lambda\;\underbrace{\text{penalty}(x)}_{\text{complexity}}.
 \]
 Here the loss measures fit to data (often from a likelihood) and the penalty (regularizer) enforces simplicity or structure.  Increasing $\lambda$ trades accuracy for simplicity (e.g. model sparsity or shrinkage).
 
-- **Ridge regression (ℓ₂ penalty):**  
+- Ridge regression (ℓ₂ penalty):  
   \[
   \min_x \|Ax - b\|_2^2 + \lambda \|x\|_2^2.
   \]  
   This arises from Gaussian noise (squared-error loss) plus a quadratic prior on $x$.  It is a smooth, strongly convex quadratic problem (Hessian $A^TA + \lambda I \succ 0$).  One can solve it via Newton’s method or closed‐form normal equations, or for large problems via (accelerated) gradient descent or conjugate gradient.  Strong convexity means fast, reliable convergence with second-order or accelerated first-order methods.
 
-- **LASSO / Sparse regression (ℓ₁ penalty):**  
+- LASSO / Sparse regression (ℓ₁ penalty):  
   \[
   \min_x \tfrac12\|Ax - b\|_2^2 + \lambda \|x\|_1.
   \]  
-  The $\ell_1$ penalty encourages many $x_i=0$ (sparsity) for interpretability.  The problem is convex but nonsmooth (since $|\cdot|$ is nondifferentiable at 0).  A standard solver is **proximal gradient**: take a gradient step on the smooth squared loss, then apply the proximal (soft-thresholding) step for $\ell_1$, which sets small entries to zero.  Coordinate descent is another popular solver – updating one coordinate at a time with a closed-form soft-thresholding step.  Proximal methods and coordinate descent scale to very high dimensions.  
+  The $\ell_1$ penalty encourages many $x_i=0$ (sparsity) for interpretability.  The problem is convex but nonsmooth (since $|\cdot|$ is nondifferentiable at 0).  A standard solver is proximal gradient: take a gradient step on the smooth squared loss, then apply the proximal (soft-thresholding) step for $\ell_1$, which sets small entries to zero.  Coordinate descent is another popular solver – updating one coordinate at a time with a closed-form soft-thresholding step.  Proximal methods and coordinate descent scale to very high dimensions.  
 
-- **Elastic net (mixed ℓ₁+ℓ₂):**  
+- Elastic net (mixed ℓ₁+ℓ₂):  
   \[
   \min_x \|Ax - b\|_2^2 + \lambda_1\|x\|_1 + \lambda_2\|x\|_2^2.
   \]  
   This combines the sparsity of LASSO with the stability of ridge regression.  It is still convex and (for $\lambda_2>0$) strongly convex[^4].  One can still use proximal gradient (prox operator splits into soft-threshold and shrink) or coordinate descent.  Because of the ℓ₂ term, the objective is smooth and unique solution.
 
-- **Group lasso, nuclear norm, etc.:** Similar composite objectives arise when enforcing block-sparsity or low-rank structure.  Each adds a convex penalty (block $\ell_{2,1}$ norms, nuclear norm) to the loss.  These remain convex, often separable or prox-friendly.  Proximal methods (using known proximal maps for each norm) or ADMM can handle these.
+- Group lasso, nuclear norm, etc.: Similar composite objectives arise when enforcing block-sparsity or low-rank structure.  Each adds a convex penalty (block $\ell_{2,1}$ norms, nuclear norm) to the loss.  These remain convex, often separable or prox-friendly.  Proximal methods (using known proximal maps for each norm) or ADMM can handle these.
 
-**Algorithmic pointers for 11.1:**  
+Algorithmic pointers for 11.1:  
 
 - *Smooth+ℓ₂ (strongly convex)* → Newton / quasi-Newton or (accelerated) gradient descent (Chapter 9).  Closed-form if possible.  
 - *Smooth + ℓ₁* → Proximal gradient or coordinate descent (Chapter 9/10).  These exploit separable nonsmoothness.  
@@ -52,15 +52,15 @@ $$
 
 Interpretation:
 
-- This corresponds to assuming **Laplace (double-exponential) noise** on the residuals.
+- This corresponds to assuming Laplace (double-exponential) noise on the residuals.
 - Unlike squared error, it penalizes big residuals *linearly*, not quadratically, so outliers hurt less.
 
 Geometry/structure:
-- The objective is **convex** but **nondifferentiable** at zero residual (the kink in \(|r|\) at \(r=0\)).
+- The objective is convex but nondifferentiable at zero residual (the kink in \(|r|\) at \(r=0\)).
 
 How to solve it:
 
-1. **As a linear program (LP).**  
+1. As a linear program (LP).  
    Introduce slack variables \(t_i \ge 0\) and rewrite:
 
     - constraints:  
@@ -75,7 +75,7 @@ How to solve it:
 
     These methods give high-accuracy solutions and certificates.
 
-2. **First-order methods for large scale.**  
+2. First-order methods for large scale.  
    
     For *very* large problems (millions of samples/features), you can apply:
    
@@ -104,25 +104,25 @@ $$
 
 Interpretation:
 
-- For **small** residuals (\(|r|\le\delta\)): it acts like least-squares (\(\tfrac{1}{2}r^2\)). So inliers are fit tightly.
-- For **large** residuals (\(|r|>\delta\)): it acts like \(\ell_1\) (linear penalty), so outliers get down-weighted.
+- For small residuals (\(|r|\le\delta\)): it acts like least-squares (\(\tfrac{1}{2}r^2\)). So inliers are fit tightly.
+- For large residuals (\(|r|>\delta\)): it acts like \(\ell_1\) (linear penalty), so outliers get down-weighted.
 - Intuition: “be aggressive on normal data, be forgiving on outliers.”
 
 Properties:
 
-- \(\rho_\delta\) is **convex**.
-- It is **smooth** except for a kink in its second derivative at \(|r|=\delta\).
+- \(\rho_\delta\) is convex.
+- It is smooth except for a kink in its second derivative at \(|r|=\delta\).
 - Its gradient exists everywhere (the function is once-differentiable).
 
 How to solve it:
 
-1. **Iteratively Reweighted Least Squares (IRLS) / quasi-Newton.**  
+1. Iteratively Reweighted Least Squares (IRLS) / quasi-Newton.  
     Because the loss is basically quadratic near the solution, Newton-type methods (including IRLS) work well and converge fast on moderate-size problems.
 
-2. **Proximal / first-order methods.**  
+2. Proximal / first-order methods.  
     You can apply proximal gradient methods, since each term is simple and has a known prox.
 
-3. **As a conic program (SOCP).**  
+3. As a conic program (SOCP).  
     The Huber objective can be written with auxiliary variables and second-order cone constraints.  
     That means you can feed it to an SOCP solver and let an interior-point method handle it efficiently and robustly.  
     This is attractive when you want high accuracy and dual certificates.
@@ -131,7 +131,7 @@ How to solve it:
 
 ### 11.2.3 Worst-case robust regression
 
-Sometimes we don’t just want “fit the data we saw,” but “fit any data within some uncertainty set.” This leads to **min–max** problems of the form:
+Sometimes we don’t just want “fit the data we saw,” but “fit any data within some uncertainty set.” This leads to min–max problems of the form:
 $$
 \min_x \;\max_{u \in \mathcal{U}} \; \| (A + u)x - b \|_2.
 $$
@@ -139,11 +139,11 @@ $$
 Meaning:
 
 - \(\mathcal{U}\) is an uncertainty set describing how much you distrust the matrix \(A\), the inputs, or the measurements.
-- You choose \(x\) that performs well even in the **worst allowed perturbation**.
+- You choose \(x\) that performs well even in the worst allowed perturbation.
 
 Why this is still tractable:
 
-- If \(\mathcal{U}\) is convex (for example, an $\ell_2$ ball or box bounds on each entry), then the inner maximization often has a **closed-form expression**.
+- If \(\mathcal{U}\) is convex (for example, an $\ell_2$ ball or box bounds on each entry), then the inner maximization often has a closed-form expression.
 
 - That inner max usually turns into an extra norm penalty or a conic constraint in the outer problem.
     - Example: if the rows of \(A\) can move within an $\ell_2$ ball of radius \(\epsilon\), the robustified problem often picks up an additional \(\ell_2\) term like \(\gamma \|x\|_2\) in the objective.
@@ -174,10 +174,10 @@ Choosing a loss often comes from a probabilistic noise model. The negative log-l
     |A x - b|_2^2.
     $$
 
-    This recovers the classic **least-squares loss** (as in linear regression).  
+    This recovers the classic least-squares loss (as in linear regression).  
     It is smooth and convex (strongly convex if $A^T A$ is full rank).
 
-    **Algorithms:**
+    Algorithms:
 
     - Closed-form via $(A^T A + \lambda I)^{-1} A^T b$ (for ridge regression),
     
@@ -193,8 +193,8 @@ Choosing a loss often comes from a probabilistic noise model. The negative log-l
     $$
 
     This is exactly the ℓ₁ regression (least absolute deviations).  
-    It can be solved as an **LP** or with **robust optimization solvers** (interior-point),  
-    or with **first-order nonsmooth methods** (subgradient/proximal) for large-scale problems.
+    It can be solved as an LP or with robust optimization solvers (interior-point),  
+    or with first-order nonsmooth methods (subgradient/proximal) for large-scale problems.
 
 - Logistic model (binary classification)
 
@@ -209,10 +209,10 @@ Choosing a loss often comes from a probabilistic noise model. The negative log-l
     \sum_i \left[ -y_i (a_i^T x) + \log(1 + e^{a_i^T x}) \right].
     $$
 
-    This loss is **convex and smooth** in $x$.  
+    This loss is convex and smooth in $x$.  
     No closed-form solution exists.
 
-    **Algorithms:**
+    Algorithms:
 
     - With ℓ₂ regularization: smooth and (if $\lambda>0$) strongly convex → use accelerated gradient or quasi-Newton (e.g. L-BFGS).
     - With ℓ₁ regularization (sparse logistic): composite convex → use proximal gradient (soft-thresholding) or coordinate descent.
@@ -225,22 +225,22 @@ Choosing a loss often comes from a probabilistic noise model. The negative log-l
     + \log\!\left(\sum_{j=1}^K e^{a_i^T x_j}\right).
     $$
 
-    This loss is **convex** in the weight vectors $\{x_k\}$ and generalizes binary logistic to multiclass.
+    This loss is convex in the weight vectors $\{x_k\}$ and generalizes binary logistic to multiclass.
 
-    **Algorithms:**
+    Algorithms:
 
     - Gradient-based solvers (L-BFGS, Newton with block Hessian) for moderate size.
     - Stochastic gradient (SGD, Adam) for large datasets.
 
 - Generalized linear models (GLMs)
 
-    In GLMs, $y_i$ given $x$ has an **exponential-family distribution** (Poisson, binomial, etc.) with mean related to $a_i^T x$.  
-    The NLL is **convex** in $x$ for canonical links (e.g. log-link for Poisson, logit for binomial).
+    In GLMs, $y_i$ given $x$ has an exponential-family distribution (Poisson, binomial, etc.) with mean related to $a_i^T x$.  
+    The NLL is convex in $x$ for canonical links (e.g. log-link for Poisson, logit for binomial).
 
-    **Examples:**
+    Examples:
 
-    - **Poisson regression** for counts: convex NLL, solved by IRLS or gradient.
-    - **Probit models:** convex but require iterative solvers.
+    - Poisson regression for counts: convex NLL, solved by IRLS or gradient.
+    - Probit models: convex but require iterative solvers.
 
 ## 11.4 Structured constraints in engineering and design
 
@@ -249,25 +249,25 @@ Optimization problems often include explicit convex constraints from physical or
 - Simple (projection-friendly) constraints
 
 
-    **Examples:**
+    Examples:
 
-    - **Box constraints:** $l \le x \le u$  
+    - Box constraints: $l \le x \le u$  
         → Projection: clip each entry to $[\ell_i, u_i]$.
 
-    - **ℓ₂-ball:** $\|x\|_2 \le R$  
+    - ℓ₂-ball: $\|x\|_2 \le R$  
         → Projection: rescale $x$ if $\|x\|_2 > R$.
 
-    - **Simplex:** $\{x \ge 0, \sum_i x_i = 1\}$  
+    - Simplex: $\{x \ge 0, \sum_i x_i = 1\}$  
         → Projection: sort and threshold coordinates (simple $O(n \log n)$ algorithm).
 
 - General convex constraints (non-projection-friendly)
 If constraints are complex (e.g. second-order cones, semidefinite, or many coupled inequalities), projections are hard. Two strategies:
 
-    1. **Barrier / penalty and interior-point methods** : Add a log-barrier or penalty and solve with an interior-point solver (Chapter 9). This handles general convex constraints well and returns dual variables (Lagrange multipliers) as a bonus.
+    1. Barrier / penalty and interior-point methods : Add a log-barrier or penalty and solve with an interior-point solver (Chapter 9). This handles general convex constraints well and returns dual variables (Lagrange multipliers) as a bonus.
 
-    2. **Conic formulation + solver**: Write the problem as an LP/QP/SOCP/SDP and use specialized solvers (like MOSEK, Gurobi) that exploit sparse structure. If only first-order methods are feasible for huge problems, one can apply dual decomposition or ADMM by splitting constraints (Chapter 10), but convergence will be slower.
+    2. Conic formulation + solver: Write the problem as an LP/QP/SOCP/SDP and use specialized solvers (like MOSEK, Gurobi) that exploit sparse structure. If only first-order methods are feasible for huge problems, one can apply dual decomposition or ADMM by splitting constraints (Chapter 10), but convergence will be slower.
 
-**Algorithmic pointers for 11.4:**
+Algorithmic pointers for 11.4:
 
 - Projection-friendly constraints → Projected (stochastic) gradient or proximal methods (fast, maintain feasibility).
 - Complex constraints (cones, PSD, many linear) → Use interior-point/conic solvers (Chapter 9) for moderate size. Alternatively, use operator-splitting (ADMM) if parallel/distributed solution is needed (Chapter 10).
@@ -277,25 +277,26 @@ Remarks: Encoding design requirements (actuator limits, stability margins, proba
 
 ## 11.5 Linear and conic programming: the canonical models
 
-Many practical problems reduce to **linear programming (LP)** or its convex extensions.  
-LP and related conic forms are the **workhorses** of operations research, control, and engineering optimization.
+Many practical problems reduce to linear programming (LP) or its convex extensions.  
+LP and related conic forms are the workhorses of operations research, control, and engineering optimization.
 
--  **Linear programs**: standard form
+-  Linear programs: standard form
 
     $$
     \min_x \; c^T x 
     \quad \text{s.t.} \quad A x = b, \; x \ge 0.
     $$
     Both objective and constraints are affine, so the optimum lies at a vertex of the polyhedron. Simplex method traverses vertices and is often very fast in practice. Interior-point methods approach the optimum through the interior and have polynomial-time guarantees. For moderate LPs, interior-point is robust and accurate; for very large LPs (sparse, structured), first-order methods or decomposition may be needed.
-- **Quadratic, SOCP, SDP:**
+- Quadratic, SOCP, SDP:
     Convex quadratic programs (QP), second-order cone programs (SOCP), and semidefinite programs (SDP) generalize LP. For example, many robust or regularized problems (elastic net, robust regression, classification with norm constraints) can be cast as QPs or SOCPs. All these are solvable by interior-point (Chapter 9) very efficiently. Interior-point solvers (like MOSEK, Gurobi, etc.) are widely used off-the-shelf for these problem classes.
 
-_ Practical patterns:
+- Practical patterns:
+
     1. Resource allocation/flow (LP): linear costs and constraints.
     2. Minimax/regret problems: e.g. $\min_{x}\max_{i}|a_i^T x - b_i|$ → LP (as in Chebyshev regression).
     3. Constrained least squares: can be QP or SOCP if constraints are polyhedral or norm-based.
 
-**Algorithmic pointers for 11.5:**
+Algorithmic pointers for 11.5:
 - Moderate LP/QP/SOCP: Use interior-point (robust, yields dual prices) or simplex (fast in practice, warm-startable).
 - Large-scale LP/QP: Exploit sparsity; use decomposition (Benders, ADMM) if structure allows; use iterative methods (primal-dual hybrid gradient, etc.) for extreme scale.
 - Reformulate into standard form: Recognize when your problem is an LP/QP/SOCP/SDP to use mature solvers. (E.g. ℓ∞ regression → LP, ℓ2 regression with ℓ2 constraint → SOCP.)
@@ -314,7 +315,7 @@ Modern design often includes risk measures or robustness. Two common patterns:
 - Worst-case (robust) optimization:
     Specify an uncertainty set $\mathcal{U}$ for data (e.g. $u$ in a norm-ball) and minimize the worst-case cost $\max_{u\in\mathcal{U}}\ell(x,u)$. Many losses $\ell$ and convex $\mathcal{U}$ yield a convex max-term (a support function or norm). The result is often a conic constraint (for ℓ₂ norms, an SOCP; for PSD, an SDP). Solve with interior-point (if problem size permits) or with specialized proximal/ADMM methods (splitting the max-term).
 
-**Algorithmic pointers for 11.6:**
+Algorithmic pointers for 11.6:
 
  - Risk/SOCP models: Interior-point (Chapter 9) is the standard approach.
  - Robust max-min problems: Convert inner max to a convex constraint (norm or cone). Then use interior-point if the reformulation is conic. If the reformulation is a nonsmooth penalty, use proximal or dual subgradient methods.
@@ -378,9 +379,8 @@ This summary gives concrete patterns of models and recommended solvers/tricks:
     - Model: Negative log-likelihood for Poisson (convex, see Section 11.3). 
     - Solve: Newton (IRLS) or gradient-based; interior-point can be used after conic reformulation.
 
----
-
-**Rule of thumb:** Identify whether your objective is smooth vs nonsmooth, strongly convex vs just convex, separable vs coupled, constrained vs unconstrained. Then pick from:
+ 
+Rule of thumb: Identify whether your objective is smooth vs nonsmooth, strongly convex vs just convex, separable vs coupled, constrained vs unconstrained. Then pick from:
 
  - Smooth & strongly convex → (quasi-)Newton or accelerated gradient.
  - Smooth + ℓ₁ → Proximal gradient/coordinate.

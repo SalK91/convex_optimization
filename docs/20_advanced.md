@@ -1,17 +1,19 @@
-# Chapter 10: Advanced Large-Scale and Structured Methods
+# Chapter 13: Advanced Large-Scale and Structured Methods
 
 In Chapter 9 we focused on “classical convex solvers”: gradient methods, accelerated methods, Newton and quasi-Newton methods, projected/proximal methods, and interior-point methods. Those are the canonical tools of convex optimisation.
 
 This chapter moves one step further.
 
 Here we study methods that:
-- exploit **problem structure** (sparsity, separability, block structure),
+
+- exploit problem structure (sparsity, separability, block structure),
 - scale to extremely high dimensions,
 - or are widely used in practice for machine learning and signal processing — including in problems that are not convex.
 
 Some of these methods were first analysed in the convex setting (often with strong guarantees), and then adopted — sometimes recklessly — in the nonconvex world (training neural nets, matrix factorisation, etc.). You’ll absolutely see them in modern optimisation and ML code.
 
 We’ll cover:
+
 1. Coordinate (block) descent,
 2. Stochastic gradient and mini-batch methods,
 3. ADMM (Alternating Direction Method of Multipliers),
@@ -22,13 +24,12 @@ Throughout we’ll emphasise:
 - When they are provably correct for convex problems,
 - Why people also use them in nonconvex problems.
 
----
-
+ 
 ## 10.1 Coordinate descent and block coordinate descent
 
 ### 10.1.1 Idea
 
-Instead of updating **all** coordinates of $x$ at once using a full gradient or Newton direction, we update **one coordinate (or one block of coordinates)** at a time, holding the others fixed.
+Instead of updating all coordinates of $x$ at once using a full gradient or Newton direction, we update one coordinate (or one block of coordinates) at a time, holding the others fixed.
 
 Suppose we want to minimise a convex function
 $$
@@ -64,7 +65,7 @@ each coordinate update becomes a scalar soft-thresholding step — so coordinate
 
 ### 10.1.4 Block coordinate descent
 
-When coordinates are naturally grouped (for example, $x$ is really $(x^{(1)}, x^{(2)}, \dots)$ where each $x^{(j)}$ is a vector of parameters for a submodule or layer), we generalise to **block coordinate descent**. Each step solves
+When coordinates are naturally grouped (for example, $x$ is really $(x^{(1)}, x^{(2)}, \dots)$ where each $x^{(j)}$ is a vector of parameters for a submodule or layer), we generalise to block coordinate descent. Each step solves
 $$
 x^{(j)} \leftarrow \arg\min_{z} F(\dots, z, \dots)\,.
 $$
@@ -82,6 +83,7 @@ Even when $F$ is not convex, people still run block coordinate descent (under na
 You see this in low-rank matrix factorisation (recommender systems), where you fix all user factors and update item factors, then swap. There are no global guarantees in general (no convexity), but empirically it converges to useful solutions.
 
 So:  
+
 - In convex settings → provable global convergence.  
 - In nonconvex settings → heuristic that often finds acceptable stationary points.
 
@@ -99,7 +101,7 @@ where $\ell_i$ is the loss on sample $i$.
 
 Computing $\nabla f(x)$ exactly costs $O(N)$ per step, which is huge.
 
-**Stochastic Gradient Descent (SGD)** replaces $\nabla f(x)$ with an unbiased estimate. At each iteration we:
+Stochastic Gradient Descent (SGD) replaces $\nabla f(x)$ with an unbiased estimate. At each iteration we:
 
 1. Sample $i$ uniformly from $\{1,\dots,N\}$,
 2. Use $g_k = \nabla \ell_i(x_k)$,
@@ -171,20 +173,20 @@ with dual variable (Lagrange multiplier) $y$ and penalty parameter $\rho>0$.
 ### 10.3.3 The ADMM updates (two-block case)
 
 Iterate the following:
-1. **$x$-update:**
+1. $x$-update:
    $$
    x^{k+1}
    :=
    \arg\min_x \mathcal{L}_\rho(x, z^k, y^k)
    $$
    (holding $z,y$ fixed).
-2. **$z$-update:**
+2. $z$-update:
    $$
    z^{k+1}
    :=
    \arg\min_z \mathcal{L}_\rho(x^{k+1}, z, y^k).
    $$
-3. **Dual update:**
+3. Dual update:
    $$
    y^{k+1}
    :=
@@ -218,7 +220,7 @@ You will see ADMM used in imaging, sparse coding, variational inference, etc., e
 
 ## 10.4 Proximal coordinate and coordinate-prox methods
 
-There’s a natural fusion of the ideas in Sections 10.1 (coordinate descent) and 9.5 (proximal methods): **proximal coordinate descent**.
+There’s a natural fusion of the ideas in Sections 10.1 (coordinate descent) and 9.5 (proximal methods): proximal coordinate descent.
 
 ### 10.4.1 Problem form
 
@@ -309,29 +311,29 @@ MM can often be interpreted as doing a proximal step on a locally quadratic or l
 
 We’ve now seen several algorithmic families that are particularly important at large scale and/or under structural constraints:
 
-1. **Coordinate descent / block coordinate descent** 
+1. Coordinate descent / block coordinate descent 
     - Updates one coordinate block at a time.  
     - Converges globally for many convex problems.  
     - Scales extremely well in high dimensions.  
     - Used heuristically in nonconvex alternating minimisation.
 
-2. **Stochastic and mini-batch gradient methods**  
+2. Stochastic and mini-batch gradient methods  
     - Use noisy gradient estimates to get cheap iterations.  
     - Converge (in expectation) for convex problems.  
     - Power all of modern large-scale ML, including nonconvex deep learning.
 
-3. **ADMM (Alternating Direction Method of Multipliers)**  
+3. ADMM (Alternating Direction Method of Multipliers)  
     - Splits a problem into simpler subproblems linked by linear constraints.  
     - Closely tied to duality and KKT (Chapters 7–8).  
     - Converges for convex problems.  
     - Used everywhere, including nonconvex settings, due to its modularity and parallelisability.
 
-4. **Proximal coordinate / coordinate-prox methods**  
+4. Proximal coordinate / coordinate-prox methods  
     - Merge sparsity-inducing penalties (Chapter 6) with blockwise updates.  
     - Ideal for $\ell_1$-type structure, group lasso, etc.  
     - Often extended to nonconvex penalties for even “more sparse” solutions.
 
-5. **Majorization–minimization (MM)**  
+5. Majorization–minimization (MM)  
     - Iteratively builds and minimises convex surrogates.  
     - Guarantees monotone descent of the true objective.  
     - Provides a clean bridge from convex optimisation theory into heuristic nonconvex optimisation.

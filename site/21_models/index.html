@@ -15,7 +15,7 @@
         <link rel="prev" href="../20_advanced/">
       
       
-        <link rel="next" href="../120_ineqaulities/">
+        <link rel="next" href="../30_canonical_problems/">
       
       
       <link rel="icon" href="../assets/images/favicon.png">
@@ -23,7 +23,7 @@
     
     
       
-        <title>11. Modelling Patterns and Algorithm Selection in Practice - Mathematics for Machine Learning</title>
+        <title>14. Modelling Patterns and Algorithm Selection in Practice - Mathematics for Machine Learning</title>
       
     
     
@@ -78,7 +78,7 @@
     
     
     
-    <body dir="ltr" data-md-color-scheme="slate" data-md-color-primary="teal" data-md-color-accent="indigo">
+    <body dir="ltr" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="cyan">
   
     
     <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
@@ -87,7 +87,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#chapter-11-modelling-patterns-and-algorithm-selection" class="md-skip">
+        <a href="#chapter-14-modelling-patterns-and-algorithm-selection" class="md-skip">
           Skip to content
         </a>
       
@@ -123,7 +123,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              11. Modelling Patterns and Algorithm Selection in Practice
+              14. Modelling Patterns and Algorithm Selection in Practice
             
           </span>
         </div>
@@ -136,7 +136,7 @@
     
     
     
-    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="teal" data-md-color-accent="indigo" aria-label="Switch to light mode" type="radio" name="__palette" id="__palette_0">
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="cyan" aria-label="Switch to light mode" type="radio" name="__palette" id="__palette_0">
     
       <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_1" hidden>
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3zm3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95zm-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31"></path></svg>
@@ -146,7 +146,7 @@
     
     
     
-    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="teal" data-md-color-accent="indigo" aria-label="Switch to dark mode" type="radio" name="__palette" id="__palette_1">
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="cyan" aria-label="Switch to dark mode" type="radio" name="__palette" id="__palette_1">
     
       <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_0" hidden>
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m3.55 19.09 1.41 1.41 1.8-1.79-1.42-1.42M12 6c-3.31 0-6 2.69-6 6s2.69 6 6 6 6-2.69 6-6c0-3.32-2.69-6-6-6m8 7h3v-2h-3m-2.76 7.71 1.8 1.79 1.41-1.41-1.79-1.8M20.45 5l-1.41-1.4-1.8 1.79 1.42 1.42M13 1h-2v3h2M6.76 5.39 4.96 3.6 3.55 5l1.79 1.81zM1 13h3v-2H1m12 9h-2v3h2"></path></svg>
@@ -239,7 +239,9 @@
 
 
 
-<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  
+
+<nav class="md-nav md-nav--primary md-nav--integrated" aria-label="Navigation" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
     <a href=".." title="Mathematics for Machine Learning" class="md-nav__button md-logo" aria-label="Mathematics for Machine Learning" data-md-component="logo">
       
@@ -289,7 +291,7 @@
   
   
   <span class="md-ellipsis">
-    Convex Optimization:
+    Convex Optimization
     
   </span>
   
@@ -300,7 +302,7 @@
         <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_1_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_1">
             <span class="md-nav__icon md-icon"></span>
-            Convex Optimization:
+            Convex Optimization
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
             
@@ -449,12 +451,35 @@
   
   
     <li class="md-nav__item">
+      <a href="../16a_optimality_conditions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    7. First-Order Optimality Conditions in Convex Optimization
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../17_kkt/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
-    7. Optimization Principles – From Gradient Descent to KKT
+    8. Optimization Principles – From Gradient Descent to KKT
     
   </span>
   
@@ -477,7 +502,53 @@
   
   
   <span class="md-ellipsis">
-    8. Lagrange Duality Theory
+    9. Lagrange Duality Theory
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../18a_pareto/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    10. Pareto Optimality and Multi-Objective Convex Optimization
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../18b_regularization/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    11. Regularized Approximation – Balancing Fit and Complexity
     
   </span>
   
@@ -500,7 +571,7 @@
   
   
   <span class="md-ellipsis">
-    9. Algorithms for Convex Optimization
+    12. Algorithms for Convex Optimization
     
   </span>
   
@@ -523,7 +594,7 @@
   
   
   <span class="md-ellipsis">
-    10. Advanced Large-Scale and Structured Methods
+    13. Advanced Large-Scale and Structured Methods
     
   </span>
   
@@ -555,7 +626,7 @@
   
   
   <span class="md-ellipsis">
-    11. Modelling Patterns and Algorithm Selection in Practice
+    14. Modelling Patterns and Algorithm Selection in Practice
     
   </span>
   
@@ -566,6 +637,142 @@
   
 
               
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../30_canonical_problems/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    15. Canonical Problems in Convex Optimization
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2">
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Cheat Sheets
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            Cheat Sheets
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../20a_cheatsheet/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Optimization Algos - Cheat Sheet
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3">
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Appendices
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            Appendices
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
             
               
                 
@@ -636,6 +843,144 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../160_conjugates/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Appendix D - Convex Conjugates and Fenchel Duality (Advanced)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../170_probability/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Appendix E - Convexity in Probability and Statistics (Advanced)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../180_subgradient%20method/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Appendix F - Subgradient Method and Variants (Advanced)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../190_proximal/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Appendix G - Proximal Operators
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../200_mirror/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Appendix H - Mirror Descent and Bregman Geometry
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../300_matrixfactorization/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Appendix I - Matrix Factorization
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -649,24 +994,6 @@
                 </div>
               </div>
             
-            
-              
-              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc">
-                <div class="md-sidebar__scrollwrap">
-                  <div class="md-sidebar__inner">
-                    
-
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
-  
-  
-  
-    
-  
-  
-</nav>
-                  </div>
-                </div>
-              </div>
             
           
           
@@ -693,17 +1020,17 @@
   
 
 
-<h1 id="chapter-11-modelling-patterns-and-algorithm-selection">Chapter 11: Modelling Patterns and Algorithm Selection<a class="headerlink" href="#chapter-11-modelling-patterns-and-algorithm-selection" title="Permanent link">¶</a></h1>
-<p>Real-world modelling starts not with algorithms but with <strong>data, assumptions, and design goals</strong>.  We choose a loss function from statistical assumptions (e.g. noise model, likelihood) and a complexity penalty or constraints from design preferences (simplicity, robustness, etc.).  The resulting convex (or nonconvex) optimization problem often <em>tells</em> us which solver class to use.  In practice, solving machine learning problems looks like: <strong>modeling → recognize structure → pick solver</strong>.  Familiar ML models (linear regression, logistic regression, etc.) can be viewed as convex programs.  Below we survey common patterns (convex and some nonconvex) and the recommended algorithms/tricks for each.</p>
+<h1 id="chapter-14-modelling-patterns-and-algorithm-selection">Chapter 14: Modelling Patterns and Algorithm Selection<a class="headerlink" href="#chapter-14-modelling-patterns-and-algorithm-selection" title="Permanent link">¶</a></h1>
+<p>Real-world modelling starts not with algorithms but with data, assumptions, and design goals.  We choose a loss function from statistical assumptions (e.g. noise model, likelihood) and a complexity penalty or constraints from design preferences (simplicity, robustness, etc.).  The resulting convex (or nonconvex) optimization problem often <em>tells</em> us which solver class to use.  In practice, solving machine learning problems looks like: modeling → recognize structure → pick solver.  Familiar ML models (linear regression, logistic regression, etc.) can be viewed as convex programs.  Below we survey common patterns (convex and some nonconvex) and the recommended algorithms/tricks for each.</p>
 <h2 id="111-regularized-estimation-and-the-accuracysimplicity-tradeoff">11.1 Regularized estimation and the accuracy–simplicity tradeoff<a class="headerlink" href="#111-regularized-estimation-and-the-accuracysimplicity-tradeoff" title="Permanent link">¶</a></h2>
-<p>Many learning tasks use a <strong>regularized risk minimization</strong> form:
+<p>Many learning tasks use a regularized risk minimization form:
 <script type="math/tex; mode=display">
 \min_x \; \underbrace{\text{loss}(x)}_{\text{data-fit}} \;+\; \lambda\;\underbrace{\text{penalty}(x)}_{\text{complexity}}.
 </script>
 Here the loss measures fit to data (often from a likelihood) and the penalty (regularizer) enforces simplicity or structure.  Increasing <span class="arithmatex">\(\lambda\)</span> trades accuracy for simplicity (e.g. model sparsity or shrinkage).</p>
 <ul>
 <li>
-<p><strong>Ridge regression (ℓ₂ penalty):</strong><br>
+<p>Ridge regression (ℓ₂ penalty):<br>
 <script type="math/tex; mode=display">
   \min_x \|Ax - b\|_2^2 + \lambda \|x\|_2^2.
   </script>
@@ -711,15 +1038,15 @@ Here the loss measures fit to data (often from a likelihood) and the penalty (re
   This arises from Gaussian noise (squared-error loss) plus a quadratic prior on <span class="arithmatex">\(x\)</span>.  It is a smooth, strongly convex quadratic problem (Hessian <span class="arithmatex">\(A^TA + \lambda I \succ 0\)</span>).  One can solve it via Newton’s method or closed‐form normal equations, or for large problems via (accelerated) gradient descent or conjugate gradient.  Strong convexity means fast, reliable convergence with second-order or accelerated first-order methods.</p>
 </li>
 <li>
-<p><strong>LASSO / Sparse regression (ℓ₁ penalty):</strong><br>
+<p>LASSO / Sparse regression (ℓ₁ penalty):<br>
 <script type="math/tex; mode=display">
   \min_x \tfrac12\|Ax - b\|_2^2 + \lambda \|x\|_1.
   </script>
 <br>
-  The <span class="arithmatex">\(\ell_1\)</span> penalty encourages many <span class="arithmatex">\(x_i=0\)</span> (sparsity) for interpretability.  The problem is convex but nonsmooth (since <span class="arithmatex">\(|\cdot|\)</span> is nondifferentiable at 0).  A standard solver is <strong>proximal gradient</strong>: take a gradient step on the smooth squared loss, then apply the proximal (soft-thresholding) step for <span class="arithmatex">\(\ell_1\)</span>, which sets small entries to zero.  Coordinate descent is another popular solver – updating one coordinate at a time with a closed-form soft-thresholding step.  Proximal methods and coordinate descent scale to very high dimensions.  </p>
+  The <span class="arithmatex">\(\ell_1\)</span> penalty encourages many <span class="arithmatex">\(x_i=0\)</span> (sparsity) for interpretability.  The problem is convex but nonsmooth (since <span class="arithmatex">\(|\cdot|\)</span> is nondifferentiable at 0).  A standard solver is proximal gradient: take a gradient step on the smooth squared loss, then apply the proximal (soft-thresholding) step for <span class="arithmatex">\(\ell_1\)</span>, which sets small entries to zero.  Coordinate descent is another popular solver – updating one coordinate at a time with a closed-form soft-thresholding step.  Proximal methods and coordinate descent scale to very high dimensions.  </p>
 </li>
 <li>
-<p><strong>Elastic net (mixed ℓ₁+ℓ₂):</strong><br>
+<p>Elastic net (mixed ℓ₁+ℓ₂):<br>
 <script type="math/tex; mode=display">
   \min_x \|Ax - b\|_2^2 + \lambda_1\|x\|_1 + \lambda_2\|x\|_2^2.
   </script>
@@ -727,10 +1054,10 @@ Here the loss measures fit to data (often from a likelihood) and the penalty (re
   This combines the sparsity of LASSO with the stability of ridge regression.  It is still convex and (for <span class="arithmatex">\(\lambda_2&gt;0\)</span>) strongly convex[^4].  One can still use proximal gradient (prox operator splits into soft-threshold and shrink) or coordinate descent.  Because of the ℓ₂ term, the objective is smooth and unique solution.</p>
 </li>
 <li>
-<p><strong>Group lasso, nuclear norm, etc.:</strong> Similar composite objectives arise when enforcing block-sparsity or low-rank structure.  Each adds a convex penalty (block <span class="arithmatex">\(\ell_{2,1}\)</span> norms, nuclear norm) to the loss.  These remain convex, often separable or prox-friendly.  Proximal methods (using known proximal maps for each norm) or ADMM can handle these.</p>
+<p>Group lasso, nuclear norm, etc.: Similar composite objectives arise when enforcing block-sparsity or low-rank structure.  Each adds a convex penalty (block <span class="arithmatex">\(\ell_{2,1}\)</span> norms, nuclear norm) to the loss.  These remain convex, often separable or prox-friendly.  Proximal methods (using known proximal maps for each norm) or ADMM can handle these.</p>
 </li>
 </ul>
-<p><strong>Algorithmic pointers for 11.1:</strong>  </p>
+<p>Algorithmic pointers for 11.1:  </p>
 <ul>
 <li><em>Smooth+ℓ₂ (strongly convex)</em> → Newton / quasi-Newton or (accelerated) gradient descent (Chapter 9).  Closed-form if possible.  </li>
 <li><em>Smooth + ℓ₁</em> → Proximal gradient or coordinate descent (Chapter 9/10).  These exploit separable nonsmoothness.  </li>
@@ -748,15 +1075,15 @@ Here the loss measures fit to data (often from a likelihood) and the penalty (re
 </p>
 <p>Interpretation:</p>
 <ul>
-<li>This corresponds to assuming <strong>Laplace (double-exponential) noise</strong> on the residuals.</li>
+<li>This corresponds to assuming Laplace (double-exponential) noise on the residuals.</li>
 <li>Unlike squared error, it penalizes big residuals <em>linearly</em>, not quadratically, so outliers hurt less.</li>
 </ul>
 <p>Geometry/structure:
-- The objective is <strong>convex</strong> but <strong>nondifferentiable</strong> at zero residual (the kink in <span class="arithmatex">\(|r|\)</span> at <span class="arithmatex">\(r=0\)</span>).</p>
+- The objective is convex but nondifferentiable at zero residual (the kink in <span class="arithmatex">\(|r|\)</span> at <span class="arithmatex">\(r=0\)</span>).</p>
 <p>How to solve it:</p>
 <ol>
 <li>
-<p><strong>As a linear program (LP).</strong><br>
+<p>As a linear program (LP).<br>
    Introduce slack variables <span class="arithmatex">\(t_i \ge 0\)</span> and rewrite:</p>
 <ul>
 <li>constraints:<br>
@@ -772,7 +1099,7 @@ Here the loss measures fit to data (often from a likelihood) and the penalty (re
 <p>These methods give high-accuracy solutions and certificates.</p>
 </li>
 <li>
-<p><strong>First-order methods for large scale.</strong>  </p>
+<p>First-order methods for large scale.  </p>
 <p>For <em>very</em> large problems (millions of samples/features), you can apply:</p>
 <ul>
 <li>subgradient methods,</li>
@@ -798,35 +1125,35 @@ Here the loss measures fit to data (often from a likelihood) and the penalty (re
 </p>
 <p>Interpretation:</p>
 <ul>
-<li>For <strong>small</strong> residuals (<span class="arithmatex">\(|r|\le\delta\)</span>): it acts like least-squares (<span class="arithmatex">\(\tfrac{1}{2}r^2\)</span>). So inliers are fit tightly.</li>
-<li>For <strong>large</strong> residuals (<span class="arithmatex">\(|r|&gt;\delta\)</span>): it acts like <span class="arithmatex">\(\ell_1\)</span> (linear penalty), so outliers get down-weighted.</li>
+<li>For small residuals (<span class="arithmatex">\(|r|\le\delta\)</span>): it acts like least-squares (<span class="arithmatex">\(\tfrac{1}{2}r^2\)</span>). So inliers are fit tightly.</li>
+<li>For large residuals (<span class="arithmatex">\(|r|&gt;\delta\)</span>): it acts like <span class="arithmatex">\(\ell_1\)</span> (linear penalty), so outliers get down-weighted.</li>
 <li>Intuition: “be aggressive on normal data, be forgiving on outliers.”</li>
 </ul>
 <p>Properties:</p>
 <ul>
-<li><span class="arithmatex">\(\rho_\delta\)</span> is <strong>convex</strong>.</li>
-<li>It is <strong>smooth</strong> except for a kink in its second derivative at <span class="arithmatex">\(|r|=\delta\)</span>.</li>
+<li><span class="arithmatex">\(\rho_\delta\)</span> is convex.</li>
+<li>It is smooth except for a kink in its second derivative at <span class="arithmatex">\(|r|=\delta\)</span>.</li>
 <li>Its gradient exists everywhere (the function is once-differentiable).</li>
 </ul>
 <p>How to solve it:</p>
 <ol>
 <li>
-<p><strong>Iteratively Reweighted Least Squares (IRLS) / quasi-Newton.</strong><br>
+<p>Iteratively Reweighted Least Squares (IRLS) / quasi-Newton.<br>
     Because the loss is basically quadratic near the solution, Newton-type methods (including IRLS) work well and converge fast on moderate-size problems.</p>
 </li>
 <li>
-<p><strong>Proximal / first-order methods.</strong><br>
+<p>Proximal / first-order methods.<br>
     You can apply proximal gradient methods, since each term is simple and has a known prox.</p>
 </li>
 <li>
-<p><strong>As a conic program (SOCP).</strong><br>
+<p>As a conic program (SOCP).<br>
     The Huber objective can be written with auxiliary variables and second-order cone constraints.<br>
     That means you can feed it to an SOCP solver and let an interior-point method handle it efficiently and robustly.<br>
     This is attractive when you want high accuracy and dual certificates.</p>
 </li>
 </ol>
 <h3 id="1123-worst-case-robust-regression">11.2.3 Worst-case robust regression<a class="headerlink" href="#1123-worst-case-robust-regression" title="Permanent link">¶</a></h3>
-<p>Sometimes we don’t just want “fit the data we saw,” but “fit any data within some uncertainty set.” This leads to <strong>min–max</strong> problems of the form:
+<p>Sometimes we don’t just want “fit the data we saw,” but “fit any data within some uncertainty set.” This leads to min–max problems of the form:
 <script type="math/tex; mode=display">
 \min_x \;\max_{u \in \mathcal{U}} \; \| (A + u)x - b \|_2.
 </script>
@@ -834,12 +1161,12 @@ Here the loss measures fit to data (often from a likelihood) and the penalty (re
 <p>Meaning:</p>
 <ul>
 <li><span class="arithmatex">\(\mathcal{U}\)</span> is an uncertainty set describing how much you distrust the matrix <span class="arithmatex">\(A\)</span>, the inputs, or the measurements.</li>
-<li>You choose <span class="arithmatex">\(x\)</span> that performs well even in the <strong>worst allowed perturbation</strong>.</li>
+<li>You choose <span class="arithmatex">\(x\)</span> that performs well even in the worst allowed perturbation.</li>
 </ul>
 <p>Why this is still tractable:</p>
 <ul>
 <li>
-<p>If <span class="arithmatex">\(\mathcal{U}\)</span> is convex (for example, an <span class="arithmatex">\(\ell_2\)</span> ball or box bounds on each entry), then the inner maximization often has a <strong>closed-form expression</strong>.</p>
+<p>If <span class="arithmatex">\(\mathcal{U}\)</span> is convex (for example, an <span class="arithmatex">\(\ell_2\)</span> ball or box bounds on each entry), then the inner maximization often has a closed-form expression.</p>
 </li>
 <li>
 <p>That inner max usually turns into an extra norm penalty or a conic constraint in the outer problem.</p>
@@ -873,9 +1200,9 @@ b = A x + \varepsilon, \quad \varepsilon \sim \mathcal{N}(0, \sigma^2 I).
 |A x - b|_2^2.
 </script>
 </p>
-<p>This recovers the classic <strong>least-squares loss</strong> (as in linear regression).<br>
+<p>This recovers the classic least-squares loss (as in linear regression).<br>
 It is smooth and convex (strongly convex if <span class="arithmatex">\(A^T A\)</span> is full rank).</p>
-<p><strong>Algorithms:</strong></p>
+<p>Algorithms:</p>
 <ul>
 <li>
 <p>Closed-form via <span class="arithmatex">\((A^T A + \lambda I)^{-1} A^T b\)</span> (for ridge regression),</p>
@@ -896,8 +1223,8 @@ It is smooth and convex (strongly convex if <span class="arithmatex">\(A^T A\)</
 </script>
 </p>
 <p>This is exactly the ℓ₁ regression (least absolute deviations).<br>
-It can be solved as an <strong>LP</strong> or with <strong>robust optimization solvers</strong> (interior-point),<br>
-or with <strong>first-order nonsmooth methods</strong> (subgradient/proximal) for large-scale problems.</p>
+It can be solved as an LP or with robust optimization solvers (interior-point),<br>
+or with first-order nonsmooth methods (subgradient/proximal) for large-scale problems.</p>
 </li>
 <li>
 <p>Logistic model (binary classification)</p>
@@ -912,9 +1239,9 @@ or with <strong>first-order nonsmooth methods</strong> (subgradient/proximal) fo
 \sum_i \left[ -y_i (a_i^T x) + \log(1 + e^{a_i^T x}) \right].
 </script>
 </p>
-<p>This loss is <strong>convex and smooth</strong> in <span class="arithmatex">\(x\)</span>.<br>
+<p>This loss is convex and smooth in <span class="arithmatex">\(x\)</span>.<br>
 No closed-form solution exists.</p>
-<p><strong>Algorithms:</strong></p>
+<p>Algorithms:</p>
 <ul>
 <li>With ℓ₂ regularization: smooth and (if <span class="arithmatex">\(\lambda&gt;0\)</span>) strongly convex → use accelerated gradient or quasi-Newton (e.g. L-BFGS).</li>
 <li>With ℓ₁ regularization (sparse logistic): composite convex → use proximal gradient (soft-thresholding) or coordinate descent.</li>
@@ -928,8 +1255,8 @@ No closed-form solution exists.</p>
 + \log\!\left(\sum_{j=1}^K e^{a_i^T x_j}\right).
 </script>
 </p>
-<p>This loss is <strong>convex</strong> in the weight vectors <span class="arithmatex">\(\{x_k\}\)</span> and generalizes binary logistic to multiclass.</p>
-<p><strong>Algorithms:</strong></p>
+<p>This loss is convex in the weight vectors <span class="arithmatex">\(\{x_k\}\)</span> and generalizes binary logistic to multiclass.</p>
+<p>Algorithms:</p>
 <ul>
 <li>Gradient-based solvers (L-BFGS, Newton with block Hessian) for moderate size.</li>
 <li>Stochastic gradient (SGD, Adam) for large datasets.</li>
@@ -937,12 +1264,12 @@ No closed-form solution exists.</p>
 </li>
 <li>
 <p>Generalized linear models (GLMs)</p>
-<p>In GLMs, <span class="arithmatex">\(y_i\)</span> given <span class="arithmatex">\(x\)</span> has an <strong>exponential-family distribution</strong> (Poisson, binomial, etc.) with mean related to <span class="arithmatex">\(a_i^T x\)</span>.<br>
-The NLL is <strong>convex</strong> in <span class="arithmatex">\(x\)</span> for canonical links (e.g. log-link for Poisson, logit for binomial).</p>
-<p><strong>Examples:</strong></p>
+<p>In GLMs, <span class="arithmatex">\(y_i\)</span> given <span class="arithmatex">\(x\)</span> has an exponential-family distribution (Poisson, binomial, etc.) with mean related to <span class="arithmatex">\(a_i^T x\)</span>.<br>
+The NLL is convex in <span class="arithmatex">\(x\)</span> for canonical links (e.g. log-link for Poisson, logit for binomial).</p>
+<p>Examples:</p>
 <ul>
-<li><strong>Poisson regression</strong> for counts: convex NLL, solved by IRLS or gradient.</li>
-<li><strong>Probit models:</strong> convex but require iterative solvers.</li>
+<li>Poisson regression for counts: convex NLL, solved by IRLS or gradient.</li>
+<li>Probit models: convex but require iterative solvers.</li>
 </ul>
 </li>
 </ul>
@@ -951,18 +1278,18 @@ The NLL is <strong>convex</strong> in <span class="arithmatex">\(x\)</span> for 
 <ul>
 <li>
 <p>Simple (projection-friendly) constraints</p>
-<p><strong>Examples:</strong></p>
+<p>Examples:</p>
 <ul>
 <li>
-<p><strong>Box constraints:</strong> <span class="arithmatex">\(l \le x \le u\)</span><br>
+<p>Box constraints: <span class="arithmatex">\(l \le x \le u\)</span><br>
     → Projection: clip each entry to <span class="arithmatex">\([\ell_i, u_i]\)</span>.</p>
 </li>
 <li>
-<p><strong>ℓ₂-ball:</strong> <span class="arithmatex">\(\|x\|_2 \le R\)</span><br>
+<p>ℓ₂-ball: <span class="arithmatex">\(\|x\|_2 \le R\)</span><br>
     → Projection: rescale <span class="arithmatex">\(x\)</span> if <span class="arithmatex">\(\|x\|_2 &gt; R\)</span>.</p>
 </li>
 <li>
-<p><strong>Simplex:</strong> <span class="arithmatex">\(\{x \ge 0, \sum_i x_i = 1\}\)</span><br>
+<p>Simplex: <span class="arithmatex">\(\{x \ge 0, \sum_i x_i = 1\}\)</span><br>
     → Projection: sort and threshold coordinates (simple <span class="arithmatex">\(O(n \log n)\)</span> algorithm).</p>
 </li>
 </ul>
@@ -972,15 +1299,15 @@ The NLL is <strong>convex</strong> in <span class="arithmatex">\(x\)</span> for 
 If constraints are complex (e.g. second-order cones, semidefinite, or many coupled inequalities), projections are hard. Two strategies:</p>
 <ol>
 <li>
-<p><strong>Barrier / penalty and interior-point methods</strong> : Add a log-barrier or penalty and solve with an interior-point solver (Chapter 9). This handles general convex constraints well and returns dual variables (Lagrange multipliers) as a bonus.</p>
+<p>Barrier / penalty and interior-point methods : Add a log-barrier or penalty and solve with an interior-point solver (Chapter 9). This handles general convex constraints well and returns dual variables (Lagrange multipliers) as a bonus.</p>
 </li>
 <li>
-<p><strong>Conic formulation + solver</strong>: Write the problem as an LP/QP/SOCP/SDP and use specialized solvers (like MOSEK, Gurobi) that exploit sparse structure. If only first-order methods are feasible for huge problems, one can apply dual decomposition or ADMM by splitting constraints (Chapter 10), but convergence will be slower.</p>
+<p>Conic formulation + solver: Write the problem as an LP/QP/SOCP/SDP and use specialized solvers (like MOSEK, Gurobi) that exploit sparse structure. If only first-order methods are feasible for huge problems, one can apply dual decomposition or ADMM by splitting constraints (Chapter 10), but convergence will be slower.</p>
 </li>
 </ol>
 </li>
 </ul>
-<p><strong>Algorithmic pointers for 11.4:</strong></p>
+<p>Algorithmic pointers for 11.4:</p>
 <ul>
 <li>Projection-friendly constraints → Projected (stochastic) gradient or proximal methods (fast, maintain feasibility).</li>
 <li>Complex constraints (cones, PSD, many linear) → Use interior-point/conic solvers (Chapter 9) for moderate size. Alternatively, use operator-splitting (ADMM) if parallel/distributed solution is needed (Chapter 10).</li>
@@ -988,26 +1315,30 @@ If constraints are complex (e.g. second-order cones, semidefinite, or many coupl
 </ul>
 <p>Remarks: Encoding design requirements (actuator limits, stability margins, probability budgets) as convex constraints lets us leverage efficient convex solvers. Feasible set geometry dictates the method: easy projection → projective methods; otherwise → interior-point or operator-splitting.</p>
 <h2 id="115-linear-and-conic-programming-the-canonical-models">11.5 Linear and conic programming: the canonical models<a class="headerlink" href="#115-linear-and-conic-programming-the-canonical-models" title="Permanent link">¶</a></h2>
-<p>Many practical problems reduce to <strong>linear programming (LP)</strong> or its convex extensions.<br>
-LP and related conic forms are the <strong>workhorses</strong> of operations research, control, and engineering optimization.</p>
+<p>Many practical problems reduce to linear programming (LP) or its convex extensions.<br>
+LP and related conic forms are the workhorses of operations research, control, and engineering optimization.</p>
 <ul>
 <li>
-<p><strong>Linear programs</strong>: standard form</p>
+<p>Linear programs: standard form</p>
 <p>
 <script type="math/tex; mode=display">
 \min_x \; c^T x 
 \quad \text{s.t.} \quad A x = b, \; x \ge 0.
 </script>
 Both objective and constraints are affine, so the optimum lies at a vertex of the polyhedron. Simplex method traverses vertices and is often very fast in practice. Interior-point methods approach the optimum through the interior and have polynomial-time guarantees. For moderate LPs, interior-point is robust and accurate; for very large LPs (sparse, structured), first-order methods or decomposition may be needed.
-- <strong>Quadratic, SOCP, SDP:</strong>
+- Quadratic, SOCP, SDP:
 Convex quadratic programs (QP), second-order cone programs (SOCP), and semidefinite programs (SDP) generalize LP. For example, many robust or regularized problems (elastic net, robust regression, classification with norm constraints) can be cast as QPs or SOCPs. All these are solvable by interior-point (Chapter 9) very efficiently. Interior-point solvers (like MOSEK, Gurobi, etc.) are widely used off-the-shelf for these problem classes.</p>
 </li>
+<li>
+<p>Practical patterns:</p>
+<ol>
+<li>Resource allocation/flow (LP): linear costs and constraints.</li>
+<li>Minimax/regret problems: e.g. <span class="arithmatex">\(\min_{x}\max_{i}|a_i^T x - b_i|\)</span> → LP (as in Chebyshev regression).</li>
+<li>Constrained least squares: can be QP or SOCP if constraints are polyhedral or norm-based.</li>
+</ol>
+</li>
 </ul>
-<p>_ Practical patterns:
-    1. Resource allocation/flow (LP): linear costs and constraints.
-    2. Minimax/regret problems: e.g. <span class="arithmatex">\(\min_{x}\max_{i}|a_i^T x - b_i|\)</span> → LP (as in Chebyshev regression).
-    3. Constrained least squares: can be QP or SOCP if constraints are polyhedral or norm-based.</p>
-<p><strong>Algorithmic pointers for 11.5:</strong>
+<p>Algorithmic pointers for 11.5:
 - Moderate LP/QP/SOCP: Use interior-point (robust, yields dual prices) or simplex (fast in practice, warm-startable).
 - Large-scale LP/QP: Exploit sparsity; use decomposition (Benders, ADMM) if structure allows; use iterative methods (primal-dual hybrid gradient, etc.) for extreme scale.
 - Reformulate into standard form: Recognize when your problem is an LP/QP/SOCP/SDP to use mature solvers. (E.g. ℓ∞ regression → LP, ℓ2 regression with ℓ2 constraint → SOCP.)</p>
@@ -1027,7 +1358,7 @@ Convex quadratic programs (QP), second-order cone programs (SOCP), and semidefin
     Specify an uncertainty set <span class="arithmatex">\(\mathcal{U}\)</span> for data (e.g. <span class="arithmatex">\(u\)</span> in a norm-ball) and minimize the worst-case cost <span class="arithmatex">\(\max_{u\in\mathcal{U}}\ell(x,u)\)</span>. Many losses <span class="arithmatex">\(\ell\)</span> and convex <span class="arithmatex">\(\mathcal{U}\)</span> yield a convex max-term (a support function or norm). The result is often a conic constraint (for ℓ₂ norms, an SOCP; for PSD, an SDP). Solve with interior-point (if problem size permits) or with specialized proximal/ADMM methods (splitting the max-term).</p>
 </li>
 </ul>
-<p><strong>Algorithmic pointers for 11.6:</strong></p>
+<p>Algorithmic pointers for 11.6:</p>
 <ul>
 <li>Risk/SOCP models: Interior-point (Chapter 9) is the standard approach.</li>
 <li>Robust max-min problems: Convert inner max to a convex constraint (norm or cone). Then use interior-point if the reformulation is conic. If the reformulation is a nonsmooth penalty, use proximal or dual subgradient methods.</li>
@@ -1119,8 +1450,7 @@ Convex quadratic programs (QP), second-order cone programs (SOCP), and semidefin
 </ul>
 </li>
 </ul>
-<hr>
-<p><strong>Rule of thumb:</strong> Identify whether your objective is smooth vs nonsmooth, strongly convex vs just convex, separable vs coupled, constrained vs unconstrained. Then pick from:</p>
+<p>Rule of thumb: Identify whether your objective is smooth vs nonsmooth, strongly convex vs just convex, separable vs coupled, constrained vs unconstrained. Then pick from:</p>
 <ul>
 <li>Smooth &amp; strongly convex → (quasi-)Newton or accelerated gradient.</li>
 <li>Smooth + ℓ₁ → Proximal gradient/coordinate.</li>
@@ -1147,6 +1477,8 @@ Convex quadratic programs (QP), second-order cone programs (SOCP), and semidefin
             </div>
           
           
+  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var labels=set.querySelector(".tabbed-labels");for(var tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+
 <script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
         </div>
         
@@ -1199,7 +1531,7 @@ Convex quadratic programs (QP), second-order cone programs (SOCP), and semidefin
     
     
       
-      <script id="__config" type="application/json">{"base": "..", "features": ["navigation.instant", "navigation.top", "navigation.expand", "header.autohide", "search.suggest", "search.highlight", "content.code.copy", "content.action.edit", "content.action.view"], "search": "../assets/javascripts/workers/search.973d3a69.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+      <script id="__config" type="application/json">{"base": "..", "features": ["navigation.top", "toc.integrate", "content.code.copy", "content.code.annotate", "content.action.edit", "content.action.view", "content.tabs.link", "search.suggest", "search.highlight"], "search": "../assets/javascripts/workers/search.973d3a69.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
     
     
       <script src="../assets/javascripts/bundle.f55a23d4.min.js"></script>

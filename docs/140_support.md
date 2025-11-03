@@ -6,7 +6,7 @@ This appendix develops a geometric viewpoint on duality using support functions,
 
 ## B.1 Support functions
 
-Let $C \subseteq \mathbb{R}^n$ be a nonempty set. The **support function** of $C$ is
+Let $C \subseteq \mathbb{R}^n$ be a nonempty set. The support function of $C$ is
 $$
 \sigma_C(y) = \sup_{x \in C} y^\top x.
 $$
@@ -46,7 +46,7 @@ $$
 =
 \|y\|_*,
 $$
-the **dual norm** of $\|\cdot\|$.
+the dual norm of $\|\cdot\|$.
 
 Example:
 
@@ -60,7 +60,7 @@ This shows that dual norms are just support functions of norm balls.
 
 ## B.3 Indicator functions and conjugates
 
-Define the **indicator function** of a set $C$:
+Define the indicator function of a set $C$:
 $$
 \delta_C(x) =
 \begin{cases}
@@ -162,7 +162,7 @@ This geometric point of view is not just pretty:
 
 <!-- # F.2 Support Functions and Dual Geometry
 
-Support functions are one of the most elegant bridges between convex sets and linear optimization. For any convex set, they describe its **extent in a given direction** — and thus appear naturally in:
+Support functions are one of the most elegant bridges between convex sets and linear optimization. For any convex set, they describe its extent in a given direction — and thus appear naturally in:
 
 - Duality theory and convex conjugates (see Section D.1)  
 - Norm analysis and dual norms (Section A.4 and A.5)  
@@ -176,7 +176,7 @@ Geometrically, a support function tells you:
 
 ## Definition and Geometry
 
-Let $C \subseteq \mathbb{R}^n$ be a nonempty convex set. The **support function** $\sigma_C : \mathbb{R}^n \to \mathbb{R}$ is defined as:
+Let $C \subseteq \mathbb{R}^n$ be a nonempty convex set. The support function $\sigma_C : \mathbb{R}^n \to \mathbb{R}$ is defined as:
 
 $$
 \sigma_C(y) = \sup_{x \in C} \langle y, x \rangle
@@ -184,24 +184,24 @@ $$
 
 - $y$ is the direction vector.  
 - $\langle y, x \rangle$ is the inner product (see Section A.2).  
-- $\sigma_C(y)$ gives the **maximum projection** of $C$ along direction $y$.
+- $\sigma_C(y)$ gives the maximum projection of $C$ along direction $y$.
 
-It corresponds to the **furthest point of $C$** in direction $y$, and hence defines a **supporting hyperplane** to the set.
+It corresponds to the furthest point of $C$ in direction $y$, and hence defines a supporting hyperplane to the set.
 
 ---
 
 ## Key Properties
 
-- **Positive Homogeneity**:  
+- Positive Homogeneity:  
   $$
   \sigma_C(\alpha y) = \alpha \sigma_C(y) \quad \text{for } \alpha \ge 0
   $$
-- **Convexity**:  
+- Convexity:  
   $$
   \sigma_C(y_1 + y_2) \le \sigma_C(y_1) + \sigma_C(y_2)
   $$
-- **Attainment**: If $C$ is closed and bounded (compact), the supremum is attained — the max is reached at some $x^\star \in C$.  
-- **Set Representation**:  
+- Attainment: If $C$ is closed and bounded (compact), the supremum is attained — the max is reached at some $x^\star \in C$.  
+- Set Representation:  
   Every closed convex set can be recovered from its support function:
   $$
   C = \{ x \in \mathbb{R}^n \mid \langle y, x \rangle \le \sigma_C(y) \quad \forall y \in \mathbb{R}^n \}
@@ -213,15 +213,15 @@ It corresponds to the **furthest point of $C$** in direction $y$, and hence defi
 
 To compute $\sigma_C(y)$:
 
-1. **Specify the convex set** $C$ (e.g., a ball, polytope, or feasible region).
-2. **Fix the direction** $y \in \mathbb{R}^n$.
-3. **Maximize the dot product** $\langle y, x \rangle$ over $x \in C$.
+1. Specify the convex set $C$ (e.g., a ball, polytope, or feasible region).
+2. Fix the direction $y \in \mathbb{R}^n$.
+3. Maximize the dot product $\langle y, x \rangle$ over $x \in C$.
 
-This is a **linear program** over $C$.
+This is a linear program over $C$.
 
 ### Links to Optimization:
 - In duality theory (Section D.1), linear functionals $\langle y, x \rangle$ are used to lower-bound convex functions — support functions arise naturally.
-- For constraint sets defined by indicator functions (Section A.8), the support function is their **convex conjugate**:
+- For constraint sets defined by indicator functions (Section A.8), the support function is their convex conjugate:
   $$
   \sigma_C = \delta_C^*
   $$
@@ -240,9 +240,9 @@ $$
 \sigma_C(y) = \sup_{\|x\|_2 \le 1} \langle y, x \rangle = \|y\|_2
 $$
 
-**Interpretation**: the farthest point in direction $y$ lies on the boundary and aligns with $y$.
+Interpretation: the farthest point in direction $y$ lies on the boundary and aligns with $y$.
 
-👉 This reveals that the support function of a norm ball gives the **dual norm** — see Section A.4.
+👉 This reveals that the support function of a norm ball gives the dual norm — see Section A.4.
 
 ---
 
@@ -256,9 +256,9 @@ $$
 \sigma_C(y) = \|y\|_\infty
 $$
 
-**Intuition**: in direction $y$, the maximal point in $C$ aligns with the coordinate having largest magnitude.
+Intuition: in direction $y$, the maximal point in $C$ aligns with the coordinate having largest magnitude.
 
-This dual norm relationship is fundamental in **sparsity-inducing optimization** (e.g., LASSO in Section F.1).
+This dual norm relationship is fundamental in sparsity-inducing optimization (e.g., LASSO in Section F.1).
 
 ---
 
@@ -272,7 +272,7 @@ $$
 \sigma_C(y) = \max_{i=1,\dots,m} \langle y, v_i \rangle
 $$
 
-**Interpretation**: the maximum projection occurs at one of the vertices of the polytope.
+Interpretation: the maximum projection occurs at one of the vertices of the polytope.
 
 In LP problems (see Section C.3), this is how extreme points determine optimal solutions.
 
@@ -282,50 +282,50 @@ In LP problems (see Section C.3), this is how extreme points determine optimal s
 
 ### 🔄 Duality and Convex Conjugates
 
-The support function is the **Fenchel conjugate** of an indicator function:
+The support function is the Fenchel conjugate of an indicator function:
 
 $$
 \sigma_C(y) = \delta_C^*(y)
 $$
 
-This connection underpins many dual optimization frameworks, including **saddle-point methods**, **dual norms**, and **variational formulations**.
+This connection underpins many dual optimization frameworks, including saddle-point methods, dual norms, and variational formulations.
 
 ---
 
 ### 📐 Dual Norms
 
-For any norm $\|\cdot\|$, the support function of its unit ball gives the **dual norm**:
+For any norm $\|\cdot\|$, the support function of its unit ball gives the dual norm:
 
 $$
 \sigma_{B}(y) = \sup_{\|x\| \le 1} \langle y, x \rangle = \|y\|_*
 $$
 
-See Section A.5 for the definition of dual norms, and Section C.1 for how they affect **step sizes and convergence geometry**.
+See Section A.5 for the definition of dual norms, and Section C.1 for how they affect step sizes and convergence geometry.
 
 ---
 
 ### 📏 Geometric Use Cases
 
-- Compute **distances to sets** via duality.  
-- Generate **separating hyperplanes** for convex sets.  
-- Implement **projection algorithms** (e.g., mirror descent in Section K.1).  
-- Construct **robust constraints** and worst-case bounds in uncertainty modeling (see Section E.2).
+- Compute distances to sets via duality.  
+- Generate separating hyperplanes for convex sets.  
+- Implement projection algorithms (e.g., mirror descent in Section K.1).  
+- Construct robust constraints and worst-case bounds in uncertainty modeling (see Section E.2).
 
 ---
 
 ## Summary and Takeaways
 
-- The support function $\sigma_C(y)$ measures **how far a convex set extends in direction $y$**.
-- It is always **convex, positively homogeneous, and subadditive**.
+- The support function $\sigma_C(y)$ measures how far a convex set extends in direction $y$.
+- It is always convex, positively homogeneous, and subadditive.
 - Support functions appear in:
-  - **Duality theory** via convex conjugates  
-  - **Norm analysis** via dual norms  
-  - **Subgradients and projections**  
-  - **Constraint representations** and recovery of convex sets
-- For **norm balls**, $\sigma_C$ gives the **dual norm**.  
-- For **polytopes**, $\sigma_C$ is the max over vertices.  
-- For **machine learning**, support functions help model constraints, regularization penalties, and geometric algorithms.
+  - Duality theory via convex conjugates  
+  - Norm analysis via dual norms  
+  - Subgradients and projections  
+  - Constraint representations and recovery of convex sets
+- For norm balls, $\sigma_C$ gives the dual norm.  
+- For polytopes, $\sigma_C$ is the max over vertices.  
+- For machine learning, support functions help model constraints, regularization penalties, and geometric algorithms.
 
-**Mental model**:  
+Mental model:  
 Think of a support function as a “radar scan” — it tells you the furthest point of a convex set in any given direction.
  -->

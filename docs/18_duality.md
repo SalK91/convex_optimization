@@ -1,17 +1,16 @@
-# Chapter 8: Lagrange Duality Theory
+# Chapter 9: Lagrange Duality Theory
 
-Duality is one of the most beautiful and useful ideas in convex optimisation. Every constrained optimisation problem (the **primal**) has an associated **dual** problem. The dual problem:
+Duality is one of the most beautiful and useful ideas in convex optimisation. Every constrained optimisation problem (the primal) has an associated dual problem. The dual problem:
 
 - provides a lower bound on the optimal primal value,
 - often has structure that is easier to analyse,
 - gives certificates of optimality,
 - interprets multipliers as “prices” of constraints.
 
-In convex optimisation, under mild assumptions, the primal and dual optimal values are equal (Boyd and Vandenberghe, 2004; Rockafellar, 1970).
+In convex optimisation, under mild assumptions, the primal and dual optimal values are equal.
 
----
-
-## 8.1 The primal problem
+ 
+## 9.1 The primal problem
 
 We consider the general problem:
 $$
@@ -31,11 +30,11 @@ $$
 
 > Infimum (inf): the greatest lower bound of a set — the smallest value a function can approach, even if it is not attained.
 
----
+ 
 
-## 8.2 The Lagrangian
+## 9.2 The Lagrangian
 
-We define the **Lagrangian**:
+We define the Lagrangian:
 $$
 L(x,\lambda,\mu)
 =
@@ -47,11 +46,11 @@ with multipliers $\mu \in \mathbb{R}^m$ and $\lambda \in \mathbb{R}^p$. For ineq
 
 Think of $\mu_i$ and $\lambda_j$ as “penalties” for violating the constraints.
 
----
+ 
 
-## 8.3 The dual function
+## 9.3 The dual function
 
-For fixed multipliers $(\lambda,\mu)$, define the **dual function**:
+For fixed multipliers $(\lambda,\mu)$, define the dual function:
 $$
 \theta(\lambda,\mu)
 =
@@ -60,13 +59,13 @@ $$
 
 Important:
 
-- $\theta(\lambda,\mu)$ is always **concave** in $(\lambda,\mu)$, even if $f$ is not convex.
+- $\theta(\lambda,\mu)$ is always concave in $(\lambda,\mu)$, even if $f$ is not convex.
 - For any $\mu \ge 0$,
 $$
 \theta(\lambda,\mu) \le f^\star.
 $$
 
-This last fact is called **weak duality**:
+This last fact is called weak duality:
 > The dual function gives lower bounds on the primal optimum.
 
 Proof sketch of weak duality:  
@@ -83,11 +82,10 @@ because $g_i(x) \le 0$ and $\mu_i \ge 0$.
 So $\theta(\lambda,\mu) = \inf_x L(x,\lambda,\mu) \le f(x)$ for all feasible $x$.  
 Taking the infimum over feasible $x$ gives $\theta(\lambda,\mu) \le f^\star$.
 
----
+ 
+## 9.4 The dual problem
 
-## 8.4 The dual problem
-
-We now **maximise** the lower bound. The **Lagrange dual problem** is:
+We now maximise the lower bound. The Lagrange dual problem is:
 $$
 \begin{array}{ll}
 \text{maximise}_{\lambda,\mu} & \theta(\lambda,\mu) \\
@@ -95,18 +93,18 @@ $$
 \end{array}
 $$
 
-Because $\theta$ is concave and we are maximising it, the dual problem is always a **concave maximisation problem** (i.e. a convex optimisation problem in standard form).
+Because $\theta$ is concave and we are maximising it, the dual problem is always a concave maximisation problem (i.e. a convex optimisation problem in standard form).
 
 Let $d^\star$ denote the optimal dual value.  
 From weak duality, $d^\star \le f^\star$ always.
 
----
+ 
 
-## 8.5 Strong duality and Slater’s condition
+## 9.5 Strong duality and Slater’s condition
 
-If $d^\star = f^\star$, we say **strong duality** holds.
+If $d^\star = f^\star$, we say strong duality holds.
 
-For convex problems, strong duality typically holds under a mild regularity condition known as **Slater’s condition** (Boyd and Vandenberghe, 2004):
+For convex problems, strong duality typically holds under a mild regularity condition known as Slater’s condition (Boyd and Vandenberghe, 2004):
 
 > If the problem is convex and there exists a strictly feasible point $\tilde{x}$ such that  
 > $g_i(\tilde{x}) < 0$ for all $i$ and $h_j(\tilde{x}) = 0$ for all $j$,  
@@ -118,9 +116,9 @@ Consequences of strong duality:
 - There exist optimal multipliers $(\lambda^*, \mu^*)$.
 - KKT conditions hold and characterise optimality.
 
----
+ 
 
-## 8.6 KKT revisited via duality
+## 9.6 KKT revisited via duality
 
 The Karush–Kuhn–Tucker (KKT) conditions from Chapter 7 can also be seen as the conditions under which:
 
@@ -129,7 +127,7 @@ The Karush–Kuhn–Tucker (KKT) conditions from Chapter 7 can also be seen as t
 3. complementary slackness holds,
 4. primal feasibility and dual feasibility hold.
 
-Under convexity + Slater, a point is optimal **if and only if** it satisfies KKT (Boyd and Vandenberghe, 2004). So KKT is both necessary and sufficient.
+Under convexity + Slater, a point is optimal if and only if it satisfies KKT (Boyd and Vandenberghe, 2004). So KKT is both necessary and sufficient.
 
 This is the unification:
 
@@ -138,9 +136,9 @@ This is the unification:
 - complementary slackness,
 - stationarity (zero subgradient of $L$ w.r.t. $x$).
 
----
+ 
 
-## 8.7 Interpretation of multipliers
+## 9.7 Interpretation of multipliers
 
 The dual variables $\mu_i^*$ and $\lambda_j^*$ have interpretations:
 
@@ -149,9 +147,9 @@ The dual variables $\mu_i^*$ and $\lambda_j^*$ have interpretations:
 
 In resource allocation problems, these multipliers act like market prices. In regularised estimation, they act like trade-off coefficients chosen by the optimisation itself.
 
----
+ 
 
-## 8.8 Example: Linear programming dual
+## 9.8 Example: Linear programming dual
 
 Consider a linear program in standard form:
 $$
@@ -172,19 +170,7 @@ $$
 
 This is a classical primal–dual pair. Linear programming is convex, Slater’s condition typically holds (assuming strict feasibility), and therefore strong duality holds. The LP duality theory you may have seen in undergraduate optimisation is just a special case of Lagrange duality (Boyd and Vandenberghe, 2004; Rockafellar, 1970).
 
----
-
-## 8.9 Duality as geometry
+ 
+## 9.9 Duality as geometry
 
 Duality is geometry in disguise. The dual problem is finding the “best supporting hyperplane” that underestimates the primal objective over the feasible set. This is exactly the picture of supporting hyperplanes from Chapter 4, and exactly the subgradient picture from Chapter 6. Appendix B makes this geometric relationship precise in terms of support functions.
-
----
-
-## 8.10 Summary
-
-1. The Lagrangian builds a bridge between constrained problems and unconstrained ones.
-2. The dual function gives lower bounds (weak duality).
-3. Maximising the dual function gives the dual problem.
-4. Under Slater’s condition, strong duality holds: no duality gap.
-5. KKT conditions fall naturally out of duality.
-6. Dual variables are interpretable and useful in analysis, sensitivity, and economics.
