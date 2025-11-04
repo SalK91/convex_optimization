@@ -8,6 +8,30 @@ https://www.youtube.com/watch?v=trs0RI39uWI
 https://www.youtube.com/watch?v=t8sp9rv-Dqo
 
 
+### Current state
+
+1. Stanford Lecture Stanford EE364A Convex Optimization
+   CUrrently on lec 7 - 50min
+   https://www.youtube.com/watch?v=ankx1lGi5jI&t=123s
+2. MIT 6.824: Distributed Systems:
+   https://www.youtube.com/@6.824
+
+3. MCP
+
+4. Non Convex Articel
+
+5. RL Articel
+
+6. LLMs
+   https://github.com/aishwaryanr/awesome-generative-ai-guide
+
+7. Amazon
+
+8. Pytorch.
+
+
+
+
 1. LP limitation and scalability
 2. Why postivie semi deifniate matrix
 

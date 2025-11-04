@@ -1,0 +1,1580 @@
+<!DOCTYPE html><html lang="en" class="no-js"><head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Structured lecture notes on optimization, convex analysis, and algorithms.">
+      
+      
+        <meta name="author" content="Salman Khan">
+      
+      
+        <link rel="canonical" href="https://salk91.github.io/convex_optimization/convex/30_canonical_problems/">
+      
+      
+        <link rel="prev" href="../21_models/">
+      
+      
+        <link rel="next" href="../../nonconvex/41_intro/">
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.20">
+    
+    
+      
+        <title>15. Canonical Problems in Convex Optimization - Mathematics for Machine Learning</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.e53b48f4.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Merriweather:300,300i,400,400i,700,700i%7CFira+Code:400,400i,700,700i&amp;display=fallback">
+        <style>:root{--md-text-font:"Merriweather";--md-code-font:"Fira Code"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../styles/extra.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  <link href="../../assets/stylesheets/glightbox.min.css" rel="stylesheet"><script src="../../assets/javascripts/glightbox.min.js"></script><style id="glightbox-style">
+            html.glightbox-open { overflow: initial; height: 100%; }
+            .gslide-title { margin-top: 0px; user-select: text; }
+            .gslide-desc { color: #666; user-select: text; }
+            .gslide-image img { background: white; }
+            .gscrollbar-fixer { padding-right: 15px; }
+            .gdesc-inner { font-size: 0.75rem; }
+            body[data-md-color-scheme="slate"] .gdesc-inner { background: var(--md-default-bg-color); }
+            body[data-md-color-scheme="slate"] .gslide-title { color: var(--md-default-fg-color); }
+            body[data-md-color-scheme="slate"] .gslide-desc { color: var(--md-default-fg-color); }
+        </style></head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="cyan">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#chapter-15-canonical-problems-in-convex-optimization" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="Mathematics for Machine Learning" class="md-header__button md-logo" aria-label="Mathematics for Machine Learning" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"></path></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"></path></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Mathematics for Machine Learning
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              15. Canonical Problems in Convex Optimization
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="cyan" aria-label="Switch to light mode" type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3zm3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95zm-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31"></path></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="cyan" aria-label="Switch to dark mode" type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m3.55 19.09 1.41 1.41 1.8-1.79-1.42-1.42M12 6c-3.31 0-6 2.69-6 6s2.69 6 6 6 6-2.69 6-6c0-3.32-2.69-6-6-6m8 7h3v-2h-3m-2.76 7.71 1.8 1.79 1.41-1.41-1.79-1.8M20.45 5l-1.41-1.4-1.8 1.79 1.42 1.42M13 1h-2v3h2M6.76 5.39 4.96 3.6 3.55 5l1.79 1.81zM1 13h3v-2H1m12 9h-2v3h2"></path></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"></path></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"></path></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"></path></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"></path></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/SalK91/convex_optimization" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.0.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"></path></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+  
+
+<nav class="md-nav md-nav--primary md-nav--integrated" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Mathematics for Machine Learning" class="md-nav__button md-logo" aria-label="Mathematics for Machine Learning" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"></path></svg>
+
+    </a>
+    Mathematics for Machine Learning
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/SalK91/convex_optimization" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.0.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"></path></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Home
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Convex Optimization
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            Convex Optimization
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../11_intro/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    1. Introduction and Overview
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../12_vector/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    2. Linear Algebra Foundations
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../13_calculus/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    3. Multivariable Calculus for Optimization
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../14_convexsets/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    4. Convex Sets and Geometric Fundamentals
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../15_convexfunctions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    5. Convex Functions
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../16_subgradients/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    6. Nonsmooth Convex Optimization – Subgradients
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../16a_optimality_conditions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    7. First-Order Optimality Conditions in Convex Optimization
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../17_kkt/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    8. Optimization Principles – From Gradient Descent to KKT
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../18_duality/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    9. Lagrange Duality Theory
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../18a_pareto/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    10. Pareto Optimality and Multi-Objective Convex Optimization
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../18b_regularization/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    11. Regularized Approximation – Balancing Fit and Complexity
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../19_optimizationalgo/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    12. Algorithms for Convex Optimization
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../20_advanced/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    13. Advanced Large-Scale and Structured Methods
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../21_models/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    14. Modelling Patterns and Algorithm Selection in Practice
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    15. Canonical Problems in Convex Optimization
+    
+  </span>
+  
+
+      </a>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3">
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Optimization Beyond Convexity
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            Optimization Beyond Convexity
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../nonconvex/41_intro/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    1. Introduction
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../nonconvex/42_meta/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    2. Metaheuristic Optimization Methods
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../nonconvex/43_hybrid/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    3. Hybrid and Modern Optimization Methods
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4">
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Cheat Sheets
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            Cheat Sheets
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../cheatsheets/20a_cheatsheet/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Optimization Algos - Cheat Sheet
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5">
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Appendices
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            Appendices
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../appendices/120_ineqaulities/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Appendix A - Common Inequalities and Identities
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../appendices/130_projections/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Appendix B - Projection and Proximal Operators
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../appendices/140_support/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Appendix C - Support Functions and Dual Geometry (Advanced)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../appendices/160_conjugates/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Appendix D - Convex Conjugates and Fenchel Duality (Advanced)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../appendices/170_probability/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Appendix E - Convexity in Probability and Statistics (Advanced)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../appendices/180_subgradient_methods/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Appendix F - Subgradient Method and Variants (Advanced)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../appendices/190_proximal/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Appendix G - Proximal Operators
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../appendices/200_mirror/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Appendix H - Mirror Descent and Bregman Geometry
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../appendices/300_matrixfactorization/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Appendix I - Matrix Factorization
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+    <a href="https://github.com/SalK91/convex_optimization/edit/master/docs/convex/30_canonical_problems.md" title="Edit this page" class="md-content__button md-icon" rel="edit">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M10 20H6V4h7v5h5v3.1l2-2V8l-6-6H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h4zm10.2-7c.1 0 .3.1.4.2l1.3 1.3c.2.2.2.6 0 .8l-1 1-2.1-2.1 1-1c.1-.1.2-.2.4-.2m0 3.9L14.1 23H12v-2.1l6.1-6.1z"></path></svg>
+    </a>
+  
+  
+    
+      
+    
+    <a href="https://github.com/SalK91/convex_optimization/raw/master/docs/convex/30_canonical_problems.md" title="View source of this page" class="md-content__button md-icon">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 18c.56 0 1 .44 1 1s-.44 1-1 1-1-.44-1-1 .44-1 1-1m0-3c-2.73 0-5.06 1.66-6 4 .94 2.34 3.27 4 6 4s5.06-1.66 6-4c-.94-2.34-3.27-4-6-4m0 6.5a2.5 2.5 0 0 1-2.5-2.5 2.5 2.5 0 0 1 2.5-2.5 2.5 2.5 0 0 1 2.5 2.5 2.5 2.5 0 0 1-2.5 2.5M9.27 20H6V4h7v5h5v4.07c.7.08 1.36.25 2 .49V8l-6-6H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h4.5a8.2 8.2 0 0 1-1.23-2"></path></svg>
+    </a>
+  
+
+
+<h1 id="chapter-15-canonical-problems-in-convex-optimization">Chapter 15: Canonical Problems in Convex Optimization<a class="headerlink" href="#chapter-15-canonical-problems-in-convex-optimization" title="Permanent link">¶</a></h1>
+<p>The table below gives canonical convex problem classes, with special cases listed <em>inside</em> their parent class to avoid duplication.<br>
+Key hierarchy: LP ⊂ QP ⊂ SOCP ⊂ SDP (all are conic programs).</p>
+<table>
+<thead>
+<tr>
+<th>Problem Type</th>
+<th>Canonical Form</th>
+<th>Special Cases  Examples</th>
+<th>Typical Applications</th>
+<th>Common Algorithms</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Linear Program</td>
+<td><span class="arithmatex">\(\displaystyle \min_x\; c^T x  \\ \text{s.t.}\; A x = b,\; x \ge 0\)</span></td>
+<td>-</td>
+<td>Resource allocation, scheduling, routing, relaxations</td>
+<td>Simplex  Dual simplex, Interior-point (barrier), Decomposition &amp; first-order for very large-scale</td>
+</tr>
+<tr>
+<td>Quadratic Program (convex if <span class="arithmatex">\(Q \succeq 0\)</span>)</td>
+<td><span class="arithmatex">\(\displaystyle \min_x\; \tfrac12 x^T Q x + c^T x \\ \text{s.t.}\; A x \le b,\; F x = g\)</span></td>
+<td>Least Squares <span class="arithmatex">\(\min\|Ax-b\|_2^2\)</span>  <br>  Ridge:<span class="arithmatex">\(\min\|Ax-b\|_2^2+\lambda\|x\|_2^2\)</span> <br> LASSO (via variable splitting → QP <br> Box-QP <br> Trust-region (QP with ball)</td>
+<td>Portfolio optimization, MPC, regression &amp; sparse estimation, large-scale ML fitting</td>
+<td>Interior-point, Active-set, ProjectedProximal gradient, Conjugate gradient (unconstrained), Coordinate descentADMM (sparsestructured)</td>
+</tr>
+<tr>
+<td>Second-Order Cone Program</td>
+<td><span class="arithmatex">\(\displaystyle \min_x\; f^T x \\ \text{s.t.}\; \|A_i x + b_i\|_2 \le c_i^T x + d_i,\; F x = g\)</span></td>
+<td>Robust least squares <br> Norm constraints (<span class="arithmatex">\(\ell_2\)</span>) <br> Quadratic constraints representable as SOC <br> Chebyshev center <br> Portfolio with varianceVaR surrogates</td>
+<td>Robust regression, antennabeamforming, control, risk-constrained finance</td>
+<td>Conic interior-point (barrier), Primal-dual first-order splitting for large-scale</td>
+</tr>
+<tr>
+<td>Semidefinite Program</td>
+<td><span class="arithmatex">\(\displaystyle \min_X\; \mathrm{Tr}(C^T X) \\ \text{s.t.}\; \mathrm{Tr}(A_i^T X)=b_i,\; X \succeq 0\)</span></td>
+<td>QCQP relaxations; Max-cutGoemans–Williamson; Covariance selection; Lyapunovcontrol synthesis; Sum-of-squares (SOS) relaxations</td>
+<td>Control &amp; systems, combinatorial relaxations, covariancecorrelation modeling, quantum information</td>
+<td>Interior-point (medium-scale), Low-rank first-order (proxFrank–Wolfe), ADMMsplitting</td>
+</tr>
+<tr>
+<td>Quadratically Constrained QP (convex if all <span class="arithmatex">\(P_i \succeq 0\)</span>; otherwise generally NP-hard)</td>
+<td><span class="arithmatex">\(\displaystyle \min_x\; \tfrac12 x^T P_0 x + q_0^T x + d_0 \\ \text{s.t.}\ \tfrac12 x^T P_i x + q_i^T x + d_i \le 0\)</span></td>
+<td>Trust-region subproblems; Ellipsoidal constraints; Robust fitting; Many admit SOCPSDP reformulations</td>
+<td>Robust control, beamforming, filter design, robust estimation</td>
+<td>Interior-point (convex case), SDPSOCP relaxations, Convex–concave proceduresheuristics</td>
+</tr>
+<tr>
+<td>GP (Geometric Program) (convex in log-space)</td>
+<td><span class="arithmatex">\(\displaystyle \min_x\; f_0(x)\ \text{s.t.}\ f_i(x)\le 1,\ g_j(x)=1\)</span> (posynomial <span class="arithmatex">\(f_i\)</span>, monomial <span class="arithmatex">\(g_j\)</span>)</td>
+<td>After <span class="arithmatex">\(y=\log x\)</span>: convex; posynomial circuit sizing; powerenergy scaling laws; resource trade-offs</td>
+<td>CircuitIC design, communication &amp; power control, engineering tuning</td>
+<td>Log-transform → Interior-point; Primal-dual methods; First-order for large sparse instances</td>
+</tr>
+<tr>
+<td>MLE  GLM (Likelihood-based convex models)</td>
+<td><span class="arithmatex">\(\displaystyle \min_x\; -\sum_i \log p(b_i\mid a_i^T x)\ +\ \mathcal{R}(x)\)</span> where <span class="arithmatex">\(\mathcal{R}\)</span> is convex (e.g., <span class="arithmatex">\(\ell_1,\ell_2\)</span>)</td>
+<td>Classification: Logisticsoftmax (GLMs); SVM as convex risk minimization (hinge loss); PoissonExponential family GLMs; Elastic-net regularized GLMs</td>
+<td>Predictive modeling, classification, count modeling, calibration</td>
+<td>Newton  (L-)BFGS, Acceleratedproximal gradient, Coordinate descent, Stochastic variants (SGDSAGASVRG), ADMM</td>
+</tr>
+</tbody>
+</table>
+<h2 id="linear-programming-lp">Linear Programming (LP)<a class="headerlink" href="#linear-programming-lp" title="Permanent link">¶</a></h2>
+<p>A standard LP has a linear objective and linear constraints:</p>
+<div class="arithmatex">\[
+minimize_{x}\; c^T x
+\quad\text{s.t.}\;
+A x = b,\; x \ge 0.
+\]</div>
+<p>with decision variable <span class="arithmatex">\(x\in\mathbb R^n\)</span>. Geometrically, the feasible set is a polyhedron (intersection of halfspaces), and optimal solutions lie at extreme points (vertices) of this polyhedron. Intuitively, imagine a flat objective plane being “pushed” until it first touches the polyhedron at a vertex.</p>
+<h3 id="algorithms">Algorithms:<a class="headerlink" href="#algorithms" title="Permanent link">¶</a></h3>
+<p>At a high level, LP algorithms fall into three families:</p>
+<ol>
+<li>Vertex-based (Simplex)</li>
+<li>Interior-based (Barrier  IPM)</li>
+<li>Decomposition and First-Order (Large-Scale  Structured)</li>
+</ol>
+<p>Each family explores the polyhedral geometry of the feasible set in a different way.</p>
+<h4 id="1-simplex-method-walking-the-edges-of-the-polyhedron">1. Simplex Method — <em>Walking the edges of the polyhedron</em><a class="headerlink" href="#1-simplex-method-walking-the-edges-of-the-polyhedron" title="Permanent link">¶</a></h4>
+<p>The Simplex method moves from vertex to vertex (corner to corner) of the feasible polyhedron, improving the objective value at each step.<br>
+Intuitively, the LP feasible region is a <em>polyhedron</em> (a high-dimensional “flat-sided” shape) and the linear objective defines a <em>tilted plane</em> sweeping across it. The optimum is always attained at a vertex, so Simplex efficiently hops between adjacent vertices along edges until it reaches the best one.</p>
+<h4 id="2-interior-point-methods-gliding-through-the-interior">2. Interior-Point Methods — <em>Gliding through the interior</em><a class="headerlink" href="#2-interior-point-methods-gliding-through-the-interior" title="Permanent link">¶</a></h4>
+<p>Interior-point methods (IPMs) take a fundamentally different route:<br>
+Instead of crawling along edges, they glide through the <em>interior</em> of the feasible region, guided by a barrier function that prevents them from hitting the boundaries.</p>
+<p>They solve a sequence of barrier problems of the form:
+<script type="math/tex; mode=display">
+\min_x\; c^T x - \mu \sum_i \log(x_i)
+\quad \text{s.t.}\; A x = b,
+</script>
+where the logarithmic term keeps <span class="arithmatex">\(x_i &gt; 0\)</span>.  </p>
+<p>As the barrier parameter <span class="arithmatex">\(\mu \to 0\)</span>, the iterates approach the true boundary optimum along a <em>central path</em>.  Each step requires solving a Newton system that couples all variables, making IPMs especially efficient for dense, moderately sized LPs.</p>
+<h4 id="3-decomposition-methods-divide-and-conquer-for-large-scale-structure">3. Decomposition Methods — <em>Divide and conquer for large-scale structure</em><a class="headerlink" href="#3-decomposition-methods-divide-and-conquer-for-large-scale-structure" title="Permanent link">¶</a></h4>
+<p>When an LP is too large to solve as a single system, or its constraint matrix <span class="arithmatex">\(A\)</span> has <em>block structure</em>, decomposition methods exploit separability by breaking the problem into smaller subproblems that can be solved independently.</p>
+<p>The basic idea:  </p>
+<ul>
+<li>Identify coupling constraints or variables that link otherwise independent subsystems.  </li>
+<li>Solve each subsystem separately, and coordinate them via <em>dual variables</em> or <em>cutting planes</em> until consistency and optimality are achieved.</li>
+</ul>
+<p>Decomposition turns “one huge LP” into “many small LPs talking to each other.”</p>
+<h3 id="applications">Applications<a class="headerlink" href="#applications" title="Permanent link">¶</a></h3>
+<p>LPs model many resource-allocation and network-flow problems (e.g.\ transportation, scheduling, blending). They also capture piecewise-linear loss minimization. For example, the minimax (Chebyshev) regression <span class="arithmatex">\(\min_x\max_i|a_i^T x - b_i|\)</span> can be written as an LP. LPs appear in operations research, control (robust linear design), and in approximations of more complex problems.</p>
+<h2 id="quadratic-programming-qp">Quadratic Programming (QP)<a class="headerlink" href="#quadratic-programming-qp" title="Permanent link">¶</a></h2>
+<p>A convex QP has a quadratic objective and linear constraints:</p>
+<div class="arithmatex">\[
+minimize_{x}\;\tfrac12 x^T Q x + c^T x
+\quad\text{s.t.}\;
+A x = b,\;x\ge0,
+\]</div>
+<p>where <span class="arithmatex">\(Q\succeq0\)</span> (positive semidefinite) makes the problem convex. Here <span class="arithmatex">\(x\in\mathbb R^n\)</span>. Equivalently, one may have inequality constraints <span class="arithmatex">\(A x\le b\)</span>. Level sets of the objective are ellipsoids (quadratic bowls), so the optimum may lie on a boundary or in the interior of the feasible set.</p>
+<p>Intuition &amp; geometry: The positive-definite part of <span class="arithmatex">\(Q\)</span> defines an “ellipsoidal” bowl of the objective. At optimum, the gradient <span class="arithmatex">\(\nabla(\tfrac12 x^T Q x + c^T x) = Qx+c\)</span> is orthogonal to the active constraint surfaces (KKT stationarity). Unlike LP, an unconstrained QP’s minimizer is at <span class="arithmatex">\(x=-Q^{-1}c\)</span> if <span class="arithmatex">\(Q\succ0\)</span>. With constraints, the optimum occurs where the ellipsoid just touches the feasible set (which is a polyhedron or affine subspace).</p>
+<p>Applications: QPs model many smooth convex problems. A classic example is Markowitz portfolio optimization (minimize variance <span class="arithmatex">\(x^T\Sigma x\)</span> plus a linear return term). QPs arise in ridge regression (least-squares with <span class="arithmatex">\(\ell_2\)</span> penalty), support-vector machines (SVMs with quadratic soft-margin), and model-predictive control (convex quadratic cost). Any least-squares problem with linear constraints is a QP. Many robust or regularized designs (elastic net regression, norm-constrained classification) also lead to QPs.</p>
+<p>Example Risk-Adjusted Quadratic Program (Mean–Variance Portfolio Optimization)</p>
+<p>We want to allocate portfolio weights ( x \in \mathbb{R}^n ) across ( n ) assets.</p>
+<ul>
+<li><span class="arithmatex">\(\mu \in \mathbb{R}^n\)</span>: expected returns of each asset</li>
+<li><span class="arithmatex">\(\Sigma \in \mathbb{R}^{n \times n}\)</span>: covariance matrix of returns (symmetric, positive semidefinite)</li>
+<li><span class="arithmatex">\(x\)</span>: portfolio weights (fractions of capital invested in each asset)</li>
+</ul>
+<p>The mean–variance trade-off says we want to:</p>
+<ul>
+<li>maximize expected return <span class="arithmatex">\(\mu^T x\)</span>,</li>
+<li>minimize risk (variance) <span class="arithmatex">\(x^T \Sigma x\)</span>.</li>
+</ul>
+<p>Combining them gives the standard convex QP form:</p>
+<div class="arithmatex">\[\begin{aligned}
+\min_x \quad &amp; \tfrac{1}{2} x^T \Sigma x - \lambda \mu^T x \
+\text{s.t.} \quad &amp; \mathbf{1}^T x = 1, \
+&amp; x \ge 0,
+\end{aligned}\]</div>
+<p>where <span class="arithmatex">\(\lambda &gt; 0\)</span> is the risk–return trade-off parameter.</p>
+<ul>
+<li>The quadratic term <span class="arithmatex">\(\tfrac{1}{2} x^T \Sigma x\)</span> penalizes portfolio variance (risk).</li>
+<li>The linear term <span class="arithmatex">\(-\lambda \mu^T x\)</span> rewards expected return.</li>
+<li>The equality constraint <span class="arithmatex">\(\mathbf{1}^T x = 1\)</span> ensures all capital is invested (weights sum to 1).</li>
+<li>The inequality <span class="arithmatex">\(x \ge 0\)</span> enforces no short selling.</li>
+</ul>
+<h3 id="algorithms_1">Algorithms<a class="headerlink" href="#algorithms_1" title="Permanent link">¶</a></h3>
+<h4 id="1-interior-point-methods-smooth-paths-through-the-interior">1. Interior-Point Methods — <em>Smooth paths through the interior</em><a class="headerlink" href="#1-interior-point-methods-smooth-paths-through-the-interior" title="Permanent link">¶</a></h4>
+<p>Interior-point methods extend the same idea used for LPs.<br>
+They replace inequality constraints with barrier terms, e.g.
+<script type="math/tex; mode=display">
+\min_x\; \tfrac{1}{2}x^T Qx + c^T x - \mu \sum_i \log(s_i)
+\quad \text{s.t.}\; A x + s = b,\; s > 0,
+</script>
+where the logarithmic barrier keeps <span class="arithmatex">\(s_i &gt; 0\)</span>.</p>
+<p>Each iteration solves a Newton system derived from the Karush–Kuhn–Tucker (KKT) conditions, coupling primal and dual variables. The method follows a <em>central path</em> toward the optimum as <span class="arithmatex">\(\mu \to 0\)</span>.</p>
+<h4 id="2-active-set-methods-walking-along-faces">2. Active-Set Methods — <em>Walking along faces</em><a class="headerlink" href="#2-active-set-methods-walking-along-faces" title="Permanent link">¶</a></h4>
+<p>Active-set methods generalize the Simplex idea to QPs.</p>
+<ol>
+<li>Guess which constraints are active (tight) at the solution.  </li>
+<li>Solve the resulting equality-constrained QP:
+   <script type="math/tex; mode=display">
+   \min_x\; \tfrac{1}{2}x^T Qx + c^T x
+   \quad \text{s.t.}\; A_{\text{active}} x = b_{\text{active}}.
+   </script>
+</li>
+<li>Check which inactive constraints become violated; update the working set and repeat.
+Each iteration moves along the <em>face</em> of the feasible region, turning when constraints become active or inactive.</li>
+</ol>
+<h4 id="3-newtons-method-one-shot-solution-when-unconstrained">3. Newton’s Method — <em>One-shot solution when unconstrained</em><a class="headerlink" href="#3-newtons-method-one-shot-solution-when-unconstrained" title="Permanent link">¶</a></h4>
+<p>If there are no constraints, the QP reduces to:
+<script type="math/tex; mode=display">
+\min_x\; \tfrac{1}{2}x^T Qx + c^T x.
+</script>
+</p>
+<p>Setting the gradient to zero gives:
+<script type="math/tex; mode=display">
+Qx + c = 0 \quad \Rightarrow \quad x^* = -Q^{-1} c.
+</script>
+</p>
+<p>Since the Hessian <span class="arithmatex">\(Q\)</span> is constant, Newton’s method reaches the optimum in one iteration.</p>
+<h4 id="4-conjugate-gradient-cg-iterative-linear-solver-for-large-problems">4. Conjugate Gradient (CG) — <em>Iterative linear solver for large problems</em><a class="headerlink" href="#4-conjugate-gradient-cg-iterative-linear-solver-for-large-problems" title="Permanent link">¶</a></h4>
+<p>When <span class="arithmatex">\(Q\)</span> is large and sparse, inverting or factorizing it is too expensive. Instead, Conjugate Gradient (CG) solves <span class="arithmatex">\(Qx = -c\)</span> iteratively using only matrix–vector products. If <span class="arithmatex">\(Q = A^T A\)</span>, the QP corresponds to a least-squares problem:
+<script type="math/tex; mode=display">
+\min_x \|A x - b\|_2^2,
+</script>
+and CG can efficiently find the minimizer without forming <span class="arithmatex">\(A^T A\)</span>.</p>
+<h4 id="5-accelerated-gradient-methods-first-order-scalability">5. Accelerated Gradient Methods — <em>First-order scalability</em><a class="headerlink" href="#5-accelerated-gradient-methods-first-order-scalability" title="Permanent link">¶</a></h4>
+<p>For extremely large QPs with simple constraints (<span class="arithmatex">\(x \ge 0\)</span> or box bounds), first-order methods are used:
+<script type="math/tex; mode=display">
+x_{k+1} = \Pi_{\mathcal{C}}(x_k - \alpha (Qx_k + c)),
+</script>
+where <span class="arithmatex">\(\Pi_{\mathcal{C}}\)</span> projects onto the feasible region.</p>
+<h2 id="quadratically-constrained-qp">Quadratically Constrained QP<a class="headerlink" href="#quadratically-constrained-qp" title="Permanent link">¶</a></h2>
+<div class="arithmatex">\[
+minimize_{x}\;\tfrac12x^T P_0 x + q_0^T x + r_0
+\quad\text{s.t.}\quad
+\tfrac12x^T P_i x + q_i^T x + r_i \le 0.
+\]</div>
+<p>where each <span class="arithmatex">\(P_i\in\mathbb R^{n\times n}\)</span> and <span class="arithmatex">\(x\in\mathbb R^n\)</span>. If all <span class="arithmatex">\(P_i\succeq0\)</span>, the feasible set is convex, and the QCQP is convex. (If any <span class="arithmatex">\(P_i\)</span> is indefinite, the problem is generally nonconvex and NP-hard.) A special case is QP (no quadratic constraints). A common simpler form is a single quadratic (ellipsoidal) constraint, as in the trust-region problem.</p>
+<p>Intuition &amp; geometry: Convex QCQPs describe intersections of “ellipsoidal” regions (and possibly affine sets). For example, the constraint <span class="arithmatex">\(\tfrac12x^TPx + q^Tx + r\le0\)</span> defines a (possibly unbounded) ellipsoid or paraboloid region. Geometrically, a convex QCQP feasible set can be an ellipsoid, paraboloid, or their intersections. The optimum lies where the objective’s ellipsoidal level set first touches this intersection. When <span class="arithmatex">\(P_0\succeq0\)</span>, the objective contours are convex (ellipsoids); if <span class="arithmatex">\(P_i\succ0\)</span>, constraint boundaries are convex surfaces.</p>
+<p>Applications: QCQPs appear in robust design and engineering. For instance, in robust beamforming or filter design one often imposes constraints on quadratic forms of <span class="arithmatex">\(x\)</span>. Sensor network localization and trust-region subproblems are QCQPs. Robust linear regression against ellipsoidal noise uncertainty is a QCQP. Any problem with norms or quadratic inequalities (e.g.\ <span class="arithmatex">\(|Fx-c|_2^2\le d^2\)</span>) can be written as a QCQP.</p>
+<h3 id="algorithms_2">Algorithms<a class="headerlink" href="#algorithms_2" title="Permanent link">¶</a></h3>
+<p>Convex Quadratically Constrained Quadratic Programs (QCQPs) where all <span class="arithmatex">\(P_i \succeq 0\)</span> can be solved efficiently using interior-point methods, which provide polynomial-time convergence.<br>
+Because QCQPs can be expressed as second-order cone programs (SOCPs) or more generally as semidefinite programs (SDPs), modern conic solvers (e.g., MOSEK, SCS, SDPT3) handle these problems robustly for moderate dimensions.</p>
+<h2 id="second-order-cone-programming-socp">Second-Order Cone Programming (SOCP)<a class="headerlink" href="#second-order-cone-programming-socp" title="Permanent link">¶</a></h2>
+<div class="arithmatex">\[
+minimize_{x}\; f^T x
+\quad\text{s.t.}\quad
+\|A_i x + b_i\|_2 \le c_i^T x + d_i,\;
+F x = g.
+\]</div>
+<p>where each <span class="arithmatex">\(|A_i x + b_i|_2\le c_i^T x + d_i\)</span> is a second-order cone constraint. Equivalently, each constraint says the affine function <span class="arithmatex">\((x,t)\mapsto (A_i x + b_i, c_i^T x + d_i)\)</span> lies in the norm cone {<script type="math/tex">{(u,t)\mid|u|_2\le t}\</script>}. Thus the feasible set is the intersection of affine spaces and cones (a convex cone itself).</p>
+<p>Intuition &amp; geometry: Each second-order constraint carves out a convex “cone” in <span class="arithmatex">\((x,t)\)</span>-space. Geometrically, a 2-norm constraint <span class="arithmatex">\(|u|\le t\)</span> forms a (rotated) quadratic cone. The feasible set is the intersection of these cones with any affine constraints. For example, <span class="arithmatex">\(|x|_2 \le 1\)</span> is a unit ball (an ellipsoid), which is a simple special case of an SOCP. SOCPs generalize linear constraints (<span class="arithmatex">\(\ell_1\)</span> norm cones) and some QCQPs.</p>
+<p>Applications: SOCPs are widely used in engineering and finance. Examples include robust least-squares (using Huber or <span class="arithmatex">\(\ell_2\)</span> penalties), design of filters and antennas, truss or structural design under stress norms, and certain portfolio models with risk measures. In statistics and ML, enforcing <span class="arithmatex">\(|w|_2\le R\)</span> is an SOCP constraint. Many chance-constrained or variance-based optimization problems lead to SOCPs. Notably, portfolio optimization with a value-at-risk (VaR) constraint can be cast as an SOCP
+en.wikipedia.org</p>
+<p>Algorithms: Interior-point methods are the standard solvers for SOCPs. Off-the-shelf conic solvers (e.g.\ MOSEK, ECOS) efficiently handle moderate-size SOCPs. Compared to SDP, SOCPs are usually faster to solve for similar problem sizes. First-order or decomposition methods (e.g.\ ADMM) can scale to larger SOCPs if needed.</p>
+<h2 id="geometric-programming-gp">Geometric Programming (GP)<a class="headerlink" href="#geometric-programming-gp" title="Permanent link">¶</a></h2>
+<p>Original (nonconvex) form:</p>
+<div class="arithmatex">\[
+minimize_{x&gt;0}\; f_0(x)
+\quad\text{s.t.}\;
+f_i(x)\le1,\quad g_j(x)=1,
+\]</div>
+<p>where each <span class="arithmatex">\(f_i\)</span> is a posynomial (a sum of monomials) and each <span class="arithmatex">\(g_j\)</span> is a monomial. In coordinates, a monomial has the form <span class="arithmatex">\(c,x_1^{a_1}x_2^{a_2}\cdots x_n^{a_n}\)</span> with <span class="arithmatex">\(c&gt;0\)</span>, and a posynomial is a sum of such terms.</p>
+<p>Intuition &amp; convexity: Though GPs are not convex in the original variables, they can be made convex by the change of variables <span class="arithmatex">\(y_i=\log x_i\)</span> and taking logs of functions. Under this log–log transformation, each monomial becomes an affine function of <span class="arithmatex">\(y\)</span>, and each posynomial becomes a log-sum-exp (convex) function. Thus every GP can be converted to a convex problem (a log-sum-exp minimization). Geometrically, GPs operate on positive variables with multiplicative relationships; in the log-domain, they become standard convex programs.</p>
+<p>Applications: GPs have many applications in engineering design. For example, circuit and analog IC component sizing (transistors, amplifiers) is often cast as a GP. Other examples include aircraft design, power system design, and network flow with multiplicative constraints. In statistics, certain inference problems (e.g. fitting log-linear models) can be written as GPs. Any problem where costs and constraints are products of powers of variables (posynomials) is a candidate for geometric programming
+en.wikipedia.org</p>
+<p>Algorithms: The usual approach is to transform the GP into a convex form and apply convex solvers. After <span class="arithmatex">\(y=\log x\)</span>, one solves a convex program using interior-point methods on the log-transformed problem. Off-the-shelf convex solvers (e.g.\ CVXOPT, MOSEK) now directly support GPs by performing this transformation internally. Specialized GP toolkits (e.g.\ GPkit) also exist. For sequential design, one can iteratively solve approximate GPs. Because GPs become convex, KKT conditions and duality apply after transformation.</p>
+<h2 id="maximum-likelihood-and-generalized-linear-models-glm">Maximum Likelihood and Generalized Linear Models (GLM)<a class="headerlink" href="#maximum-likelihood-and-generalized-linear-models-glm" title="Permanent link">¶</a></h2>
+<h3 id="1-maximum-likelihood-estimation-mle">1. Maximum Likelihood Estimation (MLE)<a class="headerlink" href="#1-maximum-likelihood-estimation-mle" title="Permanent link">¶</a></h3>
+<ul>
+<li>Parametric distribution estimation: Choose from a family of densities <span class="arithmatex">\(p_x(y)\)</span>, indexed by a parameter <span class="arithmatex">\(x\)</span> (often denoted <span class="arithmatex">\(\theta\)</span>).</li>
+<li>We take <span class="arithmatex">\(p_x(y) = 0\)</span> for invalid values of <span class="arithmatex">\(x\)</span>.</li>
+<li>The likelihood function is <span class="arithmatex">\(p_x(y)\)</span> as a function of <span class="arithmatex">\(x\)</span>.</li>
+<li>The log-likelihood function is <span class="arithmatex">\(l(x) = \log p_x(y)\)</span>.</li>
+</ul>
+<p>Maximum Likelihood Estimation (MLE):
+<script type="math/tex; mode=display">
+\hat{x} = \arg\max_x p_x(y) = \arg\max_x l(x)
+</script>
+</p>
+<p>This is often a convex optimization problem when <span class="arithmatex">\(\log p_x(y)\)</span> is concave in <span class="arithmatex">\(x\)</span> for fixed <span class="arithmatex">\(y\)</span>.</p>
+<h3 id="2-linear-measurements-with-iid-noise">2. Linear Measurements with IID Noise<a class="headerlink" href="#2-linear-measurements-with-iid-noise" title="Permanent link">¶</a></h3>
+<p>Consider the linear model:
+<script type="math/tex; mode=display">
+y_i = a_i^T x + \nu_i, \quad i = 1, \ldots, m
+</script>
+</p>
+<p>where:</p>
+<ul>
+<li><span class="arithmatex">\(x \in \mathbb{R}^n\)</span>: unknown parameter vector,</li>
+<li><span class="arithmatex">\(\nu_i\)</span>: IID measurement noise with density <span class="arithmatex">\(p(z)\)</span>,</li>
+<li><span class="arithmatex">\(y_i\)</span>: observed measurements.</li>
+</ul>
+<p>Then the joint density is:
+<script type="math/tex; mode=display">
+p_x(y) = \prod_{i=1}^m p(y_i - a_i^T x)
+</script>
+</p>
+<p>and the log-likelihood becomes:
+<script type="math/tex; mode=display">
+l(x) = \sum_{i=1}^m \log p(y_i - a_i^T x)
+</script>
+</p>
+<p>The MLE is any <span class="arithmatex">\(x\)</span> that maximizes <span class="arithmatex">\(l(x)\)</span>.</p>
+<h3 id="3-common-noise-models-and-corresponding-mles">3. Common Noise Models and Corresponding MLEs<a class="headerlink" href="#3-common-noise-models-and-corresponding-mles" title="Permanent link">¶</a></h3>
+<h4 id="a-gaussian-noise-mathcaln0-sigma2">(a) Gaussian Noise <span class="arithmatex">\(\mathcal{N}(0, \sigma^2)\)</span><a class="headerlink" href="#a-gaussian-noise-mathcaln0-sigma2" title="Permanent link">¶</a></h4>
+<div class="arithmatex">\[p(z) = (2\pi\sigma^2)^{-1/2} e^{-z^2 / (2\sigma^2)}\]</div>
+<div class="arithmatex">\[l(x) = -\frac{m}{2}\log(2\pi\sigma^2) - \frac{1}{2\sigma^2} \sum_{i=1}^m (a_i^T x - y_i)^2\]</div>
+<p>MLE: Least-squares solution
+<script type="math/tex; mode=display">
+\hat{x} = \arg\min_x |Ax - y|_2^2
+</script>
+</p>
+<h4 id="b-laplacian-noise">(b) Laplacian Noise<a class="headerlink" href="#b-laplacian-noise" title="Permanent link">¶</a></h4>
+<div class="arithmatex">\[p(z) = \frac{1}{2a} e^{-|z|/a}\]</div>
+<div class="arithmatex">\[l(x) = -m\log(2a) - \frac{1}{a} \sum_{i=1}^m |a_i^T x - y_i|\]</div>
+<p>MLE: <span class="arithmatex">\(\ell_1\)</span>-norm solution (least absolute deviations)
+<script type="math/tex; mode=display">
+\hat{x} = \arg\min_x |Ax - y|_1
+</script>
+</p>
+<p>This is convex but non-smooth; it can be solved via LP, proximal gradient, or robust convex solvers.</p>
+<h4 id="c-uniform-noise-on-a-a">(c) Uniform Noise on <span class="arithmatex">\([-a, a]\)</span><a class="headerlink" href="#c-uniform-noise-on-a-a" title="Permanent link">¶</a></h4>
+<div class="arithmatex">\[
+p(z) =
+\begin{cases}
+\frac{1}{2a}, &amp; |z| \le a \
+0, &amp; \text{otherwise}
+\end{cases}
+\]</div>
+<div class="arithmatex">\[
+l(x) =
+\begin{cases}
+-m \log(2a), &amp; |a_i^T x - y_i| \le a, \ \forall i \
+-\infty, &amp; \text{otherwise}
+\end{cases}
+\]</div>
+<p>MLE: Any <span class="arithmatex">\(x\)</span> satisfying
+<script type="math/tex; mode=display">
+|a_i^T x - y_i| \le a, \quad i = 1, \ldots, m
+</script>
+</p>
+<p>This defines a feasible region (a convex polyhedron).</p>
+<h3 id="4-logistic-regression-bernoulli-likelihood">4. Logistic Regression (Bernoulli Likelihood)<a class="headerlink" href="#4-logistic-regression-bernoulli-likelihood" title="Permanent link">¶</a></h3>
+<p>For binary labels <span class="arithmatex">\(y \in {0,1}\)</span>:
+<script type="math/tex; mode=display">
+p = \Pr(y = 1 \mid u) = \frac{\exp(a^T u + b)}{1 + \exp(a^T u + b)}
+</script>
+where <span class="arithmatex">\(a, b\)</span> are parameters and <span class="arithmatex">\(u \in \mathbb{R}^n\)</span> are observed features.</p>
+<p>For <span class="arithmatex">\(m\)</span> samples <span class="arithmatex">\((u_i, y_i)\)</span>, the log-likelihood is:
+<script type="math/tex; mode=display">
+l(a,b) = \sum_{i=1}^m \big[ y_i(a^T u_i + b) - \log(1 + e^{a^T u_i + b}) \big]
+</script>
+</p>
+<p>and the negative log-likelihood (to minimize) is:
+<script type="math/tex; mode=display">
+L(a,b) = -l(a,b) = \sum_{i=1}^m \big[ \log(1 + e^{a^T u_i + b}) - y_i(a^T u_i + b) \big]
+</script>
+</p>
+<p>This function is convex and smooth in <span class="arithmatex">\(a, b\)</span>.</p>
+<h3 id="5-softmax-multiclass-logistic-regression">5. Softmax (Multiclass Logistic Regression)<a class="headerlink" href="#5-softmax-multiclass-logistic-regression" title="Permanent link">¶</a></h3>
+<p>For <span class="arithmatex">\(K\)</span> classes with one-hot encoded labels <span class="arithmatex">\(y_i\)</span> and parameters <span class="arithmatex">\(x_k\)</span> for each class:
+<script type="math/tex; mode=display">
+p(y_i = k \mid a_i) = \frac{e^{a_i^T x_k}}{\sum_{j=1}^K e^{a_i^T x_j}}
+</script>
+</p>
+<p>Negative log-likelihood:
+<script type="math/tex; mode=display">
+L({x_k}) = -\sum_{i,k} y_{ik}(a_i^T x_k) + \sum_i \log\Big(\sum_{j=1}^K e^{a_i^T x_j}\Big)
+</script>
+</p>
+<p>Convex in all <span class="arithmatex">\(x_k\)</span>.</p>
+<h3 id="algorithms-for-mle-and-glms">Algorithms for MLE and GLMs<a class="headerlink" href="#algorithms-for-mle-and-glms" title="Permanent link">¶</a></h3>
+<ul>
+<li>LS/Gaussian: Closed-form or CG/Newton as above.</li>
+<li>ℓ₁ regression (Laplace): Convert to LP or use interior-point, or first-order methods (subgradient/proximal) for large-scale. </li>
+<li>Logistic/softmax: Use Newton or quasi-Newton (L-BFGS) when moderate-sized, since the loss is smooth. Accelerated gradient or stochastic gradient (SGD/Adam) is common for large datasets. With <span class="arithmatex">\(\ell_2\)</span>-regularization the problem is strongly convex, ensuring fast convergence. With <span class="arithmatex">\(\ell_1\)</span>-regularization one uses proximal-gradient or coordinate descent to handle the non-smooth part. </li>
+<li>GLMs: Iteratively Reweighted Least Squares (IRLS, a Newton method) often solves canonical-link GLMs efficiently.</li>
+</ul>
+<h2 id="support-vector-machines">Support Vector Machines<a class="headerlink" href="#support-vector-machines" title="Permanent link">¶</a></h2>
+<div class="arithmatex">\[
+\min_w\;\tfrac12\|w\|_2^2 + C\sum_i \max(0,1 - y_i w^T a_i).
+\]</div>
+<p>The SVM primal problem is a QP of the form $, which is convex but non-smooth. This QP is typically solved via its dual or by specialized coordinate-descent.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var labels=set.querySelector(".tabbed-labels");for(var tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"></path></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      © 2025 Salman Khan — Educational Use Only
+    </div>
+  
+  
+</div>
+      
+        
+<div class="md-social">
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://github.com/SalK91/convex_optimization" target="_blank" rel="noopener" title="github.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.0.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"></path></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.top", "toc.integrate", "content.code.copy", "content.code.annotate", "content.action.edit", "content.action.view", "content.tabs.link", "search.suggest", "search.highlight"], "search": "../../assets/javascripts/workers/search.973d3a69.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.f55a23d4.min.js"></script>
+      
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+      
+    
+  
+<script id="init-glightbox">const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});
+document$.subscribe(()=>{ lightbox.reload(); });
+</script></body></html>
