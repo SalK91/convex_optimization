@@ -621,12 +621,58 @@
   
   
     <li class="md-nav__item">
+      <a href="../19a_optimization_constraints/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    13. Optimization Algorithms for Equality-Constrained Problems
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../19b_optimization_constraints/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    14. Optimization Algorithms for Inequality-Constrained Problems
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../20_advanced/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
-    13. Advanced Large-Scale and Structured Methods
+    15. Advanced Large-Scale and Structured Methods
     
   </span>
   
@@ -649,7 +695,7 @@
   
   
   <span class="md-ellipsis">
-    14. Modelling Patterns and Algorithm Selection in Practice
+    16. Modelling Patterns and Algorithm Selection in Practice
     
   </span>
   
@@ -672,7 +718,7 @@
   
   
   <span class="md-ellipsis">
-    15. Canonical Problems in Convex Optimization
+    17. Canonical Problems in Convex Optimization
     
   </span>
   
@@ -1160,7 +1206,6 @@
 <p>Convex optimization enjoys a remarkable property: every local minimum is also a global minimum.<br>
 This chapter develops the unified first-order conditions that determine whether a point is optimal — in both unconstrained and constrained convex problems, smooth or nonsmooth.</p>
 <p>These conditions form the conceptual bridge between the subgradient theory of Chapter 6 and the KKT framework of Chapter 8.</p>
-<hr>
 <h2 id="71-why-optimality-conditions-matter">7.1 Why Optimality Conditions Matter<a class="headerlink" href="#71-why-optimality-conditions-matter" title="Permanent link">¶</a></h2>
 <p>Knowing when a point is optimal is essential for:</p>
 <ul>
@@ -1169,7 +1214,6 @@ This chapter develops the unified first-order conditions that determine whether 
 <li>Handling nonsmooth objectives (e.g., hinge loss, <span class="arithmatex">\(\ell_1\)</span> regularization),</li>
 <li>Building geometric intuition about “stationarity.”</li>
 </ul>
-<hr>
 <h2 id="72-unconstrained-convex-problems">7.2 Unconstrained Convex Problems<a class="headerlink" href="#72-unconstrained-convex-problems" title="Permanent link">¶</a></h2>
 <p>We start with the simplest case:
 <script type="math/tex; mode=display">
@@ -1236,7 +1280,6 @@ where <span class="arithmatex">\(\partial f(x)\)</span> is the subdifferential s
 </tbody>
 </table>
 <p>For convex <span class="arithmatex">\(f\)</span>, any <span class="arithmatex">\(\hat{x}\)</span> satisfying <span class="arithmatex">\(0\in\partial f(\hat{x})\)</span> is globally optimal.</p>
-<hr>
 <h2 id="73-constrained-convex-problems">7.3 Constrained Convex Problems<a class="headerlink" href="#73-constrained-convex-problems" title="Permanent link">¶</a></h2>
 <p>Let <span class="arithmatex">\( f:\mathbb{R}^n\to\mathbb{R} \)</span> be convex and <span class="arithmatex">\( \mathcal{X}\subseteq\mathbb{R}^n \)</span> be a convex feasible set.<br>
 We consider:
@@ -1245,14 +1288,12 @@ We consider:
 </script>
 </p>
 <p>The geometry of <span class="arithmatex">\( \mathcal{X} \)</span> now interacts with the stationarity condition.</p>
-<hr>
 <h3 id="a-interior-points">(a) Interior Points<a class="headerlink" href="#a-interior-points" title="Permanent link">¶</a></h3>
 <p>If <span class="arithmatex">\(\hat{x}\in\operatorname{int}(\mathcal{X})\)</span>, the constraint is inactive locally, so
 <script type="math/tex; mode=display">
 0\in\partial f(\hat{x}).
 </script>
 Same as the unconstrained case.</p>
-<hr>
 <h3 id="b-boundary-points-and-normal-cones">(b) Boundary Points and Normal Cones<a class="headerlink" href="#b-boundary-points-and-normal-cones" title="Permanent link">¶</a></h3>
 <p>If <span class="arithmatex">\(\hat{x}\)</span> lies on the boundary of <span class="arithmatex">\(\mathcal{X}\)</span>, feasible motion is restricted.</p>
 <p>A point <span class="arithmatex">\(\hat{x}\)</span> is optimal iff
@@ -1271,7 +1312,6 @@ N_{\mathcal{X}}(\hat{x})
 \nabla f(\hat{x})^\top d \ge 0.
 </script>
 The gradient points outward—any move within <span class="arithmatex">\(\mathcal{X}\)</span> would not decrease <span class="arithmatex">\(f\)</span>.</p>
-<hr>
 <h3 id="c-unified-compact-form">(c) Unified Compact Form<a class="headerlink" href="#c-unified-compact-form" title="Permanent link">¶</a></h3>
 <p>Both interior and boundary cases can be written as:
 <script type="math/tex; mode=display">
@@ -1279,7 +1319,6 @@ The gradient points outward—any move within <span class="arithmatex">\(\mathca
 </script>
 </p>
 <p>This is the general first-order optimality condition for convex problems with convex constraints.</p>
-<hr>
 <h2 id="74-tangent-and-normal-cones-intuition">7.4 Tangent and Normal Cones — Intuition<a class="headerlink" href="#74-tangent-and-normal-cones-intuition" title="Permanent link">¶</a></h2>
 <ul>
 <li>Tangent cone <span class="arithmatex">\(T_{\mathcal{X}}(x)\)</span>: directions one can move within <span class="arithmatex">\(\mathcal{X}\)</span>.</li>
@@ -1291,7 +1330,6 @@ The gradient points outward—any move within <span class="arithmatex">\(\mathca
 <blockquote>
 <p>The gradient (or subgradient) must “balance” the boundary forces — this geometric picture underlies KKT conditions (next chapter).</p>
 </blockquote>
-<hr>
 <h2 id="75-worked-example">7.5 Worked Example<a class="headerlink" href="#75-worked-example" title="Permanent link">¶</a></h2>
 <p>Minimize
 <script type="math/tex; mode=display">
@@ -1308,7 +1346,6 @@ At <span class="arithmatex">\(x=1\)</span>:
 -\,\nabla f(1)=-2\in N_{\mathcal{X}}(1)=\mathbb{R}_+.
 </script>
 ✅ Condition satisfied → <span class="arithmatex">\(x^*=1\)</span> is optimal.</p>
-<hr>
 <h2 id="76-summary-table">7.6 Summary Table<a class="headerlink" href="#76-summary-table" title="Permanent link">¶</a></h2>
 <table>
 <thead>
@@ -1332,14 +1369,12 @@ At <span class="arithmatex">\(x=1\)</span>:
 </tr>
 </tbody>
 </table>
-<hr>
 <h2 id="77-connections-and-outlook">7.7 Connections and Outlook<a class="headerlink" href="#77-connections-and-outlook" title="Permanent link">¶</a></h2>
 <ul>
 <li>The condition <span class="arithmatex">\(0\in\partial f(\hat{x})+N_{\mathcal{X}}(\hat{x})\)</span> is the foundation of projected and proximal methods (see Appendix G).  </li>
 <li>It generalizes smoothly to inequality/equality constraints, leading to KKT conditions (Chapter 8).  </li>
 <li>It underlies duality theory (Chapter 9), where these stationarity conditions appear as primal–dual relationships.</li>
 </ul>
-<hr>
 <p>Next: In Chapter 8 we extend these first-order ideas to handle general constrained problems via Karush–Kuhn–Tucker (KKT) conditions and Lagrange multipliers.</p>
 
 

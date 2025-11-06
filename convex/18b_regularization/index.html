@@ -621,12 +621,58 @@
   
   
     <li class="md-nav__item">
+      <a href="../19a_optimization_constraints/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    13. Optimization Algorithms for Equality-Constrained Problems
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../19b_optimization_constraints/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    14. Optimization Algorithms for Inequality-Constrained Problems
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../20_advanced/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
-    13. Advanced Large-Scale and Structured Methods
+    15. Advanced Large-Scale and Structured Methods
     
   </span>
   
@@ -649,7 +695,7 @@
   
   
   <span class="md-ellipsis">
-    14. Modelling Patterns and Algorithm Selection in Practice
+    16. Modelling Patterns and Algorithm Selection in Practice
     
   </span>
   
@@ -672,7 +718,7 @@
   
   
   <span class="md-ellipsis">
-    15. Canonical Problems in Convex Optimization
+    17. Canonical Problems in Convex Optimization
     
   </span>
   
@@ -1161,7 +1207,6 @@
 Regularization formalizes this trade-off as a convex optimization problem that balances these two competing goals.  </p>
 <p>Building on Chapter 10 (Pareto Optimality), this chapter shows that regularized models correspond to specific points on a Pareto frontier between data fidelity and simplicity.<br>
 We also connect regularization to duality (Chapter 9), KKT conditions, and probabilistic interpretations.</p>
-<hr>
 <h2 id="111-motivation-fit-vs-complexity">11.1 Motivation: Fit vs. Complexity<a class="headerlink" href="#111-motivation-fit-vs-complexity" title="Permanent link">¶</a></h2>
 <p>When fitting a model, we want both:
 1. Data fidelity: minimize the loss or error <span class="arithmatex">\(f(x)\)</span>,<br>
@@ -1183,7 +1228,6 @@ We also connect regularization to duality (Chapter 9), KKT conditions, and proba
 </ul>
 <p>Small <span class="arithmatex">\(\lambda\)</span> → better fit, possible overfitting.<br>
 Large <span class="arithmatex">\(\lambda\)</span> → simpler, possibly underfit model.</p>
-<hr>
 <h2 id="112-bicriterion-optimization-and-the-pareto-frontier">11.2 Bicriterion Optimization and the Pareto Frontier<a class="headerlink" href="#112-bicriterion-optimization-and-the-pareto-frontier" title="Permanent link">¶</a></h2>
 <p>Regularization is a scalarised multi-objective problem (Chapter 10).<br>
 A solution <span class="arithmatex">\(x^*\)</span> is Pareto optimal if no other feasible <span class="arithmatex">\(x\)</span> can reduce <span class="arithmatex">\(f(x)\)</span> without increasing <span class="arithmatex">\(R(x)\)</span>.</p>
@@ -1195,7 +1239,6 @@ A solution <span class="arithmatex">\(x^*\)</span> is Pareto optimal if no other
 <blockquote>
 <p>Regularization thus selects one point on the fit–complexity Pareto frontier.</p>
 </blockquote>
-<hr>
 <h2 id="113-why-keep-x-small">11.3 Why Keep <span class="arithmatex">\(x\)</span> Small?<a class="headerlink" href="#113-why-keep-x-small" title="Permanent link">¶</a></h2>
 <p>Ill-posed or noisy inverse problems (<span class="arithmatex">\(Ax \approx b\)</span> with ill-conditioned <span class="arithmatex">\(A\)</span>) often admit many unstable solutions.<br>
 Large <span class="arithmatex">\(\|x\|\)</span> values tend to overfit noise.</p>
@@ -1211,7 +1254,6 @@ The optimality condition (normal equations):
 - The matrix <span class="arithmatex">\(A^\top A + \lambda I\)</span> is positive definite for <span class="arithmatex">\(\lambda&gt;0\)</span>.<br>
 - Even if <span class="arithmatex">\(A\)</span> is rank-deficient, the solution is unique and stable.<br>
 - Larger <span class="arithmatex">\(\lambda\)</span> improves conditioning but increases bias.</p>
-<hr>
 <h2 id="114-constrained-and-lagrangian-forms">11.4 Constrained and Lagrangian Forms<a class="headerlink" href="#114-constrained-and-lagrangian-forms" title="Permanent link">¶</a></h2>
 <p>Regularized problems can be equivalently written as constrained convex programs:
 <script type="math/tex; mode=display">
@@ -1242,7 +1284,6 @@ R(x^*) \le t, \quad
 <li>The mapping <span class="arithmatex">\(\lambda \leftrightarrow t\)</span> is monotonic but not bijective.  </li>
 <li>Regularization parameters thus act as Lagrange multipliers, weighting one objective against another (Chapter 10).</li>
 </ul>
-<hr>
 <h2 id="115-common-regularizers">11.5 Common Regularizers<a class="headerlink" href="#115-common-regularizers" title="Permanent link">¶</a></h2>
 <h3 id="a-l2-regularization-ridge">(a) L2 Regularization (Ridge)<a class="headerlink" href="#a-l2-regularization-ridge" title="Permanent link">¶</a></h3>
 <p>
@@ -1305,7 +1346,6 @@ R(x)=\alpha\|x\|_1+(1-\alpha)\|x\|_2^2.
 </tbody>
 </table>
 <p>Each regularizer defines a geometry of simplicity, shaping the solution’s structure.</p>
-<hr>
 <h2 id="116-choosing-the-regularization-parameter-lambda">11.6 Choosing the Regularization Parameter <span class="arithmatex">\(\lambda\)</span><a class="headerlink" href="#116-choosing-the-regularization-parameter-lambda" title="Permanent link">¶</a></h2>
 <h3 id="a-trade-off-behavior">(a) Trade-off Behavior<a class="headerlink" href="#a-trade-off-behavior" title="Permanent link">¶</a></h3>
 <ul>
@@ -1330,7 +1370,6 @@ R(x)=\alpha\|x\|_1+(1-\alpha)\|x\|_2^2.
 <li>Regularization paths: trace <span class="arithmatex">\(x^*(\lambda)\)</span> as <span class="arithmatex">\(\lambda\)</span> varies.  </li>
 <li>Inverse problems: discrepancy principle or L-curve method.</li>
 </ul>
-<hr>
 <h2 id="117-algorithmic-perspective">11.7 Algorithmic Perspective<a class="headerlink" href="#117-algorithmic-perspective" title="Permanent link">¶</a></h2>
 <p>Regularized convex problems typically take the form
 <script type="math/tex; mode=display">
@@ -1368,7 +1407,6 @@ where <span class="arithmatex">\(f\)</span> is smooth convex and <span class="ar
 - L2 → scaling (shrinkage)<br>
 - L1 → soft-thresholding<br>
 - TV/Nuclear → more advanced proximal maps</p>
-<hr>
 <h2 id="118-bayesian-interpretation">11.8 Bayesian Interpretation<a class="headerlink" href="#118-bayesian-interpretation" title="Permanent link">¶</a></h2>
 <p>Regularization corresponds to MAP estimation in probabilistic models.</p>
 <p>Assume data model <span class="arithmatex">\( b = A x + \varepsilon \)</span> with Gaussian noise<br>
@@ -1380,7 +1418,6 @@ and prior <span class="arithmatex">\( x \sim \mathcal{N}(0,\tau^2 I) \)</span>. 
 is the MAP estimator, with <span class="arithmatex">\(\lambda = \sigma^2/(2\tau^2)\)</span>.<br>
 - Gaussian prior → L2 penalty<br>
 - Laplace prior → L1 penalty (sparse MAP estimate)</p>
-<hr>
 <h2 id="119-summary-and-outlook">11.9 Summary and Outlook<a class="headerlink" href="#119-summary-and-outlook" title="Permanent link">¶</a></h2>
 <table>
 <thead>
@@ -1419,7 +1456,6 @@ is the MAP estimator, with <span class="arithmatex">\(\lambda = \sigma^2/(2\tau^
 <p>Summary:<br>
 Regularized approximation formalizes the balance between data fit and model simplicity — a practical manifestation of Pareto optimality.<br>
 Its convex structure enables efficient algorithms and strong theoretical guarantees.</p>
-<hr>
 <p>Next:<br>
 In Chapter 12, we study first-order algorithms — gradient, proximal, and accelerated methods — that efficiently solve large-scale regularized convex problems.</p>
 

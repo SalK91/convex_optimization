@@ -23,7 +23,7 @@
     
     
       
-        <title>14. Modelling Patterns and Algorithm Selection in Practice - Mathematics for Machine Learning</title>
+        <title>16. Modelling Patterns and Algorithm Selection in Practice - Mathematics for Machine Learning</title>
       
     
     
@@ -87,7 +87,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#chapter-14-modelling-patterns-and-algorithm-selection" class="md-skip">
+        <a href="#chapter-15-modelling-patterns-and-algorithm-selection" class="md-skip">
           Skip to content
         </a>
       
@@ -123,7 +123,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              14. Modelling Patterns and Algorithm Selection in Practice
+              16. Modelling Patterns and Algorithm Selection in Practice
             
           </span>
         </div>
@@ -611,12 +611,58 @@
   
   
     <li class="md-nav__item">
+      <a href="../19a_optimization_constraints/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    13. Optimization Algorithms for Equality-Constrained Problems
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../19b_optimization_constraints/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    14. Optimization Algorithms for Inequality-Constrained Problems
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../20_advanced/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
-    13. Advanced Large-Scale and Structured Methods
+    15. Advanced Large-Scale and Structured Methods
     
   </span>
   
@@ -648,7 +694,7 @@
   
   
   <span class="md-ellipsis">
-    14. Modelling Patterns and Algorithm Selection in Practice
+    16. Modelling Patterns and Algorithm Selection in Practice
     
   </span>
   
@@ -672,7 +718,7 @@
   
   
   <span class="md-ellipsis">
-    15. Canonical Problems in Convex Optimization
+    17. Canonical Problems in Convex Optimization
     
   </span>
   
@@ -1156,7 +1202,7 @@
   
 
 
-<h1 id="chapter-14-modelling-patterns-and-algorithm-selection">Chapter 14: Modelling Patterns and Algorithm Selection<a class="headerlink" href="#chapter-14-modelling-patterns-and-algorithm-selection" title="Permanent link">¶</a></h1>
+<h1 id="chapter-15-modelling-patterns-and-algorithm-selection">Chapter 15: Modelling Patterns and Algorithm Selection<a class="headerlink" href="#chapter-15-modelling-patterns-and-algorithm-selection" title="Permanent link">¶</a></h1>
 <p>Real-world modelling starts not with algorithms but with data, assumptions, and design goals.  We choose a loss function from statistical assumptions (e.g. noise model, likelihood) and a complexity penalty or constraints from design preferences (simplicity, robustness, etc.).  The resulting convex (or nonconvex) optimization problem often <em>tells</em> us which solver class to use.  In practice, solving machine learning problems looks like: modeling → recognize structure → pick solver.  Familiar ML models (linear regression, logistic regression, etc.) can be viewed as convex programs.  Below we survey common patterns (convex and some nonconvex) and the recommended algorithms/tricks for each.</p>
 <h2 id="111-regularized-estimation-and-the-accuracysimplicity-tradeoff">11.1 Regularized estimation and the accuracy–simplicity tradeoff<a class="headerlink" href="#111-regularized-estimation-and-the-accuracysimplicity-tradeoff" title="Permanent link">¶</a></h2>
 <p>Many learning tasks use a regularized risk minimization form:
