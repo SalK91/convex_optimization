@@ -173,5 +173,4 @@ $$
 - If each $g_i$ is convex and each $h_j$ is affine, then the feasible set is convex.
 - If $f$ is also convex, then the entire problem is a convex optimisation problem.
 
-Thus, convex sets formalise “what it means for feasible directions to be allowed,” and this is what gives us global optimality guarantees later.
  

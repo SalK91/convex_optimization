@@ -15,7 +15,7 @@
         <link rel="prev" href="../18b_regularization/">
       
       
-        <link rel="next" href="../20_advanced/">
+        <link rel="next" href="../19a_optimization_constraints/">
       
       
       <link rel="icon" href="../../assets/images/favicon.png">
@@ -621,12 +621,58 @@
   
   
     <li class="md-nav__item">
+      <a href="../19a_optimization_constraints/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    13. Optimization Algorithms for Equality-Constrained Problems
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../19b_optimization_constraints/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    14. Optimization Algorithms for Inequality-Constrained Problems
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../20_advanced/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
-    13. Advanced Large-Scale and Structured Methods
+    15. Advanced Large-Scale and Structured Methods
     
   </span>
   
@@ -649,7 +695,7 @@
   
   
   <span class="md-ellipsis">
-    14. Modelling Patterns and Algorithm Selection in Practice
+    16. Modelling Patterns and Algorithm Selection in Practice
     
   </span>
   
@@ -672,7 +718,7 @@
   
   
   <span class="md-ellipsis">
-    15. Canonical Problems in Convex Optimization
+    17. Canonical Problems in Convex Optimization
     
   </span>
   
@@ -1305,17 +1351,17 @@ f(x) \approx f(x_t) + \langle \nabla f(x_t), x - x_t \rangle.
 \]</div>
 <ul>
 <li>We assume <span class="arithmatex">\(f\)</span> behaves approximately like its tangent plane near <span class="arithmatex">\(x_t\)</span>.  </li>
-<li>If we were to minimize just this linear model, we would move <strong>infinitely far</strong> in the direction of <strong>steepest descent</strong> <span class="arithmatex">\(-\nabla f(x_t)\)</span>, which is not realistic or stable.</li>
+<li>If we were to minimize just this linear model, we would move infinitely far in the direction of steepest descent <span class="arithmatex">\(-\nabla f(x_t)\)</span>, which is not realistic or stable.</li>
 </ul>
-<p>This motivates adding a <strong>locality restriction</strong> — we trust the linear approximation <strong>near</strong> <span class="arithmatex">\(x_t\)</span>, not globally. To prevent taking arbitrarily large steps, we add a quadratic penalty for moving away from <span class="arithmatex">\(x_t\)</span>:</p>
+<p>This motivates adding a locality restriction — we trust the linear approximation near <span class="arithmatex">\(x_t\)</span>, not globally. To prevent taking arbitrarily large steps, we add a quadratic penalty for moving away from <span class="arithmatex">\(x_t\)</span>:</p>
 <div class="arithmatex">\[
 f(x) \approx f(x_t) + \langle \nabla f(x_t), x - x_t \rangle + \frac{1}{2\eta} \|x - x_t\|^2,
 \]</div>
-<p>where <span class="arithmatex">\(\eta &gt; 0\)</span> is the <strong>learning rate</strong> or <strong>step size</strong>.</p>
+<p>where <span class="arithmatex">\(\eta &gt; 0\)</span> is the learning rate or step size.</p>
 <ul>
 <li>The linear term pulls <span class="arithmatex">\(x\)</span> in the steepest descent direction.</li>
-<li>The quadratic term acts like a <strong>trust region</strong>, discouraging large deviations from <span class="arithmatex">\(x_t\)</span>.</li>
-<li><span class="arithmatex">\(\eta\)</span> trades off <strong>aggressive progress</strong> vs <strong>stability</strong>:<ul>
+<li>The quadratic term acts like a trust region, discouraging large deviations from <span class="arithmatex">\(x_t\)</span>.</li>
+<li><span class="arithmatex">\(\eta\)</span> trades off aggressive progress vs stability:<ul>
 <li>Small <span class="arithmatex">\(\eta\)</span> → cautious updates.</li>
 <li>Large <span class="arithmatex">\(\eta\)</span> → bold updates (risk of divergence).</li>
 </ul>
@@ -1385,47 +1431,279 @@ which is <em>optimal</em> for any algorithm that uses only gradient information 
 <li>You can tolerate a little more instability/parameter tuning (acceleration can overshoot if step sizes are not chosen carefully).</li>
 </ul>
 <p>Acceleration is the default upgrade from vanilla gradient descent in many smooth convex machine learning problems.</p>
-<h2 id="94-newtons-method-and-second-order-methods">9.4 Newton’s method and second-order methods<a class="headerlink" href="#94-newtons-method-and-second-order-methods" title="Permanent link">¶</a></h2>
-<p>First-order methods only use gradient information. Newton’s method uses curvature (the Hessian) to take smarter steps.</p>
-<h3 id="941-local-quadratic-model">9.4.1 Local quadratic model<a class="headerlink" href="#941-local-quadratic-model" title="Permanent link">¶</a></h3>
-<p>From Chapter 3, the second-order Taylor approximation at <span class="arithmatex">\(x_k\)</span> is
+<p>The convergence of gradient descent depends strongly on the geometry of the level sets of the objective function. When these level sets are poorly conditioned—that is, highly anisotropic or elongated (not spherical)—the gradient directions tend to oscillate across narrow valleys, leading to zig-zag behavior and slow convergence.</p>
+<p>In contrast, when the level sets are well-conditioned (approximately spherical), gradient descent progresses efficiently toward the minimum. Thus, the efficiency of gradient-based methods is governed by how aspherical (anisotropic) the level sets are, which is directly related to the condition number of the Hessian.</p>
+<h2 id="94-steepest-descent-method">9.4 Steepest Descent Method<a class="headerlink" href="#94-steepest-descent-method" title="Permanent link">¶</a></h2>
+<p>The steepest descent method generalizes gradient descent by depending on the choice of norm used to measure step size or direction. It finds the direction of <em>maximum decrease</em> of the objective function under a unit norm constraint.</p>
+<blockquote>
+<p>The norm defines the “geometry” of optimization.
+Gradient descent is steepest descent under the Euclidean norm.
+Changing the norm changes what “steepest” means, and can greatly affect convergence, especially for ill-conditioned or anisotropic problems.</p>
+</blockquote>
+<p>At a point <span class="arithmatex">\(x\)</span>, and for a chosen norm <span class="arithmatex">\(|\cdot|\)</span>:</p>
+<div class="arithmatex">\[
+\Delta x_{\text{nsd}} = \arg\min_{|v| = 1} \nabla f(x)^T v
+\]</div>
+<p>This defines the normalized steepest descent direction — the unit-norm direction that yields the most negative directional derivative (i.e., the steepest local decrease of <span class="arithmatex">\(f\)</span>).</p>
+<ul>
+<li><span class="arithmatex">\(\Delta x_{\text{nsd}}\)</span>: normalized steepest descent direction</li>
+<li><span class="arithmatex">\(\Delta x_{\text{sd}}\)</span>: unnormalized direction (scaled by the gradient norm)</li>
+</ul>
+<p>For small steps <span class="arithmatex">\(v\)</span>,
 <script type="math/tex; mode=display">
+f(x + v) \approx f(x) + \nabla f(x)^T v.
+</script>
+The term <span class="arithmatex">\(\nabla f(x)^T v\)</span> describes how fast <span class="arithmatex">\(f\)</span> increases in direction <span class="arithmatex">\(v\)</span>.
+To decrease <span class="arithmatex">\(f\)</span> most rapidly, we pick <span class="arithmatex">\(v\)</span> that minimizes this inner product — subject to <span class="arithmatex">\(|v| = 1\)</span>.</p>
+<ul>
+<li>The result depends on which norm we use to measure the “size” of <span class="arithmatex">\(v\)</span>.</li>
+<li>The corresponding dual norm <span class="arithmatex">\(|\cdot|_*\)</span> determines how we measure the gradient’s magnitude.</li>
+</ul>
+<p>Thus, the steepest descent direction always aligns with the negative gradient, but it is scaled and shaped according to the geometry induced by the chosen norm.</p>
+<h2 id="941-mathematical-properties">9.4.1. Mathematical Properties<a class="headerlink" href="#941-mathematical-properties" title="Permanent link">¶</a></h2>
+<h3 id="a-normalized-direction">(a) Normalized direction<a class="headerlink" href="#a-normalized-direction" title="Permanent link">¶</a></h3>
+<p>
+<script type="math/tex; mode=display">
+\Delta x_{\text{nsd}} = \arg\min_{|v|=1} \nabla f(x)^T v
+</script>
+→ unit vector with the most negative directional derivative.</p>
+<h3 id="b-unnormalized-direction">(b) Unnormalized direction<a class="headerlink" href="#b-unnormalized-direction" title="Permanent link">¶</a></h3>
+<p>
+<script type="math/tex; mode=display">
+\Delta x_{\text{sd}} = |\nabla f(x)| , \Delta x*{\text{nsd}}
+</script>
+This gives the actual direction and magnitude used in updates.</p>
+<h3 id="c-key-identity">(c) Key identity<a class="headerlink" href="#c-key-identity" title="Permanent link">¶</a></h3>
+<p>
+<script type="math/tex; mode=display">
+\nabla f(x)^T \Delta x_{\text{sd}} = -|\nabla f(x)|_*^2
+</script>
+The directional derivative equals the negative squared dual norm of the gradient.</p>
+<h3 id="942-the-steepest-descent-method">9.4.2. The Steepest Descent Method<a class="headerlink" href="#942-the-steepest-descent-method" title="Permanent link">¶</a></h3>
+<p>The iterative update rule is:
+<script type="math/tex; mode=display">
+x_{k+1} = x_k + t_k , \Delta x_{\text{sd}},
+</script>
+where <span class="arithmatex">\(t_k &gt; 0\)</span> is a step size (from line search or a fixed rule).</p>
+<ul>
+<li>For the Euclidean norm, this reduces to ordinary gradient descent.</li>
+<li>For other norms, it adapts the search direction to the geometry of the problem.</li>
+</ul>
+<p>Convergence: Similar to gradient descent — linear for general convex functions, potentially faster when level sets are well-conditioned.</p>
+<h3 id="943-role-of-the-norm-and-its-influence">9.4.3. Role of the Norm and Its Influence<a class="headerlink" href="#943-role-of-the-norm-and-its-influence" title="Permanent link">¶</a></h3>
+<p>The choice of norm determines:</p>
+<ol>
+<li>The shape of the unit ball <span class="arithmatex">\({v : |v| \le 1}\)</span>,</li>
+<li>The direction of steepest descent, since the minimization is constrained by that shape,</li>
+<li>The dual norm <span class="arithmatex">\(|\nabla f(x)|_*\)</span> that measures the gradient’s size.</li>
+</ol>
+<p>Different norms yield different “geometries” of descent:</p>
+<table>
+<thead>
+<tr>
+<th>Norm</th>
+<th>Unit Ball Shape</th>
+<th>Dual Norm</th>
+<th>Effect on Direction</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><span class="arithmatex">\(\ell_2\)</span></td>
+<td>Circle / sphere</td>
+<td><span class="arithmatex">\(\ell_2\)</span></td>
+<td>Direction is opposite to gradient</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(\ell_1\)</span></td>
+<td>Diamond</td>
+<td><span class="arithmatex">\(\ell_\infty\)</span></td>
+<td>Moves along coordinate of largest gradient</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(\ell_\infty\)</span></td>
+<td>Square</td>
+<td><span class="arithmatex">\(\ell_1\)</span></td>
+<td>Moves opposite to sum of all gradient signs</td>
+</tr>
+<tr>
+<td>Quadratic <span class="arithmatex">\((x^T P x)^{1/2}\)</span></td>
+<td>Ellipsoid</td>
+<td>Weighted <span class="arithmatex">\(\ell_2\)</span></td>
+<td>Scales direction by preconditioner <span class="arithmatex">\(P^{-1}\)</span></td>
+</tr>
+</tbody>
+</table>
+<p>Thus, the norm defines how “distance” and “steepness” are perceived, shaping how the algorithm moves through the landscape of <span class="arithmatex">\(f(x)\)</span>.</p>
+<h3 id="a-euclidean-norm-v_2">(a) Euclidean Norm <span class="arithmatex">\(|v|_2\)</span><a class="headerlink" href="#a-euclidean-norm-v_2" title="Permanent link">¶</a></h3>
+<div class="arithmatex">\[
+\Delta x_{\text{nsd}} = -\frac{\nabla f(x)}{|\nabla f(x)|*2},
+\quad
+\Delta x*{\text{sd}} = -\nabla f(x)
+\]</div>
+<p>This is standard gradient descent.
+The direction is exactly opposite the gradient, and steps are isotropic (same scaling in all directions).</p>
+<h3 id="b-quadratic-norm-v_p-vt-p-v12-with-p-succ-0">(b) Quadratic Norm <span class="arithmatex">\(|v|_P = (v^T P v)^{1/2}\)</span>, with <span class="arithmatex">\(P \succ 0\)</span><a class="headerlink" href="#b-quadratic-norm-v_p-vt-p-v12-with-p-succ-0" title="Permanent link">¶</a></h3>
+<p>Here, <span class="arithmatex">\(P\)</span> defines an ellipsoidal metric.
+The dual norm is <span class="arithmatex">\(|y|_* = (y^T P^{-1} y)^{1/2}\)</span>.</p>
+<div class="arithmatex">\[
+\Delta x_{\text{sd}} = -P^{-1}\nabla f(x)
+\]</div>
+<p>This corresponds to preconditioned gradient descent, where <span class="arithmatex">\(P\)</span> rescales directions to counter anisotropy in level sets.</p>
+<p>Interpretation:</p>
+<ul>
+<li>If <span class="arithmatex">\(P\)</span> approximates the Hessian, this becomes Newton’s method.</li>
+<li>If <span class="arithmatex">\(P\)</span> is diagonal, it acts like an adaptive step size per coordinate.</li>
+</ul>
+<h3 id="c-ell_1-norm">(c) <span class="arithmatex">\(\ell_1\)</span>-Norm<a class="headerlink" href="#c-ell_1-norm" title="Permanent link">¶</a></h3>
+<div class="arithmatex">\[
+\Delta x_{\text{nsd}} = -e_i, \quad i = \arg\max_j \left|\frac{\partial f}{\partial x_j}\right|
+$$
+and
+$$
+\Delta x_{\text{sd}} = -|\nabla f(x)|_\infty e_i
+\]</div>
+<p>The step moves along the coordinate with the largest gradient component, resembling a coordinate descent update.</p>
+<p>Geometric intuition:
+The <span class="arithmatex">\(\ell_1\)</span>-unit ball is a diamond; its corners align with coordinate axes, so the steepest direction is along one axis at a time.</p>
+<ul>
+<li>In <span class="arithmatex">\(\ell_2\)</span>-norm: the unit ball is a circle → the steepest direction is exactly opposite the gradient.</li>
+<li>In <span class="arithmatex">\(\ell_1\)</span>-norm: the unit ball is a diamond → the steepest direction points to a corner (one coordinate).</li>
+<li>In quadratic norms: the unit ball is an ellipsoid → the steepest direction follows the metric-adjusted gradient.</li>
+</ul>
+<p>Hence, the norm defines the geometry of what “steepest” means.</p>
+<h2 id="95-newtons-method-and-second-order-methods">9.5 Newton’s method and second-order methods<a class="headerlink" href="#95-newtons-method-and-second-order-methods" title="Permanent link">¶</a></h2>
+<p>First-order methods (like gradient descent) only use gradient information. Newton’s method, in contrast, incorporates curvature information from the Hessian to take steps that better adapt to the local geometry of the function. This often leads to much faster convergence near the optimum.</p>
+<h3 id="951-local-quadratic-model">9.5.1 Local quadratic model<a class="headerlink" href="#951-local-quadratic-model" title="Permanent link">¶</a></h3>
+<p>From Chapter 3, the second-order Taylor approximation of <span class="arithmatex">\(f(x)\)</span> around a point <span class="arithmatex">\(x_k\)</span> is:</p>
+<div class="arithmatex">\[
 f(x_k + d)
 \approx
 f(x_k)
 + \nabla f(x_k)^\top d
 + \tfrac{1}{2} d^\top \nabla^2 f(x_k) d.
-</script>
-</p>
-<p>If we (temporarily) trust this model, we choose <span class="arithmatex">\(d\)</span> to minimise the RHS. Differentiating w.r.t. <span class="arithmatex">\(d\)</span> and setting to zero gives the Newton step:
-<script type="math/tex; mode=display">
-\nabla^2 f(x_k) \, d_{\text{newton}}
-= - \nabla f(x_k).
-</script>
-So
-<script type="math/tex; mode=display">
+\]</div>
+<p>If we temporarily trust this quadratic model, we can choose <span class="arithmatex">\(d\)</span> to minimize the right-hand side.<br>
+Differentiating with respect to <span class="arithmatex">\(d\)</span> and setting to zero gives:</p>
+<div class="arithmatex">\[
+\nabla^2 f(x_k) \, d_{\text{newton}} = - \nabla f(x_k).
+\]</div>
+<p>Hence, the Newton step is:</p>
+<div class="arithmatex">\[
 d_{\text{newton}} = - [\nabla^2 f(x_k)]^{-1} \nabla f(x_k),
 \quad
 x_{k+1} = x_k + d_{\text{newton}}.
-</script>
-</p>
-<h3 id="942-convergence-behaviour">9.4.2 Convergence behaviour<a class="headerlink" href="#942-convergence-behaviour" title="Permanent link">¶</a></h3>
+\]</div>
+<p>This step points toward the minimizer of the local quadratic model, and near the true minimizer, Newton’s method exhibits quadratic convergence.</p>
+<h3 id="952-convergence-behaviour">9.5.2 Convergence behaviour<a class="headerlink" href="#952-convergence-behaviour" title="Permanent link">¶</a></h3>
+<ul>
+<li>Near the minimiser of a strictly convex, twice-differentiable <span class="arithmatex">\(f\)</span>, Newton’s method converges quadratically: roughly, the number of correct digits doubles every iteration.  </li>
+<li>This is dramatically faster than the <span class="arithmatex">\(O(1/k)\)</span> or <span class="arithmatex">\(O(1/k^2)\)</span> rates typical of first-order methods — but only once the iterates enter the basin of attraction.  </li>
+<li>Far from the minimiser, Newton’s method can behave erratically or even diverge.<br>
+  To stabilise it, we typically pair it with a line search or trust region strategy to control step size.</li>
+</ul>
+<h3 id="953-implementation">9.5.3 Implementation<a class="headerlink" href="#953-implementation" title="Permanent link">¶</a></h3>
+<p>The main computational effort in each iteration lies in evaluating derivatives and solving the Newton system:</p>
+<div class="arithmatex">\[
+H \, \Delta x = -g,
+\]</div>
+<p>where</p>
+<div class="arithmatex">\[
+H = \nabla^2 f(x), \quad g = \nabla f(x).
+\]</div>
+<h4 id="solving-via-cholesky-factorization">Solving via Cholesky factorization<a class="headerlink" href="#solving-via-cholesky-factorization" title="Permanent link">¶</a></h4>
+<p>If <span class="arithmatex">\(H\)</span> is symmetric and positive definite, we can efficiently solve this system using a Cholesky factorization:</p>
+<div class="arithmatex">\[
+H = L L^{\top},
+\]</div>
+<p>where <span class="arithmatex">\(L\)</span> is lower triangular.<br>
+The Newton step is then:</p>
+<div class="arithmatex">\[
+\Delta x_{\text{nt}} = -L^{-\top} L^{-1} g.
+\]</div>
+<p>This involves two triangular solves:</p>
+<ol>
+<li><span class="arithmatex">\(L y = -g\)</span></li>
+<li><span class="arithmatex">\(L^{\top} \Delta x_{\text{nt}} = y\)</span></li>
+</ol>
+<p>This avoids explicitly computing <span class="arithmatex">\(H^{-1}\)</span> and ensures numerical stability.</p>
+<h4 id="newton-decrement">Newton decrement<a class="headerlink" href="#newton-decrement" title="Permanent link">¶</a></h4>
+<p>A useful measure of progress is the Newton decrement:</p>
+<div class="arithmatex">\[
+\lambda(x) = \| L^{-1} g \|_2,
+\]</div>
+<p>which approximates how far we are from the optimum.<br>
+A common stopping criterion is <span class="arithmatex">\(\lambda(x)^2 / 2 &lt; \varepsilon\)</span>.</p>
+<h3 id="954-computational-cost">9.5.4 Computational cost<a class="headerlink" href="#954-computational-cost" title="Permanent link">¶</a></h3>
+<p>Each Newton step requires solving a linear system involving <span class="arithmatex">\(\nabla^2 f(x_k)\)</span>, which costs about as much as factoring the Hessian (or an approximation).</p>
+<ul>
+<li>For an unstructured, dense Hessian, Cholesky factorization requires approximately <span class="arithmatex">\((1/3) n^3\)</span> floating-point operations.  </li>
+<li>If <span class="arithmatex">\(H\)</span> is sparse, banded, or has special structure, the cost can be much lower.  </li>
+<li>Because of this cubic scaling, Newton’s method is most attractive for medium-scale problems where high accuracy is required.</li>
+</ul>
+<h3 id="955-why-convexity-helps">9.5.5 Why convexity helps<a class="headerlink" href="#955-why-convexity-helps" title="Permanent link">¶</a></h3>
+<p>If <span class="arithmatex">\(f\)</span> is convex, then <span class="arithmatex">\(\nabla^2 f(x_k)\)</span> is positive semidefinite (Chapter 5).<br>
+This has two important implications:</p>
+<ul>
+<li>The local quadratic model is bowl-shaped, so the Newton direction points toward a minimiser.  </li>
+<li>Regularised Newton steps (e.g. using <span class="arithmatex">\(H + \mu I\)</span> for small <span class="arithmatex">\(\mu &gt; 0\)</span>) are guaranteed to be descent directions and behave predictably.</li>
+</ul>
+<h3 id="956-quasi-newton-methods">9.5.6 Quasi-Newton methods<a class="headerlink" href="#956-quasi-newton-methods" title="Permanent link">¶</a></h3>
+<p>When computing or storing the Hessian is too expensive, we can build low-rank approximations of <span class="arithmatex">\(\nabla^2 f(x_k)\)</span> or its inverse.<br>
+These methods use gradient information from previous steps to estimate curvature.</p>
+<p>The most famous examples are:</p>
+<ul>
+<li>BFGS (Broyden–Fletcher–Goldfarb–Shanno)  </li>
+<li>DFP (Davidon–Fletcher–Powell)  </li>
+<li>L-BFGS (Limited-memory BFGS) — for very large-scale problems.</li>
+</ul>
+<p>They maintain many of Newton’s fast local convergence properties, but with per-iteration costs similar to first-order methods.</p>
+<p>For instance, BFGS maintains an approximation <span class="arithmatex">\(B_k \approx \nabla^2 f(x_k)^{-1}\)</span> updated via gradient and step differences:</p>
+<div class="arithmatex">\[
+B_{k+1} = B_k + \frac{(s_k^\top y_k + y_k^\top B_k y_k)}{(s_k^\top y_k)^2} s_k s_k^\top
+- \frac{B_k y_k s_k^\top + s_k y_k^\top B_k}{s_k^\top y_k},
+\]</div>
+<p>where <span class="arithmatex">\(s_k = x_{k+1} - x_k\)</span> and <span class="arithmatex">\(y_k = \nabla f(x_{k+1}) - \nabla f(x_k)\)</span>.</p>
+<p>These methods achieve superlinear convergence in practice, making them popular for large smooth optimization problems.</p>
+<h3 id="957-when-to-use-newton-or-quasi-newton-methods">9.5.7 When to use Newton or quasi-Newton methods<a class="headerlink" href="#957-when-to-use-newton-or-quasi-newton-methods" title="Permanent link">¶</a></h3>
+<p>Use Newton or quasi-Newton methods when:</p>
+<ul>
+<li>You need high-accuracy solutions.  </li>
+<li>The problem is smooth and reasonably well-conditioned.  </li>
+<li>The dimension is moderate, or Hessian systems can be solved efficiently (e.g., using sparse linear algebra).  </li>
+</ul>
+<p>For large, ill-conditioned, or nonsmooth problems, first-order or proximal methods (Chapter 10) are typically more suitable.</p>
+<h2 id="96-constraints-and-nonsmooth-terms-projection-and-proximal-methods">9.6 Constraints and nonsmooth terms: projection and proximal methods<a class="headerlink" href="#96-constraints-and-nonsmooth-terms-projection-and-proximal-methods" title="Permanent link">¶</a></h2>
+<p>In practice, most convex optimization problems are not purely smooth.<br>
+They often include:</p>
+<ul>
+<li>Constraints: <span class="arithmatex">\(x \in \mathcal{X}\)</span>,</li>
+<li>Nonsmooth regularisers: such as <span class="arithmatex">\(\|x\|_1\)</span>,</li>
+<li>Penalties: promoting robustness or sparsity (see Chapter 6).</li>
+</ul>
+<p>Two core strategies handle such settings:</p>
+<ol>
+<li>Projected gradient methods — where we project each iterate back into the feasible set <span class="arithmatex">\(\mathcal{X}\)</span>.  </li>
+<li>Proximal gradient methods — which generalize projection to handle nonsmooth but structured terms.</li>
+</ol>
+<p>These methods extend the ideas of gradient and Newton updates to the broader world of constrained and composite optimization.</p>
+<h3 id="952-convergence-behaviour_1">9.5.2 Convergence behaviour<a class="headerlink" href="#952-convergence-behaviour_1" title="Permanent link">¶</a></h3>
 <ul>
 <li>Near the minimiser of a strictly convex, twice-differentiable <span class="arithmatex">\(f\)</span>, Newton’s method converges quadratically: roughly, the number of correct digits doubles every iteration.</li>
 <li>This is dramatically faster than <span class="arithmatex">\(O(1/k)\)</span> or <span class="arithmatex">\(O(1/k^2)\)</span>, but only once you’re in the “basin of attraction.”</li>
 <li>Far from the minimiser, Newton can misbehave, so we pair it with a line search or trust region.</li>
 </ul>
-<h3 id="943-computational-cost">9.4.3 Computational cost<a class="headerlink" href="#943-computational-cost" title="Permanent link">¶</a></h3>
+<h3 id="953-computational-cost">9.5.3 Computational cost<a class="headerlink" href="#953-computational-cost" title="Permanent link">¶</a></h3>
 <p>Each Newton step requires solving a linear system involving <span class="arithmatex">\(\nabla^2 f(x_k)\)</span>, which costs about as much as factoring the Hessian (or an approximation). This is expensive in very high dimensions, which is why Newton is most attractive for medium-scale problems where high accuracy matters.</p>
-<h3 id="944-why-convexity-helps">9.4.4 Why convexity helps<a class="headerlink" href="#944-why-convexity-helps" title="Permanent link">¶</a></h3>
+<h3 id="954-why-convexity-helps">9.5.4 Why convexity helps<a class="headerlink" href="#954-why-convexity-helps" title="Permanent link">¶</a></h3>
 <p>If <span class="arithmatex">\(f\)</span> is convex, then <span class="arithmatex">\(\nabla^2 f(x_k)\)</span> is positive semidefinite (Chapter 5). This means:</p>
 <ul>
 <li>The quadratic model is bowl-shaped, so the Newton step makes sense.</li>
 <li>Regularised Newton steps (adding a multiple of the identity to the Hessian) behave very predictably.</li>
 </ul>
-<h3 id="945-quasi-newton">9.4.5 Quasi-Newton<a class="headerlink" href="#945-quasi-newton" title="Permanent link">¶</a></h3>
+<h3 id="955-quasi-newton">9.5.5 Quasi-Newton<a class="headerlink" href="#955-quasi-newton" title="Permanent link">¶</a></h3>
 <p>When Hessians are too expensive, we can build low-rank approximations of <span class="arithmatex">\(\nabla^2 f(x_k)\)</span> or its inverse. Famous examples include BFGS and L-BFGS. These methods keep much of Newton’s fast local convergence but with per-iteration cost closer to first-order methods.</p>
-<h3 id="946-when-to-use-newton-quasi-newton">9.4.6 When to use Newton / quasi-Newton<a class="headerlink" href="#946-when-to-use-newton-quasi-newton" title="Permanent link">¶</a></h3>
+<h3 id="956-when-to-use-newton-quasi-newton">9.5.6 When to use Newton / quasi-Newton<a class="headerlink" href="#956-when-to-use-newton-quasi-newton" title="Permanent link">¶</a></h3>
 <ul>
 <li>You need high-accuracy solutions.</li>
 <li>The problem is smooth and reasonably well-conditioned.</li>
@@ -1439,7 +1717,7 @@ x_{k+1} = x_k + d_{\text{newton}}.
 <li>penalties that encode robustness or sparsity (Chapter 6).</li>
 </ul>
 <p>Two core ideas handle this: projected gradient and proximal gradient.</p>
-<h3 id="951-projected-gradient-descent">9.5.1 Projected gradient descent<a class="headerlink" href="#951-projected-gradient-descent" title="Permanent link">¶</a></h3>
+<h3 id="961-projected-gradient-descent">9.6.1 Projected gradient descent<a class="headerlink" href="#961-projected-gradient-descent" title="Permanent link">¶</a></h3>
 <p>Setting:<br>
 Minimise convex, differentiable <span class="arithmatex">\(f(x)\)</span> subject to <span class="arithmatex">\(x \in \mathcal{X}\)</span>, where <span class="arithmatex">\(\mathcal{X}\)</span> is a simple closed convex set (Chapter 4).</p>
 <p>Algorithm:</p>
@@ -1471,7 +1749,7 @@ Minimise convex, differentiable <span class="arithmatex">\(f(x)\)</span> subject
 <li>An <span class="arithmatex">\(\ell_2\)</span> ball <span class="arithmatex">\(\{x : \|x\|_2 \le R\}\)</span> (scale down if needed).</li>
 </ul>
 <p>Projected gradient is the constrained version of gradient descent. It maintains feasibility at every iterate.</p>
-<h3 id="952-proximal-gradient-forwardbackward-splitting">9.5.2 Proximal gradient (forward–backward splitting)<a class="headerlink" href="#952-proximal-gradient-forwardbackward-splitting" title="Permanent link">¶</a></h3>
+<h3 id="962-proximal-gradient-forwardbackward-splitting">9.6.2 Proximal gradient (forward–backward splitting)<a class="headerlink" href="#962-proximal-gradient-forwardbackward-splitting" title="Permanent link">¶</a></h3>
 <p>Setting:<br>
 Composite convex minimisation
 <script type="math/tex; mode=display">
@@ -1528,7 +1806,7 @@ R(x) + \frac{1}{2\alpha} \|x-y\|_2^2
 <li>You don’t need absurdly high accuracy, but you do need scalability.</li>
 </ul>
 <p>This is the standard tool for modern large-scale convex learning problems.</p>
-<h2 id="96-penalties-barriers-and-interior-point-methods">9.6 Penalties, barriers, and interior-point methods<a class="headerlink" href="#96-penalties-barriers-and-interior-point-methods" title="Permanent link">¶</a></h2>
+<h2 id="97-penalties-barriers-and-interior-point-methods">9.7 Penalties, barriers, and interior-point methods<a class="headerlink" href="#97-penalties-barriers-and-interior-point-methods" title="Permanent link">¶</a></h2>
 <p>So far we’ve assumed either:</p>
 <ul>
 <li>simple constraints we can project onto,</li>
@@ -1536,7 +1814,7 @@ R(x) + \frac{1}{2\alpha} \|x-y\|_2^2
 </ul>
 <p>What if the constraints are general convex inequalities <span class="arithmatex">\(g_i(x)\le0\)</span>?<br>
 Enter penalty methods, barrier methods, and (ultimately) interior-point methods.</p>
-<h3 id="961-penalty-methods">9.6.1 Penalty methods<a class="headerlink" href="#961-penalty-methods" title="Permanent link">¶</a></h3>
+<h3 id="971-penalty-methods">9.7.1 Penalty methods<a class="headerlink" href="#971-penalty-methods" title="Permanent link">¶</a></h3>
 <p>Turn constrained optimisation into unconstrained optimisation by adding a penalty for violating constraints.</p>
 <p>Suppose we want
 <script type="math/tex; mode=display">
@@ -1561,7 +1839,7 @@ where:</p>
 <li>very large <span class="arithmatex">\(\rho\)</span> can make the landscape ill-conditioned and hard for gradient/Newton to solve.</li>
 </ul>
 <p>Penalty methods are closely linked to robust formulations and Huber-like losses: you replace a hard requirement by a soft cost. This is exactly what you do in robust regression and in <span class="arithmatex">\(\epsilon\)</span>-insensitive / Huber losses (see Section 9.7).</p>
-<h3 id="962-barrier-methods">9.6.2 Barrier methods<a class="headerlink" href="#962-barrier-methods" title="Permanent link">¶</a></h3>
+<h3 id="972-barrier-methods">9.7.2 Barrier methods<a class="headerlink" href="#972-barrier-methods" title="Permanent link">¶</a></h3>
 <p>Penalty methods penalise violation <em>after</em> you cross the boundary. Barrier methods make it impossible to even touch the boundary.</p>
 <p>For inequality constraints <span class="arithmatex">\(g_i(x) \le 0\)</span>, define the logarithmic barrier
 <script type="math/tex; mode=display">
@@ -1582,7 +1860,7 @@ subject to strict feasibility <span class="arithmatex">\(g_i(x)&lt;0\)</span>.</
 <li>Increasing <span class="arithmatex">\(t\)</span> tightens the approximation; we “home in” on the boundary of feasibility.</li>
 </ul>
 <p>This is the core idea of interior-point methods.</p>
-<h3 id="963-interior-point-methods-in-practice">9.6.3 Interior-point methods in practice<a class="headerlink" href="#963-interior-point-methods-in-practice" title="Permanent link">¶</a></h3>
+<h3 id="973-interior-point-methods-in-practice">9.7.3 Interior-point methods in practice<a class="headerlink" href="#973-interior-point-methods-in-practice" title="Permanent link">¶</a></h3>
 <p>Interior-point methods:</p>
 <ul>
 <li>Are globally convergent for convex problems under mild assumptions (Slater’s condition; see Chapter 8).</li>
@@ -1598,7 +1876,7 @@ subject to strict feasibility <span class="arithmatex">\(g_i(x)&lt;0\)</span>.</
 <li>semidefinite programs (SDP).</li>
 </ul>
 <p>They give high-accuracy answers and KKT-based optimality certificates. They are more expensive per iteration than gradient methods, but need far fewer iterations, and they handle fully general convex constraints.</p>
-<p><strong>Summary: Penalty vs Barrier vs Interior-Point</strong></p>
+<p>Summary: Penalty vs Barrier vs Interior-Point</p>
 <table>
 <thead>
 <tr>

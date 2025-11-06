@@ -6,7 +6,7 @@ At this point we understand:
 - how to talk about feasible sets,
 - how to describe optimality with gradients or subgradients.
 
-Now we turn to *constrained* optimisation. We first recall unconstrained optimisation and gradient descent, then develop the Karush–Kuhn–Tucker (KKT) conditions, which are the first-order optimality conditions for constrained convex optimisation (Boyd and Vandenberghe, 2004).
+Now we turn to *constrained* optimisation. We first recall unconstrained optimisation and gradient descent, then develop the Karush–Kuhn–Tucker (KKT) conditions, which are the first-order optimality conditions for constrained convex optimisation.
 
  
 ## 8.1 Unconstrained convex minimisation
@@ -60,6 +60,8 @@ A necessary condition for $x^*$ to be optimal (under suitable regularity assumpt
    \nabla f(x^*) + \sum_j \lambda_j^* \nabla h_j(x^*) = 0.
    $$
 2. Primal feasibility:
+   Primal feasibility simply means that the point $x^*$ satisfies all the original constraints of the optimization problem.
+
    $$
    h_j(x^*) = 0 \quad \text{for all } j.
    $$
@@ -103,6 +105,8 @@ The Karush–Kuhn–Tucker (KKT) conditions consist of:
    \mu_i^* \ge 0,\quad i=1,\dots,m.
    $$
 
+   > Dual feasibility says the “penalty coefficients” for inequality constraints can only push you inward (not reward you for violating constraints).
+
 3. Stationarity:
 
       $\nabla f(x^*) 
@@ -111,6 +115,7 @@ The Karush–Kuhn–Tucker (KKT) conditions consist of:
       = 0$
 
 4. Complementary slackness:
+
    $$
    \mu_i^* g_i(x^*) = 0
    \quad \text{for all } i.
@@ -123,32 +128,4 @@ Complementary slackness means:
 
 This matches geometric intuition: only active constraints can “push back” on the optimiser.
 
- 
-## 8.4 KKT and convexity
-
-For general nonlinear problems, KKT conditions are *necessary* under regularity assumptions. For convex problems, KKT conditions are often necessary and sufficient for optimality. In other words, if the problem is convex and a point satisfies KKT, that point is globally optimal.
-
-This is extremely powerful:
-
-- You can certify optimality (and thus global optimality) just by finding multipliers $\lambda^*, \mu^*$ that satisfy KKT.
-- KKT conditions are constructive: they are what solvers try to satisfy.
-
- 
-## 8.5 Geometric picture
-
-At the optimal point $x^*$:
-
-- $\nabla f(x^*)$ is balanced by a conic combination of the normals of the active inequality constraints plus a linear combination of the equality constraint normals.
-- The objective cannot be decreased by moving in any feasible direction.
-
-Visually: the contour of $f$ is “tangent” to the feasible region. The Lagrange multipliers encode the direction and strength of that tangency.
-
-
-## 8.6 Constraint qualifications 
-
-To guarantee that KKT multipliers exist and KKT conditions apply cleanly, we usually need a mild regularity condition called a constraint qualification. The most common is Slater’s condition for convex problems:
-
-> If the problem is convex and there exists a strictly feasible point $\tilde{x}$ such that  
-> $g_i(\tilde{x}) < 0$ for all $i$ and $h_j(\tilde{x}) = 0$ for all $j$,  
-> then strong duality holds and KKT conditions are necessary and sufficient (Boyd and Vandenberghe, 2004).
 

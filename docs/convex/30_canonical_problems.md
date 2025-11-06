@@ -1,4 +1,4 @@
-# Chapter 15: Canonical Problems in Convex Optimization
+# Chapter 17: Canonical Problems in Convex Optimization
 
 The table below gives canonical convex problem classes, with special cases listed *inside* their parent class to avoid duplication.  
 Key hierarchy: LP ⊂ QP ⊂ SOCP ⊂ SDP (all are conic programs).

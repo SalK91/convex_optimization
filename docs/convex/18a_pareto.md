@@ -1,7 +1,6 @@
 # Chapter 10: Pareto Optimality and Multi-Objective Convex Optimization
 
-Optimization often focuses on a single objective function — minimizing one measure of performance.  
-However, real-world problems rarely involve a single criterion. In practice, we must balance multiple conflicting goals: accuracy vs. complexity, fairness vs. utility, return vs. risk, etc.  
+Optimization often focuses on a single objective function — minimizing one measure of performance. However, real-world problems rarely involve a single criterion. In practice, we must balance multiple conflicting goals: accuracy vs. complexity, fairness vs. utility, return vs. risk, etc.  
 
 This chapter introduces Pareto optimality, which generalizes classical convex optimization to the multi-objective setting, and explores how scalarisation connects multi-objective problems to duality and regularisation.
  
@@ -14,7 +13,7 @@ x^* \in \arg\min_{x \in \mathcal{X}} f(x),
 where $\mathcal{X}$ is a convex feasible set.
 
 Here, optimality is absolute — there exists a single best point (or equivalence class) minimizing one measure of performance.  
-The theory of Chapters 7–9 applies directly: gradients, subgradients, and KKT conditions fully characterize optimality.
+
 
 But what if we have multiple objectives that cannot all be minimized simultaneously?
 
@@ -37,7 +36,7 @@ Formally, we write:
 where each $f_i(x)$ is convex.  
 The solution concept changes: there is no single global minimum. Instead, there is a *set* of trade-off solutions.
 
----
+
 
 ## 10.3 Pareto Optimality
 
@@ -68,8 +67,7 @@ In two dimensions $(f_1, f_2)$, the Pareto frontier forms the *lower-left bounda
 
 > The frontier visualizes the fundamental trade-offs in the problem.
 
----
-
+ 
 ## 10.4 Scalarisation: Reducing Many Objectives to One
 
 Since multi-objective problems rarely have a unique minimizer, we often scalarise them — combine all objectives into a single composite scalar that we can minimize using standard methods.
@@ -88,7 +86,7 @@ Since multi-objective problems rarely have a unique minimizer, we often scalaris
 Convexity caveat:  
 If the objectives and feasible set are convex, the weighted-sum method recovers the convex portion of the Pareto frontier. Nonconvex parts cannot be reached with simple weights.
 
----
+ 
 
 ### (b) $\varepsilon$-Constraint Scalarisation
 
@@ -111,8 +109,7 @@ The Lagrangian form
 \]
 is a weighted-sum scalarisation — $\lambda$ acts as a trade-off parameter.
 
----
-
+ 
 ### (c) Duality and Scalarisation
 
 Scalarisation is closely related to duality (Chapter 9):
@@ -121,7 +118,7 @@ Scalarisation is closely related to duality (Chapter 9):
 - Changing them selects different Pareto-optimal points on the frontier.  
 - Regularisation parameters in ML (like $\lambda$) are dual to constraint levels — they *move along* the Pareto frontier.
 
----
+ 
 
 ## 10.5 Examples
 
@@ -145,7 +142,7 @@ Two equivalent formulations:
 
 Both yield Pareto optimal solutions; $\lambda$ and $\tau$ parameterize the same trade-off curve.
 
----
+ 
 
 ### Example 2 – Portfolio Optimization (Risk–Return)
 
@@ -165,7 +162,7 @@ Weighted sum formulation:
 - Varying $\alpha$ traces the efficient frontier in risk–return space.
 - This is the foundation of Modern Portfolio Theory (Markowitz).
 
----
+ 
 
 ### Example 3 – Probabilistic Modelling (ELBO and $\beta$-VAE)
 
@@ -184,44 +181,3 @@ Scalarised form (\(\beta\)-VAE):
 \]
 
 Parameter $\beta$ controls the trade-off — different $\beta$ yield different Pareto-optimal points between reconstruction accuracy and disentanglement.
-
----
-
-## 10.6 Broader Connections in ML and AI
-
-| Domain | Competing Objectives | Pareto/Scalarised Form |
-|---------|----------------------|------------------------|
-| Fairness-aware learning | Accuracy vs fairness | Weighted or constrained objectives |
-| Regularisation | Fit vs complexity | $\|Ax-b\|^2 + \lambda R(x)$ |
-| Generalisation | Empirical vs expected risk | Regularised training |
-| Information bottleneck | Accuracy vs compression | Lagrangian form with $\beta$ |
-| Reinforcement learning | Reward vs risk | Multi-objective policies |
-
-> Scalarisation explains why hyperparameters like $\lambda$ or $\beta$ shape trade-offs in modern learning systems — they represent *weights* on a hidden multi-objective frontier.
-
----
-
-## 10.7 Geometry and Visualization
-
-- The Pareto frontier is the image of optimal trade-offs in objective space.  
-- Scalarisation corresponds to taking supporting hyperplanes with normal vector \(w\).  
-- The shape of the frontier reveals whether the problem is convex:
-  - Convex frontier → smooth trade-offs, all reachable by weighted sums.  
-  - Nonconvex frontier → gaps requiring $\varepsilon$-constraints or evolutionary methods.
-
----
-
-## 10.8 Summary and Outlook
-
-| Concept | Interpretation |
-|----------|----------------|
-| Pareto optimality | No objective can improve without worsening another |
-| Weighted-sum scalarisation | Lagrangian combination of convex objectives |
-| $\varepsilon$-constraint | One objective minimized, others bounded |
-| Regularisation | Hidden scalarisation in ML |
-| Duality connection | Weights = Lagrange multipliers |
-| Pareto frontier | Boundary of optimal trade-offs |
-
-Key insight:  
-Pareto optimality unifies diverse ML techniques — from regularisation to variational inference — under one geometric lens: balancing competing convex objectives.
- 

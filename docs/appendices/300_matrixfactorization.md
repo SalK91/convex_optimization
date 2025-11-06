@@ -1,241 +1,391 @@
-# Matrix Factorizations in Convex Optimization
+# Numerical Linear Algebra for Convex Optimization
 
-Matrix factorizations are the numerical backbone of convex optimization algorithms.  
-Whether solving Newton steps, least-squares problems, or KKT systems, every convex solver eventually reduces to solving a linear system of the form:
-\[
+Numerical linear algebra is the computational foundation of convex optimization.
+Every modern optimization algorithm — from Newton’s method to interior-point or proximal algorithms — ultimately requires solving a structured linear system:
+$$
 H x = b,
-\]
-where \(H\) might represent a Hessian, normal equations matrix, or a KKT system.
+$$
+where $H$ may represent a Hessian, a normal equations matrix, or a KKT (Karush–Kuhn–Tucker) system.
 
-Directly computing \(H^{-1}\) is never done in practice — it’s unstable, slow, and wasteful.  
-Instead, solvers use matrix factorizations, which decompose \(H\) into structured components that make systems easier to solve, more numerically stable, and computationally efficient.
-
----
-
-## 1. Why Factorizations Matter
-
-In convex optimization, almost every second-order or constrained algorithm requires repeatedly solving linear systems:
-
-- Newton’s method: \(\nabla^2 f(x_k) \Delta x = -\nabla f(x_k)\)
-- Interior-point method: KKT systems coupling primal and dual variables
-- Least-squares: \(A^T A x = A^T b\)
-- Dual updates: systems involving \(A Q^{-1} A^T\)
-
-The key challenges:
-- \(H\) can be large, sparse, ill-conditioned, or indefinite.
-- Numerical stability and efficiency depend entirely on choosing the right factorization.
+In practice, we never compute $H^{-1}$ directly. Instead, we exploit matrix factorizations and structure to solve such systems efficiently and stably.
 
  
+## 1. Why Linear Algebra Matters in Convex Optimization
 
-## 2. Overview of Major Factorizations
+At each iteration of a convex optimization algorithm, we must solve one or more linear systems:
 
-| Factorization | Applies To | Form | Use Case | Notes |
-|----------------|-------------|------|-----------|-------|
-| LU | Any square (nonsingular) matrix | \(A = L U\) | General linear systems | Most basic; doesn’t exploit symmetry |
-| QR | Any matrix (square or rectangular) | \(A = Q R\) | Least squares, orthogonal projections | Numerically stable but expensive |
-| Cholesky | Symmetric positive definite (SPD) | \(A = L L^T\) | QP Hessians, least-squares normal equations | Fastest, most stable for SPD |
-| LDLᵀ | Symmetric indefinite | \(A = L D L^T\) | KKT systems, equality-constrained QPs | Generalization of Cholesky |
-| Eigen | Symmetric (or Hermitian) | \(A = Q \Lambda Q^T\) | Spectral analysis, SDP decomposition | Diagonalizes curvature |
-| SVD | Any matrix | \(A = U \Sigma V^T\) | Rank analysis, pseudoinverse, low-rank solvers | Most accurate but expensive |
+* Newton’s method:
+  $$
+  \nabla^2 f(x_k), \\ \Delta x = -\nabla f(x_k)
+  $$
 
-Each decomposition expresses the matrix in a structured way, revealing properties such as stability, conditioning, and rank.
+* Interior-point methods (KKT systems):
 
- 
-
-## 3. LU Factorization — *The general-purpose workhorse*
-
-Form:  
-\[
-A = L U,
-\]
-where \(L\) is lower triangular, \(U\) is upper triangular.
-
-Use: General square linear systems, \(A x = b\).
-
-Why in convex optimization:  
-Used when the problem matrix is not symmetric or not guaranteed positive definite (e.g., linear equality constraints in augmented systems).
-
-Pros
-- Works for any nonsingular matrix.  
-- Straightforward to implement.
-
-Cons
-- Does not exploit symmetry — double the work of symmetric factorizations.  
-- Can be unstable without pivoting.
-
-Solver context:  
-LP simplex tableau, nonsymmetric KKT systems, or linearized subproblems.
-
- 
-
-## 4. QR Factorization — *Orthogonal and stable*
-
-Form:  
-\[
-A = Q R, \quad Q^T Q = I, \quad R \text{ upper triangular.}
-\]
-
-Use: Solving least-squares problems
-\[
-\min_x \|A x - b\|_2^2.
-\]
-
-Instead of forming normal equations \(A^T A x = A^T b\) (which squares the condition number), we solve:
-\[
-R x = Q^T b,
-\]
-which is far more numerically stable.
-
-Why in convex optimization:
-- Used in least-squares or fitting subproblems inside proximal or ADMM steps.  
-- Essential when \(A\) is rectangular (overdetermined systems).
-
-Pros
-- Very stable (orthogonal transformations preserve norms).  
-- No explicit squaring of conditioning.
-
-Cons
-- ~2× slower than Cholesky.  
-- Higher memory footprint.
-
- 
-
-## 5. Cholesky Factorization — *Fastest for positive definite systems*
-
-Form:  
-\[
-A = L L^T, \quad L \text{ lower triangular.}
-\]
-
-Applies to: Symmetric positive definite matrices (SPD).  
-This includes Hessians of convex functions and normal equations in least-squares.
-
-Why it’s central to convex optimization:
-- Convex problems have positive semidefinite curvature → the Hessian or KKT submatrix is SPD.  
-- Cholesky is the fastest and most stable factorization for SPD matrices.
-
-Typical uses:
-- Newton steps in unconstrained convex problems.
-- Solving normal equations \(A^T A x = A^T b\).
-- Covariance and regularization matrices in QP and ridge regression.
-
-Pros
-- Exploits symmetry → half the computation of LU.  
-- Stable (no pivoting needed).  
-- Simple forward–backward substitution.
-
-Cons
-- Fails if matrix not SPD (e.g., indefinite KKT systems).
-
- 
-
-## 6. LDLᵀ Factorization — *Handles indefinite symmetric systems*
-
-Form:  
-\[
-A = L D L^T,
-\]
-where \(D\) is block diagonal (1×1 or 2×2 blocks), \(L\) lower triangular.
-
-Why it’s important:
-Many convex solvers (interior-point, equality-constrained QPs, SDPs) produce symmetric but indefinite KKT systems:
-\[
+$$
 \begin{bmatrix}
-Q & A^T \\
+H & A^T \\
 A & 0
+\end{bmatrix}
+\begin{bmatrix}
+\Delta x \\[3pt] \Delta \lambda
+\end{bmatrix}
+=
+\begin{bmatrix}
+-r_d \\[3pt] -r_p
+\end{bmatrix}
+$$
+
+
+* Least-squares problems: $A^T A x = A^T b$
+
+Solving these systems dominates computation time. The stability, speed, and scalability of a convex solver depend on the numerical linear algebra techniques used.
+
+## 2. The Matrix Factorization Toolbox
+
+Matrix factorizations decompose a matrix into simpler pieces, exposing its structure.
+They enable efficient triangular solves instead of direct inversion.
+
+| Factorization | Applies To                  | Form                | Common Use                        | Key Notes                       |
+| - |  | - |  | - |
+| LU        | Any nonsingular matrix      | $A = L U$           | General linear systems            | Requires pivoting for stability |
+| QR        | Any (rectangular) matrix    | $A = Q R$           | Least-squares                     | Orthogonal, stable              |
+| Cholesky  | Symmetric positive definite | $A = L L^T$         | SPD systems, normal equations     | Fastest for SPD                 |
+| $LDL^T$      | Symmetric indefinite        | $A = L D L^T$       | KKT systems                       | Handles indefiniteness          |
+| Eigen     | Symmetric/Hermitian         | $A = Q \Lambda Q^T$ | Curvature, convexity checks       | Diagonalizes $A$                |
+| SVD       | Any matrix                  | $A = U \Sigma V^T$  | Rank, conditioning, pseudoinverse | Most stable, expensive          |
+
+Each factorization corresponds to a *numerically preferred strategy* for certain classes of problems.
+
+ 
+## 3. LU Factorization — *The General-Purpose Workhorse*
+
+Form:
+$$
+A = P L U
+$$
+where $P$ is a permutation matrix ensuring stability.
+
+* Used for: General linear systems, nonsymmetric matrices.
+* Cost: $\approx \tfrac{2}{3}n^3$ (dense).
+* Stability: Requires partial pivoting ($PA=LU$) to avoid numerical blow-up.
+
+Example use case:
+
+* Solving KKT systems in linear programming (LP simplex tableau).
+* Small dense systems with no symmetry or SPD property.
+
+Note: For symmetric systems, LU wastes work (duplicate storage and computation). Prefer Cholesky or $LDL^T$.
+
+ 
+## 4. QR Factorization — *Orthogonal and Stable*
+
+Form:
+$$
+A = Q R, \quad Q^T Q = I, \ R \text{ upper triangular.}
+$$
+
+* Used for: Least-squares problems
+  $$
+  \min_x |A x - b|_2^2.
+  $$
+  Instead of forming normal equations ($A^T A x = A^T b$), we solve:
+  $$
+  R x = Q^T b.
+  $$
+* Stability: Orthogonal transformations preserve the 2-norm, making QR backward stable.
+
+Example use cases:
+
+* Linear regression via least squares.
+* ADMM and proximal steps with overdetermined systems.
+* Orthogonal projections in signal processing.
+
+Variants:
+
+* Householder QR: numerically robust, used in LAPACK.
+* Rank-revealing QR (RRQR): detects rank deficiency robustly.
+
+ 
+## 5. Cholesky Factorization — *Fastest for SPD Systems*
+
+Form:
+$$
+A = L L^T, \quad L \text{ lower triangular.}
+$$
+Applicable when $A$ is symmetric positive definite (SPD) — common in convex problems.
+
+Why it’s central:
+Convexity ensures $A \succeq 0$.
+For strictly convex problems, $A \succ 0$ and Cholesky is the most efficient and stable method.
+
+Cost: $\tfrac{1}{3}n^3$ operations — half of LU.
+
+Example use cases:
+
+* Newton’s method on unconstrained convex functions.
+* Solving normal equations $A^T A x = A^T b$.
+* QP subproblems and ridge regression.
+
+Implementation detail:
+No pivoting needed for SPD matrices. Sparse versions (e.g., CHOLMOD) use fill-reducing orderings (AMD, METIS).
+
+ 
+## 6. LDLᵀ Factorization — *For Indefinite Symmetric Systems*
+
+Form:
+$$
+A = L D L^T,
+$$
+where $D$ is block diagonal (1×1 or 2×2 blocks), and $L$ is unit lower triangular.
+
+Used when $A$ is symmetric but not SPD (e.g., KKT systems).
+
+Example use cases:
+
+* Interior-point methods for QPs and SDPs:
+  $$
+  \begin{bmatrix}
+  Q & A^T \\ A & 0
+  \end{bmatrix}
+  \begin{bmatrix}
+  \Delta x \\ \Delta \lambda
+  \end{bmatrix} =
+  \begin{bmatrix}
+  r_1 \\ r_2
+  \end{bmatrix}.
+  $$
+
+* Equality-constrained least-squares.
+* Sparse symmetric indefinite systems in primal-dual algorithms.
+
+Algorithmic note:
+Uses Bunch–Kaufman pivoting to maintain numerical stability.
+In practice, LDLᵀ is used with sparse reordering and partial elimination.
+
+
+## 7. Block Systems and the Schur Complement
+
+Many KKT or structured systems naturally appear in block form:
+$$
+\begin{bmatrix}
+A_{11} & A_{12} \\
+A_{21} & A_{22}
+\end{bmatrix}
+\begin{bmatrix}
+x_1 \\ x_2
+\end{bmatrix} =
+\begin{bmatrix}
+b_1 \\ b_2
 \end{bmatrix}.
-\]
-Cholesky fails here (negative pivots), but LDLᵀ succeeds.
+$$
 
-Advantages
-- Exploits symmetry.  
-- Works with indefinite matrices.  
-- Enables sparse reordering for large-scale problems.
+Assuming $A_{11}$ is invertible:
 
-Used in:  
-Interior-point solvers, primal–dual methods, equality-constrained Newton systems.
+1. Eliminate $x_1$:
+   $$
+   x_1 = A_{11}^{-1}(b_1 - A_{12}x_2)
+   $$
+2. Substitute into the second block:
+   $$
+   (A_{22} - A_{21}A_{11}^{-1}A_{12})x_2 = b_2 - A_{21}A_{11}^{-1}b_1
+   $$
+
+The matrix
+$$
+S = A_{22} - A_{21}A_{11}^{-1}A_{12}
+$$
+is the Schur complement of $A_{11}$ in $A$.
+
+
+### Schur Complement in Optimization
+
+* Reduces high-dimensional KKT systems to smaller systems in dual variables.
+* Preserves symmetry and often positive definiteness.
+* Foundation of block elimination and reduced Hessian methods.
+
+Example use cases:
+
+* Interior-point Newton systems (eliminate $\Delta x$ to get a system in $\Delta \lambda$).
+* Partial elimination in sequential quadratic programming (SQP).
+* Covariance conditioning and Gaussian marginalization.
+
+Numerical caution: Never form $A_{11}^{-1}$ explicitly — use triangular solves via Cholesky or LU.
 
  
-## 7. Eigenvalue Decomposition — *Revealing curvature*
+## 8. Block Elimination Algorithm
 
-Form:  
-\[
+Given a nonsingular $A_{11}$:
+
+1. Compute $A_{11}^{-1}A_{12}$ and $A_{11}^{-1}b_1$ by solving triangular systems.
+2. Form $S = A_{22} - A_{21}A_{11}^{-1}A_{12}$, $\tilde{b} = b_2 - A_{21}A_{11}^{-1}b_1$.
+3. Solve $Sx_2 = \tilde{b}$.
+4. Recover $x_1 = A_{11}^{-1}(b_1 - A_{12}x_2)$.
+
+Used in block Gaussian elimination, especially when the system has clear hierarchical structure.
+
+Example use case:
+
+* Partitioned least-squares with fixed and variable parameters.
+* Constrained optimization where some variables can be analytically eliminated.
+
+ 
+## 9. Structured Plus Low-Rank Matrices
+
+Suppose we need to solve:
+$$
+(A + BC)x = b,
+$$
+where:
+
+* $A \in \mathbb{R}^{n \times n}$ is structured or easily invertible (e.g., diagonal or sparse),
+* $B \in \mathbb{R}^{n \times p}$, $C \in \mathbb{R}^{p \times n}$ are low rank.
+
+This situation arises when updating an existing system with a small modification.
+
+ 
+### Block Reformulation
+
+Introduce $y = Cx$, yielding:
+
+$$
+\begin{bmatrix}
+A & B \\ C & -I
+\end{bmatrix}
+\begin{bmatrix}
+x \\ y
+\end{bmatrix}
+=
+
+\begin{bmatrix}
+b \\ 0
+\end{bmatrix}.
+$$
+
+Block elimination gives:
+$$
+(I + C A^{-1} B)y = C A^{-1} b,
+\quad
+x = A^{-1}(b - By).
+$$
+
+ 
+
+### Matrix Inversion Lemma (Woodbury Identity)
+
+If $A$ and $A + BC$ are nonsingular:
+$$
+(A + BC)^{-1} = A^{-1} - A^{-1}B(I + C A^{-1}B)^{-1}C A^{-1}.
+$$
+
+Example use cases:
+
+* Kalman filters / Bayesian updates: covariance updates with rank-1 corrections.
+* Ridge regression / kernel methods: low-rank updates to $(X^T X + \lambda I)^{-1}$.
+* Active-set QP: efficiently reusing factorization when constraints are added or removed.
+
+Numerical note: Avoid explicit inversion; use solves with $A$ and small dense matrices.
+
+ 
+
+## 10. Conditioning, Stability, and Sparsity
+
+### Conditioning
+
+* Condition number: $\kappa(A) = |A||A^{-1}|$ measures sensitivity to perturbations.
+* High $\kappa(A)$ ⇒ round-off errors amplified ⇒ ill-conditioning.
+* Regularization (adding $\lambda I$) improves numerical stability.
+
+### Stability
+
+* Orthogonal transformations (QR, SVD) are backward stable.
+* LU needs partial pivoting.
+* LDLᵀ needs symmetric pivoting (Bunch–Kaufman).
+* Cholesky is stable for SPD matrices.
+
+### Sparsity and Fill-In
+
+* Large convex solvers exploit sparse Cholesky / LDLᵀ.
+* Fill-reducing orderings (AMD, METIS) minimize new nonzeros.
+* Symbolic factorization determines the pattern before numeric factorization.
+
+
+## 11. Iterative Solvers and Preconditioning
+
+For large-scale problems (e.g., machine learning, PDE-constrained optimization), direct factorizations are infeasible.
+
+### Common Iterative Methods
+
+| Method               | For                  | Description                                         |
+| -- | -- |  |
+| CG               | SPD systems          | Uses matrix–vector products; converges in ≤ n steps |
+| MINRES / SYMMLQ  | Symmetric indefinite | Handles KKT and saddle-point systems                |
+| GMRES / BiCGSTAB | Nonsymmetric         | General-purpose Krylov solvers                      |
+
+### Preconditioning
+
+Preconditioners $M \approx A^{-1}$ improve convergence:
+
+* Jacobi (diagonal): $M = \text{diag}(A)^{-1}$
+* Incomplete Cholesky (IC) or Incomplete LU (ILU): approximate factorization
+* Block preconditioners: use Schur complement approximations for KKT systems
+
+Example use case:
+
+* Solving large sparse Newton systems in logistic regression or LASSO via CG with IC preconditioner.
+* Interior-point methods for large LPs using MINRES with block-diagonal preconditioning.
+
+ 
+## 12. Eigenvalue and SVD Decompositions
+
+### Eigenvalue Decomposition
+
+$$
 A = Q \Lambda Q^T, \quad Q^T Q = I.
-\]
+$$
+Reveals curvature, stability, and definiteness:
 
-Use: For symmetric (or Hermitian) matrices, especially Hessians or covariance matrices.
+* Convexity ⇔ $\Lambda \ge 0$.
+* Used in semidefinite programming (SDP) and spectral analysis.
 
-Why it matters in convex optimization:
-- Checks convexity (\(A \succeq 0 \iff \Lambda \ge 0\)).  
-- Used in semidefinite programming (SDP): constraints like \(X \succeq 0\) rely on eigenvalue decompositions.  
-- Provides spectral insight for preconditioning and regularization.
+### Singular Value Decomposition (SVD)
 
-Pros
-- Fully diagonalizes the problem (reveals curvature).  
-- Conceptually clean.
-
-Cons
-- Expensive (\(O(n^3)\)).  
-- Not used iteratively in large solvers — mainly for analysis or small SDPs.
-
- 
-
-## 8. Singular Value Decomposition (SVD) — *The most general and stable*
-
-Form:  
-\[
+$$
 A = U \Sigma V^T,
-\]
-where \(U, V\) are orthogonal, \(\Sigma\) is diagonal with nonnegative singular values.
+$$
+with $\Sigma = \text{diag}(\sigma_i) \ge 0$.
 
-Why it’s powerful:
-- Works for *any* matrix (rectangular, rank-deficient, ill-conditioned).  
-- Gives rank, conditioning, and pseudoinverse:
-  \[
-  A^+ = V \Sigma^{-1} U^T.
-  \]
+Applications:
 
-Used in:
-- Low-rank convex optimization.  
-- Nuclear-norm minimization (matrix completion).  
-- Preconditioning and numerical conditioning analysis.
-
-Pros
-- Extremely stable, handles degeneracy gracefully.  
-- Reveals numerical rank and conditioning.
-
-Cons
-- Most expensive factorization (\(O(m n^2)\)).  
-- Used selectively, not every iteration.
+* Rank and condition number estimation ($\kappa(A) = \sigma_{\max}/\sigma_{\min}$).
+* Low-rank approximation ($A_k = U_k \Sigma_k V_k^T$).
+* Pseudoinverse: $A^+ = V \Sigma^{-1} U^T$.
+* Convex relaxations: nuclear-norm minimization (matrix completion).
 
  
-## 9. Which Factorization to Use in Convex Optimization
 
-| Context | System Type | Recommended Factorization | Reason |
-|----------|--------------|----------------------------|--------|
-| Unconstrained convex problem | SPD Hessian | Cholesky | Fastest, stable, symmetric |
-| Equality-constrained QP | Symmetric indefinite KKT | LDLᵀ | Handles indefinite blocks |
-| General LP/QP Newton system | Sparse symmetric indefinite | LDLᵀ with reordering | Exploits sparsity, preserves symmetry |
-| Least-squares / regression | Rectangular \(A\) | QR | Stable for overdetermined systems |
-| Poorly conditioned / rank-deficient | Any | SVD | Safest, reveals rank and conditioning |
-| Non-symmetric systems | General \(A\) | LU | Works for all invertible matrices |
+## 13. Computational Complexity Summary
 
- 
-## 10. Why Convex Solvers Favor Cholesky and LDLᵀ
+| Factorization | Dense Cost               | Notes                                           |
+| - |  | -- |
+| LU            | $\frac{2}{3}n^3$         | Needs pivoting                                  |
+| Cholesky      | $\frac{1}{3}n^3$         | Fastest for SPD                                 |
+| QR            | $\approx \frac{2}{3}n^3$ | Stable, more memory                             |
+| LDLᵀ          | $\approx \frac{2}{3}n^3$ | For indefinite                                  |
+| SVD           | $\approx \frac{4}{3}n^3$ | Most accurate                                   |
+| CG / MINRES   | Variable                 | Depends on condition number and preconditioning |
 
-Convex problems typically produce symmetric matrices — the Hessian and KKT systems come from derivatives of convex functions or constraints.
-
-- Cholesky is ideal for positive definite systems (smooth convex Hessians, normal equations).  
-- LDLᵀ handles indefinite but symmetric systems (common in KKT matrices).  
-- Both preserve symmetry, halve computation, and allow sparse reordering — crucial for large-scale optimization.
-
-In short:
-> Convex optimization solvers rely on Cholesky and LDLᵀ because convexity guarantees symmetry, and these factorizations exploit that structure for speed and stability.
+Sparse systems reduce cost to roughly $O(n^{1.5})$–$O(n^2)$ depending on fill-in.
 
  
-### Summary: Key Takeaways
+## 14. Example Applications Overview
 
-- Matrix factorizations transform hard linear algebra problems into easy triangular ones.  
-- Cholesky and LDLᵀ are the backbone of modern convex solvers — efficient, symmetric, and numerically stable.  
-- QR is preferred for least-squares; SVD for robustness; LU for generality.  
-- Choosing the right factorization balances speed, stability, and structure.
+| Problem Type              | Typical Matrix           | Solver / Factorization | Example                              |
+| - |  | - |  |
+| Unconstrained Newton step | SPD Hessian              | Cholesky               | Convex quadratic, ridge regression   |
+| Equality-constrained QP   | Symmetric indefinite KKT | LDLᵀ                   | Interior-point QP solver             |
+| Overdetermined LS         | Rectangular $A$          | QR                     | Linear regression, ADMM subproblem   |
+| KKT block system          | Block-symmetric          | Schur complement       | Primal-dual method                   |
+| Low-rank correction       | $A + U U^T$              | Woodbury               | Kalman filter, online update         |
+| Rank-deficient system     | Any                      | SVD                    | Matrix completion, regularization    |
+| Large-scale Hessian       | SPD                      | CG + preconditioner    | Logistic regression, large ML models |
+

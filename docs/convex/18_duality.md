@@ -120,23 +120,12 @@ Consequences of strong duality:
 
 ## 9.6 KKT revisited via duality
 
-The Karush–Kuhn–Tucker (KKT) conditions from Chapter 7 can also be seen as the conditions under which:
+The Karush–Kuhn–Tucker (KKT) conditions from Chapter 8 can also be seen as the conditions under which:
 
 1. $x^*$ minimises the Lagrangian over $x$,
 2. $(\lambda^*, \mu^*)$ maximises $\theta(\lambda,\mu)$,
 3. complementary slackness holds,
 4. primal feasibility and dual feasibility hold.
-
-Under convexity + Slater, a point is optimal if and only if it satisfies KKT (Boyd and Vandenberghe, 2004). So KKT is both necessary and sufficient.
-
-This is the unification:
-
-- primal feasibility,
-- dual feasibility,
-- complementary slackness,
-- stationarity (zero subgradient of $L$ w.r.t. $x$).
-
- 
 
 ## 9.7 Interpretation of multipliers
 
@@ -146,31 +135,4 @@ The dual variables $\mu_i^*$ and $\lambda_j^*$ have interpretations:
 - $\lambda_j^*$ plays a similar role for equality constraints.
 
 In resource allocation problems, these multipliers act like market prices. In regularised estimation, they act like trade-off coefficients chosen by the optimisation itself.
-
  
-
-## 9.8 Example: Linear programming dual
-
-Consider a linear program in standard form:
-$$
-\begin{array}{ll}
-\text{minimise} & c^\top x \\
-\text{subject to} & Ax = b, \\
-& x \ge 0~.
-\end{array}
-$$
-
-Its dual is
-$$
-\begin{array}{ll}
-\text{maximise} & b^\top y \\
-\text{subject to} & A^\top y \le c~.
-\end{array}
-$$
-
-This is a classical primal–dual pair. Linear programming is convex, Slater’s condition typically holds (assuming strict feasibility), and therefore strong duality holds. The LP duality theory you may have seen in undergraduate optimisation is just a special case of Lagrange duality (Boyd and Vandenberghe, 2004; Rockafellar, 1970).
-
- 
-## 9.9 Duality as geometry
-
-Duality is geometry in disguise. The dual problem is finding the “best supporting hyperplane” that underestimates the primal objective over the feasible set. This is exactly the picture of supporting hyperplanes from Chapter 4, and exactly the subgradient picture from Chapter 6. Appendix B makes this geometric relationship precise in terms of support functions.

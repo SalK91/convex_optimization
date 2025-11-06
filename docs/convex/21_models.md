@@ -1,4 +1,4 @@
-# Chapter 14: Modelling Patterns and Algorithm Selection
+# Chapter 15: Modelling Patterns and Algorithm Selection
 
 Real-world modelling starts not with algorithms but with data, assumptions, and design goals.  We choose a loss function from statistical assumptions (e.g. noise model, likelihood) and a complexity penalty or constraints from design preferences (simplicity, robustness, etc.).  The resulting convex (or nonconvex) optimization problem often *tells* us which solver class to use.  In practice, solving machine learning problems looks like: modeling → recognize structure → pick solver.  Familiar ML models (linear regression, logistic regression, etc.) can be viewed as convex programs.  Below we survey common patterns (convex and some nonconvex) and the recommended algorithms/tricks for each.
 

@@ -5,30 +5,41 @@ Convex optimisation is geometric. To talk about convex sets, supporting hyperpla
 
 ## 2.1 Vector spaces, subspaces, and affine sets
 
-A vector space over $\mathbb{R}$ is a set $V$ equipped with addition and scalar multiplication satisfying the usual axioms: closure, associativity, distributivity, etc. In this book we mostly work with $V = \mathbb{R}^n$.
+A vector space over $\mathbb{R}$ is a set $V$ equipped with addition and scalar multiplication satisfying the usual axioms: closure, associativity, commutativity of addition, distributivity, existence of an additive identity and additive inverses, and compatibility with scalar multiplication.
 
-A subspace $S \subseteq \mathbb{R}^n$ is a subset that:
+A subspace of a vector space $V$ is a subset $S \subseteq V$ that  
+1. contains the zero vector,  
+2. is closed under addition, and  
+3. is closed under scalar multiplication.  
 
-1. contains $0$,
-2. is closed under addition,
-3. is closed under scalar multiplication.
 
-For example, the set of all solutions to $Ax = 0$ is a subspace, called the nullspace or kernel of $A$.
-
-An affine set is a translated subspace. A set $A$ is affine if for any $x,y \in A$ and any $\theta \in \mathbb{R}$,  
+A set $A \subseteq V$ is affine if for any $x, y \in A$ and any $\theta \in \mathbb{R}$,  
 $$
-\theta x + (1-\theta) y \in A~.
+\theta x + (1 - \theta) y \in A.
 $$
-Every affine set can be written as
+Every affine set can be written as  
 $$
-x_0 + S = \{ x_0 + s : s \in S \},
+A = x_0 + S = \{\, x_0 + s : s \in S \,\},
 $$
-where $S$ is a subspace. Affine sets appear as the solution sets to linear equality constraints $Ax = b$.
+where $S$ is a subspace of $V$. Affine sets arise as the solution sets to linear equality constraints $A x = b$.
 
-Affine sets are important in optimisation because:
+An affine transformation (or affine map) is a function $f : V \to W$ between vector spaces that can be written as  
+$$
+f(x) = A x + b,
+$$
+where $A : V \to W$ is a linear map and $b \in W$ is a fixed vector. The image of an affine set under an affine transformation is also affine.
 
-- Feasible sets defined by equality constraints are affine.
-- Affine functions preserve convexity.
+Affine concepts are important in optimization because:  
+
+- Feasible sets defined by equality constraints are affine.  
+- Affine transformations preserve convexity.
+
+
+
+
+
+
+
 
  
 ## 2.2 Linear combinations, span, basis, dimension
@@ -54,35 +65,30 @@ $$
 $$
 where $n$ is the number of columns of $A$.
 
-In constrained optimisation, $\mathrm{rank}(A)$ encodes the “number of independent constraints”, and the nullspace encodes feasible directions that do not violate certain constraints.
 
-
-> Column Space:  
+> #### Column Space:  
 > The column space of a matrix \( A \), denoted \( C(A) \), is the set of all possible output vectors \( b \) that can be written as \( Ax \) for some \( x \). In other words, it contains all vectors that the matrix can “reach” through linear combinations of its columns. The question “Does the system \( Ax = b \) have a solution?” is equivalent to asking whether \( b \in C(A) \). If \( b \) lies in the column space, a solution exists; otherwise, it does not.
 
-> Null Space:  
-> The null space (or kernel) of \( A \), denoted \( N(A) \), is the set of all input vectors \( x \) that are mapped to zero:  
-> \( N(A) = \{ x : Ax = 0 \} \).  
+> #### Null Space:  
+> The null space (or kernel) of \( A \), denoted \( N(A) \), is the set of all input vectors \( x \) that are mapped to zero:  \( N(A) = \{ x : Ax = 0 \} \).  
 > It answers a different question: *If a solution to \( Ax = b \) exists, is it unique?*  
 > If the null space contains only the zero vector (\( \mathrm{nullity}(A) = 0 \)), the solution is unique. But if \( N(A) \) contains nonzero vectors, there are infinitely many distinct solutions that yield the same output.
 
-> Multicollinearity:  
+> #### Multicollinearity:  
 > When one feature in the data matrix \( A \) is a linear combination of others—for example, \( \text{feature}_3 = 2 \times \text{feature}_1 + \text{feature}_2 \)—the columns of \( A \) become linearly dependent. This creates a nonzero vector in the null space of \( A \), meaning multiple weight vectors \( x \) can produce the same predictions. The model is then *unidentifiable* (Underdetermined – the number of unknowns (parameters) exceeds the number of independent equations (information)), and \( A^\top A \) becomes singular (non-invertible). Regularization methods such as Ridge or Lasso regression are used to resolve this ambiguity by selecting one stable, well-behaved solution.
 
-> Feasible Directions:  
-> In a constrained optimization problem of the form \( Ax = b \), the null space of \( A \) characterizes the directions along which one can move without violating the constraints. If \( d \in N(A) \), then moving from a feasible point \( x \) to \( x + d \) preserves feasibility, since  
-> \( A(x + d) = Ax + Ad = b + 0 = b \).  
+> #### Feasible Directions:  
+> In a constrained optimization problem of the form \( Ax = b \), the null space of \( A \) characterizes the directions along which one can move without violating the constraints. If \( d \in N(A) \), then moving from a feasible point \( x \) to \( x + d \) preserves feasibility, since  \( A(x + d) = Ax + Ad = b + 0 = b \).  
 > Thus, the null space defines the *space of free movement*—directions in which optimization algorithms can explore solutions while remaining within the constraint surface.
 
-> Row Space:  
-> The row space of \( A \), denoted \( R(A) \), is the span of the rows of \( A \) (viewed as vectors). It represents all possible linear combinations of the rows and has the same dimension as the column space, equal to \( \mathrm{rank}(A) \). The row space is orthogonal to the null space of \( A \):  
-> \( R(A) \perp N(A) \).  
+> #### Row Space:  
+> The row space of \( A \), denoted \( R(A) \), is the span of the rows of \( A \) (viewed as vectors). It represents all possible linear combinations of the rows and has the same dimension as the column space, equal to \( \mathrm{rank}(A) \). The row space is orthogonal to the null space of \( A \):  \( R(A) \perp N(A) \).  
 > In optimization, the row space corresponds to the set of active constraints or the directions along which changes in \( x \) affect the constraints.
 
-> Left Null Space:  
+> ####  Left Null Space:  
 > The left null space, denoted \( N(A^\top) \), is the set of all vectors \( y \) such that \( A^\top y = 0 \). These vectors are orthogonal to the columns of \( A \), and therefore orthogonal to the column space itself. In least squares problems, \( N(A^\top) \) represents residual directions—components of \( b \) that cannot be explained by the model \( Ax = b \).
 
-> Orthogonality Relationships (Fundamental Theorem of Linear Algebra):  
+> #### Orthogonality Relationships (Fundamental Theorem of Linear Algebra):  
 > For any matrix \( A \), there are four key subspaces:
 > \[
 > \begin{aligned}
@@ -98,7 +104,7 @@ In constrained optimisation, $\mathrm{rank}(A)$ encodes the “number of indepen
 > \]
 > Together, these subspaces form a complete and mutually orthogonal decomposition of the input and output spaces.
 
-> Projection Interpretation (Least Squares):  
+> #### Projection Interpretation (Least Squares):  
 > When \( Ax = b \) has no exact solution (as in overdetermined systems), the least squares solution finds \( x \) such that \( Ax \) is the projection of \( b \) onto the column space of \( A \):  
 > \[
 > x^* = (A^\top A)^{-1} A^\top b,
@@ -110,7 +116,7 @@ In constrained optimisation, $\mathrm{rank}(A)$ encodes the “number of indepen
 > lies in the left null space \( N(A^\top) \).  
 > This provides a geometric view: the solution projects \( b \) onto the closest point in the subspace that \( A \) can reach.
 
-> Rank–Nullity Relationship:  
+> #### Rank–Nullity Relationship:  
 > The rank of \( A \) is the dimension of both its column and row spaces, and the nullity is the dimension of its null space. Together they satisfy the Rank–Nullity Theorem:
 > \[
 > \mathrm{rank}(A) + \mathrm{nullity}(A) = n,
@@ -119,6 +125,7 @@ In constrained optimisation, $\mathrm{rank}(A)$ encodes the “number of indepen
 > This theorem reflects the balance between the number of independent constraints and the number of degrees of freedom in \( x \).
 
 > Geometric Interpretation:  
+
 > - The column space represents all *reachable outputs*.  
 > - The null space represents all *indistinguishable inputs* that map to zero.  
 > - The row space represents all *independent constraints* imposed by \( A \).  
@@ -144,9 +151,9 @@ $
 
 Two vectors are orthogonal if $\langle x,y\rangle = 0$. A set of vectors $\{v_i\}$ is orthonormal if each $\|v_i\| = 1$ and $\langle v_i, v_j\rangle = 0$ for $i\ne j$.
 
-More generally, an inner product endows $V$ with a geometric structure, turning it into an inner product space (and if complete, a Hilbert space). Inner products allow us to talk about orthogonality (perpendicular vectors) and orthogonal projections, and to define the all-important concept of a gradient in optimization. 
+> More generally, an inner product endows $V$ with a geometric structure, turning it into an inner product space (and if complete, a Hilbert space). Inner products allow us to talk about orthogonality (perpendicular vectors) and orthogonal projections, and to define the all-important concept of a gradient in optimization. 
 
- Geometry from the inner product: An inner product induces a norm $\|x\| = \sqrt{\langle x,x \rangle}$ and a notion of distance $d(x,y) = \|x-y\|$. It also defines angles: $\langle x,y \rangle = 0$ means $x$ and $y$ are orthogonal. Thus, inner products generalize the geometric concepts of lengths and angles to abstract vector spaces. Many results in Euclidean geometry (like the Pythagorean theorem and law of cosines) hold in any inner product space. For example, the parallelogram law holds: $\|x+y\|^2 + \|x-y\|^2 = 2\|x\|^2 + 2\|y\|^2$.  
+> Geometry from the inner product: An inner product induces a norm $\|x\| = \sqrt{\langle x,x \rangle}$ and a notion of distance $d(x,y) = \|x-y\|$. It also defines angles: $\langle x,y \rangle = 0$ means $x$ and $y$ are orthogonal. Thus, inner products generalize the geometric concepts of lengths and angles to abstract vector spaces. Many results in Euclidean geometry (like the Pythagorean theorem and law of cosines) hold in any inner product space. For example, the parallelogram law holds: $\|x+y\|^2 + \|x-y\|^2 = 2\|x\|^2 + 2\|y\|^2$.  
 
 The Cauchy–Schwarz inequality: For any $x,y \in \mathbb{R}^n$:
 $$

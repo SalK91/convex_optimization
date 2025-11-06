@@ -1,33 +1,10 @@
-# Chapter 13: Advanced Large-Scale and Structured Methods
+# Chapter 15: Advanced Large-Scale and Structured Methods
 
 In Chapter 9 we focused on “classical convex solvers”: gradient methods, accelerated methods, Newton and quasi-Newton methods, projected/proximal methods, and interior-point methods. Those are the canonical tools of convex optimisation.
-
-This chapter moves one step further.
-
-Here we study methods that:
-
-- exploit problem structure (sparsity, separability, block structure),
-- scale to extremely high dimensions,
-- or are widely used in practice for machine learning and signal processing — including in problems that are not convex.
-
-Some of these methods were first analysed in the convex setting (often with strong guarantees), and then adopted — sometimes recklessly — in the nonconvex world (training neural nets, matrix factorisation, etc.). You’ll absolutely see them in modern optimisation and ML code.
-
-We’ll cover:
-
-1. Coordinate (block) descent,
-2. Stochastic gradient and mini-batch methods,
-3. ADMM (Alternating Direction Method of Multipliers),
-4. Proximal coordinate / coordinate proximal variants,
-5. Majorization–minimization and iterative reweighted schemes.
-
-Throughout we’ll emphasise:
-- When they are provably correct for convex problems,
-- Why people also use them in nonconvex problems.
-
  
-## 10.1 Coordinate descent and block coordinate descent
+## 15.1 Coordinate descent and block coordinate descent
 
-### 10.1.1 Idea
+### 15.1.1 Idea
 
 Instead of updating all coordinates of $x$ at once using a full gradient or Newton direction, we update one coordinate (or one block of coordinates) at a time, holding the others fixed.
 
@@ -45,7 +22,7 @@ $$
 
 In other words: update coordinate $i$ by optimising over just that coordinate (or block), treating the rest as constants.
 
-### 10.1.2 Why this can be fast
+### 15.1.2 Why this can be fast
 
 - Each subproblem is often 1D (or low-dimensional), so it may have a closed form.
 - For problems with separable structure — e.g. sums over features, or regularisers like $\|x\|_1 = \sum_i |x_i|$ — the coordinate update is extremely cheap.
@@ -53,7 +30,7 @@ In other words: update coordinate $i$ by optimising over just that coordinate (o
 
 This is especially attractive in high dimensions (millions of features), where a full Newton step would be absurdly expensive.
 
-### 10.1.3 Convergence in convex problems
+### 15.1.3 Convergence in convex problems
 
 For many convex, continuously differentiable problems with certain regularity (e.g. strictly convex objective, or convex plus separable nonsmooth terms), cyclic coordinate descent is guaranteed to converge to the global minimiser. There are also randomized versions that pick a coordinate uniformly at random, which often give cleaner expected-rate guarantees.
 
@@ -63,16 +40,15 @@ $$
 $$
 each coordinate update becomes a scalar soft-thresholding step — so coordinate descent becomes an extremely efficient sparse regression solver.
 
-### 10.1.4 Block coordinate descent
+### 15.1.4 Block coordinate descent
 
 When coordinates are naturally grouped (for example, $x$ is really $(x^{(1)}, x^{(2)}, \dots)$ where each $x^{(j)}$ is a vector of parameters for a submodule or layer), we generalise to block coordinate descent. Each step solves
 $$
 x^{(j)} \leftarrow \arg\min_{z} F(\dots, z, \dots)\,.
 $$
 
-Block coordinate descent is the backbone of many alternating minimisation schemes in signal processing, matrix factorisation, dictionary learning, etc.
-
-### 10.1.5 Use in nonconvex problems
+ 
+### 15.1.5 Use in nonconvex problems
 
 Even when $F$ is not convex, people still run block coordinate descent (under names like “alternating minimisation” or “alternating least squares”), because:
 
@@ -87,11 +63,10 @@ So:
 - In convex settings → provable global convergence.  
 - In nonconvex settings → heuristic that often finds acceptable stationary points.
 
----
+ 
+## 15.2 Stochastic gradient and mini-batch methods
 
-## 10.2 Stochastic gradient and mini-batch methods
-
-### 10.2.1 Full gradient vs stochastic gradient
+### 15.2.1 Full gradient vs stochastic gradient
 
 In Chapter 9, gradient descent uses the full gradient $\nabla f(x)$ at each step. In large-scale learning problems, $f$ is almost always an average over data:
 $$
@@ -112,13 +87,13 @@ Stochastic Gradient Descent (SGD) replaces $\nabla f(x)$ with an unbiased estima
 
 This is extremely cheap: one data point (or a small mini-batch) per step.
 
-### 10.2.2 Convergence in convex problems
+### 15.2.2 Convergence in convex problems
 
 For convex problems, with diminishing step sizes $\alpha_k$, SGD converges to the global optimum in expectation, and more refined analyses show $O(1/\sqrt{k})$ suboptimality rates for general convex Lipschitz losses, improving to $O(1/k)$ in strongly convex smooth cases with appropriate averaging.
 
 That is slower (per iteration) than deterministic gradient descent in theory, but each iteration is *much* cheaper. So SGD wins in wall-clock time for huge $N$.
 
-### 10.2.3 Momentum, Adam, RMSProp (nonconvex practice, convex roots)
+### 15.2.3 Momentum, Adam, RMSProp (nonconvex practice, convex roots)
 
 In modern machine learning, methods like momentum SGD, Adam, RMSProp, Adagrad, etc., are used routinely to train enormous nonconvex models (deep networks). These are variations of first-order methods with:
 
@@ -133,13 +108,12 @@ So stochastic first-order methods are:
 - rigorous for convex problems,
 - widely used heuristically for nonconvex problems.
 
----
-
-## 10.3 ADMM: Alternating Direction Method of Multipliers
+ 
+## 15.3 ADMM: Alternating Direction Method of Multipliers
 
 ADMM is one of the most important algorithms in modern convex optimisation for structured problems. It is used constantly in signal processing, sparse learning, distributed optimisation, and large-scale statistical estimation.
 
-### 10.3.1 Problem form
+### 15.3.1 Problem form
 
 ADMM solves problems of the form
 $$
@@ -158,7 +132,7 @@ This form appears everywhere:
 
 For example, LASSO can be written by introducing a copy variable and enforcing $x=z$.
 
-### 10.3.2 Augmented Lagrangian
+### 15.3.2 Augmented Lagrangian
 
 ADMM applies the augmented Lagrangian method, which is like dual ascent but with a quadratic penalty on constraint violation. The augmented Lagrangian is
 $$
@@ -170,7 +144,7 @@ f(x) + g(z)
 $$
 with dual variable (Lagrange multiplier) $y$ and penalty parameter $\rho>0$.
 
-### 10.3.3 The ADMM updates (two-block case)
+### 15.3.3 The ADMM updates (two-block case)
 
 Iterate the following:
 1. $x$-update:
@@ -196,7 +170,7 @@ Iterate the following:
 
 That is: optimise $x$ given $z$, optimise $z$ given $x$, then update the multiplier.
 
-### 10.3.4 Why ADMM is powerful
+### 15.3.4 Why ADMM is powerful
 
 - Each subproblem often becomes simple and separable:
   - The $x$-update might be a least-squares or a smooth convex minimisation,
@@ -204,25 +178,24 @@ That is: optimise $x$ given $z$, optimise $z$ given $x$, then update the multipl
 - You never have to solve the full coupled problem in one shot.
 - ADMM is embarrassingly parallel / distributable: different blocks can be solved on different machines then averaged via the multiplier step.
 
-### 10.3.5 Convergence
+### 15.3.5 Convergence
 
 For convex $f$ and $g$, under mild assumptions (closed proper convex functions, some regularity), ADMM converges to a solution of the primal problem, and the dual variable $y^k$ converges to an optimal dual multiplier (Boyd and Vandenberghe, 2004, Ch. 5; also classical ADMM literature).
 
 This is deeply tied to duality (Chapter 8): ADMM is best understood as a method of solving the dual with decomposability, but returning primal iterates along the way.
 
-### 10.3.6 Use in nonconvex problems
+### 15.3.6 Use in nonconvex problems
 
 In practice, ADMM is often extended to nonconvex problems by simply “pretending it’s fine.” Each subproblem is solved anyway, and the dual variable is updated the same way. The method is no longer guaranteed to find a global minimiser — but it often finds a stationary point that is good enough (e.g. in nonconvex regularised matrix completion, dictionary learning, etc.).
 
 You will see ADMM used in imaging, sparse coding, variational inference, etc., even when parts of the model are not convex.
 
----
+ 
+## 15.4 Proximal coordinate and coordinate-prox methods
 
-## 10.4 Proximal coordinate and coordinate-prox methods
+There’s a natural fusion of the ideas in Sections 15.1 (coordinate descent) and 12.6 (proximal methods): proximal coordinate descent.
 
-There’s a natural fusion of the ideas in Sections 10.1 (coordinate descent) and 9.5 (proximal methods): proximal coordinate descent.
-
-### 10.4.1 Problem form
+### 15.4.1 Problem form
 
 Consider composite convex objectives
 $$
@@ -233,7 +206,7 @@ $$
 R(x) = \sum_{j=1}^p R_j(x_j).
 $$
 
-### 10.4.2 Algorithm sketch
+### 15.4.2 Algorithm sketch
 
 At each iteration, pick coordinate (or block) $j$, and update only $x_j$ by solving the 1D (or low-dim) proximal subproblem:
 $$
@@ -250,20 +223,19 @@ $$
 
 Often we linearise $f$ around the current point in that block and add a quadratic term, just like a proximal gradient step but on one coordinate at a time.
 
-### 10.4.3 Why it’s useful
+### 15.4.3 Why it’s useful
 
 - When $R$ is separable (e.g. $\ell_1$ sparsity penalties), each coordinate subproblem becomes a scalar shrinkage / thresholding step.
 - Memory footprint is tiny.
 - You get sparsity “for free” as many coordinates get driven to zero and stay there.
 - Randomised versions (pick a coordinate at random) are simple and have good expected convergence guarantees in convex problems.
 
-### 10.4.4 Use in nonconvex settings
+### 15.4.4 Use in nonconvex settings
 
 People run proximal coordinate descent in nonconvex sparse learning (e.g. $\ell_0$-like surrogates, nonconvex penalties for variable selection). The convex convergence guarantees are gone, but empirically the method still often converges to a structured, interpretable solution.
 
----
-
-## 10.5 Majorization–minimization (MM) and reweighted schemes
+ 
+## 15.5 Majorization–minimization (MM) and reweighted schemes
 
 Majorization–minimization (MM) is a general pattern:
 
@@ -273,7 +245,7 @@ Majorization–minimization (MM) is a general pattern:
 
 It is sometimes called “iterative reweighted” or “successive convex approximation.”
 
-### 10.5.1 MM template
+### 15.5.1 MM template
 
 Suppose we want to minimise $F(x)$ (convex or not). We construct $G(x \mid x^{(k)})$ such that:
 
@@ -288,7 +260,7 @@ $$
 
 This guarantees $F(x^{(k+1)}) \le F(x^{(k)})$. So the objective is monotonically nonincreasing.
 
-### 10.5.2 Iterative reweighted $\ell_1$ / $\ell_2$
+### 15.5.2 Iterative reweighted $\ell_1$ / $\ell_2$
 
 A classical example: to promote sparsity or robustness, you might want to minimise something like
 $$
@@ -301,13 +273,12 @@ In the nonconvex world, MM is a way to attack nonconvex penalties using a sequen
 
 This is extremely common in robust regression, compressed sensing with nonconvex sparsity surrogates, and low-rank matrix recovery.
 
-### 10.5.3 Relation to proximal methods
+### 15.5.3 Relation to proximal methods
 
 MM can often be interpreted as doing a proximal step on a locally quadratic or linearised upper bound. In that sense, it is philosophically close to proximal gradient (Chapter 9) and to Newton-like local quadratic approximation (Chapter 9), but with the additional twist that we are allowed to handle nonconvex $F$ as long as we *majorise* it with something convex.
 
----
-
-## 10.6 Summary and perspective
+ 
+## 15.6 Summary and perspective
 
 We’ve now seen several algorithmic families that are particularly important at large scale and/or under structural constraints:
 

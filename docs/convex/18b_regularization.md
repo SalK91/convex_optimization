@@ -4,13 +4,13 @@ Many practical optimization problems involve a trade-off between fitting observe
 Regularization formalizes this trade-off as a convex optimization problem that balances these two competing goals.  
 
 Building on Chapter 10 (Pareto Optimality), this chapter shows that regularized models correspond to specific points on a Pareto frontier between data fidelity and simplicity.  
-We also connect regularization to duality (Chapter 9), KKT conditions, and probabilistic interpretations.
+ 
 
----
 
 ## 11.1 Motivation: Fit vs. Complexity
 
 When fitting a model, we want both:
+
 1. Data fidelity: minimize the loss or error $f(x)$,  
 2. Model simplicity: penalize unnecessary complexity $R(x)$.
 
@@ -31,7 +31,7 @@ Since improving both simultaneously is typically impossible, we form a scalarize
 Small $\lambda$ → better fit, possible overfitting.  
 Large $\lambda$ → simpler, possibly underfit model.
 
----
+
 
 ## 11.2 Bicriterion Optimization and the Pareto Frontier
 
@@ -44,7 +44,7 @@ A solution $x^*$ is Pareto optimal if no other feasible $x$ can reduce $f(x)$ wi
 
 > Regularization thus selects one point on the fit–complexity Pareto frontier.
 
----
+
 
 ## 11.3 Why Keep $x$ Small?
 
@@ -65,7 +65,7 @@ The optimality condition (normal equations):
 - Even if $A$ is rank-deficient, the solution is unique and stable.  
 - Larger $\lambda$ improves conditioning but increases bias.
 
----
+
 
 ## 11.4 Constrained and Lagrangian Forms
 
@@ -99,7 +99,7 @@ R(x^*) \le t, \quad
 - The mapping $\lambda \leftrightarrow t$ is monotonic but not bijective.  
 - Regularization parameters thus act as Lagrange multipliers, weighting one objective against another (Chapter 10).
 
----
+
 
 ## 11.5 Common Regularizers
 
@@ -107,6 +107,7 @@ R(x^*) \le t, \quad
 \[
 R(x)=\|x\|_2^2.
 \]
+
 - Smooth, strongly convex → unique minimizer.  
 - Shrinks coefficients uniformly; improves numerical conditioning.  
 - Bayesian view: corresponds to Gaussian prior $x\sim \mathcal{N}(0,\tau^2I)$.
@@ -115,6 +116,7 @@ R(x)=\|x\|_2^2.
 \[
 R(x)=\|x\|_1 = \sum_i |x_i|.
 \]
+
 - Convex but not smooth → promotes sparsity.  
 - The $\ell_1$ ball’s corners align with coordinate axes, leading to zeros in the solution.  
 - Proximal operator (soft-thresholding):
@@ -128,13 +130,14 @@ R(x)=\|x\|_1 = \sum_i |x_i|.
 \[
 R(x)=\alpha\|x\|_1+(1-\alpha)\|x\|_2^2.
 \]
+
 - Combines sparsity (L1) with stability (L2).  
 - Ensures uniqueness under correlated features.
 
 ### (d) Beyond L1/L2
 
 | Regularizer | Definition | Effect |
-|--------------|-------------|--------|
+|--|-|--|
 | General Tikhonov | $R(x)=\|Lx\|_2^2$ | smoothness via linear operator $L$ |
 | Total Variation (TV) | $R(x)=\|\nabla x\|_1$ | piecewise-constant signals |
 | Group Lasso | $R(x)=\sum_g \|x_g\|_2$ | structured sparsity |
@@ -142,7 +145,7 @@ R(x)=\alpha\|x\|_1+(1-\alpha)\|x\|_2^2.
 
 Each regularizer defines a geometry of simplicity, shaping the solution’s structure.
 
----
+
 
 ## 11.6 Choosing the Regularization Parameter $\lambda$
 
@@ -153,23 +156,26 @@ $\lambda$ determines the location on the Pareto frontier.
 
 ### (b) Cross-Validation (CV)
 Most common selection strategy:
+
 1. Split data into $k$ folds.  
 2. Train on $k-1$ folds, validate on the remaining one.  
 3. Average validation error, choose $\lambda$ minimizing it.
 
 Best practices
+
 - Standardize features for L1/Elastic Net.  
 - For time series: use blocked or rolling CV.  
 - Use nested CV for fair model comparison.  
 - One-standard-error rule: choose simplest model within 1 SE of best error.
 
 ### (c) Analytical / Heuristic Alternatives
+
 - Closed-form rules (ridge shrinkage factor).  
 - Information criteria (AIC/BIC for Lasso).  
 - Regularization paths: trace $x^*(\lambda)$ as $\lambda$ varies.  
 - Inverse problems: discrepancy principle or L-curve method.
 
----
+
 
 ## 11.7 Algorithmic Perspective
 
@@ -182,17 +188,18 @@ where $f$ is smooth convex and $R$ convex, possibly nonsmooth.
 Key algorithms:
 
 | Method | Idea | Suitable For |
-|---------|------|--------------|
+|||--|
 | Proximal Gradient (ISTA/FISTA) | Gradient step on $f$, prox step on $R$ | L1, TV, nuclear norm |
 | Coordinate Descent | Update one coordinate at a time | Lasso, Elastic Net |
 | ADMM | Split $f$ and $R$ for parallel structure | Large-scale structured problems |
 
 Proximal operators (Appendix G) handle the nonsmooth term efficiently:
+
 - L2 → scaling (shrinkage)  
 - L1 → soft-thresholding  
 - TV/Nuclear → more advanced proximal maps
 
----
+
 
 ## 11.8 Bayesian Interpretation
 
@@ -205,27 +212,9 @@ and prior \( x \sim \mathcal{N}(0,\tau^2 I) \). Then:
 \min_x \frac{1}{2\sigma^2}\|Ax - b\|_2^2 + \frac{1}{2\tau^2}\|x\|_2^2
 \]
 is the MAP estimator, with $\lambda = \sigma^2/(2\tau^2)$.  
+
 - Gaussian prior → L2 penalty  
 - Laplace prior → L1 penalty (sparse MAP estimate)
 
----
 
-## 11.9 Summary and Outlook
 
-| Concept | Key Idea |
-|----------|-----------|
-| Regularization | scalarisation of fit–complexity trade-off |
-| Penalized vs constrained | linked by duality and KKT |
-| Ridge / Lasso / Elastic Net | canonical convex regularizers |
-| Proximal gradient, ADMM | scalable solution methods |
-| $\lambda$ selection | via CV or analytical heuristics |
-| Bayesian view | priors ↔ regularizers |
-
-Summary:  
-Regularized approximation formalizes the balance between data fit and model simplicity — a practical manifestation of Pareto optimality.  
-Its convex structure enables efficient algorithms and strong theoretical guarantees.
-
----
-
-Next:  
-In Chapter 12, we study first-order algorithms — gradient, proximal, and accelerated methods — that efficiently solve large-scale regularized convex problems.

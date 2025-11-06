@@ -621,12 +621,58 @@
   
   
     <li class="md-nav__item">
+      <a href="../19a_optimization_constraints/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    13. Optimization Algorithms for Equality-Constrained Problems
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../19b_optimization_constraints/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    14. Optimization Algorithms for Inequality-Constrained Problems
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../20_advanced/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
-    13. Advanced Large-Scale and Structured Methods
+    15. Advanced Large-Scale and Structured Methods
     
   </span>
   
@@ -649,7 +695,7 @@
   
   
   <span class="md-ellipsis">
-    14. Modelling Patterns and Algorithm Selection in Practice
+    16. Modelling Patterns and Algorithm Selection in Practice
     
   </span>
   
@@ -672,7 +718,7 @@
   
   
   <span class="md-ellipsis">
-    15. Canonical Problems in Convex Optimization
+    17. Canonical Problems in Convex Optimization
     
   </span>
   
@@ -1339,7 +1385,7 @@ Common examples on <span class="arithmatex">\(\mathbb{R}^n\)</span>:  </p>
 </li>
 </ul>
 <p>Every norm induces a metric (distance) <span class="arithmatex">\(d(x,y) = |x-y|\)</span> on the space. Norms thus define the shape of “balls” (sets <span class="arithmatex">\({x: |x|\le \text{constant}}\)</span>) and how we measure closeness. The choice of norm can significantly influence an optimization algorithm’s behavior: it affects what steps are considered small, which directions are easy to move in, and how convergence is assessed.</p>
-<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="images/norms.png" data-desc-position="bottom"><img alt="Alt text" src="images/norms.png" style="float:right; margin-right:15px; width:400px;"></a></p>
+<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../images/norms.png" data-desc-position="bottom"><img alt="Alt text" src="../images/norms.png" style="float:right; margin-right:15px; width:400px;"></a></p>
 <p>Unit-ball geometry: The shape of the unit ball <span class="arithmatex">\({x: |x| \le 1}\)</span> reveals how a norm treats different directions. For example, the <span class="arithmatex">\(\ell_2\)</span> unit ball in <span class="arithmatex">\(\mathbb{R}^2\)</span> is a perfect circle, treating all directions uniformly, whereas the <span class="arithmatex">\(\ell_1\)</span> unit ball is a diamond with corners along the axes, indicating that <span class="arithmatex">\(\ell_1\)</span> treats the coordinate axes as special (those are “cheaper” directions since the ball extends further along axes, touching them at <span class="arithmatex">\((\pm1,0)\)</span> and <span class="arithmatex">\((0,\pm1)\)</span>). The <span class="arithmatex">\(\ell_\infty\)</span> unit ball is a square aligned with axes, suggesting it allows more combined motion in coordinates as long as no single coordinate exceeds the limit. These shapes are illustrated below: we see the red diamond (<span class="arithmatex">\(\ell_1\)</span>), green circle (<span class="arithmatex">\(\ell_2\)</span>), and blue square (<span class="arithmatex">\(\ell_\infty\)</span>) in <span class="arithmatex">\(\mathbb{R}^2\)</span> . The geometry of the unit ball matters whenever we regularize or constrain solutions by a norm. For instance, using an <span class="arithmatex">\(\ell_1\)</span> norm ball as a constraint or regularizer encourages solutions on the corners (sparse solutions), while an <span class="arithmatex">\(\ell_2\)</span> ball encourages more evenly-distributed changes. An <span class="arithmatex">\(\ell_\infty\)</span> constraint limits the maximum absolute value of any component, leading to solutions that avoid any single large entry.</p>
 <p>Dual norms: Each norm <span class="arithmatex">\(\|\cdot\|\)</span> has a dual norm <span class="arithmatex">\(\|\cdot\|_*\)</span> defined by
 <script type="math/tex; mode=display">

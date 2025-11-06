@@ -13,11 +13,11 @@ This chapter develops the major algorithmic families used to solve convex proble
 - how it connects to the modelling choices you make.
 
  
-## 9.1 Problem classes vs method classes
+## 12.1 Problem classes vs method classes
 
 Before we dive into algorithms, we need a map. Different algorithms are natural for different convex problem structures.
 
-### 9.1.1 Smooth unconstrained convex minimisation
+### 12.1.1 Smooth unconstrained convex minimisation
 We want
 $$
 \min_x f(x),
@@ -34,7 +34,7 @@ Information required:
 
 - $\nabla f(x)$, sometimes $\nabla^2 f(x)$.
 
-### 9.1.2 Smooth convex minimisation with simple constraints
+### 12.1.2 Smooth convex minimisation with simple constraints
 We want
 $$
 \min_x f(x)
@@ -46,7 +46,7 @@ where $\mathcal{X}$ is a “simple” closed convex set such as a box, a norm ba
 #### Practical Examples of Simple Constraints
 
 | Constraint Type | Explanation | Example | Meaning |
-|------------------|--------------|----------|----------|
+||--|-|-|
 | Box | Each variable is bounded independently within lower and upper limits. | \( 0 \le x_i \le 1 \) | Parameters are restricted to a fixed range (e.g., pixel intensities, control limits). |
 | Norm Ball | All feasible points lie within a fixed radius from a center under some norm. | \( \|x - x_0\|_2 \le 1 \) | Keeps the solution close to a reference point — controls total magnitude or deviation. |
 | Simplex | Nonnegative variables that sum to one. | \( x_i \ge 0,\ \sum_i x_i = 1 \) | Represents valid probability distributions or normalized weights (e.g., portfolio allocations). |
@@ -62,7 +62,7 @@ Information required:
 - $\nabla f(x)$,
 - the ability to compute $\Pi_\mathcal{X}(y) = \arg\min_{x \in \mathcal{X}} \|x-y\|_2^2$ efficiently.
 
-### 9.1.3 Composite convex minimisation (smooth + nonsmooth)
+### 12.1.3 Composite convex minimisation (smooth + nonsmooth)
 We want
 $$
 \min_x \; F(x) := f(x) + R(x),
@@ -83,7 +83,7 @@ Information required:
 - $\nabla f(x)$,
 - the proximal operator of $R$.
 
-### 9.1.4 General convex programs with inequality constraints
+### 12.1.4 General convex programs with inequality constraints
 We want
 $$
 \begin{array}{ll}
@@ -104,7 +104,7 @@ Information required:
 - ability to solve linear systems arising from Newton steps.
 
 
-### 9.1.5 The moral
+### 12.1.5 The moral
 There is no single “best” algorithm.  
 There is a best algorithm for the structure you have.
 
@@ -114,9 +114,9 @@ There is a best algorithm for the structure you have.
 - Interior-point methods are the workhorse for general convex programs (including linear programs, quadratic programs, conic programs) and deliver high-accuracy solutions with strong certificates of optimality 
 
 
-## 9.2 First-order methods: Gradient descent
+## 12.2 First-order methods: Gradient descent
 
-### 9.2.1 Setting
+### 12.2.1 Setting
 We solve
 $$
 \min_x f(x),
@@ -127,7 +127,7 @@ $$
 $$
 Smoothness lets us control step sizes.
 
-### 9.2.2 Algorithm
+### 12.2.2 Algorithm
 Gradient descent iterates
 $$
 x_{k+1} = x_k - \alpha_k \nabla f(x_k),
@@ -143,19 +143,19 @@ $$
 
 
 > - We assume $f$ behaves approximately like its tangent plane near $x_t$.  
-> - If we were to minimize just this linear model, we would move **infinitely far** in the direction of **steepest descent** $-\nabla f(x_t)$, which is not realistic or stable.
+> - If we were to minimize just this linear model, we would move infinitely far in the direction of steepest descent $-\nabla f(x_t)$, which is not realistic or stable.
 
-> This motivates adding a **locality restriction** — we trust the linear approximation **near** $x_t$, not globally. To prevent taking arbitrarily large steps, we add a quadratic penalty for moving away from $x_t$:
+> This motivates adding a locality restriction — we trust the linear approximation near $x_t$, not globally. To prevent taking arbitrarily large steps, we add a quadratic penalty for moving away from $x_t$:
 
 > $$
 f(x) \approx f(x_t) + \langle \nabla f(x_t), x - x_t \rangle + \frac{1}{2\eta} \|x - x_t\|^2,
 $$
 
-> where $\eta > 0$ is the **learning rate** or **step size**.
+> where $\eta > 0$ is the learning rate or step size.
 
 > - The linear term pulls $x$ in the steepest descent direction.
-> - The quadratic term acts like a **trust region**, discouraging large deviations from $x_t$.
-> - $\eta$ trades off **aggressive progress** vs **stability**:
+> - The quadratic term acts like a trust region, discouraging large deviations from $x_t$.
+> - $\eta$ trades off aggressive progress vs stability:
 >     - Small $\eta$ → cautious updates.
 >     - Large $\eta$ → bold updates (risk of divergence).
 
@@ -179,21 +179,21 @@ x_{t+1} = x_t - \eta \nabla f(x_t)
 $$
 
 
-### 9.2.3 Geometric meaning
+### 12.2.3 Geometric meaning
 From Chapter 3, the first-order Taylor model is
 $$
 f(x + d) \approx f(x) + \nabla f(x)^\top d.
 $$
 This is minimised (under a step length constraint) by taking $d$ in the direction $-\nabla f(x)$. So gradient descent is just “take a cautious step downhill”.
 
-### 9.2.4 Convergence
+### 12.2.4 Convergence
 For convex, $L$-smooth $f$, gradient descent with a suitable fixed step size satisfies
 $$
 f(x_k) - f^\star = O\!\left(\frac{1}{k}\right),
 $$
 where $f^\star$ is the global minimum. This $O(1/k)$ sublinear rate is slow compared to second-order methods, but each step is extremely cheap: you only need $\nabla f(x_k)$.
 
-### 9.2.5 When to use gradient descent
+### 12.2.5 When to use gradient descent
 - Problems with millions of variables (large-scale ML).
 - You can afford many cheap iterations.
 - You only have access to gradients (or stochastic gradients).
@@ -202,11 +202,11 @@ where $f^\star$ is the global minimum. This $O(1/k)$ sublinear rate is slow comp
 Gradient descent is the baseline first-order method. But we can do better.
 
  
-## 9.3 Accelerated first-order methods
+## 12.3 Accelerated first-order methods
 
 Plain gradient descent has an $O(1/k)$ rate for smooth convex problems. Remarkably, we can do better — and in fact, provably optimal — by adding *momentum*.
 
-### 9.3.1 Nesterov acceleration
+### 12.3.1 Nesterov acceleration
 Nesterov’s accelerated gradient method modifies the update using a momentum-like extrapolation. One common presentation is:
 
 1. Maintain two sequences $x_k$ and $y_k$.
@@ -221,7 +221,7 @@ Nesterov’s accelerated gradient method modifies the update using a momentum-li
 
 The extra $\beta_k$ term “looks ahead,” helping the method exploit curvature better than plain gradient descent.
 
-### 9.3.2 Optimal first-order rate
+### 12.3.2 Optimal first-order rate
 For smooth convex $f$, accelerated gradient achieves
 $$
 f(x_k) - f^\star = O\!\left(\frac{1}{k^2}\right),
@@ -229,20 +229,176 @@ $$
 which is *optimal* for any algorithm that uses only gradient information and not higher derivatives. In other words, you cannot beat $O(1/k^2)$ in the worst case using only first-order oracle calls.
 
 
-### 9.3.3 When to use acceleration
+### 12.3.3 When to use acceleration
 - Same setting as gradient descent (large-scale smooth convex problems),
 - but you want to converge in fewer iterations.
 - You can tolerate a little more instability/parameter tuning (acceleration can overshoot if step sizes are not chosen carefully).
 
 Acceleration is the default upgrade from vanilla gradient descent in many smooth convex machine learning problems.
 
+
+The convergence of gradient descent depends strongly on the geometry of the level sets of the objective function. When these level sets are poorly conditioned—that is, highly anisotropic or elongated (not spherical)—the gradient directions tend to oscillate across narrow valleys, leading to zig-zag behavior and slow convergence.
+
+In contrast, when the level sets are well-conditioned (approximately spherical), gradient descent progresses efficiently toward the minimum. Thus, the efficiency of gradient-based methods is governed by how aspherical (anisotropic) the level sets are, which is directly related to the condition number of the Hessian.
+
+## 12.4 Steepest Descent Method
  
-## 9.4 Newton’s method and second-order methods
+The steepest descent method generalizes gradient descent by depending on the choice of norm used to measure step size or direction. It finds the direction of *maximum decrease* of the objective function under a unit norm constraint.
 
-First-order methods only use gradient information. Newton’s method uses curvature (the Hessian) to take smarter steps.
 
-### 9.4.1 Local quadratic model
-From Chapter 3, the second-order Taylor approximation at $x_k$ is
+> The norm defines the “geometry” of optimization.
+> Gradient descent is steepest descent under the Euclidean norm.
+> Changing the norm changes what “steepest” means, and can greatly affect convergence, especially for ill-conditioned or anisotropic problems.
+ 
+At a point $x$, and for a chosen norm $|\cdot|$:
+
+$$
+\Delta x_{\text{nsd}} = \arg\min_{|v| = 1} \nabla f(x)^T v
+$$
+
+This defines the normalized steepest descent direction — the unit-norm direction that yields the most negative directional derivative (i.e., the steepest local decrease of $f$).
+
+* $\Delta x_{\text{nsd}}$: normalized steepest descent direction
+* $\Delta x_{\text{sd}}$: unnormalized direction (scaled by the gradient norm)
+
+
+For small steps $v$,
+$$
+f(x + v) \approx f(x) + \nabla f(x)^T v.
+$$
+The term $\nabla f(x)^T v$ describes how fast $f$ increases in direction $v$.
+To decrease $f$ most rapidly, we pick $v$ that minimizes this inner product — subject to $|v| = 1$.
+
+* The result depends on which norm we use to measure the “size” of $v$.
+* The corresponding dual norm $|\cdot|_*$ determines how we measure the gradient’s magnitude.
+
+Thus, the steepest descent direction always aligns with the negative gradient, but it is scaled and shaped according to the geometry induced by the chosen norm.
+
+
+## 12.4.1. Mathematical Properties
+
+### (a) Normalized direction
+
+$$
+\Delta x_{\text{nsd}} = \arg\min_{|v|=1} \nabla f(x)^T v
+$$
+→ unit vector with the most negative directional derivative.
+
+### (b) Unnormalized direction
+
+$$
+\Delta x_{\text{sd}} = |\nabla f(x)| , \Delta x*{\text{nsd}}
+$$
+This gives the actual direction and magnitude used in updates.
+
+### (c) Key identity
+
+$$
+\nabla f(x)^T \Delta x_{\text{sd}} = -|\nabla f(x)|_*^2
+$$
+The directional derivative equals the negative squared dual norm of the gradient.
+
+
+
+### 12.4.2. The Steepest Descent Method
+
+The iterative update rule is:
+$$
+x_{k+1} = x_k + t_k , \Delta x_{\text{sd}},
+$$
+where $t_k > 0$ is a step size (from line search or a fixed rule).
+
+* For the Euclidean norm, this reduces to ordinary gradient descent.
+* For other norms, it adapts the search direction to the geometry of the problem.
+
+Convergence: Similar to gradient descent — linear for general convex functions, potentially faster when level sets are well-conditioned.
+
+
+
+### 12.4.3. Role of the Norm and Its Influence
+
+The choice of norm determines:
+
+1. The shape of the unit ball ${v : |v| \le 1}$,
+2. The direction of steepest descent, since the minimization is constrained by that shape,
+3. The dual norm $|\nabla f(x)|_*$ that measures the gradient’s size.
+
+Different norms yield different “geometries” of descent:
+
+| Norm                        | Unit Ball Shape | Dual Norm         | Effect on Direction                         |
+|  |  | -- | - |
+| $\ell_2$                    | Circle / sphere | $\ell_2$          | Direction is opposite to gradient           |
+| $\ell_1$                    | Diamond         | $\ell_\infty$     | Moves along coordinate of largest gradient  |
+| $\ell_\infty$               | Square          | $\ell_1$          | Moves opposite to sum of all gradient signs |
+| Quadratic $(x^T P x)^{1/2}$ | Ellipsoid       | Weighted $\ell_2$ | Scales direction by preconditioner $P^{-1}$ |
+
+Thus, the norm defines how “distance” and “steepness” are perceived, shaping how the algorithm moves through the landscape of $f(x)$.
+
+### (a) Euclidean Norm $|v|_2$
+
+$$
+\Delta x_{\text{nsd}} = -\frac{\nabla f(x)}{|\nabla f(x)|*2},
+\quad
+\Delta x*{\text{sd}} = -\nabla f(x)
+$$
+
+This is standard gradient descent.
+The direction is exactly opposite the gradient, and steps are isotropic (same scaling in all directions).
+
+
+
+### (b) Quadratic Norm $|v|_P = (v^T P v)^{1/2}$, with $P \succ 0$
+
+Here, $P$ defines an ellipsoidal metric.
+The dual norm is $|y|_* = (y^T P^{-1} y)^{1/2}$.
+
+$$
+\Delta x_{\text{sd}} = -P^{-1}\nabla f(x)
+$$
+
+This corresponds to preconditioned gradient descent, where $P$ rescales directions to counter anisotropy in level sets.
+
+Interpretation:
+
+* If $P$ approximates the Hessian, this becomes Newton’s method.
+* If $P$ is diagonal, it acts like an adaptive step size per coordinate.
+
+
+
+### (c) $\ell_1$-Norm
+
+$$
+\Delta x_{\text{nsd}} = -e_i, \quad i = \arg\max_j \left|\frac{\partial f}{\partial x_j}\right|
+$$
+and
+$$
+\Delta x_{\text{sd}} = -|\nabla f(x)|_\infty e_i
+$$
+
+The step moves along the coordinate with the largest gradient component, resembling a coordinate descent update.
+
+Geometric intuition:
+The $\ell_1$-unit ball is a diamond; its corners align with coordinate axes, so the steepest direction is along one axis at a time.
+
+
+
+* In $\ell_2$-norm: the unit ball is a circle → the steepest direction is exactly opposite the gradient.
+* In $\ell_1$-norm: the unit ball is a diamond → the steepest direction points to a corner (one coordinate).
+* In quadratic norms: the unit ball is an ellipsoid → the steepest direction follows the metric-adjusted gradient.
+
+Hence, the norm defines the geometry of what “steepest” means.
+
+
+## 12.5 Newton’s method and second-order methods
+
+First-order methods (like gradient descent) only use gradient information. Newton’s method, in contrast, incorporates curvature information from the Hessian to take steps that better adapt to the local geometry of the function. This often leads to much faster convergence near the optimum.
+
+
+
+### 12.5.1 Local quadratic model
+
+From Chapter 3, the second-order Taylor approximation of $f(x)$ around a point $x_k$ is:
+
 $$
 f(x_k + d)
 \approx
@@ -251,36 +407,175 @@ f(x_k)
 + \tfrac{1}{2} d^\top \nabla^2 f(x_k) d.
 $$
 
-If we (temporarily) trust this model, we choose $d$ to minimise the RHS. Differentiating w.r.t. $d$ and setting to zero gives the Newton step:
+If we temporarily trust this quadratic model, we can choose $d$ to minimize the right-hand side.  
+Differentiating with respect to $d$ and setting to zero gives:
+
 $$
-\nabla^2 f(x_k) \, d_{\text{newton}}
-= - \nabla f(x_k).
+\nabla^2 f(x_k) \, d_{\text{newton}} = - \nabla f(x_k).
 $$
-So
+
+Hence, the Newton step is:
+
 $$
 d_{\text{newton}} = - [\nabla^2 f(x_k)]^{-1} \nabla f(x_k),
 \quad
 x_{k+1} = x_k + d_{\text{newton}}.
 $$
 
-### 9.4.2 Convergence behaviour
+This step points toward the minimizer of the local quadratic model, and near the true minimizer, Newton’s method exhibits quadratic convergence.
+
+
+
+### 12.5.2 Convergence behaviour
+
+- Near the minimiser of a strictly convex, twice-differentiable $f$, Newton’s method converges quadratically: roughly, the number of correct digits doubles every iteration.  
+- This is dramatically faster than the $O(1/k)$ or $O(1/k^2)$ rates typical of first-order methods — but only once the iterates enter the basin of attraction.  
+- Far from the minimiser, Newton’s method can behave erratically or even diverge.  
+  To stabilise it, we typically pair it with a line search or trust region strategy to control step size.
+
+
+
+### 12.5.3 Implementation
+
+The main computational effort in each iteration lies in evaluating derivatives and solving the Newton system:
+
+$$
+H \, \Delta x = -g,
+$$
+
+where
+
+$$
+H = \nabla^2 f(x), \quad g = \nabla f(x).
+$$
+
+#### Solving via Cholesky factorization
+
+If $H$ is symmetric and positive definite, we can efficiently solve this system using a Cholesky factorization:
+
+$$
+H = L L^{\top},
+$$
+
+where $L$ is lower triangular.  
+The Newton step is then:
+
+$$
+\Delta x_{\text{nt}} = -L^{-\top} L^{-1} g.
+$$
+
+This involves two triangular solves:
+
+1. $L y = -g$
+2. $L^{\top} \Delta x_{\text{nt}} = y$
+
+This avoids explicitly computing $H^{-1}$ and ensures numerical stability.
+
+#### Newton decrement
+
+A useful measure of progress is the Newton decrement:
+
+$$
+\lambda(x) = \| L^{-1} g \|_2,
+$$
+
+which approximates how far we are from the optimum.  
+A common stopping criterion is $\lambda(x)^2 / 2 < \varepsilon$.
+
+
+
+### 12.5.4 Computational cost
+
+Each Newton step requires solving a linear system involving $\nabla^2 f(x_k)$, which costs about as much as factoring the Hessian (or an approximation).
+
+- For an unstructured, dense Hessian, Cholesky factorization requires approximately $(1/3) n^3$ floating-point operations.  
+- If $H$ is sparse, banded, or has special structure, the cost can be much lower.  
+- Because of this cubic scaling, Newton’s method is most attractive for medium-scale problems where high accuracy is required.
+
+
+
+### 12.5.5 Why convexity helps
+
+If $f$ is convex, then $\nabla^2 f(x_k)$ is positive semidefinite (Chapter 5).  
+This has two important implications:
+
+- The local quadratic model is bowl-shaped, so the Newton direction points toward a minimiser.  
+- Regularised Newton steps (e.g. using $H + \mu I$ for small $\mu > 0$) are guaranteed to be descent directions and behave predictably.
+
+
+
+### 12.5.6 Quasi-Newton methods
+
+When computing or storing the Hessian is too expensive, we can build low-rank approximations of $\nabla^2 f(x_k)$ or its inverse.  
+These methods use gradient information from previous steps to estimate curvature.
+
+The most famous examples are:
+
+- BFGS (Broyden–Fletcher–Goldfarb–Shanno)  
+- DFP (Davidon–Fletcher–Powell)  
+- L-BFGS (Limited-memory BFGS) — for very large-scale problems.
+
+They maintain many of Newton’s fast local convergence properties, but with per-iteration costs similar to first-order methods.
+
+For instance, BFGS maintains an approximation $B_k \approx \nabla^2 f(x_k)^{-1}$ updated via gradient and step differences:
+
+$$
+B_{k+1} = B_k + \frac{(s_k^\top y_k + y_k^\top B_k y_k)}{(s_k^\top y_k)^2} s_k s_k^\top
+- \frac{B_k y_k s_k^\top + s_k y_k^\top B_k}{s_k^\top y_k},
+$$
+
+where $s_k = x_{k+1} - x_k$ and $y_k = \nabla f(x_{k+1}) - \nabla f(x_k)$.
+
+These methods achieve superlinear convergence in practice, making them popular for large smooth optimization problems.
+
+
+
+### 12.5.7 When to use Newton or quasi-Newton methods
+
+Use Newton or quasi-Newton methods when:
+
+- You need high-accuracy solutions.  
+- The problem is smooth and reasonably well-conditioned.  
+- The dimension is moderate, or Hessian systems can be solved efficiently (e.g., using sparse linear algebra).  
+
+For large, ill-conditioned, or nonsmooth problems, first-order or proximal methods (Chapter 10) are typically more suitable.
+
+
+
+## 12.6 Constraints and nonsmooth terms: projection and proximal methods
+
+In practice, most convex optimization problems are not purely smooth.  
+They often include:
+
+- Constraints: $x \in \mathcal{X}$,
+- Nonsmooth regularisers: such as $\|x\|_1$,
+- Penalties: promoting robustness or sparsity (see Chapter 6).
+
+Two core strategies handle such settings:
+
+1. Projected gradient methods — where we project each iterate back into the feasible set $\mathcal{X}$.  
+2. Proximal gradient methods — which generalize projection to handle nonsmooth but structured terms.
+
+These methods extend the ideas of gradient and Newton updates to the broader world of constrained and composite optimization.
+
+### 12.5.2 Convergence behaviour
 - Near the minimiser of a strictly convex, twice-differentiable $f$, Newton’s method converges quadratically: roughly, the number of correct digits doubles every iteration.
 - This is dramatically faster than $O(1/k)$ or $O(1/k^2)$, but only once you’re in the “basin of attraction.”
 - Far from the minimiser, Newton can misbehave, so we pair it with a line search or trust region.
 
-### 9.4.3 Computational cost
+### 12.5.3 Computational cost
 Each Newton step requires solving a linear system involving $\nabla^2 f(x_k)$, which costs about as much as factoring the Hessian (or an approximation). This is expensive in very high dimensions, which is why Newton is most attractive for medium-scale problems where high accuracy matters.
 
-### 9.4.4 Why convexity helps
+### 12.5.4 Why convexity helps
 If $f$ is convex, then $\nabla^2 f(x_k)$ is positive semidefinite (Chapter 5). This means:
 
 - The quadratic model is bowl-shaped, so the Newton step makes sense.
 - Regularised Newton steps (adding a multiple of the identity to the Hessian) behave very predictably.
 
-### 9.4.5 Quasi-Newton
+### 12.5.5 Quasi-Newton
 When Hessians are too expensive, we can build low-rank approximations of $\nabla^2 f(x_k)$ or its inverse. Famous examples include BFGS and L-BFGS. These methods keep much of Newton’s fast local convergence but with per-iteration cost closer to first-order methods.
 
-### 9.4.6 When to use Newton / quasi-Newton
+### 12.5.6 When to use Newton / quasi-Newton
 - You need high-accuracy solutions.
 - The problem is smooth and reasonably well-conditioned.
 - The dimension is moderate, or Hessian systems can be solved efficiently (e.g. via sparse linear algebra).
@@ -288,7 +583,7 @@ When Hessians are too expensive, we can build low-rank approximations of $\nabla
 
  
 
-## 9.5 Constraints and nonsmooth terms: projection and proximal methods
+## 12.5 Constraints and nonsmooth terms: projection and proximal methods
 
 In practice, most convex objectives are not just “nice smooth $f(x)$”. They often have:
 
@@ -298,7 +593,7 @@ In practice, most convex objectives are not just “nice smooth $f(x)$”. They 
 
 Two core ideas handle this: projected gradient and proximal gradient.
 
-### 9.5.1 Projected gradient descent
+### 12.6.1 Projected gradient descent
 
 Setting:  
 Minimise convex, differentiable $f(x)$ subject to $x \in \mathcal{X}$, where $\mathcal{X}$ is a simple closed convex set (Chapter 4).
@@ -331,7 +626,7 @@ Examples of $\mathcal{X}$ where projection is cheap:
 
 Projected gradient is the constrained version of gradient descent. It maintains feasibility at every iterate.
 
-### 9.5.2 Proximal gradient (forward–backward splitting)
+### 12.6.2 Proximal gradient (forward–backward splitting)
 
 Setting:  
 Composite convex minimisation
@@ -389,7 +684,7 @@ This unifies constraints and regularisation.
 This is the standard tool for modern large-scale convex learning problems.
 
 
-## 9.6 Penalties, barriers, and interior-point methods
+## 12.7 Penalties, barriers, and interior-point methods
 
 So far we’ve assumed either:
 
@@ -399,7 +694,7 @@ So far we’ve assumed either:
 What if the constraints are general convex inequalities $g_i(x)\le0$?  
 Enter penalty methods, barrier methods, and (ultimately) interior-point methods.
 
-### 9.6.1 Penalty methods
+### 12.7.1 Penalty methods
 
 Turn constrained optimisation into unconstrained optimisation by adding a penalty for violating constraints.
 
@@ -428,7 +723,7 @@ This is conceptually simple and is sometimes effective, but:
 
 Penalty methods are closely linked to robust formulations and Huber-like losses: you replace a hard requirement by a soft cost. This is exactly what you do in robust regression and in $\epsilon$-insensitive / Huber losses (see Section 9.7).
 
-### 9.6.2 Barrier methods
+### 12.7.2 Barrier methods
 
 Penalty methods penalise violation *after* you cross the boundary. Barrier methods make it impossible to even touch the boundary.
 
@@ -455,7 +750,7 @@ Key points:
 
 This is the core idea of interior-point methods.
 
-### 9.6.3 Interior-point methods in practice
+### 12.7.3 Interior-point methods in practice
 
 Interior-point methods:
 
@@ -474,17 +769,17 @@ Interior-point methods are the engine behind modern general-purpose convex solve
 They give high-accuracy answers and KKT-based optimality certificates. They are more expensive per iteration than gradient methods, but need far fewer iterations, and they handle fully general convex constraints.
 
 
-**Summary: Penalty vs Barrier vs Interior-Point**
+Summary: Penalty vs Barrier vs Interior-Point
 
 | Method | Feasibility During Iteration | Mechanism | Typical Behavior |
-|--------|------------------------------|------------|------------------|
+|--||||
 | Penalty | May violate constraints | Adds large penalty outside feasible region | Easy to implement but can be ill-conditioned |
 | Barrier | Stays strictly feasible | Adds infinite cost near constraint boundary | Smooth approximation to constrained problem |
 | Interior-Point | Always feasible (uses barrier) | Solves a sequence of barrier problems with increasing precision | Follows central path to true optimum |
 
 
 
-## 9.8 Choosing the right method in practice
+## 12.8 Choosing the right method in practice
 
 Let’s summarise the chapter in the form of a decision guide.
 

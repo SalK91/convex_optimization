@@ -11,11 +11,29 @@ https://www.youtube.com/watch?v=t8sp9rv-Dqo
 ### Current state
 
 1. Stanford Lecture Stanford EE364A Convex Optimization
-   CUrrently on lec 7 - 50min
-   https://www.youtube.com/watch?v=ankx1lGi5jI&t=123s
+   https://www.youtube.com/watch?v=zVO4ccvrwrI&list=PLoROMvodv4rMJqxxviPa4AmDClvcbHi6h&index=15
+
+   30min
+
+   Slide 355
+
+    
+   https://www.youtube.com/watch?v=U3lJAObbMFI&list=PLGrZHfnLv54ksX-0TMKYPCZDx9NZyYh9c&index=1
+
+   https://bloomberg.github.io/foml/#home
+
+   https://www.youtube.com/playlist?list=PLZSO_6-bSqHQHBCoGaObUljoXAyyqhpFW
+
+  pyOD
+  earh mover distance
+  branch and bound
+  variational inferences?
+
 2. MIT 6.824: Distributed Systems:
    https://www.youtube.com/@6.824
 
+2. LLM
+   https://www.youtube.com/watch?v=Ub3GoFaUcds
 3. MCP
 
 4. Non Convex Articel
@@ -29,8 +47,10 @@ https://www.youtube.com/watch?v=t8sp9rv-Dqo
 
 8. Pytorch.
 
+9. Autograd lecture my Andre Kapathry
 
 
+---------------------
 
 1. LP limitation and scalability
 2. Why postivie semi deifniate matrix

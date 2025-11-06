@@ -85,7 +85,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#matrix-factorizations-in-convex-optimization" class="md-skip">
+        <a href="#numerical-linear-algebra-for-convex-optimization" class="md-skip">
           Skip to content
         </a>
       
@@ -607,12 +607,58 @@
   
   
     <li class="md-nav__item">
+      <a href="../../convex/19a_optimization_constraints/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    13. Optimization Algorithms for Equality-Constrained Problems
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../convex/19b_optimization_constraints/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    14. Optimization Algorithms for Inequality-Constrained Problems
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../../convex/20_advanced/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
-    13. Advanced Large-Scale and Structured Methods
+    15. Advanced Large-Scale and Structured Methods
     
   </span>
   
@@ -635,7 +681,7 @@
   
   
   <span class="md-ellipsis">
-    14. Modelling Patterns and Algorithm Selection in Practice
+    16. Modelling Patterns and Algorithm Selection in Practice
     
   </span>
   
@@ -658,7 +704,7 @@
   
   
   <span class="md-ellipsis">
-    15. Canonical Problems in Convex Optimization
+    17. Canonical Problems in Convex Optimization
     
   </span>
   
@@ -1154,275 +1200,489 @@
   
 
 
-<h1 id="matrix-factorizations-in-convex-optimization">Matrix Factorizations in Convex Optimization<a class="headerlink" href="#matrix-factorizations-in-convex-optimization" title="Permanent link">¶</a></h1>
-<p>Matrix factorizations are the numerical backbone of convex optimization algorithms.<br>
-Whether solving Newton steps, least-squares problems, or KKT systems, every convex solver eventually reduces to solving a linear system of the form:
+<h1 id="numerical-linear-algebra-for-convex-optimization">Numerical Linear Algebra for Convex Optimization<a class="headerlink" href="#numerical-linear-algebra-for-convex-optimization" title="Permanent link">¶</a></h1>
+<p>Numerical linear algebra is the computational foundation of convex optimization.
+Every modern optimization algorithm — from Newton’s method to interior-point or proximal algorithms — ultimately requires solving a structured linear system:
 <script type="math/tex; mode=display">
 H x = b,
 </script>
-where <span class="arithmatex">\(H\)</span> might represent a Hessian, normal equations matrix, or a KKT system.</p>
-<p>Directly computing <span class="arithmatex">\(H^{-1}\)</span> is never done in practice — it’s unstable, slow, and wasteful.<br>
-Instead, solvers use matrix factorizations, which decompose <span class="arithmatex">\(H\)</span> into structured components that make systems easier to solve, more numerically stable, and computationally efficient.</p>
-<hr>
-<h2 id="1-why-factorizations-matter">1. Why Factorizations Matter<a class="headerlink" href="#1-why-factorizations-matter" title="Permanent link">¶</a></h2>
-<p>In convex optimization, almost every second-order or constrained algorithm requires repeatedly solving linear systems:</p>
+where <span class="arithmatex">\(H\)</span> may represent a Hessian, a normal equations matrix, or a KKT (Karush–Kuhn–Tucker) system.</p>
+<p>In practice, we never compute <span class="arithmatex">\(H^{-1}\)</span> directly. Instead, we exploit matrix factorizations and structure to solve such systems efficiently and stably.</p>
+<h2 id="1-why-linear-algebra-matters-in-convex-optimization">1. Why Linear Algebra Matters in Convex Optimization<a class="headerlink" href="#1-why-linear-algebra-matters-in-convex-optimization" title="Permanent link">¶</a></h2>
+<p>At each iteration of a convex optimization algorithm, we must solve one or more linear systems:</p>
 <ul>
-<li>Newton’s method: <span class="arithmatex">\(\nabla^2 f(x_k) \Delta x = -\nabla f(x_k)\)</span></li>
-<li>Interior-point method: KKT systems coupling primal and dual variables</li>
-<li>Least-squares: <span class="arithmatex">\(A^T A x = A^T b\)</span></li>
-<li>Dual updates: systems involving <span class="arithmatex">\(A Q^{-1} A^T\)</span></li>
+<li>
+<p>Newton’s method:
+  <script type="math/tex; mode=display">
+  \nabla^2 f(x_k), \\ \Delta x = -\nabla f(x_k)
+  </script>
+</p>
+</li>
+<li>
+<p>Interior-point methods (KKT systems):</p>
+</li>
 </ul>
-<p>The key challenges:
-- <span class="arithmatex">\(H\)</span> can be large, sparse, ill-conditioned, or indefinite.
-- Numerical stability and efficiency depend entirely on choosing the right factorization.</p>
-<h2 id="2-overview-of-major-factorizations">2. Overview of Major Factorizations<a class="headerlink" href="#2-overview-of-major-factorizations" title="Permanent link">¶</a></h2>
+<div class="arithmatex">\[
+\begin{bmatrix}
+H &amp; A^T \\
+A &amp; 0
+\end{bmatrix}
+\begin{bmatrix}
+\Delta x \\[3pt] \Delta \lambda
+\end{bmatrix}
+=
+\begin{bmatrix}
+-r_d \\[3pt] -r_p
+\end{bmatrix}
+\]</div>
+<ul>
+<li>Least-squares problems: <span class="arithmatex">\(A^T A x = A^T b\)</span></li>
+</ul>
+<p>Solving these systems dominates computation time. The stability, speed, and scalability of a convex solver depend on the numerical linear algebra techniques used.</p>
+<h2 id="2-the-matrix-factorization-toolbox">2. The Matrix Factorization Toolbox<a class="headerlink" href="#2-the-matrix-factorization-toolbox" title="Permanent link">¶</a></h2>
+<p>Matrix factorizations decompose a matrix into simpler pieces, exposing its structure.
+They enable efficient triangular solves instead of direct inversion.</p>
 <table>
 <thead>
 <tr>
 <th>Factorization</th>
 <th>Applies To</th>
 <th>Form</th>
-<th>Use Case</th>
+<th>Common Use</th>
+<th>Key Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>LU</td>
+<td>Any nonsingular matrix</td>
+<td><span class="arithmatex">\(A = L U\)</span></td>
+<td>General linear systems</td>
+<td>Requires pivoting for stability</td>
+</tr>
+<tr>
+<td>QR</td>
+<td>Any (rectangular) matrix</td>
+<td><span class="arithmatex">\(A = Q R\)</span></td>
+<td>Least-squares</td>
+<td>Orthogonal, stable</td>
+</tr>
+<tr>
+<td>Cholesky</td>
+<td>Symmetric positive definite</td>
+<td><span class="arithmatex">\(A = L L^T\)</span></td>
+<td>SPD systems, normal equations</td>
+<td>Fastest for SPD</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(LDL^T\)</span></td>
+<td>Symmetric indefinite</td>
+<td><span class="arithmatex">\(A = L D L^T\)</span></td>
+<td>KKT systems</td>
+<td>Handles indefiniteness</td>
+</tr>
+<tr>
+<td>Eigen</td>
+<td>Symmetric/Hermitian</td>
+<td><span class="arithmatex">\(A = Q \Lambda Q^T\)</span></td>
+<td>Curvature, convexity checks</td>
+<td>Diagonalizes <span class="arithmatex">\(A\)</span></td>
+</tr>
+<tr>
+<td>SVD</td>
+<td>Any matrix</td>
+<td><span class="arithmatex">\(A = U \Sigma V^T\)</span></td>
+<td>Rank, conditioning, pseudoinverse</td>
+<td>Most stable, expensive</td>
+</tr>
+</tbody>
+</table>
+<p>Each factorization corresponds to a <em>numerically preferred strategy</em> for certain classes of problems.</p>
+<h2 id="3-lu-factorization-the-general-purpose-workhorse">3. LU Factorization — <em>The General-Purpose Workhorse</em><a class="headerlink" href="#3-lu-factorization-the-general-purpose-workhorse" title="Permanent link">¶</a></h2>
+<p>Form:
+<script type="math/tex; mode=display">
+A = P L U
+</script>
+where <span class="arithmatex">\(P\)</span> is a permutation matrix ensuring stability.</p>
+<ul>
+<li>Used for: General linear systems, nonsymmetric matrices.</li>
+<li>Cost: <span class="arithmatex">\(\approx \tfrac{2}{3}n^3\)</span> (dense).</li>
+<li>Stability: Requires partial pivoting (<span class="arithmatex">\(PA=LU\)</span>) to avoid numerical blow-up.</li>
+</ul>
+<p>Example use case:</p>
+<ul>
+<li>Solving KKT systems in linear programming (LP simplex tableau).</li>
+<li>Small dense systems with no symmetry or SPD property.</li>
+</ul>
+<p>Note: For symmetric systems, LU wastes work (duplicate storage and computation). Prefer Cholesky or <span class="arithmatex">\(LDL^T\)</span>.</p>
+<h2 id="4-qr-factorization-orthogonal-and-stable">4. QR Factorization — <em>Orthogonal and Stable</em><a class="headerlink" href="#4-qr-factorization-orthogonal-and-stable" title="Permanent link">¶</a></h2>
+<p>Form:
+<script type="math/tex; mode=display">
+A = Q R, \quad Q^T Q = I, \ R \text{ upper triangular.}
+</script>
+</p>
+<ul>
+<li>Used for: Least-squares problems
+  <script type="math/tex; mode=display">
+  \min_x |A x - b|_2^2.
+  </script>
+  Instead of forming normal equations (<span class="arithmatex">\(A^T A x = A^T b\)</span>), we solve:
+  <script type="math/tex; mode=display">
+  R x = Q^T b.
+  </script>
+</li>
+<li>Stability: Orthogonal transformations preserve the 2-norm, making QR backward stable.</li>
+</ul>
+<p>Example use cases:</p>
+<ul>
+<li>Linear regression via least squares.</li>
+<li>ADMM and proximal steps with overdetermined systems.</li>
+<li>Orthogonal projections in signal processing.</li>
+</ul>
+<p>Variants:</p>
+<ul>
+<li>Householder QR: numerically robust, used in LAPACK.</li>
+<li>Rank-revealing QR (RRQR): detects rank deficiency robustly.</li>
+</ul>
+<h2 id="5-cholesky-factorization-fastest-for-spd-systems">5. Cholesky Factorization — <em>Fastest for SPD Systems</em><a class="headerlink" href="#5-cholesky-factorization-fastest-for-spd-systems" title="Permanent link">¶</a></h2>
+<p>Form:
+<script type="math/tex; mode=display">
+A = L L^T, \quad L \text{ lower triangular.}
+</script>
+Applicable when <span class="arithmatex">\(A\)</span> is symmetric positive definite (SPD) — common in convex problems.</p>
+<p>Why it’s central:
+Convexity ensures <span class="arithmatex">\(A \succeq 0\)</span>.
+For strictly convex problems, <span class="arithmatex">\(A \succ 0\)</span> and Cholesky is the most efficient and stable method.</p>
+<p>Cost: <span class="arithmatex">\(\tfrac{1}{3}n^3\)</span> operations — half of LU.</p>
+<p>Example use cases:</p>
+<ul>
+<li>Newton’s method on unconstrained convex functions.</li>
+<li>Solving normal equations <span class="arithmatex">\(A^T A x = A^T b\)</span>.</li>
+<li>QP subproblems and ridge regression.</li>
+</ul>
+<p>Implementation detail:
+No pivoting needed for SPD matrices. Sparse versions (e.g., CHOLMOD) use fill-reducing orderings (AMD, METIS).</p>
+<h2 id="6-ldlt-factorization-for-indefinite-symmetric-systems">6. LDLᵀ Factorization — <em>For Indefinite Symmetric Systems</em><a class="headerlink" href="#6-ldlt-factorization-for-indefinite-symmetric-systems" title="Permanent link">¶</a></h2>
+<p>Form:
+<script type="math/tex; mode=display">
+A = L D L^T,
+</script>
+where <span class="arithmatex">\(D\)</span> is block diagonal (1×1 or 2×2 blocks), and <span class="arithmatex">\(L\)</span> is unit lower triangular.</p>
+<p>Used when <span class="arithmatex">\(A\)</span> is symmetric but not SPD (e.g., KKT systems).</p>
+<p>Example use cases:</p>
+<ul>
+<li>
+<p>Interior-point methods for QPs and SDPs:
+  <script type="math/tex; mode=display">
+  \begin{bmatrix}
+  Q & A^T \\ A & 0
+  \end{bmatrix}
+  \begin{bmatrix}
+  \Delta x \\ \Delta \lambda
+  \end{bmatrix} =
+  \begin{bmatrix}
+  r_1 \\ r_2
+  \end{bmatrix}.
+  </script>
+</p>
+</li>
+<li>
+<p>Equality-constrained least-squares.</p>
+</li>
+<li>Sparse symmetric indefinite systems in primal-dual algorithms.</li>
+</ul>
+<p>Algorithmic note:
+Uses Bunch–Kaufman pivoting to maintain numerical stability.
+In practice, LDLᵀ is used with sparse reordering and partial elimination.</p>
+<h2 id="7-block-systems-and-the-schur-complement">7. Block Systems and the Schur Complement<a class="headerlink" href="#7-block-systems-and-the-schur-complement" title="Permanent link">¶</a></h2>
+<p>Many KKT or structured systems naturally appear in block form:
+<script type="math/tex; mode=display">
+\begin{bmatrix}
+A_{11} & A_{12} \\
+A_{21} & A_{22}
+\end{bmatrix}
+\begin{bmatrix}
+x_1 \\ x_2
+\end{bmatrix} =
+\begin{bmatrix}
+b_1 \\ b_2
+\end{bmatrix}.
+</script>
+</p>
+<p>Assuming <span class="arithmatex">\(A_{11}\)</span> is invertible:</p>
+<ol>
+<li>Eliminate <span class="arithmatex">\(x_1\)</span>:
+   <script type="math/tex; mode=display">
+   x_1 = A_{11}^{-1}(b_1 - A_{12}x_2)
+   </script>
+</li>
+<li>Substitute into the second block:
+   <script type="math/tex; mode=display">
+   (A_{22} - A_{21}A_{11}^{-1}A_{12})x_2 = b_2 - A_{21}A_{11}^{-1}b_1
+   </script>
+</li>
+</ol>
+<p>The matrix
+<script type="math/tex; mode=display">
+S = A_{22} - A_{21}A_{11}^{-1}A_{12}
+</script>
+is the Schur complement of <span class="arithmatex">\(A_{11}\)</span> in <span class="arithmatex">\(A\)</span>.</p>
+<h3 id="schur-complement-in-optimization">Schur Complement in Optimization<a class="headerlink" href="#schur-complement-in-optimization" title="Permanent link">¶</a></h3>
+<ul>
+<li>Reduces high-dimensional KKT systems to smaller systems in dual variables.</li>
+<li>Preserves symmetry and often positive definiteness.</li>
+<li>Foundation of block elimination and reduced Hessian methods.</li>
+</ul>
+<p>Example use cases:</p>
+<ul>
+<li>Interior-point Newton systems (eliminate <span class="arithmatex">\(\Delta x\)</span> to get a system in <span class="arithmatex">\(\Delta \lambda\)</span>).</li>
+<li>Partial elimination in sequential quadratic programming (SQP).</li>
+<li>Covariance conditioning and Gaussian marginalization.</li>
+</ul>
+<p>Numerical caution: Never form <span class="arithmatex">\(A_{11}^{-1}\)</span> explicitly — use triangular solves via Cholesky or LU.</p>
+<h2 id="8-block-elimination-algorithm">8. Block Elimination Algorithm<a class="headerlink" href="#8-block-elimination-algorithm" title="Permanent link">¶</a></h2>
+<p>Given a nonsingular <span class="arithmatex">\(A_{11}\)</span>:</p>
+<ol>
+<li>Compute <span class="arithmatex">\(A_{11}^{-1}A_{12}\)</span> and <span class="arithmatex">\(A_{11}^{-1}b_1\)</span> by solving triangular systems.</li>
+<li>Form <span class="arithmatex">\(S = A_{22} - A_{21}A_{11}^{-1}A_{12}\)</span>, <span class="arithmatex">\(\tilde{b} = b_2 - A_{21}A_{11}^{-1}b_1\)</span>.</li>
+<li>Solve <span class="arithmatex">\(Sx_2 = \tilde{b}\)</span>.</li>
+<li>Recover <span class="arithmatex">\(x_1 = A_{11}^{-1}(b_1 - A_{12}x_2)\)</span>.</li>
+</ol>
+<p>Used in block Gaussian elimination, especially when the system has clear hierarchical structure.</p>
+<p>Example use case:</p>
+<ul>
+<li>Partitioned least-squares with fixed and variable parameters.</li>
+<li>Constrained optimization where some variables can be analytically eliminated.</li>
+</ul>
+<h2 id="9-structured-plus-low-rank-matrices">9. Structured Plus Low-Rank Matrices<a class="headerlink" href="#9-structured-plus-low-rank-matrices" title="Permanent link">¶</a></h2>
+<p>Suppose we need to solve:
+<script type="math/tex; mode=display">
+(A + BC)x = b,
+</script>
+where:</p>
+<ul>
+<li><span class="arithmatex">\(A \in \mathbb{R}^{n \times n}\)</span> is structured or easily invertible (e.g., diagonal or sparse),</li>
+<li><span class="arithmatex">\(B \in \mathbb{R}^{n \times p}\)</span>, <span class="arithmatex">\(C \in \mathbb{R}^{p \times n}\)</span> are low rank.</li>
+</ul>
+<p>This situation arises when updating an existing system with a small modification.</p>
+<h3 id="block-reformulation">Block Reformulation<a class="headerlink" href="#block-reformulation" title="Permanent link">¶</a></h3>
+<p>Introduce <span class="arithmatex">\(y = Cx\)</span>, yielding:</p>
+<p>$$
+<script type="math/tex; mode=display">\begin{bmatrix}
+A & B \\ C & -I
+\end{bmatrix}</script>
+<script type="math/tex; mode=display">\begin{bmatrix}
+x \\ y
+\end{bmatrix}</script>
+=</p>
+<p>
+<script type="math/tex; mode=display">\begin{bmatrix}
+b \\ 0
+\end{bmatrix}</script>.
+$$</p>
+<p>Block elimination gives:
+<script type="math/tex; mode=display">
+(I + C A^{-1} B)y = C A^{-1} b,
+\quad
+x = A^{-1}(b - By).
+</script>
+</p>
+<h3 id="matrix-inversion-lemma-woodbury-identity">Matrix Inversion Lemma (Woodbury Identity)<a class="headerlink" href="#matrix-inversion-lemma-woodbury-identity" title="Permanent link">¶</a></h3>
+<p>If <span class="arithmatex">\(A\)</span> and <span class="arithmatex">\(A + BC\)</span> are nonsingular:
+<script type="math/tex; mode=display">
+(A + BC)^{-1} = A^{-1} - A^{-1}B(I + C A^{-1}B)^{-1}C A^{-1}.
+</script>
+</p>
+<p>Example use cases:</p>
+<ul>
+<li>Kalman filters / Bayesian updates: covariance updates with rank-1 corrections.</li>
+<li>Ridge regression / kernel methods: low-rank updates to <span class="arithmatex">\((X^T X + \lambda I)^{-1}\)</span>.</li>
+<li>Active-set QP: efficiently reusing factorization when constraints are added or removed.</li>
+</ul>
+<p>Numerical note: Avoid explicit inversion; use solves with <span class="arithmatex">\(A\)</span> and small dense matrices.</p>
+<h2 id="10-conditioning-stability-and-sparsity">10. Conditioning, Stability, and Sparsity<a class="headerlink" href="#10-conditioning-stability-and-sparsity" title="Permanent link">¶</a></h2>
+<h3 id="conditioning">Conditioning<a class="headerlink" href="#conditioning" title="Permanent link">¶</a></h3>
+<ul>
+<li>Condition number: <span class="arithmatex">\(\kappa(A) = |A||A^{-1}|\)</span> measures sensitivity to perturbations.</li>
+<li>High <span class="arithmatex">\(\kappa(A)\)</span> ⇒ round-off errors amplified ⇒ ill-conditioning.</li>
+<li>Regularization (adding <span class="arithmatex">\(\lambda I\)</span>) improves numerical stability.</li>
+</ul>
+<h3 id="stability">Stability<a class="headerlink" href="#stability" title="Permanent link">¶</a></h3>
+<ul>
+<li>Orthogonal transformations (QR, SVD) are backward stable.</li>
+<li>LU needs partial pivoting.</li>
+<li>LDLᵀ needs symmetric pivoting (Bunch–Kaufman).</li>
+<li>Cholesky is stable for SPD matrices.</li>
+</ul>
+<h3 id="sparsity-and-fill-in">Sparsity and Fill-In<a class="headerlink" href="#sparsity-and-fill-in" title="Permanent link">¶</a></h3>
+<ul>
+<li>Large convex solvers exploit sparse Cholesky / LDLᵀ.</li>
+<li>Fill-reducing orderings (AMD, METIS) minimize new nonzeros.</li>
+<li>Symbolic factorization determines the pattern before numeric factorization.</li>
+</ul>
+<h2 id="11-iterative-solvers-and-preconditioning">11. Iterative Solvers and Preconditioning<a class="headerlink" href="#11-iterative-solvers-and-preconditioning" title="Permanent link">¶</a></h2>
+<p>For large-scale problems (e.g., machine learning, PDE-constrained optimization), direct factorizations are infeasible.</p>
+<h3 id="common-iterative-methods">Common Iterative Methods<a class="headerlink" href="#common-iterative-methods" title="Permanent link">¶</a></h3>
+<table>
+<thead>
+<tr>
+<th>Method</th>
+<th>For</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>CG</td>
+<td>SPD systems</td>
+<td>Uses matrix–vector products; converges in ≤ n steps</td>
+</tr>
+<tr>
+<td>MINRES / SYMMLQ</td>
+<td>Symmetric indefinite</td>
+<td>Handles KKT and saddle-point systems</td>
+</tr>
+<tr>
+<td>GMRES / BiCGSTAB</td>
+<td>Nonsymmetric</td>
+<td>General-purpose Krylov solvers</td>
+</tr>
+</tbody>
+</table>
+<h3 id="preconditioning">Preconditioning<a class="headerlink" href="#preconditioning" title="Permanent link">¶</a></h3>
+<p>Preconditioners <span class="arithmatex">\(M \approx A^{-1}\)</span> improve convergence:</p>
+<ul>
+<li>Jacobi (diagonal): <span class="arithmatex">\(M = \text{diag}(A)^{-1}\)</span></li>
+<li>Incomplete Cholesky (IC) or Incomplete LU (ILU): approximate factorization</li>
+<li>Block preconditioners: use Schur complement approximations for KKT systems</li>
+</ul>
+<p>Example use case:</p>
+<ul>
+<li>Solving large sparse Newton systems in logistic regression or LASSO via CG with IC preconditioner.</li>
+<li>Interior-point methods for large LPs using MINRES with block-diagonal preconditioning.</li>
+</ul>
+<h2 id="12-eigenvalue-and-svd-decompositions">12. Eigenvalue and SVD Decompositions<a class="headerlink" href="#12-eigenvalue-and-svd-decompositions" title="Permanent link">¶</a></h2>
+<h3 id="eigenvalue-decomposition">Eigenvalue Decomposition<a class="headerlink" href="#eigenvalue-decomposition" title="Permanent link">¶</a></h3>
+<p>
+<script type="math/tex; mode=display">
+A = Q \Lambda Q^T, \quad Q^T Q = I.
+</script>
+Reveals curvature, stability, and definiteness:</p>
+<ul>
+<li>Convexity ⇔ <span class="arithmatex">\(\Lambda \ge 0\)</span>.</li>
+<li>Used in semidefinite programming (SDP) and spectral analysis.</li>
+</ul>
+<h3 id="singular-value-decomposition-svd">Singular Value Decomposition (SVD)<a class="headerlink" href="#singular-value-decomposition-svd" title="Permanent link">¶</a></h3>
+<p>
+<script type="math/tex; mode=display">
+A = U \Sigma V^T,
+</script>
+with <span class="arithmatex">\(\Sigma = \text{diag}(\sigma_i) \ge 0\)</span>.</p>
+<p>Applications:</p>
+<ul>
+<li>Rank and condition number estimation (<span class="arithmatex">\(\kappa(A) = \sigma_{\max}/\sigma_{\min}\)</span>).</li>
+<li>Low-rank approximation (<span class="arithmatex">\(A_k = U_k \Sigma_k V_k^T\)</span>).</li>
+<li>Pseudoinverse: <span class="arithmatex">\(A^+ = V \Sigma^{-1} U^T\)</span>.</li>
+<li>Convex relaxations: nuclear-norm minimization (matrix completion).</li>
+</ul>
+<h2 id="13-computational-complexity-summary">13. Computational Complexity Summary<a class="headerlink" href="#13-computational-complexity-summary" title="Permanent link">¶</a></h2>
+<table>
+<thead>
+<tr>
+<th>Factorization</th>
+<th>Dense Cost</th>
 <th>Notes</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td>LU</td>
-<td>Any square (nonsingular) matrix</td>
-<td><span class="arithmatex">\(A = L U\)</span></td>
-<td>General linear systems</td>
-<td>Most basic; doesn’t exploit symmetry</td>
-</tr>
-<tr>
-<td>QR</td>
-<td>Any matrix (square or rectangular)</td>
-<td><span class="arithmatex">\(A = Q R\)</span></td>
-<td>Least squares, orthogonal projections</td>
-<td>Numerically stable but expensive</td>
+<td><span class="arithmatex">\(\frac{2}{3}n^3\)</span></td>
+<td>Needs pivoting</td>
 </tr>
 <tr>
 <td>Cholesky</td>
-<td>Symmetric positive definite (SPD)</td>
-<td><span class="arithmatex">\(A = L L^T\)</span></td>
-<td>QP Hessians, least-squares normal equations</td>
-<td>Fastest, most stable for SPD</td>
+<td><span class="arithmatex">\(\frac{1}{3}n^3\)</span></td>
+<td>Fastest for SPD</td>
+</tr>
+<tr>
+<td>QR</td>
+<td><span class="arithmatex">\(\approx \frac{2}{3}n^3\)</span></td>
+<td>Stable, more memory</td>
 </tr>
 <tr>
 <td>LDLᵀ</td>
-<td>Symmetric indefinite</td>
-<td><span class="arithmatex">\(A = L D L^T\)</span></td>
-<td>KKT systems, equality-constrained QPs</td>
-<td>Generalization of Cholesky</td>
-</tr>
-<tr>
-<td>Eigen</td>
-<td>Symmetric (or Hermitian)</td>
-<td><span class="arithmatex">\(A = Q \Lambda Q^T\)</span></td>
-<td>Spectral analysis, SDP decomposition</td>
-<td>Diagonalizes curvature</td>
+<td><span class="arithmatex">\(\approx \frac{2}{3}n^3\)</span></td>
+<td>For indefinite</td>
 </tr>
 <tr>
 <td>SVD</td>
-<td>Any matrix</td>
-<td><span class="arithmatex">\(A = U \Sigma V^T\)</span></td>
-<td>Rank analysis, pseudoinverse, low-rank solvers</td>
-<td>Most accurate but expensive</td>
+<td><span class="arithmatex">\(\approx \frac{4}{3}n^3\)</span></td>
+<td>Most accurate</td>
+</tr>
+<tr>
+<td>CG / MINRES</td>
+<td>Variable</td>
+<td>Depends on condition number and preconditioning</td>
 </tr>
 </tbody>
 </table>
-<p>Each decomposition expresses the matrix in a structured way, revealing properties such as stability, conditioning, and rank.</p>
-<h2 id="3-lu-factorization-the-general-purpose-workhorse">3. LU Factorization — <em>The general-purpose workhorse</em><a class="headerlink" href="#3-lu-factorization-the-general-purpose-workhorse" title="Permanent link">¶</a></h2>
-<p>Form:<br>
-<script type="math/tex; mode=display">
-A = L U,
-</script>
-where <span class="arithmatex">\(L\)</span> is lower triangular, <span class="arithmatex">\(U\)</span> is upper triangular.</p>
-<p>Use: General square linear systems, <span class="arithmatex">\(A x = b\)</span>.</p>
-<p>Why in convex optimization:<br>
-Used when the problem matrix is not symmetric or not guaranteed positive definite (e.g., linear equality constraints in augmented systems).</p>
-<p>Pros
-- Works for any nonsingular matrix.<br>
-- Straightforward to implement.</p>
-<p>Cons
-- Does not exploit symmetry — double the work of symmetric factorizations.<br>
-- Can be unstable without pivoting.</p>
-<p>Solver context:<br>
-LP simplex tableau, nonsymmetric KKT systems, or linearized subproblems.</p>
-<h2 id="4-qr-factorization-orthogonal-and-stable">4. QR Factorization — <em>Orthogonal and stable</em><a class="headerlink" href="#4-qr-factorization-orthogonal-and-stable" title="Permanent link">¶</a></h2>
-<p>Form:<br>
-<script type="math/tex; mode=display">
-A = Q R, \quad Q^T Q = I, \quad R \text{ upper triangular.}
-</script>
-</p>
-<p>Use: Solving least-squares problems
-<script type="math/tex; mode=display">
-\min_x \|A x - b\|_2^2.
-</script>
-</p>
-<p>Instead of forming normal equations <span class="arithmatex">\(A^T A x = A^T b\)</span> (which squares the condition number), we solve:
-<script type="math/tex; mode=display">
-R x = Q^T b,
-</script>
-which is far more numerically stable.</p>
-<p>Why in convex optimization:
-- Used in least-squares or fitting subproblems inside proximal or ADMM steps.<br>
-- Essential when <span class="arithmatex">\(A\)</span> is rectangular (overdetermined systems).</p>
-<p>Pros
-- Very stable (orthogonal transformations preserve norms).<br>
-- No explicit squaring of conditioning.</p>
-<p>Cons
-- ~2× slower than Cholesky.<br>
-- Higher memory footprint.</p>
-<h2 id="5-cholesky-factorization-fastest-for-positive-definite-systems">5. Cholesky Factorization — <em>Fastest for positive definite systems</em><a class="headerlink" href="#5-cholesky-factorization-fastest-for-positive-definite-systems" title="Permanent link">¶</a></h2>
-<p>Form:<br>
-<script type="math/tex; mode=display">
-A = L L^T, \quad L \text{ lower triangular.}
-</script>
-</p>
-<p>Applies to: Symmetric positive definite matrices (SPD).<br>
-This includes Hessians of convex functions and normal equations in least-squares.</p>
-<p>Why it’s central to convex optimization:
-- Convex problems have positive semidefinite curvature → the Hessian or KKT submatrix is SPD.<br>
-- Cholesky is the fastest and most stable factorization for SPD matrices.</p>
-<p>Typical uses:
-- Newton steps in unconstrained convex problems.
-- Solving normal equations <span class="arithmatex">\(A^T A x = A^T b\)</span>.
-- Covariance and regularization matrices in QP and ridge regression.</p>
-<p>Pros
-- Exploits symmetry → half the computation of LU.<br>
-- Stable (no pivoting needed).<br>
-- Simple forward–backward substitution.</p>
-<p>Cons
-- Fails if matrix not SPD (e.g., indefinite KKT systems).</p>
-<h2 id="6-ldlt-factorization-handles-indefinite-symmetric-systems">6. LDLᵀ Factorization — <em>Handles indefinite symmetric systems</em><a class="headerlink" href="#6-ldlt-factorization-handles-indefinite-symmetric-systems" title="Permanent link">¶</a></h2>
-<p>Form:<br>
-<script type="math/tex; mode=display">
-A = L D L^T,
-</script>
-where <span class="arithmatex">\(D\)</span> is block diagonal (1×1 or 2×2 blocks), <span class="arithmatex">\(L\)</span> lower triangular.</p>
-<p>Why it’s important:
-Many convex solvers (interior-point, equality-constrained QPs, SDPs) produce symmetric but indefinite KKT systems:
-<script type="math/tex; mode=display">
-\begin{bmatrix}
-Q & A^T \\
-A & 0
-\end{bmatrix}.
-</script>
-Cholesky fails here (negative pivots), but LDLᵀ succeeds.</p>
-<p>Advantages
-- Exploits symmetry.<br>
-- Works with indefinite matrices.<br>
-- Enables sparse reordering for large-scale problems.</p>
-<p>Used in:<br>
-Interior-point solvers, primal–dual methods, equality-constrained Newton systems.</p>
-<h2 id="7-eigenvalue-decomposition-revealing-curvature">7. Eigenvalue Decomposition — <em>Revealing curvature</em><a class="headerlink" href="#7-eigenvalue-decomposition-revealing-curvature" title="Permanent link">¶</a></h2>
-<p>Form:<br>
-<script type="math/tex; mode=display">
-A = Q \Lambda Q^T, \quad Q^T Q = I.
-</script>
-</p>
-<p>Use: For symmetric (or Hermitian) matrices, especially Hessians or covariance matrices.</p>
-<p>Why it matters in convex optimization:
-- Checks convexity (<span class="arithmatex">\(A \succeq 0 \iff \Lambda \ge 0\)</span>).<br>
-- Used in semidefinite programming (SDP): constraints like <span class="arithmatex">\(X \succeq 0\)</span> rely on eigenvalue decompositions.<br>
-- Provides spectral insight for preconditioning and regularization.</p>
-<p>Pros
-- Fully diagonalizes the problem (reveals curvature).<br>
-- Conceptually clean.</p>
-<p>Cons
-- Expensive (<span class="arithmatex">\(O(n^3)\)</span>).<br>
-- Not used iteratively in large solvers — mainly for analysis or small SDPs.</p>
-<h2 id="8-singular-value-decomposition-svd-the-most-general-and-stable">8. Singular Value Decomposition (SVD) — <em>The most general and stable</em><a class="headerlink" href="#8-singular-value-decomposition-svd-the-most-general-and-stable" title="Permanent link">¶</a></h2>
-<p>Form:<br>
-<script type="math/tex; mode=display">
-A = U \Sigma V^T,
-</script>
-where <span class="arithmatex">\(U, V\)</span> are orthogonal, <span class="arithmatex">\(\Sigma\)</span> is diagonal with nonnegative singular values.</p>
-<p>Why it’s powerful:
-- Works for <em>any</em> matrix (rectangular, rank-deficient, ill-conditioned).<br>
-- Gives rank, conditioning, and pseudoinverse:
-  <script type="math/tex; mode=display">
-  A^+ = V \Sigma^{-1} U^T.
-  </script>
-</p>
-<p>Used in:
-- Low-rank convex optimization.<br>
-- Nuclear-norm minimization (matrix completion).<br>
-- Preconditioning and numerical conditioning analysis.</p>
-<p>Pros
-- Extremely stable, handles degeneracy gracefully.<br>
-- Reveals numerical rank and conditioning.</p>
-<p>Cons
-- Most expensive factorization (<span class="arithmatex">\(O(m n^2)\)</span>).<br>
-- Used selectively, not every iteration.</p>
-<h2 id="9-which-factorization-to-use-in-convex-optimization">9. Which Factorization to Use in Convex Optimization<a class="headerlink" href="#9-which-factorization-to-use-in-convex-optimization" title="Permanent link">¶</a></h2>
+<p>Sparse systems reduce cost to roughly <span class="arithmatex">\(O(n^{1.5})\)</span>–<span class="arithmatex">\(O(n^2)\)</span> depending on fill-in.</p>
+<h2 id="14-example-applications-overview">14. Example Applications Overview<a class="headerlink" href="#14-example-applications-overview" title="Permanent link">¶</a></h2>
 <table>
 <thead>
 <tr>
-<th>Context</th>
-<th>System Type</th>
-<th>Recommended Factorization</th>
-<th>Reason</th>
+<th>Problem Type</th>
+<th>Typical Matrix</th>
+<th>Solver / Factorization</th>
+<th>Example</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>Unconstrained convex problem</td>
+<td>Unconstrained Newton step</td>
 <td>SPD Hessian</td>
 <td>Cholesky</td>
-<td>Fastest, stable, symmetric</td>
+<td>Convex quadratic, ridge regression</td>
 </tr>
 <tr>
 <td>Equality-constrained QP</td>
 <td>Symmetric indefinite KKT</td>
 <td>LDLᵀ</td>
-<td>Handles indefinite blocks</td>
+<td>Interior-point QP solver</td>
 </tr>
 <tr>
-<td>General LP/QP Newton system</td>
-<td>Sparse symmetric indefinite</td>
-<td>LDLᵀ with reordering</td>
-<td>Exploits sparsity, preserves symmetry</td>
-</tr>
-<tr>
-<td>Least-squares / regression</td>
+<td>Overdetermined LS</td>
 <td>Rectangular <span class="arithmatex">\(A\)</span></td>
 <td>QR</td>
-<td>Stable for overdetermined systems</td>
+<td>Linear regression, ADMM subproblem</td>
 </tr>
 <tr>
-<td>Poorly conditioned / rank-deficient</td>
+<td>KKT block system</td>
+<td>Block-symmetric</td>
+<td>Schur complement</td>
+<td>Primal-dual method</td>
+</tr>
+<tr>
+<td>Low-rank correction</td>
+<td><span class="arithmatex">\(A + U U^T\)</span></td>
+<td>Woodbury</td>
+<td>Kalman filter, online update</td>
+</tr>
+<tr>
+<td>Rank-deficient system</td>
 <td>Any</td>
 <td>SVD</td>
-<td>Safest, reveals rank and conditioning</td>
+<td>Matrix completion, regularization</td>
 </tr>
 <tr>
-<td>Non-symmetric systems</td>
-<td>General <span class="arithmatex">\(A\)</span></td>
-<td>LU</td>
-<td>Works for all invertible matrices</td>
+<td>Large-scale Hessian</td>
+<td>SPD</td>
+<td>CG + preconditioner</td>
+<td>Logistic regression, large ML models</td>
 </tr>
 </tbody>
 </table>
-<h2 id="10-why-convex-solvers-favor-cholesky-and-ldlt">10. Why Convex Solvers Favor Cholesky and LDLᵀ<a class="headerlink" href="#10-why-convex-solvers-favor-cholesky-and-ldlt" title="Permanent link">¶</a></h2>
-<p>Convex problems typically produce symmetric matrices — the Hessian and KKT systems come from derivatives of convex functions or constraints.</p>
-<ul>
-<li>Cholesky is ideal for positive definite systems (smooth convex Hessians, normal equations).  </li>
-<li>LDLᵀ handles indefinite but symmetric systems (common in KKT matrices).  </li>
-<li>Both preserve symmetry, halve computation, and allow sparse reordering — crucial for large-scale optimization.</li>
-</ul>
-<p>In short:</p>
-<blockquote>
-<p>Convex optimization solvers rely on Cholesky and LDLᵀ because convexity guarantees symmetry, and these factorizations exploit that structure for speed and stability.</p>
-</blockquote>
-<h3 id="summary-key-takeaways">Summary: Key Takeaways<a class="headerlink" href="#summary-key-takeaways" title="Permanent link">¶</a></h3>
-<ul>
-<li>Matrix factorizations transform hard linear algebra problems into easy triangular ones.  </li>
-<li>Cholesky and LDLᵀ are the backbone of modern convex solvers — efficient, symmetric, and numerically stable.  </li>
-<li>QR is preferred for least-squares; SVD for robustness; LU for generality.  </li>
-<li>Choosing the right factorization balances speed, stability, and structure.</li>
-</ul>
 
 
 

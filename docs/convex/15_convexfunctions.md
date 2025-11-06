@@ -4,8 +4,6 @@ Convex functions are the objectives we minimise. Understanding them is essential
 
 
 ## 5.1 Definitions of convexity
-
-### 5.1.1 Basic definition
 A function $f : \mathbb{R}^n \to \mathbb{R}$ is convex if for all $x,y$ in its domain and all $\theta \in [0,1]$,
 
 $$
@@ -16,14 +14,13 @@ $$
 
 If the inequality is strict whenever $x \ne y$ and $\theta \in (0,1)$, then $f$ is strictly convex.
 
-### 5.1.2 Epigraph definition
 
-The epigraph of $f$ is
+>The epigraph of $f$ is
 $$
 \mathrm{epi}(f) = \{ (x, t) \in \mathbb{R}^n \times \mathbb{R} : f(x) \le t \}.
 $$
 
-> $f$ is convex if and only if $\mathrm{epi}(f)$ is a convex set. This links convex *functions* to convex *sets*, and unlocks the geometry: tangent hyperplanes to $\mathrm{epi}(f)$ correspond to subgradients (Chapter 6).
+$f$ is convex if and only if $\mathrm{epi}(f)$ is a convex set. This links convex *functions* to convex *sets*, and unlocks the geometry: tangent hyperplanes to $\mathrm{epi}(f)$ correspond to subgradients (Chapter 6).
 
 ## 5.2 First-order characterisation
 

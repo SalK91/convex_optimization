@@ -2,9 +2,7 @@
 
 Optimization is the mathematical language of decision-making and learning. In machine learning and data science we constantly fit, estimate, or infer by minimizing a loss. Yet most real-world objectives are nonlinear and messy; solving them globally can be hard.
 
-Convex optimization is the *tractable core* of this landscape.  
-A convex problem has a single “bowl-shaped” valley, no false minima, so any local optimum is automatically global.  
-That geometric simplicity gives us:
+Convex optimization is the *tractable core* of this landscape. A convex problem has a single “bowl-shaped” valley, no false minima, so any local optimum is automatically global. That geometric simplicity gives us:
 
 - mathematical guarantees of optimality,  
 - efficient algorithms that scale,  
@@ -26,25 +24,56 @@ $$
 $$
 
 where each $f$ and $g_i$ is convex, and each $h_j$ is affine (affine functions are both convex and concave).
+ 
 
-
-## 1.3 How the Web-Book Is Structured
-
-This Web-book builds step-by-step from mathematics to algorithms:
-
-1. Linear Algebra Foundations (Ch 2) — geometry of vectors, subspaces, and positive-semidefinite matrices.  
-2. Multivariable Calculus (Ch 3) — gradients, Hessians, and first-/second-order optimality.  
-3. Convex Sets (Ch 4) — feasible regions and geometric intuition.  
-4. Convex Functions (Ch 5) — what makes an objective convex.  
-5. Subgradients (Ch 6) — handling nondifferentiable convex functions (e.g., $\lvert x \rvert$, $\max$).  
-6. KKT Conditions (Ch 7) — first-order optimality for constrained problems.  
-7. Duality (Ch 8) — lower bounds, certificates of optimality, and geometric interpretation.  
-8. Algorithms (Ch 9–10) — gradient, proximal, Newton, stochastic, and ADMM methods.  
-9. Modeling and Practice (Ch 11) — convex modeling patterns, solver selection, ML applications.  
-10. Appendices — common inequalities, projections, and support-function geometry.
-
-
-
-## MIssing elements
-
-1. Subgradient descent
+ Chapter 01: Mathematical Concepts
+Chapter 1.1: Differentiability
+Chapter 1.2: Taylor Approximation
+Chapter 1.3: Convexity
+Chapter 1.4: Conditions for optimality
+Chapter 1.5: Quadratic forms I
+Chapter 1.6: Quadratic forms II
+Chapter 1.7: Matrix calculus
+Chapter 02: Optimization problems
+Chapter 2.1: Unconstrained optimization problems
+Chapter 2.2: Constrained optimization problems
+Chapter 2.3: Other optimization problems
+Chapter 03: Univariate Optimization
+Chapter 3.1: Golden ratio
+Chapter 3.2: Brent
+Chapter 04: First order methods
+Chapter 4.01: Gradient descent
+Chapter 4.02: Step size and optimality
+Chapter 4.03: Deep dive: Gradient descent
+Chapter 4.04: Weaknesses of GD – Curvature
+Chapter 4.05: GD – Multimodality and Saddle points
+Chapter 4.06: GD with Momentum
+Chapter 4.07: GD in quadratic forms
+Chapter 4.09: SGD
+Chapter 4.10: SGD Further Details
+Chapter 4.11: ADAM and friends
+Chapter 05: Second order methods
+Chapter 5.01: Newton-Raphson
+Chapter 5.03: Gauss-Newton
+Chapter 06: Constrained Optimization
+Chapter 6.01: Introduction
+Chapter 6.02: Linear Programming
+Chapter 6.04: Duality in optimization
+Chapter 6.05: Nonlinear programs and Lagrangian
+Chapter 07: Derivative Free Optimization
+Chapter 7.01: Coordinate Descent
+Chapter 7.02: Nelder-Mead
+Chapter 7.03: Simulated Annealing
+Chapter 7.04: Multi-Starts
+Chapter 08: Evolutionary Algorithms
+Chapter 8.01: Introduction
+Chapter 8.02: ES / Numerical Encodings
+Chapter 8.03: GA / Bit Strings
+Chapter 8.04: CMA-ES Algorithm
+Chapter 8.05: CMA-ES Algorithm Wrap Up
+Chapter 10: Bayesian Optimization
+Chapter 10.01: Black Box Optimization
+Chapter 10.02: Basic BO Loop and Surrogate Modelling
+Chapter 10.03: Posterior Uncertainty and Acquisition Functions I
+Chapter 10.04: Posterior Uncertainty and Acquisition Functions II
+Chapter 10.05: Important Surrogate Models

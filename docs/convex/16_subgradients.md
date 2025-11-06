@@ -124,20 +124,4 @@ If $f$ and $g$ are convex:
 These rules make it possible to compute subgradients of complicated nonsmooth objectives.
  
 
-## 6.5 Applications in Machine Learning
-
-- Nonsmooth Optimization:  
-  Subgradient descent and proximal algorithms solve problems with nonsmooth losses (hinge, absolute error, $\ell_1$ penalties).  
-    - Lasso ($\ell_1$ regularization): $\min \|Xw - y\|_2^2 + \lambda \|w\|_1$
-    - SVM (hinge loss): $\min \frac{1}{2}\|w\|^2 + C \sum_i \max(0, 1 - y_i w^T x_i)$
-
-- Regularization and Sparsity:  
-  Subgradients characterize the behavior of norms at the origin – leading to sparsity in optimal solutions (especially $\ell_1$ norms).
-
-- Duality and Proximal Methods:  
-  Many primal-dual algorithms rely on subgradients for deriving dual objectives and implementing updates via proximal operators.
-
-- Composite Optimization:  
-  Problems of the form $f(x) + g(x)$, where $f$ is smooth and $g$ is nonsmooth (e.g. Lasso), rely on subgradients of $g$.
- 
  
