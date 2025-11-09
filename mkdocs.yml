@@ -1,0 +1,153 @@
+# ==========================================================
+# Project Information
+# ==========================================================
+site_name: Mathematics for Machine Learning
+site_description: "Structured lecture notes on optimization, convex analysis, and algorithms."
+site_author: "Salman Khan"
+repo_url: "https://github.com/SalK91/convex_optimization"
+repo_name: "GitHub"
+site_url: "https://salk91.github.io/convex_optimization"
+copyright: "© 2025 Salman Khan — Educational Use Only"
+
+# ==========================================================
+# Theme Configuration (Material)
+# ==========================================================
+theme:
+  name: material
+  language: en
+
+  # ---- Color Palette ----
+  palette:
+    - scheme: slate     # dark academic background
+      primary: indigo
+      accent: cyan
+      toggle:
+        icon: material/weather-night
+        name: Switch to light mode
+    - scheme: default   # optional light mode
+      primary: indigo
+      accent: cyan
+      toggle:
+        icon: material/white-balance-sunny
+        name: Switch to dark mode
+
+  # ---- Fonts ----
+  font:
+    text: "Merriweather"
+    code: "Fira Code"
+
+  # ---- Features ----
+  features:
+    # Navigation / Layout
+    #- navigation.instant
+    - navigation.top
+    #- navigation.expand
+    #- navigation.sections
+    #- navigation.footer
+    #- header.autohide
+    - toc.integrate
+
+    # Content UX
+    - content.code.copy
+    - content.code.annotate
+    - content.action.edit
+    - content.action.view
+    - content.tabs.link
+
+    # Search
+    - search.suggest
+    - search.highlight
+
+# ==========================================================
+# Plugins
+# ==========================================================
+plugins:
+  - search
+  - autorefs
+  - glightbox       # image lightbox support
+
+# ==========================================================
+# Markdown Extensions
+# ==========================================================
+markdown_extensions:
+  - admonition
+  - footnotes
+  - def_list
+  - attr_list
+  - mdx_math:
+      enable_dollar_delimiter: true
+  - pymdownx.details
+  - pymdownx.superfences
+  - pymdownx.arithmatex:
+      generic: true
+  - toc:
+      permalink: true
+      toc_depth: 1   # only top-level headings in sidebar
+
+# ==========================================================
+# Extra JavaScript and Styling
+# ==========================================================
+extra_javascript:
+  - https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML
+
+extra_css:
+  - styles/extra.css
+
+# ==========================================================
+# Footer and Social Links
+# ==========================================================
+extra:
+  social:
+    - icon: fontawesome/brands/github
+      link: https://github.com/SalK91/convex_optimization
+  generator: false
+
+# ==========================================================
+# Navigation
+# ==========================================================
+nav:
+  - Home: "index.md"
+
+  - Convex Optimization:
+      - 1. Introduction and Overview: "convex/11_intro.md"
+      - 2. Linear Algebra Foundations: "convex/12_vector.md"
+      - 3. Multivariable Calculus for Optimization: "convex/13_calculus.md"
+      - 4. Convex Sets and Geometric Fundamentals: "convex/14_convexsets.md"
+      - 5. Convex Functions: "convex/15_convexfunctions.md"
+      - 6. Nonsmooth Convex Optimization – Subgradients: "convex/16_subgradients.md"
+      - 7. First-Order Optimality Conditions in Convex Optimization: "convex/16a_optimality_conditions.md"
+      - 8. Optimization Principles – From Gradient Descent to KKT: "convex/17_kkt.md"
+      - 9. Lagrange Duality Theory: "convex/18_duality.md"
+      - 10. Pareto Optimality and Multi-Objective Convex Optimization: "convex/18a_pareto.md"
+      - 11. Regularized Approximation – Balancing Fit and Complexity: "convex/18b_regularization.md"
+      - 12. Algorithms for Convex Optimization: "convex/19_optimizationalgo.md"
+      - 13. Optimization Algorithms for Equality-Constrained Problems: "convex/19a_optimization_constraints.md"
+      - 14. Optimization Algorithms for Inequality-Constrained Problems: "convex/19b_optimization_constraints.md"
+      - 15. Advanced Large-Scale and Structured Methods: "convex/20_advanced.md"
+      - 16. Modelling Patterns and Algorithm Selection in Practice: "convex/21_models.md"
+      - 17. Canonical Problems in Convex Optimization: "convex/30_canonical_problems.md"
+
+  - Optimization Beyond Convexity:
+      - 1. Introduction: "nonconvex/41_intro.md"
+      - 2. Metaheuristic Optimization Methods: "nonconvex/42_meta.md"
+      - 3. Hybrid and Modern Optimization Methods: "nonconvex/43_hybrid.md"
+
+  - Deep Learning:
+      - 1. Introduction to Neural Netwoks: "deeplearning/intro.md"
+      - 2. Convolutional Neural Networks (CNNs): "deeplearning/2_convnets.md"
+      - 2. Optimization Challenges in Deep Learning: "deeplearning/intro.md"
+      - 3. Advanced Optimization Techniques for Deep Learning: "deeplearning/intro.md"
+
+  - Cheat Sheets:
+      - Optimization Algos - Cheat Sheet: "cheatsheets/20a_cheatsheet.md"
+
+  - Appendices:
+      - Appendix A - Common Inequalities and Identities: "appendices/120_ineqaulities.md"
+      - Appendix B - Projection and Proximal Operators: "appendices/130_projections.md"
+      - Appendix C - Support Functions and Dual Geometry (Advanced): "appendices/140_support.md"
+      - Appendix D - Convex Conjugates and Fenchel Duality (Advanced): "appendices/160_conjugates.md"
+      - Appendix E - Convexity in Probability and Statistics (Advanced): "appendices/170_probability.md"
+      - Appendix F - Subgradient Method and Variants (Advanced): "appendices/180_subgradient_methods.md"
+      - Appendix G - Proximal Operators: "appendices/190_proximal.md"
+      - Appendix H - Mirror Descent and Bregman Geometry: "appendices/200_mirror.md"
+      - Appendix I - Matrix Factorization: "appendices/300_matrixfactorization.md"
