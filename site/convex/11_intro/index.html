@@ -49,6 +49,10 @@
       
     
     
+      <link rel="stylesheet" href="../../css/print-site.css">
+    
+      <link rel="stylesheet" href="../../css/print-site-material.css">
+    
       <link rel="stylesheet" href="../../styles/extra.css">
     
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
@@ -1307,6 +1311,28 @@
   
 
     
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../print_page/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Print Site
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
   </ul>
 </nav>
                   </div>
@@ -1340,13 +1366,28 @@
 
 
 <h1 id="chapter-1-introduction-and-overview">Chapter 1  Introduction and Overview<a class="headerlink" href="#chapter-1-introduction-and-overview" title="Permanent link">¶</a></h1>
-<p>Convex optimization is the mathematical foundation of modern machine learning, signal processing, and control. It provides a framework for reasoning about optimal decisions when the cost functions and constraints behave “nicely” — that is, when they are <em>convex</em>.</p>
-<p>Convexity gives us three advantages at once:</p>
+<p>Optimization is the mathematical foundation of nearly all modern machine learning, signal processing, and control systems.<br>
+Every learning algorithm — from linear regression to deep neural networks — is ultimately an optimization procedure: it adjusts model parameters to minimize a loss or maximize a performance criterion based on observed data.</p>
+<p>Convex optimization is a special and profoundly important subset of optimization.<br>
+It provides structure, guarantees, and tractability that general nonlinear optimization often lacks.<br>
+When the objective and constraints are convex, we obtain three fundamental advantages:</p>
 <ol>
-<li>Any local minimum is global.</li>
-<li>Optimization algorithms are stable and efficient.</li>
-<li>Solutions come with built-in guarantees — often interpretable through dual variables or KKT conditions.</li>
+<li>
+<p>Global optimality:<br>
+   Any local minimum is also a global minimum — eliminating the risk of getting trapped in suboptimal solutions.</p>
+</li>
+<li>
+<p>Algorithmic stability and efficiency: 
+   Convex problems admit well-understood convergence behavior and can be solved reliably by gradient, Newton, or interior-point methods.</p>
+</li>
+<li>
+<p>Theoretical guarantees and interpretability:
+   Duality theory and KKT (Karush-Kuhn-Tucker) conditions provide verifiable optimality certificates and often lend economic or geometric meaning to solutions.</p>
+</li>
 </ol>
+<p>These properties make convex optimization the “language of guarantees” in machine learning.<br>
+While deep learning and other modern methods are largely nonconvex, many of their building blocks — such as linear models, regularizers, and convex losses — originate from convex analysis.<br>
+Understanding convex optimization equips us with the principles that ensure robustness, efficiency, and insight across all areas of data-driven modeling.</p>
 <blockquote>
 <p>Convexity ⇒ Robustness.<br>
 Convex problems are stable: small perturbations to inputs cause proportionally small shifts in the solution.<br>
@@ -1578,6 +1619,8 @@ then optimality and algorithms.</p>
     
     
       <script src="../../assets/javascripts/bundle.f55a23d4.min.js"></script>
+      
+        <script src="../../js/print-site.js"></script>
       
         <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
       

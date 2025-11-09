@@ -65,6 +65,12 @@ plugins:
   - search
   - autorefs
   - glightbox       # image lightbox support
+  - print-site:
+      add_to_navigation: true     # adds a "Print Site" link in the nav
+      print_page_title: "Print Site"
+      include_nav: true
+      include_footer: true
+      
 
 # ==========================================================
 # Markdown Extensions
