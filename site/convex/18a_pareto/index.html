@@ -873,7 +873,7 @@
   
   
   <span class="md-ellipsis">
-    Cheat Sheets
+    Deep Learning
     
   </span>
   
@@ -883,6 +883,143 @@
         
         <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            Deep Learning
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../deeplearning/1_intro/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    1. Introduction to Deep Learning Optimization
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../deeplearning/1_intro/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    1. Introduction to Deep Learning Optimization
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../deep_learning/1_intro.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    3. Regularization Techniques in Deep Learning
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../deep_learning/1_intro.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    4. Advanced Topics in Deep Learning Optimization
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5">
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Cheat Sheets
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
             <span class="md-nav__icon md-icon"></span>
             Cheat Sheets
           </label>
@@ -933,10 +1070,10 @@
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5">
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6">
         
           
-          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
             
   
   
@@ -949,8 +1086,8 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_5">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
             <span class="md-nav__icon md-icon"></span>
             Appendices
           </label>
@@ -1203,18 +1340,16 @@
 
 
 <h1 id="chapter-10-pareto-optimality-and-multi-objective-convex-optimization">Chapter 10: Pareto Optimality and Multi-Objective Convex Optimization<a class="headerlink" href="#chapter-10-pareto-optimality-and-multi-objective-convex-optimization" title="Permanent link">¶</a></h1>
-<p>Optimization often focuses on a single objective function — minimizing one measure of performance.<br>
-However, real-world problems rarely involve a single criterion. In practice, we must balance multiple conflicting goals: accuracy vs. complexity, fairness vs. utility, return vs. risk, etc.  </p>
+<p>Optimization often focuses on a single objective function — minimizing one measure of performance. However, real-world problems rarely involve a single criterion. In practice, we must balance multiple conflicting goals: accuracy vs. complexity, fairness vs. utility, return vs. risk, etc.  </p>
 <p>This chapter introduces Pareto optimality, which generalizes classical convex optimization to the multi-objective setting, and explores how scalarisation connects multi-objective problems to duality and regularisation.</p>
 <h2 id="101-classical-optimality">10.1 Classical Optimality<a class="headerlink" href="#101-classical-optimality" title="Permanent link">¶</a></h2>
-<p>In standard convex optimization, we minimize one function:
+<p>In standard convex optimization, we minimize one convex function:
 <script type="math/tex; mode=display">
 x^* \in \arg\min_{x \in \mathcal{X}} f(x),
 </script>
 where <span class="arithmatex">\(\mathcal{X}\)</span> is a convex feasible set.</p>
-<p>Here, optimality is absolute — there exists a single best point (or equivalence class) minimizing one measure of performance.<br>
-The theory of Chapters 7–9 applies directly: gradients, subgradients, and KKT conditions fully characterize optimality.</p>
-<p>But what if we have multiple objectives that cannot all be minimized simultaneously?</p>
+<p>Optimality is <em>absolute</em>: there exists (or can exist) one best point minimizing a single criterion.<br>
+But what happens when we must minimize <em>several</em> convex functions simultaneously?</p>
 <h2 id="102-multi-objective-convex-optimization">10.2 Multi-Objective Convex Optimization<a class="headerlink" href="#102-multi-objective-convex-optimization" title="Permanent link">¶</a></h2>
 <p>In many learning and design problems, several objectives compete:</p>
 <table>
@@ -1253,13 +1388,12 @@ The theory of Chapters 7–9 applies directly: gradients, subgradients, and KKT 
 </tr>
 </tbody>
 </table>
-<p>Formally, we write:
+<p>Formally:
 <script type="math/tex; mode=display">
 \min_{x \in \mathcal{X}} F(x) = (f_1(x), f_2(x), \dots, f_k(x)),
 </script>
 where each <span class="arithmatex">\(f_i(x)\)</span> is convex.<br>
-The solution concept changes: there is no single global minimum. Instead, there is a <em>set</em> of trade-off solutions.</p>
-<hr>
+Because no single <span class="arithmatex">\(x\)</span> minimizes all <span class="arithmatex">\(f_i\)</span> simultaneously, we define <em>optimality</em> differently — not as a single point, but as a set of <em>efficient trade-offs</em>.</p>
 <h2 id="103-pareto-optimality">10.3 Pareto Optimality<a class="headerlink" href="#103-pareto-optimality" title="Permanent link">¶</a></h2>
 <h3 id="a-strong-pareto-optimality">(a) Strong Pareto Optimality<a class="headerlink" href="#a-strong-pareto-optimality" title="Permanent link">¶</a></h3>
 <p>A point <span class="arithmatex">\(x^* \in \mathcal{X}\)</span> is Pareto optimal if no other <span class="arithmatex">\(x \in \mathcal{X}\)</span> satisfies:
@@ -1273,7 +1407,8 @@ with strict inequality for at least one <span class="arithmatex">\(j\)</span>.</
 <script type="math/tex; mode=display">
 f_i(x) < f_i(x^*) \quad \forall i.
 </script>
-That is, no feasible solution strictly improves all objectives simultaneously.</p>
+</p>
+<p>That is, no feasible solution strictly improves all objectives simultaneously.</p>
 <h3 id="c-geometric-intuition">(c) Geometric Intuition<a class="headerlink" href="#c-geometric-intuition" title="Permanent link">¶</a></h3>
 <p>In two dimensions <span class="arithmatex">\((f_1, f_2)\)</span>, the Pareto frontier forms the <em>lower-left boundary</em> of the feasible region (for minimization):</p>
 <ul>
@@ -1283,7 +1418,6 @@ That is, no feasible solution strictly improves all objectives simultaneously.</
 <blockquote>
 <p>The frontier visualizes the fundamental trade-offs in the problem.</p>
 </blockquote>
-<hr>
 <h2 id="104-scalarisation-reducing-many-objectives-to-one">10.4 Scalarisation: Reducing Many Objectives to One<a class="headerlink" href="#104-scalarisation-reducing-many-objectives-to-one" title="Permanent link">¶</a></h2>
 <p>Since multi-objective problems rarely have a unique minimizer, we often scalarise them — combine all objectives into a single composite scalar that we can minimize using standard methods.</p>
 <h3 id="a-weighted-sum-scalarisation">(a) Weighted Sum Scalarisation<a class="headerlink" href="#a-weighted-sum-scalarisation" title="Permanent link">¶</a></h3>
@@ -1298,13 +1432,11 @@ That is, no feasible solution strictly improves all objectives simultaneously.</
 </ul>
 <p>Convexity caveat:<br>
 If the objectives and feasible set are convex, the weighted-sum method recovers the convex portion of the Pareto frontier. Nonconvex parts cannot be reached with simple weights.</p>
-<hr>
 <h3 id="b-varepsilon-constraint-scalarisation">(b) <span class="arithmatex">\(\varepsilon\)</span>-Constraint Scalarisation<a class="headerlink" href="#b-varepsilon-constraint-scalarisation" title="Permanent link">¶</a></h3>
-<p>Alternatively, minimize one objective while turning others into constraints:
-<script type="math/tex; mode=display">
+<p>Alternatively, minimize one objective while turning others into constraints:</p>
+<div class="arithmatex">\[
 \min_x f_1(x) \quad \text{s.t. } f_i(x) \le \varepsilon_i,\; i=2,\dots,k.
-</script>
-</p>
+\]</div>
 <ul>
 <li>The tolerances <span class="arithmatex">\(\varepsilon_i\)</span> act as <em>performance budgets</em>.  </li>
 <li>Varying them explores different Pareto-optimal trade-offs.  </li>
@@ -1314,12 +1446,11 @@ Ridge regression minimizes fit error subject to a bound on model complexity:
 <script type="math/tex; mode=display">
 \min_x \|Ax - b\|_2^2 \quad \text{s.t. } \|x\|_2^2 \le \tau.
 </script>
-The Lagrangian form
+The Lagrangian form:
 <script type="math/tex; mode=display">
 \min_x \|Ax - b\|_2^2 + \lambda \|x\|_2^2
 </script>
 is a weighted-sum scalarisation — <span class="arithmatex">\(\lambda\)</span> acts as a trade-off parameter.</p>
-<hr>
 <h3 id="c-duality-and-scalarisation">(c) Duality and Scalarisation<a class="headerlink" href="#c-duality-and-scalarisation" title="Permanent link">¶</a></h3>
 <p>Scalarisation is closely related to duality (Chapter 9):</p>
 <ul>
@@ -1327,151 +1458,66 @@ is a weighted-sum scalarisation — <span class="arithmatex">\(\lambda\)</span> 
 <li>Changing them selects different Pareto-optimal points on the frontier.  </li>
 <li>Regularisation parameters in ML (like <span class="arithmatex">\(\lambda\)</span>) are dual to constraint levels — they <em>move along</em> the Pareto frontier.</li>
 </ul>
-<hr>
-<h2 id="105-examples">10.5 Examples<a class="headerlink" href="#105-examples" title="Permanent link">¶</a></h2>
-<h3 id="example-1-regularised-least-squares">Example 1 – Regularised Least Squares<a class="headerlink" href="#example-1-regularised-least-squares" title="Permanent link">¶</a></h3>
+<h2 id="105-examples-and-applications">10.5 Examples and Applications<a class="headerlink" href="#105-examples-and-applications" title="Permanent link">¶</a></h2>
+<h3 id="example-1-regularized-least-squares">Example 1 – Regularized Least Squares<a class="headerlink" href="#example-1-regularized-least-squares" title="Permanent link">¶</a></h3>
 <p>Objectives:
 <script type="math/tex; mode=display">
-f_1(x)=\|Ax-b\|_2^2, \quad f_2(x)=\|x\|_2^2.
+f_1(x) = \|Ax - b\|_2^2, \qquad f_2(x) = \|x\|_2^2.
 </script>
 </p>
-<p>Two equivalent formulations:</p>
-<ol>
-<li>Weighted sum:
+<p>Two equivalent forms:
+1. Weighted sum:
    <script type="math/tex; mode=display">
-   \min_x \|Ax-b\|_2^2 + \lambda \|x\|_2^2.
+   \min_x \|Ax - b\|_2^2 + \lambda \|x\|_2^2.
    </script>
-</li>
-<li><span class="arithmatex">\(\varepsilon\)</span>-constraint:
+2. <span class="arithmatex">\(\varepsilon\)</span>-constraint:
    <script type="math/tex; mode=display">
-   \min_x \|Ax-b\|_2^2 \quad \text{s.t. } \|x\|_2^2 \le \tau.
+   \min_x \|Ax - b\|_2^2 \quad \text{s.t. } \|x\|_2^2 \le \tau.
    </script>
-</li>
-</ol>
-<p>Both yield Pareto optimal solutions; <span class="arithmatex">\(\lambda\)</span> and <span class="arithmatex">\(\tau\)</span> parameterize the same trade-off curve.</p>
-<hr>
+</p>
+<p>Both yield Pareto-optimal solutions; <span class="arithmatex">\(\lambda\)</span> and <span class="arithmatex">\(\tau\)</span> trace the same curve — the bias–variance trade-off.</p>
 <h3 id="example-2-portfolio-optimization-riskreturn">Example 2 – Portfolio Optimization (Risk–Return)<a class="headerlink" href="#example-2-portfolio-optimization-riskreturn" title="Permanent link">¶</a></h3>
-<p>Decision variable: portfolio weights <span class="arithmatex">\( w \in \mathbb{R}^n \)</span>.<br>
+<p>Decision variable: portfolio weights <span class="arithmatex">\(w \in \mathbb{R}^n\)</span>.<br>
 Objectives:
 <script type="math/tex; mode=display">
-f_1(w) = -\mu^\top w \quad (\text{negative return}), \qquad
-f_2(w) = w^\top \Sigma w \quad (\text{risk}).
+f_1(w) = -\mu^\top w \quad \text{(negative return)}, \qquad
+f_2(w) = w^\top \Sigma w \quad \text{(risk)}.
 </script>
 </p>
-<p>Weighted sum formulation:
+<p>Weighted formulation:
 <script type="math/tex; mode=display">
-\min_w \; -\alpha \mu^\top w + (1-\alpha) w^\top \Sigma w,
-\quad 0 \le \alpha \le 1.
+\min_w \; -\alpha \mu^\top w + (1 - \alpha) w^\top \Sigma w, \quad 0 \le \alpha \le 1.
 </script>
 </p>
 <ul>
 <li>Varying <span class="arithmatex">\(\alpha\)</span> traces the efficient frontier in risk–return space.</li>
-<li>This is the foundation of Modern Portfolio Theory (Markowitz).</li>
+<li>This forms the basis of Modern Portfolio Theory (Markowitz, 1952).</li>
 </ul>
-<hr>
-<h3 id="example-3-probabilistic-modelling-elbo-and-beta-vae">Example 3 – Probabilistic Modelling (ELBO and <span class="arithmatex">\(\beta\)</span>-VAE)<a class="headerlink" href="#example-3-probabilistic-modelling-elbo-and-beta-vae" title="Permanent link">¶</a></h3>
-<p>The Evidence Lower Bound (ELBO) in variational inference:
+<h3 id="example-3-fairnessaccuracy-trade-off-in-ml">Example 3 – Fairness–Accuracy Trade-off in ML<a class="headerlink" href="#example-3-fairnessaccuracy-trade-off-in-ml" title="Permanent link">¶</a></h3>
+<p>In fair machine learning, we minimize prediction loss while maintaining fairness:
+<script type="math/tex; mode=display">
+\min_\theta \; \mathbb{E}[\ell(y, f_\theta(x))] \quad \text{s.t. } \; D(f_\theta(x), y) \le \varepsilon,
+</script>
+where <span class="arithmatex">\(D\)</span> is a fairness measure (e.g., demographic disparity).</p>
+<p>Equivalent scalarized form:
+<script type="math/tex; mode=display">
+\min_\theta \; \mathbb{E}[\ell(y, f_\theta(x))] + \lambda D(f_\theta(x), y).
+</script>
+Different <span class="arithmatex">\(\lambda\)</span> values trace the fairness–accuracy Pareto frontier.</p>
+<h3 id="example-4-variational-autoencoders-and-beta-vae">Example 4 – Variational Autoencoders and <span class="arithmatex">\(\beta\)</span>-VAE<a class="headerlink" href="#example-4-variational-autoencoders-and-beta-vae" title="Permanent link">¶</a></h3>
+<p>The ELBO in variational inference:
 <script type="math/tex; mode=display">
 \text{ELBO} = \mathbb{E}_{q(z)}[\log p(x|z)] - \mathrm{KL}(q(z)\|p(z)).
 </script>
 </p>
-<p>Two competing objectives:
-- Data fit: maximize expected log-likelihood.<br>
-- Simplicity: minimize KL divergence.</p>
-<p>Scalarised form (<span class="arithmatex">\(\beta\)</span>-VAE):
+<p>Here we balance two objectives:
+- Reconstruction accuracy (<span class="arithmatex">\(f_1\)</span>)
+- Latent simplicity (<span class="arithmatex">\(f_2\)</span>)</p>
+<p>The scalarized <span class="arithmatex">\(\beta\)</span>-VAE objective:
 <script type="math/tex; mode=display">
-\max_q \; \mathbb{E}_{q(z)}[\log p(x|z)] - \beta\, \mathrm{KL}(q(z)\|p(z)).
+\max_q \; \mathbb{E}_{q(z)}[\log p(x|z)] - \beta \, \mathrm{KL}(q(z)\|p(z)).
 </script>
-</p>
-<p>Parameter <span class="arithmatex">\(\beta\)</span> controls the trade-off — different <span class="arithmatex">\(\beta\)</span> yield different Pareto-optimal points between reconstruction accuracy and disentanglement.</p>
-<hr>
-<h2 id="106-broader-connections-in-ml-and-ai">10.6 Broader Connections in ML and AI<a class="headerlink" href="#106-broader-connections-in-ml-and-ai" title="Permanent link">¶</a></h2>
-<table>
-<thead>
-<tr>
-<th>Domain</th>
-<th>Competing Objectives</th>
-<th>Pareto/Scalarised Form</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Fairness-aware learning</td>
-<td>Accuracy vs fairness</td>
-<td>Weighted or constrained objectives</td>
-</tr>
-<tr>
-<td>Regularisation</td>
-<td>Fit vs complexity</td>
-<td><span class="arithmatex">\(\|Ax-b\|^2 + \lambda R(x)\)</span></td>
-</tr>
-<tr>
-<td>Generalisation</td>
-<td>Empirical vs expected risk</td>
-<td>Regularised training</td>
-</tr>
-<tr>
-<td>Information bottleneck</td>
-<td>Accuracy vs compression</td>
-<td>Lagrangian form with <span class="arithmatex">\(\beta\)</span></td>
-</tr>
-<tr>
-<td>Reinforcement learning</td>
-<td>Reward vs risk</td>
-<td>Multi-objective policies</td>
-</tr>
-</tbody>
-</table>
-<blockquote>
-<p>Scalarisation explains why hyperparameters like <span class="arithmatex">\(\lambda\)</span> or <span class="arithmatex">\(\beta\)</span> shape trade-offs in modern learning systems — they represent <em>weights</em> on a hidden multi-objective frontier.</p>
-</blockquote>
-<hr>
-<h2 id="107-geometry-and-visualization">10.7 Geometry and Visualization<a class="headerlink" href="#107-geometry-and-visualization" title="Permanent link">¶</a></h2>
-<ul>
-<li>The Pareto frontier is the image of optimal trade-offs in objective space.  </li>
-<li>Scalarisation corresponds to taking supporting hyperplanes with normal vector <span class="arithmatex">\(w\)</span>.  </li>
-<li>The shape of the frontier reveals whether the problem is convex:</li>
-<li>Convex frontier → smooth trade-offs, all reachable by weighted sums.  </li>
-<li>Nonconvex frontier → gaps requiring <span class="arithmatex">\(\varepsilon\)</span>-constraints or evolutionary methods.</li>
-</ul>
-<hr>
-<h2 id="108-summary-and-outlook">10.8 Summary and Outlook<a class="headerlink" href="#108-summary-and-outlook" title="Permanent link">¶</a></h2>
-<table>
-<thead>
-<tr>
-<th>Concept</th>
-<th>Interpretation</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Pareto optimality</td>
-<td>No objective can improve without worsening another</td>
-</tr>
-<tr>
-<td>Weighted-sum scalarisation</td>
-<td>Lagrangian combination of convex objectives</td>
-</tr>
-<tr>
-<td><span class="arithmatex">\(\varepsilon\)</span>-constraint</td>
-<td>One objective minimized, others bounded</td>
-</tr>
-<tr>
-<td>Regularisation</td>
-<td>Hidden scalarisation in ML</td>
-</tr>
-<tr>
-<td>Duality connection</td>
-<td>Weights = Lagrange multipliers</td>
-</tr>
-<tr>
-<td>Pareto frontier</td>
-<td>Boundary of optimal trade-offs</td>
-</tr>
-</tbody>
-</table>
-<p>Key insight:<br>
-Pareto optimality unifies diverse ML techniques — from regularisation to variational inference — under one geometric lens: balancing competing convex objectives.</p>
+Parameter <span class="arithmatex">\(\beta\)</span> moves the solution along the Pareto frontier between data fidelity and disentanglement.</p>
 
 
 

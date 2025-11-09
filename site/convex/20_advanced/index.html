@@ -87,7 +87,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#chapter-14-advanced-large-scale-and-structured-methods" class="md-skip">
+        <a href="#chapter-15-advanced-large-scale-and-structured-methods" class="md-skip">
           Skip to content
         </a>
       
@@ -873,7 +873,7 @@
   
   
   <span class="md-ellipsis">
-    Cheat Sheets
+    Deep Learning
     
   </span>
   
@@ -883,6 +883,143 @@
         
         <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            Deep Learning
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../deeplearning/1_intro/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    1. Introduction to Deep Learning Optimization
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../deeplearning/1_intro/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    1. Introduction to Deep Learning Optimization
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../deep_learning/1_intro.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    3. Regularization Techniques in Deep Learning
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../deep_learning/1_intro.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    4. Advanced Topics in Deep Learning Optimization
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5">
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Cheat Sheets
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
             <span class="md-nav__icon md-icon"></span>
             Cheat Sheets
           </label>
@@ -933,10 +1070,10 @@
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5">
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6">
         
           
-          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
             
   
   
@@ -949,8 +1086,8 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_5">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
             <span class="md-nav__icon md-icon"></span>
             Appendices
           </label>
@@ -1202,297 +1339,288 @@
   
 
 
-<h1 id="chapter-14-advanced-large-scale-and-structured-methods">Chapter 14: Advanced Large-Scale and Structured Methods<a class="headerlink" href="#chapter-14-advanced-large-scale-and-structured-methods" title="Permanent link">¶</a></h1>
-<p>In Chapter 9 we focused on “classical convex solvers”: gradient methods, accelerated methods, Newton and quasi-Newton methods, projected/proximal methods, and interior-point methods. Those are the canonical tools of convex optimisation.</p>
-<p>This chapter moves one step further.</p>
-<p>Here we study methods that:</p>
+<h1 id="chapter-15-advanced-large-scale-and-structured-methods">Chapter 15: Advanced Large-Scale and Structured Methods<a class="headerlink" href="#chapter-15-advanced-large-scale-and-structured-methods" title="Permanent link">¶</a></h1>
+<p>Modern convex optimization often operates at massive scales — millions of variables, billions of data points, or constraints distributed across devices and networks.<br>
+Classical Newton or interior-point algorithms, while theoretically elegant, become computationally impractical in these regimes.  </p>
+<p>This chapter introduces methods that exploit structure, sparsity, separability, and stochasticity to solve large-scale convex problems efficiently.<br>
+These ideas underpin the optimization engines behind most machine learning systems.</p>
+<h2 id="151-motivation-structure-and-scale">15.1 Motivation: Structure and Scale<a class="headerlink" href="#151-motivation-structure-and-scale" title="Permanent link">¶</a></h2>
+<p>In large-scale convex optimization, the difficulty lies not in theory but in computation.</p>
 <ul>
-<li>exploit problem structure (sparsity, separability, block structure),</li>
-<li>scale to extremely high dimensions,</li>
-<li>or are widely used in practice for machine learning and signal processing — including in problems that are not convex.</li>
+<li>Memory limits: Storing the full Hessian or even the gradient can be infeasible.  </li>
+<li>Data size: Evaluating the objective over the full dataset is expensive.  </li>
+<li>Distributed data: Information may be spread across machines or devices.  </li>
+<li>Sparsity and separability: Many objectives decompose nicely into smaller components.</li>
 </ul>
-<p>Some of these methods were first analysed in the convex setting (often with strong guarantees), and then adopted — sometimes recklessly — in the nonconvex world (training neural nets, matrix factorisation, etc.). You’ll absolutely see them in modern optimisation and ML code.</p>
-<p>We’ll cover:</p>
-<ol>
-<li>Coordinate (block) descent,</li>
-<li>Stochastic gradient and mini-batch methods,</li>
-<li>ADMM (Alternating Direction Method of Multipliers),</li>
-<li>Proximal coordinate / coordinate proximal variants,</li>
-<li>Majorization–minimization and iterative reweighted schemes.</li>
-</ol>
-<p>Throughout we’ll emphasise:
-- When they are provably correct for convex problems,
-- Why people also use them in nonconvex problems.</p>
-<h2 id="101-coordinate-descent-and-block-coordinate-descent">10.1 Coordinate descent and block coordinate descent<a class="headerlink" href="#101-coordinate-descent-and-block-coordinate-descent" title="Permanent link">¶</a></h2>
-<h3 id="1011-idea">10.1.1 Idea<a class="headerlink" href="#1011-idea" title="Permanent link">¶</a></h3>
-<p>Instead of updating all coordinates of <span class="arithmatex">\(x\)</span> at once using a full gradient or Newton direction, we update one coordinate (or one block of coordinates) at a time, holding the others fixed.</p>
-<p>Suppose we want to minimise a convex function
+<p>Thus, the goal is to design algorithms that make incremental or local progress while exploiting the structure of the problem.</p>
+<p>Typical forms include:
 <script type="math/tex; mode=display">
-\min_x F(x),
+f(x) = \frac{1}{N}\sum_{i=1}^N f_i(x) + R(x),
 </script>
-and write <span class="arithmatex">\(x = (x_1, x_2, \dots, x_p)\)</span> in coordinates or blocks.<br>
-Coordinate descent cycles through <span class="arithmatex">\(i = 1,2,\dots,p\)</span> and solves (or approximately solves)
+where:
+- each <span class="arithmatex">\(f_i(x)\)</span> represents a data-sample loss term, and<br>
+- <span class="arithmatex">\(R(x)\)</span> is a regularizer (possibly nonsmooth, such as <span class="arithmatex">\(\lambda\|x\|_1\)</span>).</p>
+<h2 id="152-coordinate-descent">15.2 Coordinate Descent<a class="headerlink" href="#152-coordinate-descent" title="Permanent link">¶</a></h2>
+<p>Coordinate descent updates a single variable (or a small block) at a time while holding others fixed.  </p>
+<h3 id="algorithm">Algorithm<a class="headerlink" href="#algorithm" title="Permanent link">¶</a></h3>
+<p>Given <span class="arithmatex">\(x^{(k)}\)</span>, choose coordinate <span class="arithmatex">\(i\)</span> and update:
 <script type="math/tex; mode=display">
-x_i^{(k+1)}
-=
-\arg\min_{z} \; F\big(x_1^{(k+1)}, \dots, x_{i-1}^{(k+1)}, z, x_{i+1}^{(k)}, \dots, x_p^{(k)}\big).
+x_i^{(k+1)} = \arg\min_{z} f(x_1^{(k+1)}, \ldots, x_{i-1}^{(k+1)}, z, x_{i+1}^{(k)}, \ldots, x_n^{(k)}).
 </script>
 </p>
-<p>In other words: update coordinate <span class="arithmatex">\(i\)</span> by optimising over just that coordinate (or block), treating the rest as constants.</p>
-<h3 id="1012-why-this-can-be-fast">10.1.2 Why this can be fast<a class="headerlink" href="#1012-why-this-can-be-fast" title="Permanent link">¶</a></h3>
+<p>This can be seen as projecting the gradient onto the coordinate directions. For separable problems, it is computationally much cheaper than full gradient updates.</p>
 <ul>
 <li>Each subproblem is often 1D (or low-dimensional), so it may have a closed form.</li>
 <li>For problems with separable structure — e.g. sums over features, or regularisers like <span class="arithmatex">\(\|x\|_1 = \sum_i |x_i|\)</span> — the coordinate update is extremely cheap.</li>
 <li>You never form the full gradient or solve a large linear system; you just operate on pieces.</li>
 </ul>
 <p>This is especially attractive in high dimensions (millions of features), where a full Newton step would be absurdly expensive.</p>
-<h3 id="1013-convergence-in-convex-problems">10.1.3 Convergence in convex problems<a class="headerlink" href="#1013-convergence-in-convex-problems" title="Permanent link">¶</a></h3>
-<p>For many convex, continuously differentiable problems with certain regularity (e.g. strictly convex objective, or convex plus separable nonsmooth terms), cyclic coordinate descent is guaranteed to converge to the global minimiser. There are also randomized versions that pick a coordinate uniformly at random, which often give cleaner expected-rate guarantees.</p>
-<p>For <span class="arithmatex">\(\ell_1\)</span>-regularised least squares, i.e.
+<h3 id="convergence">Convergence<a class="headerlink" href="#convergence" title="Permanent link">¶</a></h3>
+<p>If <span class="arithmatex">\(f\)</span> is convex with Lipschitz-continuous partial derivatives, cyclic or randomized coordinate descent converges to the global optimum.</p>
+<h3 id="ml-context">ML Context<a class="headerlink" href="#ml-context" title="Permanent link">¶</a></h3>
+<p>Coordinate descent is widely used in:
+- LASSO and Elastic Net regression (where updates are closed-form soft-thresholding),
+- logistic regression with <span class="arithmatex">\(\ell_1\)</span> penalty,
+- matrix factorization and dictionary learning.</p>
+<h2 id="153-stochastic-gradient-and-variance-reduced-methods">15.3 Stochastic Gradient and Variance-Reduced Methods<a class="headerlink" href="#153-stochastic-gradient-and-variance-reduced-methods" title="Permanent link">¶</a></h2>
+<p>When the dataset is large, computing the full gradient
 <script type="math/tex; mode=display">
-\min_x \; \tfrac12 \|Ax - b\|_2^2 + \lambda \|x\|_1,
+\nabla f(x) = \frac{1}{N} \sum_{i=1}^N \nabla f_i(x)
 </script>
-each coordinate update becomes a scalar soft-thresholding step — so coordinate descent becomes an extremely efficient sparse regression solver.</p>
-<h3 id="1014-block-coordinate-descent">10.1.4 Block coordinate descent<a class="headerlink" href="#1014-block-coordinate-descent" title="Permanent link">¶</a></h3>
-<p>When coordinates are naturally grouped (for example, <span class="arithmatex">\(x\)</span> is really <span class="arithmatex">\((x^{(1)}, x^{(2)}, \dots)\)</span> where each <span class="arithmatex">\(x^{(j)}\)</span> is a vector of parameters for a submodule or layer), we generalise to block coordinate descent. Each step solves
+is prohibitive. Instead, stochastic methods use a random mini-batch <span class="arithmatex">\(\mathcal{B}\)</span> to estimate it.</p>
+<h3 id="basic-sgd">Basic SGD<a class="headerlink" href="#basic-sgd" title="Permanent link">¶</a></h3>
+<p>
 <script type="math/tex; mode=display">
-x^{(j)} \leftarrow \arg\min_{z} F(\dots, z, \dots)\,.
+x_{k+1} = x_k - \eta_k \nabla f_{i_k}(x_k),
 </script>
-</p>
-<p>Block coordinate descent is the backbone of many alternating minimisation schemes in signal processing, matrix factorisation, dictionary learning, etc.</p>
-<h3 id="1015-use-in-nonconvex-problems">10.1.5 Use in nonconvex problems<a class="headerlink" href="#1015-use-in-nonconvex-problems" title="Permanent link">¶</a></h3>
-<p>Even when <span class="arithmatex">\(F\)</span> is not convex, people still run block coordinate descent (under names like “alternating minimisation” or “alternating least squares”), because:</p>
+where <span class="arithmatex">\(i_k\)</span> is a random index or mini-batch.</p>
+<p>The step size <span class="arithmatex">\(\eta_k\)</span> typically decays with <span class="arithmatex">\(k\)</span>, such as <span class="arithmatex">\(\eta_k = c / \sqrt{k}\)</span>.</p>
+<h3 id="convergence_1">Convergence<a class="headerlink" href="#convergence_1" title="Permanent link">¶</a></h3>
 <ul>
-<li>each block subproblem might be convex even if the joint problem isn’t,</li>
-<li>it is easy to implement,</li>
-<li>it often works “well enough” in practice.</li>
+<li>For convex <span class="arithmatex">\(f\)</span>, SGD achieves expected error <span class="arithmatex">\(O(1/\sqrt{k})\)</span>.  </li>
+<li>For strongly convex <span class="arithmatex">\(f\)</span>, using decreasing <span class="arithmatex">\(\eta_k\)</span> gives <span class="arithmatex">\(O(1/k)\)</span> convergence.  </li>
+<li>In practice, adaptive methods (Adam, RMSProp) improve stability.</li>
 </ul>
-<p>You see this in low-rank matrix factorisation (recommender systems), where you fix all user factors and update item factors, then swap. There are no global guarantees in general (no convexity), but empirically it converges to useful solutions.</p>
-<p>So:  </p>
-<ul>
-<li>In convex settings → provable global convergence.  </li>
-<li>In nonconvex settings → heuristic that often finds acceptable stationary points.</li>
-</ul>
-<hr>
-<h2 id="102-stochastic-gradient-and-mini-batch-methods">10.2 Stochastic gradient and mini-batch methods<a class="headerlink" href="#102-stochastic-gradient-and-mini-batch-methods" title="Permanent link">¶</a></h2>
-<h3 id="1021-full-gradient-vs-stochastic-gradient">10.2.1 Full gradient vs stochastic gradient<a class="headerlink" href="#1021-full-gradient-vs-stochastic-gradient" title="Permanent link">¶</a></h3>
-<p>In Chapter 9, gradient descent uses the full gradient <span class="arithmatex">\(\nabla f(x)\)</span> at each step. In large-scale learning problems, <span class="arithmatex">\(f\)</span> is almost always an average over data:
+<h3 id="variance-reduction">Variance Reduction<a class="headerlink" href="#variance-reduction" title="Permanent link">¶</a></h3>
+<p>Methods like SVRG (Stochastic Variance-Reduced Gradient) and SAGA combine stochastic and deterministic steps to reduce variance:
 <script type="math/tex; mode=display">
-f(x) = \frac{1}{N} \sum_{i=1}^N \ell_i(x),
+\nabla f_{SVRG}(x) = \nabla f_i(x) - \nabla f_i(\tilde{x}) + \nabla f(\tilde{x}),
 </script>
-where <span class="arithmatex">\(\ell_i\)</span> is the loss on sample <span class="arithmatex">\(i\)</span>.</p>
-<p>Computing <span class="arithmatex">\(\nabla f(x)\)</span> exactly costs <span class="arithmatex">\(O(N)\)</span> per step, which is huge.</p>
-<p>Stochastic Gradient Descent (SGD) replaces <span class="arithmatex">\(\nabla f(x)\)</span> with an unbiased estimate. At each iteration we:</p>
-<ol>
-<li>Sample <span class="arithmatex">\(i\)</span> uniformly from <span class="arithmatex">\(\{1,\dots,N\}\)</span>,</li>
-<li>Use <span class="arithmatex">\(g_k = \nabla \ell_i(x_k)\)</span>,</li>
-<li>Update
-   <script type="math/tex; mode=display">
-   x_{k+1} = x_k - \alpha_k g_k.
-   </script>
-</li>
-</ol>
-<p>This is extremely cheap: one data point (or a small mini-batch) per step.</p>
-<h3 id="1022-convergence-in-convex-problems">10.2.2 Convergence in convex problems<a class="headerlink" href="#1022-convergence-in-convex-problems" title="Permanent link">¶</a></h3>
-<p>For convex problems, with diminishing step sizes <span class="arithmatex">\(\alpha_k\)</span>, SGD converges to the global optimum in expectation, and more refined analyses show <span class="arithmatex">\(O(1/\sqrt{k})\)</span> suboptimality rates for general convex Lipschitz losses, improving to <span class="arithmatex">\(O(1/k)\)</span> in strongly convex smooth cases with appropriate averaging.</p>
-<p>That is slower (per iteration) than deterministic gradient descent in theory, but each iteration is <em>much</em> cheaper. So SGD wins in wall-clock time for huge <span class="arithmatex">\(N\)</span>.</p>
-<h3 id="1023-momentum-adam-rmsprop-nonconvex-practice-convex-roots">10.2.3 Momentum, Adam, RMSProp (nonconvex practice, convex roots)<a class="headerlink" href="#1023-momentum-adam-rmsprop-nonconvex-practice-convex-roots" title="Permanent link">¶</a></h3>
-<p>In modern machine learning, methods like momentum SGD, Adam, RMSProp, Adagrad, etc., are used routinely to train enormous nonconvex models (deep networks). These are variations of first-order methods with:</p>
+where <span class="arithmatex">\(\tilde{x}\)</span> is a reference (snapshot) point.<br>
+These achieve linear convergence for strongly convex functions, bridging the gap between SGD and full gradient descent.</p>
+<h3 id="ml-context_1">ML Context<a class="headerlink" href="#ml-context_1" title="Permanent link">¶</a></h3>
 <ul>
-<li>adaptive step sizes,</li>
-<li>running averages of squared gradients,</li>
-<li>momentum terms.</li>
+<li>Deep neural networks rely almost exclusively on SGD and its adaptive variants.  </li>
+<li>Large-scale convex ML (logistic regression, SVM) also uses SGD or SVRG for efficiency.</li>
 </ul>
-<p>While the most common use is for nonconvex problems, many of these methods (e.g. Adagrad-type adaptive steps, momentum acceleration) have their theoretical roots in convex optimisation and mirror-descent style analyses.</p>
-<p>So stochastic first-order methods are:</p>
-<ul>
-<li>rigorous for convex problems,</li>
-<li>widely used heuristically for nonconvex problems.</li>
-</ul>
-<hr>
-<h2 id="103-admm-alternating-direction-method-of-multipliers">10.3 ADMM: Alternating Direction Method of Multipliers<a class="headerlink" href="#103-admm-alternating-direction-method-of-multipliers" title="Permanent link">¶</a></h2>
-<p>ADMM is one of the most important algorithms in modern convex optimisation for structured problems. It is used constantly in signal processing, sparse learning, distributed optimisation, and large-scale statistical estimation.</p>
-<h3 id="1031-problem-form">10.3.1 Problem form<a class="headerlink" href="#1031-problem-form" title="Permanent link">¶</a></h3>
-<p>ADMM solves problems of the form
+<h2 id="154-proximal-and-composite-optimization">15.4 Proximal and Composite Optimization<a class="headerlink" href="#154-proximal-and-composite-optimization" title="Permanent link">¶</a></h2>
+<p>Many modern objectives combine a smooth loss and a nonsmooth regularizer:
 <script type="math/tex; mode=display">
-\min_{x,z} \; f(x) + g(z)
-\quad
-\text{subject to} \quad
-Ax + Bz = c,
+\min_x \; g(x) + R(x),
 </script>
-where <span class="arithmatex">\(f\)</span> and <span class="arithmatex">\(g\)</span> are convex.</p>
-<p>This form appears everywhere:</p>
-<ul>
-<li><span class="arithmatex">\(f\)</span> is a data-fit term,</li>
-<li><span class="arithmatex">\(g\)</span> is a regulariser or constraint indicator,</li>
-<li><span class="arithmatex">\(Ax + Bz = c\)</span> ties them together.</li>
-</ul>
-<p>For example, LASSO can be written by introducing a copy variable and enforcing <span class="arithmatex">\(x=z\)</span>.</p>
-<h3 id="1032-augmented-lagrangian">10.3.2 Augmented Lagrangian<a class="headerlink" href="#1032-augmented-lagrangian" title="Permanent link">¶</a></h3>
-<p>ADMM applies the augmented Lagrangian method, which is like dual ascent but with a quadratic penalty on constraint violation. The augmented Lagrangian is
+where <span class="arithmatex">\(g\)</span> is differentiable with Lipschitz gradient and <span class="arithmatex">\(R\)</span> is convex but possibly nonsmooth.</p>
+<p>The proximal gradient method updates as:
 <script type="math/tex; mode=display">
-\mathcal{L}_\rho(x,z,y)
-=
-f(x) + g(z)
-+ y^\top (Ax + Bz - c)
-+ \frac{\rho}{2} \|Ax + Bz - c\|_2^2,
+x_{k+1} = \mathrm{prox}_{\alpha R}(x_k - \alpha \nabla g(x_k)),
 </script>
-with dual variable (Lagrange multiplier) <span class="arithmatex">\(y\)</span> and penalty parameter <span class="arithmatex">\(\rho&gt;0\)</span>.</p>
-<h3 id="1033-the-admm-updates-two-block-case">10.3.3 The ADMM updates (two-block case)<a class="headerlink" href="#1033-the-admm-updates-two-block-case" title="Permanent link">¶</a></h3>
-<p>Iterate the following:
-1. <span class="arithmatex">\(x\)</span>-update:
-   <script type="math/tex; mode=display">
-   x^{k+1}
-   :=
-   \arg\min_x \mathcal{L}_\rho(x, z^k, y^k)
-   </script>
-   (holding <span class="arithmatex">\(z,y\)</span> fixed).
-2. <span class="arithmatex">\(z\)</span>-update:
-   <script type="math/tex; mode=display">
-   z^{k+1}
-   :=
-   \arg\min_z \mathcal{L}_\rho(x^{k+1}, z, y^k).
-   </script>
-3. Dual update:
-   <script type="math/tex; mode=display">
-   y^{k+1}
-   :=
-   y^k
-   + \rho (A x^{k+1} + B z^{k+1} - c).
-   </script>
-</p>
-<p>That is: optimise <span class="arithmatex">\(x\)</span> given <span class="arithmatex">\(z\)</span>, optimise <span class="arithmatex">\(z\)</span> given <span class="arithmatex">\(x\)</span>, then update the multiplier.</p>
-<h3 id="1034-why-admm-is-powerful">10.3.4 Why ADMM is powerful<a class="headerlink" href="#1034-why-admm-is-powerful" title="Permanent link">¶</a></h3>
-<ul>
-<li>Each subproblem often becomes simple and separable:</li>
-<li>The <span class="arithmatex">\(x\)</span>-update might be a least-squares or a smooth convex minimisation,</li>
-<li>The <span class="arithmatex">\(z\)</span>-update might be a proximal operator (soft-thresholding, projection, etc.).</li>
-<li>You never have to solve the full coupled problem in one shot.</li>
-<li>ADMM is embarrassingly parallel / distributable: different blocks can be solved on different machines then averaged via the multiplier step.</li>
-</ul>
-<h3 id="1035-convergence">10.3.5 Convergence<a class="headerlink" href="#1035-convergence" title="Permanent link">¶</a></h3>
-<p>For convex <span class="arithmatex">\(f\)</span> and <span class="arithmatex">\(g\)</span>, under mild assumptions (closed proper convex functions, some regularity), ADMM converges to a solution of the primal problem, and the dual variable <span class="arithmatex">\(y^k\)</span> converges to an optimal dual multiplier (Boyd and Vandenberghe, 2004, Ch. 5; also classical ADMM literature).</p>
-<p>This is deeply tied to duality (Chapter 8): ADMM is best understood as a method of solving the dual with decomposability, but returning primal iterates along the way.</p>
-<h3 id="1036-use-in-nonconvex-problems">10.3.6 Use in nonconvex problems<a class="headerlink" href="#1036-use-in-nonconvex-problems" title="Permanent link">¶</a></h3>
-<p>In practice, ADMM is often extended to nonconvex problems by simply “pretending it’s fine.” Each subproblem is solved anyway, and the dual variable is updated the same way. The method is no longer guaranteed to find a global minimiser — but it often finds a stationary point that is good enough (e.g. in nonconvex regularised matrix completion, dictionary learning, etc.).</p>
-<p>You will see ADMM used in imaging, sparse coding, variational inference, etc., even when parts of the model are not convex.</p>
-<hr>
-<h2 id="104-proximal-coordinate-and-coordinate-prox-methods">10.4 Proximal coordinate and coordinate-prox methods<a class="headerlink" href="#104-proximal-coordinate-and-coordinate-prox-methods" title="Permanent link">¶</a></h2>
-<p>There’s a natural fusion of the ideas in Sections 10.1 (coordinate descent) and 9.5 (proximal methods): proximal coordinate descent.</p>
-<h3 id="1041-problem-form">10.4.1 Problem form<a class="headerlink" href="#1041-problem-form" title="Permanent link">¶</a></h3>
-<p>Consider composite convex objectives
+where the proximal operator is:
 <script type="math/tex; mode=display">
-F(x) = f(x) + R(x),
-</script>
-with <span class="arithmatex">\(f\)</span> smooth convex and <span class="arithmatex">\(R\)</span> convex, possibly nonsmooth and separable across coordinates or blocks:
-<script type="math/tex; mode=display">
-R(x) = \sum_{j=1}^p R_j(x_j).
+\mathrm{prox}_{\alpha R}(v) = \arg\min_x \left( R(x) + \frac{1}{2\alpha}\|x-v\|^2 \right).
 </script>
 </p>
-<h3 id="1042-algorithm-sketch">10.4.2 Algorithm sketch<a class="headerlink" href="#1042-algorithm-sketch" title="Permanent link">¶</a></h3>
-<p>At each iteration, pick coordinate (or block) <span class="arithmatex">\(j\)</span>, and update only <span class="arithmatex">\(x_j\)</span> by solving the 1D (or low-dim) proximal subproblem:
+<h3 id="intuition">Intuition<a class="headerlink" href="#intuition" title="Permanent link">¶</a></h3>
+<ul>
+<li>The gradient step moves in a descent direction for <span class="arithmatex">\(g\)</span>.  </li>
+<li>The proximal step performs a local “denoising” or shrinkage under <span class="arithmatex">\(R\)</span> (e.g., soft-thresholding for <span class="arithmatex">\(\ell_1\)</span> norms).</li>
+</ul>
+<h3 id="ml-context_2">ML Context<a class="headerlink" href="#ml-context_2" title="Permanent link">¶</a></h3>
+<p>Proximal methods underpin:
+- Sparse regression (LASSO, Elastic Net),
+- matrix completion and compressed sensing,
+- total-variation image denoising,
+- low-rank and structured regularization.</p>
+<h2 id="155-alternating-direction-method-of-multipliers-admm">15.5 Alternating Direction Method of Multipliers (ADMM)<a class="headerlink" href="#155-alternating-direction-method-of-multipliers-admm" title="Permanent link">¶</a></h2>
+<p>When an objective separates into parts that depend on different variables, ADMM enables efficient distributed optimization.</p>
+<p>Consider:
 <script type="math/tex; mode=display">
-x_j^{(k+1)}
-=
-\arg\min_{z}
-\left[
-\underbrace{
-f\big(x_1^{(k+1)}, \dots, x_{j-1}^{(k+1)}, z, x_{j+1}^{(k)}, \dots \big)
-}_{\text{local linear/quadratic approximation}}
-+ R_j(z)
-\right].
+\min_{x,z}\; f(x) + g(z) \quad \text{s.t. } A x + B z = c.
 </script>
 </p>
-<p>Often we linearise <span class="arithmatex">\(f\)</span> around the current point in that block and add a quadratic term, just like a proximal gradient step but on one coordinate at a time.</p>
-<h3 id="1043-why-its-useful">10.4.3 Why it’s useful<a class="headerlink" href="#1043-why-its-useful" title="Permanent link">¶</a></h3>
-<ul>
-<li>When <span class="arithmatex">\(R\)</span> is separable (e.g. <span class="arithmatex">\(\ell_1\)</span> sparsity penalties), each coordinate subproblem becomes a scalar shrinkage / thresholding step.</li>
-<li>Memory footprint is tiny.</li>
-<li>You get sparsity “for free” as many coordinates get driven to zero and stay there.</li>
-<li>Randomised versions (pick a coordinate at random) are simple and have good expected convergence guarantees in convex problems.</li>
-</ul>
-<h3 id="1044-use-in-nonconvex-settings">10.4.4 Use in nonconvex settings<a class="headerlink" href="#1044-use-in-nonconvex-settings" title="Permanent link">¶</a></h3>
-<p>People run proximal coordinate descent in nonconvex sparse learning (e.g. <span class="arithmatex">\(\ell_0\)</span>-like surrogates, nonconvex penalties for variable selection). The convex convergence guarantees are gone, but empirically the method still often converges to a structured, interpretable solution.</p>
-<hr>
-<h2 id="105-majorizationminimization-mm-and-reweighted-schemes">10.5 Majorization–minimization (MM) and reweighted schemes<a class="headerlink" href="#105-majorizationminimization-mm-and-reweighted-schemes" title="Permanent link">¶</a></h2>
-<p>Majorization–minimization (MM) is a general pattern:</p>
-<ol>
-<li>Build a simple convex surrogate that upper-bounds (majorises) your objective at the current iterate,</li>
-<li>Minimise the surrogate,</li>
-<li>Repeat.</li>
-</ol>
-<p>It is sometimes called “iterative reweighted” or “successive convex approximation.”</p>
-<h3 id="1051-mm-template">10.5.1 MM template<a class="headerlink" href="#1051-mm-template" title="Permanent link">¶</a></h3>
-<p>Suppose we want to minimise <span class="arithmatex">\(F(x)\)</span> (convex or not). We construct <span class="arithmatex">\(G(x \mid x^{(k)})\)</span> such that:</p>
-<ul>
-<li><span class="arithmatex">\(G(x^{(k)} \mid x^{(k)}) = F(x^{(k)})\)</span> (touches at current iterate),</li>
-<li><span class="arithmatex">\(G(x \mid x^{(k)}) \ge F(x)\)</span> for all <span class="arithmatex">\(x\)</span> (majorises <span class="arithmatex">\(F\)</span>),</li>
-<li><span class="arithmatex">\(G(\cdot \mid x^{(k)})\)</span> is easy to minimise (often convex, often separable).</li>
-</ul>
-<p>Then we set
+<h3 id="augmented-lagrangian">Augmented Lagrangian<a class="headerlink" href="#augmented-lagrangian" title="Permanent link">¶</a></h3>
+<div class="arithmatex">\[
+L_\rho(x,z,y) = f(x) + g(z) + y^T(Ax + Bz - c) + \frac{\rho}{2}\|A x + B z - c\|^2.
+\]</div>
+<h3 id="iterations">Iterations<a class="headerlink" href="#iterations" title="Permanent link">¶</a></h3>
+<p>ADMM performs alternating updates:
 <script type="math/tex; mode=display">
-x^{(k+1)} \in \arg\min_x G(x \mid x^{(k)}).
+\begin{aligned}
+x^{k+1} &= \arg\min_x L_\rho(x, z^k, y^k),\\
+z^{k+1} &= \arg\min_z L_\rho(x^{k+1}, z, y^k),\\
+y^{k+1} &= y^k + \rho (A x^{k+1} + B z^{k+1} - c).
+\end{aligned}
 </script>
 </p>
-<p>This guarantees <span class="arithmatex">\(F(x^{(k+1)}) \le F(x^{(k)})\)</span>. So the objective is monotonically nonincreasing.</p>
-<h3 id="1052-iterative-reweighted-ell_1-ell_2">10.5.2 Iterative reweighted <span class="arithmatex">\(\ell_1\)</span> / <span class="arithmatex">\(\ell_2\)</span><a class="headerlink" href="#1052-iterative-reweighted-ell_1-ell_2" title="Permanent link">¶</a></h3>
-<p>A classical example: to promote sparsity or robustness, you might want to minimise something like
+<h3 id="interpretation">Interpretation<a class="headerlink" href="#interpretation" title="Permanent link">¶</a></h3>
+<p>Each step solves an easier subproblem involving only part of the variables, followed by a dual update to enforce consistency.<br>
+ADMM thus merges ideas from dual ascent and penalty methods.</p>
+<h3 id="convergence_2">Convergence<a class="headerlink" href="#convergence_2" title="Permanent link">¶</a></h3>
+<p>For convex <span class="arithmatex">\(f\)</span> and <span class="arithmatex">\(g\)</span>, ADMM converges to the global optimum.<br>
+It is particularly effective when the subproblems are simple (e.g., proximal operators).</p>
+<h3 id="ml-context_3">ML Context<a class="headerlink" href="#ml-context_3" title="Permanent link">¶</a></h3>
+<p>ADMM is a key tool for:
+- distributed LASSO and logistic regression,
+- matrix decomposition and factorization,
+- consensus optimization in federated learning,
+- distributed deep learning regularization.</p>
+<h2 id="156-majorizationminimization-mm-and-em-algorithms">15.6 Majorization–Minimization (MM) and EM Algorithms<a class="headerlink" href="#156-majorizationminimization-mm-and-em-algorithms" title="Permanent link">¶</a></h2>
+<p>The MM principle iteratively minimizes a surrogate function that upper-bounds the objective.</p>
+<p>Given a current point <span class="arithmatex">\(x_k\)</span>, construct a surrogate <span class="arithmatex">\(g(x|x_k)\)</span> such that:
 <script type="math/tex; mode=display">
-\sum_i w_i(x) \, |x_i|
+g(x|x_k) \ge f(x), \quad g(x_k|x_k) = f(x_k).
 </script>
-or a concave penalty on residuals. You replace that concave / nonconvex penalty with a weighted convex penalty that depends on the previous iterate. Then you update the weights and solve again.</p>
-<p>In the convex world, MM is just another way to design descent methods.<br>
-In the nonconvex world, MM is a way to attack nonconvex penalties using a sequence of convex subproblems.</p>
-<p>This is extremely common in robust regression, compressed sensing with nonconvex sparsity surrogates, and low-rank matrix recovery.</p>
-<h3 id="1053-relation-to-proximal-methods">10.5.3 Relation to proximal methods<a class="headerlink" href="#1053-relation-to-proximal-methods" title="Permanent link">¶</a></h3>
-<p>MM can often be interpreted as doing a proximal step on a locally quadratic or linearised upper bound. In that sense, it is philosophically close to proximal gradient (Chapter 9) and to Newton-like local quadratic approximation (Chapter 9), but with the additional twist that we are allowed to handle nonconvex <span class="arithmatex">\(F\)</span> as long as we <em>majorise</em> it with something convex.</p>
-<hr>
-<h2 id="106-summary-and-perspective">10.6 Summary and perspective<a class="headerlink" href="#106-summary-and-perspective" title="Permanent link">¶</a></h2>
-<p>We’ve now seen several algorithmic families that are particularly important at large scale and/or under structural constraints:</p>
-<ol>
-<li>
-<p>Coordinate descent / block coordinate descent </p>
+</p>
+<p>Then update:
+<script type="math/tex; mode=display">
+x_{k+1} = \arg\min_x g(x|x_k).
+</script>
+</p>
+<p>Each iteration ensures <span class="arithmatex">\(f(x_{k+1}) \le f(x_k)\)</span>.</p>
+<h3 id="ml-context_4">ML Context<a class="headerlink" href="#ml-context_4" title="Permanent link">¶</a></h3>
 <ul>
-<li>Updates one coordinate block at a time.  </li>
-<li>Converges globally for many convex problems.  </li>
-<li>Scales extremely well in high dimensions.  </li>
-<li>Used heuristically in nonconvex alternating minimisation.</li>
+<li>The Expectation–Maximization (EM) algorithm is an MM method for latent-variable models.  </li>
+<li>IRLS (Iteratively Reweighted Least Squares) for logistic regression and <span class="arithmatex">\(\ell_p\)</span> regression follows the same idea.  </li>
+<li>MM methods guarantee descent even for complex, nonconvex objectives.</li>
 </ul>
-</li>
-<li>
-<p>Stochastic and mini-batch gradient methods  </p>
+<h2 id="157-distributed-and-parallel-optimization">15.7 Distributed and Parallel Optimization<a class="headerlink" href="#157-distributed-and-parallel-optimization" title="Permanent link">¶</a></h2>
+<p>For large-scale convex problems distributed across multiple nodes, parallel methods are essential.</p>
+<h3 id="synchronous-and-asynchronous-updates">Synchronous and Asynchronous Updates<a class="headerlink" href="#synchronous-and-asynchronous-updates" title="Permanent link">¶</a></h3>
 <ul>
-<li>Use noisy gradient estimates to get cheap iterations.  </li>
-<li>Converge (in expectation) for convex problems.  </li>
-<li>Power all of modern large-scale ML, including nonconvex deep learning.</li>
+<li>Synchronous: all workers compute updates and synchronize (used in federated averaging).  </li>
+<li>Asynchronous: updates proceed without waiting, improving throughput but increasing variance.</li>
 </ul>
-</li>
-<li>
-<p>ADMM (Alternating Direction Method of Multipliers)  </p>
+<h3 id="consensus-optimization">Consensus Optimization<a class="headerlink" href="#consensus-optimization" title="Permanent link">¶</a></h3>
+<p>In distributed convex optimization, one solves
+<script type="math/tex; mode=display">
+\min_{x_1,\dots,x_p} \sum_{i=1}^p f_i(x_i)
+\quad \text{s.t. } x_i = z,
+</script>
+which can be handled by ADMM or primal–dual methods.<br>
+Each machine optimizes its local copy <span class="arithmatex">\(x_i\)</span>, and the shared variable <span class="arithmatex">\(z\)</span> enforces consensus.</p>
+<h3 id="ml-context_5">ML Context<a class="headerlink" href="#ml-context_5" title="Permanent link">¶</a></h3>
 <ul>
-<li>Splits a problem into simpler subproblems linked by linear constraints.  </li>
-<li>Closely tied to duality and KKT (Chapters 7–8).  </li>
-<li>Converges for convex problems.  </li>
-<li>Used everywhere, including nonconvex settings, due to its modularity and parallelisability.</li>
+<li>Federated learning and parameter-server training frameworks (e.g., TensorFlow Distributed, PyTorch DDP) follow this model.  </li>
+<li>Decentralized convex optimization appears in sensor networks and multi-agent control.</li>
 </ul>
-</li>
-<li>
-<p>Proximal coordinate / coordinate-prox methods  </p>
+<h2 id="158-handling-structure-sparsity-and-low-rank">15.8 Handling Structure: Sparsity and Low Rank<a class="headerlink" href="#158-handling-structure-sparsity-and-low-rank" title="Permanent link">¶</a></h2>
+<p>Many convex problems exhibit special structures that algorithms can exploit:</p>
+<table>
+<thead>
+<tr>
+<th>Structure</th>
+<th>Typical Regularizer</th>
+<th>Algorithmic Advantage</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Sparsity</td>
+<td><span class="arithmatex">\(\ell_1\)</span> or group lasso</td>
+<td>Coordinate updates, proximal shrinkage</td>
+</tr>
+<tr>
+<td>Low rank</td>
+<td>nuclear norm <span class="arithmatex">\(\|X\|_*\)</span></td>
+<td>SVD-based proximal step</td>
+</tr>
+<tr>
+<td>Block separability</td>
+<td><span class="arithmatex">\(\sum_i f_i(x_i)\)</span></td>
+<td>Parallel or distributed updates</td>
+</tr>
+<tr>
+<td>Graph structure</td>
+<td>total variation norm</td>
+<td>Local neighborhood computations</td>
+</tr>
+<tr>
+<td>Simplex or probability constraints</td>
+<td>entropy or KL penalty</td>
+<td>Mirror descent, projected methods</td>
+</tr>
+</tbody>
+</table>
+<p>Exploiting such structure yields orders-of-magnitude speedups in both memory and computation.</p>
+<h2 id="159-summary-and-practical-guidance">15.9 Summary and Practical Guidance<a class="headerlink" href="#159-summary-and-practical-guidance" title="Permanent link">¶</a></h2>
+<table>
+<thead>
+<tr>
+<th>Method</th>
+<th>Gradient Access</th>
+<th>Scalability</th>
+<th>Parallelization</th>
+<th>Convexity Required</th>
+<th>Typical ML Uses</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Coordinate Descent</td>
+<td>Partial / coordinate</td>
+<td>High</td>
+<td>Easy</td>
+<td>Convex</td>
+<td>LASSO, sparse models</td>
+</tr>
+<tr>
+<td>SGD / SVRG / SAGA</td>
+<td>Stochastic</td>
+<td>Excellent</td>
+<td>Natural</td>
+<td>Convex / nonconvex</td>
+<td>Deep learning, logistic regression</td>
+</tr>
+<tr>
+<td>Proximal Gradient</td>
+<td>Full gradient + prox</td>
+<td>Moderate–High</td>
+<td>Easy</td>
+<td>Convex</td>
+<td>Composite objectives</td>
+</tr>
+<tr>
+<td>ADMM</td>
+<td>Separable subproblems</td>
+<td>High</td>
+<td>Distributed</td>
+<td>Convex</td>
+<td>Consensus, large convex solvers</td>
+</tr>
+<tr>
+<td>MM / EM</td>
+<td>Surrogate-based</td>
+<td>Moderate</td>
+<td>Model-specific</td>
+<td>Convex / nonconvex</td>
+<td>Probabilistic models, IRLS</td>
+</tr>
+<tr>
+<td>Distributed / Federated</td>
+<td>Local gradients</td>
+<td>Very high</td>
+<td>Essential</td>
+<td>Convex / smooth</td>
+<td>Federated learning, large-scale convex optimization</td>
+</tr>
+</tbody>
+</table>
+<h2 id="1510-key-takeaways">15.10 Key Takeaways<a class="headerlink" href="#1510-key-takeaways" title="Permanent link">¶</a></h2>
 <ul>
-<li>Merge sparsity-inducing penalties (Chapter 6) with blockwise updates.  </li>
-<li>Ideal for <span class="arithmatex">\(\ell_1\)</span>-type structure, group lasso, etc.  </li>
-<li>Often extended to nonconvex penalties for even “more sparse” solutions.</li>
+<li>Large-scale convex optimization relies on exploiting structure, stochasticity, and separability.  </li>
+<li>Coordinate and proximal methods handle sparse and composite problems efficiently.  </li>
+<li>Stochastic and variance-reduced methods scale to massive data.  </li>
+<li>ADMM and distributed optimization enable multi-machine or federated settings.  </li>
+<li>MM and EM extend convex ideas to broader nonconvex inference tasks.</li>
 </ul>
-</li>
-<li>
-<p>Majorization–minimization (MM)  </p>
-<ul>
-<li>Iteratively builds and minimises convex surrogates.  </li>
-<li>Guarantees monotone descent of the true objective.  </li>
-<li>Provides a clean bridge from convex optimisation theory into heuristic nonconvex optimisation.</li>
-</ul>
-</li>
-</ol>
 
 
 

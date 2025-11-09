@@ -873,7 +873,7 @@
   
   
   <span class="md-ellipsis">
-    Cheat Sheets
+    Deep Learning
     
   </span>
   
@@ -883,6 +883,143 @@
         
         <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            Deep Learning
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../deeplearning/1_intro/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    1. Introduction to Deep Learning Optimization
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../deeplearning/1_intro/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    1. Introduction to Deep Learning Optimization
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../deep_learning/1_intro.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    3. Regularization Techniques in Deep Learning
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../deep_learning/1_intro.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    4. Advanced Topics in Deep Learning Optimization
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5">
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Cheat Sheets
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
             <span class="md-nav__icon md-icon"></span>
             Cheat Sheets
           </label>
@@ -933,10 +1070,10 @@
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5">
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6">
         
           
-          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
             
   
   
@@ -949,8 +1086,8 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_5">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
             <span class="md-nav__icon md-icon"></span>
             Appendices
           </label>
@@ -1203,30 +1340,41 @@
 
 
 <h1 id="chapter-2-linear-algebra-foundations">Chapter 2: Linear Algebra Foundations<a class="headerlink" href="#chapter-2-linear-algebra-foundations" title="Permanent link">¶</a></h1>
-<p>Convex optimisation is geometric. To talk about convex sets, supporting hyperplanes, projections, and quadratic forms, we need linear algebra. This chapter reviews the specific linear algebra tools we will use throughout: vector spaces, inner products, norms, projections, eigenvalues, and positive semidefinite matrices.</p>
+<p>Linear algebra is the geometry of optimization. A simple motivating example: fitting a linear model <span class="arithmatex">\(x\)</span> to data <span class="arithmatex">\((A,b)\)</span> solves:</p>
+<div class="arithmatex">\[
+\min_x \ \|A x - b\|_2^2.
+\]</div>
+<p>We will see that this is a projection of <span class="arithmatex">\(b\)</span> onto the column space of <span class="arithmatex">\(A\)</span>, and that ideas like rank, nullspace, orthogonality, and conditioning directly control optimization algorithms and convergence.</p>
+<p>This chapter builds the geometric toolkit used throughout convex optimization and machine learning.</p>
 <h2 id="21-vector-spaces-subspaces-and-affine-sets">2.1 Vector spaces, subspaces, and affine sets<a class="headerlink" href="#21-vector-spaces-subspaces-and-affine-sets" title="Permanent link">¶</a></h2>
-<p>A vector space over <span class="arithmatex">\(\mathbb{R}\)</span> is a set <span class="arithmatex">\(V\)</span> equipped with addition and scalar multiplication satisfying the usual axioms: closure, associativity, distributivity, etc. In this book we mostly work with <span class="arithmatex">\(V = \mathbb{R}^n\)</span>.</p>
-<p>A subspace <span class="arithmatex">\(S \subseteq \mathbb{R}^n\)</span> is a subset that:</p>
-<ol>
-<li>contains <span class="arithmatex">\(0\)</span>,</li>
-<li>is closed under addition,</li>
-<li>is closed under scalar multiplication.</li>
-</ol>
-<p>For example, the set of all solutions to <span class="arithmatex">\(Ax = 0\)</span> is a subspace, called the nullspace or kernel of <span class="arithmatex">\(A\)</span>.</p>
-<p>An affine set is a translated subspace. A set <span class="arithmatex">\(A\)</span> is affine if for any <span class="arithmatex">\(x,y \in A\)</span> and any <span class="arithmatex">\(\theta \in \mathbb{R}\)</span>,<br>
+<p>A vector space over <span class="arithmatex">\(\mathbb{R}\)</span> is a set <span class="arithmatex">\(V\)</span> equipped with addition and scalar multiplication satisfying the usual axioms: closure, associativity, commutativity of addition, distributivity, existence of an additive identity and additive inverses, and compatibility with scalar multiplication.</p>
+<p>A subspace of a vector space <span class="arithmatex">\(V\)</span> is a subset <span class="arithmatex">\(S \subseteq V\)</span> that<br>
+1. contains the zero vector,<br>
+2. is closed under addition, and<br>
+3. is closed under scalar multiplication.  </p>
+<h3 id="affine-sets">Affine Sets<a class="headerlink" href="#affine-sets" title="Permanent link">¶</a></h3>
+<p>A set <span class="arithmatex">\(A \subseteq V\)</span> is affine if for any <span class="arithmatex">\(x, y \in A\)</span> and any <span class="arithmatex">\(\theta \in \mathbb{R}\)</span>,<br>
 <script type="math/tex; mode=display">
-\theta x + (1-\theta) y \in A~.
+\theta x + (1 - \theta) y \in A.
 </script>
-Every affine set can be written as
+</p>
+<p>That is, the entire line passing through any two points in <span class="arithmatex">\(A\)</span> lies within <span class="arithmatex">\(A\)</span>.</p>
+<blockquote>
+<p>By contrast, a convex set only requires this property for <span class="arithmatex">\(\theta \in [0,1]\)</span>, meaning only the line segment between <span class="arithmatex">\(x\)</span> and <span class="arithmatex">\(y\)</span> must lie within the set.</p>
+</blockquote>
+<p>Every affine set can be written as<br>
 <script type="math/tex; mode=display">
-x_0 + S = \{ x_0 + s : s \in S \},
+A = x_0 + S = \{\, x_0 + s : s \in S \,\},
 </script>
-where <span class="arithmatex">\(S\)</span> is a subspace. Affine sets appear as the solution sets to linear equality constraints <span class="arithmatex">\(Ax = b\)</span>.</p>
-<p>Affine sets are important in optimisation because:</p>
-<ul>
-<li>Feasible sets defined by equality constraints are affine.</li>
-<li>Affine functions preserve convexity.</li>
-</ul>
+where <span class="arithmatex">\(S\)</span> is a subspace of <span class="arithmatex">\(V\)</span>. Affine sets arise as the solution sets to linear equality constraints <span class="arithmatex">\(A x = b\)</span>.</p>
+<h3 id="affine-transformations">Affine Transformations<a class="headerlink" href="#affine-transformations" title="Permanent link">¶</a></h3>
+<p>An affine transformation (or affine map) is a function <span class="arithmatex">\(f : V \to W\)</span> that can be written as<br>
+<script type="math/tex; mode=display">
+f(x) = A x + b,
+</script>
+where <span class="arithmatex">\(A\)</span> is a linear map and <span class="arithmatex">\(b\)</span> is a fixed vector.<br>
+Affine transformations preserve both affinity and convexity:
+if <span class="arithmatex">\(C\)</span> is convex, then <span class="arithmatex">\(A C + b\)</span> is also convex.</p>
 <h2 id="22-linear-combinations-span-basis-dimension">2.2 Linear combinations, span, basis, dimension<a class="headerlink" href="#22-linear-combinations-span-basis-dimension" title="Permanent link">¶</a></h2>
 <p>Given vectors <span class="arithmatex">\(v_1,\dots,v_k\)</span>, any vector of the form
 <script type="math/tex; mode=display">
@@ -1237,7 +1385,7 @@ is a linear combination. The set of all linear combinations is called the span:
 \mathrm{span}\{v_1,\dots,v_k\} = \left\{ \sum_{i=1}^k \alpha_i v_i : \alpha_i \in \mathbb{R} \right\}.
 </script>
 </p>
-<p>A list of vectors is linearly independent if no nontrivial linear combination gives <span class="arithmatex">\(0\)</span>. A basis of a subspace <span class="arithmatex">\(S\)</span> is a set of linearly independent vectors whose span is <span class="arithmatex">\(S\)</span>. The number of vectors in a basis is the dimension of <span class="arithmatex">\(S\)</span>.</p>
+<p>A set of vectors is linearly independent if no vector can be written as a combination of others.  A basis of a space <span class="arithmatex">\(V\)</span> is a linearly independent set whose span equals <span class="arithmatex">\(V\)</span>. The number of basis vectors is the dimension <span class="arithmatex">\(\dim(V)\)</span>.</p>
 <p>Rank and nullity facts:</p>
 <ul>
 <li>The column space of <span class="arithmatex">\(A\)</span> is the span of its columns. Its dimension is <span class="arithmatex">\(\mathrm{rank}(A)\)</span>.</li>
@@ -1248,44 +1396,44 @@ is a linear combination. The set of all linear combinations is called the span:
 </script>
 where <span class="arithmatex">\(n\)</span> is the number of columns of <span class="arithmatex">\(A\)</span>.</li>
 </ul>
-<p>In constrained optimisation, <span class="arithmatex">\(\mathrm{rank}(A)\)</span> encodes the “number of independent constraints”, and the nullspace encodes feasible directions that do not violate certain constraints.</p>
 <blockquote>
-<p>Column Space:<br>
-The column space of a matrix <span class="arithmatex">\( A \)</span>, denoted <span class="arithmatex">\( C(A) \)</span>, is the set of all possible output vectors <span class="arithmatex">\( b \)</span> that can be written as <span class="arithmatex">\( Ax \)</span> for some <span class="arithmatex">\( x \)</span>. In other words, it contains all vectors that the matrix can “reach” through linear combinations of its columns. The question “Does the system <span class="arithmatex">\( Ax = b \)</span> have a solution?” is equivalent to asking whether <span class="arithmatex">\( b \in C(A) \)</span>. If <span class="arithmatex">\( b \)</span> lies in the column space, a solution exists; otherwise, it does not.</p>
-<p>Null Space:<br>
-The null space (or kernel) of <span class="arithmatex">\( A \)</span>, denoted <span class="arithmatex">\( N(A) \)</span>, is the set of all input vectors <span class="arithmatex">\( x \)</span> that are mapped to zero:<br>
-<span class="arithmatex">\( N(A) = \{ x : Ax = 0 \} \)</span>.<br>
+<h4 id="column-space">Column Space:<a class="headerlink" href="#column-space" title="Permanent link">¶</a></h4>
+<p>The column space of a matrix <span class="arithmatex">\( A \)</span>, denoted <span class="arithmatex">\( C(A) \)</span>, is the set of all possible output vectors <span class="arithmatex">\( b \)</span> that can be written as <span class="arithmatex">\( Ax \)</span> for some <span class="arithmatex">\( x \)</span>. In other words, it contains all vectors that the matrix can “reach” through linear combinations of its columns. The question “Does the system <span class="arithmatex">\( Ax = b \)</span> have a solution?” is equivalent to asking whether <span class="arithmatex">\( b \in C(A) \)</span>. If <span class="arithmatex">\( b \)</span> lies in the column space, a solution exists; otherwise, it does not.</p>
+<h4 id="null-space">Null Space:<a class="headerlink" href="#null-space" title="Permanent link">¶</a></h4>
+<p>The null space (or kernel) of <span class="arithmatex">\( A \)</span>, denoted <span class="arithmatex">\( N(A) \)</span>, is the set of all input vectors <span class="arithmatex">\( x \)</span> that are mapped to zero:  <span class="arithmatex">\( N(A) = \{ x : Ax = 0 \} \)</span>.<br>
 It answers a different question: <em>If a solution to <span class="arithmatex">\( Ax = b \)</span> exists, is it unique?</em><br>
 If the null space contains only the zero vector (<span class="arithmatex">\( \mathrm{nullity}(A) = 0 \)</span>), the solution is unique. But if <span class="arithmatex">\( N(A) \)</span> contains nonzero vectors, there are infinitely many distinct solutions that yield the same output.</p>
-<p>Multicollinearity:<br>
-When one feature in the data matrix <span class="arithmatex">\( A \)</span> is a linear combination of others—for example, <span class="arithmatex">\( \text{feature}_3 = 2 \times \text{feature}_1 + \text{feature}_2 \)</span>—the columns of <span class="arithmatex">\( A \)</span> become linearly dependent. This creates a nonzero vector in the null space of <span class="arithmatex">\( A \)</span>, meaning multiple weight vectors <span class="arithmatex">\( x \)</span> can produce the same predictions. The model is then <em>unidentifiable</em> (Underdetermined – the number of unknowns (parameters) exceeds the number of independent equations (information)), and <span class="arithmatex">\( A^\top A \)</span> becomes singular (non-invertible). Regularization methods such as Ridge or Lasso regression are used to resolve this ambiguity by selecting one stable, well-behaved solution.</p>
-<p>Feasible Directions:<br>
-In a constrained optimization problem of the form <span class="arithmatex">\( Ax = b \)</span>, the null space of <span class="arithmatex">\( A \)</span> characterizes the directions along which one can move without violating the constraints. If <span class="arithmatex">\( d \in N(A) \)</span>, then moving from a feasible point <span class="arithmatex">\( x \)</span> to <span class="arithmatex">\( x + d \)</span> preserves feasibility, since<br>
-<span class="arithmatex">\( A(x + d) = Ax + Ad = b + 0 = b \)</span>.<br>
-Thus, the null space defines the <em>space of free movement</em>—directions in which optimization algorithms can explore solutions while remaining within the constraint surface.</p>
-<p>Row Space:<br>
-The row space of <span class="arithmatex">\( A \)</span>, denoted <span class="arithmatex">\( R(A) \)</span>, is the span of the rows of <span class="arithmatex">\( A \)</span> (viewed as vectors). It represents all possible linear combinations of the rows and has the same dimension as the column space, equal to <span class="arithmatex">\( \mathrm{rank}(A) \)</span>. The row space is orthogonal to the null space of <span class="arithmatex">\( A \)</span>:<br>
-<span class="arithmatex">\( R(A) \perp N(A) \)</span>.<br>
+<h4 id="multicollinearity">Multicollinearity:<a class="headerlink" href="#multicollinearity" title="Permanent link">¶</a></h4>
+<p>When one feature in the data matrix <span class="arithmatex">\( A \)</span> is a linear combination of others—for example, <span class="arithmatex">\( \text{feature}_3 = 2 \times \text{feature}_1 + \text{feature}_2 \)</span>—the columns of <span class="arithmatex">\( A \)</span> become linearly dependent. This creates a nonzero vector in the null space of <span class="arithmatex">\( A \)</span>, meaning multiple weight vectors <span class="arithmatex">\( x \)</span> can produce the same predictions. The model is then <em>unidentifiable</em> (Underdetermined – the number of unknowns (parameters) exceeds the number of independent equations (information)), and <span class="arithmatex">\( A^\top A \)</span> becomes singular (non-invertible). Regularization methods such as Ridge or Lasso regression are used to resolve this ambiguity by selecting one stable, well-behaved solution.</p>
+<blockquote>
+<p>Regularization introduces an additional constraint or penalty that selects a <em>single, stable</em> solution from among the infinite possibilities.</p>
+<ul>
+<li>
+<p>Ridge regression (L2 regularization) adds a penalty on the norm of <span class="arithmatex">\(x\)</span>:
+  <script type="math/tex; mode=display">
+  \min_x \|A x - b\|_2^2 + \lambda \|x\|_2^2,
+  </script>
+  which modifies the normal equations to
+  <script type="math/tex; mode=display">
+  (A^\top A + \lambda I)x = A^\top b.
+  </script>
+  The added term <span class="arithmatex">\(\lambda I\)</span> ensures invertibility and numerical stability.</p>
+</li>
+<li>
+<p>Lasso regression (L1 regularization) instead penalizes <span class="arithmatex">\(\|x\|_1\)</span>, promoting sparsity by driving some coefficients exactly to zero.</p>
+</li>
+</ul>
+<p>Thus, regularization resolves ambiguity by imposing structure or preference on the solution—favoring smaller or sparser coefficient vectors—and making the regression problem well-posed even when <span class="arithmatex">\(A\)</span> is rank-deficient.</p>
+</blockquote>
+<h4 id="feasible-directions">Feasible Directions:<a class="headerlink" href="#feasible-directions" title="Permanent link">¶</a></h4>
+<p>In a constrained optimization problem of the form <span class="arithmatex">\( Ax = b \)</span>, the null space of <span class="arithmatex">\( A \)</span> characterizes the directions along which one can move without violating the constraints. If <span class="arithmatex">\( d \in N(A) \)</span>, then moving from a feasible point <span class="arithmatex">\( x \)</span> to <span class="arithmatex">\( x + d \)</span> preserves feasibility, since  <span class="arithmatex">\( A(x + d) = Ax + Ad = b + 0 = b \)</span>. Thus, the null space defines the <em>space of free movement</em>—directions in which optimization algorithms can explore solutions while remaining within the constraint surface.</p>
+<h4 id="row-space">Row Space:<a class="headerlink" href="#row-space" title="Permanent link">¶</a></h4>
+<p>The row space of <span class="arithmatex">\( A \)</span>, denoted <span class="arithmatex">\( R(A) \)</span>, is the span of the rows of <span class="arithmatex">\( A \)</span> (viewed as vectors). It represents all possible linear combinations of the rows and has the same dimension as the column space, equal to <span class="arithmatex">\( \mathrm{rank}(A) \)</span>. The row space is orthogonal to the null space of <span class="arithmatex">\( A \)</span>:  <span class="arithmatex">\( R(A) \perp N(A) \)</span>.<br>
 In optimization, the row space corresponds to the set of active constraints or the directions along which changes in <span class="arithmatex">\( x \)</span> affect the constraints.</p>
-<p>Left Null Space:<br>
-The left null space, denoted <span class="arithmatex">\( N(A^\top) \)</span>, is the set of all vectors <span class="arithmatex">\( y \)</span> such that <span class="arithmatex">\( A^\top y = 0 \)</span>. These vectors are orthogonal to the columns of <span class="arithmatex">\( A \)</span>, and therefore orthogonal to the column space itself. In least squares problems, <span class="arithmatex">\( N(A^\top) \)</span> represents residual directions—components of <span class="arithmatex">\( b \)</span> that cannot be explained by the model <span class="arithmatex">\( Ax = b \)</span>.</p>
-<p>Orthogonality Relationships (Fundamental Theorem of Linear Algebra):<br>
-For any matrix <span class="arithmatex">\( A \)</span>, there are four key subspaces:
-<script type="math/tex; mode=display">
-\begin{aligned}
-&\text{Column space: } C(A) \subseteq \mathbb{R}^m, \\
-&\text{Null space: } N(A) \subseteq \mathbb{R}^n, \\
-&\text{Row space: } C(A^\top) \subseteq \mathbb{R}^n, \\
-&\text{Left null space: } N(A^\top) \subseteq \mathbb{R}^m.
-\end{aligned}
-</script>
-These satisfy the orthogonality relationships:
-<script type="math/tex; mode=display">
-R(A) = N(A)^\perp, \quad C(A) = N(A^\top)^\perp.
-</script>
-Together, these subspaces form a complete and mutually orthogonal decomposition of the input and output spaces.</p>
-<p>Projection Interpretation (Least Squares):<br>
-When <span class="arithmatex">\( Ax = b \)</span> has no exact solution (as in overdetermined systems), the least squares solution finds <span class="arithmatex">\( x \)</span> such that <span class="arithmatex">\( Ax \)</span> is the projection of <span class="arithmatex">\( b \)</span> onto the column space of <span class="arithmatex">\( A \)</span>:<br>
+<h4 id="left-null-space">Left Null Space:<a class="headerlink" href="#left-null-space" title="Permanent link">¶</a></h4>
+<p>The left null space, denoted <span class="arithmatex">\( N(A^\top) \)</span>, is the set of all vectors <span class="arithmatex">\( y \)</span> such that <span class="arithmatex">\( A^\top y = 0 \)</span>. These vectors are orthogonal to the columns of <span class="arithmatex">\( A \)</span>, and therefore orthogonal to the column space itself. In least squares problems, <span class="arithmatex">\( N(A^\top) \)</span> represents residual directions—components of <span class="arithmatex">\( b \)</span> that cannot be explained by the model <span class="arithmatex">\( Ax = b \)</span>.</p>
+<h4 id="projection-interpretation-least-squares">Projection Interpretation (Least Squares):<a class="headerlink" href="#projection-interpretation-least-squares" title="Permanent link">¶</a></h4>
+<p>When <span class="arithmatex">\( Ax = b \)</span> has no exact solution (as in overdetermined systems), the least squares solution finds <span class="arithmatex">\( x \)</span> such that <span class="arithmatex">\( Ax \)</span> is the projection of <span class="arithmatex">\( b \)</span> onto the column space of <span class="arithmatex">\( A \)</span>:<br>
 <script type="math/tex; mode=display">
 x^* = (A^\top A)^{-1} A^\top b,
 </script>
@@ -1295,18 +1443,20 @@ r = b - Ax^*
 </script>
 lies in the left null space <span class="arithmatex">\( N(A^\top) \)</span>.<br>
 This provides a geometric view: the solution projects <span class="arithmatex">\( b \)</span> onto the closest point in the subspace that <span class="arithmatex">\( A \)</span> can reach.</p>
-<p>Rank–Nullity Relationship:<br>
-The rank of <span class="arithmatex">\( A \)</span> is the dimension of both its column and row spaces, and the nullity is the dimension of its null space. Together they satisfy the Rank–Nullity Theorem:
+<h4 id="ranknullity-relationship">Rank–Nullity Relationship:<a class="headerlink" href="#ranknullity-relationship" title="Permanent link">¶</a></h4>
+<p>The rank of <span class="arithmatex">\( A \)</span> is the dimension of both its column and row spaces, and the nullity is the dimension of its null space. Together they satisfy the Rank–Nullity Theorem:
 <script type="math/tex; mode=display">
 \mathrm{rank}(A) + \mathrm{nullity}(A) = n,
 </script>
 where <span class="arithmatex">\( n \)</span> is the number of columns of <span class="arithmatex">\( A \)</span>.<br>
 This theorem reflects the balance between the number of independent constraints and the number of degrees of freedom in <span class="arithmatex">\( x \)</span>.</p>
-<p>Geometric Interpretation:<br>
-- The column space represents all <em>reachable outputs</em>.<br>
-- The null space represents all <em>indistinguishable inputs</em> that map to zero.<br>
-- The row space represents all <em>independent constraints</em> imposed by <span class="arithmatex">\( A \)</span>.<br>
-- The left null space captures <em>inconsistencies</em> or residual directions that cannot be explained by the model.  </p>
+<p>Geometric Interpretation:  </p>
+<ul>
+<li>The column space represents all <em>reachable outputs</em>.  </li>
+<li>The null space represents all <em>indistinguishable inputs</em> that map to zero.  </li>
+<li>The row space represents all <em>independent constraints</em> imposed by <span class="arithmatex">\( A \)</span>.  </li>
+<li>The left null space captures <em>inconsistencies</em> or residual directions that cannot be explained by the model.  </li>
+</ul>
 <p>Together, these four subspaces define the complete geometry of the linear map <span class="arithmatex">\( A: \mathbb{R}^n \to \mathbb{R}^m \)</span>.</p>
 </blockquote>
 <h2 id="23-inner-products-and-orthogonality">2.3 Inner products and orthogonality<a class="headerlink" href="#23-inner-products-and-orthogonality" title="Permanent link">¶</a></h2>
@@ -1326,8 +1476,10 @@ This theorem reflects the balance between the number of independent constraints 
 </li>
 </ul>
 <p>Two vectors are orthogonal if <span class="arithmatex">\(\langle x,y\rangle = 0\)</span>. A set of vectors <span class="arithmatex">\(\{v_i\}\)</span> is orthonormal if each <span class="arithmatex">\(\|v_i\| = 1\)</span> and <span class="arithmatex">\(\langle v_i, v_j\rangle = 0\)</span> for <span class="arithmatex">\(i\ne j\)</span>.</p>
+<blockquote>
 <p>More generally, an inner product endows <span class="arithmatex">\(V\)</span> with a geometric structure, turning it into an inner product space (and if complete, a Hilbert space). Inner products allow us to talk about orthogonality (perpendicular vectors) and orthogonal projections, and to define the all-important concept of a gradient in optimization. </p>
 <p>Geometry from the inner product: An inner product induces a norm <span class="arithmatex">\(\|x\| = \sqrt{\langle x,x \rangle}\)</span> and a notion of distance <span class="arithmatex">\(d(x,y) = \|x-y\|\)</span>. It also defines angles: <span class="arithmatex">\(\langle x,y \rangle = 0\)</span> means <span class="arithmatex">\(x\)</span> and <span class="arithmatex">\(y\)</span> are orthogonal. Thus, inner products generalize the geometric concepts of lengths and angles to abstract vector spaces. Many results in Euclidean geometry (like the Pythagorean theorem and law of cosines) hold in any inner product space. For example, the parallelogram law holds: <span class="arithmatex">\(\|x+y\|^2 + \|x-y\|^2 = 2\|x\|^2 + 2\|y\|^2\)</span>.  </p>
+</blockquote>
 <p>The Cauchy–Schwarz inequality: For any <span class="arithmatex">\(x,y \in \mathbb{R}^n\)</span>:
 <script type="math/tex; mode=display">
 |\langle x,y\rangle| \le \|x\|\|y\|~,
@@ -1345,7 +1497,9 @@ with equality iff <span class="arithmatex">\(x\)</span> and <span class="arithma
 <p>Function space inner product: <span class="arithmatex">\(\langle f, g \rangle = \int_a^b f(t)\,g(t)\,dt\)</span>. This turns the space of square-integrable functions on <span class="arithmatex">\([a,b]\)</span> into an inner product space (a Hilbert space, <span class="arithmatex">\(L^2[a,b]\)</span>). In machine learning, this is the basis for kernel Hilbert spaces, where one defines an inner product between functions to lift optimization into infinite-dimensional feature spaces.  </p>
 </li>
 </ul>
+<blockquote>
 <p>Any vector space with an inner product has an orthonormal basis (via the Gram–Schmidt process). Gram–Schmidt is fundamental in numerical algorithms to orthogonalize vectors and is used to derive the QR decomposition: any full-rank matrix <span class="arithmatex">\(A \in \mathbb{R}^{m\times n}\)</span> can be factored as <span class="arithmatex">\(A = QR\)</span> where <span class="arithmatex">\(Q\)</span> has orthonormal columns and <span class="arithmatex">\(R\)</span> is upper triangular. This factorization is widely used in least squares and optimization because it provides a stable way to solve <span class="arithmatex">\(Ax=b\)</span> and to analyze subspaces. For example, for an overdetermined system (<span class="arithmatex">\(m&gt;n\)</span> i.e. more equations than unknowns), <span class="arithmatex">\(Ax=b\)</span> has a least-squares solution <span class="arithmatex">\(x = R^{-1}(Q^\top b)\)</span>, and for underdetermined (<span class="arithmatex">\(m&lt;n\)</span>), <span class="arithmatex">\(Ax=b\)</span> has infinitely many solutions, among which one often chooses the minimal-norm solution using the orthonormal basis of the range. </p>
+</blockquote>
 <p>Applications in optimization: Inner product geometry is indispensable in convex optimization.  </p>
 <ul>
 <li>
@@ -1427,10 +1581,12 @@ x^\top Q x \ge 0 \quad \text{for all } x~.
 <div class="arithmatex">\[
 \nabla^2 f(x) = Q~.
 \]</div>
-<p>So <span class="arithmatex">\(f\)</span> is convex iff <span class="arithmatex">\(Q\)</span> is PSD. Quadratic objectives with PSD Hessians are convex; with indefinite Hessians, they are not (Boyd and Vandenberghe, 2004). This is the algebraic test for convexity of quadratic forms.</p>
+<p>So <span class="arithmatex">\(f\)</span> is convex iff <span class="arithmatex">\(Q\)</span> is PSD. Quadratic objectives with PSD Hessians are convex; with indefinite Hessians, they are not. This is the algebraic test for convexity of quadratic forms.</p>
+<blockquote>
 <p>Implications of definiteness: If <span class="arithmatex">\(A \succ 0\)</span>, the quadratic function <span class="arithmatex">\(x^T A x\)</span> is strictly convex and has a unique minimizer at <span class="arithmatex">\(x=0\)</span>. If <span class="arithmatex">\(A \succeq 0\)</span>, <span class="arithmatex">\(x^T A x\)</span> is convex but could be flat in some directions (if some <span class="arithmatex">\(\lambda_i = 0\)</span>, those eigenvectors lie in the nullspace and the form is constant along them). In optimization, PD Hessian <span class="arithmatex">\(\nabla^2 f(x) \succ 0\)</span> means <span class="arithmatex">\(f\)</span> has a unique local (and global, if domain convex) minimum at that <span class="arithmatex">\(x\)</span> (since the second-order condition for optimality is satisfied strictly). PD constraint matrices in quadratic programs ensure nice properties like Slater’s condition for strong duality.</p>
 <p>Condition number and convergence: For iterative methods on convex quadratics <span class="arithmatex">\(f(x) = \frac{1}{2}x^T Q x - b^T x\)</span>, the eigenvalues of <span class="arithmatex">\(Q\)</span> dictate convergence speed. Gradient descent’s error after <span class="arithmatex">\(k\)</span> steps satisfies roughly <span class="arithmatex">\(|x_k - x^*| \le (\frac{\lambda_{\max}-\lambda_{\min}}{\lambda_{\max}+\lambda_{\min}})^k |x_0 - x^*|\)</span> (for normalized step). So the ratio <span class="arithmatex">\(\frac{\lambda_{\max}}{\lambda_{\min}} = \kappa(Q)\)</span> appears: closer to 1 (well-conditioned) means rapid convergence; large ratio (ill-conditioned) means slow, zigzagging progress. Newton’s method uses Hessian inverse, effectively rescaling by eigenvalues to 1, so its performance is invariant to <span class="arithmatex">\(\kappa\)</span> (locally). This explains why second-order methods shine on ill-conditioned problems: they “whiten” the curvature by dividing by eigenvalues.</p>
 <p>Optimization interpretation of eigenvectors: The eigenvectors of <span class="arithmatex">\(\nabla^2 f(x^*)\)</span> at optimum indicate principal axes of the local quadratic approximation. Directions with small eigenvalues are flat directions where the function changes slowly (possibly requiring LARGE steps unless Newton’s method is used). Directions with large eigenvalues are steep, potentially requiring small step sizes to maintain stability if using gradient descent. Preconditioning or change of variables often aims to transform the problem so that in new coordinates the Hessian is closer to the identity (all eigenvalues ~1). For constrained problems, the Hessian of the Lagrangian (the KKT matrix) being PSD relates to second-order optimality conditions.</p>
+</blockquote>
 <h2 id="26-orthogonal-projections-and-least-squares">2.6 Orthogonal projections and least squares<a class="headerlink" href="#26-orthogonal-projections-and-least-squares" title="Permanent link">¶</a></h2>
 <p>Let <span class="arithmatex">\(S\)</span> be a subspace of <span class="arithmatex">\(\mathbb{R}^n\)</span>. The orthogonal projection of a vector <span class="arithmatex">\(b\)</span> onto <span class="arithmatex">\(S\)</span> is the unique vector <span class="arithmatex">\(p \in S\)</span> minimising <span class="arithmatex">\(\|b - p\|_2\)</span>. Geometrically, <span class="arithmatex">\(p\)</span> is the closest point in <span class="arithmatex">\(S\)</span> to <span class="arithmatex">\(b\)</span>.</p>
 <p>If <span class="arithmatex">\(S = \mathrm{span}\{a_1,\dots,a_k\}\)</span> and <span class="arithmatex">\(A = [a_1~\cdots~a_k]\)</span>, then projecting <span class="arithmatex">\(b\)</span> onto <span class="arithmatex">\(S\)</span> is equivalent to solving the least-squares problem</p>

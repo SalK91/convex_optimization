@@ -132,6 +132,12 @@ nav:
       - 2. Metaheuristic Optimization Methods: "nonconvex/42_meta.md"
       - 3. Hybrid and Modern Optimization Methods: "nonconvex/43_hybrid.md"
 
+  - Deep Learning:
+      - 1. Introduction to Deep Learning Optimization: "deeplearning/1_intro.md"
+      - 2. Optimization Algorithms for Deep Learning: "deeplearning/1_intro.md"
+      - 3. Regularization Techniques in Deep Learning: "deep_learning/1_intro.md"
+      - 4. Advanced Topics in Deep Learning Optimization: "deep_learning/1_intro.md"
+
   - Cheat Sheets:
       - Optimization Algos - Cheat Sheet: "cheatsheets/20a_cheatsheet.md"
 

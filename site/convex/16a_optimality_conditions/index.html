@@ -87,7 +87,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#chapter-7-first-order-optimality-conditions-in-convex-optimization" class="md-skip">
+        <a href="#chapter-7-first-order-and-geometric-optimality-conditions" class="md-skip">
           Skip to content
         </a>
       
@@ -873,7 +873,7 @@
   
   
   <span class="md-ellipsis">
-    Cheat Sheets
+    Deep Learning
     
   </span>
   
@@ -883,6 +883,143 @@
         
         <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            Deep Learning
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../deeplearning/1_intro/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    1. Introduction to Deep Learning Optimization
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../deeplearning/1_intro/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    1. Introduction to Deep Learning Optimization
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../deep_learning/1_intro.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    3. Regularization Techniques in Deep Learning
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../deep_learning/1_intro.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    4. Advanced Topics in Deep Learning Optimization
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5">
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Cheat Sheets
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
             <span class="md-nav__icon md-icon"></span>
             Cheat Sheets
           </label>
@@ -933,10 +1070,10 @@
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5">
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6">
         
           
-          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
             
   
   
@@ -949,8 +1086,8 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_5">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
             <span class="md-nav__icon md-icon"></span>
             Appendices
           </label>
@@ -1202,180 +1339,113 @@
   
 
 
-<h1 id="chapter-7-first-order-optimality-conditions-in-convex-optimization">Chapter 7: First-Order Optimality Conditions in Convex Optimization<a class="headerlink" href="#chapter-7-first-order-optimality-conditions-in-convex-optimization" title="Permanent link">¶</a></h1>
-<p>Convex optimization enjoys a remarkable property: every local minimum is also a global minimum.<br>
-This chapter develops the unified first-order conditions that determine whether a point is optimal — in both unconstrained and constrained convex problems, smooth or nonsmooth.</p>
-<p>These conditions form the conceptual bridge between the subgradient theory of Chapter 6 and the KKT framework of Chapter 8.</p>
-<h2 id="71-why-optimality-conditions-matter">7.1 Why Optimality Conditions Matter<a class="headerlink" href="#71-why-optimality-conditions-matter" title="Permanent link">¶</a></h2>
-<p>Knowing when a point is optimal is essential for:</p>
-<ul>
-<li>Certifying convergence of algorithms (e.g., gradient or proximal methods),</li>
-<li>Understanding how constraints affect the solution,</li>
-<li>Handling nonsmooth objectives (e.g., hinge loss, <span class="arithmatex">\(\ell_1\)</span> regularization),</li>
-<li>Building geometric intuition about “stationarity.”</li>
-</ul>
-<h2 id="72-unconstrained-convex-problems">7.2 Unconstrained Convex Problems<a class="headerlink" href="#72-unconstrained-convex-problems" title="Permanent link">¶</a></h2>
-<p>We start with the simplest case:
-<script type="math/tex; mode=display">
-\min_{x \in \mathbb{R}^n} f(x),
-</script>
-where <span class="arithmatex">\( f \)</span> is convex.</p>
-<h3 id="a-smooth-case">(a) Smooth Case<a class="headerlink" href="#a-smooth-case" title="Permanent link">¶</a></h3>
-<p>If <span class="arithmatex">\( f \)</span> is differentiable, a point <span class="arithmatex">\(\hat{x}\)</span> is optimal iff
-<script type="math/tex; mode=display">
+<h1 id="chapter-7-first-order-and-geometric-optimality-conditions">Chapter 7: First-Order and Geometric Optimality Conditions<a class="headerlink" href="#chapter-7-first-order-and-geometric-optimality-conditions" title="Permanent link">¶</a></h1>
+<p>Optimization problems seek points where no infinitesimal movement can improve the objective. For convex functions, first-order conditions provide precise geometric and analytic criteria for such points to be optimal. They generalize the idea of “zero gradient” to nonsmooth and constrained settings, linking gradients, subgradients, and the geometry of feasible regions.</p>
+<p>These conditions form the conceptual bridge between unconstrained minimization and the Karush–Kuhn–Tucker (KKT) theory developed in the next chapter.</p>
+<h3 id="71-understanding-nth-order-optimality-conditions">7.1  Understanding “nth-Order” Optimality Conditions<a class="headerlink" href="#71-understanding-nth-order-optimality-conditions" title="Permanent link">¶</a></h3>
+<p>For a differentiable function <span class="arithmatex">\(f : \mathbb{R}^n \to \mathbb{R}\)</span>, the “order’’ of an optimality condition refers to how many derivatives (or generalized derivatives) we inspect around a candidate minimizer <span class="arithmatex">\(x^*\)</span>:</p>
+<table>
+<thead>
+<tr>
+<th>Order</th>
+<th>Uses</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>First-order</td>
+<td><span class="arithmatex">\(\nabla f(x^*)\)</span> (or subgradients)</td>
+<td>Checks whether any local descent direction exists</td>
+</tr>
+<tr>
+<td>Second-order</td>
+<td>Hessian <span class="arithmatex">\(\nabla^2 f(x^*)\)</span></td>
+<td>Examines curvature to ensure the point is bowl-shaped (no local maxima or saddle)</td>
+</tr>
+<tr>
+<td>Third and higher</td>
+<td>Higher derivatives</td>
+<td>Rarely used; detect flat or degenerate cases when curvature vanishes</td>
+</tr>
+</tbody>
+</table>
+<p>In general optimization, these successive tests ensure a point is truly a <em>local</em> minimizer. However, in convex optimization, this hierarchy collapses beautifully:</p>
+<h3 id="why-only-first-order-conditions-matter-for-convex-functions">Why Only First-Order Conditions Matter for Convex Functions<a class="headerlink" href="#why-only-first-order-conditions-matter-for-convex-functions" title="Permanent link">¶</a></h3>
+<p>A convex function already has non-negative curvature everywhere — its Hessian is automatically positive semidefinite wherever it exists:</p>
+<div class="arithmatex">\[
+\nabla^2 f(x) \succeq 0, \quad \forall x.
+\]</div>
+<p>Therefore, once the first-order condition is satisfied, no direction can decrease <span class="arithmatex">\(f\)</span> — not locally, but globally.  Convexity guarantees that the landscape is bowl-shaped everywhere, so a stationary point is the unique global minimum. In contrast, nonconvex functions can have zero gradient points that are maxima or saddles; second- or higher-order checks are needed to tell them apart. Hence, convex optimization requires only the first-order condition — it captures both necessity and sufficiency for global optimality. This remarkable simplification is one of the reasons convex analysis is so powerful and elegant.</p>
+<h2 id="72-motivation">7.2 Motivation<a class="headerlink" href="#72-motivation" title="Permanent link">¶</a></h2>
+<p>Consider minimizing a convex function <span class="arithmatex">\(f\)</span> over a convex set <span class="arithmatex">\(\mathcal{X}\)</span>:</p>
+<div class="arithmatex">\[
+\min_{x \in \mathcal{X}} f(x).
+\]</div>
+<p>Even for simple convex objectives, we need a way to check when a point <span class="arithmatex">\(\hat{x}\)</span> is optimal. In unconstrained problems, this means no direction can reduce <span class="arithmatex">\(f\)</span>.<br>
+With constraints, we only consider feasible directions — those that stay inside <span class="arithmatex">\(\mathcal{X}\)</span>.</p>
+<p>In both cases, optimality can be understood as an <em>equilibrium condition</em>:<br>
+the gradient (or subgradient) of <span class="arithmatex">\(f\)</span> is balanced by the “forces’’ from the constraints. These equilibrium conditions are the first-order optimality conditions.</p>
+<p>In machine learning, this reasoning appears everywhere — verifying when a trained model reaches stationarity (zero gradient) or when a sparsity constraint (like <span class="arithmatex">\(\ell_1\)</span> regularization) is active.</p>
+<h2 id="73-unconstrained-convex-problems">7.3 Unconstrained Convex Problems<a class="headerlink" href="#73-unconstrained-convex-problems" title="Permanent link">¶</a></h2>
+<p>For the unconstrained problem</p>
+<div class="arithmatex">\[
+\min_x f(x),
+\]</div>
+<p>the first-order optimality condition is simple:</p>
+<p>If <span class="arithmatex">\(f\)</span> is differentiable, <span class="arithmatex">\(\hat{x}\)</span> is optimal if and only if</p>
+<div class="arithmatex">\[
 \nabla f(\hat{x}) = 0.
-</script>
-</p>
-<p>This is the classical first-order condition.</p>
-<p>Examples</p>
-<table>
-<thead>
-<tr>
-<th>Function</th>
-<th>Gradient</th>
-<th>Optimum</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><span class="arithmatex">\(f(x)=x^2-4x+7\)</span></td>
-<td><span class="arithmatex">\(2x-4\)</span></td>
-<td><span class="arithmatex">\(\hat{x}=2\)</span></td>
-</tr>
-<tr>
-<td><span class="arithmatex">\(f(x)=\sum_i (x-y_i)^2\)</span></td>
-<td><span class="arithmatex">\(2n(x-\bar{y})\)</span></td>
-<td><span class="arithmatex">\(\hat{x}=\bar{y}\)</span> (the mean)</td>
-</tr>
-</tbody>
-</table>
-<hr>
-<h3 id="b-nonsmooth-case">(b) Nonsmooth Case<a class="headerlink" href="#b-nonsmooth-case" title="Permanent link">¶</a></h3>
-<p>When <span class="arithmatex">\(f\)</span> is convex but nondifferentiable, we use subgradients (Chapter 6).</p>
-<p>Optimality condition:
-<script type="math/tex; mode=display">
-0 \in \partial f(\hat{x}),
-</script>
-where <span class="arithmatex">\(\partial f(x)\)</span> is the subdifferential set.</p>
-<p>Examples</p>
-<table>
-<thead>
-<tr>
-<th>Function</th>
-<th>Subgradient</th>
-<th>Optimum</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>(f(x)=</td>
-<td>x</td>
-<td>)</td>
-</tr>
-<tr>
-<td>(f(x)=\sum_i</td>
-<td>x-y_i</td>
-<td>)</td>
-</tr>
-</tbody>
-</table>
-<p>For convex <span class="arithmatex">\(f\)</span>, any <span class="arithmatex">\(\hat{x}\)</span> satisfying <span class="arithmatex">\(0\in\partial f(\hat{x})\)</span> is globally optimal.</p>
-<h2 id="73-constrained-convex-problems">7.3 Constrained Convex Problems<a class="headerlink" href="#73-constrained-convex-problems" title="Permanent link">¶</a></h2>
-<p>Let <span class="arithmatex">\( f:\mathbb{R}^n\to\mathbb{R} \)</span> be convex and <span class="arithmatex">\( \mathcal{X}\subseteq\mathbb{R}^n \)</span> be a convex feasible set.<br>
-We consider:
-<script type="math/tex; mode=display">
-\min_{x\in\mathcal{X}} f(x).
-</script>
-</p>
-<p>The geometry of <span class="arithmatex">\( \mathcal{X} \)</span> now interacts with the stationarity condition.</p>
-<h3 id="a-interior-points">(a) Interior Points<a class="headerlink" href="#a-interior-points" title="Permanent link">¶</a></h3>
-<p>If <span class="arithmatex">\(\hat{x}\in\operatorname{int}(\mathcal{X})\)</span>, the constraint is inactive locally, so
-<script type="math/tex; mode=display">
-0\in\partial f(\hat{x}).
-</script>
-Same as the unconstrained case.</p>
-<h3 id="b-boundary-points-and-normal-cones">(b) Boundary Points and Normal Cones<a class="headerlink" href="#b-boundary-points-and-normal-cones" title="Permanent link">¶</a></h3>
-<p>If <span class="arithmatex">\(\hat{x}\)</span> lies on the boundary of <span class="arithmatex">\(\mathcal{X}\)</span>, feasible motion is restricted.</p>
-<p>A point <span class="arithmatex">\(\hat{x}\)</span> is optimal iff
-<script type="math/tex; mode=display">
--\,\nabla f(\hat{x}) \in N_{\mathcal{X}}(\hat{x}),
-</script>
-where <span class="arithmatex">\( N_{\mathcal{X}}(\hat{x}) \)</span> is the normal cone to <span class="arithmatex">\(\mathcal{X}\)</span> at <span class="arithmatex">\(\hat{x}\)</span>:
-<script type="math/tex; mode=display">
-N_{\mathcal{X}}(\hat{x})
-= \{\, v \mid v^\top (x-\hat{x}) \le 0,\; \forall x\in\mathcal{X} \,\}.
-</script>
-</p>
-<p>Geometric form: for every feasible direction <span class="arithmatex">\(d\)</span> in the tangent cone
-<span class="arithmatex">\(T_{\mathcal{X}}(\hat{x})\)</span>,
-<script type="math/tex; mode=display">
-\nabla f(\hat{x})^\top d \ge 0.
-</script>
-The gradient points outward—any move within <span class="arithmatex">\(\mathcal{X}\)</span> would not decrease <span class="arithmatex">\(f\)</span>.</p>
-<h3 id="c-unified-compact-form">(c) Unified Compact Form<a class="headerlink" href="#c-unified-compact-form" title="Permanent link">¶</a></h3>
-<p>Both interior and boundary cases can be written as:
-<script type="math/tex; mode=display">
+\]</div>
+<p>If <span class="arithmatex">\(f\)</span> is convex but possibly nonsmooth, the gradient is replaced by the subdifferential:</p>
+<div class="arithmatex">\[
+0 \in \partial f(\hat{x}).
+\]</div>
+<p>Intuitively, this means that the origin lies inside the set of all subgradients at <span class="arithmatex">\(\hat{x}\)</span>.  Geometrically, every supporting hyperplane to the graph of <span class="arithmatex">\(f\)</span> at <span class="arithmatex">\((\hat{x}, f(\hat{x}))\)</span> has zero slope — the function cannot be decreased by moving in any direction.</p>
+<p>For smooth functions, <span class="arithmatex">\(\nabla f(\hat{x}) = 0\)</span> means that the tangent plane is horizontal. For nonsmooth functions, <span class="arithmatex">\(0 \in \partial f(\hat{x})\)</span> means there exists at least one horizontal supporting plane among all possible tangents.</p>
+<h2 id="74-constrained-convex-problems">7.4 Constrained Convex Problems<a class="headerlink" href="#74-constrained-convex-problems" title="Permanent link">¶</a></h2>
+<p>Now consider minimizing <span class="arithmatex">\(f(x)\)</span> over a closed convex set <span class="arithmatex">\(\mathcal{X} \subseteq \mathbb{R}^n\)</span>:</p>
+<div class="arithmatex">\[
+\min_{x \in \mathcal{X}} f(x).
+\]</div>
+<p>If <span class="arithmatex">\(\hat{x} \in \operatorname{int}(\mathcal{X})\)</span> (the interior), the situation is identical to the unconstrained case:
+no boundary prevents motion, so</p>
+<div class="arithmatex">\[
+0 \in \partial f(\hat{x}).
+\]</div>
+<p>However, if <span class="arithmatex">\(\hat{x}\)</span> lies on the boundary of <span class="arithmatex">\(\mathcal{X}\)</span>, we must restrict movement to feasible directions — those that stay within the set.<br>
+At such points, not all directions are allowed, and the gradient (or subgradient) may point outward from the feasible region.</p>
+<h3 id="tangent-and-normal-cones">Tangent and Normal Cones<a class="headerlink" href="#tangent-and-normal-cones" title="Permanent link">¶</a></h3>
+<p>At a point <span class="arithmatex">\(x \in \mathcal{X}\)</span>, define the tangent cone <span class="arithmatex">\(T_x(\mathcal{X})\)</span> as the set of feasible directions:</p>
+<div class="arithmatex">\[
+T_x(\mathcal{X}) = \{\, d : \exists\, t_k \downarrow 0,\; x + t_k d \in \mathcal{X} \,\}.
+\]</div>
+<p>It captures all directions in which one can move infinitesimally without leaving <span class="arithmatex">\(\mathcal{X}\)</span>.  </p>
+<p>The normal cone is its polar:</p>
+<div class="arithmatex">\[
+N_x(\mathcal{X}) = \{\, v : v^\top d \le 0,\; \forall d \in T_x(\mathcal{X}) \,\}.
+\]</div>
+<p>The normal cone consists of vectors pointing <em>outward</em> from <span class="arithmatex">\(\mathcal{X}\)</span> — the directions orthogonal (or opposing) to every feasible direction.</p>
+<p>Geometrically, at an optimal boundary point, the gradient of <span class="arithmatex">\(f\)</span> must lie inside the normal cone:<br>
+if you try to move within <span class="arithmatex">\(\mathcal{X}\)</span> (inside the tangent cone), <span class="arithmatex">\(f\)</span> cannot decrease further.</p>
+<h3 id="first-order-condition-with-constraints">First-Order Condition with Constraints<a class="headerlink" href="#first-order-condition-with-constraints" title="Permanent link">¶</a></h3>
+<p>For constrained convex optimization, the unified first-order condition is</p>
+<div class="arithmatex">\[
 0 \in \partial f(\hat{x}) + N_{\mathcal{X}}(\hat{x}).
-</script>
-</p>
-<p>This is the general first-order optimality condition for convex problems with convex constraints.</p>
-<h2 id="74-tangent-and-normal-cones-intuition">7.4 Tangent and Normal Cones — Intuition<a class="headerlink" href="#74-tangent-and-normal-cones-intuition" title="Permanent link">¶</a></h2>
+\]</div>
+<p>This means that there exists a subgradient <span class="arithmatex">\(g \in \partial f(\hat{x})\)</span> and a normal vector <span class="arithmatex">\(v \in N_{\mathcal{X}}(\hat{x})\)</span> such that <span class="arithmatex">\(g + v = 0\)</span>.<br>
+Equivalently, the objective’s slope is exactly counterbalanced by the constraint’s normal pressure.</p>
+<p>If <span class="arithmatex">\(\hat{x}\)</span> lies in the interior of <span class="arithmatex">\(\mathcal{X}\)</span>, <span class="arithmatex">\(N_{\mathcal{X}}(\hat{x}) = \{0\}\)</span>, so the condition reduces to the unconstrained one (<span class="arithmatex">\(0 \in \partial f(\hat{x})\)</span>).<br>
+If <span class="arithmatex">\(\hat{x}\)</span> is on the boundary, the constraint pushes back against the descent direction.</p>
+<h3 id="geometric-interpretation">Geometric Interpretation<a class="headerlink" href="#geometric-interpretation" title="Permanent link">¶</a></h3>
+<p>At optimality:</p>
 <ul>
-<li>Tangent cone <span class="arithmatex">\(T_{\mathcal{X}}(x)\)</span>: directions one can move within <span class="arithmatex">\(\mathcal{X}\)</span>.</li>
-<li>Normal cone <span class="arithmatex">\(N_{\mathcal{X}}(x)\)</span>: directions pointing <em>outward</em>, orthogonal to all feasible directions.</li>
+<li>The gradient (or a subgradient) points into the normal cone of the feasible set.  </li>
+<li>The tangent cone defines all directions along which the function cannot decrease.  </li>
+<li>The inclusion <span class="arithmatex">\(0 \in \partial f(\hat{x}) + N_{\mathcal{X}}(\hat{x})\)</span> encodes equilibrium between descent forces and boundary constraints.</li>
 </ul>
-<p>At an optimum:
-- Interior point → gradient = 0.
-- Boundary point → gradient points into the normal cone (outward from feasible region).</p>
-<blockquote>
-<p>The gradient (or subgradient) must “balance” the boundary forces — this geometric picture underlies KKT conditions (next chapter).</p>
-</blockquote>
-<h2 id="75-worked-example">7.5 Worked Example<a class="headerlink" href="#75-worked-example" title="Permanent link">¶</a></h2>
-<p>Minimize
-<script type="math/tex; mode=display">
-f(x)=x^2 \quad\text{s.t.}\quad x\ge1.
-</script>
-</p>
-<ul>
-<li><span class="arithmatex">\(f'(x)=2x\)</span></li>
-<li>Feasible set <span class="arithmatex">\(\mathcal{X}=[1,\infty)\)</span>.</li>
-</ul>
-<p>Unconstrained optimum <span class="arithmatex">\(x=0\)</span> is infeasible.<br>
-At <span class="arithmatex">\(x=1\)</span>:
-<script type="math/tex; mode=display">
--\,\nabla f(1)=-2\in N_{\mathcal{X}}(1)=\mathbb{R}_+.
-</script>
-✅ Condition satisfied → <span class="arithmatex">\(x^*=1\)</span> is optimal.</p>
-<h2 id="76-summary-table">7.6 Summary Table<a class="headerlink" href="#76-summary-table" title="Permanent link">¶</a></h2>
-<table>
-<thead>
-<tr>
-<th>Setting</th>
-<th>Condition for Optimality</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Unconstrained, smooth</td>
-<td><span class="arithmatex">\( \nabla f(\hat{x}) = 0 \)</span></td>
-</tr>
-<tr>
-<td>Unconstrained, nonsmooth</td>
-<td><span class="arithmatex">\( 0 \in \partial f(\hat{x}) \)</span></td>
-</tr>
-<tr>
-<td>Constrained, general</td>
-<td><span class="arithmatex">\( 0 \in \partial f(\hat{x}) + N_{\mathcal{X}}(\hat{x}) \)</span></td>
-</tr>
-</tbody>
-</table>
-<h2 id="77-connections-and-outlook">7.7 Connections and Outlook<a class="headerlink" href="#77-connections-and-outlook" title="Permanent link">¶</a></h2>
-<ul>
-<li>The condition <span class="arithmatex">\(0\in\partial f(\hat{x})+N_{\mathcal{X}}(\hat{x})\)</span> is the foundation of projected and proximal methods (see Appendix G).  </li>
-<li>It generalizes smoothly to inequality/equality constraints, leading to KKT conditions (Chapter 8).  </li>
-<li>It underlies duality theory (Chapter 9), where these stationarity conditions appear as primal–dual relationships.</li>
-</ul>
-<p>Next: In Chapter 8 we extend these first-order ideas to handle general constrained problems via Karush–Kuhn–Tucker (KKT) conditions and Lagrange multipliers.</p>
+<p>This picture generalizes the intuitive idea from single-variable calculus:<br>
+the derivative changes sign at a minimum, while with constraints, the derivative at the boundary is balanced by the constraint’s barrier.</p>
 
 
 

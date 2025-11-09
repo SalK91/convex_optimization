@@ -873,7 +873,7 @@
   
   
   <span class="md-ellipsis">
-    Cheat Sheets
+    Deep Learning
     
   </span>
   
@@ -883,6 +883,143 @@
         
         <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            Deep Learning
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../deeplearning/1_intro/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    1. Introduction to Deep Learning Optimization
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../deeplearning/1_intro/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    1. Introduction to Deep Learning Optimization
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../deep_learning/1_intro.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    3. Regularization Techniques in Deep Learning
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../deep_learning/1_intro.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    4. Advanced Topics in Deep Learning Optimization
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5">
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Cheat Sheets
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
             <span class="md-nav__icon md-icon"></span>
             Cheat Sheets
           </label>
@@ -933,10 +1070,10 @@
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5">
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6">
         
           
-          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
             
   
   
@@ -949,8 +1086,8 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_5">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
             <span class="md-nav__icon md-icon"></span>
             Appendices
           </label>
@@ -1203,50 +1340,146 @@
 
 
 <h1 id="chapter-3-multivariable-calculus-for-optimization">Chapter 3: Multivariable Calculus for Optimization<a class="headerlink" href="#chapter-3-multivariable-calculus-for-optimization" title="Permanent link">¶</a></h1>
-<p>Optimisation is about finding points that minimise (or maximise) a function. To do that analytically, we need to understand gradients, Hessians, Taylor expansions, and first-/second-order optimality conditions.</p>
-<p>We work in <span class="arithmatex">\(\mathbb{R}^n\)</span>.</p>
-<h2 id="31-gradients-jacobians-and-hessians">3.1 Gradients, Jacobians, and Hessians<a class="headerlink" href="#31-gradients-jacobians-and-hessians" title="Permanent link">¶</a></h2>
-<p>Let <span class="arithmatex">\(f : \mathbb{R}^n \to \mathbb{R}\)</span>.<br>
-The gradient of <span class="arithmatex">\(f\)</span> at <span class="arithmatex">\(x\)</span> is the column vector
+<p>Optimization seeks to find points that minimize or maximize a real-valued function. To analyze and solve such problems, we rely on tools from multivariable calculus — gradients, Jacobians, Hessians, and Taylor expansions — which describe how a function changes locally.</p>
+<p>This chapter provides the differential calculus foundation essential for convex analysis and gradient-based learning algorithms.  It links geometric intuition and analytical tools that underlie optimization methods such as gradient descent, Newton’s method, and backpropagation.</p>
+<h2 id="31-gradients-and-directional-derivatives">3.1 Gradients and Directional Derivatives<a class="headerlink" href="#31-gradients-and-directional-derivatives" title="Permanent link">¶</a></h2>
+<p>Let <span class="arithmatex">\(f:\mathbb{R}^n\to\mathbb{R}\)</span>. Differentiability at <span class="arithmatex">\(x\)</span> means there exists a linear map (the gradient) such that</p>
+<div class="arithmatex">\[
+f(x+h)=f(x)+\nabla f(x)^\top h+o(\|h\|).
+\]</div>
+<p>Equivalently, for every direction <span class="arithmatex">\(v\in\mathbb{R}^n\)</span>, the directional derivative exists and matches the gradient pairing:</p>
+<div class="arithmatex">\[
+D_v f(x)=\lim_{t \rightarrow 0}\frac{f(x+tv)-f(x)}{t}=\nabla f(x)^\top v.
+\]</div>
+<p>This shows that <span class="arithmatex">\(\nabla f(x)\)</span> is the unique vector giving the best linear approximation of <span class="arithmatex">\(f\)</span> near <span class="arithmatex">\(x\)</span>.<br>
+Among all unit directions <span class="arithmatex">\(u\)</span>,
 <script type="math/tex; mode=display">
+D_u f(x) = \langle \nabla f(x), u \rangle
+</script>
+is maximized when <span class="arithmatex">\(u\)</span> aligns with <span class="arithmatex">\(\nabla f(x)\)</span> — the direction of steepest ascent.<br>
+The opposite direction, <span class="arithmatex">\(- \nabla f(x)\)</span>, gives the steepest descent.</p>
+<blockquote>
+<p>A level set of a differentiable function <span class="arithmatex">\(f\)</span> is
+<script type="math/tex; mode=display">
+L_c = \{\, x \in \mathbb{R}^n : f(x) = c \,\}.
+</script>
+</p>
+<p>At any point <span class="arithmatex">\(x\)</span> with <span class="arithmatex">\(\nabla f(x) \ne 0\)</span>, the gradient <span class="arithmatex">\(\nabla f(x)\)</span> is orthogonal to the level set <span class="arithmatex">\(L_{f(x)}\)</span>. Geometrically, level sets are like contour lines on a topographic map, and the gradient points perpendicular to them — in the direction of the steepest ascent of <span class="arithmatex">\(f\)</span>. If we wish to decrease <span class="arithmatex">\(f\)</span>, we move roughly in the opposite direction, <span class="arithmatex">\(-\nabla f(x)\)</span> (the direction of steepest descent). This geometric fact becomes central in constrained optimization:  at optimality, the gradient of the objective lies in the span of gradients of active constraints.</p>
+</blockquote>
+<h2 id="32-jacobians">3.2  Jacobians<a class="headerlink" href="#32-jacobians" title="Permanent link">¶</a></h2>
+<p>When dealing with optimization or learning, functions rarely map one number to another. They often map many inputs to many outputs — for example, a neural network layer, a physical model, or a vector-valued transformation. The Jacobian matrix captures <em>how each output reacts to each input</em> — the complete local sensitivity of a system.</p>
+<p>Derivative to Gradient:  For a scalar function <span class="arithmatex">\(f : \mathbb{R}^n \to \mathbb{R}\)</span>, the derivative generalizes to the gradient:</p>
+<div class="arithmatex">\[
 \nabla f(x) =
 \begin{bmatrix}
 \frac{\partial f}{\partial x_1}(x) \\
 \vdots \\
 \frac{\partial f}{\partial x_n}(x)
 \end{bmatrix}.
-</script>
-It points in the direction of steepest increase of <span class="arithmatex">\(f\)</span>.</p>
-<p>The directional derivative in direction <span class="arithmatex">\(u\)</span> is <span class="arithmatex">\(D_u f(x) = \lim_{t\to0} \frac{f(x+tu)-f(x)}{t} = \langle \nabla f(x), u\rangle\)</span>. This shows how the gradient inner product with <span class="arithmatex">\(u\)</span> gives the instantaneous rate of change of <span class="arithmatex">\(f\)</span> along <span class="arithmatex">\(u\)</span>. In particular, <span class="arithmatex">\(D_u f(x)\)</span> is maximized when <span class="arithmatex">\(u\)</span> points along <span class="arithmatex">\(\nabla f(x)\)</span> (steepest ascent) and minimized when <span class="arithmatex">\(u\)</span> is opposite.</p>
-<p>If <span class="arithmatex">\(F : \mathbb{R}^n \to \mathbb{R}^m\)</span>, the Jacobian <span class="arithmatex">\(J_F(x)\)</span> is the <span class="arithmatex">\(m \times n\)</span> matrix of partial derivatives.</p>
-<p>Gradient Lipschitz continuity: A concept often used in convergence analysis is Lipschitz continuity of the gradient. If there exists <span class="arithmatex">\(L\)</span> such that <span class="arithmatex">\(|\nabla f(x) - \nabla f(y)| \le L |x-y|\)</span> for all <span class="arithmatex">\(x,y\)</span>, we say the gradient is <span class="arithmatex">\(L\)</span>-Lipschitz (or <span class="arithmatex">\(f\)</span> is <span class="arithmatex">\(L\)</span>-smooth). <span class="arithmatex">\(L\)</span> is essentially an upper bound on the Hessian eigenvalues (for <span class="arithmatex">\(\ell_2\)</span> norm): <span class="arithmatex">\(L \ge \lambda_{\max}(\nabla^2 f(x))\)</span> for all <span class="arithmatex">\(x\)</span>. Smoothness is important because it ensures gradient descent with step <span class="arithmatex">\(\alpha = 1/L\)</span> converges, and it gives a bound <span class="arithmatex">\(f(x_{k+1}) \le f(x_k) - \frac{1}{2L}|\nabla f(x_k)|^2\)</span> (so the function value decreases at least proportionally to the squared gradient norm). Many convex functions in optimization are <span class="arithmatex">\(L\)</span>-smooth (e.g. quadratic forms with <span class="arithmatex">\(\lambda_{\max}(Q)=L\)</span>). Smoothness together with strong convexity (defined shortly) yields linear convergence rates for gradient descent.</p>
-<p>Strong convexity: A differentiable function <span class="arithmatex">\(f\)</span> is <span class="arithmatex">\(\mu\)</span>-strongly convex if <span class="arithmatex">\(f(y) \ge f(x) + \langle \nabla f(x), y-x \rangle + \frac{\mu}{2}|y-x|^2\)</span> for all <span class="arithmatex">\(x,y\)</span>. Equivalently, <span class="arithmatex">\(f(x) - \frac{\mu}{2}|x|^2\)</span> is convex, which implies <span class="arithmatex">\(\nabla^2 f(x) \succeq \mu I\)</span> (Hessian bounded below by <span class="arithmatex">\(\mu\)</span>) when <span class="arithmatex">\(f\)</span> is twice differentiable. Strong convexity means <span class="arithmatex">\(f\)</span> has a quadratic curvature of at least <span class="arithmatex">\(\mu\)</span> – it grows at least as fast as a parabola. Strongly convex functions have unique minimizers (the bowl can’t flatten out). They also yield much faster convergence: for <span class="arithmatex">\(\mu\)</span>-strongly convex and <span class="arithmatex">\(L\)</span>-smooth <span class="arithmatex">\(f\)</span>, gradient descent with <span class="arithmatex">\(\alpha=1/L\)</span> converges like <span class="arithmatex">\((1-\mu/L)^k\)</span> (linear rate). Intuitively, the condition number <span class="arithmatex">\(\kappa = L/\mu\)</span> comes into play. Examples: the quadratic form above is strongly convex with <span class="arithmatex">\(\mu = \lambda_{\min}(Q)\)</span>. Adding a small ridge term <span class="arithmatex">\(\frac{\mu}{2}|x|^2\)</span> to any convex <span class="arithmatex">\(f\)</span> makes it <span class="arithmatex">\(\mu\)</span>-strongly convex and improves conditioning at the cost of bias.</p>
-<p>The Hessian of <span class="arithmatex">\(f\)</span> is the <span class="arithmatex">\(n \times n\)</span> matrix of second partial derivatives:
-<script type="math/tex; mode=display">
-\nabla^2 f(x) =
+\]</div>
+<ul>
+<li>Each component <span class="arithmatex">\(\frac{\partial f}{\partial x_i}\)</span> tells how <span class="arithmatex">\(f\)</span> changes as we vary <span class="arithmatex">\(x_i\)</span> alone.  </li>
+<li>Collectively, <span class="arithmatex">\(\nabla f(x)\)</span> forms the vector of steepest ascent, pointing toward the direction of maximal increase.  </li>
+<li>The magnitude <span class="arithmatex">\(\|\nabla f(x)\|\)</span> measures how sharply <span class="arithmatex">\(f\)</span> rises.</li>
+</ul>
+<p>From Gradient to Jacobian — Many Inputs, Many Outputs: Now let <span class="arithmatex">\(F : \mathbb{R}^n \to \mathbb{R}^m\)</span> be a vector-valued function:</p>
+<div class="arithmatex">\[
+F(x) =
 \begin{bmatrix}
-\frac{\partial^2 f}{\partial x_1^2} & \cdots & \frac{\partial^2 f}{\partial x_1 \partial x_n} \\
+F_1(x) \\[4pt]
+F_2(x) \\[4pt]
+\vdots \\[4pt]
+F_m(x)
+\end{bmatrix}.
+\]</div>
+<p>Each <span class="arithmatex">\(F_i(x)\)</span> is a scalar function with its own gradient <span class="arithmatex">\(\nabla F_i(x)^\top\)</span>.<br>
+Stacking these row vectors gives the Jacobian matrix:
+<script type="math/tex; mode=display">
+J_F(x) =
+\begin{bmatrix}
+\frac{\partial F_1}{\partial x_1} & \cdots & \frac{\partial F_1}{\partial x_n} \\
 \vdots & \ddots & \vdots \\
-\frac{\partial^2 f}{\partial x_n \partial x_1} & \cdots & \frac{\partial^2 f}{\partial x_n^2}
+\frac{\partial F_m}{\partial x_1} & \cdots & \frac{\partial F_m}{\partial x_n}
 \end{bmatrix}.
 </script>
 </p>
-<p>If <span class="arithmatex">\(f\)</span> is twice continuously differentiable, then <span class="arithmatex">\(\nabla^2 f(x)\)</span> is symmetric (Clairaut’s theorem).</p>
+<p>For <span class="arithmatex">\(F : \mathbb{R}^n \to \mathbb{R}^m\)</span>, the Jacobian is the <span class="arithmatex">\(m \times n\)</span> matrix
+<script type="math/tex; mode=display">
+J_F(x) =
+\begin{bmatrix}
+\frac{\partial F_1}{\partial x_1} & \dots & \frac{\partial F_1}{\partial x_n} \\
+\vdots & \ddots & \vdots \\
+\frac{\partial F_m}{\partial x_1} & \dots & \frac{\partial F_m}{\partial x_n}
+\end{bmatrix}.
+</script>
+</p>
+<p>It represents the best linear map approximating <span class="arithmatex">\(F\)</span> near <span class="arithmatex">\(x\)</span>:
+<script type="math/tex; mode=display">
+F(x + h) \approx F(x) + J_F(x) \, h.
+</script>
+</p>
+<p>Just as a tangent line approximates a scalar curve, the Jacobian defines the tangent linear map that approximates <span class="arithmatex">\(F\)</span> near <span class="arithmatex">\(x\)</span>:
+<script type="math/tex; mode=display">
+F(x + h) \approx F(x) + J_F(x) \, h.
+</script>
+</p>
+<ul>
+<li>The small displacement <span class="arithmatex">\(h\)</span> in input space is transformed linearly into an output change <span class="arithmatex">\(J_F(x)h\)</span>.  </li>
+<li>Thus, <span class="arithmatex">\(J_F(x)\)</span> acts like the <em>microscopic blueprint</em> of <span class="arithmatex">\(F\)</span> around <span class="arithmatex">\(x\)</span>.  </li>
+<li>Locally, <span class="arithmatex">\(F\)</span> behaves like a matrix transformation — stretching, rotating, or skewing space.</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>Part of <span class="arithmatex">\(J_F(x)\)</span></th>
+<th>Interpretation</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Row <span class="arithmatex">\(i\)</span></td>
+<td>Gradient of the <span class="arithmatex">\(i\)</span>-th output <span class="arithmatex">\(F_i(x)\)</span> — how that output changes with each input variable.</td>
+</tr>
+<tr>
+<td>Column <span class="arithmatex">\(j\)</span></td>
+<td>Sensitivity of all outputs to input <span class="arithmatex">\(x_j\)</span> — how changing <span class="arithmatex">\(x_j\)</span> influences the entire output vector.</td>
+</tr>
+<tr>
+<td>Determinant (if <span class="arithmatex">\(m=n\)</span>)</td>
+<td>Local volume scaling — how much <span class="arithmatex">\(F\)</span> expands or compresses space near <span class="arithmatex">\(x\)</span>.</td>
+</tr>
+<tr>
+<td>Rank of <span class="arithmatex">\(J_F(x)\)</span></td>
+<td>Local dimensionality of the image of <span class="arithmatex">\(F\)</span> — tells if directions are lost or preserved.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="33-the-hessian-and-curvature">3.3 The Hessian and Curvature<a class="headerlink" href="#33-the-hessian-and-curvature" title="Permanent link">¶</a></h2>
+<p>If <span class="arithmatex">\(f : \mathbb{R}^n \to \mathbb{R}\)</span> is twice differentiable, its Hessian is</p>
+<div class="arithmatex">\[
+\nabla^2 f(x) =
+\begin{bmatrix}
+\frac{\partial^2 f}{\partial x_1^2} &amp; \cdots &amp; \frac{\partial^2 f}{\partial x_1 \partial x_n} \\
+\vdots &amp; \ddots &amp; \vdots \\
+\frac{\partial^2 f}{\partial x_n \partial x_1} &amp; \cdots &amp; \frac{\partial^2 f}{\partial x_n^2}
+\end{bmatrix}.
+\]</div>
+<p>The Hessian encodes curvature information:
+- <span class="arithmatex">\(\nabla^2 f(x) \succeq 0\)</span> (positive semidefinite) ⟹ <span class="arithmatex">\(f\)</span> is convex near <span class="arithmatex">\(x\)</span>.<br>
+- <span class="arithmatex">\(\nabla^2 f(x) \succ 0\)</span> ⟹ <span class="arithmatex">\(f\)</span> is strictly convex.<br>
+- Negative eigenvalues ⟹ directions of local decrease.</p>
 <p>Example – quadratic function: <span class="arithmatex">\(f(x) = \frac{1}{2}x^TQx - b^T x\)</span>. Here <span class="arithmatex">\(\nabla f(x) = Qx - b\)</span> (linear), and <span class="arithmatex">\(\nabla^2 f(x) = Q\)</span>. Solving <span class="arithmatex">\(\nabla f=0\)</span> yields <span class="arithmatex">\(Qx=b\)</span>, so if <span class="arithmatex">\(Q \succ 0\)</span> the unique minimizer is <span class="arithmatex">\(x^* = Q^{-1}b\)</span>. The Hessian being <span class="arithmatex">\(Q \succ 0\)</span> confirms convexity. If <span class="arithmatex">\(Q\)</span> has large eigenvalues, gradient <span class="arithmatex">\(Qx - b\)</span> changes rapidly in some directions (steep narrow valley); if some eigenvalues are tiny, gradient hardly changes in those directions (flat valley). This aligns with earlier discussions: condition number of <span class="arithmatex">\(Q\)</span> controls difficulty of minimizing <span class="arithmatex">\(f\)</span>.</p>
-<h2 id="32-first-order-taylor-approximation">3.2 First-order Taylor approximation<a class="headerlink" href="#32-first-order-taylor-approximation" title="Permanent link">¶</a></h2>
+<blockquote>
+<p>Eigenvalues of the Hessian describe curvature along principal directions. Large eigenvalues correspond to steep curvature; small ones correspond to flat regions. Understanding this curvature is essential in designing stable optimization algorithms.</p>
+</blockquote>
+<h2 id="34-taylor-approximation">3.4 Taylor approximation<a class="headerlink" href="#34-taylor-approximation" title="Permanent link">¶</a></h2>
 <p>For differentiable <span class="arithmatex">\(f\)</span>, we have the first-order Taylor expansion around <span class="arithmatex">\(x\)</span>:
 <script type="math/tex; mode=display">
 f(x + d) \approx f(x) + \nabla f(x)^\top d~.
 </script>
 </p>
-<p>Interpretation:</p>
-<ul>
-<li><span class="arithmatex">\(\nabla f(x)\)</span> gives the best linear approximation.</li>
-<li>The linear model predicts how <span class="arithmatex">\(f\)</span> changes if we move by <span class="arithmatex">\(d\)</span>.</li>
-</ul>
-<p>This is the basis of first-order optimisation methods like gradient descent.</p>
-<h2 id="33-second-order-taylor-approximation">3.3 Second-order Taylor approximation<a class="headerlink" href="#33-second-order-taylor-approximation" title="Permanent link">¶</a></h2>
-<p>If <span class="arithmatex">\(f\)</span> is twice differentiable, then
+<p>The gradient gives the best local linear approximation, predicting how <span class="arithmatex">\(f\)</span> changes for a small move <span class="arithmatex">\(d\)</span>. This is the foundation of first-order optimization methods such as gradient descent.</p>
+<p>If f is twice differentiable, we have the second-order expansion
 <script type="math/tex; mode=display">
 f(x + d) \approx f(x)
 + \nabla f(x)^\top d
@@ -1254,64 +1487,97 @@ f(x + d) \approx f(x)
 </script>
 </p>
 <p>If <span class="arithmatex">\(\nabla^2 f(x)\)</span> is positive semidefinite, the quadratic term is always <span class="arithmatex">\(\ge 0\)</span>. Locally, <span class="arithmatex">\(x\)</span> is in a “bowl”. If <span class="arithmatex">\(\nabla^2 f(x)\)</span> is indefinite, the landscape can curve up in some directions and down in others — typical of saddle points.</p>
-<h2 id="34-unconstrained-optimality-conditions">3.4 Unconstrained optimality conditions<a class="headerlink" href="#34-unconstrained-optimality-conditions" title="Permanent link">¶</a></h2>
-<p>Suppose we want to solve
+<h2 id="35-convexity-and-the-hessian">3.5 Convexity and the Hessian<a class="headerlink" href="#35-convexity-and-the-hessian" title="Permanent link">¶</a></h2>
+<p>A twice-differentiable function <span class="arithmatex">\(f\)</span> is convex on a convex set if and only if</p>
+<div class="arithmatex">\[
+\nabla^2 f(x) \succeq 0 \quad \forall x \text{ in the domain.}
+\]</div>
+<p>The Hessian describes how the gradient changes.</p>
+<h2 id="36-first-and-second-order-optimality-conditions">3.6 First and Second-Order Optimality Conditions<a class="headerlink" href="#36-first-and-second-order-optimality-conditions" title="Permanent link">¶</a></h2>
+<p>Suppose we want to solve an unconstrained optimization problem:
 <script type="math/tex; mode=display">
-\min_x f(x)
+\min_x f(x).
 </script>
-with no constraints.</p>
-<p>A point <span class="arithmatex">\(x^*\)</span> is called a critical point if <span class="arithmatex">\(\nabla f(x^*) = 0\)</span>.</p>
-<ul>
-<li>
-<p>First-order necessary condition:<br>
-  If <span class="arithmatex">\(x^*\)</span> is a (local) minimiser and <span class="arithmatex">\(f\)</span> is differentiable, then
-  <script type="math/tex; mode=display">
-  \nabla f(x^*) = 0~.
-  </script>
 </p>
-</li>
-<li>
-<p>Second-order necessary condition:<br>
-  If <span class="arithmatex">\(x^*\)</span> is a (local) minimiser and <span class="arithmatex">\(f\)</span> is twice differentiable,
-  <script type="math/tex; mode=display">
-  \nabla f(x^*) = 0,
-  \quad
-  \nabla^2 f(x^*) \succeq 0
-  \quad\text{(i.e. PSD).}
-  </script>
+<p>A point <span class="arithmatex">\(x^\star\)</span> is called a critical point if
+<script type="math/tex; mode=display">
+\nabla f(x^\star) = 0.
+</script>
 </p>
-</li>
-<li>
-<p>Second-order sufficient condition:<br>
-  If
-  <script type="math/tex; mode=display">
-  \nabla f(x^*) = 0,
-  \quad
-  \nabla^2 f(x^*) \succ 0
-  \quad\text{(i.e. PD),}
-  </script>
-  then <span class="arithmatex">\(x^*\)</span> is a strict local minimiser.</p>
-</li>
-</ul>
-<p>Now, here is where convexity changes everything.</p>
+<h3 id="first-order-necessary-condition">First-Order Necessary Condition<a class="headerlink" href="#first-order-necessary-condition" title="Permanent link">¶</a></h3>
+<p>If <span class="arithmatex">\(f\)</span> is differentiable and <span class="arithmatex">\(x^\star\)</span> is a local minimizer, then necessarily
+<script type="math/tex; mode=display">
+\nabla f(x^\star) = 0.
+</script>
+</p>
+<p>Intuitively, this means the slope in every direction must vanish — there is no infinitesimal move that decreases <span class="arithmatex">\(f\)</span> further.</p>
+<h3 id="second-order-necessary-condition">Second-Order Necessary Condition<a class="headerlink" href="#second-order-necessary-condition" title="Permanent link">¶</a></h3>
+<p>If <span class="arithmatex">\(f\)</span> is twice differentiable and <span class="arithmatex">\(x^\star\)</span> is a local minimizer, then
+<script type="math/tex; mode=display">
+\nabla f(x^\star) = 0,
+\quad
+\nabla^2 f(x^\star) \succeq 0,
+</script>
+</p>
+<p>meaning the Hessian is positive semidefinite (PSD). The function curves upward (or flat) in all local directions.</p>
+<h3 id="second-order-sufficient-condition">Second-Order Sufficient Condition<a class="headerlink" href="#second-order-sufficient-condition" title="Permanent link">¶</a></h3>
+<p>If
+<script type="math/tex; mode=display">
+\nabla f(x^\star) = 0,
+\quad
+\nabla^2 f(x^\star) \succ 0,
+</script>
+i.e. the Hessian is positive definite (PD),<br>
+then <span class="arithmatex">\(x^\star\)</span> is a strict local minimizer — the point lies at the bottom of a strictly convex bowl.</p>
+<p>The gradient gives the best local linear approximation, predicting how f changes for a small move d.  This is the foundation of first-order optimization methods such as gradient descent. If <span class="arithmatex">\(\nabla f(x^\star)\)</span> has both positive and negative eigenvalues, <span class="arithmatex">\(x^\star\)</span> is a saddle point — neither a minimum nor a maximum.</p>
+<p>Convexity makes everything simpler.If <span class="arithmatex">\(f\)</span> is convex, then <em>any</em> point <span class="arithmatex">\(x^\star\)</span> satisfying <span class="arithmatex">\(\nabla f(x^\star) = 0\)</span>  is not only a local minimizer — it is a global minimizer.</p>
+<h2 id="37-lipschitz-continuity-and-smoothness">3.7 Lipschitz Continuity and Smoothness<a class="headerlink" href="#37-lipschitz-continuity-and-smoothness" title="Permanent link">¶</a></h2>
+<p>A function <span class="arithmatex">\(f\)</span> has a Lipschitz continuous gradient with constant <span class="arithmatex">\(L &gt; 0\)</span> if
+<script type="math/tex; mode=display">
+\|\nabla f(x) - \nabla f(y)\| \le L \|x - y\|, \quad \forall x,y.
+</script>
+</p>
+<p>Such a function is called L-smooth. This condition bounds how quickly the gradient can change, ensuring the function is not excessively curved.</p>
+<p>This property implies the Descent Lemma:
+<script type="math/tex; mode=display">
+f(y) \le f(x) + \nabla f(x)^\top (y - x) + \tfrac{L}{2} \|y - x\|^2.
+</script>
+</p>
+<p>Smoothness bounds how fast <span class="arithmatex">\(f\)</span> can curve.<br>
+In gradient descent, choosing a step size <span class="arithmatex">\(\eta \le 1/L\)</span> guarantees convergence for convex functions.</p>
 <blockquote>
-<p>If <span class="arithmatex">\(f\)</span> is convex, then any point <span class="arithmatex">\(x^*\)</span> with <span class="arithmatex">\(\nabla f(x^*) = 0\)</span> is not just a local minimiser — it is a global minimiser (Boyd and Vandenberghe, 2004). No second-order check is even needed.</p>
+<p>In ML training, <span class="arithmatex">\(L\)</span> controls how “aggressive” the learning rate can be — smoother losses allow larger steps.</p>
 </blockquote>
-<h2 id="35-gradients-as-normals-to-level-sets">3.5 Gradients as normals to level sets<a class="headerlink" href="#35-gradients-as-normals-to-level-sets" title="Permanent link">¶</a></h2>
-<p>A level set of a differentiable function <span class="arithmatex">\(f\)</span> is
+<h2 id="38-strong-convexity-functions-with-guaranteed-curvature">3.8 Strong Convexity — Functions with Guaranteed Curvature<a class="headerlink" href="#38-strong-convexity-functions-with-guaranteed-curvature" title="Permanent link">¶</a></h2>
+<p>A differentiable function <span class="arithmatex">\(f\)</span> is said to be <span class="arithmatex">\(\mu\)</span>-strongly convex if for some <span class="arithmatex">\(\mu &gt; 0\)</span>,
 <script type="math/tex; mode=display">
-L_c = \{ x : f(x) = c \}.
+f(y) \ge f(x) + \langle \nabla f(x),\, y - x \rangle + \frac{\mu}{2}\|y - x\|^2,
+\quad \forall\, x, y.
 </script>
 </p>
-<p>At any point <span class="arithmatex">\(x\)</span> with <span class="arithmatex">\(\nabla f(x) \ne 0\)</span>, the gradient <span class="arithmatex">\(\nabla f(x)\)</span> is orthogonal to the level set <span class="arithmatex">\(L_{f(x)}\)</span>. Intuitively, the level set is like a contour line, and the gradient is perpendicular to it, pointing toward larger values of <span class="arithmatex">\(f\)</span>.</p>
-<p>In optimisation, if we want to decrease <span class="arithmatex">\(f\)</span>, we move roughly in direction <span class="arithmatex">\(-\nabla f(x)\)</span>.</p>
-<p>This geometric fact recurs later in constrained optimisation and KKT: at optimality, the gradient of the objective lies in the span of gradients of active constraints.</p>
-<h2 id="36-convexity-and-the-hessian">3.6 Convexity and the Hessian<a class="headerlink" href="#36-convexity-and-the-hessian" title="Permanent link">¶</a></h2>
-<p>If <span class="arithmatex">\(f : \mathbb{R}^n \to \mathbb{R}\)</span> is twice differentiable, then:</p>
-<ul>
-<li><span class="arithmatex">\(f\)</span> is convex if and only if <span class="arithmatex">\(\nabla^2 f(x)\)</span> is positive semidefinite for all <span class="arithmatex">\(x\)</span> in its domain (Boyd and Vandenberghe, 2004).</li>
-<li><span class="arithmatex">\(f\)</span> is strictly convex if <span class="arithmatex">\(\nabla^2 f(x)\)</span> is positive definite for all <span class="arithmatex">\(x\)</span>.</li>
-</ul>
+<p>This inequality means f always lies above its tangent plane by at least a quadratic term of curvature μ.<br>
+Strong convexity ensures a minimum curvature: f grows at least as fast as a parabola away from its minimizer.</p>
+<h2 id="39-subgradients-and-nonsmooth-extensions">3.9 Subgradients and Nonsmooth Extensions<a class="headerlink" href="#39-subgradients-and-nonsmooth-extensions" title="Permanent link">¶</a></h2>
+<p>Many useful convex functions are nonsmooth — e.g., hinge loss, <span class="arithmatex">\(\ell_1\)</span> norm, ReLU.<br>
+They lack a gradient at certain points but admit a subgradient.</p>
+<p>A vector <span class="arithmatex">\(g\)</span> is a subgradient of <span class="arithmatex">\(f\)</span> at <span class="arithmatex">\(x\)</span> if
+<script type="math/tex; mode=display">
+f(y) \ge f(x) + g^\top (y - x), \quad \forall y.
+</script>
+</p>
+<p>The set of all such vectors is the subdifferential <span class="arithmatex">\(\partial f(x)\)</span>.  </p>
+<p>Examples:
+- <span class="arithmatex">\(f(x) = \|x\|_1\)</span> has
+  <script type="math/tex; mode=display">
+  (\partial f(x))_i =
+  \begin{cases}
+  \operatorname{sign}(x_i), & x_i \ne 0, \\
+  [-1, 1], & x_i = 0.
+  \end{cases}
+  </script>
+- For <span class="arithmatex">\(f(x) = \max_i x_i\)</span>, any unit vector supported on the active index is a subgradient.</p>
+<p>Subgradients generalize the gradient concept, allowing optimization even when derivatives do not exist.<br>
+They are the backbone of nonsmooth convex optimization and proximal methods.  In machine learning, they make it possible to minimize losses such as the hinge or absolute deviation, where gradients are undefined at corners.</p>
 
 
 

@@ -9,13 +9,9 @@
         <meta name="author" content="Salman Khan">
       
       
-        <link rel="canonical" href="https://salk91.github.io/convex_optimization/appendices/190_proximal/">
+        <link rel="canonical" href="https://salk91.github.io/convex_optimization/informationtheory/intro/">
       
       
-        <link rel="prev" href="../180_subgradient_methods/">
-      
-      
-        <link rel="next" href="../200_mirror/">
       
       
       <link rel="icon" href="../../assets/images/favicon.png">
@@ -23,7 +19,7 @@
     
     
       
-        <title>Appendix G - Proximal Operators - Mathematics for Machine Learning</title>
+        <title>Intro - Mathematics for Machine Learning</title>
       
     
     
@@ -86,11 +82,6 @@
     <label class="md-overlay" for="__drawer"></label>
     <div data-md-component="skip">
       
-        
-        <a href="#appendix-g-projections-and-proximal-operators-in-constrained-convex-optimization" class="md-skip">
-          Skip to content
-        </a>
-      
     </div>
     <div data-md-component="announce">
       
@@ -123,7 +114,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Appendix G - Proximal Operators
+              Intro
             
           </span>
         </div>
@@ -1047,20 +1038,18 @@
       
   
   
-    
   
   
-  
     
     
     
     
     
-    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" checked>
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6">
         
           
           <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
@@ -1076,7 +1065,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="true">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_6">
             <span class="md-nav__icon md-icon"></span>
             Appendices
@@ -1090,7 +1079,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../120_ineqaulities/" class="md-nav__link">
+      <a href="../../appendices/120_ineqaulities/" class="md-nav__link">
         
   
   
@@ -1113,7 +1102,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../130_projections/" class="md-nav__link">
+      <a href="../../appendices/130_projections/" class="md-nav__link">
         
   
   
@@ -1136,7 +1125,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../140_support/" class="md-nav__link">
+      <a href="../../appendices/140_support/" class="md-nav__link">
         
   
   
@@ -1159,7 +1148,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../160_conjugates/" class="md-nav__link">
+      <a href="../../appendices/160_conjugates/" class="md-nav__link">
         
   
   
@@ -1182,7 +1171,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../170_probability/" class="md-nav__link">
+      <a href="../../appendices/170_probability/" class="md-nav__link">
         
   
   
@@ -1205,7 +1194,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../180_subgradient_methods/" class="md-nav__link">
+      <a href="../../appendices/180_subgradient_methods/" class="md-nav__link">
         
   
   
@@ -1225,19 +1214,10 @@
                 
   
   
-    
   
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../../appendices/190_proximal/" class="md-nav__link">
         
   
   
@@ -1248,7 +1228,6 @@
   
 
       </a>
-      
     </li>
   
 
@@ -1261,7 +1240,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../200_mirror/" class="md-nav__link">
+      <a href="../../appendices/200_mirror/" class="md-nav__link">
         
   
   
@@ -1284,7 +1263,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../300_matrixfactorization/" class="md-nav__link">
+      <a href="../../appendices/300_matrixfactorization/" class="md-nav__link">
         
   
   
@@ -1323,7 +1302,7 @@
 
 
   
-    <a href="https://github.com/SalK91/convex_optimization/edit/master/docs/appendices/190_proximal.md" title="Edit this page" class="md-content__button md-icon" rel="edit">
+    <a href="https://github.com/SalK91/convex_optimization/edit/master/docs/informationtheory/intro.md" title="Edit this page" class="md-content__button md-icon" rel="edit">
       
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M10 20H6V4h7v5h5v3.1l2-2V8l-6-6H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h4zm10.2-7c.1 0 .3.1.4.2l1.3 1.3c.2.2.2.6 0 .8l-1 1-2.1-2.1 1-1c.1-.1.2-.2.4-.2m0 3.9L14.1 23H12v-2.1l6.1-6.1z"></path></svg>
     </a>
@@ -1332,195 +1311,18 @@
     
       
     
-    <a href="https://github.com/SalK91/convex_optimization/raw/master/docs/appendices/190_proximal.md" title="View source of this page" class="md-content__button md-icon">
+    <a href="https://github.com/SalK91/convex_optimization/raw/master/docs/informationtheory/intro.md" title="View source of this page" class="md-content__button md-icon">
       
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 18c.56 0 1 .44 1 1s-.44 1-1 1-1-.44-1-1 .44-1 1-1m0-3c-2.73 0-5.06 1.66-6 4 .94 2.34 3.27 4 6 4s5.06-1.66 6-4c-.94-2.34-3.27-4-6-4m0 6.5a2.5 2.5 0 0 1-2.5-2.5 2.5 2.5 0 0 1 2.5-2.5 2.5 2.5 0 0 1 2.5 2.5 2.5 2.5 0 0 1-2.5 2.5M9.27 20H6V4h7v5h5v4.07c.7.08 1.36.25 2 .49V8l-6-6H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h4.5a8.2 8.2 0 0 1-1.23-2"></path></svg>
     </a>
   
 
 
-<h1 id="appendix-g-projections-and-proximal-operators-in-constrained-convex-optimization">Appendix G | Projections and Proximal Operators in Constrained Convex Optimization<a class="headerlink" href="#appendix-g-projections-and-proximal-operators-in-constrained-convex-optimization" title="Permanent link">¶</a></h1>
-<p>Many convex optimization problems involve constraints or nonsmooth penalties.<br>
-This appendix unifies both under the framework of projections and proximal operators, which extend gradient-based methods to constrained or regularized settings.</p>
-<h2 id="g1-problem-setup">G.1 Problem Setup<a class="headerlink" href="#g1-problem-setup" title="Permanent link">¶</a></h2>
-<p>We wish to minimize a convex, differentiable function <span class="arithmatex">\( f(x) \)</span> subject to a convex feasible set <span class="arithmatex">\( \mathcal{X} \subseteq \mathbb{R}^n \)</span>:</p>
-<div class="arithmatex">\[
-\min_{x \in \mathcal{X}} f(x).
-\]</div>
-<p>A plain gradient step,</p>
-<div class="arithmatex">\[
-x_{t+1} = x_t - \eta \nabla f(x_t),
-\]</div>
-<p>may leave <span class="arithmatex">\( x_{t+1} \notin \mathcal{X} \)</span>.<br>
-We fix this by projecting the iterate back into the feasible region.</p>
-<h2 id="g2-projection-operator">G.2 Projection Operator<a class="headerlink" href="#g2-projection-operator" title="Permanent link">¶</a></h2>
-<p>The projection of a point <span class="arithmatex">\(y\)</span> onto a convex set <span class="arithmatex">\(\mathcal{X}\)</span> is</p>
-<div class="arithmatex">\[
-\text{Proj}_{\mathcal{X}}(y)
-= \arg\min_{x \in \mathcal{X}} \|x - y\|^2.
-\]</div>
-<p>Hence, the projected gradient descent update is</p>
-<div class="arithmatex">\[
-x_{t+1} = \text{Proj}_{\mathcal{X}}\big(x_t - \eta \nabla f(x_t)\big).
-\]</div>
-<h3 id="geometric-insight">Geometric Insight<a class="headerlink" href="#geometric-insight" title="Permanent link">¶</a></h3>
-<ul>
-<li>Take a descent step possibly outside the feasible set.  </li>
-<li>Project back to the closest feasible point.  </li>
-<li>The update direction remains aligned with the negative gradient while maintaining feasibility.</li>
-</ul>
-<p>Example — Euclidean ball:<br>
-If <span class="arithmatex">\( \mathcal{X} = \{x : \|x\|_2 \le 1\} \)</span>, then</p>
-<div class="arithmatex">\[
-\text{Proj}_{\mathcal{X}}(y) = \frac{y}{\max(1, \|y\|_2)}.
-\]</div>
-<ul>
-<li>Inside the ball → unchanged.  </li>
-<li>Outside → scaled back to the boundary.</li>
-</ul>
-<hr>
-<h2 id="g3-from-projections-to-proximal-operators">G.3 From Projections to Proximal Operators<a class="headerlink" href="#g3-from-projections-to-proximal-operators" title="Permanent link">¶</a></h2>
-<p>Projections handle explicit constraints, but many problems use implicit penalties — e.g. sparsity (<span class="arithmatex">\(\|x\|_1\)</span>), total variation, or nonnegativity penalties.</p>
-<p>The proximal operator generalizes projection to handle such nonsmooth regularization directly.</p>
-<h3 id="definition">Definition<a class="headerlink" href="#definition" title="Permanent link">¶</a></h3>
-<p>For a convex (possibly nondifferentiable) function <span class="arithmatex">\( g(x) \)</span>,</p>
-<p>
-<script type="math/tex; mode=display">
-\text{prox}_{\lambda g}(y)
-= \arg\min_x \Big( g(x) + \tfrac{1}{2\lambda}\|x - y\|^2 \Big),
-</script>
-where <span class="arithmatex">\( \lambda &gt; 0 \)</span> balances regularization vs. proximity.</p>
-<h3 id="interpretation">Interpretation<a class="headerlink" href="#interpretation" title="Permanent link">¶</a></h3>
-<ul>
-<li>The quadratic term <span class="arithmatex">\( \tfrac{1}{2\lambda}\|x - y\|^2 \)</span> keeps <span class="arithmatex">\(x\)</span> close to <span class="arithmatex">\(y\)</span>.  </li>
-<li>The function <span class="arithmatex">\( g(x) \)</span> encourages structure (sparsity, smoothness, feasibility).  </li>
-<li>Small <span class="arithmatex">\(\lambda\)</span>: conservative correction; large <span class="arithmatex">\(\lambda\)</span>: stronger regularization.</li>
-</ul>
-<p>The proximal step acts as a soft correction after a gradient step.</p>
-<hr>
-<h2 id="g4-projection-as-a-special-case">G.4 Projection as a Special Case<a class="headerlink" href="#g4-projection-as-a-special-case" title="Permanent link">¶</a></h2>
-<p>Define the indicator function of a convex set <span class="arithmatex">\(\mathcal{X}\)</span>:</p>
-<div class="arithmatex">\[
-I_{\mathcal{X}}(x) =
-\begin{cases}
-0, &amp; x \in \mathcal{X}, \\[4pt]
-+\infty, &amp; x \notin \mathcal{X}.
-\end{cases}
-\]</div>
-<p>Substitute <span class="arithmatex">\(g(x)=I_{\mathcal{X}}(x)\)</span> into the proximal definition:</p>
-<div class="arithmatex">\[
-\text{prox}_{\lambda I_{\mathcal{X}}}(y)
-= \arg\min_x \Big( I_{\mathcal{X}}(x) + \tfrac{1}{2\lambda}\|x - y\|^2 \Big)
-= \arg\min_{x \in \mathcal{X}} \|x - y\|^2
-= \text{Proj}_{\mathcal{X}}(y).
-\]</div>
-<p>✅ Projection is just a proximal operator for an indicator function.</p>
-<h2 id="g5-proximal-gradient-method">G.5 Proximal Gradient Method<a class="headerlink" href="#g5-proximal-gradient-method" title="Permanent link">¶</a></h2>
-<p>When minimizing a composite convex objective
-<script type="math/tex; mode=display">
-\min_x \; f(x) + g(x),
-</script>
-where <span class="arithmatex">\(f\)</span> is smooth and <span class="arithmatex">\(g\)</span> convex (possibly nonsmooth), the proximal gradient method updates:</p>
-<div class="arithmatex">\[
-x_{t+1} = \text{prox}_{\eta g}\big(x_t - \eta \nabla f(x_t)\big).
-\]</div>
-<ul>
-<li>The gradient step reduces the smooth part <span class="arithmatex">\(f(x)\)</span>.  </li>
-<li>The proximal step enforces structure via <span class="arithmatex">\(g(x)\)</span>.<br>
-This method generalizes projected gradient descent to include penalties and constraints seamlessly.</li>
-</ul>
-<h2 id="g6-example-proximal-operator-of-the-ell_1-norm">G.6 Example: Proximal Operator of the <span class="arithmatex">\(\ell_1\)</span>-Norm<a class="headerlink" href="#g6-example-proximal-operator-of-the-ell_1-norm" title="Permanent link">¶</a></h2>
-<p>We seek</p>
-<div class="arithmatex">\[
-\text{prox}_{\lambda \|\cdot\|_1}(y)
-= \arg\min_x \left( \lambda\|x\|_1 + \tfrac{1}{2}\|x - y\|^2 \right).
-\]</div>
-<h3 id="step-1-coordinate-separation">Step 1. Coordinate Separation<a class="headerlink" href="#step-1-coordinate-separation" title="Permanent link">¶</a></h3>
-<p>The problem is separable across coordinates:
-<script type="math/tex; mode=display">
-\min_x \sum_i \Big(\lambda |x_i| + \tfrac{1}{2}(x_i - y_i)^2\Big),
-</script>
-so each coordinate solves
-<script type="math/tex; mode=display">
-\min_x \phi(x) = \lambda|x| + \tfrac{1}{2}(x - y)^2.
-</script>
-</p>
-<h3 id="step-2-subgradient-optimality">Step 2. Subgradient Optimality<a class="headerlink" href="#step-2-subgradient-optimality" title="Permanent link">¶</a></h3>
-<p>Optimality condition:
-<script type="math/tex; mode=display">
-0 \in \partial\phi(x^\star) = \lambda \partial|x^\star| + (x^\star - y).
-</script>
-Thus,
-<script type="math/tex; mode=display">
-x^\star = y - \lambda s, \quad s \in \partial |x^\star|.
-</script>
-</p>
-<h3 id="step-3-case-analysis">Step 3. Case Analysis<a class="headerlink" href="#step-3-case-analysis" title="Permanent link">¶</a></h3>
-<table>
-<thead>
-<tr>
-<th>Case</th>
-<th>Condition</th>
-<th>Solution</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><span class="arithmatex">\(x^\star&gt;0\)</span></td>
-<td><span class="arithmatex">\(y&gt;\lambda\)</span></td>
-<td><span class="arithmatex">\(x^\star = y - \lambda\)</span></td>
-</tr>
-<tr>
-<td><span class="arithmatex">\(x^\star&lt;0\)</span></td>
-<td><span class="arithmatex">\(y&lt;-\lambda\)</span></td>
-<td><span class="arithmatex">\(x^\star = y + \lambda\)</span></td>
-</tr>
-<tr>
-<td><span class="arithmatex">\(x^\star=0\)</span></td>
-<td>(</td>
-<td>y</td>
-</tr>
-</tbody>
-</table>
-<h3 id="step-4-compact-form">Step 4. Compact Form<a class="headerlink" href="#step-4-compact-form" title="Permanent link">¶</a></h3>
-<div class="arithmatex">\[
-\boxed{
-\text{prox}_{\lambda|\cdot|}(y)
-= \text{sign}(y) \cdot \max(|y| - \lambda,\, 0)
-}
-\]</div>
-<p>This is the soft-thresholding operator.</p>
-<h3 id="step-5-vector-case">Step 5. Vector Case<a class="headerlink" href="#step-5-vector-case" title="Permanent link">¶</a></h3>
-<p>For <span class="arithmatex">\(y \in \mathbb{R}^n\)</span>,</p>
-<div class="arithmatex">\[
-\big(\text{prox}_{\lambda\|\cdot\|_1}(y)\big)_i
-= \text{sign}(y_i)\cdot\max(|y_i| - \lambda, 0).
-\]</div>
-<p>Each coordinate is independently shrunk toward zero — producing sparse solutions.</p>
-<h3 id="step-6-interpretation">Step 6. Interpretation<a class="headerlink" href="#step-6-interpretation" title="Permanent link">¶</a></h3>
-<ul>
-<li>Coordinates with <span class="arithmatex">\(|y_i| \le \lambda\)</span> → set to zero (promotes sparsity).  </li>
-<li>Coordinates with <span class="arithmatex">\(|y_i| &gt; \lambda\)</span> → shrink by <span class="arithmatex">\(\lambda\)</span>.  </li>
-<li>The proximal operator thus blends denoising and regularization: it keeps large coefficients but trims small ones.</li>
-</ul>
-<h2 id="g7-geometry-and-connection-to-algorithms">G.7 Geometry and Connection to Algorithms<a class="headerlink" href="#g7-geometry-and-connection-to-algorithms" title="Permanent link">¶</a></h2>
-<ul>
-<li>Projection = nearest feasible point → handles <em>hard constraints</em>.  </li>
-<li>Proximal operator = nearest structured point → handles <em>soft regularization</em>.  </li>
-<li>Proximal gradient = combines both, yielding algorithms like:</li>
-<li>ISTA / FISTA (sparse recovery, LASSO),</li>
-<li>Projected gradient (feasibility),</li>
-<li>ADMM (splitting into subproblems).</li>
-</ul>
-<p>Proximal methods lie at the core of modern convex optimization and machine learning, offering flexibility for nonsmooth and constrained problems alike.</p>
-<h2 id="g8-summary">G.8 Summary<a class="headerlink" href="#g8-summary" title="Permanent link">¶</a></h2>
-<ul>
-<li>Projections and proximal operators generalize gradient steps to respect constraints and structure.  </li>
-<li>Projection is a special case of the proximal operator for an indicator function.  </li>
-<li>Proximal mappings handle nonsmooth regularizers (e.g., <span class="arithmatex">\(\ell_1\)</span>-norm).  </li>
-<li>The proximal gradient method unifies constrained and regularized optimization.  </li>
-<li>Many state-of-the-art ML algorithms are built upon these proximal foundations.</li>
-</ul>
+  <h1>Intro</h1>
+
+<p>Entropy
+Cross Entropy 
+KL Divergence</p>
 
 
 

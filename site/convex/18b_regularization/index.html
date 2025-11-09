@@ -873,7 +873,7 @@
   
   
   <span class="md-ellipsis">
-    Cheat Sheets
+    Deep Learning
     
   </span>
   
@@ -883,6 +883,143 @@
         
         <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            Deep Learning
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../deeplearning/1_intro/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    1. Introduction to Deep Learning Optimization
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../deeplearning/1_intro/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    1. Introduction to Deep Learning Optimization
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../deep_learning/1_intro.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    3. Regularization Techniques in Deep Learning
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../deep_learning/1_intro.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    4. Advanced Topics in Deep Learning Optimization
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5">
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Cheat Sheets
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
             <span class="md-nav__icon md-icon"></span>
             Cheat Sheets
           </label>
@@ -933,10 +1070,10 @@
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5">
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6">
         
           
-          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
             
   
   
@@ -949,8 +1086,8 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_5">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
             <span class="md-nav__icon md-icon"></span>
             Appendices
           </label>
@@ -1205,12 +1342,13 @@
 <h1 id="chapter-11-regularized-approximation-balancing-fit-and-complexity">Chapter 11: Regularized Approximation – Balancing Fit and Complexity<a class="headerlink" href="#chapter-11-regularized-approximation-balancing-fit-and-complexity" title="Permanent link">¶</a></h1>
 <p>Many practical optimization problems involve a trade-off between fitting observed data and controlling model complexity.<br>
 Regularization formalizes this trade-off as a convex optimization problem that balances these two competing goals.  </p>
-<p>Building on Chapter 10 (Pareto Optimality), this chapter shows that regularized models correspond to specific points on a Pareto frontier between data fidelity and simplicity.<br>
-We also connect regularization to duality (Chapter 9), KKT conditions, and probabilistic interpretations.</p>
+<p>Building on Chapter 10 (Pareto Optimality), this chapter shows that regularized models correspond to specific points on a Pareto frontier between data fidelity and simplicity.  </p>
 <h2 id="111-motivation-fit-vs-complexity">11.1 Motivation: Fit vs. Complexity<a class="headerlink" href="#111-motivation-fit-vs-complexity" title="Permanent link">¶</a></h2>
-<p>When fitting a model, we want both:
-1. Data fidelity: minimize the loss or error <span class="arithmatex">\(f(x)\)</span>,<br>
-2. Model simplicity: penalize unnecessary complexity <span class="arithmatex">\(R(x)\)</span>.</p>
+<p>When fitting a model, we want both:</p>
+<ol>
+<li>Data fidelity: minimize the loss or error <span class="arithmatex">\(f(x)\)</span>,  </li>
+<li>Model simplicity: penalize unnecessary complexity <span class="arithmatex">\(R(x)\)</span>.</li>
+</ol>
 <p>This yields a bicriterion problem:
 <script type="math/tex; mode=display">
 \min_{x \in \mathbb{R}^n} (f(x), R(x)).
@@ -1229,20 +1367,15 @@ We also connect regularization to duality (Chapter 9), KKT conditions, and proba
 <p>Small <span class="arithmatex">\(\lambda\)</span> → better fit, possible overfitting.<br>
 Large <span class="arithmatex">\(\lambda\)</span> → simpler, possibly underfit model.</p>
 <h2 id="112-bicriterion-optimization-and-the-pareto-frontier">11.2 Bicriterion Optimization and the Pareto Frontier<a class="headerlink" href="#112-bicriterion-optimization-and-the-pareto-frontier" title="Permanent link">¶</a></h2>
-<p>Regularization is a scalarised multi-objective problem (Chapter 10).<br>
-A solution <span class="arithmatex">\(x^*\)</span> is Pareto optimal if no other feasible <span class="arithmatex">\(x\)</span> can reduce <span class="arithmatex">\(f(x)\)</span> without increasing <span class="arithmatex">\(R(x)\)</span>.</p>
+<p>Regularization is a scalarised multi-objective problem (Chapter 10). A solution <span class="arithmatex">\(x^*\)</span> is Pareto optimal if no other feasible <span class="arithmatex">\(x\)</span> can reduce <span class="arithmatex">\(f(x)\)</span> without increasing <span class="arithmatex">\(R(x)\)</span>.</p>
 <ul>
-<li>For convex <span class="arithmatex">\(f\)</span> and <span class="arithmatex">\(R\)</span>, every Pareto-optimal solution can be obtained for some <span class="arithmatex">\(\lambda \ge 0\)</span>.  </li>
-<li>The mapping between <span class="arithmatex">\(\lambda\)</span> and the constraint level <span class="arithmatex">\(R(x) \le t\)</span> is monotonic (though not one-to-one).  </li>
-<li>Nonconvex objectives may yield Pareto frontiers that cannot be fully recovered by weighted sums.</li>
+<li>For convex <span class="arithmatex">\(f\)</span> and <span class="arithmatex">\(R\)</span>, each <span class="arithmatex">\(\lambda \ge 0\)</span> yields a Pareto-optimal solution.  </li>
+<li>The mapping between <span class="arithmatex">\(\lambda\)</span> (Lagrange multiplier) and constraint level <span class="arithmatex">\(R(x)\le t\)</span> is <strong>monotonic</strong>.  </li>
+<li>Each <span class="arithmatex">\(\lambda\)</span> thus corresponds to one point on the <strong>fit–complexity frontier</strong>.</li>
 </ul>
-<blockquote>
-<p>Regularization thus selects one point on the fit–complexity Pareto frontier.</p>
-</blockquote>
+<p>If both <span class="arithmatex">\(f\)</span> and <span class="arithmatex">\(R\)</span> are convex, this frontier is also convex; otherwise, scalarisation may miss nonconvex trade-offs.</p>
 <h2 id="113-why-keep-x-small">11.3 Why Keep <span class="arithmatex">\(x\)</span> Small?<a class="headerlink" href="#113-why-keep-x-small" title="Permanent link">¶</a></h2>
-<p>Ill-posed or noisy inverse problems (<span class="arithmatex">\(Ax \approx b\)</span> with ill-conditioned <span class="arithmatex">\(A\)</span>) often admit many unstable solutions.<br>
-Large <span class="arithmatex">\(\|x\|\)</span> values tend to overfit noise.</p>
-<p>Regularization — especially <span class="arithmatex">\(\ell_2\)</span> — stabilizes the solution by shrinking <span class="arithmatex">\(x\)</span>.</p>
+<p>Ill-posed or noisy inverse problems (<span class="arithmatex">\(Ax \approx b\)</span> with ill-conditioned <span class="arithmatex">\(A\)</span>) often admit many unstable solutions. If <span class="arithmatex">\(A\)</span> is ill-conditioned, small perturbations in <span class="arithmatex">\(b\)</span> cause large changes in <span class="arithmatex">\(x\)</span>. Regularization controls this instability by constraining the size or structure of <span class="arithmatex">\(x\)</span>.</p>
 <p>Example: Ridge Regression
 <script type="math/tex; mode=display">
 \min_x \|Ax - b\|_2^2 + \lambda \|x\|_2^2.
@@ -1251,9 +1384,15 @@ The optimality condition (normal equations):
 <script type="math/tex; mode=display">
 (A^\top A + \lambda I)x = A^\top b.
 </script>
-- The matrix <span class="arithmatex">\(A^\top A + \lambda I\)</span> is positive definite for <span class="arithmatex">\(\lambda&gt;0\)</span>.<br>
-- Even if <span class="arithmatex">\(A\)</span> is rank-deficient, the solution is unique and stable.<br>
-- Larger <span class="arithmatex">\(\lambda\)</span> improves conditioning but increases bias.</p>
+</p>
+<ul>
+<li>The matrix <span class="arithmatex">\(A^\top A + \lambda I\)</span> is positive definite for <span class="arithmatex">\(\lambda&gt;0\)</span>.  </li>
+<li>Even if <span class="arithmatex">\(A\)</span> is rank-deficient, the solution is unique and stable.  </li>
+<li>Larger <span class="arithmatex">\(\lambda\)</span> improves conditioning but increases bias.</li>
+</ul>
+<blockquote>
+<p>Interpretation: Regularization trades variance for stability — “smooths” the solution landscape and tames directions where data provides weak information.</p>
+</blockquote>
 <h2 id="114-constrained-and-lagrangian-forms">11.4 Constrained and Lagrangian Forms<a class="headerlink" href="#114-constrained-and-lagrangian-forms" title="Permanent link">¶</a></h2>
 <p>Regularized problems can be equivalently written as constrained convex programs:
 <script type="math/tex; mode=display">
@@ -1270,15 +1409,13 @@ The associated penalized form
 \min_x f(x) + \lambda R(x)
 </script>
 corresponds to solving the constrained problem for some <span class="arithmatex">\(t&gt;0\)</span>.</p>
-<h3 id="kkt-and-duality-connection">KKT and Duality Connection<a class="headerlink" href="#kkt-and-duality-connection" title="Permanent link">¶</a></h3>
-<p>Under convexity and Slater’s condition:
-<script type="math/tex; mode=display">
+<p>Under convexity and Slater’s condition, the KKT conditions become:</p>
+<div class="arithmatex">\[
 0 \in \partial f(x^*) + \lambda^* \partial R(x^*), \quad
 \lambda^* \ge 0, \quad
 R(x^*) \le t, \quad
 \lambda^*(R(x^*)-t)=0.
-</script>
-</p>
+\]</div>
 <ul>
 <li>Penalized and constrained forms yield the same optimality structure.  </li>
 <li>The mapping <span class="arithmatex">\(\lambda \leftrightarrow t\)</span> is monotonic but not bijective.  </li>
@@ -1287,32 +1424,42 @@ R(x^*) \le t, \quad
 <h2 id="115-common-regularizers">11.5 Common Regularizers<a class="headerlink" href="#115-common-regularizers" title="Permanent link">¶</a></h2>
 <h3 id="a-l2-regularization-ridge">(a) L2 Regularization (Ridge)<a class="headerlink" href="#a-l2-regularization-ridge" title="Permanent link">¶</a></h3>
 <p>
-<script type="math/tex; mode=display">
+<script type="math/tex">
 R(x)=\|x\|_2^2.
 </script>
-- Smooth, strongly convex → unique minimizer.<br>
-- Shrinks coefficients uniformly; improves numerical conditioning.<br>
-- Bayesian view: corresponds to Gaussian prior <span class="arithmatex">\(x\sim \mathcal{N}(0,\tau^2I)\)</span>.</p>
+</p>
+<ul>
+<li>Smooth, strongly convex → unique minimizer.  </li>
+<li>Shrinks coefficients uniformly; improves numerical conditioning.  </li>
+<li>Bayesian view: corresponds to Gaussian prior <span class="arithmatex">\(x\sim \mathcal{N}(0,\tau^2I)\)</span>.</li>
+</ul>
 <h3 id="b-l1-regularization-lasso">(b) L1 Regularization (Lasso)<a class="headerlink" href="#b-l1-regularization-lasso" title="Permanent link">¶</a></h3>
 <p>
-<script type="math/tex; mode=display">
+<script type="math/tex">
 R(x)=\|x\|_1 = \sum_i |x_i|.
 </script>
-- Convex but not smooth → promotes sparsity.<br>
-- The <span class="arithmatex">\(\ell_1\)</span> ball’s corners align with coordinate axes, leading to zeros in the solution.<br>
-- Proximal operator (soft-thresholding):
-  <script type="math/tex; mode=display">
+</p>
+<ul>
+<li>Convex but not smooth → promotes sparsity.  </li>
+<li>The <span class="arithmatex">\(\ell_1\)</span> ball’s corners align with coordinate axes, leading to zeros in the solution.  </li>
+<li>Proximal operator (soft-thresholding):
+  <script type="math/tex">
   \operatorname{prox}_{\tau\|\cdot\|_1}(v)
   = \operatorname{sign}(v)\max(|v|-\tau,0).
   </script>
-- Bayesian view: Laplace prior <span class="arithmatex">\(\sim e^{-|x_i|/\tau}\)</span>.</p>
+</li>
+<li>Bayesian view: Laplace prior <span class="arithmatex">\(\sim e^{-|x_i|/\tau}\)</span>.</li>
+</ul>
 <h3 id="c-elastic-net">(c) Elastic Net<a class="headerlink" href="#c-elastic-net" title="Permanent link">¶</a></h3>
 <p>
-<script type="math/tex; mode=display">
+<script type="math/tex">
 R(x)=\alpha\|x\|_1+(1-\alpha)\|x\|_2^2.
 </script>
-- Combines sparsity (L1) with stability (L2).<br>
-- Ensures uniqueness under correlated features.</p>
+</p>
+<ul>
+<li>Combines sparsity (L1) with stability (L2).  </li>
+<li>Ensures uniqueness under correlated features.</li>
+</ul>
 <h3 id="d-beyond-l1l2">(d) Beyond L1/L2<a class="headerlink" href="#d-beyond-l1l2" title="Permanent link">¶</a></h3>
 <table>
 <thead>
@@ -1345,7 +1492,7 @@ R(x)=\alpha\|x\|_1+(1-\alpha)\|x\|_2^2.
 </tr>
 </tbody>
 </table>
-<p>Each regularizer defines a geometry of simplicity, shaping the solution’s structure.</p>
+<p>Each regularizer defines a distinct geometry — spheres, diamonds, polytopes — shaping the solution’s structure.</p>
 <h2 id="116-choosing-the-regularization-parameter-lambda">11.6 Choosing the Regularization Parameter <span class="arithmatex">\(\lambda\)</span><a class="headerlink" href="#116-choosing-the-regularization-parameter-lambda" title="Permanent link">¶</a></h2>
 <h3 id="a-trade-off-behavior">(a) Trade-off Behavior<a class="headerlink" href="#a-trade-off-behavior" title="Permanent link">¶</a></h3>
 <ul>
@@ -1354,15 +1501,19 @@ R(x)=\alpha\|x\|_1+(1-\alpha)\|x\|_2^2.
 <span class="arithmatex">\(\lambda\)</span> determines the location on the Pareto frontier.</li>
 </ul>
 <h3 id="b-cross-validation-cv">(b) Cross-Validation (CV)<a class="headerlink" href="#b-cross-validation-cv" title="Permanent link">¶</a></h3>
-<p>Most common selection strategy:
-1. Split data into <span class="arithmatex">\(k\)</span> folds.<br>
-2. Train on <span class="arithmatex">\(k-1\)</span> folds, validate on the remaining one.<br>
-3. Average validation error, choose <span class="arithmatex">\(\lambda\)</span> minimizing it.</p>
-<p>Best practices
-- Standardize features for L1/Elastic Net.<br>
-- For time series: use blocked or rolling CV.<br>
-- Use nested CV for fair model comparison.<br>
-- One-standard-error rule: choose simplest model within 1 SE of best error.</p>
+<p>Most common selection strategy:</p>
+<ol>
+<li>Split data into <span class="arithmatex">\(k\)</span> folds.  </li>
+<li>Train on <span class="arithmatex">\(k-1\)</span> folds, validate on the remaining one.  </li>
+<li>Average validation error, choose <span class="arithmatex">\(\lambda\)</span> minimizing it.</li>
+</ol>
+<p>Best practices</p>
+<ul>
+<li>Standardize features for L1/Elastic Net.  </li>
+<li>For time series: use blocked or rolling CV.  </li>
+<li>Use nested CV for fair model comparison.  </li>
+<li>One-standard-error rule: choose simplest model within 1 SE of best error.</li>
+</ul>
 <h3 id="c-analytical-heuristic-alternatives">(c) Analytical / Heuristic Alternatives<a class="headerlink" href="#c-analytical-heuristic-alternatives" title="Permanent link">¶</a></h3>
 <ul>
 <li>Closed-form rules (ridge shrinkage factor).  </li>
@@ -1371,7 +1522,8 @@ R(x)=\alpha\|x\|_1+(1-\alpha)\|x\|_2^2.
 <li>Inverse problems: discrepancy principle or L-curve method.</li>
 </ul>
 <h2 id="117-algorithmic-perspective">11.7 Algorithmic Perspective<a class="headerlink" href="#117-algorithmic-perspective" title="Permanent link">¶</a></h2>
-<p>Regularized convex problems typically take the form
+<p>Regularized convex problems typically take the form</p>
+<p>
 <script type="math/tex; mode=display">
 \min_x f(x) + R(x),
 </script>
@@ -1403,61 +1555,34 @@ where <span class="arithmatex">\(f\)</span> is smooth convex and <span class="ar
 </tr>
 </tbody>
 </table>
-<p>Proximal operators (Appendix G) handle the nonsmooth term efficiently:
-- L2 → scaling (shrinkage)<br>
-- L1 → soft-thresholding<br>
-- TV/Nuclear → more advanced proximal maps</p>
+<p>Proximal operators (Appendix G) handle the nonsmooth term efficiently:</p>
+<ul>
+<li>L2 → scaling (shrinkage)  </li>
+<li>L1 → soft-thresholding  </li>
+<li>TV/Nuclear → more advanced proximal maps</li>
+</ul>
 <h2 id="118-bayesian-interpretation">11.8 Bayesian Interpretation<a class="headerlink" href="#118-bayesian-interpretation" title="Permanent link">¶</a></h2>
 <p>Regularization corresponds to MAP estimation in probabilistic models.</p>
-<p>Assume data model <span class="arithmatex">\( b = A x + \varepsilon \)</span> with Gaussian noise<br>
-<span class="arithmatex">\(\varepsilon \sim \mathcal{N}(0,\sigma^2 I)\)</span>,<br>
-and prior <span class="arithmatex">\( x \sim \mathcal{N}(0,\tau^2 I) \)</span>. Then:
+<p>Given the linear model:
 <script type="math/tex; mode=display">
-\min_x \frac{1}{2\sigma^2}\|Ax - b\|_2^2 + \frac{1}{2\tau^2}\|x\|_2^2
+b = A x + \varepsilon, \quad \varepsilon \sim \mathcal{N}(0,\sigma^2 I),
 </script>
-is the MAP estimator, with <span class="arithmatex">\(\lambda = \sigma^2/(2\tau^2)\)</span>.<br>
-- Gaussian prior → L2 penalty<br>
-- Laplace prior → L1 penalty (sparse MAP estimate)</p>
-<h2 id="119-summary-and-outlook">11.9 Summary and Outlook<a class="headerlink" href="#119-summary-and-outlook" title="Permanent link">¶</a></h2>
-<table>
-<thead>
-<tr>
-<th>Concept</th>
-<th>Key Idea</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Regularization</td>
-<td>scalarisation of fit–complexity trade-off</td>
-</tr>
-<tr>
-<td>Penalized vs constrained</td>
-<td>linked by duality and KKT</td>
-</tr>
-<tr>
-<td>Ridge / Lasso / Elastic Net</td>
-<td>canonical convex regularizers</td>
-</tr>
-<tr>
-<td>Proximal gradient, ADMM</td>
-<td>scalable solution methods</td>
-</tr>
-<tr>
-<td><span class="arithmatex">\(\lambda\)</span> selection</td>
-<td>via CV or analytical heuristics</td>
-</tr>
-<tr>
-<td>Bayesian view</td>
-<td>priors ↔ regularizers</td>
-</tr>
-</tbody>
-</table>
-<p>Summary:<br>
-Regularized approximation formalizes the balance between data fit and model simplicity — a practical manifestation of Pareto optimality.<br>
-Its convex structure enables efficient algorithms and strong theoretical guarantees.</p>
-<p>Next:<br>
-In Chapter 12, we study first-order algorithms — gradient, proximal, and accelerated methods — that efficiently solve large-scale regularized convex problems.</p>
+and prior <span class="arithmatex">\(x \sim \mathcal{N}(0,\tau^2 I)\)</span>,<br>
+the MAP estimator is:
+<script type="math/tex; mode=display">
+\min_x \frac{1}{2\sigma^2}\|Ax - b\|_2^2 + \frac{1}{2\tau^2}\|x\|_2^2.
+</script>
+</p>
+<p>The connection:
+<script type="math/tex; mode=display">
+\lambda = \frac{\sigma^2}{2\tau^2}.
+</script>
+</p>
+<ul>
+<li>Gaussian prior → L2 penalty (ridge).  </li>
+<li>Laplace prior → L1 penalty (sparse MAP estimate).  </li>
+</ul>
+<p>Thus, regularization = prior knowledge: it encodes our beliefs about what solutions are likely before seeing data.</p>
 
 
 

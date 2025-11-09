@@ -873,7 +873,7 @@
   
   
   <span class="md-ellipsis">
-    Cheat Sheets
+    Deep Learning
     
   </span>
   
@@ -883,6 +883,143 @@
         
         <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            Deep Learning
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../deeplearning/1_intro/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    1. Introduction to Deep Learning Optimization
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../deeplearning/1_intro/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    1. Introduction to Deep Learning Optimization
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../deep_learning/1_intro.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    3. Regularization Techniques in Deep Learning
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../deep_learning/1_intro.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    4. Advanced Topics in Deep Learning Optimization
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5">
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Cheat Sheets
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
             <span class="md-nav__icon md-icon"></span>
             Cheat Sheets
           </label>
@@ -933,10 +1070,10 @@
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5">
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6">
         
           
-          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
             
   
   
@@ -949,8 +1086,8 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_5">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
             <span class="md-nav__icon md-icon"></span>
             Appendices
           </label>
@@ -1205,7 +1342,6 @@
 <h1 id="chapter-5-convex-functions">Chapter 5: Convex Functions<a class="headerlink" href="#chapter-5-convex-functions" title="Permanent link">¶</a></h1>
 <p>Convex functions are the objectives we minimise. Understanding them is essential, because convexity of the objective is what turns an optimisation problem from "possibly impossible" to "provably solvable".</p>
 <h2 id="51-definitions-of-convexity">5.1 Definitions of convexity<a class="headerlink" href="#51-definitions-of-convexity" title="Permanent link">¶</a></h2>
-<h3 id="511-basic-definition">5.1.1 Basic definition<a class="headerlink" href="#511-basic-definition" title="Permanent link">¶</a></h3>
 <p>A function <span class="arithmatex">\(f : \mathbb{R}^n \to \mathbb{R}\)</span> is convex if for all <span class="arithmatex">\(x,y\)</span> in its domain and all <span class="arithmatex">\(\theta \in [0,1]\)</span>,</p>
 <div class="arithmatex">\[
 f(\theta x + (1-\theta) y)
@@ -1213,15 +1349,13 @@ f(\theta x + (1-\theta) y)
 \theta f(x) + (1-\theta) f(y)~.
 \]</div>
 <p>If the inequality is strict whenever <span class="arithmatex">\(x \ne y\)</span> and <span class="arithmatex">\(\theta \in (0,1)\)</span>, then <span class="arithmatex">\(f\)</span> is strictly convex.</p>
-<h3 id="512-epigraph-definition">5.1.2 Epigraph definition<a class="headerlink" href="#512-epigraph-definition" title="Permanent link">¶</a></h3>
-<p>The epigraph of <span class="arithmatex">\(f\)</span> is
-<script type="math/tex; mode=display">
+<p>Geometrically, the chord between two points on the graph of f lies above the graph itself.<br>
+This means that f never “bends downward” — it has a single valley rather than multiple dips.<br>
+Equivalently, the <strong>epigraph</strong> of f,</p>
+<div class="arithmatex">\[
 \mathrm{epi}(f) = \{ (x, t) \in \mathbb{R}^n \times \mathbb{R} : f(x) \le t \}.
-</script>
-</p>
-<blockquote>
-<p><span class="arithmatex">\(f\)</span> is convex if and only if <span class="arithmatex">\(\mathrm{epi}(f)\)</span> is a convex set. This links convex <em>functions</em> to convex <em>sets</em>, and unlocks the geometry: tangent hyperplanes to <span class="arithmatex">\(\mathrm{epi}(f)\)</span> correspond to subgradients (Chapter 6).</p>
-</blockquote>
+\]</div>
+<p>is a convex set.</p>
 <h2 id="52-first-order-characterisation">5.2 First-order characterisation<a class="headerlink" href="#52-first-order-characterisation" title="Permanent link">¶</a></h2>
 <p>If <span class="arithmatex">\(f\)</span> is differentiable, then <span class="arithmatex">\(f\)</span> is convex if and only if</p>
 <div class="arithmatex">\[
@@ -1237,7 +1371,7 @@ f(y) \ge f(x) + \nabla f(x)^\top (y - x)
 <blockquote>
 <p>This is a powerful characterization: it says the tangent hyperplane at any point <span class="arithmatex">\(x\)</span> lies below the graph of <span class="arithmatex">\(f\)</span> everywhere. In other words, the gradient at <span class="arithmatex">\(x\)</span> provides a global underestimator of <span class="arithmatex">\(f\)</span> (supporting hyperplane to epigraph). Geometrically, this means no tangent line ever goes above the function. </p>
 <p>For a convex differentiable <span class="arithmatex">\(f\)</span>, we have <span class="arithmatex">\(f(y) - f(x) \ge \nabla f(x)^T (y-x)\)</span>, so moving from <span class="arithmatex">\(x\)</span> in any direction, the actual increase in <span class="arithmatex">\(f\)</span> is at least as large as the linear prediction by <span class="arithmatex">\(\nabla f(x)\)</span> (since the function bends upward or straight). At optimum <span class="arithmatex">\(\hat{x}\)</span>, a necessary and sufficient condition (for convex differentiable <span class="arithmatex">\(f\)</span>) is <span class="arithmatex">\(\nabla f(\hat{x}) = 0\)</span>. This ties to optimality: <span class="arithmatex">\(\nabla f(\hat{x})=0\)</span> means <span class="arithmatex">\(f(y)\ge f(\hat{x}) + \nabla f(\hat{x})^T (y-\hat{x}) = f(\hat{x})\)</span> for all <span class="arithmatex">\(y\)</span>, so <span class="arithmatex">\(\hat{x}\)</span> is global minimizer.</p>
-<p>If <span class="arithmatex">\(f\)</span> is not differentiable, a similar condition holds with subgradients: <span class="arithmatex">\(f\)</span> is convex iff for all <span class="arithmatex">\(x,y\)</span> there exists a (sub)gradient <span class="arithmatex">\(g \in \partial f(x)\)</span> such that <span class="arithmatex">\(f(y) \ge f(x) + g^T(y-x)\)</span>. The set of all subgradients <span class="arithmatex">\(\partial f(x)\)</span> is a convex set (the subdifferential). At optimum, <span class="arithmatex">\(0 \in \partial f(\hat{x})\)</span> is the condition. For example, <span class="arithmatex">\(f(x)=|x|\)</span> has subgradient <span class="arithmatex">\(g=\mathrm{sign}(x)\)</span> (multivalued at 0, where any <span class="arithmatex">\(g\in[-1,1]\)</span> is subgradient). Setting <span class="arithmatex">\(0\)</span> in subdifferential yields <span class="arithmatex">\(0\in[-1,1]\)</span>, so indeed <span class="arithmatex">\(x^=0\)</span> is minimizer.</p>
+<p>If <span class="arithmatex">\(f\)</span> is not differentiable, a similar condition holds with subgradients (see next chapter): <span class="arithmatex">\(f\)</span> is convex iff for all <span class="arithmatex">\(x,y\)</span> there exists a (sub)gradient <span class="arithmatex">\(g \in \partial f(x)\)</span> such that <span class="arithmatex">\(f(y) \ge f(x) + g^T(y-x)\)</span>. The set of all subgradients <span class="arithmatex">\(\partial f(x)\)</span> is a convex set (the subdifferential). At optimum, <span class="arithmatex">\(0 \in \partial f(\hat{x})\)</span> is the condition. </p>
 </blockquote>
 <h2 id="53-second-order-characterisation">5.3 Second-order characterisation<a class="headerlink" href="#53-second-order-characterisation" title="Permanent link">¶</a></h2>
 <p>If <span class="arithmatex">\(f\)</span> is twice continuously differentiable, then <span class="arithmatex">\(f\)</span> is convex if and only if its Hessian is positive semidefinite everywhere:</p>
@@ -1281,6 +1415,9 @@ f(y) \ge f(x) + \nabla f(x)^\top (y - x)
 f(\mathbb{E}[X]) \le \mathbb{E}[f(X)]~.
 </script>
 </p>
+<blockquote>
+<p>the function value at the mean is always less than or equal to the mean of function values.</p>
+</blockquote>
 <p>This is Jensen’s inequality. It generalises the definition of convexity from two-point averages to arbitrary expectations. As a special case, for scalars <span class="arithmatex">\(x_1,\dots,x_n\)</span> and weights <span class="arithmatex">\(\theta_i \ge 0\)</span> with <span class="arithmatex">\(\sum_i \theta_i = 1\)</span>,
 <script type="math/tex; mode=display">
 f\!\left(\sum_i \theta_i x_i\right)
@@ -1307,7 +1444,10 @@ f\!\left(\sum_i \theta_i x_i\right)
 \{ x : f(x) \le \alpha \}.
 </script>
 </p>
-<p>If <span class="arithmatex">\(f\)</span> is convex, then every sublevel set is convex (Boyd and Vandenberghe, 2004). This is crucial: constraints of the form <span class="arithmatex">\(f(x) \le \alpha\)</span> are convex constraints.</p>
+<blockquote>
+<p>Geometrically, these are the “contour slices” of a convex bowl — cross-sections below certain heights.  </p>
+</blockquote>
+<p>If <span class="arithmatex">\(f\)</span> is convex, then every sublevel set is convex. This is crucial: constraints of the form <span class="arithmatex">\(f(x) \le \alpha\)</span> are convex constraints.</p>
 <p>For example, the set
 <script type="math/tex; mode=display">
 \{ x : \|Ax - b\|_2 \le \epsilon \}
@@ -1315,19 +1455,20 @@ f\!\left(\sum_i \theta_i x_i\right)
 is convex because <span class="arithmatex">\(x \mapsto \|Ax-b\|_2\)</span> is convex.</p>
 <h2 id="58-strict-and-strong-convexity">5.8 Strict and strong convexity<a class="headerlink" href="#58-strict-and-strong-convexity" title="Permanent link">¶</a></h2>
 <ul>
-<li>
-<p><span class="arithmatex">\(f\)</span> is strictly convex if
+<li><span class="arithmatex">\(f\)</span> is strictly convex if
 <script type="math/tex; mode=display">
 f(\theta x + (1-\theta) y) < \theta f(x) + (1-\theta) f(y)
 </script>
-for all <span class="arithmatex">\(x \ne y\)</span> and <span class="arithmatex">\(\theta \in (0,1)\)</span>.</p>
-</li>
-<li>
-<p><span class="arithmatex">\(f\)</span> is strongly convex with parameter <span class="arithmatex">\(m&gt;0\)</span> if
+for all <span class="arithmatex">\(x \ne y\)</span> and <span class="arithmatex">\(\theta \in (0,1)\)</span>.</li>
+</ul>
+<blockquote>
+<p>Strict convexity ensures uniqueness of the minimizer: there can be only one bottom to the bowl.</p>
+</blockquote>
+<ul>
+<li><span class="arithmatex">\(f\)</span> is strongly convex with parameter <span class="arithmatex">\(m&gt;0\)</span> if
 <script type="math/tex; mode=display">
 f(y) \ge f(x) + \nabla f(x)^\top (y-x) + \frac{m}{2} \|y-x\|_2^2.
 </script>
-</p>
 </li>
 </ul>
 <p>Strong convexity implies a unique minimiser and gives quantitative convergence rates for gradient methods.</p>

@@ -873,7 +873,7 @@
   
   
   <span class="md-ellipsis">
-    Cheat Sheets
+    Deep Learning
     
   </span>
   
@@ -883,6 +883,143 @@
         
         <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            Deep Learning
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../deeplearning/1_intro/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    1. Introduction to Deep Learning Optimization
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../deeplearning/1_intro/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    1. Introduction to Deep Learning Optimization
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../deep_learning/1_intro.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    3. Regularization Techniques in Deep Learning
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../deep_learning/1_intro.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    4. Advanced Topics in Deep Learning Optimization
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5">
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Cheat Sheets
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
             <span class="md-nav__icon md-icon"></span>
             Cheat Sheets
           </label>
@@ -933,10 +1070,10 @@
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5">
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6">
         
           
-          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
             
   
   
@@ -949,8 +1086,8 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_5">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
             <span class="md-nav__icon md-icon"></span>
             Appendices
           </label>
@@ -1203,263 +1340,302 @@
 
 
 <h1 id="chapter-14-optimization-algorithms-for-inequality-constrained-problems">Chapter 14: Optimization Algorithms for Inequality-Constrained Problems<a class="headerlink" href="#chapter-14-optimization-algorithms-for-inequality-constrained-problems" title="Permanent link">¶</a></h1>
-<p>In many real-world optimization problems, not all solutions are allowed — we often have both equality and inequality constraints that define a feasible region.<br>
-In this chapter, we study algorithms that handle inequality constraints efficiently, focusing on the logarithmic barrier method, which is foundational for interior-point methods.</p>
-<hr>
-<h2 id="141-inequality-constrained-minimization">14.1 Inequality-Constrained Minimization<a class="headerlink" href="#141-inequality-constrained-minimization" title="Permanent link">¶</a></h2>
-<p>We consider the general inequality- and equality-constrained optimization problem:</p>
+<p>In practice, optimization problems often include inequalities that restrict feasible solutions to a convex region. Examples include nonnegativity of variables, margin constraints in support vector machines, fairness or safety limits, and physical conservation laws. This chapter introduces algorithms for solving such problems efficiently, focusing on the logarithmic barrier and interior-point methods that underpin modern convex solvers.</p>
+<h2 id="141-problem-setup">14.1 Problem Setup<a class="headerlink" href="#141-problem-setup" title="Permanent link">¶</a></h2>
+<p>We consider the general convex optimization problem with both equality and inequality constraints:</p>
 <div class="arithmatex">\[
 \begin{aligned}
-\text{minimize} \quad &amp; f_0(x) \\
-\text{subject to} \quad &amp; f_i(x) \leq 0, \quad i = 1, \dots, m, \\
-&amp; A x = b.
+\text{minimize}   &amp;\quad f_0(x) \\
+\text{subject to} &amp;\quad f_i(x) \le 0, \quad i=1,\dots,m,\\
+&amp;\quad A x = b.
 \end{aligned}
 \]</div>
-<p>We assume:
-- Each <span class="arithmatex">\(f_i\)</span> is convex and twice continuously differentiable.<br>
-- <span class="arithmatex">\(A \in \mathbb{R}^{p \times n}\)</span> has full rank, <span class="arithmatex">\(\text{rank}(A) = p\)</span>.<br>
-- The optimal value <span class="arithmatex">\(p^*\)</span> is finite and attained.<br>
-- The problem is strictly feasible, meaning there exists a point <span class="arithmatex">\(\bar{x}\)</span> satisfying:</p>
-<div class="arithmatex">\[
-\bar{x} \in \text{dom } f_0, \quad f_i(\bar{x}) &lt; 0, \; i=1,\dots,m, \quad A \bar{x} = b.
-\]</div>
-<p>Under these assumptions, strong duality holds and the dual optimum is attained.</p>
-<hr>
+<p>Assumptions:</p>
+<ul>
+<li>Each <span class="arithmatex">\(f_i\)</span> is convex and twice differentiable.  </li>
+<li><span class="arithmatex">\(A \in \mathbb{R}^{p\times n}\)</span> has full row rank (<span class="arithmatex">\(\mathrm{rank}(A)=p\)</span>).  </li>
+<li>There exists a strictly feasible point <span class="arithmatex">\(\bar{x}\)</span> such that <span class="arithmatex">\(f_i(\bar{x})&lt;0\)</span> and <span class="arithmatex">\(A\bar{x}=b\)</span> (Slater’s condition).  </li>
+</ul>
+<p>Under these assumptions, strong duality holds and the KKT conditions are necessary and sufficient for optimality.</p>
 <h3 id="examples">Examples<a class="headerlink" href="#examples" title="Permanent link">¶</a></h3>
-<p>Many common optimization problems fall under this framework:</p>
-<ul>
-<li>LP (Linear Program): <span class="arithmatex">\(f_0(x) = c^T x\)</span>, <span class="arithmatex">\(f_i(x) = a_i^T x - b_i\)</span>  </li>
-<li>QP (Quadratic Program): <span class="arithmatex">\(f_0(x) = \tfrac{1}{2} x^T P x + q^T x\)</span>  </li>
-<li>QCQP (Quadratically Constrained Quadratic Program)  </li>
-<li>GP (Geometric Program)  </li>
-<li>Entropy maximization with linear inequality constraints:</li>
-</ul>
-<div class="arithmatex">\[
-\begin{aligned}
-\text{minimize} \quad &amp; \sum_{i=1}^n x_i \log x_i \\
-\text{subject to} \quad &amp; F x \leq g, \\
-&amp; A x = b,
-\end{aligned}
-\]</div>
-<p>where <span class="arithmatex">\(\text{dom } f_0 = \mathbb{R}_{++}^n\)</span>.</p>
-<hr>
-<h2 id="142-reformulation-via-indicator-functions">14.2 Reformulation via Indicator Functions<a class="headerlink" href="#142-reformulation-via-indicator-functions" title="Permanent link">¶</a></h2>
-<p>We can reformulate the constrained problem as an unconstrained one using an <em>indicator function</em> for the feasible set.</p>
-<p>Define the indicator of the nonpositive orthant:</p>
-<div class="arithmatex">\[
-I_-(u) =
-\begin{cases}
-0, &amp; u \leq 0, \\
-+\infty, &amp; u &gt; 0.
-\end{cases}
-\]</div>
-<p>Then the constrained problem is equivalent to:</p>
-<div class="arithmatex">\[
-\begin{aligned}
-\text{minimize} \quad &amp; f_0(x) + \sum_{i=1}^m I_-(f_i(x)) \\
-\text{subject to} \quad &amp; A x = b.
-\end{aligned}
-\]</div>
-<p>However, this formulation is not smooth — <span class="arithmatex">\(I_-(u)\)</span> is discontinuous.<br>
-To apply smooth optimization methods, we approximate <span class="arithmatex">\(I_-\)</span> using a logarithmic barrier.</p>
-<hr>
-<h2 id="143-logarithmic-barrier-approximation">14.3 Logarithmic Barrier Approximation<a class="headerlink" href="#143-logarithmic-barrier-approximation" title="Permanent link">¶</a></h2>
-<p>We replace <span class="arithmatex">\(I_-(u)\)</span> by a smooth function:</p>
-<div class="arithmatex">\[
-\Phi(u) = -\frac{1}{t} \log(-u),
-\]</div>
-<p>where <span class="arithmatex">\(t &gt; 0\)</span> is a barrier parameter controlling the accuracy of the approximation.<br>
-The resulting logarithmic barrier problem is:</p>
-<div class="arithmatex">\[
-\begin{aligned}
-\text{minimize} \quad &amp; f_0(x) - \frac{1}{t} \sum_{i=1}^m \log(-f_i(x)) \\
-\text{subject to} \quad &amp; A x = b.
-\end{aligned}
-\]</div>
-<ul>
-<li>For small <span class="arithmatex">\(t\)</span>, the barrier term is significant — it keeps iterates strictly inside the feasible region.  </li>
-<li>As <span class="arithmatex">\(t \to \infty\)</span>, the approximation becomes exact, and the solution approaches the true constrained optimum.</li>
-</ul>
-<p>Thus, the original constrained problem is transformed into a sequence of smooth equality-constrained problems.</p>
-<hr>
-<h2 id="144-logarithmic-barrier-function">14.4 Logarithmic Barrier Function<a class="headerlink" href="#144-logarithmic-barrier-function" title="Permanent link">¶</a></h2>
-<p>Define the logarithmic barrier function:</p>
-<div class="arithmatex">\[
-\phi(x) = -\sum_{i=1}^m \log(-f_i(x)),
-\]</div>
-<p>with domain</p>
-<div class="arithmatex">\[
-\text{dom } \phi = \{ x \mid f_i(x) &lt; 0, \; i = 1, \dots, m \}.
-\]</div>
-<h3 id="properties">Properties<a class="headerlink" href="#properties" title="Permanent link">¶</a></h3>
-<ul>
-<li><span class="arithmatex">\(\phi(x)\)</span> is convex, since it is a composition of convex and decreasing functions.  </li>
-<li>It is twice continuously differentiable, with:</li>
-</ul>
-<div class="arithmatex">\[
-\nabla \phi(x) = \sum_{i=1}^m \frac{1}{-f_i(x)} \nabla f_i(x),
-\]</div>
-<p>and</p>
-<div class="arithmatex">\[
-\nabla^2 \phi(x) =
-\sum_{i=1}^m \frac{1}{f_i(x)^2} \nabla f_i(x) \nabla f_i(x)^T
-+ \sum_{i=1}^m \frac{1}{-f_i(x)} \nabla^2 f_i(x).
-\]</div>
-<hr>
-<h2 id="145-central-path">14.5 Central Path<a class="headerlink" href="#145-central-path" title="Permanent link">¶</a></h2>
-<p>For each <span class="arithmatex">\(t &gt; 0\)</span>, define <span class="arithmatex">\(x^*(t)\)</span> as the minimizer of the barrier problem:</p>
-<div class="arithmatex">\[
-\begin{aligned}
-\text{minimize} \quad &amp; t f_0(x) + \phi(x) \\
-\text{subject to} \quad &amp; A x = b.
-\end{aligned}
-\]</div>
-<p>The set <span class="arithmatex">\(\{ x^*(t) \mid t &gt; 0 \}\)</span> is called the central path.</p>
-<p>As <span class="arithmatex">\(t \to \infty\)</span>, <span class="arithmatex">\(x^*(t)\)</span> approaches the solution <span class="arithmatex">\(x^*\)</span> of the original constrained problem.</p>
-<h3 id="example-central-path-for-a-linear-program">Example: Central Path for a Linear Program<a class="headerlink" href="#example-central-path-for-a-linear-program" title="Permanent link">¶</a></h3>
-<p>For an LP:</p>
-<div class="arithmatex">\[
-\begin{aligned}
-\text{minimize} \quad &amp; c^T x \\
-\text{subject to} \quad &amp; a_i^T x \leq b_i, \quad i = 1, \dots, m,
-\end{aligned}
-\]</div>
-<p>the central path consists of points <span class="arithmatex">\(x^*(t)\)</span> where hyperplanes <span class="arithmatex">\(c^T x = c^T x^*(t)\)</span> are tangent to the level sets of the barrier <span class="arithmatex">\(\phi(x)\)</span>.</p>
-<hr>
-<h2 id="146-interpretation-via-kkt-conditions">14.6 Interpretation via KKT Conditions<a class="headerlink" href="#146-interpretation-via-kkt-conditions" title="Permanent link">¶</a></h2>
-<p>At any point on the central path <span class="arithmatex">\((x^*(t), \lambda^*(t), v^*(t))\)</span>, the following hold:</p>
-<ol>
-<li>
-<p>Primal feasibility:<br>
-<span class="arithmatex">\(f_i(x^*(t)) \leq 0, \; i = 1, \dots, m\)</span>, and <span class="arithmatex">\(A x^*(t) = b\)</span>.</p>
-</li>
-<li>
-<p>Dual feasibility:<br>
-<span class="arithmatex">\(\lambda_i^*(t) \geq 0\)</span>.</p>
-</li>
-<li>
-<p>Approximate complementary slackness:<br>
-<span class="arithmatex">\(-\lambda_i^*(t) f_i(x^*(t)) = \frac{1}{t}\)</span>, for <span class="arithmatex">\(i = 1, \dots, m\)</span>.</p>
-</li>
-<li>
-<p>Stationarity (gradient condition):
-   <script type="math/tex; mode=display">
-   \nabla f_0(x^*(t)) + \sum_{i=1}^m \lambda_i^*(t) \nabla f_i(x^*(t)) + A^T v^*(t) = 0.
-   </script>
-</p>
-</li>
-</ol>
-<p>The only difference between these and the exact KKT conditions is the relaxation of complementary slackness —<br>
-instead of <span class="arithmatex">\(\lambda_i f_i(x) = 0\)</span>, we have <span class="arithmatex">\(\lambda_i f_i(x) = -1/t\)</span>.</p>
-<p>As <span class="arithmatex">\(t \to \infty\)</span>, the approximate KKT conditions converge to the true KKT conditions.</p>
-<hr>
-<h2 id="147-force-field-interpretation">14.7 Force Field Interpretation<a class="headerlink" href="#147-force-field-interpretation" title="Permanent link">¶</a></h2>
-<p>To build geometric intuition, consider the centering problem (no equality constraints):</p>
-<div class="arithmatex">\[
-\text{minimize} \quad t f_0(x) - \sum_{i=1}^m \log(-f_i(x)).
-\]</div>
-<ul>
-<li>
-<p>The term <span class="arithmatex">\(f_0(x)\)</span> represents a “potential energy” whose gradient is the external force:
-  <script type="math/tex; mode=display">
-  F_0(x) = -\nabla f_0(x).
-  </script>
-</p>
-</li>
-<li>
-<p>Each constraint contributes a repulsive force preventing violation:
-  <script type="math/tex; mode=display">
-  F_i(x) = \frac{1}{f_i(x)} \nabla f_i(x).
-  </script>
-</p>
-</li>
-</ul>
-<p>At equilibrium (the central point <span class="arithmatex">\(x^*(t)\)</span>), forces balance perfectly:</p>
-<div class="arithmatex">\[
-F_0(x^*(t)) + \sum_{i=1}^m F_i(x^*(t)) = 0.
-\]</div>
-<p>The solution thus represents a balance between the pull of minimizing <span class="arithmatex">\(f_0\)</span> and the repulsion from the boundaries <span class="arithmatex">\(f_i(x) = 0\)</span>.</p>
-<hr>
-<h2 id="148-barrier-method-algorithm">14.8 Barrier Method Algorithm<a class="headerlink" href="#148-barrier-method-algorithm" title="Permanent link">¶</a></h2>
-<p>The barrier method solves a sequence of equality-constrained barrier subproblems, gradually increasing <span class="arithmatex">\(t\)</span> to approach the true optimum.</p>
-<hr>
-<p>Given: strictly feasible <span class="arithmatex">\(x\)</span>, initial barrier parameter <span class="arithmatex">\(t := t^{(0)} &gt; 0\)</span>, multiplier <span class="arithmatex">\(\mu &gt; 1\)</span>, tolerance <span class="arithmatex">\(\varepsilon &gt; 0\)</span>.</p>
-<p>Repeat:
-1. Centering Step:<br>
-   Compute <span class="arithmatex">\(x^*(t)\)</span> by minimizing<br>
-<script type="math/tex; mode=display">
-   f_0(x) - \frac{1}{t} \sum_{i=1}^m \log(-f_i(x))
-   </script>
-   subject to <span class="arithmatex">\(A x = b\)</span>.<br>
-   (This is typically done with Newton’s method.)</p>
-<ol>
-<li>
-<p>Update:<br>
-<span class="arithmatex">\(x := x^*(t)\)</span>.</p>
-</li>
-<li>
-<p>Stopping Criterion:<br>
-   Quit if <span class="arithmatex">\(\frac{m}{t} &lt; \varepsilon\)</span>.</p>
-</li>
-<li>
-<p>Increase Barrier Parameter:<br>
-<span class="arithmatex">\(t := \mu t\)</span>.</p>
-</li>
-</ol>
-<hr>
-<h3 id="notes-on-practical-implementation">Notes on Practical Implementation<a class="headerlink" href="#notes-on-practical-implementation" title="Permanent link">¶</a></h3>
-<ul>
-<li>Each centering step (inner loop) is an equality-constrained Newton method.  </li>
-<li>The outer loop gradually increases <span class="arithmatex">\(t\)</span>, making the barrier steeper.  </li>
-<li>A larger <span class="arithmatex">\(\mu\)</span> means fewer outer iterations but more Newton steps per inner problem.<br>
-  Typical values: <span class="arithmatex">\(\mu = 10\)</span> or <span class="arithmatex">\(\mu = 20\)</span>.</li>
-</ul>
-<p>The method terminates when:</p>
-<div class="arithmatex">\[
-f_0(x) - p^* \leq \varepsilon,
-\]</div>
-<p>which follows directly from the bound <span class="arithmatex">\(f_0(x^*(t)) - p^* \leq \frac{m}{t}\)</span>.</p>
-<h3 id="convergence-and-intuition">Convergence and Intuition<a class="headerlink" href="#convergence-and-intuition" title="Permanent link">¶</a></h3>
-<ul>
-<li>Early iterations focus on feasibility and centrality — staying deep within the feasible region.  </li>
-<li>Later iterations approach the true optimum, as the barrier term becomes negligible.  </li>
-<li>The iterates <span class="arithmatex">\(x^*(t)\)</span> always remain strictly feasible, hence the method name: <em>interior-point</em>.</li>
-</ul>
-<h3 id="summary-of-key-ideas">Summary of Key Ideas<a class="headerlink" href="#summary-of-key-ideas" title="Permanent link">¶</a></h3>
 <table>
 <thead>
 <tr>
-<th>Concept</th>
-<th>Description</th>
+<th>Problem</th>
+<th><span class="arithmatex">\(f_0(x)\)</span></th>
+<th><span class="arithmatex">\(f_i(x)\)</span></th>
+<th>Notes / ML context</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>Indicator function</td>
-<td>Encodes inequality constraints via <span class="arithmatex">\(I_-(f_i(x))\)</span>.</td>
+<td>Linear Program (LP)</td>
+<td><span class="arithmatex">\(c^T x\)</span></td>
+<td><span class="arithmatex">\(a_i^T x - b_i\)</span></td>
+<td>Feature selection, resource allocation</td>
 </tr>
 <tr>
-<td>Logarithmic barrier</td>
-<td>Smooth approximation of <span class="arithmatex">\(I_-\)</span>, prevents boundary crossing.</td>
+<td>Quadratic Program (QP)</td>
+<td><span class="arithmatex">\(\tfrac{1}{2}x^T P x + q^T x\)</span></td>
+<td>Linear <span class="arithmatex">\(a_i^T x - b_i\)</span></td>
+<td>SVM training, ridge regression</td>
 </tr>
 <tr>
-<td>Central path</td>
-<td>Sequence of minimizers for increasing <span class="arithmatex">\(t\)</span>, approaching the optimum.</td>
+<td>QCQP</td>
+<td>Quadratic</td>
+<td>Quadratic</td>
+<td>Portfolio optimization, control</td>
 </tr>
 <tr>
-<td>Approximate KKT</td>
-<td><span class="arithmatex">\(\lambda_i f_i(x) = -1/t\)</span> replaces exact complementarity.</td>
+<td>Geometric Program (log domain)</td>
+<td>Convex in <span class="arithmatex">\(\log x\)</span></td>
+<td>Linear in <span class="arithmatex">\(\log x\)</span></td>
+<td>Network flow, resource allocation</td>
 </tr>
 <tr>
-<td>Barrier method</td>
-<td>Iterative scheme using inner Newton steps and outer <span class="arithmatex">\(t\)</span> updates.</td>
+<td>Entropy minimization</td>
+<td><span class="arithmatex">\(\sum_i x_i \log x_i\)</span></td>
+<td><span class="arithmatex">\(F x \le g\)</span></td>
+<td>Probability calibration, information bottleneck</td>
 </tr>
 </tbody>
 </table>
-<p>In summary:<br>
-The barrier method transforms inequality constraints into smooth penalties that “repel” the optimizer from infeasible regions.<br>
-As <span class="arithmatex">\(t\)</span> grows, the optimizer moves along the central path, converging to the true solution while maintaining strict feasibility.<br>
-This approach forms the foundation for modern interior-point methods used in convex optimization, linear programming, and semidefinite programming.</p>
+<h2 id="142-indicator-function-reformulation">14.2 Indicator-Function Reformulation<a class="headerlink" href="#142-indicator-function-reformulation" title="Permanent link">¶</a></h2>
+<p>Define the indicator of the nonpositive orthant:</p>
+<div class="arithmatex">\[
+I_-(u)=
+\begin{cases}
+0, &amp; u \le 0,\\
++\infty, &amp; u &gt; 0.
+\end{cases}
+\]</div>
+<p>Then the constrained problem is equivalent to</p>
+<div class="arithmatex">\[
+\min_x \; f_0(x) + \sum_{i=1}^m I_-(f_i(x))
+\quad \text{s.t. } A x = b.
+\]</div>
+<p>This form is conceptually clear but nondifferentiable since <span class="arithmatex">\(I_-\)</span> is discontinuous. To apply Newton-type algorithms, we replace <span class="arithmatex">\(I_-\)</span> with a smooth approximation: the logarithmic barrier.</p>
+<h2 id="143-logarithmic-barrier-approximation">14.3 Logarithmic-Barrier Approximation<a class="headerlink" href="#143-logarithmic-barrier-approximation" title="Permanent link">¶</a></h2>
+<p>We approximate each <span class="arithmatex">\(I_-(f_i(x))\)</span> by a differentiable barrier function <span class="arithmatex">\(\Phi(u) = -\tfrac{1}{t} \log(-u)\)</span> for <span class="arithmatex">\(u &lt; 0\)</span>. The smoothed subproblem becomes</p>
+<div class="arithmatex">\[
+\min_x \; f_0(x) - \frac{1}{t} \sum_{i=1}^m \log(-f_i(x))
+\quad \text{s.t. } A x = b.
+\]</div>
+<ul>
+<li>For small <span class="arithmatex">\(t\)</span>: the barrier is strong and keeps points deep inside the feasible region.  </li>
+<li>As <span class="arithmatex">\(t \to \infty\)</span>: the barrier weakens and the solution approaches the true optimum.</li>
+</ul>
+<p>Hence, the original inequality-constrained problem is replaced by a sequence of smooth equality-constrained subproblems.</p>
+<h2 id="144-properties-of-the-barrier-function">14.4 Properties of the Barrier Function<a class="headerlink" href="#144-properties-of-the-barrier-function" title="Permanent link">¶</a></h2>
+<p>Define</p>
+<div class="arithmatex">\[
+\phi(x) = -\sum_{i=1}^m \log(-f_i(x)), \qquad
+\mathrm{dom}\,\phi = \{x : f_i(x) &lt; 0\}.
+\]</div>
+<p>Then <span class="arithmatex">\(\phi\)</span> is convex and twice differentiable:</p>
+<div class="arithmatex">\[
+\nabla \phi(x) = \sum_i \frac{1}{-f_i(x)} \nabla f_i(x),
+\]</div>
+<div class="arithmatex">\[
+\nabla^2 \phi(x) =
+\sum_i \frac{1}{f_i(x)^2} \nabla f_i(x)\nabla f_i(x)^T
++ \sum_i \frac{1}{-f_i(x)} \nabla^2 f_i(x).
+\]</div>
+<p>Near the boundary <span class="arithmatex">\(f_i(x)=0\)</span>, the gradient norm grows without bound — producing a repulsive force that prevents violation of constraints.</p>
+<h2 id="145-central-path-and-approximate-kkt-conditions">14.5 Central Path and Approximate KKT Conditions<a class="headerlink" href="#145-central-path-and-approximate-kkt-conditions" title="Permanent link">¶</a></h2>
+<p>For each <span class="arithmatex">\(t &gt; 0\)</span>, let <span class="arithmatex">\(x^*(t)\)</span> minimize the barrier problem</p>
+<div class="arithmatex">\[
+\min_x\; t f_0(x) + \phi(x)
+\quad \text{s.t. } A x = b.
+\]</div>
+<p>The curve <span class="arithmatex">\(\{x^*(t) : t &gt; 0\}\)</span> is the central path. As <span class="arithmatex">\(t \to \infty\)</span>, <span class="arithmatex">\(x^*(t)\)</span> approaches the true optimal solution <span class="arithmatex">\(x^*\)</span>. Along this path there exist dual variables <span class="arithmatex">\((\lambda^*(t), v^*(t))\)</span> satisfying</p>
+<div class="arithmatex">\[
+\begin{aligned}
+\nabla f_0(x^*(t)) + \sum_i \lambda_i^*(t) \nabla f_i(x^*(t)) + A^T v^*(t) &amp;= 0,\\
+A x^*(t) &amp;= b,\\
+-\lambda_i^*(t) f_i(x^*(t)) &amp;= \tfrac{1}{t}, \quad \lambda_i^*(t) \ge 0.
+\end{aligned}
+\]</div>
+<p>The complementarity condition is relaxed: <span class="arithmatex">\(\lambda_i f_i(x) = -1/t\)</span> instead of <span class="arithmatex">\(0\)</span>. As <span class="arithmatex">\(t \to \infty\)</span>, these approximate KKT conditions converge to the exact ones.</p>
+<h2 id="146-geometric-and-physical-intuition">14.6 Geometric and Physical Intuition<a class="headerlink" href="#146-geometric-and-physical-intuition" title="Permanent link">¶</a></h2>
+<p>The centering subproblem</p>
+<div class="arithmatex">\[
+\min_x\; t f_0(x) - \sum_i \log(-f_i(x))
+\]</div>
+<p>can be viewed as a particle system in a potential field:</p>
+<ul>
+<li>The objective <span class="arithmatex">\(f_0(x)\)</span> pulls toward lower cost (external force).  </li>
+<li>Each constraint <span class="arithmatex">\(f_i(x)\le0\)</span> creates a repulsive potential that diverges near the boundary.  </li>
+</ul>
+<p>At equilibrium, these forces balance:</p>
+<div class="arithmatex">\[
+\nabla f_0(x^*(t)) + \sum_i \frac{1}{t(-f_i(x^*(t)))} \nabla f_i(x^*(t)) = 0.
+\]</div>
+<p>Thus, the solution remains strictly feasible — this is the essence of the interior-point philosophy.</p>
+<h2 id="147-barrier-method-algorithm">14.7 Barrier-Method Algorithm<a class="headerlink" href="#147-barrier-method-algorithm" title="Permanent link">¶</a></h2>
+<p>The barrier method converts the original inequality-constrained problem into a sequence of smooth equality-constrained subproblems.<br>
+Each subproblem is solved exactly (to high precision) while a <em>barrier parameter</em> <span class="arithmatex">\(t\)</span> is gradually increased, allowing the iterates to approach the boundary and the true constrained optimum.</p>
+<h3 id="algorithm-outline">Algorithm Outline<a class="headerlink" href="#algorithm-outline" title="Permanent link">¶</a></h3>
+<p>Given:</p>
+<ul>
+<li>a strictly feasible starting point <span class="arithmatex">\(x\)</span> (so <span class="arithmatex">\(f_i(x) &lt; 0\)</span> for all <span class="arithmatex">\(i\)</span>),</li>
+<li>an initial barrier parameter <span class="arithmatex">\(t &gt; 0\)</span>,</li>
+<li>a barrier scaling factor <span class="arithmatex">\(\mu &gt; 1\)</span> (usually between 10 and 20),</li>
+<li>and a desired accuracy <span class="arithmatex">\(\varepsilon &gt; 0\)</span> (for stopping),</li>
+</ul>
+<p>the algorithm proceeds as follows:</p>
+<ol>
+<li>
+<p>Centering step: Solve<br>
+<script type="math/tex; mode=display">
+   \min_x \; f_0(x) - \frac{1}{t} \sum_{i=1}^m \log(-f_i(x))
+   \quad \text{s.t. } A x = b
+   </script>
+   using Newton’s method for equality-constrained optimization. The result <span class="arithmatex">\(x^*(t)\)</span> is the <em>centering point</em> for the current <span class="arithmatex">\(t\)</span>.</p>
+</li>
+<li>
+<p>Update iterate:  Set <span class="arithmatex">\(x := x^*(t)\)</span>.</p>
+</li>
+<li>
+<p>Stopping criterion:  Stop if 
+   <script type="math/tex; mode=display">
+   \frac{m}{t} < \varepsilon.
+   </script>
+   Here <span class="arithmatex">\(m\)</span> is the number of inequality constraints, and <span class="arithmatex">\(\varepsilon\)</span> is the desired tolerance on suboptimality. This rule is derived from the duality gap bound:
+   <script type="math/tex; mode=display">
+   f_0(x^*(t)) - p^* \le \frac{m}{t},
+   </script>
+   meaning that if <span class="arithmatex">\(m/t\)</span> is smaller than <span class="arithmatex">\(\varepsilon\)</span>, the current solution is guaranteed to be within <span class="arithmatex">\(\varepsilon\)</span> of the true optimum.</p>
+</li>
+<li>
+<p>Increase barrier parameter: Set <span class="arithmatex">\(t := \mu t\)</span> and return to Step 1.
+   Each centering subproblem maintains strict feasibility, and increasing <span class="arithmatex">\(t\)</span> gradually weakens the barrier, allowing the iterates to approach the true constraint boundary. A typical choice is <span class="arithmatex">\(\mu \in [10, 20]\)</span>.</p>
+</li>
+</ol>
+<h3 id="understanding-varepsilon-the-accuracy-parameter">Understanding <span class="arithmatex">\(\varepsilon\)</span> — the Accuracy Parameter<a class="headerlink" href="#understanding-varepsilon-the-accuracy-parameter" title="Permanent link">¶</a></h3>
+<p>The parameter <span class="arithmatex">\(\varepsilon\)</span> controls how close to the optimal solution we wish to stop.</p>
+<ul>
+<li>
+<p>Mathematically, <span class="arithmatex">\(\varepsilon\)</span> specifies an upper bound on the duality gap:
+  <script type="math/tex; mode=display">
+  f_0(x) - p^* \le \varepsilon.
+  </script>
+</p>
+</li>
+<li>
+<p>Conceptually, <span class="arithmatex">\(\varepsilon\)</span> represents the trade-off between accuracy and computational cost:</p>
+</li>
+<li>Smaller <span class="arithmatex">\(\varepsilon\)</span> → more iterations (larger <span class="arithmatex">\(t\)</span> required).</li>
+<li>Larger <span class="arithmatex">\(\varepsilon\)</span> → faster termination, but lower accuracy.</li>
+</ul>
+<p>In practice:</p>
+<ul>
+<li>For numerical optimization or ML training, <span class="arithmatex">\(\varepsilon\)</span> is often set between <span class="arithmatex">\(10^{-3}\)</span> and <span class="arithmatex">\(10^{-8}\)</span> depending on problem size and desired precision.  </li>
+<li>Convex solvers (like CVX, MOSEK, or ECOS) typically use <span class="arithmatex">\(\varepsilon \approx 10^{-6}\)</span> as a default high-accuracy target.</li>
+</ul>
+<h3 id="intuitive-interpretation">Intuitive Interpretation<a class="headerlink" href="#intuitive-interpretation" title="Permanent link">¶</a></h3>
+<ul>
+<li>Think of <span class="arithmatex">\(\varepsilon\)</span> as the “distance” between the current point and the true optimum in terms of objective value.  </li>
+<li>The ratio <span class="arithmatex">\(m/t\)</span> acts like a thermometer for this distance — as <span class="arithmatex">\(t\)</span> grows, the temperature (error) cools down.</li>
+<li>Once <span class="arithmatex">\(m/t &lt; \varepsilon\)</span>, we know the algorithm has cooled sufficiently: the point lies extremely close to the optimal constrained solution.</li>
+</ul>
+<h3 id="summary-of-key-parameters">Summary of Key Parameters<a class="headerlink" href="#summary-of-key-parameters" title="Permanent link">¶</a></h3>
+<table>
+<thead>
+<tr>
+<th>Symbol</th>
+<th>Meaning</th>
+<th>Typical Value / Range</th>
+<th>Intuitive Role</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><span class="arithmatex">\(m\)</span></td>
+<td>Number of inequality constraints</td>
+<td>problem dependent</td>
+<td>Total number of barrier terms</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(t\)</span></td>
+<td>Barrier parameter</td>
+<td>starts small (1–10), grows by <span class="arithmatex">\(\mu\)</span></td>
+<td>Controls strength of barrier</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(\mu\)</span></td>
+<td>Barrier growth factor</td>
+<td>10–20</td>
+<td>Controls how fast we approach constraint boundary</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(\varepsilon\)</span></td>
+<td>Desired accuracy (tolerance)</td>
+<td><span class="arithmatex">\(10^{-3}\)</span> to <span class="arithmatex">\(10^{-8}\)</span></td>
+<td>Stopping threshold based on duality gap</td>
+</tr>
+</tbody>
+</table>
+<h3 id="intuitive-summary">Intuitive Summary<a class="headerlink" href="#intuitive-summary" title="Permanent link">¶</a></h3>
+<ul>
+<li>Each centering step finds the best <em>interior</em> point for a given barrier strength <span class="arithmatex">\(1/t\)</span>.  </li>
+<li>Increasing <span class="arithmatex">\(t\)</span> reduces the barrier effect, letting <span class="arithmatex">\(x\)</span> approach the boundary.  </li>
+<li>The stopping rule <span class="arithmatex">\(m/t &lt; \varepsilon\)</span> ensures that the objective value of <span class="arithmatex">\(x\)</span> differs from the true optimum by less than <span class="arithmatex">\(\varepsilon\)</span>.  </li>
+<li>Smaller <span class="arithmatex">\(\varepsilon\)</span> means tighter optimality, but more work (larger <span class="arithmatex">\(t\)</span> and more iterations).</li>
+</ul>
+<h2 id="148-computational-and-practical-notes">14.8 Computational and Practical Notes<a class="headerlink" href="#148-computational-and-practical-notes" title="Permanent link">¶</a></h2>
+<ul>
+<li>Each centering problem is solved by equality-constrained Newton steps (KKT system).  </li>
+<li>Barrier methods inherit superlinear convergence near the optimum.  </li>
+<li>Initialization must be strictly feasible; feasibility restoration can be costly.  </li>
+<li>Large <span class="arithmatex">\(t\)</span> makes the barrier steep, so line search and step damping are essential.</li>
+</ul>
+<p>In machine learning:
+- SVM and logistic regression margin constraints fit naturally in this form.<br>
+- Interior-point solvers for QPs are used in sparse regression and convex relaxations.<br>
+- Barrier penalties act as smooth approximations to hard constraints in physics-informed and fairness-aware models.</p>
+<h2 id="149-comparison-equality-vs-inequality-constrained-methods">14.9 Comparison: Equality vs Inequality-Constrained Methods<a class="headerlink" href="#149-comparison-equality-vs-inequality-constrained-methods" title="Permanent link">¶</a></h2>
+<table>
+<thead>
+<tr>
+<th>Aspect</th>
+<th>Equality Constraints</th>
+<th>Inequality Constraints</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Feasible set</td>
+<td>Affine manifold</td>
+<td>Convex region with boundary</td>
+</tr>
+<tr>
+<td>Algorithms</td>
+<td>Newton, projected Newton, KKT</td>
+<td>Barrier, interior-point, primal–dual</td>
+</tr>
+<tr>
+<td>Feasibility handling</td>
+<td>Exact</td>
+<td>Maintained via barrier term</td>
+</tr>
+<tr>
+<td>Complementarity</td>
+<td><span class="arithmatex">\(A x = b\)</span></td>
+<td><span class="arithmatex">\(\lambda_i f_i(x) = 0\)</span> (or <span class="arithmatex">\(= -1/t\)</span>)</td>
+</tr>
+<tr>
+<td>Feasible start</td>
+<td>Optional</td>
+<td>Required (strict)</td>
+</tr>
+<tr>
+<td>ML relevance</td>
+<td>Normalization, fairness, balance</td>
+<td>Nonnegativity, margins, sparsity, safety constraints</td>
+</tr>
+</tbody>
+</table>
 
 
 
