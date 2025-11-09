@@ -873,7 +873,7 @@
   
   
   <span class="md-ellipsis">
-    Deep Learning
+    Cheat Sheets
     
   </span>
   
@@ -883,143 +883,6 @@
         
         <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_4">
-            <span class="md-nav__icon md-icon"></span>
-            Deep Learning
-          </label>
-          <ul class="md-nav__list" data-md-scrollfix>
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../deeplearning/intro/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    1. Introduction to Neural Netwoks
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../deeplearning/2_convnets/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    2. Convolutional Neural Networks (CNNs)
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../deeplearning/intro/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    1. Introduction to Neural Netwoks
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../deeplearning/intro/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    1. Introduction to Neural Netwoks
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-          </ul>
-        </nav>
-      
-    </li>
-  
-
-    
-      
-      
-  
-  
-  
-  
-    
-    
-    
-    
-    
-    <li class="md-nav__item md-nav__item--nested">
-      
-        
-        
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5">
-        
-          
-          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
-            
-  
-  
-  <span class="md-ellipsis">
-    Cheat Sheets
-    
-  </span>
-  
-
-            <span class="md-nav__icon md-icon"></span>
-          </label>
-        
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_5">
             <span class="md-nav__icon md-icon"></span>
             Cheat Sheets
           </label>
@@ -1070,10 +933,10 @@
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6">
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5">
         
           
-          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
             
   
   
@@ -1086,8 +949,8 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_6">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
             <span class="md-nav__icon md-icon"></span>
             Appendices
           </label>
@@ -1340,241 +1203,344 @@
 
 
 <h1 id="chapter-17-canonical-problems-in-convex-optimization">Chapter 17: Canonical Problems in Convex Optimization<a class="headerlink" href="#chapter-17-canonical-problems-in-convex-optimization" title="Permanent link">¶</a></h1>
-<p>Convex optimization encompasses a wide range of problem classes.<br>
-Despite their diversity, many real-world models reduce to a few canonical forms — each with characteristic geometry, structure, and algorithms.</p>
-<h2 id="171-hierarchy-of-canonical-problems">17.1 Hierarchy of Canonical Problems<a class="headerlink" href="#171-hierarchy-of-canonical-problems" title="Permanent link">¶</a></h2>
-<p>Convex programs form a nested hierarchy:</p>
-<div class="arithmatex">\[
-\text{LP} \subseteq \text{QP} \subseteq \text{SOCP} \subseteq \text{SDP}.
-\]</div>
-<p>Each inclusion represents an extension of representational power — from linear to quadratic, to conic, and finally to semidefinite constraints.<br>
-Separately, Geometric Programs (GPs) and Maximum Likelihood Estimators (MLEs) form additional convex families after suitable transformations.</p>
-<table>
-<thead>
-<tr>
-<th>Class</th>
-<th>Canonical Form</th>
-<th>Key Condition</th>
-<th>Typical Algorithms</th>
-<th>ML / Applied Examples</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>LP</td>
-<td><span class="arithmatex">\(\min_x c^\top x\)</span> s.t. <span class="arithmatex">\(A x=b,\,x\ge0\)</span></td>
-<td>Linear constraints</td>
-<td>Simplex, Interior-point</td>
-<td>Resource allocation, Chebyshev regression</td>
-</tr>
-<tr>
-<td>QP</td>
-<td><span class="arithmatex">\(\min_x \tfrac12 x^\top Q x + c^\top x\)</span> s.t. <span class="arithmatex">\(A x\le b\)</span></td>
-<td><span class="arithmatex">\(Q\succeq0\)</span></td>
-<td>Interior-point, Active-set, CG</td>
-<td>Ridge, SVM, Portfolio optimization</td>
-</tr>
-<tr>
-<td>QCQP</td>
-<td><span class="arithmatex">\(\min_x \tfrac12 x^\top P_0 x + q_0^\top x\)</span> s.t. <span class="arithmatex">\(\tfrac12 x^\top P_i x + q_i^\top x \le0\)</span></td>
-<td>All <span class="arithmatex">\(P_i\succeq0\)</span></td>
-<td>Interior-point, SOCP reformulation</td>
-<td>Robust regression, trust-region</td>
-</tr>
-<tr>
-<td>SOCP</td>
-<td><span class="arithmatex">\(\min_x f^\top x\)</span> s.t. <span class="arithmatex">\(\|A_i x + b_i\|_2 \le c_i^\top x + d_i\)</span></td>
-<td>Cone constraints</td>
-<td>Conic interior-point</td>
-<td>Robust least-squares, risk limits</td>
-</tr>
-<tr>
-<td>SDP</td>
-<td><span class="arithmatex">\(\min_X \mathrm{Tr}(C^\top X)\)</span> s.t. <span class="arithmatex">\(\mathrm{Tr}(A_i^\top X)=b_i\)</span>, <span class="arithmatex">\(X\succeq0\)</span></td>
-<td>Matrix PSD constraint</td>
-<td>Interior-point, low-rank first-order</td>
-<td>Covariance estimation, control</td>
-</tr>
-<tr>
-<td>GP</td>
-<td><span class="arithmatex">\(\min_{x&gt;0} f_0(x)\)</span> s.t. <span class="arithmatex">\(f_i(x)\le1,\,g_j(x)=1\)</span></td>
-<td>Log-convex after <span class="arithmatex">\(y=\log x\)</span></td>
-<td>Log-transform + IPM</td>
-<td>Circuit design, power control</td>
-</tr>
-<tr>
-<td>MLE / GLM</td>
-<td>$\min_x -\sum_i \log p(b_i</td>
-<td>a_i^\top x)+\mathcal{R}(x)$</td>
-<td>Log-concave likelihood</td>
-<td>Newton, L-BFGS, Prox / SGD</td>
-</tr>
-</tbody>
-</table>
-<h2 id="172-linear-programming-lp">17.2 Linear Programming (LP)<a class="headerlink" href="#172-linear-programming-lp" title="Permanent link">¶</a></h2>
-<p>Form</p>
-<div class="arithmatex">\[
-\min_x c^\top x \quad \text{s.t. } A x=b,\, x\ge0
-\]</div>
-<p>Geometry: Feasible region = polyhedron; optimum = vertex.<br>
-Applications: Resource allocation, shortest path, flow, scheduling.<br>
-Algorithms:</p>
-<ol>
-<li>Simplex: walks along edges (vertex-based).  </li>
-<li>Interior-point: moves through the interior using log barriers.  </li>
-<li>Decomposition: exploits block structure for large LPs.</li>
-</ol>
-<h2 id="173-quadratic-programming-qp">17.3 Quadratic Programming (QP)<a class="headerlink" href="#173-quadratic-programming-qp" title="Permanent link">¶</a></h2>
-<p>Form</p>
-<div class="arithmatex">\[
-\min_x \tfrac12 x^\top Q x + c^\top x 
-\quad \text{s.t. } A x \le b,\, F x = g, \quad Q\succeq0
-\]</div>
-<p>Geometry: Objective = ellipsoids; feasible = polyhedron.<br>
-Examples: Ridge regression, Markowitz portfolio, SVM.<br>
-Algorithms:<br>
-- Interior-point (smooth path).<br>
-- Active-set (edge-following).<br>
-- Conjugate Gradient for large unconstrained QPs.<br>
-- First-order methods for massive <span class="arithmatex">\(n\)</span>.</p>
-<h2 id="174-quadratically-constrained-qp-qcqp">17.4 Quadratically Constrained QP (QCQP)<a class="headerlink" href="#174-quadratically-constrained-qp-qcqp" title="Permanent link">¶</a></h2>
-<p>Form</p>
-<div class="arithmatex">\[
-\min_x \tfrac12 x^\top P_0x + q_0^\top x
-\quad \text{s.t. } \tfrac12 x^\top P_i x + q_i^\top x + r_i \le 0
-\]</div>
-<p>Convex if all <span class="arithmatex">\(P_i\succeq0\)</span>.<br>
-Geometry: Intersection of ellipsoids and half-spaces.<br>
-Applications: Robust control, filter design, trust-region.<br>
-Algorithms: Interior-point (convex case), SOCP / SDP reformulations.</p>
-<h2 id="175-second-order-cone-programming-socp">17.5 Second-Order Cone Programming (SOCP)<a class="headerlink" href="#175-second-order-cone-programming-socp" title="Permanent link">¶</a></h2>
-<p>Form</p>
-<div class="arithmatex">\[
-\min_x f^\top x
-\quad \text{s.t. } 
-\|A_i x + b_i\|_2 \le c_i^\top x + d_i,\;
-F x = g
-\]</div>
-<p>Interpretation: Linear objective, norm-bounded constraints.<br>
-Applications: Robust regression, risk-aware portfolio, engineering design.<br>
-Algorithms: Conic interior-point; scalable ADMM variants.<br>
-Special case: Any QP or norm constraint can be written as an SOCP.</p>
-<h2 id="176-semidefinite-programming-sdp">17.6 Semidefinite Programming (SDP)<a class="headerlink" href="#176-semidefinite-programming-sdp" title="Permanent link">¶</a></h2>
-<p>Form</p>
-<div class="arithmatex">\[
-\min_X \mathrm{Tr}(C^\top X)
-\quad \text{s.t. } \mathrm{Tr}(A_i^\top X)=b_i,\; X\succeq0
-\]</div>
-<p>Meaning: Variable = PSD matrix <span class="arithmatex">\(X\)</span>; constraints = affine.<br>
-Geometry: Feasible region = intersection of affine space with PSD cone.<br>
-Applications: Control synthesis, combinatorial relaxations, covariance estimation, matrix completion.<br>
-Algorithms: Interior-point for moderate <span class="arithmatex">\(n\)</span>; low-rank proximal / Frank–Wolfe for large-scale.</p>
-<h2 id="177-geometric-programming-gp">17.7 Geometric Programming (GP)<a class="headerlink" href="#177-geometric-programming-gp" title="Permanent link">¶</a></h2>
-<p>Original form</p>
-<div class="arithmatex">\[
-\min_{x&gt;0} f_0(x)
-\quad \text{s.t. } f_i(x)\le1,\; g_j(x)=1
-\]</div>
-<p>where <span class="arithmatex">\(f_i\)</span> are posynomials and <span class="arithmatex">\(g_j\)</span> monomials.  </p>
-<p>Log transformation: With <span class="arithmatex">\(y=\log x\)</span>, the problem becomes convex in <span class="arithmatex">\(y\)</span>.<br>
-Applications: Circuit sizing, communication power control, resource allocation.<br>
-Solvers: Convert to convex form → interior-point or primal-dual methods.</p>
-<h2 id="178-likelihood-based-convex-models-mle-and-glms">17.8 Likelihood-Based Convex Models (MLE and GLMs)<a class="headerlink" href="#178-likelihood-based-convex-models-mle-and-glms" title="Permanent link">¶</a></h2>
-<p>General form</p>
-<div class="arithmatex">\[
-\min_x -\sum_i \log p(b_i|a_i^\top x) + \mathcal{R}(x)
-\]</div>
-<p>Examples</p>
-<table>
-<thead>
-<tr>
-<th>Noise Model</th>
-<th>Objective</th>
-<th>Equivalent Problem</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Gaussian</td>
-<td><span class="arithmatex">\(\|A x - b\|_2^2\)</span></td>
-<td>Least squares</td>
-</tr>
-<tr>
-<td>Laplacian</td>
-<td><span class="arithmatex">\(\|A x - b\|_1\)</span></td>
-<td>Robust regression (LP)</td>
-</tr>
-<tr>
-<td>Bernoulli</td>
-<td><span class="arithmatex">\(\sum_i \log(1+e^{-y_i a_i^\top x})\)</span></td>
-<td>Logistic regression</td>
-</tr>
-<tr>
-<td>Poisson</td>
-<td><span class="arithmatex">\(\sum_i [a_i^\top x - y_i\log(a_i^\top x)]\)</span></td>
-<td>Poisson GLM</td>
-</tr>
-</tbody>
-</table>
-<p>Algorithms<br>
-- Newton or IRLS (small–medium).<br>
-- Quasi-Newton / L-BFGS (moderate).<br>
-- Proximal or SGD (large-scale).</p>
-<h2 id="179-solver-selection-summary">17.9 Solver Selection Summary<a class="headerlink" href="#179-solver-selection-summary" title="Permanent link">¶</a></h2>
+<p>The table below gives canonical convex problem classes, with special cases listed <em>inside</em> their parent class to avoid duplication.<br>
+Key hierarchy: LP ⊂ QP ⊂ SOCP ⊂ SDP (all are conic programs).</p>
 <table>
 <thead>
 <tr>
 <th>Problem Type</th>
-<th>Convex Form</th>
-<th>Key Solvers</th>
-<th>ML Examples</th>
+<th>Canonical Form</th>
+<th>Special Cases  Examples</th>
+<th>Typical Applications</th>
+<th>Common Algorithms</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>LP</td>
-<td>Linear</td>
-<td>Simplex, Interior-point</td>
-<td>Minimax regression</td>
+<td>Linear Program</td>
+<td><span class="arithmatex">\(\displaystyle \min_x\; c^T x  \\ \text{s.t.}\; A x = b,\; x \ge 0\)</span></td>
+<td>-</td>
+<td>Resource allocation, scheduling, routing, relaxations</td>
+<td>Simplex  Dual simplex, Interior-point (barrier), Decomposition &amp; first-order for very large-scale</td>
 </tr>
 <tr>
-<td>QP</td>
-<td>Quadratic</td>
-<td>Interior-point, CG, Active-set</td>
-<td>Ridge, SVM</td>
+<td>Quadratic Program (convex if <span class="arithmatex">\(Q \succeq 0\)</span>)</td>
+<td><span class="arithmatex">\(\displaystyle \min_x\; \tfrac12 x^T Q x + c^T x \\ \text{s.t.}\; A x \le b,\; F x = g\)</span></td>
+<td>Least Squares <span class="arithmatex">\(\min\|Ax-b\|_2^2\)</span>  <br>  Ridge:<span class="arithmatex">\(\min\|Ax-b\|_2^2+\lambda\|x\|_2^2\)</span> <br> LASSO (via variable splitting → QP <br> Box-QP <br> Trust-region (QP with ball)</td>
+<td>Portfolio optimization, MPC, regression &amp; sparse estimation, large-scale ML fitting</td>
+<td>Interior-point, Active-set, ProjectedProximal gradient, Conjugate gradient (unconstrained), Coordinate descentADMM (sparsestructured)</td>
 </tr>
 <tr>
-<td>QCQP</td>
-<td>Quadratic + constraints</td>
-<td>IPM, SOCP / SDP reformulation</td>
-<td>Robust regression</td>
+<td>Second-Order Cone Program</td>
+<td><span class="arithmatex">\(\displaystyle \min_x\; f^T x \\ \text{s.t.}\; \|A_i x + b_i\|_2 \le c_i^T x + d_i,\; F x = g\)</span></td>
+<td>Robust least squares <br> Norm constraints (<span class="arithmatex">\(\ell_2\)</span>) <br> Quadratic constraints representable as SOC <br> Chebyshev center <br> Portfolio with varianceVaR surrogates</td>
+<td>Robust regression, antennabeamforming, control, risk-constrained finance</td>
+<td>Conic interior-point (barrier), Primal-dual first-order splitting for large-scale</td>
 </tr>
 <tr>
-<td>SOCP</td>
-<td>Cone</td>
-<td>Conic IPM, ADMM</td>
-<td>Robust least-squares</td>
+<td>Semidefinite Program</td>
+<td><span class="arithmatex">\(\displaystyle \min_X\; \mathrm{Tr}(C^T X) \\ \text{s.t.}\; \mathrm{Tr}(A_i^T X)=b_i,\; X \succeq 0\)</span></td>
+<td>QCQP relaxations; Max-cutGoemans–Williamson; Covariance selection; Lyapunovcontrol synthesis; Sum-of-squares (SOS) relaxations</td>
+<td>Control &amp; systems, combinatorial relaxations, covariancecorrelation modeling, quantum information</td>
+<td>Interior-point (medium-scale), Low-rank first-order (proxFrank–Wolfe), ADMMsplitting</td>
 </tr>
 <tr>
-<td>SDP</td>
-<td>PSD cone</td>
-<td>Interior-point, low-rank FW</td>
-<td>Covariance, Max-cut relaxations</td>
+<td>Quadratically Constrained QP (convex if all <span class="arithmatex">\(P_i \succeq 0\)</span>; otherwise generally NP-hard)</td>
+<td><span class="arithmatex">\(\displaystyle \min_x\; \tfrac12 x^T P_0 x + q_0^T x + d_0 \\ \text{s.t.}\ \tfrac12 x^T P_i x + q_i^T x + d_i \le 0\)</span></td>
+<td>Trust-region subproblems; Ellipsoidal constraints; Robust fitting; Many admit SOCPSDP reformulations</td>
+<td>Robust control, beamforming, filter design, robust estimation</td>
+<td>Interior-point (convex case), SDPSOCP relaxations, Convex–concave proceduresheuristics</td>
 </tr>
 <tr>
-<td>GP</td>
-<td>Log-convex</td>
-<td>Log-transform + IPM</td>
-<td>Power allocation</td>
+<td>GP (Geometric Program) (convex in log-space)</td>
+<td><span class="arithmatex">\(\displaystyle \min_x\; f_0(x)\ \text{s.t.}\ f_i(x)\le 1,\ g_j(x)=1\)</span> (posynomial <span class="arithmatex">\(f_i\)</span>, monomial <span class="arithmatex">\(g_j\)</span>)</td>
+<td>After <span class="arithmatex">\(y=\log x\)</span>: convex; posynomial circuit sizing; powerenergy scaling laws; resource trade-offs</td>
+<td>CircuitIC design, communication &amp; power control, engineering tuning</td>
+<td>Log-transform → Interior-point; Primal-dual methods; First-order for large sparse instances</td>
 </tr>
 <tr>
-<td>MLE / GLM</td>
-<td>Log-concave</td>
-<td>Newton, L-BFGS, Prox-SGD</td>
-<td>Logistic regression</td>
+<td>MLE  GLM (Likelihood-based convex models)</td>
+<td><span class="arithmatex">\(\displaystyle \min_x\; -\sum_i \log p(b_i\mid a_i^T x)\ +\ \mathcal{R}(x)\)</span> where <span class="arithmatex">\(\mathcal{R}\)</span> is convex (e.g., <span class="arithmatex">\(\ell_1,\ell_2\)</span>)</td>
+<td>Classification: Logisticsoftmax (GLMs); SVM as convex risk minimization (hinge loss); PoissonExponential family GLMs; Elastic-net regularized GLMs</td>
+<td>Predictive modeling, classification, count modeling, calibration</td>
+<td>Newton  (L-)BFGS, Acceleratedproximal gradient, Coordinate descent, Stochastic variants (SGDSAGASVRG), ADMM</td>
 </tr>
 </tbody>
 </table>
+<h2 id="linear-programming-lp">Linear Programming (LP)<a class="headerlink" href="#linear-programming-lp" title="Permanent link">¶</a></h2>
+<p>A standard LP has a linear objective and linear constraints:</p>
+<div class="arithmatex">\[
+minimize_{x}\; c^T x
+\quad\text{s.t.}\;
+A x = b,\; x \ge 0.
+\]</div>
+<p>with decision variable <span class="arithmatex">\(x\in\mathbb R^n\)</span>. Geometrically, the feasible set is a polyhedron (intersection of halfspaces), and optimal solutions lie at extreme points (vertices) of this polyhedron. Intuitively, imagine a flat objective plane being “pushed” until it first touches the polyhedron at a vertex.</p>
+<h3 id="algorithms">Algorithms:<a class="headerlink" href="#algorithms" title="Permanent link">¶</a></h3>
+<p>At a high level, LP algorithms fall into three families:</p>
+<ol>
+<li>Vertex-based (Simplex)</li>
+<li>Interior-based (Barrier  IPM)</li>
+<li>Decomposition and First-Order (Large-Scale  Structured)</li>
+</ol>
+<p>Each family explores the polyhedral geometry of the feasible set in a different way.</p>
+<h4 id="1-simplex-method-walking-the-edges-of-the-polyhedron">1. Simplex Method — <em>Walking the edges of the polyhedron</em><a class="headerlink" href="#1-simplex-method-walking-the-edges-of-the-polyhedron" title="Permanent link">¶</a></h4>
+<p>The Simplex method moves from vertex to vertex (corner to corner) of the feasible polyhedron, improving the objective value at each step.<br>
+Intuitively, the LP feasible region is a <em>polyhedron</em> (a high-dimensional “flat-sided” shape) and the linear objective defines a <em>tilted plane</em> sweeping across it. The optimum is always attained at a vertex, so Simplex efficiently hops between adjacent vertices along edges until it reaches the best one.</p>
+<h4 id="2-interior-point-methods-gliding-through-the-interior">2. Interior-Point Methods — <em>Gliding through the interior</em><a class="headerlink" href="#2-interior-point-methods-gliding-through-the-interior" title="Permanent link">¶</a></h4>
+<p>Interior-point methods (IPMs) take a fundamentally different route:<br>
+Instead of crawling along edges, they glide through the <em>interior</em> of the feasible region, guided by a barrier function that prevents them from hitting the boundaries.</p>
+<p>They solve a sequence of barrier problems of the form:
+<script type="math/tex; mode=display">
+\min_x\; c^T x - \mu \sum_i \log(x_i)
+\quad \text{s.t.}\; A x = b,
+</script>
+where the logarithmic term keeps <span class="arithmatex">\(x_i &gt; 0\)</span>.  </p>
+<p>As the barrier parameter <span class="arithmatex">\(\mu \to 0\)</span>, the iterates approach the true boundary optimum along a <em>central path</em>.  Each step requires solving a Newton system that couples all variables, making IPMs especially efficient for dense, moderately sized LPs.</p>
+<h4 id="3-decomposition-methods-divide-and-conquer-for-large-scale-structure">3. Decomposition Methods — <em>Divide and conquer for large-scale structure</em><a class="headerlink" href="#3-decomposition-methods-divide-and-conquer-for-large-scale-structure" title="Permanent link">¶</a></h4>
+<p>When an LP is too large to solve as a single system, or its constraint matrix <span class="arithmatex">\(A\)</span> has <em>block structure</em>, decomposition methods exploit separability by breaking the problem into smaller subproblems that can be solved independently.</p>
+<p>The basic idea:  </p>
+<ul>
+<li>Identify coupling constraints or variables that link otherwise independent subsystems.  </li>
+<li>Solve each subsystem separately, and coordinate them via <em>dual variables</em> or <em>cutting planes</em> until consistency and optimality are achieved.</li>
+</ul>
+<p>Decomposition turns “one huge LP” into “many small LPs talking to each other.”</p>
+<h3 id="applications">Applications<a class="headerlink" href="#applications" title="Permanent link">¶</a></h3>
+<p>LPs model many resource-allocation and network-flow problems (e.g.\ transportation, scheduling, blending). They also capture piecewise-linear loss minimization. For example, the minimax (Chebyshev) regression <span class="arithmatex">\(\min_x\max_i|a_i^T x - b_i|\)</span> can be written as an LP. LPs appear in operations research, control (robust linear design), and in approximations of more complex problems.</p>
+<h2 id="quadratic-programming-qp">Quadratic Programming (QP)<a class="headerlink" href="#quadratic-programming-qp" title="Permanent link">¶</a></h2>
+<p>A convex QP has a quadratic objective and linear constraints:</p>
+<div class="arithmatex">\[
+minimize_{x}\;\tfrac12 x^T Q x + c^T x
+\quad\text{s.t.}\;
+A x = b,\;x\ge0,
+\]</div>
+<p>where <span class="arithmatex">\(Q\succeq0\)</span> (positive semidefinite) makes the problem convex. Here <span class="arithmatex">\(x\in\mathbb R^n\)</span>. Equivalently, one may have inequality constraints <span class="arithmatex">\(A x\le b\)</span>. Level sets of the objective are ellipsoids (quadratic bowls), so the optimum may lie on a boundary or in the interior of the feasible set.</p>
+<p>Intuition &amp; geometry: The positive-definite part of <span class="arithmatex">\(Q\)</span> defines an “ellipsoidal” bowl of the objective. At optimum, the gradient <span class="arithmatex">\(\nabla(\tfrac12 x^T Q x + c^T x) = Qx+c\)</span> is orthogonal to the active constraint surfaces (KKT stationarity). Unlike LP, an unconstrained QP’s minimizer is at <span class="arithmatex">\(x=-Q^{-1}c\)</span> if <span class="arithmatex">\(Q\succ0\)</span>. With constraints, the optimum occurs where the ellipsoid just touches the feasible set (which is a polyhedron or affine subspace).</p>
+<p>Applications: QPs model many smooth convex problems. A classic example is Markowitz portfolio optimization (minimize variance <span class="arithmatex">\(x^T\Sigma x\)</span> plus a linear return term). QPs arise in ridge regression (least-squares with <span class="arithmatex">\(\ell_2\)</span> penalty), support-vector machines (SVMs with quadratic soft-margin), and model-predictive control (convex quadratic cost). Any least-squares problem with linear constraints is a QP. Many robust or regularized designs (elastic net regression, norm-constrained classification) also lead to QPs.</p>
+<p>Example Risk-Adjusted Quadratic Program (Mean–Variance Portfolio Optimization)</p>
+<p>We want to allocate portfolio weights ( x \in \mathbb{R}^n ) across ( n ) assets.</p>
+<ul>
+<li><span class="arithmatex">\(\mu \in \mathbb{R}^n\)</span>: expected returns of each asset</li>
+<li><span class="arithmatex">\(\Sigma \in \mathbb{R}^{n \times n}\)</span>: covariance matrix of returns (symmetric, positive semidefinite)</li>
+<li><span class="arithmatex">\(x\)</span>: portfolio weights (fractions of capital invested in each asset)</li>
+</ul>
+<p>The mean–variance trade-off says we want to:</p>
+<ul>
+<li>maximize expected return <span class="arithmatex">\(\mu^T x\)</span>,</li>
+<li>minimize risk (variance) <span class="arithmatex">\(x^T \Sigma x\)</span>.</li>
+</ul>
+<p>Combining them gives the standard convex QP form:</p>
+<div class="arithmatex">\[\begin{aligned}
+\min_x \quad &amp; \tfrac{1}{2} x^T \Sigma x - \lambda \mu^T x \
+\text{s.t.} \quad &amp; \mathbf{1}^T x = 1, \
+&amp; x \ge 0,
+\end{aligned}\]</div>
+<p>where <span class="arithmatex">\(\lambda &gt; 0\)</span> is the risk–return trade-off parameter.</p>
+<ul>
+<li>The quadratic term <span class="arithmatex">\(\tfrac{1}{2} x^T \Sigma x\)</span> penalizes portfolio variance (risk).</li>
+<li>The linear term <span class="arithmatex">\(-\lambda \mu^T x\)</span> rewards expected return.</li>
+<li>The equality constraint <span class="arithmatex">\(\mathbf{1}^T x = 1\)</span> ensures all capital is invested (weights sum to 1).</li>
+<li>The inequality <span class="arithmatex">\(x \ge 0\)</span> enforces no short selling.</li>
+</ul>
+<h3 id="algorithms_1">Algorithms<a class="headerlink" href="#algorithms_1" title="Permanent link">¶</a></h3>
+<h4 id="1-interior-point-methods-smooth-paths-through-the-interior">1. Interior-Point Methods — <em>Smooth paths through the interior</em><a class="headerlink" href="#1-interior-point-methods-smooth-paths-through-the-interior" title="Permanent link">¶</a></h4>
+<p>Interior-point methods extend the same idea used for LPs.<br>
+They replace inequality constraints with barrier terms, e.g.
+<script type="math/tex; mode=display">
+\min_x\; \tfrac{1}{2}x^T Qx + c^T x - \mu \sum_i \log(s_i)
+\quad \text{s.t.}\; A x + s = b,\; s > 0,
+</script>
+where the logarithmic barrier keeps <span class="arithmatex">\(s_i &gt; 0\)</span>.</p>
+<p>Each iteration solves a Newton system derived from the Karush–Kuhn–Tucker (KKT) conditions, coupling primal and dual variables. The method follows a <em>central path</em> toward the optimum as <span class="arithmatex">\(\mu \to 0\)</span>.</p>
+<h4 id="2-active-set-methods-walking-along-faces">2. Active-Set Methods — <em>Walking along faces</em><a class="headerlink" href="#2-active-set-methods-walking-along-faces" title="Permanent link">¶</a></h4>
+<p>Active-set methods generalize the Simplex idea to QPs.</p>
+<ol>
+<li>Guess which constraints are active (tight) at the solution.  </li>
+<li>Solve the resulting equality-constrained QP:
+   <script type="math/tex; mode=display">
+   \min_x\; \tfrac{1}{2}x^T Qx + c^T x
+   \quad \text{s.t.}\; A_{\text{active}} x = b_{\text{active}}.
+   </script>
+</li>
+<li>Check which inactive constraints become violated; update the working set and repeat.
+Each iteration moves along the <em>face</em> of the feasible region, turning when constraints become active or inactive.</li>
+</ol>
+<h4 id="3-newtons-method-one-shot-solution-when-unconstrained">3. Newton’s Method — <em>One-shot solution when unconstrained</em><a class="headerlink" href="#3-newtons-method-one-shot-solution-when-unconstrained" title="Permanent link">¶</a></h4>
+<p>If there are no constraints, the QP reduces to:
+<script type="math/tex; mode=display">
+\min_x\; \tfrac{1}{2}x^T Qx + c^T x.
+</script>
+</p>
+<p>Setting the gradient to zero gives:
+<script type="math/tex; mode=display">
+Qx + c = 0 \quad \Rightarrow \quad x^* = -Q^{-1} c.
+</script>
+</p>
+<p>Since the Hessian <span class="arithmatex">\(Q\)</span> is constant, Newton’s method reaches the optimum in one iteration.</p>
+<h4 id="4-conjugate-gradient-cg-iterative-linear-solver-for-large-problems">4. Conjugate Gradient (CG) — <em>Iterative linear solver for large problems</em><a class="headerlink" href="#4-conjugate-gradient-cg-iterative-linear-solver-for-large-problems" title="Permanent link">¶</a></h4>
+<p>When <span class="arithmatex">\(Q\)</span> is large and sparse, inverting or factorizing it is too expensive. Instead, Conjugate Gradient (CG) solves <span class="arithmatex">\(Qx = -c\)</span> iteratively using only matrix–vector products. If <span class="arithmatex">\(Q = A^T A\)</span>, the QP corresponds to a least-squares problem:
+<script type="math/tex; mode=display">
+\min_x \|A x - b\|_2^2,
+</script>
+and CG can efficiently find the minimizer without forming <span class="arithmatex">\(A^T A\)</span>.</p>
+<h4 id="5-accelerated-gradient-methods-first-order-scalability">5. Accelerated Gradient Methods — <em>First-order scalability</em><a class="headerlink" href="#5-accelerated-gradient-methods-first-order-scalability" title="Permanent link">¶</a></h4>
+<p>For extremely large QPs with simple constraints (<span class="arithmatex">\(x \ge 0\)</span> or box bounds), first-order methods are used:
+<script type="math/tex; mode=display">
+x_{k+1} = \Pi_{\mathcal{C}}(x_k - \alpha (Qx_k + c)),
+</script>
+where <span class="arithmatex">\(\Pi_{\mathcal{C}}\)</span> projects onto the feasible region.</p>
+<h2 id="quadratically-constrained-qp">Quadratically Constrained QP<a class="headerlink" href="#quadratically-constrained-qp" title="Permanent link">¶</a></h2>
+<div class="arithmatex">\[
+minimize_{x}\;\tfrac12x^T P_0 x + q_0^T x + r_0
+\quad\text{s.t.}\quad
+\tfrac12x^T P_i x + q_i^T x + r_i \le 0.
+\]</div>
+<p>where each <span class="arithmatex">\(P_i\in\mathbb R^{n\times n}\)</span> and <span class="arithmatex">\(x\in\mathbb R^n\)</span>. If all <span class="arithmatex">\(P_i\succeq0\)</span>, the feasible set is convex, and the QCQP is convex. (If any <span class="arithmatex">\(P_i\)</span> is indefinite, the problem is generally nonconvex and NP-hard.) A special case is QP (no quadratic constraints). A common simpler form is a single quadratic (ellipsoidal) constraint, as in the trust-region problem.</p>
+<p>Intuition &amp; geometry: Convex QCQPs describe intersections of “ellipsoidal” regions (and possibly affine sets). For example, the constraint <span class="arithmatex">\(\tfrac12x^TPx + q^Tx + r\le0\)</span> defines a (possibly unbounded) ellipsoid or paraboloid region. Geometrically, a convex QCQP feasible set can be an ellipsoid, paraboloid, or their intersections. The optimum lies where the objective’s ellipsoidal level set first touches this intersection. When <span class="arithmatex">\(P_0\succeq0\)</span>, the objective contours are convex (ellipsoids); if <span class="arithmatex">\(P_i\succ0\)</span>, constraint boundaries are convex surfaces.</p>
+<p>Applications: QCQPs appear in robust design and engineering. For instance, in robust beamforming or filter design one often imposes constraints on quadratic forms of <span class="arithmatex">\(x\)</span>. Sensor network localization and trust-region subproblems are QCQPs. Robust linear regression against ellipsoidal noise uncertainty is a QCQP. Any problem with norms or quadratic inequalities (e.g.\ <span class="arithmatex">\(|Fx-c|_2^2\le d^2\)</span>) can be written as a QCQP.</p>
+<h3 id="algorithms_2">Algorithms<a class="headerlink" href="#algorithms_2" title="Permanent link">¶</a></h3>
+<p>Convex Quadratically Constrained Quadratic Programs (QCQPs) where all <span class="arithmatex">\(P_i \succeq 0\)</span> can be solved efficiently using interior-point methods, which provide polynomial-time convergence.<br>
+Because QCQPs can be expressed as second-order cone programs (SOCPs) or more generally as semidefinite programs (SDPs), modern conic solvers (e.g., MOSEK, SCS, SDPT3) handle these problems robustly for moderate dimensions.</p>
+<h2 id="second-order-cone-programming-socp">Second-Order Cone Programming (SOCP)<a class="headerlink" href="#second-order-cone-programming-socp" title="Permanent link">¶</a></h2>
+<div class="arithmatex">\[
+minimize_{x}\; f^T x
+\quad\text{s.t.}\quad
+\|A_i x + b_i\|_2 \le c_i^T x + d_i,\;
+F x = g.
+\]</div>
+<p>where each <span class="arithmatex">\(|A_i x + b_i|_2\le c_i^T x + d_i\)</span> is a second-order cone constraint. Equivalently, each constraint says the affine function <span class="arithmatex">\((x,t)\mapsto (A_i x + b_i, c_i^T x + d_i)\)</span> lies in the norm cone {<script type="math/tex">{(u,t)\mid|u|_2\le t}\</script>}. Thus the feasible set is the intersection of affine spaces and cones (a convex cone itself).</p>
+<p>Intuition &amp; geometry: Each second-order constraint carves out a convex “cone” in <span class="arithmatex">\((x,t)\)</span>-space. Geometrically, a 2-norm constraint <span class="arithmatex">\(|u|\le t\)</span> forms a (rotated) quadratic cone. The feasible set is the intersection of these cones with any affine constraints. For example, <span class="arithmatex">\(|x|_2 \le 1\)</span> is a unit ball (an ellipsoid), which is a simple special case of an SOCP. SOCPs generalize linear constraints (<span class="arithmatex">\(\ell_1\)</span> norm cones) and some QCQPs.</p>
+<p>Applications: SOCPs are widely used in engineering and finance. Examples include robust least-squares (using Huber or <span class="arithmatex">\(\ell_2\)</span> penalties), design of filters and antennas, truss or structural design under stress norms, and certain portfolio models with risk measures. In statistics and ML, enforcing <span class="arithmatex">\(|w|_2\le R\)</span> is an SOCP constraint. Many chance-constrained or variance-based optimization problems lead to SOCPs. Notably, portfolio optimization with a value-at-risk (VaR) constraint can be cast as an SOCP
+en.wikipedia.org</p>
+<p>Algorithms: Interior-point methods are the standard solvers for SOCPs. Off-the-shelf conic solvers (e.g.\ MOSEK, ECOS) efficiently handle moderate-size SOCPs. Compared to SDP, SOCPs are usually faster to solve for similar problem sizes. First-order or decomposition methods (e.g.\ ADMM) can scale to larger SOCPs if needed.</p>
+<h2 id="geometric-programming-gp">Geometric Programming (GP)<a class="headerlink" href="#geometric-programming-gp" title="Permanent link">¶</a></h2>
+<p>Original (nonconvex) form:</p>
+<div class="arithmatex">\[
+minimize_{x&gt;0}\; f_0(x)
+\quad\text{s.t.}\;
+f_i(x)\le1,\quad g_j(x)=1,
+\]</div>
+<p>where each <span class="arithmatex">\(f_i\)</span> is a posynomial (a sum of monomials) and each <span class="arithmatex">\(g_j\)</span> is a monomial. In coordinates, a monomial has the form <span class="arithmatex">\(c,x_1^{a_1}x_2^{a_2}\cdots x_n^{a_n}\)</span> with <span class="arithmatex">\(c&gt;0\)</span>, and a posynomial is a sum of such terms.</p>
+<p>Intuition &amp; convexity: Though GPs are not convex in the original variables, they can be made convex by the change of variables <span class="arithmatex">\(y_i=\log x_i\)</span> and taking logs of functions. Under this log–log transformation, each monomial becomes an affine function of <span class="arithmatex">\(y\)</span>, and each posynomial becomes a log-sum-exp (convex) function. Thus every GP can be converted to a convex problem (a log-sum-exp minimization). Geometrically, GPs operate on positive variables with multiplicative relationships; in the log-domain, they become standard convex programs.</p>
+<p>Applications: GPs have many applications in engineering design. For example, circuit and analog IC component sizing (transistors, amplifiers) is often cast as a GP. Other examples include aircraft design, power system design, and network flow with multiplicative constraints. In statistics, certain inference problems (e.g. fitting log-linear models) can be written as GPs. Any problem where costs and constraints are products of powers of variables (posynomials) is a candidate for geometric programming
+en.wikipedia.org</p>
+<p>Algorithms: The usual approach is to transform the GP into a convex form and apply convex solvers. After <span class="arithmatex">\(y=\log x\)</span>, one solves a convex program using interior-point methods on the log-transformed problem. Off-the-shelf convex solvers (e.g.\ CVXOPT, MOSEK) now directly support GPs by performing this transformation internally. Specialized GP toolkits (e.g.\ GPkit) also exist. For sequential design, one can iteratively solve approximate GPs. Because GPs become convex, KKT conditions and duality apply after transformation.</p>
+<h2 id="maximum-likelihood-and-generalized-linear-models-glm">Maximum Likelihood and Generalized Linear Models (GLM)<a class="headerlink" href="#maximum-likelihood-and-generalized-linear-models-glm" title="Permanent link">¶</a></h2>
+<h3 id="1-maximum-likelihood-estimation-mle">1. Maximum Likelihood Estimation (MLE)<a class="headerlink" href="#1-maximum-likelihood-estimation-mle" title="Permanent link">¶</a></h3>
+<ul>
+<li>Parametric distribution estimation: Choose from a family of densities <span class="arithmatex">\(p_x(y)\)</span>, indexed by a parameter <span class="arithmatex">\(x\)</span> (often denoted <span class="arithmatex">\(\theta\)</span>).</li>
+<li>We take <span class="arithmatex">\(p_x(y) = 0\)</span> for invalid values of <span class="arithmatex">\(x\)</span>.</li>
+<li>The likelihood function is <span class="arithmatex">\(p_x(y)\)</span> as a function of <span class="arithmatex">\(x\)</span>.</li>
+<li>The log-likelihood function is <span class="arithmatex">\(l(x) = \log p_x(y)\)</span>.</li>
+</ul>
+<p>Maximum Likelihood Estimation (MLE):
+<script type="math/tex; mode=display">
+\hat{x} = \arg\max_x p_x(y) = \arg\max_x l(x)
+</script>
+</p>
+<p>This is often a convex optimization problem when <span class="arithmatex">\(\log p_x(y)\)</span> is concave in <span class="arithmatex">\(x\)</span> for fixed <span class="arithmatex">\(y\)</span>.</p>
+<h3 id="2-linear-measurements-with-iid-noise">2. Linear Measurements with IID Noise<a class="headerlink" href="#2-linear-measurements-with-iid-noise" title="Permanent link">¶</a></h3>
+<p>Consider the linear model:
+<script type="math/tex; mode=display">
+y_i = a_i^T x + \nu_i, \quad i = 1, \ldots, m
+</script>
+</p>
+<p>where:</p>
+<ul>
+<li><span class="arithmatex">\(x \in \mathbb{R}^n\)</span>: unknown parameter vector,</li>
+<li><span class="arithmatex">\(\nu_i\)</span>: IID measurement noise with density <span class="arithmatex">\(p(z)\)</span>,</li>
+<li><span class="arithmatex">\(y_i\)</span>: observed measurements.</li>
+</ul>
+<p>Then the joint density is:
+<script type="math/tex; mode=display">
+p_x(y) = \prod_{i=1}^m p(y_i - a_i^T x)
+</script>
+</p>
+<p>and the log-likelihood becomes:
+<script type="math/tex; mode=display">
+l(x) = \sum_{i=1}^m \log p(y_i - a_i^T x)
+</script>
+</p>
+<p>The MLE is any <span class="arithmatex">\(x\)</span> that maximizes <span class="arithmatex">\(l(x)\)</span>.</p>
+<h3 id="3-common-noise-models-and-corresponding-mles">3. Common Noise Models and Corresponding MLEs<a class="headerlink" href="#3-common-noise-models-and-corresponding-mles" title="Permanent link">¶</a></h3>
+<h4 id="a-gaussian-noise-mathcaln0-sigma2">(a) Gaussian Noise <span class="arithmatex">\(\mathcal{N}(0, \sigma^2)\)</span><a class="headerlink" href="#a-gaussian-noise-mathcaln0-sigma2" title="Permanent link">¶</a></h4>
+<div class="arithmatex">\[p(z) = (2\pi\sigma^2)^{-1/2} e^{-z^2 / (2\sigma^2)}\]</div>
+<div class="arithmatex">\[l(x) = -\frac{m}{2}\log(2\pi\sigma^2) - \frac{1}{2\sigma^2} \sum_{i=1}^m (a_i^T x - y_i)^2\]</div>
+<p>MLE: Least-squares solution
+<script type="math/tex; mode=display">
+\hat{x} = \arg\min_x |Ax - y|_2^2
+</script>
+</p>
+<h4 id="b-laplacian-noise">(b) Laplacian Noise<a class="headerlink" href="#b-laplacian-noise" title="Permanent link">¶</a></h4>
+<div class="arithmatex">\[p(z) = \frac{1}{2a} e^{-|z|/a}\]</div>
+<div class="arithmatex">\[l(x) = -m\log(2a) - \frac{1}{a} \sum_{i=1}^m |a_i^T x - y_i|\]</div>
+<p>MLE: <span class="arithmatex">\(\ell_1\)</span>-norm solution (least absolute deviations)
+<script type="math/tex; mode=display">
+\hat{x} = \arg\min_x |Ax - y|_1
+</script>
+</p>
+<p>This is convex but non-smooth; it can be solved via LP, proximal gradient, or robust convex solvers.</p>
+<h4 id="c-uniform-noise-on-a-a">(c) Uniform Noise on <span class="arithmatex">\([-a, a]\)</span><a class="headerlink" href="#c-uniform-noise-on-a-a" title="Permanent link">¶</a></h4>
+<div class="arithmatex">\[
+p(z) =
+\begin{cases}
+\frac{1}{2a}, &amp; |z| \le a \
+0, &amp; \text{otherwise}
+\end{cases}
+\]</div>
+<div class="arithmatex">\[
+l(x) =
+\begin{cases}
+-m \log(2a), &amp; |a_i^T x - y_i| \le a, \ \forall i \
+-\infty, &amp; \text{otherwise}
+\end{cases}
+\]</div>
+<p>MLE: Any <span class="arithmatex">\(x\)</span> satisfying
+<script type="math/tex; mode=display">
+|a_i^T x - y_i| \le a, \quad i = 1, \ldots, m
+</script>
+</p>
+<p>This defines a feasible region (a convex polyhedron).</p>
+<h3 id="4-logistic-regression-bernoulli-likelihood">4. Logistic Regression (Bernoulli Likelihood)<a class="headerlink" href="#4-logistic-regression-bernoulli-likelihood" title="Permanent link">¶</a></h3>
+<p>For binary labels <span class="arithmatex">\(y \in {0,1}\)</span>:
+<script type="math/tex; mode=display">
+p = \Pr(y = 1 \mid u) = \frac{\exp(a^T u + b)}{1 + \exp(a^T u + b)}
+</script>
+where <span class="arithmatex">\(a, b\)</span> are parameters and <span class="arithmatex">\(u \in \mathbb{R}^n\)</span> are observed features.</p>
+<p>For <span class="arithmatex">\(m\)</span> samples <span class="arithmatex">\((u_i, y_i)\)</span>, the log-likelihood is:
+<script type="math/tex; mode=display">
+l(a,b) = \sum_{i=1}^m \big[ y_i(a^T u_i + b) - \log(1 + e^{a^T u_i + b}) \big]
+</script>
+</p>
+<p>and the negative log-likelihood (to minimize) is:
+<script type="math/tex; mode=display">
+L(a,b) = -l(a,b) = \sum_{i=1}^m \big[ \log(1 + e^{a^T u_i + b}) - y_i(a^T u_i + b) \big]
+</script>
+</p>
+<p>This function is convex and smooth in <span class="arithmatex">\(a, b\)</span>.</p>
+<h3 id="5-softmax-multiclass-logistic-regression">5. Softmax (Multiclass Logistic Regression)<a class="headerlink" href="#5-softmax-multiclass-logistic-regression" title="Permanent link">¶</a></h3>
+<p>For <span class="arithmatex">\(K\)</span> classes with one-hot encoded labels <span class="arithmatex">\(y_i\)</span> and parameters <span class="arithmatex">\(x_k\)</span> for each class:
+<script type="math/tex; mode=display">
+p(y_i = k \mid a_i) = \frac{e^{a_i^T x_k}}{\sum_{j=1}^K e^{a_i^T x_j}}
+</script>
+</p>
+<p>Negative log-likelihood:
+<script type="math/tex; mode=display">
+L({x_k}) = -\sum_{i,k} y_{ik}(a_i^T x_k) + \sum_i \log\Big(\sum_{j=1}^K e^{a_i^T x_j}\Big)
+</script>
+</p>
+<p>Convex in all <span class="arithmatex">\(x_k\)</span>.</p>
+<h3 id="algorithms-for-mle-and-glms">Algorithms for MLE and GLMs<a class="headerlink" href="#algorithms-for-mle-and-glms" title="Permanent link">¶</a></h3>
+<ul>
+<li>LS/Gaussian: Closed-form or CG/Newton as above.</li>
+<li>ℓ₁ regression (Laplace): Convert to LP or use interior-point, or first-order methods (subgradient/proximal) for large-scale. </li>
+<li>Logistic/softmax: Use Newton or quasi-Newton (L-BFGS) when moderate-sized, since the loss is smooth. Accelerated gradient or stochastic gradient (SGD/Adam) is common for large datasets. With <span class="arithmatex">\(\ell_2\)</span>-regularization the problem is strongly convex, ensuring fast convergence. With <span class="arithmatex">\(\ell_1\)</span>-regularization one uses proximal-gradient or coordinate descent to handle the non-smooth part. </li>
+<li>GLMs: Iteratively Reweighted Least Squares (IRLS, a Newton method) often solves canonical-link GLMs efficiently.</li>
+</ul>
+<h2 id="support-vector-machines">Support Vector Machines<a class="headerlink" href="#support-vector-machines" title="Permanent link">¶</a></h2>
+<div class="arithmatex">\[
+\min_w\;\tfrac12\|w\|_2^2 + C\sum_i \max(0,1 - y_i w^T a_i).
+\]</div>
+<p>The SVM primal problem is a QP of the form $, which is convex but non-smooth. This QP is typically solved via its dual or by specialized coordinate-descent.</p>
 
 
 
