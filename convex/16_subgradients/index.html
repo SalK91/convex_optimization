@@ -873,7 +873,7 @@
   
   
   <span class="md-ellipsis">
-    Cheat Sheets
+    Deep Learning
     
   </span>
   
@@ -883,6 +883,143 @@
         
         <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            Deep Learning
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../deeplearning/1_intro/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    1. Introduction to Deep Learning Optimization
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../deeplearning/1_intro/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    1. Introduction to Deep Learning Optimization
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../deep_learning/1_intro.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    3. Regularization Techniques in Deep Learning
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../deep_learning/1_intro.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    4. Advanced Topics in Deep Learning Optimization
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5">
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Cheat Sheets
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
             <span class="md-nav__icon md-icon"></span>
             Cheat Sheets
           </label>
@@ -933,10 +1070,10 @@
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5">
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6">
         
           
-          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
             
   
   
@@ -949,8 +1086,8 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_5">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
             <span class="md-nav__icon md-icon"></span>
             Appendices
           </label>
@@ -1232,6 +1369,12 @@ f(y) \ge f(x) + g^\top (y - x).
 </script>
 </p>
 <p>If <span class="arithmatex">\(f\)</span> is not differentiable at <span class="arithmatex">\(x\)</span>, <span class="arithmatex">\(\partial f(x)\)</span> is typically a nonempty convex set.</p>
+<p>Geometrically, each <span class="arithmatex">\(g \in \partial f(x)\)</span> defines a <em>supporting hyperplane</em> touching the epigraph of <span class="arithmatex">\(f\)</span> at <span class="arithmatex">\((x, f(x))\)</span>.  At smooth points, there is a single supporting hyperplane (the tangent); at corners, there are many possible supporting hyperplanes, forming a convex set of slopes.</p>
+<p>Intuitively:</p>
+<ul>
+<li>Gradients describe “tilt” at smooth points.</li>
+<li>Subgradients describe all possible valid tilts at kinks.</li>
+</ul>
 <h2 id="62-examples">6.2 Examples<a class="headerlink" href="#62-examples" title="Permanent link">¶</a></h2>
 <h3 id="absolute-value-in-1d">Absolute value in 1D<a class="headerlink" href="#absolute-value-in-1d" title="Permanent link">¶</a></h3>
 <p>Let <span class="arithmatex">\(f(t) = |t|\)</span>.</p>
@@ -1282,9 +1425,7 @@ the convex hull of all active slopes.</p>
 <div class="arithmatex">\[
 0 \in \partial f(x^*).
 \]</div>
-<blockquote>
-<p>At the minimiser, there is no subgradient pointing into a direction that would reduce <span class="arithmatex">\(f\)</span>.</p>
-</blockquote>
+<p>The condition <span class="arithmatex">\(0\in\partial f(x^*)\)</span> means no subgradient points in a direction that can reduce <span class="arithmatex">\(f\)</span>.  In optimization geometry, this corresponds to the supporting hyperplane being <em>horizontal</em> at <span class="arithmatex">\(x^*\)</span> — the flat bottom of the convex bowl. In constrained problems, this generalizes to <span class="arithmatex">\(0\in\partial f(x^)+A^\top\lambda^\)</span>, the KKT stationarity condition (see Chapter 8).</p>
 <h2 id="64-subgradient-calculus-useful-rules">6.4 Subgradient calculus (useful rules)<a class="headerlink" href="#64-subgradient-calculus-useful-rules" title="Permanent link">¶</a></h2>
 <p>If <span class="arithmatex">\(f\)</span> and <span class="arithmatex">\(g\)</span> are convex:</p>
 <ul>
@@ -1319,6 +1460,17 @@ the convex hull of all active slopes.</p>
 x_{k+1} = x_k - \alpha_k g_k
 \]</div>
 <p>moves in the direction of the negative subgradient. Unlike in smooth optimization, the step sizes <span class="arithmatex">\(\alpha_k\)</span> typically decrease with <span class="arithmatex">\(k\)</span> (for example, <span class="arithmatex">\(\alpha_k = c / \sqrt{k}\)</span>) to guarantee convergence. Subgradient descent converges to the global minimum for convex <span class="arithmatex">\(f\)</span>, though at a slower rate than smooth gradient descent. While smooth convex functions enjoy <span class="arithmatex">\(\mathcal{O}(1/k^2)\)</span> or linear convergence under strong convexity, nonsmooth convex functions converge at rate <span class="arithmatex">\(\mathcal{O}(1/\sqrt{k})\)</span>. In practice, many machine learning algorithms—such as SVM training with hinge loss, <span class="arithmatex">\(\ell_1\)</span>-regularized models, and even certain deep learning optimizers—operate as subgradient methods in disguise. Their stability and robustness stem from convexity rather than smoothness.</p>
+<h2 id="66-proximal-and-smoothed-alternatives">6.6  Proximal and Smoothed Alternatives<a class="headerlink" href="#66-proximal-and-smoothed-alternatives" title="Permanent link">¶</a></h2>
+<p>When the subgradient method converges too slowly, we often smooth or separate the nonsmooth term.</p>
+<ul>
+<li>
+<p>Proximal methods (Chapter 12) compute <span class="arithmatex">\(\mathrm{prox}_{\alpha f}(y)=\arg\min_x f(x)+\tfrac1{2\alpha}\|x-y\|^2\)</span> — this yields faster and more stable updates.</p>
+</li>
+<li>
+<p>Smoothed approximations replace <span class="arithmatex">\(\max\)</span> or <span class="arithmatex">\(|t|\)</span> by smooth surrogates (e.g. Huber loss, softplus) retaining convexity but enabling gradient-based solvers.</p>
+</li>
+</ul>
+<p>These bridges connect subgradient theory with modern first-order algorithms.</p>
 
 
 

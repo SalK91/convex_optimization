@@ -87,7 +87,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#chapter-8-optimization-principles-from-gradient-descent-to-kkt" class="md-skip">
+        <a href="#chapter-8-lagrange-multipliers-and-kkt-framework" class="md-skip">
           Skip to content
         </a>
       
@@ -873,7 +873,7 @@
   
   
   <span class="md-ellipsis">
-    Cheat Sheets
+    Deep Learning
     
   </span>
   
@@ -883,6 +883,143 @@
         
         <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            Deep Learning
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../deeplearning/1_intro/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    1. Introduction to Deep Learning Optimization
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../deeplearning/1_intro/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    1. Introduction to Deep Learning Optimization
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../deep_learning/1_intro.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    3. Regularization Techniques in Deep Learning
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../deep_learning/1_intro.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    4. Advanced Topics in Deep Learning Optimization
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5">
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Cheat Sheets
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
             <span class="md-nav__icon md-icon"></span>
             Cheat Sheets
           </label>
@@ -933,10 +1070,10 @@
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5">
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6">
         
           
-          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
             
   
   
@@ -949,8 +1086,8 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_5">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
             <span class="md-nav__icon md-icon"></span>
             Appendices
           </label>
@@ -1202,7 +1339,7 @@
   
 
 
-<h1 id="chapter-8-optimization-principles-from-gradient-descent-to-kkt">Chapter 8: Optimization Principles – From Gradient Descent to KKT<a class="headerlink" href="#chapter-8-optimization-principles-from-gradient-descent-to-kkt" title="Permanent link">¶</a></h1>
+<h1 id="chapter-8-lagrange-multipliers-and-kkt-framework">Chapter 8: Lagrange Multipliers and KKT Framework<a class="headerlink" href="#chapter-8-lagrange-multipliers-and-kkt-framework" title="Permanent link">¶</a></h1>
 <p>At this point we understand:</p>
 <ul>
 <li>how to recognise convex functions,</li>
@@ -1210,6 +1347,7 @@
 <li>how to describe optimality with gradients or subgradients.</li>
 </ul>
 <p>This chapter unifies these ideas. We begin with unconstrained optimization and the gradient descent principle, then extend to equality and inequality constraints — culminating in the Karush–Kuhn–Tucker (KKT) conditions, the cornerstone of constrained convex optimization.</p>
+<p>In constrained convex optimization, the gradient cannot vanish freely—it must be counteracted by constraint forces. Lagrange multipliers quantify these forces. The Karush–Kuhn–Tucker (KKT) conditions express this balance algebraically.</p>
 <h2 id="81-unconstrained-convex-minimisation">8.1 Unconstrained convex minimisation<a class="headerlink" href="#81-unconstrained-convex-minimisation" title="Permanent link">¶</a></h2>
 <p>Consider
 <script type="math/tex; mode=display">

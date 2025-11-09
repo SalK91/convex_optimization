@@ -873,7 +873,7 @@
   
   
   <span class="md-ellipsis">
-    Cheat Sheets
+    Deep Learning
     
   </span>
   
@@ -883,6 +883,143 @@
         
         <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            Deep Learning
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../deeplearning/1_intro/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    1. Introduction to Deep Learning Optimization
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../deeplearning/1_intro/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    1. Introduction to Deep Learning Optimization
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../deep_learning/1_intro.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    3. Regularization Techniques in Deep Learning
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../deep_learning/1_intro.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    4. Advanced Topics in Deep Learning Optimization
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5">
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Cheat Sheets
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
             <span class="md-nav__icon md-icon"></span>
             Cheat Sheets
           </label>
@@ -933,10 +1070,10 @@
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5">
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6">
         
           
-          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
             
   
   
@@ -949,8 +1086,8 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_5">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
             <span class="md-nav__icon md-icon"></span>
             Appendices
           </label>
@@ -1204,7 +1341,7 @@
 
 <h1 id="chapter-12-algorithms-for-convex-optimization">Chapter 12: Algorithms for Convex Optimization<a class="headerlink" href="#chapter-12-algorithms-for-convex-optimization" title="Permanent link">¶</a></h1>
 <p>In the previous chapters, we built the mathematical foundations of convex optimization — convex sets, convex functions, gradients, subgradients, KKT conditions, and duality. Now we answer the practical question: How do we actually solve convex optimization problems in practice?</p>
-<p>This chapter surveys the main algorithmic families for convex optimization — how they work, what problems they solve, and how they connect to learning and modeling principles.  </p>
+<p>This chapter now serves as the algorithmic backbone of the book. It bridges theoretical convex analysis (Chapters 3–11) with the practical numerical methods that solve those problems. Each algorithm here can be seen as a computational lens on a convex geometry concept — gradients as supporting planes, Hessians as curvature maps, and proximal maps as projection operators. Later chapters (13–15) extend these ideas to constrained, stochastic, and large-scale environments.</p>
 <h2 id="121-problem-classes-vs-method-classes">12.1 Problem classes vs method classes<a class="headerlink" href="#121-problem-classes-vs-method-classes" title="Permanent link">¶</a></h2>
 <p>Different convex problems call for different algorithmic structures.<br>
 Here is the broad landscape:</p>
@@ -1490,9 +1627,7 @@ The <span class="arithmatex">\(\ell_1\)</span>-unit ball is a diamond; its corne
 </ul>
 <p>Hence, the norm defines the geometry of what “steepest” means.</p>
 <h2 id="125-conjugate-gradient-method-efficient-optimization-for-quadratic-objectives">12.5 Conjugate Gradient Method — Efficient Optimization for Quadratic Objectives<a class="headerlink" href="#125-conjugate-gradient-method-efficient-optimization-for-quadratic-objectives" title="Permanent link">¶</a></h2>
-<p>Gradient descent can be slow when the objective’s level sets are highly elongated —<br>
-a symptom of ill-conditioning in the Hessian.<br>
-For quadratic functions of the form</p>
+<p>Gradient descent can be slow when the objective’s level sets are highly elongated, a symptom of ill-conditioning in the Hessian. For quadratic functions of the form</p>
 <div class="arithmatex">\[
 f(x) = \tfrac{1}{2} x^\top A x - b^\top x, \quad A \succ 0,
 \]</div>
@@ -1508,8 +1643,7 @@ f(x) = \tfrac{1}{2} x^\top A x - b^\top x, \quad A \succ 0,
 A x = b.
 \]</div>
 <h3 id="algorithm-linear-cg">Algorithm (Linear CG)<a class="headerlink" href="#algorithm-linear-cg" title="Permanent link">¶</a></h3>
-<p>Given an initial <span class="arithmatex">\(x_0\)</span>, define the residual <span class="arithmatex">\(r_0 = b - A x_0\)</span><br>
-and the initial direction <span class="arithmatex">\(p_0 = r_0\)</span>.</p>
+<p>Given an initial <span class="arithmatex">\(x_0\)</span>, define the residual <span class="arithmatex">\(r_0 = b - A x_0\)</span>  and the initial direction <span class="arithmatex">\(p_0 = r_0\)</span>.</p>
 <p>For <span class="arithmatex">\(k = 0, 1, 2, \dots\)</span> until convergence:</p>
 <ol>
 <li>Compute step size<br>

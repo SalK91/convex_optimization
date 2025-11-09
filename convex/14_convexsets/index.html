@@ -873,7 +873,7 @@
   
   
   <span class="md-ellipsis">
-    Cheat Sheets
+    Deep Learning
     
   </span>
   
@@ -883,6 +883,143 @@
         
         <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            Deep Learning
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../deeplearning/1_intro/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    1. Introduction to Deep Learning Optimization
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../deeplearning/1_intro/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    1. Introduction to Deep Learning Optimization
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../deep_learning/1_intro.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    3. Regularization Techniques in Deep Learning
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../deep_learning/1_intro.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    4. Advanced Topics in Deep Learning Optimization
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5">
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Cheat Sheets
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
             <span class="md-nav__icon md-icon"></span>
             Cheat Sheets
           </label>
@@ -933,10 +1070,10 @@
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5">
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6">
         
           
-          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
             
   
   
@@ -949,8 +1086,8 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_5">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
             <span class="md-nav__icon md-icon"></span>
             Appendices
           </label>
@@ -1221,6 +1358,13 @@
 <li>An <span class="arithmatex">\(\ell_\infty\)</span> ball: <span class="arithmatex">\(\{ x : \|x\|_\infty \le r \}\)</span>, which is a box.</li>
 <li>The probability simplex: <span class="arithmatex">\(\{ x \in \mathbb{R}^n : x \ge 0, \sum_i x_i = 1 \}\)</span>.</li>
 </ul>
+<p>Convexity means “no caves or holes” — you can mix any two feasible points and stay feasible.</p>
+<p>Geometrically:  </p>
+<ul>
+<li>Convex sets are closed under averaging.  </li>
+<li>Optimization over convex sets is stable: small perturbations to data do not create new local minima.  </li>
+<li>Convex sets preserve feasibility under stochastic mixing — a key property in probabilistic ML models.</li>
+</ul>
 <blockquote>
 <p>A set that is not convex: a crescent shape or annulus. The defining failure is: there exist <span class="arithmatex">\(x,y\)</span> in the set such that some convex combination leaves the set.</p>
 </blockquote>
@@ -1258,6 +1402,12 @@ for some nonzero <span class="arithmatex">\(a \in \mathbb{R}^n\)</span>.</p>
 <li>Polytopes (bounded polyhedra) can be described as convex hulls of finitely many points (their vertices).</li>
 <li>Many relaxations in optimisation replace a complicated nonconvex feasible set by its convex hull.</li>
 </ul>
+<p>Convex hulls appear everywhere:</p>
+<ul>
+<li>In machine learning, convex combinations define <em>mixtures</em> (e.g., mixture of experts, convex combination of base classifiers).</li>
+<li>In optimization, many relaxations approximate hard discrete sets by their convex hull — making problems solvable with convex tools.</li>
+</ul>
+<p>Geometric intuition: the convex hull of points is like wrapping a rubber band around them.</p>
 <h2 id="44-polyhedra-and-polytopes">4.4 Polyhedra and polytopes<a class="headerlink" href="#44-polyhedra-and-polytopes" title="Permanent link">¶</a></h2>
 <p>A polyhedron is an intersection of finitely many halfspaces:
 <script type="math/tex; mode=display">
@@ -1265,6 +1415,12 @@ P = \{ x : Ax \le b \}.
 </script>
 Polyhedra are convex and cane be unbounded. If <span class="arithmatex">\(P\)</span> is also bounded, it is called a polytope.</p>
 <p>In linear programming, we minimise a linear objective <span class="arithmatex">\(c^\top x\)</span> over a polyhedron. The optimal solution, if it exists, is always attained at an extreme point (vertex) of the feasible polyhedron.</p>
+<p>Linear programs (LPs) minimize <span class="arithmatex">\(c^\top x\)</span> over polyhedra. Since the objective is linear, the optimum lies at a vertex (extreme point) of the feasible region.</p>
+<p>In ML:</p>
+<ul>
+<li>LPs describe support vector machines (linear margin constraints).  </li>
+<li>Polyhedral feasible regions define sparsity-inducing <span class="arithmatex">\(\ell_1\)</span> regularizers (via linear inequalities).</li>
+</ul>
 <h2 id="45-extreme-points">4.5 Extreme points<a class="headerlink" href="#45-extreme-points" title="Permanent link">¶</a></h2>
 <p>Let <span class="arithmatex">\(C\)</span> be a convex set. A point <span class="arithmatex">\(x \in C\)</span> is an extreme point if it cannot be expressed as a strict convex combination of two other distinct points in <span class="arithmatex">\(C\)</span>. Formally, <span class="arithmatex">\(x\)</span> is extreme in <span class="arithmatex">\(C\)</span> if whenever
 <script type="math/tex; mode=display">
