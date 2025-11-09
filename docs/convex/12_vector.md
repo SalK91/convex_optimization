@@ -1,6 +1,14 @@
 # Chapter 2: Linear Algebra Foundations
 
-Convex optimisation is geometric. To talk about convex sets, supporting hyperplanes, projections, and quadratic forms, we need linear algebra. This chapter reviews the specific linear algebra tools we will use throughout: vector spaces, inner products, norms, projections, eigenvalues, and positive semidefinite matrices.
+Linear algebra is the geometry of optimization. A simple motivating example: fitting a linear model $x$ to data $(A,b)$ solves:
+
+$$
+\min_x \ \|A x - b\|_2^2.
+$$
+
+We will see that this is a projection of $b$ onto the column space of $A$, and that ideas like rank, nullspace, orthogonality, and conditioning directly control optimization algorithms and convergence.
+
+This chapter builds the geometric toolkit used throughout convex optimization and machine learning.
 
 
 ## 2.1 Vector spaces, subspaces, and affine sets

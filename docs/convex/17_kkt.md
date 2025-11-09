@@ -1,4 +1,4 @@
-# Chapter 8: Optimization Principles – From Gradient Descent to KKT
+# Chapter 8: Lagrange Multipliers and KKT Framework
 
 At this point we understand:
 
@@ -7,6 +7,8 @@ At this point we understand:
 - how to describe optimality with gradients or subgradients.
 
 This chapter unifies these ideas. We begin with unconstrained optimization and the gradient descent principle, then extend to equality and inequality constraints — culminating in the Karush–Kuhn–Tucker (KKT) conditions, the cornerstone of constrained convex optimization.
+
+In constrained convex optimization, the gradient cannot vanish freely—it must be counteracted by constraint forces. Lagrange multipliers quantify these forces. The Karush–Kuhn–Tucker (KKT) conditions express this balance algebraically.
 
  
 ## 8.1 Unconstrained convex minimisation

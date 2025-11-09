@@ -1,4 +1,4 @@
-# Chapter 7: First-Order Optimality Conditions in Convex Optimization
+# Chapter 7: First-Order and Geometric Optimality Conditions
 
 
 Optimization problems seek points where no infinitesimal movement can improve the objective. For convex functions, first-order conditions provide precise geometric and analytic criteria for such points to be optimal. They generalize the idea of “zero gradient” to nonsmooth and constrained settings, linking gradients, subgradients, and the geometry of feasible regions.

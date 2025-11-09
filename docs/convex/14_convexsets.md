@@ -18,6 +18,14 @@ $$
 - An $\ell_\infty$ ball: $\{ x : \|x\|_\infty \le r \}$, which is a box.
 - The probability simplex: $\{ x \in \mathbb{R}^n : x \ge 0, \sum_i x_i = 1 \}$.
 
+Convexity means “no caves or holes” — you can mix any two feasible points and stay feasible.
+
+Geometrically:  
+
+- Convex sets are closed under averaging.  
+- Optimization over convex sets is stable: small perturbations to data do not create new local minima.  
+- Convex sets preserve feasibility under stochastic mixing — a key property in probabilistic ML models.
+
 > A set that is not convex: a crescent shape or annulus. The defining failure is: there exist $x,y$ in the set such that some convex combination leaves the set.
 
  
@@ -62,6 +70,13 @@ Convex hulls matter because:
 - Polytopes (bounded polyhedra) can be described as convex hulls of finitely many points (their vertices).
 - Many relaxations in optimisation replace a complicated nonconvex feasible set by its convex hull.
 
+Convex hulls appear everywhere:
+
+- In machine learning, convex combinations define *mixtures* (e.g., mixture of experts, convex combination of base classifiers).
+- In optimization, many relaxations approximate hard discrete sets by their convex hull — making problems solvable with convex tools.
+
+Geometric intuition: the convex hull of points is like wrapping a rubber band around them.
+
  
 ## 4.4 Polyhedra and polytopes
 
@@ -73,7 +88,13 @@ Polyhedra are convex and cane be unbounded. If $P$ is also bounded, it is called
 
 In linear programming, we minimise a linear objective $c^\top x$ over a polyhedron. The optimal solution, if it exists, is always attained at an extreme point (vertex) of the feasible polyhedron.
 
- 
+Linear programs (LPs) minimize $c^\top x$ over polyhedra. Since the objective is linear, the optimum lies at a vertex (extreme point) of the feasible region.
+
+In ML:
+
+- LPs describe support vector machines (linear margin constraints).  
+- Polyhedral feasible regions define sparsity-inducing $\ell_1$ regularizers (via linear inequalities).
+
 ## 4.5 Extreme points
 
 Let $C$ be a convex set. A point $x \in C$ is an extreme point if it cannot be expressed as a strict convex combination of two other distinct points in $C$. Formally, $x$ is extreme in $C$ if whenever

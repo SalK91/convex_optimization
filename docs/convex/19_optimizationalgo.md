@@ -1,7 +1,7 @@
 # Chapter 12: Algorithms for Convex Optimization
 In the previous chapters, we built the mathematical foundations of convex optimization — convex sets, convex functions, gradients, subgradients, KKT conditions, and duality. Now we answer the practical question: How do we actually solve convex optimization problems in practice?
 
-This chapter surveys the main algorithmic families for convex optimization — how they work, what problems they solve, and how they connect to learning and modeling principles.  
+This chapter now serves as the algorithmic backbone of the book. It bridges theoretical convex analysis (Chapters 3–11) with the practical numerical methods that solve those problems. Each algorithm here can be seen as a computational lens on a convex geometry concept — gradients as supporting planes, Hessians as curvature maps, and proximal maps as projection operators. Later chapters (13–15) extend these ideas to constrained, stochastic, and large-scale environments.
 
  
 ## 12.1 Problem classes vs method classes
@@ -295,9 +295,7 @@ Hence, the norm defines the geometry of what “steepest” means.
 
 ## 12.5 Conjugate Gradient Method — Efficient Optimization for Quadratic Objectives
 
-Gradient descent can be slow when the objective’s level sets are highly elongated —  
-a symptom of ill-conditioning in the Hessian.  
-For quadratic functions of the form
+Gradient descent can be slow when the objective’s level sets are highly elongated, a symptom of ill-conditioning in the Hessian. For quadratic functions of the form
 
 $$
 f(x) = \tfrac{1}{2} x^\top A x - b^\top x, \quad A \succ 0,
@@ -325,8 +323,7 @@ $$
 
 ### Algorithm (Linear CG)
 
-Given an initial $x_0$, define the residual $r_0 = b - A x_0$  
-and the initial direction $p_0 = r_0$.
+Given an initial $x_0$, define the residual $r_0 = b - A x_0$  and the initial direction $p_0 = r_0$.
 
 For $k = 0, 1, 2, \dots$ until convergence:
 

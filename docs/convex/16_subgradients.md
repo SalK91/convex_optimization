@@ -34,6 +34,13 @@ $$
 
 If $f$ is not differentiable at $x$, $\partial f(x)$ is typically a nonempty convex set.
 
+Geometrically, each $g \in \partial f(x)$ defines a *supporting hyperplane* touching the epigraph of $f$ at $(x, f(x))$.  At smooth points, there is a single supporting hyperplane (the tangent); at corners, there are many possible supporting hyperplanes, forming a convex set of slopes.
+
+Intuitively:
+
+- Gradients describe “tilt” at smooth points.
+- Subgradients describe all possible valid tilts at kinks.
+
 
 
 ## 6.2 Examples
@@ -96,7 +103,8 @@ $$
 0 \in \partial f(x^*).
 $$
 
-> At the minimiser, there is no subgradient pointing into a direction that would reduce $f$.
+The condition $0\in\partial f(x^*)$ means no subgradient points in a direction that can reduce $f$.  In optimization geometry, this corresponds to the supporting hyperplane being *horizontal* at $x^*$ — the flat bottom of the convex bowl. In constrained problems, this generalizes to $0\in\partial f(x^)+A^\top\lambda^$, the KKT stationarity condition (see Chapter 8).
+
 
 
 
@@ -134,3 +142,12 @@ $$
 
 moves in the direction of the negative subgradient. Unlike in smooth optimization, the step sizes $\alpha_k$ typically decrease with $k$ (for example, $\alpha_k = c / \sqrt{k}$) to guarantee convergence. Subgradient descent converges to the global minimum for convex $f$, though at a slower rate than smooth gradient descent. While smooth convex functions enjoy $\mathcal{O}(1/k^2)$ or linear convergence under strong convexity, nonsmooth convex functions converge at rate $\mathcal{O}(1/\sqrt{k})$. In practice, many machine learning algorithms—such as SVM training with hinge loss, $\ell_1$-regularized models, and even certain deep learning optimizers—operate as subgradient methods in disguise. Their stability and robustness stem from convexity rather than smoothness.
 
+## 6.6  Proximal and Smoothed Alternatives
+
+When the subgradient method converges too slowly, we often smooth or separate the nonsmooth term.
+
+- Proximal methods (Chapter 12) compute $\mathrm{prox}_{\alpha f}(y)=\arg\min_x f(x)+\tfrac1{2\alpha}\|x-y\|^2$ — this yields faster and more stable updates.
+
+- Smoothed approximations replace $\max$ or $|t|$ by smooth surrogates (e.g. Huber loss, softplus) retaining convexity but enabling gradient-based solvers.
+
+These bridges connect subgradient theory with modern first-order algorithms.
