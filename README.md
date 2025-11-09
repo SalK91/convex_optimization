@@ -51,6 +51,8 @@ Dual averaging and stochastic mirror descent	Ch. 15	Links convex optimization to
 6. LLMs
    https://github.com/aishwaryanr/awesome-generative-ai-guide
 
+
+
 7. Amazon
 
 8. Pytorch.
