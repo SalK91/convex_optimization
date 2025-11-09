@@ -14,13 +14,15 @@ $$
 
 If the inequality is strict whenever $x \ne y$ and $\theta \in (0,1)$, then $f$ is strictly convex.
 
+Geometrically, the chord between two points on the graph of f lies above the graph itself.  
+This means that f never “bends downward” — it has a single valley rather than multiple dips.  
+Equivalently, the **epigraph** of f,
 
->The epigraph of $f$ is
 $$
 \mathrm{epi}(f) = \{ (x, t) \in \mathbb{R}^n \times \mathbb{R} : f(x) \le t \}.
 $$
 
-$f$ is convex if and only if $\mathrm{epi}(f)$ is a convex set. This links convex *functions* to convex *sets*, and unlocks the geometry: tangent hyperplanes to $\mathrm{epi}(f)$ correspond to subgradients (Chapter 6).
+is a convex set.
 
 ## 5.2 First-order characterisation
 
@@ -43,7 +45,7 @@ This inequality is sometimes called the first-order condition for convexity.
 
 > For a convex differentiable $f$, we have $f(y) - f(x) \ge \nabla f(x)^T (y-x)$, so moving from $x$ in any direction, the actual increase in $f$ is at least as large as the linear prediction by $\nabla f(x)$ (since the function bends upward or straight). At optimum $\hat{x}$, a necessary and sufficient condition (for convex differentiable $f$) is $\nabla f(\hat{x}) = 0$. This ties to optimality: $\nabla f(\hat{x})=0$ means $f(y)\ge f(\hat{x}) + \nabla f(\hat{x})^T (y-\hat{x}) = f(\hat{x})$ for all $y$, so $\hat{x}$ is global minimizer.
 
-> If $f$ is not differentiable, a similar condition holds with subgradients: $f$ is convex iff for all $x,y$ there exists a (sub)gradient $g \in \partial f(x)$ such that $f(y) \ge f(x) + g^T(y-x)$. The set of all subgradients $\partial f(x)$ is a convex set (the subdifferential). At optimum, $0 \in \partial f(\hat{x})$ is the condition. For example, $f(x)=|x|$ has subgradient $g=\mathrm{sign}(x)$ (multivalued at 0, where any $g\in[-1,1]$ is subgradient). Setting $0$ in subdifferential yields $0\in[-1,1]$, so indeed $x^=0$ is minimizer.
+> If $f$ is not differentiable, a similar condition holds with subgradients: $f$ is convex iff for all $x,y$ there exists a (sub)gradient $g \in \partial f(x)$ such that $f(y) \ge f(x) + g^T(y-x)$. The set of all subgradients $\partial f(x)$ is a convex set (the subdifferential). At optimum, $0 \in \partial f(\hat{x})$ is the condition. 
 
 ## 5.3 Second-order characterisation
 
@@ -88,6 +90,8 @@ $$
 f(\mathbb{E}[X]) \le \mathbb{E}[f(X)]~.
 $$
 
+> the function value at the mean is always less than or equal to the mean of function values.
+
 This is Jensen’s inequality. It generalises the definition of convexity from two-point averages to arbitrary expectations. As a special case, for scalars $x_1,\dots,x_n$ and weights $\theta_i \ge 0$ with $\sum_i \theta_i = 1$,
 $$
 f\!\left(\sum_i \theta_i x_i\right)
@@ -117,7 +121,10 @@ $$
 \{ x : f(x) \le \alpha \}.
 $$
 
-If $f$ is convex, then every sublevel set is convex (Boyd and Vandenberghe, 2004). This is crucial: constraints of the form $f(x) \le \alpha$ are convex constraints.
+> Geometrically, these are the “contour slices” of a convex bowl — cross-sections below certain heights.  
+
+
+If $f$ is convex, then every sublevel set is convex. This is crucial: constraints of the form $f(x) \le \alpha$ are convex constraints.
 
 For example, the set
 $$
@@ -132,6 +139,9 @@ $$
 f(\theta x + (1-\theta) y) < \theta f(x) + (1-\theta) f(y)
 $$
 for all $x \ne y$ and $\theta \in (0,1)$.
+
+> Strict convexity ensures uniqueness of the minimizer: there can be only one bottom to the bowl.
+
 
 - $f$ is strongly convex with parameter $m>0$ if
 $$

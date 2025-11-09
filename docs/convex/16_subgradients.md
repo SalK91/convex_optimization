@@ -124,4 +124,13 @@ If $f$ and $g$ are convex:
 These rules make it possible to compute subgradients of complicated nonsmooth objectives.
  
 
- 
+## 6.5 Subgradient Methods
+
+Even though nonsmooth functions lack gradients, we can still minimize them using subgradient descent. Given a subgradient $g_k \in \partial f(x_k)$, the iteration
+
+$$
+x_{k+1} = x_k - \alpha_k g_k
+$$
+
+moves in the direction of the negative subgradient. Unlike in smooth optimization, the step sizes $\alpha_k$ typically decrease with $k$ (for example, $\alpha_k = c / \sqrt{k}$) to guarantee convergence. Subgradient descent converges to the global minimum for convex $f$, though at a slower rate than smooth gradient descent. While smooth convex functions enjoy $\mathcal{O}(1/k^2)$ or linear convergence under strong convexity, nonsmooth convex functions converge at rate $\mathcal{O}(1/\sqrt{k})$. In practice, many machine learning algorithms—such as SVM training with hinge loss, $\ell_1$-regularized models, and even certain deep learning optimizers—operate as subgradient methods in disguise. Their stability and robustness stem from convexity rather than smoothness.
+

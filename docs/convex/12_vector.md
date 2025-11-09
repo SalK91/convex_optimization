@@ -13,33 +13,32 @@ A subspace of a vector space $V$ is a subset $S \subseteq V$ that
 3. is closed under scalar multiplication.  
 
 
+### Affine Sets
+
 A set $A \subseteq V$ is affine if for any $x, y \in A$ and any $\theta \in \mathbb{R}$,  
 $$
 \theta x + (1 - \theta) y \in A.
 $$
+
+That is, the entire line passing through any two points in $A$ lies within $A$.
+
+> By contrast, a convex set only requires this property for $\theta \in [0,1]$, meaning only the line segment between $x$ and $y$ must lie within the set.
+
 Every affine set can be written as  
 $$
 A = x_0 + S = \{\, x_0 + s : s \in S \,\},
 $$
 where $S$ is a subspace of $V$. Affine sets arise as the solution sets to linear equality constraints $A x = b$.
 
-An affine transformation (or affine map) is a function $f : V \to W$ between vector spaces that can be written as  
+### Affine Transformations
+
+An affine transformation (or affine map) is a function $f : V \to W$ that can be written as  
 $$
 f(x) = A x + b,
 $$
-where $A : V \to W$ is a linear map and $b \in W$ is a fixed vector. The image of an affine set under an affine transformation is also affine.
-
-Affine concepts are important in optimization because:  
-
-- Feasible sets defined by equality constraints are affine.  
-- Affine transformations preserve convexity.
-
-
-
-
-
-
-
+where $A$ is a linear map and $b$ is a fixed vector.  
+Affine transformations preserve both affinity and convexity:
+if $C$ is convex, then $A C + b$ is also convex.
 
  
 ## 2.2 Linear combinations, span, basis, dimension
@@ -53,7 +52,7 @@ $$
 \mathrm{span}\{v_1,\dots,v_k\} = \left\{ \sum_{i=1}^k \alpha_i v_i : \alpha_i \in \mathbb{R} \right\}.
 $$
 
-A list of vectors is linearly independent if no nontrivial linear combination gives $0$. A basis of a subspace $S$ is a set of linearly independent vectors whose span is $S$. The number of vectors in a basis is the dimension of $S$.
+A set of vectors is linearly independent if no vector can be written as a combination of others.  A basis of a space $V$ is a linearly independent set whose span equals $V$. The number of basis vectors is the dimension $\dim(V)$.
 
 Rank and nullity facts:
 
@@ -77,9 +76,24 @@ where $n$ is the number of columns of $A$.
 > #### Multicollinearity:  
 > When one feature in the data matrix \( A \) is a linear combination of others—for example, \( \text{feature}_3 = 2 \times \text{feature}_1 + \text{feature}_2 \)—the columns of \( A \) become linearly dependent. This creates a nonzero vector in the null space of \( A \), meaning multiple weight vectors \( x \) can produce the same predictions. The model is then *unidentifiable* (Underdetermined – the number of unknowns (parameters) exceeds the number of independent equations (information)), and \( A^\top A \) becomes singular (non-invertible). Regularization methods such as Ridge or Lasso regression are used to resolve this ambiguity by selecting one stable, well-behaved solution.
 
+>> Regularization introduces an additional constraint or penalty that selects a *single, stable* solution from among the infinite possibilities.
+
+>> - Ridge regression (L2 regularization) adds a penalty on the norm of $x$:
+  $$
+  \min_x \|A x - b\|_2^2 + \lambda \|x\|_2^2,
+  $$
+  which modifies the normal equations to
+  $$
+  (A^\top A + \lambda I)x = A^\top b.
+  $$
+  The added term $\lambda I$ ensures invertibility and numerical stability.
+
+>> - Lasso regression (L1 regularization) instead penalizes $\|x\|_1$, promoting sparsity by driving some coefficients exactly to zero.
+
+>> Thus, regularization resolves ambiguity by imposing structure or preference on the solution—favoring smaller or sparser coefficient vectors—and making the regression problem well-posed even when $A$ is rank-deficient.
+
 > #### Feasible Directions:  
-> In a constrained optimization problem of the form \( Ax = b \), the null space of \( A \) characterizes the directions along which one can move without violating the constraints. If \( d \in N(A) \), then moving from a feasible point \( x \) to \( x + d \) preserves feasibility, since  \( A(x + d) = Ax + Ad = b + 0 = b \).  
-> Thus, the null space defines the *space of free movement*—directions in which optimization algorithms can explore solutions while remaining within the constraint surface.
+> In a constrained optimization problem of the form \( Ax = b \), the null space of \( A \) characterizes the directions along which one can move without violating the constraints. If \( d \in N(A) \), then moving from a feasible point \( x \) to \( x + d \) preserves feasibility, since  \( A(x + d) = Ax + Ad = b + 0 = b \). Thus, the null space defines the *space of free movement*—directions in which optimization algorithms can explore solutions while remaining within the constraint surface.
 
 > #### Row Space:  
 > The row space of \( A \), denoted \( R(A) \), is the span of the rows of \( A \) (viewed as vectors). It represents all possible linear combinations of the rows and has the same dimension as the column space, equal to \( \mathrm{rank}(A) \). The row space is orthogonal to the null space of \( A \):  \( R(A) \perp N(A) \).  
@@ -87,22 +101,6 @@ where $n$ is the number of columns of $A$.
 
 > ####  Left Null Space:  
 > The left null space, denoted \( N(A^\top) \), is the set of all vectors \( y \) such that \( A^\top y = 0 \). These vectors are orthogonal to the columns of \( A \), and therefore orthogonal to the column space itself. In least squares problems, \( N(A^\top) \) represents residual directions—components of \( b \) that cannot be explained by the model \( Ax = b \).
-
-> #### Orthogonality Relationships (Fundamental Theorem of Linear Algebra):  
-> For any matrix \( A \), there are four key subspaces:
-> \[
-> \begin{aligned}
-> &\text{Column space: } C(A) \subseteq \mathbb{R}^m, \\
-> &\text{Null space: } N(A) \subseteq \mathbb{R}^n, \\
-> &\text{Row space: } C(A^\top) \subseteq \mathbb{R}^n, \\
-> &\text{Left null space: } N(A^\top) \subseteq \mathbb{R}^m.
-> \end{aligned}
-> \]
-> These satisfy the orthogonality relationships:
-> \[
-> R(A) = N(A)^\perp, \quad C(A) = N(A^\top)^\perp.
-> \]
-> Together, these subspaces form a complete and mutually orthogonal decomposition of the input and output spaces.
 
 > #### Projection Interpretation (Least Squares):  
 > When \( Ax = b \) has no exact solution (as in overdetermined systems), the least squares solution finds \( x \) such that \( Ax \) is the projection of \( b \) onto the column space of \( A \):  
@@ -169,7 +167,7 @@ Examples of inner products:
 
 - Function space inner product: $\langle f, g \rangle = \int_a^b f(t)\,g(t)\,dt$. This turns the space of square-integrable functions on $[a,b]$ into an inner product space (a Hilbert space, $L^2[a,b]$). In machine learning, this is the basis for kernel Hilbert spaces, where one defines an inner product between functions to lift optimization into infinite-dimensional feature spaces.  
 
-Any vector space with an inner product has an orthonormal basis (via the Gram–Schmidt process). Gram–Schmidt is fundamental in numerical algorithms to orthogonalize vectors and is used to derive the QR decomposition: any full-rank matrix $A \in \mathbb{R}^{m\times n}$ can be factored as $A = QR$ where $Q$ has orthonormal columns and $R$ is upper triangular. This factorization is widely used in least squares and optimization because it provides a stable way to solve $Ax=b$ and to analyze subspaces. For example, for an overdetermined system ($m>n$ i.e. more equations than unknowns), $Ax=b$ has a least-squares solution $x = R^{-1}(Q^\top b)$, and for underdetermined ($m<n$), $Ax=b$ has infinitely many solutions, among which one often chooses the minimal-norm solution using the orthonormal basis of the range. 
+> Any vector space with an inner product has an orthonormal basis (via the Gram–Schmidt process). Gram–Schmidt is fundamental in numerical algorithms to orthogonalize vectors and is used to derive the QR decomposition: any full-rank matrix $A \in \mathbb{R}^{m\times n}$ can be factored as $A = QR$ where $Q$ has orthonormal columns and $R$ is upper triangular. This factorization is widely used in least squares and optimization because it provides a stable way to solve $Ax=b$ and to analyze subspaces. For example, for an overdetermined system ($m>n$ i.e. more equations than unknowns), $Ax=b$ has a least-squares solution $x = R^{-1}(Q^\top b)$, and for underdetermined ($m<n$), $Ax=b$ has infinitely many solutions, among which one often chooses the minimal-norm solution using the orthonormal basis of the range. 
 
 
 Applications in optimization: Inner product geometry is indispensable in convex optimization.  
@@ -262,14 +260,14 @@ $$
 \nabla^2 f(x) = Q~.
 $$
 
-So $f$ is convex iff $Q$ is PSD. Quadratic objectives with PSD Hessians are convex; with indefinite Hessians, they are not (Boyd and Vandenberghe, 2004). This is the algebraic test for convexity of quadratic forms.
+So $f$ is convex iff $Q$ is PSD. Quadratic objectives with PSD Hessians are convex; with indefinite Hessians, they are not. This is the algebraic test for convexity of quadratic forms.
 
 
-Implications of definiteness: If $A \succ 0$, the quadratic function $x^T A x$ is strictly convex and has a unique minimizer at $x=0$. If $A \succeq 0$, $x^T A x$ is convex but could be flat in some directions (if some $\lambda_i = 0$, those eigenvectors lie in the nullspace and the form is constant along them). In optimization, PD Hessian $\nabla^2 f(x) \succ 0$ means $f$ has a unique local (and global, if domain convex) minimum at that $x$ (since the second-order condition for optimality is satisfied strictly). PD constraint matrices in quadratic programs ensure nice properties like Slater’s condition for strong duality.
+> Implications of definiteness: If $A \succ 0$, the quadratic function $x^T A x$ is strictly convex and has a unique minimizer at $x=0$. If $A \succeq 0$, $x^T A x$ is convex but could be flat in some directions (if some $\lambda_i = 0$, those eigenvectors lie in the nullspace and the form is constant along them). In optimization, PD Hessian $\nabla^2 f(x) \succ 0$ means $f$ has a unique local (and global, if domain convex) minimum at that $x$ (since the second-order condition for optimality is satisfied strictly). PD constraint matrices in quadratic programs ensure nice properties like Slater’s condition for strong duality.
 
-Condition number and convergence: For iterative methods on convex quadratics $f(x) = \frac{1}{2}x^T Q x - b^T x$, the eigenvalues of $Q$ dictate convergence speed. Gradient descent’s error after $k$ steps satisfies roughly $|x_k - x^*| \le (\frac{\lambda_{\max}-\lambda_{\min}}{\lambda_{\max}+\lambda_{\min}})^k |x_0 - x^*|$ (for normalized step). So the ratio $\frac{\lambda_{\max}}{\lambda_{\min}} = \kappa(Q)$ appears: closer to 1 (well-conditioned) means rapid convergence; large ratio (ill-conditioned) means slow, zigzagging progress. Newton’s method uses Hessian inverse, effectively rescaling by eigenvalues to 1, so its performance is invariant to $\kappa$ (locally). This explains why second-order methods shine on ill-conditioned problems: they “whiten” the curvature by dividing by eigenvalues.
+> Condition number and convergence: For iterative methods on convex quadratics $f(x) = \frac{1}{2}x^T Q x - b^T x$, the eigenvalues of $Q$ dictate convergence speed. Gradient descent’s error after $k$ steps satisfies roughly $|x_k - x^*| \le (\frac{\lambda_{\max}-\lambda_{\min}}{\lambda_{\max}+\lambda_{\min}})^k |x_0 - x^*|$ (for normalized step). So the ratio $\frac{\lambda_{\max}}{\lambda_{\min}} = \kappa(Q)$ appears: closer to 1 (well-conditioned) means rapid convergence; large ratio (ill-conditioned) means slow, zigzagging progress. Newton’s method uses Hessian inverse, effectively rescaling by eigenvalues to 1, so its performance is invariant to $\kappa$ (locally). This explains why second-order methods shine on ill-conditioned problems: they “whiten” the curvature by dividing by eigenvalues.
 
-Optimization interpretation of eigenvectors: The eigenvectors of $\nabla^2 f(x^*)$ at optimum indicate principal axes of the local quadratic approximation. Directions with small eigenvalues are flat directions where the function changes slowly (possibly requiring LARGE steps unless Newton’s method is used). Directions with large eigenvalues are steep, potentially requiring small step sizes to maintain stability if using gradient descent. Preconditioning or change of variables often aims to transform the problem so that in new coordinates the Hessian is closer to the identity (all eigenvalues ~1). For constrained problems, the Hessian of the Lagrangian (the KKT matrix) being PSD relates to second-order optimality conditions.
+> Optimization interpretation of eigenvectors: The eigenvectors of $\nabla^2 f(x^*)$ at optimum indicate principal axes of the local quadratic approximation. Directions with small eigenvalues are flat directions where the function changes slowly (possibly requiring LARGE steps unless Newton’s method is used). Directions with large eigenvalues are steep, potentially requiring small step sizes to maintain stability if using gradient descent. Preconditioning or change of variables often aims to transform the problem so that in new coordinates the Hessian is closer to the identity (all eigenvalues ~1). For constrained problems, the Hessian of the Lagrangian (the KKT matrix) being PSD relates to second-order optimality conditions.
 
 ## 2.6 Orthogonal projections and least squares
 

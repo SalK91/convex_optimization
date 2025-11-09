@@ -1,118 +1,23 @@
 # Chapter 12: Algorithms for Convex Optimization
-In Chapters 2–8 we built the mathematics of convex optimization: linear algebra (Chapter 2), gradients and Hessians (Chapter 3), convex sets (Chapter 4), convex functions (Chapter 5), subgradients (Chapter 6), KKT conditions (Chapter 7), and duality (Chapter 8). 
+In the previous chapters, we built the mathematical foundations of convex optimization — convex sets, convex functions, gradients, subgradients, KKT conditions, and duality. Now we answer the practical question: How do we actually solve convex optimization problems in practice?
 
-Now we answer the practical question:
-
-How do we actually solve convex optimization problems in practice?
-
-This chapter develops the major algorithmic families used to solve convex problems. Our goal is not only to describe each method, but to explain:
-
-- what class of problem it solves,
-- what information it needs (gradient, Hessian, projection, etc.),
-- when you should use it,
-- how it connects to the modelling choices you make.
+This chapter surveys the main algorithmic families for convex optimization — how they work, what problems they solve, and how they connect to learning and modeling principles.  
 
  
 ## 12.1 Problem classes vs method classes
 
-Before we dive into algorithms, we need a map. Different algorithms are natural for different convex problem structures.
+Different convex problems call for different algorithmic structures.  
+Here is the broad landscape:
 
-### 12.1.1 Smooth unconstrained convex minimisation
-We want
-$$
-\min_x f(x),
-$$
-where $f:\mathbb{R}^n \to \mathbb{R}$ is convex and differentiable.
-
-Typical methods:
-
-- Gradient descent (first-order),
-- Accelerated gradient,
-- Newton / quasi-Newton (second-order).
-
-Information required:
-
-- $\nabla f(x)$, sometimes $\nabla^2 f(x)$.
-
-### 12.1.2 Smooth convex minimisation with simple constraints
-We want
-$$
-\min_x f(x)
-\quad \text{s.t.} \quad x \in \mathcal{X},
-$$
-where $\mathcal{X}$ is a “simple” closed convex set such as a box, a norm ball, or a simplex (Chapter 4).
+| Problem Type | Typical Formulation | Representative Methods | Examples |
+|---------------|--------------------|-------------------------|-----------|
+| Smooth, unconstrained | $\min_x f(x)$, convex and differentiable | Gradient descent, Accelerated gradient, Newton | Logistic regression, least squares |
+| Smooth with simple constraints | $\min_x f(x)$ s.t. $x \in \mathcal{X}$ (box, ball, simplex) | Projected gradient | Constrained regression, probability simplex |
+| Composite convex (smooth + nonsmooth) | $\min_x f(x) + R(x)$ | Proximal gradient, coordinate descent | Lasso, Elastic Net, TV minimization |
+| General constrained convex | $\min f(x)$ s.t. $g_i(x) \le 0, h_j(x)=0$ | Interior-point, primal–dual methods | LP, QP, SDP, SOCP |
 
 
-#### Practical Examples of Simple Constraints
-
-| Constraint Type | Explanation | Example | Meaning |
-||--|-|-|
-| Box | Each variable is bounded independently within lower and upper limits. | \( 0 \le x_i \le 1 \) | Parameters are restricted to a fixed range (e.g., pixel intensities, control limits). |
-| Norm Ball | All feasible points lie within a fixed radius from a center under some norm. | \( \|x - x_0\|_2 \le 1 \) | Keeps the solution close to a reference point — controls total magnitude or deviation. |
-| Simplex | Nonnegative variables that sum to one. | \( x_i \ge 0,\ \sum_i x_i = 1 \) | Represents valid probability distributions or normalized weights (e.g., portfolio allocations). |
-
-
-Typical method:
-
-- Projected gradient descent, which alternates a gradient step and Euclidean projection back to $\mathcal{X}$.
-
-
-Information required:
-
-- $\nabla f(x)$,
-- the ability to compute $\Pi_\mathcal{X}(y) = \arg\min_{x \in \mathcal{X}} \|x-y\|_2^2$ efficiently.
-
-### 12.1.3 Composite convex minimisation (smooth + nonsmooth)
-We want
-$$
-\min_x \; F(x) := f(x) + R(x),
-$$
-where $f$ is convex and differentiable with Lipschitz gradient, and $R$ is convex but possibly nonsmooth (Chapter 6).  
-Examples:
-
-- $f(x)=\|Ax-b\|_2^2$, $R(x)=\lambda\|x\|_1$ (LASSO),
-- $R(x)$ is the indicator of a convex set, enforcing a hard constraint.
-
-Typical method:
-
-- Proximal gradient / forward–backward splitting,
-- Projected gradient as a special case.
-
-Information required:
-
-- $\nabla f(x)$,
-- the proximal operator of $R$.
-
-### 12.1.4 General convex programs with inequality constraints
-We want
-$$
-\begin{array}{ll}
-\text{minimise} & f(x) \\
-\text{subject to} & g_i(x) \le 0,\quad i=1,\dots,m, \\
-& h_j(x) = 0,\quad j=1,\dots,p,
-\end{array}
-$$
-where $f$ and $g_i$ are convex, $h_j$ are affine.  
-
-Typical method:
-
-- Interior-point (barrier) methods.
-
-Information required:
-
-- Gradients and Hessians of the barrier-augmented objective,
-- ability to solve linear systems arising from Newton steps.
-
-
-### 12.1.5 The moral
-There is no single “best” algorithm.  
-There is a best algorithm for the structure you have.
-
-- First-order methods scale to huge problems but converge relatively slowly.
-- Newton and interior-point methods converge extremely fast in iterations but each iteration is more expensive (they solve linear systems involving Hessians).
-- Proximal methods are designed for nonsmooth regularisers and constraints that appear everywhere in statistics and machine learning.
-- Interior-point methods are the workhorse for general convex programs (including linear programs, quadratic programs, conic programs) and deliver high-accuracy solutions with strong certificates of optimality 
-
+     
 
 ## 12.2 First-order methods: Gradient descent
 
@@ -388,14 +293,134 @@ The $\ell_1$-unit ball is a diamond; its corners align with coordinate axes, so 
 
 Hence, the norm defines the geometry of what “steepest” means.
 
+## 12.5 Conjugate Gradient Method — Efficient Optimization for Quadratic Objectives
 
-## 12.5 Newton’s method and second-order methods
+Gradient descent can be slow when the objective’s level sets are highly elongated —  
+a symptom of ill-conditioning in the Hessian.  
+For quadratic functions of the form
+
+$$
+f(x) = \tfrac{1}{2} x^\top A x - b^\top x, \quad A \succ 0,
+$$
+
+plain gradient descent takes many small steps along shallow directions of $A$.
+
+The Conjugate Gradient (CG) method accelerates convergence dramatically for such problems — it exploits the structure of the quadratic and uses curvature-aware search directions without explicitly forming or inverting the Hessian.
+
+
+### Problem Setup
+
+Minimize a strictly convex quadratic:
+
+$$
+\min_x f(x) = \tfrac{1}{2} x^\top A x - b^\top x, \quad A \in \mathbb{R}^{n \times n}, \; A \succ 0.
+$$
+
+This is equivalent to solving the linear system
+
+$$
+A x = b.
+$$
+
+
+### Algorithm (Linear CG)
+
+Given an initial $x_0$, define the residual $r_0 = b - A x_0$  
+and the initial direction $p_0 = r_0$.
+
+For $k = 0, 1, 2, \dots$ until convergence:
+
+1. Compute step size  
+   $$
+   \alpha_k = \frac{r_k^\top r_k}{p_k^\top A p_k}.
+   $$
+2. Update the iterate  
+   $$
+   x_{k+1} = x_k + \alpha_k p_k.
+   $$
+3. Update the residual  
+   $$
+   r_{k+1} = r_k - \alpha_k A p_k.
+   $$
+4. Compute the new direction coefficient  
+   $$
+   \beta_k = \frac{r_{k+1}^\top r_{k+1}}{r_k^\top r_k}.
+   $$
+5. Update the direction  
+   $$
+   p_{k+1} = r_{k+1} + \beta_k p_k.
+   $$
+
+Terminate when $\|r_k\|$ is below tolerance $\varepsilon$.
+
+
+### Geometric Intuition
+
+Each search direction $p_k$ is $A$-conjugate to the previous ones:
+
+$$
+p_i^\top A p_j = 0 \quad \text{for } i \ne j.
+$$
+
+That means successive steps explore independent curvature directions of the quadratic. The residual $r_k$ (the negative gradient) becomes orthogonal to all previous directions, so the method never re-searches the same subspace.
+
+As a result, in exact arithmetic, CG finds the exact minimizer in at most $n$ steps.
+
+
+### Convergence Properties
+
+- For SPD $A$, CG converges monotonically to the minimizer $x^\star = A^{-1} b$.
+- The rate depends on the condition number $\kappa(A) = \frac{\lambda_{\max}}{\lambda_{\min}}$:
+  $$
+  \|x_k - x^\star\|_A \le 2 \left( \frac{\sqrt{\kappa}-1}{\sqrt{\kappa}+1} \right)^k \|x_0 - x^\star\|_A.
+  $$
+- Preconditioning (using $M^{-1}A$ with well-chosen $M$) further improves convergence.
+
+
+### Machine Learning Context
+
+In ML, CG is widely used for large-scale convex quadratic subproblems:
+
+| Application | Formulation | Notes |
+|--------------|--------------|-------|
+| Ridge regression | $\min_x \|A x - b\|_2^2 + \lambda\|x\|_2^2$ | Normal equations are SPD; CG avoids explicit inversion. |
+| Kernel ridge regression | $(K + \lambda I)\alpha = y$ | CG solves this efficiently without forming full $K^{-1}$. |
+| Linear least squares | $\min_x \tfrac{1}{2}\|A x - b\|^2$ | Equivalent to solving $A^\top A x = A^\top b$. |
+| Large-scale Newton steps | Solve $\nabla^2 f(x_k)p = -\nabla f(x_k)$ | CG acts as an inner solver for the Newton direction. |
+
+
+
+### Practical Notes
+
+- CG requires only matrix–vector products with $A$, not explicit storage.  
+  It’s ideal when $A$ is large, sparse, or implicitly defined.
+- Sensitive to rounding errors; residual re-orthogonalization may be needed for long runs.
+- Preconditioners (Jacobi, incomplete Cholesky, etc.) can drastically reduce iterations.
+
+### Comparison Summary
+
+| Method | Memory | Curvature Use | Convergence | Typical Use |
+|--------|---------|----------------|--------------|--------------|
+| Gradient Descent | $O(n)$ | None | $O(1/k)$ | General smooth convex |
+| Newton’s Method | $O(n^2)$ | Full Hessian | Quadratic (local) | Small/medium convex |
+| Conjugate Gradient | $O(n)$ | Implicit (via $A$-conjugacy) | Fast linear / finite-step | Large quadratic systems |
+
+-
+
+### Key Insight
+
+> The Conjugate Gradient method is the exact gradient method for quadratic objectives  
+> that automatically builds curvature information through orthogonalized directions,  
+> achieving Newton-like efficiency without forming the Hessian.
+
+
+## 12.6 Newton’s method and second-order methods
 
 First-order methods (like gradient descent) only use gradient information. Newton’s method, in contrast, incorporates curvature information from the Hessian to take steps that better adapt to the local geometry of the function. This often leads to much faster convergence near the optimum.
 
 
 
-### 12.5.1 Local quadratic model
+### 12.6.1 Local quadratic model
 
 From Chapter 3, the second-order Taylor approximation of $f(x)$ around a point $x_k$ is:
 
@@ -426,7 +451,7 @@ This step points toward the minimizer of the local quadratic model, and near the
 
 
 
-### 12.5.2 Convergence behaviour
+### 12.6.2 Convergence behaviour
 
 - Near the minimiser of a strictly convex, twice-differentiable $f$, Newton’s method converges quadratically: roughly, the number of correct digits doubles every iteration.  
 - This is dramatically faster than the $O(1/k)$ or $O(1/k^2)$ rates typical of first-order methods — but only once the iterates enter the basin of attraction.  
@@ -435,7 +460,7 @@ This step points toward the minimizer of the local quadratic model, and near the
 
 
 
-### 12.5.3 Implementation
+### 12.6.3 Implementation
 
 The main computational effort in each iteration lies in evaluating derivatives and solving the Newton system:
 
@@ -484,7 +509,7 @@ A common stopping criterion is $\lambda(x)^2 / 2 < \varepsilon$.
 
 
 
-### 12.5.4 Computational cost
+### 12.6.4 Computational cost
 
 Each Newton step requires solving a linear system involving $\nabla^2 f(x_k)$, which costs about as much as factoring the Hessian (or an approximation).
 
@@ -494,7 +519,7 @@ Each Newton step requires solving a linear system involving $\nabla^2 f(x_k)$, w
 
 
 
-### 12.5.5 Why convexity helps
+### 12.6.5 Why convexity helps
 
 If $f$ is convex, then $\nabla^2 f(x_k)$ is positive semidefinite (Chapter 5).  
 This has two important implications:
@@ -504,7 +529,7 @@ This has two important implications:
 
 
 
-### 12.5.6 Quasi-Newton methods
+### 12.6.6 Quasi-Newton methods
 
 When computing or storing the Hessian is too expensive, we can build low-rank approximations of $\nabla^2 f(x_k)$ or its inverse.  
 These methods use gradient information from previous steps to estimate curvature.
@@ -514,6 +539,8 @@ The most famous examples are:
 - BFGS (Broyden–Fletcher–Goldfarb–Shanno)  
 - DFP (Davidon–Fletcher–Powell)  
 - L-BFGS (Limited-memory BFGS) — for very large-scale problems.
+
+Quasi-Newton methods (BFGS, L-BFGS) build inverse-Hessian approximations from gradient differences, achieving superlinear convergence with low memory
 
 They maintain many of Newton’s fast local convergence properties, but with per-iteration costs similar to first-order methods.
 
@@ -530,7 +557,7 @@ These methods achieve superlinear convergence in practice, making them popular f
 
 
 
-### 12.5.7 When to use Newton or quasi-Newton methods
+### 12.6.7 When to use Newton or quasi-Newton methods
 
 Use Newton or quasi-Newton methods when:
 
@@ -542,7 +569,12 @@ For large, ill-conditioned, or nonsmooth problems, first-order or proximal metho
 
 
 
-## 12.6 Constraints and nonsmooth terms: projection and proximal methods
+
+> Newton-Raphson: The Newton step solves $\nabla^2 f(x_k) p_k=-\nabla f(x_k)$ and updates $x_{k+1}=x_k+p_k$ with line search or trust-region safeguards. Complexity hinges on solving linear systems; use sparse Cholesky, conjugate gradients with preconditioning, or low-rank structure to scale. For generalized linear models, iteratively reweighted least squares converges in few iterations, but regularization and damping are needed when data are nearly separable.
+
+> Gauss-Newton: For nonlinear least squares $f(x)=\tfrac12\|r(x)\|^2$, the Gauss–Newton approximation uses $H\approx J^\top J$ where $J$ is the Jacobian of $r$. Solve $(J^\top J)\Delta=-J^\top r$ to get a step; Levenberg–Marquardt adds damping $(J^\top J+\lambda I)\Delta=-J^\top r$ interpolating between gradient and Gauss–Newton. Effective for residual models where second-order residual terms are small; widely used in curve fitting and some deep learning layerwise updates.
+
+## 12.7 Constraints and nonsmooth terms: projection and proximal methods
 
 In practice, most convex optimization problems are not purely smooth.  
 They often include:
@@ -558,24 +590,24 @@ Two core strategies handle such settings:
 
 These methods extend the ideas of gradient and Newton updates to the broader world of constrained and composite optimization.
 
-### 12.5.2 Convergence behaviour
+### 12.7.2 Convergence behaviour
 - Near the minimiser of a strictly convex, twice-differentiable $f$, Newton’s method converges quadratically: roughly, the number of correct digits doubles every iteration.
 - This is dramatically faster than $O(1/k)$ or $O(1/k^2)$, but only once you’re in the “basin of attraction.”
 - Far from the minimiser, Newton can misbehave, so we pair it with a line search or trust region.
 
-### 12.5.3 Computational cost
+### 12.7.3 Computational cost
 Each Newton step requires solving a linear system involving $\nabla^2 f(x_k)$, which costs about as much as factoring the Hessian (or an approximation). This is expensive in very high dimensions, which is why Newton is most attractive for medium-scale problems where high accuracy matters.
 
-### 12.5.4 Why convexity helps
+### 12.7.4 Why convexity helps
 If $f$ is convex, then $\nabla^2 f(x_k)$ is positive semidefinite (Chapter 5). This means:
 
 - The quadratic model is bowl-shaped, so the Newton step makes sense.
 - Regularised Newton steps (adding a multiple of the identity to the Hessian) behave very predictably.
 
-### 12.5.5 Quasi-Newton
+### 12.7.5 Quasi-Newton
 When Hessians are too expensive, we can build low-rank approximations of $\nabla^2 f(x_k)$ or its inverse. Famous examples include BFGS and L-BFGS. These methods keep much of Newton’s fast local convergence but with per-iteration cost closer to first-order methods.
 
-### 12.5.6 When to use Newton / quasi-Newton
+### 12.7.6 When to use Newton / quasi-Newton
 - You need high-accuracy solutions.
 - The problem is smooth and reasonably well-conditioned.
 - The dimension is moderate, or Hessian systems can be solved efficiently (e.g. via sparse linear algebra).
@@ -583,7 +615,7 @@ When Hessians are too expensive, we can build low-rank approximations of $\nabla
 
  
 
-## 12.5 Constraints and nonsmooth terms: projection and proximal methods
+## 12.8 Constraints and nonsmooth terms: projection and proximal methods
 
 In practice, most convex objectives are not just “nice smooth $f(x)$”. They often have:
 
@@ -593,7 +625,7 @@ In practice, most convex objectives are not just “nice smooth $f(x)$”. They 
 
 Two core ideas handle this: projected gradient and proximal gradient.
 
-### 12.6.1 Projected gradient descent
+### 12.8.1 Projected gradient descent
 
 Setting:  
 Minimise convex, differentiable $f(x)$ subject to $x \in \mathcal{X}$, where $\mathcal{X}$ is a simple closed convex set (Chapter 4).
@@ -626,7 +658,7 @@ Examples of $\mathcal{X}$ where projection is cheap:
 
 Projected gradient is the constrained version of gradient descent. It maintains feasibility at every iterate.
 
-### 12.6.2 Proximal gradient (forward–backward splitting)
+### 12.8.2 Proximal gradient (forward–backward splitting)
 
 Setting:  
 Composite convex minimisation
@@ -684,7 +716,7 @@ This unifies constraints and regularisation.
 This is the standard tool for modern large-scale convex learning problems.
 
 
-## 12.7 Penalties, barriers, and interior-point methods
+## 12.9 Penalties, barriers, and interior-point methods
 
 So far we’ve assumed either:
 
@@ -694,7 +726,7 @@ So far we’ve assumed either:
 What if the constraints are general convex inequalities $g_i(x)\le0$?  
 Enter penalty methods, barrier methods, and (ultimately) interior-point methods.
 
-### 12.7.1 Penalty methods
+### 12.9.1 Penalty methods
 
 Turn constrained optimisation into unconstrained optimisation by adding a penalty for violating constraints.
 
@@ -723,7 +755,7 @@ This is conceptually simple and is sometimes effective, but:
 
 Penalty methods are closely linked to robust formulations and Huber-like losses: you replace a hard requirement by a soft cost. This is exactly what you do in robust regression and in $\epsilon$-insensitive / Huber losses (see Section 9.7).
 
-### 12.7.2 Barrier methods
+### 12.9.2 Barrier methods
 
 Penalty methods penalise violation *after* you cross the boundary. Barrier methods make it impossible to even touch the boundary.
 
@@ -750,7 +782,7 @@ Key points:
 
 This is the core idea of interior-point methods.
 
-### 12.7.3 Interior-point methods in practice
+### 12.9.3 Interior-point methods in practice
 
 Interior-point methods:
 
@@ -779,7 +811,7 @@ Summary: Penalty vs Barrier vs Interior-Point
 
 
 
-## 12.8 Choosing the right method in practice
+## 12.10 Choosing the right method in practice
 
 Let’s summarise the chapter in the form of a decision guide.
 

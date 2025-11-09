@@ -6,16 +6,14 @@ This chapter introduces Pareto optimality, which generalizes classical convex op
  
 ## 10.1 Classical Optimality
 
-In standard convex optimization, we minimize one function:
-\[
+In standard convex optimization, we minimize one convex function:
+$$
 x^* \in \arg\min_{x \in \mathcal{X}} f(x),
-\]
+$$
 where $\mathcal{X}$ is a convex feasible set.
 
-Here, optimality is absolute — there exists a single best point (or equivalence class) minimizing one measure of performance.  
-
-
-But what if we have multiple objectives that cannot all be minimized simultaneously?
+Optimality is *absolute*: there exists (or can exist) one best point minimizing a single criterion.  
+But what happens when we must minimize *several* convex functions simultaneously?
 
 
 ## 10.2 Multi-Objective Convex Optimization
@@ -29,12 +27,12 @@ In many learning and design problems, several objectives compete:
 | Portfolio design | Return | Risk | Profit vs stability |
 | Information theory | Accuracy | Compression | Fit vs simplicity |
 
-Formally, we write:
-\[
+Formally:
+$$
 \min_{x \in \mathcal{X}} F(x) = (f_1(x), f_2(x), \dots, f_k(x)),
-\]
+$$
 where each $f_i(x)$ is convex.  
-The solution concept changes: there is no single global minimum. Instead, there is a *set* of trade-off solutions.
+Because no single $x$ minimizes all $f_i$ simultaneously, we define *optimality* differently — not as a single point, but as a set of *efficient trade-offs*.
 
 
 
@@ -43,9 +41,9 @@ The solution concept changes: there is no single global minimum. Instead, there 
 ### (a) Strong Pareto Optimality
 
 A point $x^* \in \mathcal{X}$ is Pareto optimal if no other $x \in \mathcal{X}$ satisfies:
-\[
+$$
 f_i(x) \le f_i(x^*) \quad \forall i,
-\]
+$$
 with strict inequality for at least one $j$.
 
 Intuitively: no feasible solution can improve one objective without worsening another.
@@ -53,9 +51,10 @@ Intuitively: no feasible solution can improve one objective without worsening an
 ### (b) Weak Pareto Optimality
 
 A point $x^*$ is weakly Pareto optimal if no $x$ satisfies:
-\[
+$$
 f_i(x) < f_i(x^*) \quad \forall i.
-\]
+$$
+
 That is, no feasible solution strictly improves all objectives simultaneously.
 
 ### (c) Geometric Intuition
@@ -74,10 +73,10 @@ Since multi-objective problems rarely have a unique minimizer, we often scalaris
 
 ### (a) Weighted Sum Scalarisation
 
-\[
+$$
 \min_{x \in \mathcal{X}} \; \sum_{i=1}^k w_i f_i(x),
 \quad w_i \ge 0,\quad \sum_i w_i = 1.
-\]
+$$
 
 - The weights $w_i$ encode relative importance of objectives.
 - Each choice of $w$ yields a different point on the Pareto frontier.
@@ -91,22 +90,23 @@ If the objectives and feasible set are convex, the weighted-sum method recovers 
 ### (b) $\varepsilon$-Constraint Scalarisation
 
 Alternatively, minimize one objective while turning others into constraints:
-\[
+
+$$
 \min_x f_1(x) \quad \text{s.t. } f_i(x) \le \varepsilon_i,\; i=2,\dots,k.
-\]
+$$
 
 - The tolerances $\varepsilon_i$ act as *performance budgets*.  
 - Varying them explores different Pareto-optimal trade-offs.  
 
 Example connection:  
 Ridge regression minimizes fit error subject to a bound on model complexity:
-\[
+$$
 \min_x \|Ax - b\|_2^2 \quad \text{s.t. } \|x\|_2^2 \le \tau.
-\]
-The Lagrangian form
-\[
+$$
+The Lagrangian form:
+$$
 \min_x \|Ax - b\|_2^2 + \lambda \|x\|_2^2
-\]
+$$
 is a weighted-sum scalarisation — $\lambda$ acts as a trade-off parameter.
 
  
@@ -119,65 +119,74 @@ Scalarisation is closely related to duality (Chapter 9):
 - Regularisation parameters in ML (like $\lambda$) are dual to constraint levels — they *move along* the Pareto frontier.
 
  
+## 10.5 Examples and Applications
 
-## 10.5 Examples
-
-### Example 1 – Regularised Least Squares
+### Example 1 – Regularized Least Squares
 
 Objectives:
-\[
-f_1(x)=\|Ax-b\|_2^2, \quad f_2(x)=\|x\|_2^2.
-\]
+$$
+f_1(x) = \|Ax - b\|_2^2, \qquad f_2(x) = \|x\|_2^2.
+$$
 
-Two equivalent formulations:
-
+Two equivalent forms:
 1. Weighted sum:
-   \[
-   \min_x \|Ax-b\|_2^2 + \lambda \|x\|_2^2.
-   \]
+   $$
+   \min_x \|Ax - b\|_2^2 + \lambda \|x\|_2^2.
+   $$
 2. $\varepsilon$-constraint:
-   \[
-   \min_x \|Ax-b\|_2^2 \quad \text{s.t. } \|x\|_2^2 \le \tau.
-   \]
+   $$
+   \min_x \|Ax - b\|_2^2 \quad \text{s.t. } \|x\|_2^2 \le \tau.
+   $$
 
-Both yield Pareto optimal solutions; $\lambda$ and $\tau$ parameterize the same trade-off curve.
+Both yield Pareto-optimal solutions; $\lambda$ and $\tau$ trace the same curve — the bias–variance trade-off.
 
  
-
 ### Example 2 – Portfolio Optimization (Risk–Return)
 
-Decision variable: portfolio weights \( w \in \mathbb{R}^n \).  
+Decision variable: portfolio weights $w \in \mathbb{R}^n$.  
 Objectives:
-\[
-f_1(w) = -\mu^\top w \quad (\text{negative return}), \qquad
-f_2(w) = w^\top \Sigma w \quad (\text{risk}).
-\]
+$$
+f_1(w) = -\mu^\top w \quad \text{(negative return)}, \qquad
+f_2(w) = w^\top \Sigma w \quad \text{(risk)}.
+$$
 
-Weighted sum formulation:
-\[
-\min_w \; -\alpha \mu^\top w + (1-\alpha) w^\top \Sigma w,
-\quad 0 \le \alpha \le 1.
-\]
+Weighted formulation:
+$$
+\min_w \; -\alpha \mu^\top w + (1 - \alpha) w^\top \Sigma w, \quad 0 \le \alpha \le 1.
+$$
 
 - Varying $\alpha$ traces the efficient frontier in risk–return space.
-- This is the foundation of Modern Portfolio Theory (Markowitz).
+- This forms the basis of Modern Portfolio Theory (Markowitz, 1952).
 
  
+### Example 3 – Fairness–Accuracy Trade-off in ML
 
-### Example 3 – Probabilistic Modelling (ELBO and $\beta$-VAE)
+In fair machine learning, we minimize prediction loss while maintaining fairness:
+$$
+\min_\theta \; \mathbb{E}[\ell(y, f_\theta(x))] \quad \text{s.t. } \; D(f_\theta(x), y) \le \varepsilon,
+$$
+where $D$ is a fairness measure (e.g., demographic disparity).
 
-The Evidence Lower Bound (ELBO) in variational inference:
-\[
+Equivalent scalarized form:
+$$
+\min_\theta \; \mathbb{E}[\ell(y, f_\theta(x))] + \lambda D(f_\theta(x), y).
+$$
+Different $\lambda$ values trace the fairness–accuracy Pareto frontier.
+
+ 
+### Example 4 – Variational Autoencoders and $\beta$-VAE
+
+The ELBO in variational inference:
+$$
 \text{ELBO} = \mathbb{E}_{q(z)}[\log p(x|z)] - \mathrm{KL}(q(z)\|p(z)).
-\]
+$$
 
-Two competing objectives:
-- Data fit: maximize expected log-likelihood.  
-- Simplicity: minimize KL divergence.
+Here we balance two objectives:
+- Reconstruction accuracy ($f_1$)
+- Latent simplicity ($f_2$)
 
-Scalarised form (\(\beta\)-VAE):
-\[
-\max_q \; \mathbb{E}_{q(z)}[\log p(x|z)] - \beta\, \mathrm{KL}(q(z)\|p(z)).
-\]
-
-Parameter $\beta$ controls the trade-off — different $\beta$ yield different Pareto-optimal points between reconstruction accuracy and disentanglement.
+The scalarized $\beta$-VAE objective:
+$$
+\max_q \; \mathbb{E}_{q(z)}[\log p(x|z)] - \beta \, \mathrm{KL}(q(z)\|p(z)).
+$$
+Parameter $\beta$ moves the solution along the Pareto frontier between data fidelity and disentanglement.

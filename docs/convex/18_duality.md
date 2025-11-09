@@ -28,111 +28,159 @@ $$
 f^\star = \inf \{ f(x) : g_i(x) \le 0,\ h_j(x) = 0 \}.
 $$
 
-> Infimum (inf): the greatest lower bound of a set — the smallest value a function can approach, even if it is not attained.
+Here, *infimum* means the smallest value $f(x)$ can approach — even if it is not exactly attained.
 
- 
+
+## 9.2 Why Duality?
+
+Before any equations, let’s understand the high-level idea.
+
+A constrained optimization problem can be viewed as a *trade-off*:
+> Minimize $f(x)$ while paying penalties for violating constraints.
+
+If we allow violations but penalize them proportionally, we get a relaxed problem.  
+How high should these penalties be? That’s what the dual variables $\mu_i, \lambda_j$ represent.
+
+- $\mu_i$ (for inequalities): how costly it is to violate constraint $g_i(x) \le 0$.  
+- $\lambda_j$ (for equalities): how much the objective changes when equality constraint $h_j(x)=0$ is relaxed.
+
+Thus, duality converts *constraints* into *prices* or *forces* that shape the optimization landscape.
+
 
 ## 9.2 The Lagrangian
 
-We define the Lagrangian:
+The Lagrangian function incorporates both the objective and constraints:
 $$
-L(x,\lambda,\mu)
-=
-f(x)
+L(x, \lambda, \mu)
+= f(x)
 + \sum_{i=1}^m \mu_i g_i(x)
 + \sum_{j=1}^p \lambda_j h_j(x),
 $$
-with multipliers $\mu \in \mathbb{R}^m$ and $\lambda \in \mathbb{R}^p$. For inequality constraints, we will later require $\mu_i \ge 0$.
+with dual variables $\mu \in \mathbb{R}^m$, $\lambda \in \mathbb{R}^p$.
 
-Think of $\mu_i$ and $\lambda_j$ as “penalties” for violating the constraints.
+- $\mu_i \ge 0$ are multipliers for inequality constraints,
+- $\lambda_j$ are free (can be any sign) for equality constraints.
 
- 
+If $\mu_i > 0$, violating the $i$th constraint is penalized heavily; if $\mu_i = 0$, that constraint is inactive.
 
-## 9.3 The dual function
 
-For fixed multipliers $(\lambda,\mu)$, define the dual function:
+
+
+## 9.4 The Dual Function – Lower Bounds from Penalties
+
+For fixed $(\lambda, \mu)$, we define the dual function:
 $$
-\theta(\lambda,\mu)
-=
-\inf_x L(x,\lambda,\mu).
-$$
-
-Important:
-
-- $\theta(\lambda,\mu)$ is always concave in $(\lambda,\mu)$, even if $f$ is not convex.
-- For any $\mu \ge 0$,
-$$
-\theta(\lambda,\mu) \le f^\star.
+\theta(\lambda, \mu) = \inf_x L(x, \lambda, \mu).
 $$
 
-This last fact is called weak duality:
-> The dual function gives lower bounds on the primal optimum.
+Intuitively:
 
-Proof sketch of weak duality:  
-For any feasible $x$ (i.e. satisfying $g_i(x) \le 0$, $h_j(x) = 0$) and any $\mu \ge 0$,
+- We pick penalties $(\lambda, \mu)$ for constraint violations.
+- We minimize $L$ with respect to $x$ — allowing constraint violations but paying for them.
+- The resulting value $\theta(\lambda, \mu)$ is a *lower bound* on the original problem’s optimum $f^*$.
+
+Formally, for any feasible $x$ and any $\mu \ge 0$,
 $$
-L(x,\lambda,\mu)
-=
-f(x)
-+ \sum_i \mu_i g_i(x)
-+ \sum_j \lambda_j h_j(x)
+L(x, \lambda, \mu)
+= f(x) + \sum_i \mu_i g_i(x) + \sum_j \lambda_j h_j(x)
 \le f(x),
 $$
-because $g_i(x) \le 0$ and $\mu_i \ge 0$.  
-So $\theta(\lambda,\mu) = \inf_x L(x,\lambda,\mu) \le f(x)$ for all feasible $x$.  
-Taking the infimum over feasible $x$ gives $\theta(\lambda,\mu) \le f^\star$.
+since $g_i(x) \le 0$ and $\mu_i \ge 0$.  
+Taking the infimum over all $x$ gives:
+$$
+\theta(\lambda, \mu) \le f^*.
+$$
 
+This property is known as weak duality:
+> The dual function provides lower bounds on the primal optimum.
  
-## 9.4 The dual problem
+  
+### Properties of the Dual Function
 
-We now maximise the lower bound. The Lagrange dual problem is:
+- $\theta(\lambda, \mu)$ is concave, even if $f$ itself is not convex.  
+  (Infimum of affine functions in $(\lambda, \mu)$ is concave.)
+- It may take the value $-\infty$ if the Lagrangian is unbounded below.
+
+The dual function defines a new optimization problem — the dual problem — where we maximize this lower bound.
+
+## 9.5 The Dual Problem
+
+We now *maximize* the dual function subject to $\mu \ge 0$:
 $$
 \begin{array}{ll}
-\text{maximise}_{\lambda,\mu} & \theta(\lambda,\mu) \\
+\text{maximize}_{\lambda, \mu} & \theta(\lambda, \mu) \\
 \text{subject to} & \mu \ge 0.
 \end{array}
 $$
 
-Because $\theta$ is concave and we are maximising it, the dual problem is always a concave maximisation problem (i.e. a convex optimisation problem in standard form).
+This is the Lagrange dual problem.
 
-Let $d^\star$ denote the optimal dual value.  
-From weak duality, $d^\star \le f^\star$ always.
+Let $d^*$ denote the optimal dual value.  
+From weak duality, we always have:
+$$
+d^* \le f^*.
+$$
+
+The dual problem is always a concave maximization — equivalently, a convex optimization problem in the variables $(\lambda, \mu)$.
+
+## 9.6 Strong Duality and the Zero Duality Gap
+
+When $d^* = f^*$, we say strong duality holds.  
+The difference $f^* - d^*$ is called the duality gap.
+
+- Weak duality: $d^* \le f^*$ (always true).  
+- Strong duality: $d^* = f^*$ (no gap).
+
+Strong duality means the dual gives *exactly the same value* as the primal — and optimal multipliers $(\lambda^*, \mu^*)$ exist.
+
+For convex problems, this beautiful property holds under Slater’s condition (see Chapter 8):
+
+> If there exists a strictly feasible point $\tilde{x}$ such that  
+> $g_i(\tilde{x}) < 0$ for all $i$, and $h_j(\tilde{x}) = 0$ for all $j$,  
+> then strong duality holds — the duality gap is zero.
+
+Consequences:
+
+- $f^* = d^*$ (zero gap).  
+- Dual variables $(\lambda^*, \mu^*)$ exist and are finite.  
+- The KKT conditions are both necessary and sufficient for optimality.
 
  
+## 9.7 Duality and the KKT Conditions
 
-## 9.5 Strong duality and Slater’s condition
+The KKT conditions (from Chapter 8) are the points where:
 
-If $d^\star = f^\star$, we say strong duality holds.
+1. The primal is feasible ($g_i(x^*) \le 0$, $h_j(x^*) = 0$),
+2. The dual is feasible ($\mu_i^* \ge 0$),
+3. The gradients balance (stationarity):
+   $$
+   \nabla f(x^*) + \sum_i \mu_i^* \nabla g_i(x^*) + \sum_j \lambda_j^* \nabla h_j(x^*) = 0,
+   $$
+4. Complementary slackness holds ($\mu_i^* g_i(x^*) = 0$).
 
-For convex problems, strong duality typically holds under a mild regularity condition known as Slater’s condition (Boyd and Vandenberghe, 2004):
+When these hold, $(x^*, \lambda^*, \mu^*)$ is a primal–dual optimal pair and  
+$$
+f(x^*) = \theta(\lambda^*, \mu^*) = f^* = d^*.
+$$
 
-> If the problem is convex and there exists a strictly feasible point $\tilde{x}$ such that  
-> $g_i(\tilde{x}) < 0$ for all $i$ and $h_j(\tilde{x}) = 0$ for all $j$,  
-> then strong duality holds.
-
-Consequences of strong duality:
-
-- The gap $f^\star - d^\star$ is zero.
-- There exist optimal multipliers $(\lambda^*, \mu^*)$.
-- KKT conditions hold and characterise optimality.
+Geometrically, the primal and dual surfaces *touch* at the optimum — the tangent plane defined by $(\lambda^*, \mu^*)$ supports $f$ exactly.
 
  
+## 9.8 Interpreting Dual Variables
 
-## 9.6 KKT revisited via duality
+Dual variables have rich interpretations:
 
-The Karush–Kuhn–Tucker (KKT) conditions from Chapter 8 can also be seen as the conditions under which:
+- $\mu_i^*$: the *shadow price* of relaxing inequality $g_i(x) \le 0$.  
+  A large $\mu_i^*$ means this constraint is expensive — small relaxation significantly reduces $f$.
+- $\lambda_j^*$: the price or force associated with equality $h_j(x)=0$.  
+  Changing the equality’s right-hand side shifts the objective by roughly $\lambda_j^*$.
 
-1. $x^*$ minimises the Lagrangian over $x$,
-2. $(\lambda^*, \mu^*)$ maximises $\theta(\lambda,\mu)$,
-3. complementary slackness holds,
-4. primal feasibility and dual feasibility hold.
+In economic or resource allocation problems:
+- The dual problem represents *pricing* of limited resources.  
+- The primal problem represents *allocation* given prices.
 
-## 9.7 Interpretation of multipliers
+In machine learning:
+- SVMs: dual variables correspond to support vectors.  
+- Lasso and Elastic Net: $\ell_1$ penalties can be viewed as dual constraints on coefficient magnitudes.  
+- Regularized losses: duality expresses the trade-off between data fit and model complexity.
 
-The dual variables $\mu_i^*$ and $\lambda_j^*$ have interpretations:
-
-- $\mu_i^*$ can be seen as the “shadow price” of relaxing constraint $g_i(x) \le 0$. If $\mu_i^*$ is large, then constraint $i$ is “expensive” to satisfy — it is strongly active.
-- $\lambda_j^*$ plays a similar role for equality constraints.
-
-In resource allocation problems, these multipliers act like market prices. In regularised estimation, they act like trade-off coefficients chosen by the optimisation itself.
- 

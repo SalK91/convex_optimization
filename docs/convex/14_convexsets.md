@@ -41,6 +41,8 @@ $$
 \{ x : a^\top x \le b \}.
 $$
 
+> Every affine set is convex, and every hyperplane is both affine and convex.
+
 > Halfspaces are convex; intersections of halfspaces are convex. Linear inequality constraints define intersections of halfspaces, and therefore give convex feasible regions.
 
  

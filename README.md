@@ -1,24 +1,10 @@
-https://www.youtube.com/watch?v=d2jF3SXcFQ8
-    1. https://web.stanford.edu/class/ee364a/lectures.html
-https://www.youtube.com/watch?v=N3V2AdTImJE&list=PLoROMvodv4rMJqxxviPa4AmDClvcbHi6h&index=10
-
-
-https://www.youtube.com/watch?v=trs0RI39uWI
-
-https://www.youtube.com/watch?v=t8sp9rv-Dqo
-
-
 ### Current state
 
-1. Stanford Lecture Stanford EE364A Convex Optimization
-   https://www.youtube.com/watch?v=zVO4ccvrwrI&list=PLoROMvodv4rMJqxxviPa4AmDClvcbHi6h&index=15
+ 
 
-   30min
-
-   Slide 355
-
-    
-   https://www.youtube.com/watch?v=U3lJAObbMFI&list=PLGrZHfnLv54ksX-0TMKYPCZDx9NZyYh9c&index=1
+2. Deep Mind UCL
+   https://www.youtube.com/watch?v=7R52wiUgxZI&list=PLqYmG7hTraZCDxZ44o4p3N5Anz3lLRVZF&index=1
+     
 
    https://bloomberg.github.io/foml/#home
 
@@ -28,6 +14,22 @@ https://www.youtube.com/watch?v=t8sp9rv-Dqo
   earh mover distance
   branch and bound
   variational inferences?
+  aduto diff
+
+  
+
+
+Derivative Free Optimization
+Coordinate Descent
+ Nelder-Mead
+Simulated Annealing
+ Multi-Starts
+Evolutionary Algorithms
+Genetic Algorithms 
+Evolution Strategies
+Numerical Encodings
+Black Box Optimization
+
 
 2. MIT 6.824: Distributed Systems:
    https://www.youtube.com/@6.824
@@ -49,7 +51,7 @@ https://www.youtube.com/watch?v=t8sp9rv-Dqo
 
 9. Autograd lecture my Andre Kapathry
 
-
+10. EM - Expected maximization
 ---------------------
 
 1. LP limitation and scalability
