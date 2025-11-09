@@ -61,32 +61,129 @@ When the dataset is large, computing the full gradient
 $$
 \nabla f(x) = \frac{1}{N} \sum_{i=1}^N \nabla f_i(x)
 $$
-is prohibitive. Instead, stochastic methods use a random mini-batch $\mathcal{B}$ to estimate it.
+can be prohibitively expensive, since it requires evaluating all $N$ samples at every iteration. Stochastic methods overcome this by using *unbiased gradient estimates* based on small random subsets (mini-batches) of the data.
 
-### Basic SGD
+
+### 15.3.1 Stochastic Gradient Descent (SGD)
+
+At each iteration, choose a random sample (or mini-batch) $\mathcal{B}_k$ and perform the update:
+
 $$
-x_{k+1} = x_k - \eta_k \nabla f_{i_k}(x_k),
+x_{k+1} = x_k - \eta_k \, \widehat{\nabla f}(x_k),
 $$
-where $i_k$ is a random index or mini-batch.
-
-The step size $\eta_k$ typically decays with $k$, such as $\eta_k = c / \sqrt{k}$.
-
-### Convergence
-- For convex $f$, SGD achieves expected error $O(1/\sqrt{k})$.  
-- For strongly convex $f$, using decreasing $\eta_k$ gives $O(1/k)$ convergence.  
-- In practice, adaptive methods (Adam, RMSProp) improve stability.
-
-### Variance Reduction
-Methods like SVRG (Stochastic Variance-Reduced Gradient) and SAGA combine stochastic and deterministic steps to reduce variance:
+where
 $$
-\nabla f_{SVRG}(x) = \nabla f_i(x) - \nabla f_i(\tilde{x}) + \nabla f(\tilde{x}),
+\widehat{\nabla f}(x_k)
+= \frac{1}{|\mathcal{B}_k|} \sum_{i \in \mathcal{B}_k} \nabla f_i(x_k)
 $$
-where $\tilde{x}$ is a reference (snapshot) point.  
-These achieve linear convergence for strongly convex functions, bridging the gap between SGD and full gradient descent.
 
-### ML Context
-- Deep neural networks rely almost exclusively on SGD and its adaptive variants.  
-- Large-scale convex ML (logistic regression, SVM) also uses SGD or SVRG for efficiency.
+is a stochastic estimate of the true gradient,  
+and $\eta_k > 0$ is the step size (learning rate).
+
+#### Interpretation
+
+- SGD performs a *noisy gradient step*: it moves in approximately the right direction on average.
+- The noise introduced by sampling allows exploration of the parameter space and helps escape shallow local minima in nonconvex problems.
+- In convex settings, it trades accuracy for computational efficiency — each iteration is much cheaper, so we can afford many more of them.
+
+
+### 15.3.2 Step Size and Averaging
+
+The step size $\eta_k$ controls the bias–variance tradeoff:
+- If $\eta_k$ is too large → iterates oscillate due to stochastic noise.
+- If $\eta_k$ is too small → progress slows down.
+
+Common choices:
+$$
+\eta_k = \frac{c}{\sqrt{k}} \quad \text{(for convex $f$)}, 
+\qquad
+\eta_k = \frac{c}{k} \quad \text{(for strongly convex $f$)}.
+$$
+
+Two popular stabilization strategies:
+
+1.  Decay learning rate.
+
+2. Polyak–Ruppert averaging:
+   Instead of returning the last iterate, return the running average
+   $$
+   \bar{x}_k = \frac{1}{k}\sum_{t=1}^k x_t.
+   $$
+   Averaging cancels gradient noise and ensures convergence to the optimal solution in expectation.
+
+3. Increasing mini-batch size:  
+   As optimization proceeds, increasing $|\mathcal{B}_k|$ gradually reduces gradient variance while keeping updates efficient.
+
+### 15.3.3 Convergence Properties
+
+For convex objectives:
+- $\mathbb{E}[f(x_k)] - f^\star = O(1/\sqrt{k})$ with diminishing $\eta_k$.
+  
+For *strongly convex* $f$, with $\eta_k = O(1/k)$:
+- $\mathbb{E}[\|x_k - x^\star\|^2] = O(1/k)$.
+
+These are optimal rates for stochastic first-order methods:  no unbiased stochastic optimizer using the same amount of data can asymptotically converge faster than SGD with Polyak averaging.
+
+
+### 15.3.4 Variance Reduction
+
+Although SGD is simple, the stochastic noise prevents it from reaching very high accuracy.  Variance-reduced methods (SVRG, SAGA, SARAH) correct this by mixing stochastic and full-gradient information.
+
+Example: SVRG (Stochastic Variance-Reduced Gradient)
+
+At outer iteration $s$, compute a full gradient snapshot $\nabla f(\tilde{x})$.  
+Then, for inner iterations:
+$$
+v_k = \nabla f_i(x_k) - \nabla f_i(\tilde{x}) + \nabla f(\tilde{x}),
+\quad
+x_{k+1} = x_k - \eta v_k.
+$$
+
+- $v_k$ is an unbiased estimate of $\nabla f(x_k)$ but with reduced variance.
+- For strongly convex $f$, SVRG and SAGA achieve linear convergence, bridging the gap between SGD and full gradient descent.
+
+Intuitively, these methods “anchor” stochastic gradients around a periodically refreshed reference point, preventing the gradient noise from accumulating.
+
+### 15.3.5 Stochastic Second-Order and Momentum Methods
+SGD can be further improved by incorporating curvature or momentum information.
+
+1. Momentum / Nesterov acceleration:  
+   Maintains an exponential moving average of past gradients:
+   $$
+   m_k = \beta m_{k-1} + (1 - \beta) \widehat{\nabla f}(x_k),
+   \quad
+   x_{k+1} = x_k - \eta m_k.
+   $$
+   Momentum accelerates convergence in smooth regions and damps oscillations in narrow valleys.
+
+2. Adaptive methods (Adam, RMSProp, Adagrad):  
+   Use coordinate-wise scaling based on running averages of squared gradients to handle ill-conditioned curvature.
+
+3. Stochastic second-order methods:  
+   Approximate curvature matrices (e.g., Fisher or Hessian) via stochastic estimates and maintain them with exponential decay:
+   $$
+   H_k \approx (1 - \rho) H_{k-1} + \rho \, g_k g_k^\top.
+   $$
+   Though theoretically limited by SGD’s asymptotic rate, they often yield better pre-asymptotic performance — crucial in practical deep learning where only a few passes over the data are feasible.
+
+
+### 15.3.6 Machine Learning Context and Insights
+
+- Deep neural networks rely almost exclusively on SGD and its adaptive or momentum-based variants. The stochasticity helps generalization by acting as implicit regularization.
+- Large-scale convex ML problems — logistic regression, SVMs, ridge regression — use SGD or variance-reduced methods (SVRG/SAGA) for scalability.
+- The balance between *variance reduction* and *computational cost* defines practical performance.
+
+
+### 15.3.7 Summary
+
+| Method | Key Idea | Convergence | Practical Use |
+|---------|-----------|-------------|----------------|
+| SGD | Uses mini-batch gradients | $O(1/\sqrt{k})$ | Deep learning, online learning |
+| SGD + Polyak averaging | Averaged iterates | $O(1/k)$ | Theoretically optimal stochastic convergence |
+| SVRG / SAGA | Variance-reduced updates | Linear for strongly convex | Convex ML, GLMs |
+| Momentum / Adam | Smoothed gradient estimates | Empirical acceleration | Deep nets |
+| Stochastic 2nd-order | Curvature tracking | Better pre-asymptotic | Large-batch training |
+
 
 ## 15.4 Proximal and Composite Optimization
 

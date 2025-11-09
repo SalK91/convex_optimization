@@ -30,6 +30,7 @@ $$
 is maximized when $u$ aligns with $\nabla f(x)$ — the direction of steepest ascent.  
 The opposite direction, $- \nabla f(x)$, gives the steepest descent.
 
+
 > A level set of a differentiable function $f$ is
 $$
 L_c = \{\, x \in \mathbb{R}^n : f(x) = c \,\}.
@@ -156,6 +157,8 @@ f(x + d) \approx f(x)
 $$
 
 If $\nabla^2 f(x)$ is positive semidefinite, the quadratic term is always $\ge 0$. Locally, $x$ is in a “bowl”. If $\nabla^2 f(x)$ is indefinite, the landscape can curve up in some directions and down in others — typical of saddle points.
+
+This quadratic model is the foundation of Newton’s method and trust-region algorithms:  the linear term drives direction; the quadratic term refines curvature.
 
 ## 3.5 Convexity and the Hessian
 
