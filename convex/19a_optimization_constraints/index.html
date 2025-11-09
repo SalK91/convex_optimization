@@ -873,7 +873,7 @@
   
   
   <span class="md-ellipsis">
-    Cheat Sheets
+    Deep Learning
     
   </span>
   
@@ -883,6 +883,143 @@
         
         <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            Deep Learning
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../deeplearning/intro/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    1. Introduction to Neural Netwoks
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../deeplearning/2_convnets/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    2. Convolutional Neural Networks (CNNs)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../deeplearning/intro/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    1. Introduction to Neural Netwoks
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../deeplearning/intro/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    1. Introduction to Neural Netwoks
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5">
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Cheat Sheets
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
             <span class="md-nav__icon md-icon"></span>
             Cheat Sheets
           </label>
@@ -933,10 +1070,10 @@
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5">
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6">
         
           
-          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
             
   
   
@@ -949,8 +1086,8 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_5">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
             <span class="md-nav__icon md-icon"></span>
             Appendices
           </label>
@@ -1203,137 +1340,121 @@
 
 
 <h1 id="chapter-13-optimization-algorithms-for-equality-constrained-problems">Chapter 13: Optimization Algorithms for Equality-Constrained Problems<a class="headerlink" href="#chapter-13-optimization-algorithms-for-equality-constrained-problems" title="Permanent link">¶</a></h1>
-<p>In many optimization problems, we are not free to choose any <span class="arithmatex">\(x \in \mathbb{R}^n\)</span>; instead, we must satisfy a set of equality constraints of the form:</p>
+<p>Equality-constrained optimization arises whenever the variables must satisfy one or more exact relations — such as conservation laws, normalization, or fairness criteria. We study algorithms for minimizing a function subject to linear or nonlinear equality constraints:</p>
 <div class="arithmatex">\[
-A x = b,
+\min_x \; f(x) \quad \text{s.t.} \quad A x = b.
 \]</div>
-<p>where <span class="arithmatex">\(A \in \mathbb{R}^{p \times n}\)</span> and <span class="arithmatex">\(b \in \mathbb{R}^p\)</span>.<br>
-Such problems arise naturally in engineering design, resource allocation, and systems governed by conservation laws.</p>
-<h2 id="131-equality-constrained-minimization">13.1 Equality-Constrained Minimization<a class="headerlink" href="#131-equality-constrained-minimization" title="Permanent link">¶</a></h2>
-<p>We consider the general equality-constrained smooth optimization problem:</p>
+<p>Such problems are fundamental in convex optimization, quadratic programming, and many ML formulations involving exact invariants.</p>
+<h2 id="131-geometric-view-optimization-on-an-affine-manifold">13.1 Geometric View — Optimization on an Affine Manifold<a class="headerlink" href="#131-geometric-view-optimization-on-an-affine-manifold" title="Permanent link">¶</a></h2>
+<p>The constraint <span class="arithmatex">\(A x = b\)</span> defines an affine set, a lower-dimensional plane within <span class="arithmatex">\(\mathbb{R}^n\)</span>. The feasible region is:</p>
+<div class="arithmatex">\[
+\mathcal{X} = \{ x \in \mathbb{R}^n \mid A x = b \}.
+\]</div>
+<p>If <span class="arithmatex">\(A \in \mathbb{R}^{p \times n}\)</span> has full row rank (<span class="arithmatex">\(\operatorname{rank}(A)=p\)</span>), then <span class="arithmatex">\(\mathcal{X}\)</span> is an <span class="arithmatex">\((n-p)\)</span>-dimensional affine manifold.</p>
+<p>Geometrically, optimization proceeds not over all <span class="arithmatex">\(\mathbb{R}^n\)</span>, but along this manifold. At the optimum, the gradient <span class="arithmatex">\(\nabla f(x^\star)\)</span> cannot point in a direction that stays feasible—hence it must be orthogonal to the feasible surface. This gives the first key optimality relation:</p>
+<div class="arithmatex">\[
+\nabla f(x^\star) = A^\top \nu^\star,
+\]</div>
+<p>where <span class="arithmatex">\(\nu^\star\)</span> is a vector of Lagrange multipliers capturing how sensitive the objective is to constraint perturbations.</p>
+<blockquote>
+<p>Intuition:<br>
+The gradient of the objective at the optimum lies in the span of the constraint normals (rows of <span class="arithmatex">\(A\)</span>).<br>
+Any feasible direction must lie in the null space of <span class="arithmatex">\(A\)</span>, orthogonal to <span class="arithmatex">\(\nabla f(x^\star)\)</span>.</p>
+</blockquote>
+<h2 id="132-lagrange-function-and-kkt-system">13.2 Lagrange Function and KKT System<a class="headerlink" href="#132-lagrange-function-and-kkt-system" title="Permanent link">¶</a></h2>
+<p>Define the Lagrangian:</p>
+<div class="arithmatex">\[
+\mathcal{L}(x, \nu) = f(x) + \nu^\top (A x - b).
+\]</div>
+<p>The first-order (KKT) conditions for a feasible point <span class="arithmatex">\((x^\star, \nu^\star)\)</span> to be optimal are:</p>
 <div class="arithmatex">\[
 \begin{aligned}
-\text{minimize} \quad &amp; f(x) \\
-\text{subject to} \quad &amp; A x = b,
+\nabla f(x^\star) + A^\top \nu^\star &amp;= 0, \\
+A x^\star &amp;= b.
 \end{aligned}
 \]</div>
-<p>where:</p>
-<ul>
-<li><span class="arithmatex">\(f: \mathbb{R}^n \to \mathbb{R}\)</span> is convex and twice continuously differentiable,  </li>
-<li><span class="arithmatex">\(A\)</span> has full row rank, i.e., <span class="arithmatex">\(\text{rank}(A) = p\)</span>,  </li>
-<li>and the optimum value <span class="arithmatex">\(p^*\)</span> is finite and attained.</li>
-</ul>
-<h3 id="optimality-conditions">Optimality Conditions<a class="headerlink" href="#optimality-conditions" title="Permanent link">¶</a></h3>
-<p>The point <span class="arithmatex">\(x^*\)</span> is optimal if and only if there exists a Lagrange multiplier vector <span class="arithmatex">\(v^*\)</span> such that:</p>
-<div class="arithmatex">\[
-\nabla f(x^*) + A^T v^* = 0, \qquad A x^* = b.
-\]</div>
-<p>These are the Karush–Kuhn–Tucker (KKT) conditions for equality-constrained optimization.</p>
-<p>Intuitively:</p>
-<ul>
-<li><span class="arithmatex">\(\nabla f(x^*)\)</span> represents the gradient (direction of steepest ascent) of the objective.</li>
-<li><span class="arithmatex">\(A^T v^*\)</span> represents a correction term ensuring that we stay within the feasible set <span class="arithmatex">\(A x = b\)</span>.</li>
-<li>At the optimum, the projected gradient along feasible directions is zero.</li>
-</ul>
-<h2 id="132-equality-constrained-quadratic-minimization">13.2 Equality-Constrained Quadratic Minimization<a class="headerlink" href="#132-equality-constrained-quadratic-minimization" title="Permanent link">¶</a></h2>
-<p>A particularly important case is when <span class="arithmatex">\(f\)</span> is quadratic:</p>
-<div class="arithmatex">\[
-f(x) = \tfrac{1}{2} x^T P x + q^T x + r,
-\]</div>
-<p>where <span class="arithmatex">\(P \in \mathbb{S}_+^n\)</span> (symmetric positive semidefinite).<br>
-Then <span class="arithmatex">\(\nabla f(x) = P x + q\)</span>, and the optimality conditions become the linear system:</p>
+<p>These equations express stationarity and feasibility simultaneously. They can be combined into the KKT linear system:</p>
 <div class="arithmatex">\[
 \begin{bmatrix}
-P &amp; A^T \\
+\nabla^2 f(x) &amp; A^\top \\
 A &amp; 0
 \end{bmatrix}
 \begin{bmatrix}
-x^* \\ v^*
+\Delta x \\
+\Delta \nu
 \end{bmatrix}
 =
+-
 \begin{bmatrix}
-- q \\ b
+\nabla f(x) + A^\top \nu \\
+A x - b
 \end{bmatrix}.
 \]</div>
-<p>This is known as the KKT system for the quadratic program.</p>
-<h3 id="the-kkt-matrix">The KKT Matrix<a class="headerlink" href="#the-kkt-matrix" title="Permanent link">¶</a></h3>
-<p>The block matrix</p>
+<p>At the optimum, the right-hand side is zero.</p>
+<blockquote>
+<p>ML Connection:<br>
+Lagrange multipliers <span class="arithmatex">\(\nu\)</span> quantify trade-offs between objectives and hard constraints —<br>
+for instance, enforcing weight normalization in a neural layer, balance constraints in fair classification, or conservation laws in physics-informed networks.</p>
+</blockquote>
+<h2 id="133-the-quadratic-case">13.3 The Quadratic Case<a class="headerlink" href="#133-the-quadratic-case" title="Permanent link">¶</a></h2>
+<p>For a quadratic objective
+<script type="math/tex; mode=display">
+f(x) = \tfrac{1}{2}x^\top P x + q^\top x + r,
+</script>
+with <span class="arithmatex">\(P \succeq 0\)</span>, the KKT conditions reduce to a linear system:</p>
 <div class="arithmatex">\[
-K = 
 \begin{bmatrix}
-P &amp; A^T \\
+P &amp; A^\top \\
 A &amp; 0
 \end{bmatrix}
+\begin{bmatrix}
+x^\star \\ \nu^\star
+\end{bmatrix}
+=
+-
+\begin{bmatrix}
+q \\ -b
+\end{bmatrix}.
 \]</div>
-<p>is called the KKT matrix.<br>
-It is nonsingular (and thus the problem has a unique solution) if and only if:</p>
+<p>This is a saddle-point system, solvable by factorization or elimination. If <span class="arithmatex">\(P \succ 0\)</span> and <span class="arithmatex">\(A\)</span> has full row rank, the solution <span class="arithmatex">\((x^\star, \nu^\star)\)</span> is unique.</p>
+<blockquote>
+<p>In ML, such systems appear in constrained least squares, e.g. enforcing <span class="arithmatex">\(\sum_i w_i = 1\)</span> in portfolio optimization or convex combination weights in mixture models.</p>
+</blockquote>
+<h2 id="134-the-null-space-reduced-variable-method">13.4 The Null-Space (Reduced Variable) Method<a class="headerlink" href="#134-the-null-space-reduced-variable-method" title="Permanent link">¶</a></h2>
+<p>If <span class="arithmatex">\(A\)</span> has full row rank, we can find a particular feasible point <span class="arithmatex">\(x_0\)</span> such that <span class="arithmatex">\(A x_0 = b\)</span>, and a basis <span class="arithmatex">\(Z\)</span> for the null space of <span class="arithmatex">\(A\)</span> satisfying <span class="arithmatex">\(A Z = 0\)</span>.<br>
+Then any feasible <span class="arithmatex">\(x\)</span> can be written as:</p>
 <div class="arithmatex">\[
-A x = 0, \, x \neq 0 \quad \Rightarrow \quad x^T P x &gt; 0,
+x = x_0 + Z y, \quad y \in \mathbb{R}^{n-p}.
 \]</div>
-<p>i.e., <span class="arithmatex">\(P\)</span> is positive definite on the nullspace of <span class="arithmatex">\(A\)</span>.<br>
-An equivalent condition is that:</p>
+<p>Substituting into the objective gives a reduced problem:</p>
 <div class="arithmatex">\[
-P + A^T A \succ 0.
+\min_y \; f(x_0 + Z y).
 \]</div>
-<h2 id="133-eliminating-equality-constraints">13.3 Eliminating Equality Constraints<a class="headerlink" href="#133-eliminating-equality-constraints" title="Permanent link">¶</a></h2>
-<p>Sometimes it is convenient to eliminate the equality constraints by parameterizing the feasible set.</p>
-<p>The feasible set <span class="arithmatex">\(\{x \mid A x = b\}\)</span> can be expressed as:</p>
+<p>This is an unconstrained problem in <span class="arithmatex">\(y\)</span>, solvable by gradient or Newton methods.<br>
+The reduced gradient and Hessian are:</p>
 <div class="arithmatex">\[
-x = F z + \hat{x}, \quad z \in \mathbb{R}^{n-p},
+\nabla_y f = Z^\top \nabla_x f, \qquad \nabla_y^2 f = Z^\top \nabla_x^2 f \, Z.
 \]</div>
-<p>where:</p>
-<ul>
-<li><span class="arithmatex">\(\hat{x}\)</span> is a particular solution of <span class="arithmatex">\(A x = b\)</span>,</li>
-<li><span class="arithmatex">\(F \in \mathbb{R}^{n \times (n-p)}\)</span> is a matrix whose columns form a basis for the nullspace of <span class="arithmatex">\(A\)</span> (so <span class="arithmatex">\(A F = 0\)</span>).</li>
-</ul>
-<p>Substituting this into the objective gives an unconstrained problem:</p>
-<div class="arithmatex">\[
-\min_z \; f(F z + \hat{x}).
-\]</div>
-<p>Once we solve for <span class="arithmatex">\(z^*\)</span>, we recover:</p>
-<div class="arithmatex">\[
-x^* = F z^* + \hat{x}, \quad v^* = - (A A^T)^{-1} A \nabla f(x^*).
-\]</div>
-<h3 id="example-optimal-resource-allocation">Example: Optimal Resource Allocation<a class="headerlink" href="#example-optimal-resource-allocation" title="Permanent link">¶</a></h3>
-<p>Suppose we allocate resources <span class="arithmatex">\(x_i \in \mathbb{R}\)</span> to <span class="arithmatex">\(n\)</span> agents, with cost functions <span class="arithmatex">\(f_i(x_i)\)</span> for each agent <span class="arithmatex">\(i\)</span>.</p>
-<p>We have a total resource constraint:</p>
-<div class="arithmatex">\[
-x_1 + x_2 + \dots + x_n = b.
-\]</div>
-<p>The problem is:</p>
+<blockquote>
+<p>Interpretation: Optimization proceeds only along feasible directions — those that do not violate the constraints (i.e., within <span class="arithmatex">\(\operatorname{Null}(A)\)</span>).<br>
+This is equivalent to projecting all gradient steps onto the tangent space of the constraint manifold.</p>
+</blockquote>
+<h2 id="135-newtons-method-for-equality-constrained-problems">13.5 Newton’s Method for Equality-Constrained Problems<a class="headerlink" href="#135-newtons-method-for-equality-constrained-problems" title="Permanent link">¶</a></h2>
+<p>For a twice differentiable <span class="arithmatex">\(f\)</span>, the equality-constrained Newton step solves the quadratic subproblem:</p>
 <div class="arithmatex">\[
 \begin{aligned}
-\text{minimize} \quad &amp; f_1(x_1) + \cdots + f_n(x_n) \\
-\text{subject to} \quad &amp; x_1 + \cdots + x_n = b.
+\min_d &amp; \quad \tfrac{1}{2} d^\top \nabla^2 f(x) d + \nabla f(x)^\top d, \\
+\text{s.t.} &amp; \quad A d = 0.
 \end{aligned}
 \]</div>
-<p>To eliminate the constraint, we express <span class="arithmatex">\(x_n\)</span> as:</p>
-<div class="arithmatex">\[
-x_n = b - (x_1 + \cdots + x_{n-1}),
-\]</div>
-<p>and define:</p>
-<div class="arithmatex">\[
-\hat{x} = b e_n, \quad
-F = 
-\begin{bmatrix}
-I_{n-1} \\
-- \mathbf{1}^T
-\end{bmatrix} \in \mathbb{R}^{n \times (n-1)}.
-\]</div>
-<p>The reduced problem is:</p>
-<div class="arithmatex">\[
-\min_{x_1, \ldots, x_{n-1}} f_1(x_1) + \cdots + f_{n-1}(x_{n-1}) + f_n(b - x_1 - \cdots - x_{n-1}).
-\]</div>
-<h2 id="134-newtons-method-for-equality-constrained-problems">13.4 Newton’s Method for Equality-Constrained Problems<a class="headerlink" href="#134-newtons-method-for-equality-constrained-problems" title="Permanent link">¶</a></h2>
-<p>We now extend Newton’s method to handle equality constraints.</p>
-<p>At a feasible point <span class="arithmatex">\(x\)</span> (i.e., <span class="arithmatex">\(A x = b\)</span>), the Newton step <span class="arithmatex">\(\Delta x_{\text{nt}}\)</span> is obtained by solving:</p>
+<p>This produces the step <span class="arithmatex">\((d, \lambda)\)</span> from the linearized KKT system:</p>
 <div class="arithmatex">\[
 \begin{bmatrix}
-\nabla^2 f(x) &amp; A^T \\
+\nabla^2 f(x) &amp; A^\top \\
 A &amp; 0
 \end{bmatrix}
 \begin{bmatrix}
-v \\ w
+d \\ \lambda
 \end{bmatrix}
 =
 -
@@ -1341,119 +1462,168 @@ v \\ w
 \nabla f(x) \\ 0
 \end{bmatrix}.
 \]</div>
-<p>The Newton step is <span class="arithmatex">\(\Delta x_{\text{nt}} = v\)</span>.</p>
-<h3 id="interpretation">Interpretation<a class="headerlink" href="#interpretation" title="Permanent link">¶</a></h3>
-<p>The step <span class="arithmatex">\(\Delta x_{\text{nt}}\)</span> solves the second-order approximation of the equality-constrained problem:</p>
-<div class="arithmatex">\[
-\begin{aligned}
-\text{minimize} \quad &amp; \hat{f}(x + v)
-= f(x) + \nabla f(x)^T v + \tfrac{1}{2} v^T \nabla^2 f(x) v \\
-\text{subject to} \quad &amp; A(x + v) = b.
-\end{aligned}
-\]</div>
-<p>The equations follow from linearizing the KKT conditions:</p>
-<div class="arithmatex">\[
-\nabla f(x + v) + A^T w \approx \nabla f(x) + \nabla^2 f(x) v + A^T w = 0, \quad
-A(x + v) = b.
-\]</div>
-<h2 id="135-newton-decrement-and-stopping-criterion">13.5 Newton Decrement and Stopping Criterion<a class="headerlink" href="#135-newton-decrement-and-stopping-criterion" title="Permanent link">¶</a></h2>
-<p>The Newton decrement measures proximity to the optimum:</p>
-<div class="arithmatex">\[
-\lambda(x) =
-(\Delta x_{\text{nt}}^T \nabla^2 f(x) \Delta x_{\text{nt}})^{1/2}
-=
-(-\nabla f(x)^T \Delta x_{\text{nt}})^{1/2}.
-\]</div>
-<p>It provides a local estimate of suboptimality:</p>
-<div class="arithmatex">\[
-f(x) - f^* \approx \frac{\lambda(x)^2}{2}.
-\]</div>
-<p>The directional derivative along the Newton direction is:</p>
-<div class="arithmatex">\[
-\left.\frac{d}{dt} f(x + t \Delta x_{\text{nt}})\right|_{t=0} = -\lambda(x)^2.
-\]</div>
-<p>A common stopping condition is <span class="arithmatex">\(\lambda(x)^2 / 2 \leq \varepsilon\)</span>.</p>
-<h2 id="136-newtons-method-with-equality-constraints">13.6 Newton’s Method with Equality Constraints<a class="headerlink" href="#136-newtons-method-with-equality-constraints" title="Permanent link">¶</a></h2>
-<p>A practical algorithm:</p>
-<p>Given: feasible starting point <span class="arithmatex">\(x \in \text{dom } f\)</span> with <span class="arithmatex">\(A x = b\)</span>, and tolerance <span class="arithmatex">\(\varepsilon &gt; 0\)</span>.</p>
-<p>Repeat:
-1. Compute the Newton step and decrement <span class="arithmatex">\(\Delta x_{\text{nt}}, \lambda(x)\)</span>.<br>
-2. Stopping criterion: if <span class="arithmatex">\(\lambda^2 / 2 \leq \varepsilon\)</span>, quit.<br>
-3. Line search: choose step size <span class="arithmatex">\(t\)</span> via backtracking line search.<br>
-4. Update: <span class="arithmatex">\(x := x + t \Delta x_{\text{nt}}\)</span>.</p>
-<p>This is a feasible descent method: all iterates satisfy <span class="arithmatex">\(A x = b\)</span> and <span class="arithmatex">\(f(x^{(k+1)}) &lt; f(x^{(k)})\)</span>.<br>
-It is also affine invariant — the algorithm behaves identically under affine transformations of the variables.</p>
-<h2 id="137-newtons-method-and-elimination">13.7 Newton’s Method and Elimination<a class="headerlink" href="#137-newtons-method-and-elimination" title="Permanent link">¶</a></h2>
-<p>If we have already eliminated the constraints, Newton’s method can be directly applied to the reduced function:</p>
-<div class="arithmatex">\[
-\tilde{f}(z) = f(F z + \hat{x}), \quad A \hat{x} = b, \quad A F = 0.
-\]</div>
-<p>Unconstrained Newton’s method for <span class="arithmatex">\(\tilde{f}(z)\)</span> generates iterates <span class="arithmatex">\(z^{(k)}\)</span>, and corresponding:</p>
-<div class="arithmatex">\[
-x^{(k)} = F z^{(k)} + \hat{x}.
-\]</div>
-<p>Thus, the equality-constrained Newton iterates correspond exactly to unconstrained Newton iterates on the reduced problem.</p>
-<h2 id="138-newton-step-at-infeasible-points">13.8 Newton Step at Infeasible Points<a class="headerlink" href="#138-newton-step-at-infeasible-points" title="Permanent link">¶</a></h2>
-<p>If <span class="arithmatex">\(x\)</span> is not feasible (i.e., <span class="arithmatex">\(A x \neq b\)</span>), we can generalize to the infeasible Newton step.</p>
-<p>Define the primal-dual residual:</p>
-<div class="arithmatex">\[
-r(y) = 
-\begin{bmatrix}
-\nabla f(x) + A^T v \\
-A x - b
-\end{bmatrix}, \quad y = (x, v).
-\]</div>
-<p>Linearizing <span class="arithmatex">\(r(y) = 0\)</span> around <span class="arithmatex">\(y\)</span> gives:</p>
-<div class="arithmatex">\[
-r(y + \Delta y) \approx r(y) + D r(y) \Delta y = 0.
-\]</div>
-<p>Hence, the Newton step <span class="arithmatex">\(\Delta y = (\Delta x_{\text{nt}}, \Delta v_{\text{nt}})\)</span> satisfies:</p>
+<p>The update is <span class="arithmatex">\(x_{k+1} = x_k + \alpha d\)</span>, ensuring <span class="arithmatex">\(A x_{k+1} = b\)</span> if <span class="arithmatex">\(A x_k = b\)</span>.</p>
+<p>Geometric insight:<br>
+The Newton direction is the projection of the unconstrained Newton step onto the tangent space of the feasible set (directions satisfying <span class="arithmatex">\(A d = 0\)</span>).<br>
+Thus, each step stays within the affine constraint manifold.</p>
+<blockquote>
+<p>In practice:<br>
+The KKT system is typically solved by <em>Schur complement factorization</em>:
+<script type="math/tex; mode=display">
+(A (\nabla^2 f)^{-1} A^\top) \lambda = A (\nabla^2 f)^{-1} \nabla f,
+</script>
+which then yields <span class="arithmatex">\(d = -(\nabla^2 f)^{-1} (\nabla f + A^\top \lambda)\)</span>.</p>
+</blockquote>
+<h2 id="136-infeasible-start-newton-method">13.6 Infeasible Start Newton Method<a class="headerlink" href="#136-infeasible-start-newton-method" title="Permanent link">¶</a></h2>
+<p>When starting from an infeasible point (<span class="arithmatex">\(A x_0 \ne b\)</span>),<br>
+we relax the constraint and drive feasibility progressively.<br>
+At iteration <span class="arithmatex">\(k\)</span>, compute <span class="arithmatex">\((\Delta x, \Delta \nu)\)</span> by solving:</p>
 <div class="arithmatex">\[
 \begin{bmatrix}
-\nabla^2 f(x) &amp; A^T \\
+\nabla^2 f(x_k) &amp; A^\top \\
 A &amp; 0
 \end{bmatrix}
 \begin{bmatrix}
-\Delta x_{\text{nt}} \\ \Delta v_{\text{nt}}
+\Delta x \\ \Delta \nu
 \end{bmatrix}
 =
 -
 \begin{bmatrix}
-\nabla f(x) + A^T v \\ A x - b
+\nabla f(x_k) + A^\top \nu_k \\
+A x_k - b
 \end{bmatrix}.
 \]</div>
-<p>This is known as the primal-dual Newton step.</p>
-<h2 id="139-infeasible-start-newton-method">13.9 Infeasible-Start Newton Method<a class="headerlink" href="#139-infeasible-start-newton-method" title="Permanent link">¶</a></h2>
-<p>A more general algorithm that does not require feasibility at the start.</p>
-<p>Given: initial <span class="arithmatex">\((x, v)\)</span>, tolerance <span class="arithmatex">\(\varepsilon &gt; 0\)</span>, constants <span class="arithmatex">\(\alpha \in (0, 1/2)\)</span>, <span class="arithmatex">\(\beta \in (0, 1)\)</span>.</p>
-<p>Repeat:
-1. Compute primal-dual Newton step <span class="arithmatex">\((\Delta x_{\text{nt}}, \Delta v_{\text{nt}})\)</span>.<br>
-2. Backtracking line search on <span class="arithmatex">\(\|r(y)\|_2\)</span>:<br>
-   - set <span class="arithmatex">\(t = 1\)</span><br>
-   - while <span class="arithmatex">\(\|r(y + t \Delta y)\|_2 &gt; (1 - \alpha t)\|r(y)\|_2\)</span>, set <span class="arithmatex">\(t := \beta t\)</span>.<br>
-3. Update:<br>
-<span class="arithmatex">\(x := x + t \Delta x_{\text{nt}}, \quad v := v + t \Delta v_{\text{nt}}\)</span>.</p>
-<p>Continue until <span class="arithmatex">\(\|r(y)\|_2 \leq \varepsilon\)</span>.</p>
-<p>Although this is not a descent method for <span class="arithmatex">\(f(x)\)</span>, it ensures that <span class="arithmatex">\(\|r(y)\|_2\)</span> decreases at each iteration.</p>
-<p>Directional derivative of <span class="arithmatex">\(\|r(y)\|_2\)</span> along the Newton direction is:</p>
+<p>Then update:</p>
 <div class="arithmatex">\[
-\left.\frac{d}{dt} \|r(y + t \Delta y)\|_2\right|_{t=0} = -\|r(y)\|_2.
+x_{k+1} = x_k + \alpha \Delta x, \quad
+\nu_{k+1} = \nu_k + \alpha \Delta \nu.
 \]</div>
-<h2 id="1310-solving-kkt-systems-efficiently">13.10 Solving KKT Systems Efficiently<a class="headerlink" href="#1310-solving-kkt-systems-efficiently" title="Permanent link">¶</a></h2>
-<p>Both feasible and infeasible Newton methods require solving KKT systems of the form:</p>
-<div class="arithmatex">\[
-\begin{bmatrix}
-H &amp; A^T \\
-A &amp; 0
-\end{bmatrix}
-\begin{bmatrix}
-v \\ w
-\end{bmatrix}
-= -
-\begin{bmatrix}
-g \\ h
-\end{bmatrix},
-\]</div>
+<p>This method enforces feasibility gradually, converging to <span class="arithmatex">\((x^\star, \nu^\star)\)</span> under mild conditions.</p>
+<blockquote>
+<p>In ML contexts, infeasible starts are typical — we rarely have feasible initialization (e.g., in constrained autoencoders or regularized fairness models).<br>
+The infeasible Newton method ensures consistent progress in both primal feasibility (<span class="arithmatex">\(A x = b\)</span>) and dual stationarity (<span class="arithmatex">\(\nabla f + A^\top \nu = 0\)</span>).</p>
+</blockquote>
+<h2 id="137-computational-considerations">13.7 Computational Considerations<a class="headerlink" href="#137-computational-considerations" title="Permanent link">¶</a></h2>
+<ul>
+<li>Factorization: KKT systems can be large but structured. Exploiting sparsity in <span class="arithmatex">\(\nabla^2 f\)</span> and <span class="arithmatex">\(A\)</span> is essential in high-dimensional problems.</li>
+<li>Stability: Adding small regularization to the (0,0) block of the KKT matrix improves conditioning:
+  <script type="math/tex; mode=display">
+  \begin{bmatrix}
+  \nabla^2 f + \delta I & A^\top \\
+  A & -\delta I
+  \end{bmatrix}.
+  </script>
+</li>
+<li>Schur Complement: Eliminating <span class="arithmatex">\(\Delta x\)</span> yields a smaller linear system in <span class="arithmatex">\(\Delta \nu\)</span>, which can be more efficient when <span class="arithmatex">\(p \ll n\)</span>.</li>
+</ul>
+<h2 id="138-connections-to-machine-learning">13.8 Connections to Machine Learning<a class="headerlink" href="#138-connections-to-machine-learning" title="Permanent link">¶</a></h2>
+<p>Equality-constrained optimization appears in several ML and signal processing settings:</p>
+<table>
+<thead>
+<tr>
+<th>Example</th>
+<th>Equality Constraint</th>
+<th>Interpretation</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Portfolio optimization</td>
+<td><span class="arithmatex">\(\mathbf{1}^\top w = 1\)</span></td>
+<td>Weights must sum to 1</td>
+</tr>
+<tr>
+<td>Fair classification</td>
+<td><span class="arithmatex">\(A w = 0\)</span></td>
+<td>Enforces equal outcomes across groups</td>
+</tr>
+<tr>
+<td>Orthogonal embeddings</td>
+<td><span class="arithmatex">\(W^\top W = I\)</span></td>
+<td>Preserves independence / energy</td>
+</tr>
+<tr>
+<td>Normalization layers</td>
+<td><span class="arithmatex">\(\|w\|_2^2 = 1\)</span></td>
+<td>Scale invariance constraint</td>
+</tr>
+<tr>
+<td>Physics-informed models</td>
+<td><span class="arithmatex">\(\text{div}(F)=0\)</span></td>
+<td>Conservation of mass / charge</td>
+</tr>
+</tbody>
+</table>
+<h3 id="summary-approaches-to-equality-constrained-optimization">Summary: Approaches to Equality-Constrained Optimization<a class="headerlink" href="#summary-approaches-to-equality-constrained-optimization" title="Permanent link">¶</a></h3>
+<table>
+<thead>
+<tr>
+<th>Approach</th>
+<th>Constraint Type</th>
+<th>Feasibility (Local/Global)</th>
+<th>Core Idea</th>
+<th>Advantages</th>
+<th>Limitations / Drawbacks</th>
+<th>Typical ML / Optimization Use</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Null-Space (Variable Elimination)</td>
+<td>Linear, full-rank <span class="arithmatex">\(A\)</span></td>
+<td>Global</td>
+<td>Parameterize feasible <span class="arithmatex">\(x = x_0 + Z y\)</span> with <span class="arithmatex">\(A Z = 0\)</span></td>
+<td>Converts to unconstrained problem; dimension reduction; exact</td>
+<td>Requires null-space basis <span class="arithmatex">\(Z\)</span>; destroys sparsity; expensive for large <span class="arithmatex">\(A\)</span></td>
+<td>Constrained least squares, small-scale convex programs</td>
+</tr>
+<tr>
+<td>Local Parameterization (Manifold Method)</td>
+<td>Nonlinear <span class="arithmatex">\(g(x) = 0\)</span></td>
+<td>Local (around feasible point)</td>
+<td>Use implicit function theorem: locally express <span class="arithmatex">\(x = x(y)\)</span></td>
+<td>Captures nonlinear manifold structure; geometric insight</td>
+<td>Valid only locally; requires Jacobians; expensive</td>
+<td>Manifold learning, orthogonal embeddings, equality-regularized networks</td>
+</tr>
+<tr>
+<td>KKT / Lagrange System</td>
+<td>Linear or nonlinear</td>
+<td>Global (if convex)</td>
+<td>Solve coupled system <span class="arithmatex">\(\nabla f + A^\top \nu = 0\)</span>, <span class="arithmatex">\(A x = b\)</span></td>
+<td>Keeps structure; allows dual interpretation; works for large sparse systems</td>
+<td>Larger system; more variables</td>
+<td>Quadratic programming, convex solvers, equality-constrained ML models</td>
+</tr>
+<tr>
+<td>Primal–Dual Newton Method</td>
+<td>Linear or nonlinear</td>
+<td>Global (convex)</td>
+<td>Newton’s method on full KKT system</td>
+<td>Quadratic convergence near optimum; stable numerically</td>
+<td>Requires Hessians and factorizations</td>
+<td>Interior-point solvers, primal–dual optimization, barrier methods</td>
+</tr>
+<tr>
+<td>Penalty / Augmented Lagrangian</td>
+<td>General (convex or nonconvex)</td>
+<td>Approximate (drives feasibility)</td>
+<td>Add penalty term <span class="arithmatex">\(\tfrac{\rho}{2}\|A x - b\|^2\)</span> or dual updates</td>
+<td>Simple to implement; smooth transition from unconstrained</td>
+<td>Needs tuning of <span class="arithmatex">\(\rho\)</span>; slow convergence to exact feasibility</td>
+<td>Regularized fairness, soft constraints, physics-informed networks</td>
+</tr>
+<tr>
+<td>Projection / Normalization Step</td>
+<td>Linear or nonlinear (simple form)</td>
+<td>Iterative (after each step)</td>
+<td>Project back to feasible set: <span class="arithmatex">\(x_{k+1} = \Pi_{\{A x = b\}}(x_{k+1})\)</span></td>
+<td>Keeps updates feasible; easy for simple constraints</td>
+<td>Costly for complex <span class="arithmatex">\(A\)</span>; may distort gradient direction</td>
+<td>Normalization layers, unit-norm or balance constraints</td>
+</tr>
+</tbody>
+</table>
 
 
 

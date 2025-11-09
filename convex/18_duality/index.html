@@ -873,7 +873,7 @@
   
   
   <span class="md-ellipsis">
-    Cheat Sheets
+    Deep Learning
     
   </span>
   
@@ -883,6 +883,143 @@
         
         <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            Deep Learning
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../deeplearning/intro/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    1. Introduction to Neural Netwoks
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../deeplearning/2_convnets/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    2. Convolutional Neural Networks (CNNs)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../deeplearning/intro/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    1. Introduction to Neural Netwoks
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../deeplearning/intro/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    1. Introduction to Neural Netwoks
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5">
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Cheat Sheets
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
             <span class="md-nav__icon md-icon"></span>
             Cheat Sheets
           </label>
@@ -933,10 +1070,10 @@
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5">
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6">
         
           
-          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
             
   
   
@@ -949,8 +1086,8 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_5">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
             <span class="md-nav__icon md-icon"></span>
             Appendices
           </label>
@@ -1227,124 +1364,139 @@
 f^\star = \inf \{ f(x) : g_i(x) \le 0,\ h_j(x) = 0 \}.
 </script>
 </p>
+<p>Here, <em>infimum</em> means the smallest value <span class="arithmatex">\(f(x)\)</span> can approach — even if it is not exactly attained.</p>
+<h2 id="92-why-duality">9.2 Why Duality?<a class="headerlink" href="#92-why-duality" title="Permanent link">¶</a></h2>
+<p>Before any equations, let’s understand the high-level idea.</p>
+<p>A constrained optimization problem can be viewed as a <em>trade-off</em>:</p>
 <blockquote>
-<p>Infimum (inf): the greatest lower bound of a set — the smallest value a function can approach, even if it is not attained.</p>
+<p>Minimize <span class="arithmatex">\(f(x)\)</span> while paying penalties for violating constraints.</p>
 </blockquote>
+<p>If we allow violations but penalize them proportionally, we get a relaxed problem.<br>
+How high should these penalties be? That’s what the dual variables <span class="arithmatex">\(\mu_i, \lambda_j\)</span> represent.</p>
+<ul>
+<li><span class="arithmatex">\(\mu_i\)</span> (for inequalities): how costly it is to violate constraint <span class="arithmatex">\(g_i(x) \le 0\)</span>.  </li>
+<li><span class="arithmatex">\(\lambda_j\)</span> (for equalities): how much the objective changes when equality constraint <span class="arithmatex">\(h_j(x)=0\)</span> is relaxed.</li>
+</ul>
+<p>Thus, duality converts <em>constraints</em> into <em>prices</em> or <em>forces</em> that shape the optimization landscape.</p>
 <h2 id="92-the-lagrangian">9.2 The Lagrangian<a class="headerlink" href="#92-the-lagrangian" title="Permanent link">¶</a></h2>
-<p>We define the Lagrangian:
+<p>The Lagrangian function incorporates both the objective and constraints:
 <script type="math/tex; mode=display">
-L(x,\lambda,\mu)
-=
-f(x)
+L(x, \lambda, \mu)
+= f(x)
 + \sum_{i=1}^m \mu_i g_i(x)
 + \sum_{j=1}^p \lambda_j h_j(x),
 </script>
-with multipliers <span class="arithmatex">\(\mu \in \mathbb{R}^m\)</span> and <span class="arithmatex">\(\lambda \in \mathbb{R}^p\)</span>. For inequality constraints, we will later require <span class="arithmatex">\(\mu_i \ge 0\)</span>.</p>
-<p>Think of <span class="arithmatex">\(\mu_i\)</span> and <span class="arithmatex">\(\lambda_j\)</span> as “penalties” for violating the constraints.</p>
-<h2 id="93-the-dual-function">9.3 The dual function<a class="headerlink" href="#93-the-dual-function" title="Permanent link">¶</a></h2>
-<p>For fixed multipliers <span class="arithmatex">\((\lambda,\mu)\)</span>, define the dual function:
+with dual variables <span class="arithmatex">\(\mu \in \mathbb{R}^m\)</span>, <span class="arithmatex">\(\lambda \in \mathbb{R}^p\)</span>.</p>
+<ul>
+<li><span class="arithmatex">\(\mu_i \ge 0\)</span> are multipliers for inequality constraints,</li>
+<li><span class="arithmatex">\(\lambda_j\)</span> are free (can be any sign) for equality constraints.</li>
+</ul>
+<p>If <span class="arithmatex">\(\mu_i &gt; 0\)</span>, violating the <span class="arithmatex">\(i\)</span>th constraint is penalized heavily; if <span class="arithmatex">\(\mu_i = 0\)</span>, that constraint is inactive.</p>
+<h2 id="94-the-dual-function-lower-bounds-from-penalties">9.4 The Dual Function – Lower Bounds from Penalties<a class="headerlink" href="#94-the-dual-function-lower-bounds-from-penalties" title="Permanent link">¶</a></h2>
+<p>For fixed <span class="arithmatex">\((\lambda, \mu)\)</span>, we define the dual function:
 <script type="math/tex; mode=display">
-\theta(\lambda,\mu)
-=
-\inf_x L(x,\lambda,\mu).
+\theta(\lambda, \mu) = \inf_x L(x, \lambda, \mu).
 </script>
 </p>
-<p>Important:</p>
+<p>Intuitively:</p>
 <ul>
-<li><span class="arithmatex">\(\theta(\lambda,\mu)\)</span> is always concave in <span class="arithmatex">\((\lambda,\mu)\)</span>, even if <span class="arithmatex">\(f\)</span> is not convex.</li>
-<li>For any <span class="arithmatex">\(\mu \ge 0\)</span>,
-<script type="math/tex; mode=display">
-\theta(\lambda,\mu) \le f^\star.
-</script>
-</li>
+<li>We pick penalties <span class="arithmatex">\((\lambda, \mu)\)</span> for constraint violations.</li>
+<li>We minimize <span class="arithmatex">\(L\)</span> with respect to <span class="arithmatex">\(x\)</span> — allowing constraint violations but paying for them.</li>
+<li>The resulting value <span class="arithmatex">\(\theta(\lambda, \mu)\)</span> is a <em>lower bound</em> on the original problem’s optimum <span class="arithmatex">\(f^*\)</span>.</li>
 </ul>
-<p>This last fact is called weak duality:</p>
-<blockquote>
-<p>The dual function gives lower bounds on the primal optimum.</p>
-</blockquote>
-<p>Proof sketch of weak duality:<br>
-For any feasible <span class="arithmatex">\(x\)</span> (i.e. satisfying <span class="arithmatex">\(g_i(x) \le 0\)</span>, <span class="arithmatex">\(h_j(x) = 0\)</span>) and any <span class="arithmatex">\(\mu \ge 0\)</span>,
+<p>Formally, for any feasible <span class="arithmatex">\(x\)</span> and any <span class="arithmatex">\(\mu \ge 0\)</span>,
 <script type="math/tex; mode=display">
-L(x,\lambda,\mu)
-=
-f(x)
-+ \sum_i \mu_i g_i(x)
-+ \sum_j \lambda_j h_j(x)
+L(x, \lambda, \mu)
+= f(x) + \sum_i \mu_i g_i(x) + \sum_j \lambda_j h_j(x)
 \le f(x),
 </script>
-because <span class="arithmatex">\(g_i(x) \le 0\)</span> and <span class="arithmatex">\(\mu_i \ge 0\)</span>.<br>
-So <span class="arithmatex">\(\theta(\lambda,\mu) = \inf_x L(x,\lambda,\mu) \le f(x)\)</span> for all feasible <span class="arithmatex">\(x\)</span>.<br>
-Taking the infimum over feasible <span class="arithmatex">\(x\)</span> gives <span class="arithmatex">\(\theta(\lambda,\mu) \le f^\star\)</span>.</p>
-<h2 id="94-the-dual-problem">9.4 The dual problem<a class="headerlink" href="#94-the-dual-problem" title="Permanent link">¶</a></h2>
-<p>We now maximise the lower bound. The Lagrange dual problem is:
+since <span class="arithmatex">\(g_i(x) \le 0\)</span> and <span class="arithmatex">\(\mu_i \ge 0\)</span>.<br>
+Taking the infimum over all <span class="arithmatex">\(x\)</span> gives:
+<script type="math/tex; mode=display">
+\theta(\lambda, \mu) \le f^*.
+</script>
+</p>
+<p>This property is known as weak duality:</p>
+<blockquote>
+<p>The dual function provides lower bounds on the primal optimum.</p>
+</blockquote>
+<h3 id="properties-of-the-dual-function">Properties of the Dual Function<a class="headerlink" href="#properties-of-the-dual-function" title="Permanent link">¶</a></h3>
+<ul>
+<li><span class="arithmatex">\(\theta(\lambda, \mu)\)</span> is concave, even if <span class="arithmatex">\(f\)</span> itself is not convex.<br>
+  (Infimum of affine functions in <span class="arithmatex">\((\lambda, \mu)\)</span> is concave.)</li>
+<li>It may take the value <span class="arithmatex">\(-\infty\)</span> if the Lagrangian is unbounded below.</li>
+</ul>
+<p>The dual function defines a new optimization problem — the dual problem — where we maximize this lower bound.</p>
+<h2 id="95-the-dual-problem">9.5 The Dual Problem<a class="headerlink" href="#95-the-dual-problem" title="Permanent link">¶</a></h2>
+<p>We now <em>maximize</em> the dual function subject to <span class="arithmatex">\(\mu \ge 0\)</span>:
 <script type="math/tex; mode=display">
 \begin{array}{ll}
-\text{maximise}_{\lambda,\mu} & \theta(\lambda,\mu) \\
+\text{maximize}_{\lambda, \mu} & \theta(\lambda, \mu) \\
 \text{subject to} & \mu \ge 0.
 \end{array}
 </script>
 </p>
-<p>Because <span class="arithmatex">\(\theta\)</span> is concave and we are maximising it, the dual problem is always a concave maximisation problem (i.e. a convex optimisation problem in standard form).</p>
-<p>Let <span class="arithmatex">\(d^\star\)</span> denote the optimal dual value.<br>
-From weak duality, <span class="arithmatex">\(d^\star \le f^\star\)</span> always.</p>
-<h2 id="95-strong-duality-and-slaters-condition">9.5 Strong duality and Slater’s condition<a class="headerlink" href="#95-strong-duality-and-slaters-condition" title="Permanent link">¶</a></h2>
-<p>If <span class="arithmatex">\(d^\star = f^\star\)</span>, we say strong duality holds.</p>
-<p>For convex problems, strong duality typically holds under a mild regularity condition known as Slater’s condition (Boyd and Vandenberghe, 2004):</p>
+<p>This is the Lagrange dual problem.</p>
+<p>Let <span class="arithmatex">\(d^*\)</span> denote the optimal dual value.<br>
+From weak duality, we always have:
+<script type="math/tex; mode=display">
+d^* \le f^*.
+</script>
+</p>
+<p>The dual problem is always a concave maximization — equivalently, a convex optimization problem in the variables <span class="arithmatex">\((\lambda, \mu)\)</span>.</p>
+<h2 id="96-strong-duality-and-the-zero-duality-gap">9.6 Strong Duality and the Zero Duality Gap<a class="headerlink" href="#96-strong-duality-and-the-zero-duality-gap" title="Permanent link">¶</a></h2>
+<p>When <span class="arithmatex">\(d^* = f^*\)</span>, we say strong duality holds.<br>
+The difference <span class="arithmatex">\(f^* - d^*\)</span> is called the duality gap.</p>
+<ul>
+<li>Weak duality: <span class="arithmatex">\(d^* \le f^*\)</span> (always true).  </li>
+<li>Strong duality: <span class="arithmatex">\(d^* = f^*\)</span> (no gap).</li>
+</ul>
+<p>Strong duality means the dual gives <em>exactly the same value</em> as the primal — and optimal multipliers <span class="arithmatex">\((\lambda^*, \mu^*)\)</span> exist.</p>
+<p>For convex problems, this beautiful property holds under Slater’s condition (see Chapter 8):</p>
 <blockquote>
-<p>If the problem is convex and there exists a strictly feasible point <span class="arithmatex">\(\tilde{x}\)</span> such that<br>
-<span class="arithmatex">\(g_i(\tilde{x}) &lt; 0\)</span> for all <span class="arithmatex">\(i\)</span> and <span class="arithmatex">\(h_j(\tilde{x}) = 0\)</span> for all <span class="arithmatex">\(j\)</span>,<br>
-then strong duality holds.</p>
+<p>If there exists a strictly feasible point <span class="arithmatex">\(\tilde{x}\)</span> such that<br>
+<span class="arithmatex">\(g_i(\tilde{x}) &lt; 0\)</span> for all <span class="arithmatex">\(i\)</span>, and <span class="arithmatex">\(h_j(\tilde{x}) = 0\)</span> for all <span class="arithmatex">\(j\)</span>,<br>
+then strong duality holds — the duality gap is zero.</p>
 </blockquote>
-<p>Consequences of strong duality:</p>
+<p>Consequences:</p>
 <ul>
-<li>The gap <span class="arithmatex">\(f^\star - d^\star\)</span> is zero.</li>
-<li>There exist optimal multipliers <span class="arithmatex">\((\lambda^*, \mu^*)\)</span>.</li>
-<li>KKT conditions hold and characterise optimality.</li>
+<li><span class="arithmatex">\(f^* = d^*\)</span> (zero gap).  </li>
+<li>Dual variables <span class="arithmatex">\((\lambda^*, \mu^*)\)</span> exist and are finite.  </li>
+<li>The KKT conditions are both necessary and sufficient for optimality.</li>
 </ul>
-<h2 id="96-kkt-revisited-via-duality">9.6 KKT revisited via duality<a class="headerlink" href="#96-kkt-revisited-via-duality" title="Permanent link">¶</a></h2>
-<p>The Karush–Kuhn–Tucker (KKT) conditions from Chapter 7 can also be seen as the conditions under which:</p>
+<h2 id="97-duality-and-the-kkt-conditions">9.7 Duality and the KKT Conditions<a class="headerlink" href="#97-duality-and-the-kkt-conditions" title="Permanent link">¶</a></h2>
+<p>The KKT conditions (from Chapter 8) are the points where:</p>
 <ol>
-<li><span class="arithmatex">\(x^*\)</span> minimises the Lagrangian over <span class="arithmatex">\(x\)</span>,</li>
-<li><span class="arithmatex">\((\lambda^*, \mu^*)\)</span> maximises <span class="arithmatex">\(\theta(\lambda,\mu)\)</span>,</li>
-<li>complementary slackness holds,</li>
-<li>primal feasibility and dual feasibility hold.</li>
+<li>The primal is feasible (<span class="arithmatex">\(g_i(x^*) \le 0\)</span>, <span class="arithmatex">\(h_j(x^*) = 0\)</span>),</li>
+<li>The dual is feasible (<span class="arithmatex">\(\mu_i^* \ge 0\)</span>),</li>
+<li>The gradients balance (stationarity):
+   <script type="math/tex; mode=display">
+   \nabla f(x^*) + \sum_i \mu_i^* \nabla g_i(x^*) + \sum_j \lambda_j^* \nabla h_j(x^*) = 0,
+   </script>
+</li>
+<li>Complementary slackness holds (<span class="arithmatex">\(\mu_i^* g_i(x^*) = 0\)</span>).</li>
 </ol>
-<p>Under convexity + Slater, a point is optimal if and only if it satisfies KKT (Boyd and Vandenberghe, 2004). So KKT is both necessary and sufficient.</p>
-<p>This is the unification:</p>
-<ul>
-<li>primal feasibility,</li>
-<li>dual feasibility,</li>
-<li>complementary slackness,</li>
-<li>stationarity (zero subgradient of <span class="arithmatex">\(L\)</span> w.r.t. <span class="arithmatex">\(x\)</span>).</li>
-</ul>
-<h2 id="97-interpretation-of-multipliers">9.7 Interpretation of multipliers<a class="headerlink" href="#97-interpretation-of-multipliers" title="Permanent link">¶</a></h2>
-<p>The dual variables <span class="arithmatex">\(\mu_i^*\)</span> and <span class="arithmatex">\(\lambda_j^*\)</span> have interpretations:</p>
-<ul>
-<li><span class="arithmatex">\(\mu_i^*\)</span> can be seen as the “shadow price” of relaxing constraint <span class="arithmatex">\(g_i(x) \le 0\)</span>. If <span class="arithmatex">\(\mu_i^*\)</span> is large, then constraint <span class="arithmatex">\(i\)</span> is “expensive” to satisfy — it is strongly active.</li>
-<li><span class="arithmatex">\(\lambda_j^*\)</span> plays a similar role for equality constraints.</li>
-</ul>
-<p>In resource allocation problems, these multipliers act like market prices. In regularised estimation, they act like trade-off coefficients chosen by the optimisation itself.</p>
-<h2 id="98-example-linear-programming-dual">9.8 Example: Linear programming dual<a class="headerlink" href="#98-example-linear-programming-dual" title="Permanent link">¶</a></h2>
-<p>Consider a linear program in standard form:
+<p>When these hold, <span class="arithmatex">\((x^*, \lambda^*, \mu^*)\)</span> is a primal–dual optimal pair and<br>
 <script type="math/tex; mode=display">
-\begin{array}{ll}
-\text{minimise} & c^\top x \\
-\text{subject to} & Ax = b, \\
-& x \ge 0~.
-\end{array}
+f(x^*) = \theta(\lambda^*, \mu^*) = f^* = d^*.
 </script>
 </p>
-<p>Its dual is
-<script type="math/tex; mode=display">
-\begin{array}{ll}
-\text{maximise} & b^\top y \\
-\text{subject to} & A^\top y \le c~.
-\end{array}
-</script>
-</p>
-<p>This is a classical primal–dual pair. Linear programming is convex, Slater’s condition typically holds (assuming strict feasibility), and therefore strong duality holds. The LP duality theory you may have seen in undergraduate optimisation is just a special case of Lagrange duality (Boyd and Vandenberghe, 2004; Rockafellar, 1970).</p>
-<h2 id="99-duality-as-geometry">9.9 Duality as geometry<a class="headerlink" href="#99-duality-as-geometry" title="Permanent link">¶</a></h2>
-<p>Duality is geometry in disguise. The dual problem is finding the “best supporting hyperplane” that underestimates the primal objective over the feasible set. This is exactly the picture of supporting hyperplanes from Chapter 4, and exactly the subgradient picture from Chapter 6. Appendix B makes this geometric relationship precise in terms of support functions.</p>
+<p>Geometrically, the primal and dual surfaces <em>touch</em> at the optimum — the tangent plane defined by <span class="arithmatex">\((\lambda^*, \mu^*)\)</span> supports <span class="arithmatex">\(f\)</span> exactly.</p>
+<h2 id="98-interpreting-dual-variables">9.8 Interpreting Dual Variables<a class="headerlink" href="#98-interpreting-dual-variables" title="Permanent link">¶</a></h2>
+<p>Dual variables have rich interpretations:</p>
+<ul>
+<li><span class="arithmatex">\(\mu_i^*\)</span>: the <em>shadow price</em> of relaxing inequality <span class="arithmatex">\(g_i(x) \le 0\)</span>.<br>
+  A large <span class="arithmatex">\(\mu_i^*\)</span> means this constraint is expensive — small relaxation significantly reduces <span class="arithmatex">\(f\)</span>.</li>
+<li><span class="arithmatex">\(\lambda_j^*\)</span>: the price or force associated with equality <span class="arithmatex">\(h_j(x)=0\)</span>.<br>
+  Changing the equality’s right-hand side shifts the objective by roughly <span class="arithmatex">\(\lambda_j^*\)</span>.</li>
+</ul>
+<p>In economic or resource allocation problems:
+- The dual problem represents <em>pricing</em> of limited resources.<br>
+- The primal problem represents <em>allocation</em> given prices.</p>
+<p>In machine learning:
+- SVMs: dual variables correspond to support vectors.<br>
+- Lasso and Elastic Net: <span class="arithmatex">\(\ell_1\)</span> penalties can be viewed as dual constraints on coefficient magnitudes.<br>
+- Regularized losses: duality expresses the trade-off between data fit and model complexity.</p>
 
 
 

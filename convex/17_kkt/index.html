@@ -87,7 +87,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#chapter-8-optimization-principles-from-gradient-descent-to-kkt" class="md-skip">
+        <a href="#chapter-8-lagrange-multipliers-and-kkt-framework" class="md-skip">
           Skip to content
         </a>
       
@@ -873,7 +873,7 @@
   
   
   <span class="md-ellipsis">
-    Cheat Sheets
+    Deep Learning
     
   </span>
   
@@ -883,6 +883,143 @@
         
         <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            Deep Learning
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../deeplearning/intro/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    1. Introduction to Neural Netwoks
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../deeplearning/2_convnets/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    2. Convolutional Neural Networks (CNNs)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../deeplearning/intro/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    1. Introduction to Neural Netwoks
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../deeplearning/intro/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    1. Introduction to Neural Netwoks
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5">
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Cheat Sheets
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
             <span class="md-nav__icon md-icon"></span>
             Cheat Sheets
           </label>
@@ -933,10 +1070,10 @@
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5">
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6">
         
           
-          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
             
   
   
@@ -949,8 +1086,8 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_5">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
             <span class="md-nav__icon md-icon"></span>
             Appendices
           </label>
@@ -1202,14 +1339,15 @@
   
 
 
-<h1 id="chapter-8-optimization-principles-from-gradient-descent-to-kkt">Chapter 8: Optimization Principles – From Gradient Descent to KKT<a class="headerlink" href="#chapter-8-optimization-principles-from-gradient-descent-to-kkt" title="Permanent link">¶</a></h1>
+<h1 id="chapter-8-lagrange-multipliers-and-kkt-framework">Chapter 8: Lagrange Multipliers and KKT Framework<a class="headerlink" href="#chapter-8-lagrange-multipliers-and-kkt-framework" title="Permanent link">¶</a></h1>
 <p>At this point we understand:</p>
 <ul>
 <li>how to recognise convex functions,</li>
 <li>how to talk about feasible sets,</li>
 <li>how to describe optimality with gradients or subgradients.</li>
 </ul>
-<p>Now we turn to <em>constrained</em> optimisation. We first recall unconstrained optimisation and gradient descent, then develop the Karush–Kuhn–Tucker (KKT) conditions, which are the first-order optimality conditions for constrained convex optimisation (Boyd and Vandenberghe, 2004).</p>
+<p>This chapter unifies these ideas. We begin with unconstrained optimization and the gradient descent principle, then extend to equality and inequality constraints — culminating in the Karush–Kuhn–Tucker (KKT) conditions, the cornerstone of constrained convex optimization.</p>
+<p>In constrained convex optimization, the gradient cannot vanish freely—it must be counteracted by constraint forces. Lagrange multipliers quantify these forces. The Karush–Kuhn–Tucker (KKT) conditions express this balance algebraically.</p>
 <h2 id="81-unconstrained-convex-minimisation">8.1 Unconstrained convex minimisation<a class="headerlink" href="#81-unconstrained-convex-minimisation" title="Permanent link">¶</a></h2>
 <p>Consider
 <script type="math/tex; mode=display">
@@ -1227,8 +1365,12 @@ for some step size <span class="arithmatex">\(\alpha_k &gt; 0\)</span>.</p>
 <li>Under suitable conditions on step size (e.g. Lipschitz gradient), this converges to a global minimiser if <span class="arithmatex">\(f\)</span> is convex.</li>
 </ul>
 <p>If <span class="arithmatex">\(f\)</span> is strongly convex, we get uniqueness of the minimiser and faster convergence.</p>
+<blockquote>
+<p>In machine learning, this is the foundation of training via backpropagation — each step reduces the loss by following the negative gradient of the cost function with respect to model parameters.</p>
+</blockquote>
 <h2 id="82-equality-constrained-optimisation-and-lagrange-multipliers">8.2 Equality-constrained optimisation and Lagrange multipliers<a class="headerlink" href="#82-equality-constrained-optimisation-and-lagrange-multipliers" title="Permanent link">¶</a></h2>
-<p>Consider
+<p>Now suppose we add equality constraints:</p>
+<p>
 <script type="math/tex; mode=display">
 \begin{array}{ll}
 \text{minimise} & f(x) \\
@@ -1253,14 +1395,16 @@ where <span class="arithmatex">\(\lambda_j\)</span> are the Lagrange multipliers
    </script>
 </li>
 <li>Primal feasibility:
-   <script type="math/tex; mode=display">
+   Primal feasibility simply means that the point <span class="arithmatex">\(x^*\)</span> satisfies all the original constraints of the optimization problem.</li>
+</ol>
+<p>
+<script type="math/tex; mode=display">
    h_j(x^*) = 0 \quad \text{for all } j.
    </script>
-</li>
-</ol>
-<p>Geometrically, stationarity says: the gradient of <span class="arithmatex">\(f\)</span> at <span class="arithmatex">\(x^*\)</span> lies in the span of the gradients of the active constraints. In words, you cannot move in any feasible direction without increasing <span class="arithmatex">\(f\)</span>.</p>
+</p>
+<p>Geometrically, stationarity says: At an equality-constrained optimum, the gradient of <span class="arithmatex">\(f\)</span> is orthogonal to the feasible set — it points in a direction that cannot reduce <span class="arithmatex">\(f\)</span> without violating a constraint.</p>
 <h2 id="83-inequality-constraints-and-kkt">8.3 Inequality constraints and KKT<a class="headerlink" href="#83-inequality-constraints-and-kkt" title="Permanent link">¶</a></h2>
-<p>Now consider the general problem:
+<p>Now consider the general convex problem:
 <script type="math/tex; mode=display">
 \begin{array}{ll}
 \text{minimise} & f(x) \\
@@ -1277,7 +1421,7 @@ f(x)
 + \sum_{j=1}^p \lambda_j h_j(x)
 + \sum_{i=1}^m \mu_i g_i(x),
 </script>
-with multipliers <span class="arithmatex">\(\lambda \in \mathbb{R}^p\)</span> (unrestricted) and <span class="arithmatex">\(\mu \in \mathbb{R}^m\)</span> with <span class="arithmatex">\(\mu_i \ge 0\)</span>.</p>
+with dual varibales <span class="arithmatex">\(\lambda \in \mathbb{R}^p\)</span> (unrestricted) and <span class="arithmatex">\(\mu \in \mathbb{R}^m\)</span> with <span class="arithmatex">\(\mu_i \ge 0\)</span>.</p>
 <p>The Karush–Kuhn–Tucker (KKT) conditions consist of:</p>
 <ol>
 <li>
@@ -1296,6 +1440,11 @@ with multipliers <span class="arithmatex">\(\lambda \in \mathbb{R}^p\)</span> (u
    </script>
 </p>
 </li>
+</ol>
+<blockquote>
+<p>Dual feasibility says the “penalty coefficients” for inequality constraints can only push you inward (not reward you for violating constraints).</p>
+</blockquote>
+<ol>
 <li>
 <p>Stationarity:</p>
 <p><span class="arithmatex">\(\nabla f(x^*) 
@@ -1304,40 +1453,86 @@ with multipliers <span class="arithmatex">\(\lambda \in \mathbb{R}^p\)</span> (u
   = 0\)</span></p>
 </li>
 <li>
-<p>Complementary slackness:
-   <script type="math/tex; mode=display">
+<p>Complementary slackness:</p>
+</li>
+</ol>
+<p>
+<script type="math/tex; mode=display">
    \mu_i^* g_i(x^*) = 0
    \quad \text{for all } i.
    </script>
 </p>
-</li>
-</ol>
 <p>Complementary slackness means:</p>
 <ul>
 <li>If a constraint <span class="arithmatex">\(g_i(x) \le 0\)</span> is strictly inactive at <span class="arithmatex">\(x^*\)</span> (i.e. <span class="arithmatex">\(g_i(x^*) &lt; 0\)</span>), then <span class="arithmatex">\(\mu_i^* = 0\)</span>.</li>
 <li>If <span class="arithmatex">\(\mu_i^* &gt; 0\)</span>, then the constraint is tight: <span class="arithmatex">\(g_i(x^*) = 0\)</span>.</li>
 </ul>
 <p>This matches geometric intuition: only active constraints can “push back” on the optimiser.</p>
-<h2 id="84-kkt-and-convexity">8.4 KKT and convexity<a class="headerlink" href="#84-kkt-and-convexity" title="Permanent link">¶</a></h2>
-<p>For general nonlinear problems, KKT conditions are <em>necessary</em> under regularity assumptions. For convex problems, KKT conditions are often necessary and sufficient for optimality. In other words, if the problem is convex and a point satisfies KKT, that point is globally optimal.</p>
-<p>This is extremely powerful:</p>
+<h2 id="84-slaters-condition-ensuring-strong-duality">8.4 Slater’s Condition – Ensuring Strong Duality<a class="headerlink" href="#84-slaters-condition-ensuring-strong-duality" title="Permanent link">¶</a></h2>
+<p>For the KKT conditions to not only hold but also guarantee optimality and zero duality gap, the problem must satisfy a regularity condition known as Slater’s condition.</p>
+<h3 id="definition">Definition<a class="headerlink" href="#definition" title="Permanent link">¶</a></h3>
+<p>For the convex problem above, if all <span class="arithmatex">\(f\)</span> and <span class="arithmatex">\(g_i\)</span> are convex and all <span class="arithmatex">\(h_j\)</span> are affine, then Slater’s condition holds if there exists at least one strictly feasible point:</p>
+<div class="arithmatex">\[
+\exists\, x^{\text{slater}} \text{ such that } 
+h_j(x^{\text{slater}}) = 0, \ \forall j, 
+\quad \text{and} \quad 
+g_i(x^{\text{slater}}) &lt; 0, \ \forall i.
+\]</div>
+<p>This means there is some point that satisfies the equalities exactly and the inequalities strictly — i.e., a point inside the feasible region, not merely on its boundary.</p>
+<h3 id="dual-problems-and-the-duality-gap">Dual Problems and the Duality Gap<a class="headerlink" href="#dual-problems-and-the-duality-gap" title="Permanent link">¶</a></h3>
+<p>Every constrained problem (the primal) has a dual:
+<script type="math/tex; mode=display">
+p^* = \min_x f(x), \qquad
+d^* = \max_{\lambda,\mu\ge0} g(\lambda,\mu),
+</script>
+where <span class="arithmatex">\(g(\lambda,\mu)\)</span> is the dual function obtained from the Lagrangian.</p>
+<p>By weak duality, for all feasible <span class="arithmatex">\(x,(\lambda,\mu)\)</span>,
+<script type="math/tex; mode=display">
+d^* \le p^*.
+</script>
+The difference<br>
+<script type="math/tex; mode=display">
+\text{duality gap} = p^* - d^*
+</script>
+measures how far apart the primal and dual optima are.</p>
 <ul>
-<li>You can certify optimality (and thus global optimality) just by finding multipliers <span class="arithmatex">\(\lambda^*, \mu^*\)</span> that satisfy KKT.</li>
-<li>KKT conditions are constructive: they are what solvers try to satisfy.</li>
+<li>If <span class="arithmatex">\(p^*&gt;d^*\)</span>, the gap is positive (weak duality only).  </li>
+<li>If <span class="arithmatex">\(p^*=d^*\)</span>, we have strong duality — the primal and dual attain the same optimum.</li>
 </ul>
-<h2 id="85-geometric-picture">8.5 Geometric picture<a class="headerlink" href="#85-geometric-picture" title="Permanent link">¶</a></h2>
-<p>At the optimal point <span class="arithmatex">\(x^*\)</span>:</p>
+<h3 id="what-slaters-condition-guarantees">What Slater’s Condition Guarantees<a class="headerlink" href="#what-slaters-condition-guarantees" title="Permanent link">¶</a></h3>
+<p>For convex problems, Slater’s condition ensures:
+1. Strong duality: <span class="arithmatex">\(p^*=d^*\)</span> (duality gap = 0).<br>
+2. Dual attainment: finite <span class="arithmatex">\((\lambda^*,\mu^*)\)</span> exist.<br>
+3. KKT conditions are necessary and sufficient for optimality.</p>
+<p>Intuitively, Slater’s condition says the feasible region has “breathing room’’; it’s not pinched to the boundary.<br>
+Then the dual hyperplanes can exactly touch the primal surface — they <em>kiss</em> at the optimum, eliminating the gap.</p>
+<h3 id="examples">Examples<a class="headerlink" href="#examples" title="Permanent link">¶</a></h3>
+<p>(a) Condition Holds → Zero Gap
+<script type="math/tex; mode=display">
+\min_x x^2 \quad \text{s.t. } x \ge 1.
+</script>
+Strictly feasible point <span class="arithmatex">\(x=2\)</span> satisfies <span class="arithmatex">\(g(x)=-1&lt;0\)</span>.<br>
+Hence <span class="arithmatex">\(p^*=d^*=1\)</span> — no duality gap.</p>
+<p>(b) Condition Fails → Positive Gap
+<script type="math/tex; mode=display">
+\min_x x \quad \text{s.t. } x^2 \le 0.
+</script>
+Feasible set <span class="arithmatex">\(\{0\}\)</span> has no interior; no strictly feasible point.<br>
+Dual cannot attain equality: <span class="arithmatex">\(p^*&gt;d^*\)</span>.</p>
+<h2 id="85-geometric-and-physical-interpretation">8.5 Geometric and Physical Interpretation<a class="headerlink" href="#85-geometric-and-physical-interpretation" title="Permanent link">¶</a></h2>
 <ul>
-<li><span class="arithmatex">\(\nabla f(x^*)\)</span> is balanced by a conic combination of the normals of the active inequality constraints plus a linear combination of the equality constraint normals.</li>
-<li>The objective cannot be decreased by moving in any feasible direction.</li>
+<li>The gradient of the objective is balanced by the weighted gradients of the active constraints.  </li>
+<li>Each multiplier <span class="arithmatex">\(\mu_i\)</span> or <span class="arithmatex">\(\lambda_j\)</span> acts like a <em>tension</em> or <em>shadow price</em> that enforces feasibility.</li>
+<li>The KKT system generalizes the condition <span class="arithmatex">\(\nabla f(x^*) = 0\)</span>:</li>
+<li>In the unconstrained case, there are no forces — pure gradient equilibrium.</li>
+<li>With constraints, these forces push the solution back into the feasible region.</li>
 </ul>
-<p>Visually: the contour of <span class="arithmatex">\(f\)</span> is “tangent” to the feasible region. The Lagrange multipliers encode the direction and strength of that tangency.</p>
-<h2 id="86-constraint-qualifications">8.6 Constraint qualifications<a class="headerlink" href="#86-constraint-qualifications" title="Permanent link">¶</a></h2>
-<p>To guarantee that KKT multipliers exist and KKT conditions apply cleanly, we usually need a mild regularity condition called a constraint qualification. The most common is Slater’s condition for convex problems:</p>
 <blockquote>
-<p>If the problem is convex and there exists a strictly feasible point <span class="arithmatex">\(\tilde{x}\)</span> such that<br>
-<span class="arithmatex">\(g_i(\tilde{x}) &lt; 0\)</span> for all <span class="arithmatex">\(i\)</span> and <span class="arithmatex">\(h_j(\tilde{x}) = 0\)</span> for all <span class="arithmatex">\(j\)</span>,<br>
-then strong duality holds and KKT conditions are necessary and sufficient (Boyd and Vandenberghe, 2004).</p>
+<p>Physically, you can imagine optimization as minimizing potential energy subject to rigid walls (constraints).<br>
+At equilibrium, the total force — gradient of <span class="arithmatex">\(f\)</span> plus constraint reactions — equals zero.
+Convexity ensures the landscape is bowl-shaped.<br>
+Slater’s condition ensures the bowl has interior volume so that primal and dual solutions coincide.<br>
+Together they make the KKT framework both elegant and powerful — the foundation upon which Lagrange duality theory is built.</p>
 </blockquote>
 
 

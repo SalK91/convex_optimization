@@ -87,7 +87,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#chapter-15-modelling-patterns-and-algorithm-selection" class="md-skip">
+        <a href="#chapter-16-modelling-patterns-and-algorithm-selection" class="md-skip">
           Skip to content
         </a>
       
@@ -873,7 +873,7 @@
   
   
   <span class="md-ellipsis">
-    Cheat Sheets
+    Deep Learning
     
   </span>
   
@@ -883,6 +883,143 @@
         
         <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            Deep Learning
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../deeplearning/intro/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    1. Introduction to Neural Netwoks
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../deeplearning/2_convnets/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    2. Convolutional Neural Networks (CNNs)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../deeplearning/intro/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    1. Introduction to Neural Netwoks
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../deeplearning/intro/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    1. Introduction to Neural Netwoks
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5">
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Cheat Sheets
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
             <span class="md-nav__icon md-icon"></span>
             Cheat Sheets
           </label>
@@ -933,10 +1070,10 @@
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5">
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6">
         
           
-          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
             
   
   
@@ -949,8 +1086,8 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_5">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
             <span class="md-nav__icon md-icon"></span>
             Appendices
           </label>
@@ -1202,9 +1339,9 @@
   
 
 
-<h1 id="chapter-15-modelling-patterns-and-algorithm-selection">Chapter 15: Modelling Patterns and Algorithm Selection<a class="headerlink" href="#chapter-15-modelling-patterns-and-algorithm-selection" title="Permanent link">¶</a></h1>
+<h1 id="chapter-16-modelling-patterns-and-algorithm-selection">Chapter 16: Modelling Patterns and Algorithm Selection<a class="headerlink" href="#chapter-16-modelling-patterns-and-algorithm-selection" title="Permanent link">¶</a></h1>
 <p>Real-world modelling starts not with algorithms but with data, assumptions, and design goals.  We choose a loss function from statistical assumptions (e.g. noise model, likelihood) and a complexity penalty or constraints from design preferences (simplicity, robustness, etc.).  The resulting convex (or nonconvex) optimization problem often <em>tells</em> us which solver class to use.  In practice, solving machine learning problems looks like: modeling → recognize structure → pick solver.  Familiar ML models (linear regression, logistic regression, etc.) can be viewed as convex programs.  Below we survey common patterns (convex and some nonconvex) and the recommended algorithms/tricks for each.</p>
-<h2 id="111-regularized-estimation-and-the-accuracysimplicity-tradeoff">11.1 Regularized estimation and the accuracy–simplicity tradeoff<a class="headerlink" href="#111-regularized-estimation-and-the-accuracysimplicity-tradeoff" title="Permanent link">¶</a></h2>
+<h2 id="161-regularized-estimation-and-the-accuracysimplicity-tradeoff">16.1 Regularized estimation and the accuracy–simplicity tradeoff<a class="headerlink" href="#161-regularized-estimation-and-the-accuracysimplicity-tradeoff" title="Permanent link">¶</a></h2>
 <p>Many learning tasks use a regularized risk minimization form:
 <script type="math/tex; mode=display">
 \min_x \; \underbrace{\text{loss}(x)}_{\text{data-fit}} \;+\; \lambda\;\underbrace{\text{penalty}(x)}_{\text{complexity}}.
@@ -1247,9 +1384,9 @@ Here the loss measures fit to data (often from a likelihood) and the penalty (re
 <li><em>Large-scale data</em> → Stochastic/mini-batch variants of first-order methods (SGD, SVRG, etc.).  </li>
 </ul>
 <p><em>Remarks:</em>  Choose <span class="arithmatex">\(\lambda\)</span> via cross-validation or hold-out to balance fit vs simplicity.  In high dimensions (<span class="arithmatex">\(n\)</span> large), coordinate or stochastic methods often outperform direct second-order methods.</p>
-<h2 id="112-robust-regression-and-outlier-resistance">11.2 Robust regression and outlier resistance<a class="headerlink" href="#112-robust-regression-and-outlier-resistance" title="Permanent link">¶</a></h2>
+<h2 id="162-robust-regression-and-outlier-resistance">16.2 Robust regression and outlier resistance<a class="headerlink" href="#162-robust-regression-and-outlier-resistance" title="Permanent link">¶</a></h2>
 <p>Standard least-squares uses squared loss, which penalizes large errors quadratically. This makes it sensitive to outliers. Robust alternatives replace the loss:</p>
-<h3 id="1121-least-absolute-deviations-l1-loss">11.2.1 Least absolute deviations (ℓ₁ loss)<a class="headerlink" href="#1121-least-absolute-deviations-l1-loss" title="Permanent link">¶</a></h3>
+<h3 id="1621-least-absolute-deviations-l1-loss">16.2.1 Least absolute deviations (ℓ₁ loss)<a class="headerlink" href="#1621-least-absolute-deviations-l1-loss" title="Permanent link">¶</a></h3>
 <p>Formulation:
 <script type="math/tex; mode=display">
 \min_x \sum_i \lvert a_i^\top x - b_i \rvert.
@@ -1290,7 +1427,7 @@ Here the loss measures fit to data (often from a likelihood) and the penalty (re
 <p>These are slower in theory (subgradient is only <span class="arithmatex">\(O(1/\sqrt{t})\)</span> convergence), but they scale to huge data where generic LP solvers would struggle.</p>
 </li>
 </ol>
-<h3 id="1122-huber-loss">11.2.2 Huber loss<a class="headerlink" href="#1122-huber-loss" title="Permanent link">¶</a></h3>
+<h3 id="1622-huber-loss">16.2.2 Huber loss<a class="headerlink" href="#1622-huber-loss" title="Permanent link">¶</a></h3>
 <p>Definition of the Huber penalty for residual <span class="arithmatex">\(r\)</span>:
 <script type="math/tex; mode=display">
 \rho_\delta(r) =
@@ -1334,7 +1471,7 @@ Here the loss measures fit to data (often from a likelihood) and the penalty (re
     This is attractive when you want high accuracy and dual certificates.</p>
 </li>
 </ol>
-<h3 id="1123-worst-case-robust-regression">11.2.3 Worst-case robust regression<a class="headerlink" href="#1123-worst-case-robust-regression" title="Permanent link">¶</a></h3>
+<h3 id="1623-worst-case-robust-regression">16.2.3 Worst-case robust regression<a class="headerlink" href="#1623-worst-case-robust-regression" title="Permanent link">¶</a></h3>
 <p>Sometimes we don’t just want “fit the data we saw,” but “fit any data within some uncertainty set.” This leads to min–max problems of the form:
 <script type="math/tex; mode=display">
 \min_x \;\max_{u \in \mathcal{U}} \; \| (A + u)x - b \|_2.
@@ -1367,7 +1504,7 @@ Here the loss measures fit to data (often from a likelihood) and the penalty (re
 <p>If the structure is separable and high-dimensional, you can sometimes solve the dual or a proximal/ADMM splitting of the robust problem using first-order methods.</p>
 </li>
 </ul>
-<h2 id="113-maximum-likelihood-and-loss-design">11.3 Maximum likelihood and loss design<a class="headerlink" href="#113-maximum-likelihood-and-loss-design" title="Permanent link">¶</a></h2>
+<h2 id="163-maximum-likelihood-and-loss-design">16.3 Maximum likelihood and loss design<a class="headerlink" href="#163-maximum-likelihood-and-loss-design" title="Permanent link">¶</a></h2>
 <p>Choosing a loss often comes from a probabilistic noise model. The negative log-likelihood (NLL) of an assumed distribution gives a convex loss for many common cases:</p>
 <ul>
 <li>
@@ -1455,7 +1592,7 @@ The NLL is convex in <span class="arithmatex">\(x\)</span> for canonical links (
 </ul>
 </li>
 </ul>
-<h2 id="114-structured-constraints-in-engineering-and-design">11.4 Structured constraints in engineering and design<a class="headerlink" href="#114-structured-constraints-in-engineering-and-design" title="Permanent link">¶</a></h2>
+<h2 id="164-structured-constraints-in-engineering-and-design">16.4 Structured constraints in engineering and design<a class="headerlink" href="#164-structured-constraints-in-engineering-and-design" title="Permanent link">¶</a></h2>
 <p>Optimization problems often include explicit convex constraints from physical or resource limits: e.g. variable bounds, norm limits, budget constraints. The solver choice depends on how easily we can handle projections or barriers for <span class="arithmatex">\(\mathcal{X}\)</span>:</p>
 <ul>
 <li>
@@ -1496,7 +1633,7 @@ If constraints are complex (e.g. second-order cones, semidefinite, or many coupl
 <li>LP/QP special cases → Use simplex or specialized LP/QP solvers (Section 11.5).</li>
 </ul>
 <p>Remarks: Encoding design requirements (actuator limits, stability margins, probability budgets) as convex constraints lets us leverage efficient convex solvers. Feasible set geometry dictates the method: easy projection → projective methods; otherwise → interior-point or operator-splitting.</p>
-<h2 id="115-linear-and-conic-programming-the-canonical-models">11.5 Linear and conic programming: the canonical models<a class="headerlink" href="#115-linear-and-conic-programming-the-canonical-models" title="Permanent link">¶</a></h2>
+<h2 id="165-linear-and-conic-programming-the-canonical-models">16.5 Linear and conic programming: the canonical models<a class="headerlink" href="#165-linear-and-conic-programming-the-canonical-models" title="Permanent link">¶</a></h2>
 <p>Many practical problems reduce to linear programming (LP) or its convex extensions.<br>
 LP and related conic forms are the workhorses of operations research, control, and engineering optimization.</p>
 <ul>
@@ -1524,7 +1661,7 @@ Convex quadratic programs (QP), second-order cone programs (SOCP), and semidefin
 - Moderate LP/QP/SOCP: Use interior-point (robust, yields dual prices) or simplex (fast in practice, warm-startable).
 - Large-scale LP/QP: Exploit sparsity; use decomposition (Benders, ADMM) if structure allows; use iterative methods (primal-dual hybrid gradient, etc.) for extreme scale.
 - Reformulate into standard form: Recognize when your problem is an LP/QP/SOCP/SDP to use mature solvers. (E.g. ℓ∞ regression → LP, ℓ2 regression with ℓ2 constraint → SOCP.)</p>
-<h2 id="116-risk-safety-margins-and-robust-design">11.6 Risk, safety margins, and robust design<a class="headerlink" href="#116-risk-safety-margins-and-robust-design" title="Permanent link">¶</a></h2>
+<h2 id="166-risk-safety-margins-and-robust-design">16.6 Risk, safety margins, and robust design<a class="headerlink" href="#166-risk-safety-margins-and-robust-design" title="Permanent link">¶</a></h2>
 <p>Modern design often includes risk measures or robustness. Two common patterns:</p>
 <ul>
 <li>
@@ -1546,7 +1683,7 @@ Convex quadratic programs (QP), second-order cone programs (SOCP), and semidefin
 <li>Robust max-min problems: Convert inner max to a convex constraint (norm or cone). Then use interior-point if the reformulation is conic. If the reformulation is a nonsmooth penalty, use proximal or dual subgradient methods.</li>
 <li>Distributed or iterative solutions: If <span class="arithmatex">\(\mathcal{U}\)</span> or loss separable, ADMM can distribute the computation (Chapter 10).</li>
 </ul>
-<h2 id="117-cheat-sheet-if-your-problem-looks-like-this-use-that">11.7 Cheat sheet: If your problem looks like this, use that<a class="headerlink" href="#117-cheat-sheet-if-your-problem-looks-like-this-use-that" title="Permanent link">¶</a></h2>
+<h2 id="167-cheat-sheet-if-your-problem-looks-like-this-use-that">16.7 Cheat sheet: If your problem looks like this, use that<a class="headerlink" href="#167-cheat-sheet-if-your-problem-looks-like-this-use-that" title="Permanent link">¶</a></h2>
 <p>This summary gives concrete patterns of models and recommended solvers/tricks:</p>
 <ul>
 <li>
@@ -1642,6 +1779,61 @@ Convex quadratic programs (QP), second-order cone programs (SOCP), and semidefin
 <li>Large-scale separable → Stochastic gradient/ADMM.</li>
 </ul>
 <p>Convexity guarantees global optimum. When nonconvex (deep nets, latent variables, etc.), we rely on heuristics: SGD, random restarts, and often settle for local minima or approximate solutions.</p>
+<h2 id="167-matching-model-structure-to-algorithm-type">16.7 Matching Model Structure to Algorithm Type<a class="headerlink" href="#167-matching-model-structure-to-algorithm-type" title="Permanent link">¶</a></h2>
+<table>
+<thead>
+<tr>
+<th>Model Type</th>
+<th>Problem Form</th>
+<th>Recommended Algorithms</th>
+<th>Notes / ML Examples</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Smooth unconstrained</td>
+<td><span class="arithmatex">\(\min f(x)\)</span></td>
+<td>Gradient descent, Newton, LBFGS</td>
+<td>Small to medium problems; logistic regression, ridge regression</td>
+</tr>
+<tr>
+<td>Nonsmooth unconstrained</td>
+<td><span class="arithmatex">\(\min f(x) + R(x)\)</span></td>
+<td>Subgradient, proximal (ISTA/FISTA), coordinate descent</td>
+<td>LASSO, hinge loss SVM</td>
+</tr>
+<tr>
+<td>Equality-constrained</td>
+<td><span class="arithmatex">\(\min f(x)\)</span> s.t. <span class="arithmatex">\(A x = b\)</span></td>
+<td>Projected gradient, augmented Lagrangian</td>
+<td>Constrained least squares, balance conditions</td>
+</tr>
+<tr>
+<td>Inequality-constrained</td>
+<td><span class="arithmatex">\(\min f(x)\)</span> s.t. <span class="arithmatex">\(f_i(x)\le 0\)</span></td>
+<td>Barrier, primal–dual, interior-point</td>
+<td>Quadratic programming, LPs, constrained regression</td>
+</tr>
+<tr>
+<td>Separable / block structure</td>
+<td><span class="arithmatex">\(\min \sum_i f_i(x_i)\)</span></td>
+<td>ADMM, coordinate updates</td>
+<td>Distributed optimization, federated learning</td>
+</tr>
+<tr>
+<td>Stochastic / large data</td>
+<td><span class="arithmatex">\(\min \frac{1}{N}\sum_i f_i(x_i)\)</span></td>
+<td>SGD, SVRG, adaptive variants</td>
+<td>Deep learning, online convex optimization</td>
+</tr>
+<tr>
+<td>Low-rank / matrix structure</td>
+<td><span class="arithmatex">\(\min f(X) + \lambda \|X\|_*\)</span></td>
+<td>Proximal (SVD shrinkage), ADMM</td>
+<td>Matrix completion, PCA variants</td>
+</tr>
+</tbody>
+</table>
 
 
 

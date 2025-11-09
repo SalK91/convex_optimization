@@ -873,7 +873,7 @@
   
   
   <span class="md-ellipsis">
-    Cheat Sheets
+    Deep Learning
     
   </span>
   
@@ -883,6 +883,143 @@
         
         <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            Deep Learning
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../deeplearning/intro/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    1. Introduction to Neural Netwoks
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../deeplearning/2_convnets/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    2. Convolutional Neural Networks (CNNs)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../deeplearning/intro/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    1. Introduction to Neural Netwoks
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../deeplearning/intro/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    1. Introduction to Neural Netwoks
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5">
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Cheat Sheets
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
             <span class="md-nav__icon md-icon"></span>
             Cheat Sheets
           </label>
@@ -933,10 +1070,10 @@
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5">
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6">
         
           
-          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
             
   
   
@@ -949,8 +1086,8 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_5">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
             <span class="md-nav__icon md-icon"></span>
             Appendices
           </label>
@@ -1202,47 +1339,170 @@
   
 
 
-<h1 id="chapter-1-introduction-and-overview">Chapter 1: Introduction and Overview<a class="headerlink" href="#chapter-1-introduction-and-overview" title="Permanent link">¶</a></h1>
-<p>Optimization is the mathematical language of decision-making and learning. In machine learning and data science we constantly fit, estimate, or infer by minimizing a loss. Yet most real-world objectives are nonlinear and messy; solving them globally can be hard.</p>
-<p>Convex optimization is the <em>tractable core</em> of this landscape.<br>
-A convex problem has a single “bowl-shaped” valley, no false minima, so any local optimum is automatically global.<br>
-That geometric simplicity gives us:</p>
-<ul>
-<li>mathematical guarantees of optimality,  </li>
-<li>efficient algorithms that scale,  </li>
-<li>robustness to noise and initialization.</li>
-</ul>
+<h1 id="chapter-1-introduction-and-overview">Chapter 1  Introduction and Overview<a class="headerlink" href="#chapter-1-introduction-and-overview" title="Permanent link">¶</a></h1>
+<p>Convex optimization is the mathematical foundation of modern machine learning, signal processing, and control. It provides a framework for reasoning about optimal decisions when the cost functions and constraints behave “nicely” — that is, when they are <em>convex</em>.</p>
+<p>Convexity gives us three gifts at once:</p>
+<ol>
+<li>Any local minimum is global.</li>
+<li>Optimization algorithms are stable and efficient.</li>
+<li>Solutions come with built-in guarantees — often interpretable through dual variables or KKT conditions.</li>
+</ol>
 <blockquote>
-<p>Convexity leads to robustness. Small perturbations to problem data typically result in small changes to the solution in convex optimization, a desirable feature in practice. Moreover, many approximation techniques (like convex relaxations of NP-hard problems) rely on solving a convex problem to get bounds or heuristic solutions for the original task. </p>
+<p>Convexity ⇒ Robustness.<br>
+Convex problems are stable: small perturbations to inputs cause proportionally small shifts in the solution.<br>
+Many difficult non-convex problems are attacked by constructing convex relaxations, whose solutions yield bounds or high-quality approximations.</p>
 </blockquote>
-<h2 id="12-canonical-convex-problem-form">1.2 Canonical Convex Problem Form<a class="headerlink" href="#12-canonical-convex-problem-form" title="Permanent link">¶</a></h2>
-<p>A generic convex optimization problem can be written as:</p>
+<p>This web-book is written for ML practitioners who want to understand <em>why</em> convex optimization works,  and <em>how</em> to use its geometry, duality, and algorithms to build and tune models in practice.</p>
+<h2 id="11-motivation-optimization-in-machine-learning">1.1 Motivation: Optimization in Machine Learning<a class="headerlink" href="#11-motivation-optimization-in-machine-learning" title="Permanent link">¶</a></h2>
+<p>Most supervised learning problems can be viewed as minimizing a regularized empirical risk:</p>
 <div class="arithmatex">\[
-\begin{array}{ll}
-\text{minimize}_{x} &amp; f(x) \\
-\text{subject to} &amp; g_i(x) \le 0,\quad i = 1,\dots,m, \\
-                  &amp; h_j(x) = 0,\quad j = 1,\dots,p,
-\end{array}
+\min_x \; \frac{1}{N}\sum_{i=1}^{N} \ell(a_i^\top x, b_i) + \lambda R(x)
+\quad \text{s.t. } x \in \mathcal{X}.
 \]</div>
-<p>where each <span class="arithmatex">\(f\)</span> and <span class="arithmatex">\(g_i\)</span> is convex, and each <span class="arithmatex">\(h_j\)</span> is affine (affine functions are both convex and concave).</p>
-<h2 id="13-how-the-web-book-is-structured">1.3 How the Web-Book Is Structured<a class="headerlink" href="#13-how-the-web-book-is-structured" title="Permanent link">¶</a></h2>
-<p>This Web-book builds step-by-step from mathematics to algorithms:</p>
+<p>Here:</p>
+<ul>
+<li><span class="arithmatex">\(\ell(\cdot,\cdot)\)</span> is a loss function measuring fit to data,  </li>
+<li><span class="arithmatex">\(R(x)\)</span> is a regularizer controlling complexity or promoting structure,  </li>
+<li><span class="arithmatex">\(\mathcal{X}\)</span> encodes simple constraints (box, simplex, or norm ball).</li>
+</ul>
+<p>Many of these objectives — least squares, logistic loss, hinge loss, <span class="arithmatex">\(\ell_1\)</span> or <span class="arithmatex">\(\ell_2\)</span> regularizers — are convex. That convexity is what makes them <em>reliably solvable</em> at scale.</p>
+<blockquote>
+<p>Key idea: Convex optimization is the quiet engine under the hood of most practical ML methods, even in settings that appear nonconvex.</p>
+</blockquote>
+<h2 id="12-convex-sets-and-convex-functions-first-intuition">1.2 Convex Sets and Convex Functions — First Intuition<a class="headerlink" href="#12-convex-sets-and-convex-functions-first-intuition" title="Permanent link">¶</a></h2>
+<p>A set <span class="arithmatex">\(\mathcal{C}\subseteq\mathbb{R}^n\)</span> is convex if for all <span class="arithmatex">\(x,y\in\mathcal{C}\)</span> and any <span class="arithmatex">\(\theta\in[0,1]\)</span>,
+<script type="math/tex; mode=display">
+\theta x + (1-\theta)y \in \mathcal{C}.
+</script>
+This means the line segment joining any two points in <span class="arithmatex">\(\mathcal{C}\)</span> stays inside <span class="arithmatex">\(\mathcal{C}\)</span>.</p>
+<p>A function <span class="arithmatex">\(f:\mathbb{R}^n\to\mathbb{R}\)</span> is convex if its epigraph is a convex set,<br>
+or equivalently if for all <span class="arithmatex">\(x,y\)</span> and <span class="arithmatex">\(\theta\in[0,1]\)</span>,
+<script type="math/tex; mode=display">
+f(\theta x + (1-\theta)y)
+\le \theta f(x) + (1-\theta) f(y).
+</script>
+</p>
+<p>Intuitively, the graph of <span class="arithmatex">\(f\)</span> lies below the chord connecting any two points — it curves upward but never downward.</p>
+<blockquote>
+<p>Clarification: Affine functions (linear + constant) are both convex and concave.<br>
+They define flat surfaces — neither bowl-shaped nor peaked.</p>
+</blockquote>
+<h2 id="13-why-convex-optimization-still-matters-in-ml">1.3 Why Convex Optimization Still Matters in ML<a class="headerlink" href="#13-why-convex-optimization-still-matters-in-ml" title="Permanent link">¶</a></h2>
+<p>Convex optimization remains vital in ML for three reasons:</p>
 <ol>
-<li>Linear Algebra Foundations (Ch 2) — geometry of vectors, subspaces, and positive-semidefinite matrices.  </li>
-<li>Multivariable Calculus (Ch 3) — gradients, Hessians, and first-/second-order optimality.  </li>
-<li>Convex Sets (Ch 4) — feasible regions and geometric intuition.  </li>
-<li>Convex Functions (Ch 5) — what makes an objective convex.  </li>
-<li>Subgradients (Ch 6) — handling nondifferentiable convex functions (e.g., <span class="arithmatex">\(\lvert x \rvert\)</span>, <span class="arithmatex">\(\max\)</span>).  </li>
-<li>KKT Conditions (Ch 7) — first-order optimality for constrained problems.  </li>
-<li>Duality (Ch 8) — lower bounds, certificates of optimality, and geometric interpretation.  </li>
-<li>Algorithms (Ch 9–10) — gradient, proximal, Newton, stochastic, and ADMM methods.  </li>
-<li>Modeling and Practice (Ch 11) — convex modeling patterns, solver selection, ML applications.  </li>
-<li>Appendices — common inequalities, projections, and support-function geometry.</li>
+<li>
+<p>Convex surrogates<br>
+   Losses such as logistic, hinge, or Huber are convex approximations to difficult nonconvex objectives (like 0–1 loss). They make training tractable while preserving predictive performance.</p>
+</li>
+<li>
+<p>Convex subproblems in nonconvex training<br>
+   Even deep learning routinely solves convex inner loops: least-squares layers, proximal updates, line searches, or trust-region substeps.</p>
+</li>
+<li>
+<p>Implicit bias and geometry<br>
+   Gradient descent on convex models (e.g., least squares) naturally converges to the <em>minimum-norm</em> solution — a property used to analyze implicit regularization in overparameterized regimes.</p>
+</li>
 </ol>
-<h2 id="missing-elements">MIssing elements<a class="headerlink" href="#missing-elements" title="Permanent link">¶</a></h2>
-<ol>
-<li>Subgradient descent</li>
-</ol>
+<p>Convex optimization provides both the tools and the theory for understanding why first-order methods generalize and converge.</p>
+<h2 id="14-from-global-optima-to-algorithms">1.4 From Global Optima to Algorithms<a class="headerlink" href="#14-from-global-optima-to-algorithms" title="Permanent link">¶</a></h2>
+<p>Convexity eliminates local traps. For a differentiable convex <span class="arithmatex">\(f\)</span> on a convex domain <span class="arithmatex">\(\mathcal{X}\)</span>:</p>
+<div class="arithmatex">\[
+\nabla f(x^\star) = 0 \;\Rightarrow\; x^\star \text{ is a global minimizer.}
+\]</div>
+<p>There are no local minima or saddle points distinct from the global solution.  For nondifferentiable convex <span class="arithmatex">\(f\)</span>, the same holds with subgradients:
+<span class="arithmatex">\(0\in\partial f(x^\star)\)</span>.</p>
+<blockquote>
+<p>Practical meaning: You can trust gradient-based methods to find the best possible solution —<br>
+not just a good one — if the problem is convex.</p>
+</blockquote>
+<h2 id="15-canonical-convex-ml-problems-at-a-glance">1.5 Canonical Convex ML Problems at a Glance<a class="headerlink" href="#15-canonical-convex-ml-problems-at-a-glance" title="Permanent link">¶</a></h2>
+<table>
+<thead>
+<tr>
+<th>Problem</th>
+<th>Objective</th>
+<th>Typical Solver</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Least squares</td>
+<td><span class="arithmatex">\(\|A x - b\|_2^2\)</span></td>
+<td>Gradient descent, CG</td>
+</tr>
+<tr>
+<td>Ridge regression</td>
+<td><span class="arithmatex">\(\|A x - b\|_2^2 + \lambda\|x\|_2^2\)</span></td>
+<td>Closed form / GD</td>
+</tr>
+<tr>
+<td>LASSO</td>
+<td><span class="arithmatex">\(\|A x - b\|_2^2 + \lambda\|x\|_1\)</span></td>
+<td>Prox-gradient (ISTA/FISTA)</td>
+</tr>
+<tr>
+<td>Logistic regression</td>
+<td><span class="arithmatex">\(\sum_i \log(1+\exp(-y_i a_i^\top x)) + \lambda\|x\|_2^2\)</span></td>
+<td>Newton, SGD</td>
+</tr>
+<tr>
+<td>SVM (hinge loss)</td>
+<td><span class="arithmatex">\(\tfrac{1}{2}\|x\|^2 + C\sum_i \max(0,1-y_i a_i^\top x)\)</span></td>
+<td>Subgradient, SMO</td>
+</tr>
+<tr>
+<td>Robust regression</td>
+<td><span class="arithmatex">\(\|A x - b\|_1\)</span></td>
+<td>Linear programming</td>
+</tr>
+<tr>
+<td>Elastic Net</td>
+<td><span class="arithmatex">\(\|A x-b\|_2^2+\lambda_1\|x\|_1+\lambda_2\|x\|_2^2\)</span></td>
+<td>Coordinate descent</td>
+</tr>
+</tbody>
+</table>
+<p>These patterns appear repeatedly in later chapters and unify much of convex ML.</p>
+<h2 id="16-web-book-roadmap-and-how-to-use-it">1.6 Web-Book Roadmap and How to Use It<a class="headerlink" href="#16-web-book-roadmap-and-how-to-use-it" title="Permanent link">¶</a></h2>
+<table>
+<thead>
+<tr>
+<th>Question</th>
+<th>Where to Look</th>
+<th>Key Idea</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>What makes a function or set convex?</td>
+<td>Ch. 2 – 5</td>
+<td>Geometry &amp; calculus of convexity</td>
+</tr>
+<tr>
+<td>How do gradients, subgradients, and KKT conditions certify optimality?</td>
+<td>Ch. 6 – 9</td>
+<td>Optimality &amp; duality</td>
+</tr>
+<tr>
+<td>How are convex problems actually solved?</td>
+<td>Ch. 10 – 14</td>
+<td>First-order, second-order, interior-point methods</td>
+</tr>
+<tr>
+<td>How do I pick a solver for my ML model?</td>
+<td>Ch. 15 – 17</td>
+<td>Large-scale, structured, and modeling patterns</td>
+</tr>
+</tbody>
+</table>
+<h2 id="17-next-steps">1.7 Next Steps<a class="headerlink" href="#17-next-steps" title="Permanent link">¶</a></h2>
+<p>In the next chapters we move from intuition to structure:</p>
+<blockquote>
+<p>Geometry first (convex sets, functions),<br>
+then calculus (gradients, subgradients),<br>
+then optimality and algorithms.</p>
+</blockquote>
+<p>This geometric foundation will make every later algorithm — gradient descent, Newton, or interior-point — feel natural and inevitable.</p>
 
 
 
