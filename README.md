@@ -38,12 +38,16 @@ Black Box Optimization
 
 
 2. Deep Mind UCL
-   https://www.youtube.com/watch?v=7R52wiUgxZI&list=PLqYmG7hTraZCDxZ44o4p3N5Anz3lLRVZF&index=1
+
+   https://www.youtube.com/watch?v=8zAP2qWAsKg&list=PLqYmG7hTraZCDxZ44o4p3N5Anz3lLRVZF&index=7
      
-   Completeled 6 out of 12.
+   Completeled 7 out of 12.
 
 4. MIT 6.824: Distributed Systems:
+   https://pdos.csail.mit.edu/6.824/schedule.html
    https://www.youtube.com/@6.824
+
+   Lec 1 done out of 20
 
 5. LLM
    https://www.youtube.com/watch?v=Ub3GoFaUcds
@@ -61,7 +65,7 @@ Black Box Optimization
 
 10. Amazon
 
-11. Pytorch.
+11. Pytorch
 
 12. Autograd lecture my Andre Kapathry
 

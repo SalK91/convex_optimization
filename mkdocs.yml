@@ -142,9 +142,14 @@ nav:
       - 1. Introduction to Deep Learning Optimization: "deeplearning/1_mlp.md"
       - 2. Convolutional Neural Networks (CNNs): "deeplearning/2_convnets.md"
       - 3. Sequence Data and Recurrent Neural Networks (RNNs): "deeplearning/3_sequence_data.md"
+      - 4. Natural Language Processing (NLP) with Deep Learning: "deeplearning/4_nlp.md"
       - 2. Optimization Algorithms for Deep Learning: "deeplearning/1_intro.md"
       - 3. Regularization Techniques in Deep Learning: "deep_learning/1_intro.md"
       - 4. Advanced Topics in Deep Learning Optimization: "deep_learning/1_intro.md"
+
+  - Distributed Systems:
+      - 1. Introduction: "distributedsystems/1_intro.md"
+      - 2. MapReduce: "distributedsystems/2_mapreduce.md"
 
   - Cheat Sheets:
       - Optimization Algos - Cheat Sheet: "cheatsheets/20a_cheatsheet.md"
