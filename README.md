@@ -56,7 +56,10 @@ Black Box Optimization
 
 7. Non Convex Articel
 
-8. RL Articel
+8. RL
+   why can't we using backpropogation on RL policy and end to end learning
+   how is attention built in RL? Why is this hard attention?
+   Is RL problem differentiable?
 
 9. LLMs
    https://github.com/aishwaryanr/awesome-generative-ai-guide
@@ -70,3 +73,7 @@ Black Box Optimization
 12. Autograd lecture my Andre Kapathry
 
 13. EM - Expected maximization
+
+14. Causal Analysis
+
+15. variantional inference
