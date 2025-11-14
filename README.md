@@ -36,12 +36,7 @@ Evolution Strategies
 Numerical Encodings
 Black Box Optimization
 
-
-2. Deep Mind UCL
-
-   https://www.youtube.com/watch?v=8zAP2qWAsKg&list=PLqYmG7hTraZCDxZ44o4p3N5Anz3lLRVZF&index=7
-     
-   Completeled 7 out of 12.
+ 
 
 4. MIT 6.824: Distributed Systems:
    https://pdos.csail.mit.edu/6.824/schedule.html
@@ -77,3 +72,4 @@ Black Box Optimization
 14. Causal Analysis
 
 15. variantional inference
+    variational autoencoders

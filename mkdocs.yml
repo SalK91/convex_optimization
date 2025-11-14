@@ -152,9 +152,17 @@ nav:
       - 4. Advanced Topics in Deep Learning Optimization: "deep_learning/1_intro.md"
 
   - Distributed Systems:
-      - 1. Introduction: "distributedsystems/1_intro.md"
-      - 2. MapReduce: "distributedsystems/2_mapreduce.md"
+      - Introduction: "distributedsystems/0_intro.md"
+      - 1. MapReduce: "distributedsystems/1_mapreduce.md"
+      - 2. Threads and RPC: "distributedsystems/2_threads.md"
 
+  - Information Theory:
+      - 1. Introduction: "informationtheory/1_intro_to_infotheory.md"
+      - 2. Entropy and Information Measures: "informationtheory/2_entropy.md"
+      - 3. Source Coding Theorems: "informationtheory/3_source_coding.md"
+      - 4. Channel Capacity and Coding Theorems: "informationtheory/4_channel_capacity.md"
+      - 5. Applications of Information Theory: "informationtheory/5_applications.md"
+  
   - Cheat Sheets:
       - Optimization Algos - Cheat Sheet: "cheatsheets/20a_cheatsheet.md"
 

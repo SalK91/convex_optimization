@@ -1,6 +1,7 @@
 # Introduction
 
 What is "distributed system":
+
 A group of computers cooperating to provide a service
 
 

@@ -461,6 +461,7 @@ Design goal:
 
 > Flows are powerful but rigid: they trade flexibility in modeling for tractability in inference.
 
+## Mar
 
 ## 4. Variational Inference (VI)
 
@@ -482,10 +483,34 @@ We still need the posterior for:
 - Learning (MLE gradient depends on it)
 - EM algorithm E-step
 
-So we replace the true posterior with a tractable approximation.
+
+#### Approximate Inference
+
+There are two major classes of approaches to approximate inference:
+
+
+####  Markov Chain Monte Carlo (MCMC)  
+Generate samples from the exact posterior using a Markov chain.
+
+- Very general; exact in the limit of infinite time / computation  
+- Computationally expensive  
+- Convergence is hard to diagnose  
+
+
+#### 2. Variational Inference (VI)  
+Approximate the posterior with a tractable distribution  
+(e.g., fully factorized, mixture, or autoregressive).
+
+- Fairly efficient — inference reduces to optimization of distribution parameters  
+- Fast at test time (single forward pass of the inference network)  
+- Cannot easily trade computation for accuracy (unlike MCMC)  
+
+MCMC = flexible, asymptotically exact, but slow.  
+VI = fast and scalable, but biased due to restricted approximating family.
 
  
 ## 4.2 Core Idea of Variational Inference
+Turns inference into a optimization problem. Faster compared to MCMC as optimization is faster than sampleing.
 Approximate the posterior with a simpler distribution:
 
 $$
@@ -572,23 +597,23 @@ q_\phi(z\mid x) = p_\theta(z\mid x)
 \text{gap} = 0
 $$
 
----
-
+ 
 ## 4.5 What Happens When Updating Each Parameter Set?
 
 ### Updating variational parameters $\phi$:
+
 - Minimizes the variational gap  
 - Makes $q_\phi(z \mid x)$ closer to the true posterior  
 - Does not affect the model directly
 
 ### Updating model parameters $\theta$:
+
 - Increases $\log p_\theta(x)$ (good)
 - BUT often also reduces the gap by making the posterior simpler  
   → Risk: posterior collapse / variational pruning
 
 This motivates using expressive variational families (flows, mixtures, autoregressive).
 
----
 
 ## 4.6 Variational Pruning (Posterior Collapse)
 Because VI pushes $p_\theta(z \mid x)$ towards $q_\phi(z\mid x)$, the model may choose to ignore some latent dimensions:
@@ -600,22 +625,25 @@ $$
 Meaning the latent variable carries no information about $x$.
 
 Pros:
+
 - Automatically learns effective latent dimensionality
 
 Cons:
+
 - Prevents fully utilizing the latent capacity  
 - Common issue in VAEs (particularly with strong decoders)
 
----
 
 ## 4.7 Choosing the Variational Posterior Family
 
 ### Simple: Mean-field Gaussian
+
 - Fast
 - Easy to optimize
 - But limited expressivity
 
 ### More expressive options:
+
 - Mixture posteriors
 - Gaussians with full covariance
 - Autoregressive posteriors
@@ -623,16 +651,17 @@ Cons:
 
 Trade-off: accuracy vs speed.
 
----
-
+ 
 ## 4.8 Amortized Variational Inference
 
 Classic VI:
+
 - Each datapoint $x$ has its own variational parameters  
 - Requires iterative optimization per datapoint  
 - Too slow for deep learning
 
 Amortized VI:
+
 - Use an inference network (encoder)
   $$
   \phi(x) \mapsto \text{parameters of } q_\phi(z\mid x)
@@ -642,22 +671,22 @@ Amortized VI:
 - Introduced in Helmholtz Machines  
 - Popularized by Variational Autoencoders
 
----
-
+ 
 ## 4.9 Variational vs Exact Inference
 
 ### Advantages of VI
+
 - Scalable to modern deep models  
 - Fast inference  
 - Enables flexible model design  
 
 ### Disadvantages
+
 - Approximation bias  
 - Posterior may be oversimplified  
 - Can limit expressiveness of the full model  
 
----
-
+ 
 ## 4.10 Summary of Section 4
 
 - Variational inference approximates the true posterior with a tractable distribution.  
