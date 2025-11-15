@@ -158,11 +158,15 @@ nav:
 
   - Information Theory:
       - 1. Introduction: "informationtheory/1_intro_to_infotheory.md"
-      - 2. Entropy and Information Measures: "informationtheory/2_entropy.md"
-      - 3. Source Coding Theorems: "informationtheory/3_source_coding.md"
-      - 4. Channel Capacity and Coding Theorems: "informationtheory/4_channel_capacity.md"
-      - 5. Applications of Information Theory: "informationtheory/5_applications.md"
-  
+      - 2. Entropy, Self-Information & Cross-Entropy: "informationtheory/2_entropy.md"
+      - 3. Kullback-Leibler Divergence: "informationtheory/3_KL.md"
+      - 4. Bayesian Inference: "informationtheory/4_bayes.md"
+      - 5. Probability toolbox: "informationtheory/5_mc_intro.md"
+      - 6. Monte Carlo Methods: "informationtheory/6_mc.md"
+      - 8. Optimization-Based Inference: "informationtheory/7a_vi_intro.md"
+      - 7. Variatonal Inference: "informationtheory/7b_vi.md"
+      - 8. Representation Learning: "informationtheory/8_representation.md"
+    
   - Cheat Sheets:
       - Optimization Algos - Cheat Sheet: "cheatsheets/20a_cheatsheet.md"
 

@@ -1,12 +1,6 @@
 
-Entropy
-Cross Entropy 
-KL Divergence
-f-divergence
-Jesnsen Shannon divergences -mizture of KL and ML?
-divergence vs distance
-
-Wassertein Distance?
+https://www.inference.org.uk/itprnn_lectures/
+https://www.youtube.com/watch?v=BCiZc0n6COY
 
 Application in 
 1. GANS

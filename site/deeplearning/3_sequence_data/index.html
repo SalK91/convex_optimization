@@ -1,0 +1,2090 @@
+<!DOCTYPE html><html lang="en" class="no-js"><head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Structured lecture notes on optimization, convex analysis, and algorithms.">
+      
+      
+        <meta name="author" content="Salman Khan">
+      
+      
+        <link rel="canonical" href="https://salk91.github.io/convex_optimization/deeplearning/3_sequence_data/">
+      
+      
+        <link rel="prev" href="../2_convnets/">
+      
+      
+        <link rel="next" href="../4_nlp/">
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.20">
+    
+    
+      
+        <title>3. Sequence Data and Recurrent Neural Networks (RNNs) - Mathematics for Machine Learning</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.e53b48f4.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Merriweather:300,300i,400,400i,700,700i%7CFira+Code:400,400i,700,700i&amp;display=fallback">
+        <style>:root{--md-text-font:"Merriweather";--md-code-font:"Fira Code"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../css/print-site.css">
+    
+      <link rel="stylesheet" href="../../css/print-site-material.css">
+    
+      <link rel="stylesheet" href="../../styles/extra.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  <link href="../../assets/stylesheets/glightbox.min.css" rel="stylesheet"><script src="../../assets/javascripts/glightbox.min.js"></script><style id="glightbox-style">
+            html.glightbox-open { overflow: initial; height: 100%; }
+            .gslide-title { margin-top: 0px; user-select: text; }
+            .gslide-desc { color: #666; user-select: text; }
+            .gslide-image img { background: white; }
+            .gscrollbar-fixer { padding-right: 15px; }
+            .gdesc-inner { font-size: 0.75rem; }
+            body[data-md-color-scheme="slate"] .gdesc-inner { background: var(--md-default-bg-color); }
+            body[data-md-color-scheme="slate"] .gslide-title { color: var(--md-default-fg-color); }
+            body[data-md-color-scheme="slate"] .gslide-desc { color: var(--md-default-fg-color); }
+        </style></head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="cyan">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#chapter-3-modeling-sequence-data-in-deep-learning" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="Mathematics for Machine Learning" class="md-header__button md-logo" aria-label="Mathematics for Machine Learning" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"></path></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"></path></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Mathematics for Machine Learning
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              3. Sequence Data and Recurrent Neural Networks (RNNs)
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="cyan" aria-label="Switch to light mode" type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3zm3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95zm-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31"></path></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="cyan" aria-label="Switch to dark mode" type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m3.55 19.09 1.41 1.41 1.8-1.79-1.42-1.42M12 6c-3.31 0-6 2.69-6 6s2.69 6 6 6 6-2.69 6-6c0-3.32-2.69-6-6-6m8 7h3v-2h-3m-2.76 7.71 1.8 1.79 1.41-1.41-1.79-1.8M20.45 5l-1.41-1.4-1.8 1.79 1.42 1.42M13 1h-2v3h2M6.76 5.39 4.96 3.6 3.55 5l1.79 1.81zM1 13h3v-2H1m12 9h-2v3h2"></path></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"></path></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"></path></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"></path></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"></path></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/SalK91/convex_optimization" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.0.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"></path></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+  
+
+<nav class="md-nav md-nav--primary md-nav--integrated" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Mathematics for Machine Learning" class="md-nav__button md-logo" aria-label="Mathematics for Machine Learning" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"></path></svg>
+
+    </a>
+    Mathematics for Machine Learning
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/SalK91/convex_optimization" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.0.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"></path></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Home
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2">
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Convex Optimization
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            Convex Optimization
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../convex/11_intro/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    1. Introduction and Overview
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../convex/12_vector/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    2. Linear Algebra Foundations
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../convex/13_calculus/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    3. Multivariable Calculus for Optimization
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../convex/14_convexsets/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    4. Convex Sets and Geometric Fundamentals
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../convex/15_convexfunctions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    5. Convex Functions
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../convex/16_subgradients/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    6. Nonsmooth Convex Optimization – Subgradients
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../convex/16a_optimality_conditions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    7. First-Order Optimality Conditions in Convex Optimization
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../convex/17_kkt/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    8. Optimization Principles – From Gradient Descent to KKT
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../convex/18_duality/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    9. Lagrange Duality Theory
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../convex/18a_pareto/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    10. Pareto Optimality and Multi-Objective Convex Optimization
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../convex/18b_regularization/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    11. Regularized Approximation – Balancing Fit and Complexity
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../convex/19_optimizationalgo/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    12. Algorithms for Convex Optimization
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../convex/19a_optimization_constraints/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    13. Optimization Algorithms for Equality-Constrained Problems
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../convex/19b_optimization_constraints/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    14. Optimization Algorithms for Inequality-Constrained Problems
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../convex/20_advanced/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    15. Advanced Large-Scale and Structured Methods
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../convex/21_models/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    16. Modelling Patterns and Algorithm Selection in Practice
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../convex/30_canonical_problems/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    17. Canonical Problems in Convex Optimization
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3">
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Optimization Beyond Convexity
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            Optimization Beyond Convexity
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../nonconvex/41_intro/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    1. Introduction
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../nonconvex/42_meta/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    2. Metaheuristic Optimization Methods
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../nonconvex/43_hybrid/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    3. Hybrid and Modern Optimization Methods
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Deep Learning
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            Deep Learning
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../1_mlp/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    1. Introduction to Deep Learning Optimization
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../2_convnets/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    2. Convolutional Neural Networks (CNNs)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    3. Sequence Data and Recurrent Neural Networks (RNNs)
+    
+  </span>
+  
+
+      </a>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../4_nlp/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    4. Natural Language Processing (NLP) with Deep Learning
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../5_attention/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    5. Transformers and Attention Mechanisms
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../6_gans/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    6. Generative Models and GANs
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../7_unsuper/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    7. Unsupervised and Self-Supervised Learning
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../8_latentvariables/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    8. Latent Variable Models
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../1_intro.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    2. Optimization Algorithms for Deep Learning
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../deep_learning/1_intro.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    3. Regularization Techniques in Deep Learning
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../deep_learning/1_intro.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    4. Advanced Topics in Deep Learning Optimization
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5">
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Distributed Systems
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            Distributed Systems
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../distributedsystems/0_intro/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Introduction
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../distributedsystems/1_mapreduce/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    1. MapReduce
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../distributedsystems/2_threads/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    2. Threads and RPC
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6">
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Information Theory
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            Information Theory
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../informationtheory/1_intro_to_infotheory/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    1. Introduction
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../informationtheory/2_entropy/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    2. Entropy, Self-Information &amp; Cross-Entropy
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../informationtheory/3_KL/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    3. Kullback-Leibler Divergence
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../informationtheory/4_bayes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    4. Bayesian Inference
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../informationtheory/5_mc_intro/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    5. Probability toolbox
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../informationtheory/6_mc/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    6. Monte Carlo Methods
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../informationtheory/7a_vi_intro/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    8. Optimization-Based Inference
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../informationtheory/7b_vi/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    7. Variatonal Inference
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../informationtheory/8_representation.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    8. Representation Learning
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7">
+        
+          
+          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Cheat Sheets
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            Cheat Sheets
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../cheatsheets/20a_cheatsheet/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Optimization Algos - Cheat Sheet
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_8">
+        
+          
+          <label class="md-nav__link" for="__nav_8" id="__nav_8_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Appendices
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_8">
+            <span class="md-nav__icon md-icon"></span>
+            Appendices
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../appendices/120_ineqaulities/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Appendix A - Common Inequalities and Identities
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../appendices/130_projections/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Appendix B - Projection and Proximal Operators
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../appendices/140_support/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Appendix C - Support Functions and Dual Geometry (Advanced)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../appendices/160_conjugates/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Appendix D - Convex Conjugates and Fenchel Duality (Advanced)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../appendices/170_probability/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Appendix E - Convexity in Probability and Statistics (Advanced)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../appendices/180_subgradient_methods/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Appendix F - Subgradient Method and Variants (Advanced)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../appendices/190_proximal/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Appendix G - Proximal Operators
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../appendices/200_mirror/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Appendix H - Mirror Descent and Bregman Geometry
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../appendices/300_matrixfactorization/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Appendix I - Matrix Factorization
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../print_page/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Print Site
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+    <a href="https://github.com/SalK91/convex_optimization/edit/master/docs/deeplearning/3_sequence_data.md" title="Edit this page" class="md-content__button md-icon" rel="edit">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M10 20H6V4h7v5h5v3.1l2-2V8l-6-6H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h4zm10.2-7c.1 0 .3.1.4.2l1.3 1.3c.2.2.2.6 0 .8l-1 1-2.1-2.1 1-1c.1-.1.2-.2.4-.2m0 3.9L14.1 23H12v-2.1l6.1-6.1z"></path></svg>
+    </a>
+  
+  
+    
+      
+    
+    <a href="https://github.com/SalK91/convex_optimization/raw/master/docs/deeplearning/3_sequence_data.md" title="View source of this page" class="md-content__button md-icon">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 18c.56 0 1 .44 1 1s-.44 1-1 1-1-.44-1-1 .44-1 1-1m0-3c-2.73 0-5.06 1.66-6 4 .94 2.34 3.27 4 6 4s5.06-1.66 6-4c-.94-2.34-3.27-4-6-4m0 6.5a2.5 2.5 0 0 1-2.5-2.5 2.5 2.5 0 0 1 2.5-2.5 2.5 2.5 0 0 1 2.5 2.5 2.5 2.5 0 0 1-2.5 2.5M9.27 20H6V4h7v5h5v4.07c.7.08 1.36.25 2 .49V8l-6-6H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h4.5a8.2 8.2 0 0 1-1.23-2"></path></svg>
+    </a>
+  
+
+
+<h1 id="chapter-3-modeling-sequence-data-in-deep-learning">Chapter 3: Modeling Sequence Data in Deep Learning<a class="headerlink" href="#chapter-3-modeling-sequence-data-in-deep-learning" title="Permanent link">¶</a></h1>
+<p>In machine learning, a sequence is an ordered list of elements (e.g. words, time-series measurements) where the order of elements carries meaning. Formally, a sequence of length <span class="arithmatex">\(T\)</span> can be written as <span class="arithmatex">\((x_1,x_2,\dots,x_T)\)</span>, where each element <span class="arithmatex">\(x_t\)</span> is indexed by its position in the sequence. Elements can repeat (e.g. the word “the” may appear multiple times), and different sequences may have different lengths. Thus sequence data is inherently variable-length and order-dependent.</p>
+<p>Sequences are collection of elements where:</p>
+<ul>
+<li>Elements can be repeated.</li>
+<li>Order matters.</li>
+<li>Of variable length.</li>
+</ul>
+<h2 id="limitations-of-traditional-supervised-models">Limitations of Traditional Supervised Models:<a class="headerlink" href="#limitations-of-traditional-supervised-models" title="Permanent link">¶</a></h2>
+<p>Traditional supervised models (e.g. fixed-size feedforward neural networks or classifiers) expect inputs of a fixed dimension and have no built-in notion of order or memory. In practice, applying a standard feedforward net to sequence data – by, say, collapsing the sequence into a fixed-size feature vector – ignores the important temporal or sequential structure. As one summary notes, “feedforward neural networks are severely limited when it comes to sequential data”. Indeed, trying to predict a time-series or next word in a sentence by a fixed snapshot yields poor results. The key missing capability in traditional networks is memory of the past: they cannot readily model how earlier parts of the sequence influence later outputs. </p>
+<p>Concretely, most classifiers assume each input example is independent and fixed-size. A sentence of variable length or a time-series with long-term correlations violates this assumption. Thus, classical models fail because they have no mechanism to store or process long-term context: they either throw away order information or arbitrarily truncate sequences. Feedforward networks also do not share parameters over time, so each time-step would have its own weights (infeasible for long sequences).</p>
+<h2 id="the-simplest-assumption-independent-words-bag-of-words">The Simplest Assumption: Independent Words (Bag-of-Words)<a class="headerlink" href="#the-simplest-assumption-independent-words-bag-of-words" title="Permanent link">¶</a></h2>
+<p>A naïve approach to sequence (especially text) is to assume all elements are independent. In language, this is like a bag-of-words model (or unigram model) that ignores word order. In a bag-of-words representation, one simply counts or models each word’s occurrence, treating all words as “independent features.” This ignores sequence structure: “the order of words in the original documents is irrelevant”. Such a model can still do document classification by word frequency, but it cannot predict the next word or capture meaning that depends on word order. Critically, bag-of-words assumes word occurrences are uncorrelated: “bag-of-words assumes words are independent of one another”. In reality, words co-occur in context (“peanut butter” versus “peanut giraffe”) – bag-of-words misses all such dependencies. Thus the independent-words assumption breaks down for sequence modeling, motivating models that explicitly use ordering and context.</p>
+<h2 id="n-gram-models-and-fixed-context-assumptions">N-gram Models and Fixed-Context Assumptions<a class="headerlink" href="#n-gram-models-and-fixed-context-assumptions" title="Permanent link">¶</a></h2>
+<p>To go beyond complete independence, one can incorporate local context by using <span class="arithmatex">\(n\)</span>-gram models. An <span class="arithmatex">\(n\)</span>-gram model makes the (Markov) assumption that the probability of each element depends only on the previous <span class="arithmatex">\(n-1\)</span> elements. For language, a bigram model (2-gram) assumes <span class="arithmatex">\(P(w_t\mid w_{t-1})\)</span>, a trigram (3-gram) uses <span class="arithmatex">\(P(w_t\mid w_{t-2},w_{t-1})\)</span>, etc. In general, the chain rule with an <span class="arithmatex">\(N\)</span>-gram approximation is</p>
+<div class="arithmatex">\[
+P(x_1, \ldots, x_T) = \prod_{t=1}^{T} P(x_t \mid x_{t-N+1}, \ldots, x_{t-1}) \, .
+\]</div>
+<p>This preserves some order information: the window of the last <span class="arithmatex">\(N-1\)</span> items is used to predict the next. However, <span class="arithmatex">\(n\)</span>-gram models have well-known downsides:</p>
+<ul>
+<li>
+<p>Limited context length: They cannot capture dependencies beyond the fixed window. As noted in the literature, language “cannot reason about context beyond the immediate <span class="arithmatex">\(n\)</span>-gram window”, and dependencies span entire sentences or documents. For example, a 3-gram model cannot connect a subject at the start of a sentence to its verb at the end if they are more than two words apart. Thus any longer-range dependency is missed by an <span class="arithmatex">\(n\)</span>-gram.</p>
+</li>
+<li>
+<p>Data sparsity and scalability: The number of possible <span class="arithmatex">\(n\)</span>-grams grows exponentially with vocabulary size <span class="arithmatex">\(V\)</span>. For a vocabulary of size <span class="arithmatex">\(V\)</span>, there are <span class="arithmatex">\(V^N\)</span> possible <span class="arithmatex">\(N\)</span>-grams. Jurafsky &amp; Martin observe that even for Shakespeare’s corpus (<span class="arithmatex">\(V\approx 29{,}066\)</span>), there are <span class="arithmatex">\(V^2\approx8.4\times 10^8\)</span> possible bigrams and <span class="arithmatex">\(V^4\approx 7\times 10^{17}\)</span> possible 4-grams. Most of these never occur, so the resulting probability tables are extremely sparse. Training requires huge corpora to observe enough <span class="arithmatex">\(n\)</span>-gram counts, and storing these tables is impractical for large <span class="arithmatex">\(N\)</span> or <span class="arithmatex">\(V\)</span>. In practice, language models become “ridiculously sparse” and unwieldy.</p>
+</li>
+<li>
+<p>No parametrization (non-differentiable): Traditional <span class="arithmatex">\(n\)</span>-gram models are simply tables of counts with smoothing. They are not learned via gradient descent, so integrating them into larger neural pipelines (or backpropagating through them) is not straightforward. They lack nonlinearity and share no features across contexts.</p>
+</li>
+</ul>
+<p>In summary, while <span class="arithmatex">\(n\)</span>-grams preserve local order up to length <span class="arithmatex">\(N\)</span>, they suffer from fixed-window limitations and massive tables, motivating more compact, learnable alternatives.</p>
+<h2 id="learnable-context-models-vectorization-and-neural-nets">Learnable Context Models: Vectorization and Neural Nets<a class="headerlink" href="#learnable-context-models-vectorization-and-neural-nets" title="Permanent link">¶</a></h2>
+<p>Modern sequence models address these issues by representing context with vectors and training parametric models. Key features of a learnable sequential model include:</p>
+<ul>
+<li>
+<p>Vector representation (embedding) of words and context: Each element (e.g. a word) is mapped to a continuous vector. Context (the recent history) can be summarized by combining or encoding these vectors into a fixed-size context vector. This preserves order by using the positions of the context vectors in the encoding.</p>
+</li>
+<li>
+<p>Order sensitivity: Unlike bag-of-words, the model output depends on the order of context elements. For example, we might concatenate or otherwise encode a sequence of word embeddings, ensuring different sequences yield different context vectors.</p>
+</li>
+<li>
+<p>Variable-length compatibility: The model should handle inputs of differing lengths. For instance, recurrent or attention models can process a variable number of inputs sequentially. Context-vectors built from the sequence (such as by a recurrent state) grow as needed. As noted, context-vector methods can “operate in variable length of sequences”.</p>
+</li>
+<li>
+<p>Differentiability: The mapping from context vector to next-word probability should be a differentiable function (e.g. a neural network) so we can train by gradient descent. This requires using continuous, learnable transformations (matrices, nonlinearities) instead of fixed count tables.</p>
+</li>
+<li>
+<p>Nonlinearity: Neural networks allow complex (nonlinear) interactions among inputs. A simple linear model on concatenated embeddings might be too weak, so one often uses at least one hidden layer with a nonlinear activation (e.g. tanh, ReLU).</p>
+</li>
+</ul>
+<p>For example, one could take the last few words, map each to an embedding <span class="arithmatex">\(\mathbf{x}{t-N+1},\dots,\mathbf{x}{t-1}\)</span>, concatenate them into one large vector, and feed it into a multilayer perceptron (MLP) to predict the next word’s probability. This would be order-sensitive and differentiable. However, it still fixes the context window size (<span class="arithmatex">\(N-1\)</span>) and uses a separate weight for each position, so it’s not efficient or variable-length. </p>
+<p>A more flexible approach is to encode arbitrary prefixes of the sequence into a single context (memory) vector using a recurrent or recursive process. One introduces a context vector <span class="arithmatex">\(\mathbf{h}_t\)</span> that evolves as the sequence is read. Such a context-vector “acts as memory” summarizing the past. A context-vector model has crucial advantages: it preserves order, handles variable-length inputs, and is fully trainable (differentiable). In short, vectorized context models can “learn” how much each part of the past matters, via backpropagation, while maintaining the sequence structure.</p>
+<h2 id="recurrent-neural-networks-rnns">Recurrent Neural Networks (RNNs)<a class="headerlink" href="#recurrent-neural-networks-rnns" title="Permanent link">¶</a></h2>
+<p>These considerations lead naturally to Recurrent Neural Networks (RNNs) – models specifically designed for sequences. An RNN processes one element at a time, maintaining a hidden state (context vector) that is updated recurrently. At each time step <span class="arithmatex">\(t\)</span>, the RNN takes the current input <span class="arithmatex">\(\mathbf{x}t\)</span> and the previous hidden state <span class="arithmatex">\(\mathbf{h}{t-1}\)</span> and computes a new hidden state <span class="arithmatex">\(\mathbf{h}_t\)</span>. The simplest RNN update is:</p>
+<div class="arithmatex">\[
+h_t = \phi(W_h h_{t-1} + W_x x_t + b) \, .
+\]</div>
+<p>where <span class="arithmatex">\(\phi\)</span> is a nonlinear activation (often <span class="arithmatex">\(\tanh\)</span>) and <span class="arithmatex">\(W_h,W_x\)</span> are weight matrices. The same weight matrices <span class="arithmatex">\(W_h,W_x\)</span> are reused at every time step (this is parameter sharing), which gives the RNN the ability to handle sequences of any length. As noted, this weight sharing means the model uses constant parameters across time.</p>
+<p>Intuitively, the RNN’s hidden state <span class="arithmatex">\(\mathbf{h}_t\)</span> “remembers” the information from all prior inputs up to time <span class="arithmatex">\(t\)</span>. The final hidden state (or the hidden state at each step) can then be fed to an output layer to make predictions. Typically, we compute an output distribution over the next element via a softmax layer:</p>
+<div class="arithmatex">\[
+y_t = \mathrm{softmax}(W_y h_t + b_y) \, .
+\]</div>
+<p>so that <span class="arithmatex">\(P(x_{t+1}=w \mid \mathbf{h}_t)\)</span> is given by the corresponding component of <span class="arithmatex">\(\mathbf{y}_t\)</span>. In language modeling, for instance, <span class="arithmatex">\(y_t\)</span> gives a probability for each word in the vocabulary. As described in practice, “RNNs predict the output from the last hidden state along with output parameter <span class="arithmatex">\(W_y\)</span>; a softmax function to ensure the probability over all possible words”. </p>
+<p>In summary, RNNs explicitly model order and context via their hidden state updates and shared parameters. They can be seen as a recurrent generalization of feedforward networks: an “MLP with shared weights across time.” At time <span class="arithmatex">\(t\)</span>, the RNN effectively takes the previous state and new input and feeds them through a nonlinear layer to compute the new state. Because information flows from each state to the next, the RNN can, in principle, capture long-range dependencies: any input can influence all future hidden states.</p>
+<h2 id="unrolling-and-backpropagation-through-time-bptt">Unrolling and Backpropagation Through Time (BPTT)<a class="headerlink" href="#unrolling-and-backpropagation-through-time-bptt" title="Permanent link">¶</a></h2>
+<p>Training an RNN is done by backpropagation through time. Conceptually, we unfold or unroll the RNN across <span class="arithmatex">\(T\)</span> time steps, creating a deep feedforward network of depth <span class="arithmatex">\(T\)</span> (each layer corresponds to one time step) with tied weights. One then applies standard backpropagation on this unfolded network. Formally, the total loss (e.g. sum of cross-entropies at each step) depends on the sequence of outputs, and gradients are computed by propagating errors backward through the unfolded time dimension. As one overview explains, “the network needs to be expanded, or unfolded, so that the parameters could be differentiated ... – hence backpropagation through time (BPTT)”. In practice, each weight matrix <span class="arithmatex">\(W\)</span> receives gradient contributions from each time step, effectively summing gradients as they propagate back. BPTT thus accounts for how current errors depend on all previous inputs through the recurrent hidden state. Because parameters are shared across time, the gradient at each step flows through multiple copies of the layer. BPTT differs from ordinary backpropagation only in that errors are summed at each time step due to weight sharing. Concretely, if <span class="arithmatex">\(L = -\sum_t \log P(x_t\mid \mathbf{h}_{t-1})\)</span> is the loss, then for each <span class="arithmatex">\(W\)</span> we compute</p>
+<div class="arithmatex">\[
+\frac{\partial L}{\partial W} = \sum_{t} \frac{\partial L}{\partial h_t} \frac{\partial h_t}{\partial W} \, .
+\]</div>
+<p>taking into account the influence of <span class="arithmatex">\(W\)</span> at every time step. In implementation, we typically use truncated BPTT (backprop through a limited number of steps) for efficiency on long sequences. But in principle, gradients propagate through all time steps, linking distant inputs to distant outputs.</p>
+<h2 id="vanishing-and-exploding-gradients">Vanishing and Exploding Gradients<a class="headerlink" href="#vanishing-and-exploding-gradients" title="Permanent link">¶</a></h2>
+<p>A critical challenge in training RNNs is that the repeated nonlinear transformations can cause gradients to vanish or explode during BPTT. Mathematically, the derivative <span class="arithmatex">\(\partial \mathbf{h}t/\partial \mathbf{h}{t-1}\)</span> involves the Jacobian of the activation and the recurrent weights. Over many steps, the gradient involves a product of many such Jacobians. Just as multiplying many numbers less than 1 quickly goes to zero, multiplying many matrices with spectral radius <span class="arithmatex">\(&lt;1\)</span> causes the gradients to shrink exponentially (vanishing), while if the spectral radius is <span class="arithmatex">\(&gt;1\)</span> they blow up (exploding). The exploding gradient problem arises when the norm of the gradient grows exponentially (due to eigenvalues <span class="arithmatex">\(&gt;1\)</span>), whereas the vanishing gradient problem occurs when long-term components of the gradient go “exponentially fast to norm 0”. Formally, for a linearized RNN one can show that if the largest eigenvalue <span class="arithmatex">\(\lambda_{\max}\)</span> of the recurrent weight matrix satisfies <span class="arithmatex">\(|\lambda_{\max}|&lt;1\)</span>, long-term gradients vanish as <span class="arithmatex">\(t\to\infty\)</span>, and if <span class="arithmatex">\(|\lambda_{\max}|&gt;1\)</span> they explode. </p>
+<p>Vanishing gradients mean that inputs from the distant past have almost no effect on the gradient of the loss, so the model learns only short-term dependencies. Exploding gradients make training unstable (weights take huge jumps). Both phenomena are well-documented: “when long term components go to zero, the model cannot learn correlation between distant events.” In practice, it is common to observe gradients either shrinking toward zero over time or blowing up and causing numerical issues in RNNs, especially with long sequences.</p>
+<h2 id="gated-architectures-lstm-and-gru">Gated Architectures: LSTM and GRU<a class="headerlink" href="#gated-architectures-lstm-and-gru" title="Permanent link">¶</a></h2>
+<p>To mitigate the vanishing gradient, gated RNN architectures such as Long Short-Term Memory (LSTM) and Gated Recurrent Unit (GRU) were introduced. These architectures incorporate learnable “gates” that control the flow of information and create paths for gradients to propagate more easily. Long Short-Term Memory (LSTM): An LSTM cell augments the basic RNN with a cell state <span class="arithmatex">\(\mathbf{C}_t\)</span> and three gates: input (<span class="arithmatex">\(\mathbf{i}_t\)</span>), forget (<span class="arithmatex">\(\mathbf{f}_t\)</span>), and output (<span class="arithmatex">\(\mathbf{o}t\)</span>) gates. Each gate is a sigmoid unit that decides how much information to let through. Formally, at time <span class="arithmatex">\(t\)</span> with input <span class="arithmatex">\(\mathbf{x}t\)</span> and previous hidden <span class="arithmatex">\(\mathbf{h}{t-1}\)</span> and cell <span class="arithmatex">\(\mathbf{C}{t-1}\)</span>, the gates and cell update are given by (all operations are elementwise):</p>
+<p>​<script type="math/tex; mode=display">
+\begin{aligned}
+i_t &= \sigma(W_{xi} x_t + W_{hi} h_{t-1} + b_i), \\
+f_t &= \sigma(W_{xf} x_t + W_{hf} h_{t-1} + b_f), \\
+o_t &= \sigma(W_{xo} x_t + W_{ho} h_{t-1} + b_o), \\
+\tilde{C}_t &= \tanh(W_{xc} x_t + W_{hc} h_{t-1} + b_c) \, .
+\end{aligned}
+</script>
+</p>
+<p>The new cell state <span class="arithmatex">\(\mathbf{C}_t\)</span> is then updated by combining the old state and the candidate:</p>
+<div class="arithmatex">\[
+C_t = f_t \odot C_{t-1} + i_t \odot \tilde{C}_t \, .
+\]</div>
+<p>where <span class="arithmatex">\(\odot\)</span> denotes elementwise multiplication. Finally, the hidden state (output of the LSTM) is</p>
+<div class="arithmatex">\[
+h_t = o_t \odot \tanh(C_t) \,
+\]</div>
+<p>The intuition is that the forget gate <span class="arithmatex">\(\mathbf{f_t}\)</span> can reset or retain the old memory <span class="arithmatex">\(\mathbf{C}_{t-1}\)</span>, the input gate <span class="arithmatex">\(\mathbf{i}_t\)</span> controls how much new information <span class="arithmatex">\(\tilde{\mathbf{C}}_t\)</span> to write, and the output gate <span class="arithmatex">\(\mathbf{o}_t\)</span> controls how much of the cell state to expose as <span class="arithmatex">\(\mathbf{h}_t\)</span>. By design, if the forget gate is near 1 and input gate near 0, the cell state is simply carried forward unchanged; gradients can flow through this constant path, avoiding vanishing. In practice, LSTMs “alleviate the vanishing gradient problem,” making it easier to train on long sequences. The gating architecture enables the network to learn to keep or discard information over many time steps. </p>
+<p>In practice, using LSTM or GRU units yields much better performance on sequence tasks like language modeling or translation than vanilla RNNs.</p>
+<h2 id="optimization-challenges-and-solutions">Optimization Challenges and Solutions<a class="headerlink" href="#optimization-challenges-and-solutions" title="Permanent link">¶</a></h2>
+<p>Even with gating, training RNNs can be tricky. Besides architectural fixes, optimization techniques are crucial:</p>
+<ul>
+<li>
+<p>Gradient clipping: To handle exploding gradients, one common technique is gradient clipping. Before updating parameters, one clips the norm of the gradient vector to some threshold (rescaling if too large). This prevents any single update from blowing up. As Pascanu et al. note, clipping “solves the exploding gradients problem” by limiting gradient norm. Clipping was key to many RNN successes (e.g. in language modeling), and it is standard practice in modern frameworks.</p>
+</li>
+<li>
+<p>Orthogonal (or careful) initialization: Choosing a good initial recurrent weight matrix can help. Initializing <span class="arithmatex">\(W_h\)</span> as an (scaled) orthogonal matrix ensures its eigenvalues have magnitude 1, which prevents immediate vanishing/exploding. In fact, orthogonal matrices preserve the norm of vectors, so repeated multiplications neither decay nor explode. As one tutorial explains, “Orthogonal initialization is a simple yet relatively effective way of combating exploding and vanishing gradients,” ensuring stable gradient propagation. In practice, some implementations initialize <span class="arithmatex">\(W_h\)</span> to random orthogonal (or unitary) matrices to encourage long memory.</p>
+</li>
+<li>
+<p>Layer normalization or gating enhancements: Techniques like layer normalization inside LSTM cells, or using newer architectures (e.g. LayerNorm-LSTM, transformer-like attention), also alleviate training difficulties.</p>
+</li>
+<li>
+<p>Regularization: Some works add penalties to encourage <span class="arithmatex">\(W_h\)</span> to have a controlled spectral radius, or use techniques like weight noise or dropout to stabilize training.</p>
+</li>
+</ul>
+<p>In summary, sequence modeling requires architectures and training methods that explicitly handle order, context, and long-range information. Traditional models fail because they lack memory and flexibility. N-gram models give a glimpse of sequential structure but cannot scale or generalize. Recurrent models – especially gated RNNs – provide a powerful framework: mathematically, they define hidden states <span class="arithmatex">\(\mathbf{h}_t\)</span> updated by <span class="arithmatex">\(\mathbf{h}t = f(\mathbf{h}{t-1},\mathbf{x}_t)\)</span> with shared weights, and training via BPTT. Gating (LSTM/GRU) adds control mechanisms that preserve gradients and selective memory. With appropriate initialization, clipping, and optimization, these RNN-based models form the foundation of modern sequence learning. </p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var labels=set.querySelector(".tabbed-labels");for(var tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"></path></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      © 2025 Salman Khan — Educational Use Only
+    </div>
+  
+  
+</div>
+      
+        
+<div class="md-social">
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://github.com/SalK91/convex_optimization" target="_blank" rel="noopener" title="github.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.0.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"></path></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.top", "toc.integrate", "content.code.copy", "content.code.annotate", "content.action.edit", "content.action.view", "content.tabs.link", "search.suggest", "search.highlight"], "search": "../../assets/javascripts/workers/search.973d3a69.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.f55a23d4.min.js"></script>
+      
+        <script src="../../js/print-site.js"></script>
+      
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+      
+    
+  
+<script id="init-glightbox">const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});
+document$.subscribe(()=>{ lightbox.reload(); });
+</script></body></html>
