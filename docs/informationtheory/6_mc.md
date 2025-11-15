@@ -59,30 +59,33 @@ $$
 \mathbb{E}_{q(z)}\left[f(z)\frac{p(z)}{q(z)}\right].
 $$
 
-Importance sampling is widely used for:
+The weights
 
-- likelihood estimation  
-- off-policy reinforcement learning  
-- correcting distribution mismatch  
+$$(z)=
+\frac{q(z)}{p(z)}
+$$	​
 
-It suffers when $p(z)/q(z)$ has high variance.
+correct for the fact that samples were drawn from $q$ instead of $p$.
 
+The main challenge is weight variability. If $q(z)$ does not closely match $p(z)$, the ratio $p(z)/q(z)$ becomes extremely uneven: most samples have tiny weights, while a few samples have very large weights. This produces high-variance estimates because the estimator becomes dominated by a handful of rare but extremely influential samples. In high-dimensional spaces, designing a proposal $q(z)$ that covers the important regions of $p(z)$ is especially difficult, making importance sampling unreliable unless the proposal distribution is carefully chosen.
  
 ### 2.3 Rejection Sampling
 
-Rejection sampling uses a proposal distribution $q(z)$ and a constant $M$ such that
-
+Rejection sampling draws exact samples from a target distribution $p(z)$ by using a simpler proposal distribution $q(z)$ and accepting or rejecting candidate samples based on how well $q$ covers $p$. The method requires a constant $M$ such that
 $$
 p(z) \le M q(z) \quad \text{for all } z.
 $$
+
+This condition ensures that $Mq(z)$ forms an envelope that completely contains $p(z)$.
 
 Procedure:
 
 1. sample $z \sim q(z)$  
 2. accept with probability $\frac{p(z)}{M q(z)}$  
 
-It produces exact samples from $p(z)$, but can be extremely inefficient in high dimensions.
+If accepted, $z$ is guaranteed to be an exact draw from $p$.
 
+Rejection sampling is conceptually simple and does not distort the target distribution, but it becomes inefficient in many settings. When $q(z)$ is a poor match for $p(z)$, the constant $M$ must be large, which means that most samples are rejected. In high-dimensional spaces, the mismatch between $p$ and $q$ typically worsens exponentially, making the acceptance probability extremely small. As a result, rejection sampling is rarely practical for modern high-dimensional machine-learning models, although it remains useful in low-dimensional problems or when $q$ can be chosen to closely match $p$.
  
 ## 3. Monte Carlo Estimation
 
@@ -124,37 +127,63 @@ $$
 
 ### 4.1 Metropolis–Hastings Algorithm
 
-Given the current state $z$, propose $z'$ using a proposal distribution $q(z'|z)$.  
-Accept with probability:
+The Metropolis–Hastings (MH) algorithm constructs a Markov chain whose stationary distribution is the target distribution $p(z)$, even when $p(z)$ is known only up to a proportionality constant. This makes MH suitable for Bayesian inference, where the posterior is often available only in unnormalized form:
 
-$$
-\alpha = \min\left(1, 
-\frac{p(z')\,q(z|z')}
+$$p(z \mid x) \propto p(x, z)$$
+
+MH works by proposing a new point based on the current state and then accepting or rejecting it according to how well it aligns with the target distribution.
+
+
+Given a current sample $z$, the algorithm proceeds as follows:
+
+1. propose a new sample $z'$ using a proposal distribution $z' \sim q(z' \mid z)$.
+
+2. compute the acceptance probability
+     $$
+     \alpha = \min\left(1, \frac{p(z')\,q(z|z')}
      {p(z)\,q(z'|z)}
-\right).
-$$
+     \right).
+     $$
 
-If accepted, set $z_{t+1} = z'$, otherwise keep $z_{t+1} = z$.
+3. accept the proposal with probability $\alpha(z,z')$
+otherwise remain at the current state If accepted, set $z_{t+1} = z'$, otherwise keep $z_{t+1} = z$.
 
-Metropolis–Hastings forms the foundation for most MCMC methods.
 
+This simple rule ensures that the Markov chain satisfies detailed balance and converges to the desired distribution $p(z)$.
+
+Metropolis–Hastings is flexible and works with virtually any distribution from which we can evaluate $p(z)$ up to a constant. However, its efficiency depends strongly on the proposal distribution. If the proposal steps are too small, the chain performs a random walk and mixes slowly. If the steps are too large, most proposals are rejected. Choosing or adapting the proposal distribution is therefore crucial for performance, especially in high-dimensional settings.
  
 
 ### 4.2 Gibbs Sampling
 
-Gibbs sampling updates one variable at a time by sampling from its conditional distribution:
+Gibbs sampling is a special case of MCMC designed for multivariate distributions where sampling from the full conditional distributions is easy. Instead of proposing a new state and accepting or rejecting it, Gibbs sampling updates one variable at a time by drawing directly from its exact conditional distribution.
+
+For a latent vector:
+$$z = (z_1, z_2, \dots, z_d)$$
+
+
+a Gibbs update for coordinate $i$ samples:
 
 $$
 z_i \sim p(z_i \mid z_{-i}).
 $$
 
-This requires all conditionals to be tractable.
+where $z_{-i}$ denotes all components except $z_i$.
 
-Applications include:
+By cycling through all coordinates repeatedly, the Markov chain eventually converges to the target joint distribution $p(z)$.
 
-- topic models (LDA)  
-- hidden Markov models  
-- Bayesian networks  
+The key requirement is that each full conditional distribution
+
+$$p(z_i \mid z_{-i})$$
+
+must be analytically tractable and easy to sample from. When this holds, Gibbs sampling is simple to implement and avoids the accept–reject step of Metropolis–Hastings.
+
+However, Gibbs sampling can mix slowly when variables are strongly correlated, since updating one coordinate at a time may explore the space inefficiently. Gibbs sampling is widely used in models where conditional distributions are naturally available, including:
+
+- topic models such as Latent Dirichlet Allocation (LDA)
+- hidden Markov models
+- Gaussian graphical models
+- Bayesian networks with conjugate priors
 
  
 ### 4.3 Slice Sampling
