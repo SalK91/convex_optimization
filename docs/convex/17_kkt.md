@@ -108,7 +108,7 @@ The Karush–Kuhn–Tucker (KKT) conditions consist of:
    \mu_i^* \ge 0,\quad i=1,\dots,m.
    $$
 
-   > Dual feasibility says the “penalty coefficients” for inequality constraints can only push you inward (not reward you for violating constraints).
+      > Dual feasibility says the “penalty coefficients” for inequality constraints can only push you inward (not reward you for violating constraints).
 
 3. Stationarity:
 
@@ -123,19 +123,17 @@ The Karush–Kuhn–Tucker (KKT) conditions consist of:
    \mu_i^* g_i(x^*) = 0
    \quad \text{for all } i.
    $$
+   
+   Complementary slackness means:
 
-Complementary slackness means:
-
-- If a constraint $g_i(x) \le 0$ is strictly inactive at $x^*$ (i.e. $g_i(x^*) < 0$), then $\mu_i^* = 0$.
-- If $\mu_i^* > 0$, then the constraint is tight: $g_i(x^*) = 0$.
+   - If a constraint $g_i(x) \le 0$ is strictly inactive at $x^*$ (i.e. $g_i(x^*) < 0$), then $\mu_i^* = 0$.
+   - If $\mu_i^* > 0$, then the constraint is tight: $g_i(x^*) = 0$.
 
 This matches geometric intuition: only active constraints can “push back” on the optimiser.
 
 ## 8.4 Slater’s Condition – Ensuring Strong Duality
 
 For the KKT conditions to not only hold but also guarantee optimality and zero duality gap, the problem must satisfy a regularity condition known as Slater’s condition.
-
-### Definition
 
 For the convex problem above, if all $f$ and $g_i$ are convex and all $h_j$ are affine, then Slater’s condition holds if there exists at least one strictly feasible point:
 
@@ -174,6 +172,7 @@ measures how far apart the primal and dual optima are.
 ### What Slater’s Condition Guarantees
 
 For convex problems, Slater’s condition ensures:
+
 1. Strong duality: $p^*=d^*$ (duality gap = 0).  
 2. Dual attainment: finite $(\lambda^*,\mu^*)$ exist.  
 3. KKT conditions are necessary and sufficient for optimality.
@@ -207,9 +206,4 @@ Dual cannot attain equality: $p^*>d^*$.
   - In the unconstrained case, there are no forces — pure gradient equilibrium.
   - With constraints, these forces push the solution back into the feasible region.
 
-> Physically, you can imagine optimization as minimizing potential energy subject to rigid walls (constraints).  
-> At equilibrium, the total force — gradient of $f$ plus constraint reactions — equals zero.
-> Convexity ensures the landscape is bowl-shaped.  
-> Slater’s condition ensures the bowl has interior volume so that primal and dual solutions coincide.  
-> Together they make the KKT framework both elegant and powerful — the foundation upon which Lagrange duality theory is built.
 

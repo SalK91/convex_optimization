@@ -133,7 +133,7 @@ The difference $f^* - d^*$ is called the duality gap.
 
 Strong duality means the dual gives *exactly the same value* as the primal — and optimal multipliers $(\lambda^*, \mu^*)$ exist.
 
-For convex problems, this beautiful property holds under Slater’s condition (see Chapter 8):
+For convex problems Slater’s condition (see Chapter 8):
 
 > If there exists a strictly feasible point $\tilde{x}$ such that  
 > $g_i(\tilde{x}) < 0$ for all $i$, and $h_j(\tilde{x}) = 0$ for all $j$,  
@@ -176,10 +176,12 @@ Dual variables have rich interpretations:
   Changing the equality’s right-hand side shifts the objective by roughly $\lambda_j^*$.
 
 In economic or resource allocation problems:
+
 - The dual problem represents *pricing* of limited resources.  
 - The primal problem represents *allocation* given prices.
 
 In machine learning:
+
 - SVMs: dual variables correspond to support vectors.  
 - Lasso and Elastic Net: $\ell_1$ penalties can be viewed as dual constraints on coefficient magnitudes.  
 - Regularized losses: duality expresses the trade-off between data fit and model complexity.

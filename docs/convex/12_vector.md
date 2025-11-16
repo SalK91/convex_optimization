@@ -16,7 +16,8 @@ This chapter builds the geometric toolkit used throughout convex optimization an
 A vector space over $\mathbb{R}$ is a set $V$ equipped with addition and scalar multiplication satisfying the usual axioms: closure, associativity, commutativity of addition, distributivity, existence of an additive identity and additive inverses, and compatibility with scalar multiplication.
 
 A subspace of a vector space $V$ is a subset $S \subseteq V$ that  
-1. contains the zero vector,  
+
+1. contains the zero vector 
 2. is closed under addition, and  
 3. is closed under scalar multiplication.  
 
@@ -78,11 +79,10 @@ where $n$ is the number of columns of $A$.
 
 > #### Null Space:  
 > The null space (or kernel) of \( A \), denoted \( N(A) \), is the set of all input vectors \( x \) that are mapped to zero:  \( N(A) = \{ x : Ax = 0 \} \).  
-> It answers a different question: *If a solution to \( Ax = b \) exists, is it unique?*  
-> If the null space contains only the zero vector (\( \mathrm{nullity}(A) = 0 \)), the solution is unique. But if \( N(A) \) contains nonzero vectors, there are infinitely many distinct solutions that yield the same output.
+> It answers a different question: *If a solution to \( Ax = b \) exists, is it unique?* If the null space contains only the zero vector (\( \mathrm{nullity}(A) = 0 \)), the solution is unique. But if \( N(A) \) contains nonzero vectors, there are infinitely many distinct solutions that yield the same output.
 
 > #### Multicollinearity:  
-> When one feature in the data matrix \( A \) is a linear combination of others—for example, \( \text{feature}_3 = 2 \times \text{feature}_1 + \text{feature}_2 \)—the columns of \( A \) become linearly dependent. This creates a nonzero vector in the null space of \( A \), meaning multiple weight vectors \( x \) can produce the same predictions. The model is then *unidentifiable* (Underdetermined – the number of unknowns (parameters) exceeds the number of independent equations (information)), and \( A^\top A \) becomes singular (non-invertible). Regularization methods such as Ridge or Lasso regression are used to resolve this ambiguity by selecting one stable, well-behaved solution.
+> When one feature in the data matrix \( A \) is a linear combination of others for example, \( \text{feature}_3 = 2 \times \text{feature}_1 + \text{feature}_2 \)—the columns of \( A \) become linearly dependent. This creates a nonzero vector in the null space of \( A \), meaning multiple weight vectors \( x \) can produce the same predictions. The model is then *unidentifiable* (Underdetermined – the number of unknowns (parameters) exceeds the number of independent equations (information)), and \( A^\top A \) becomes singular (non-invertible). Regularization methods such as Ridge or Lasso regression are used to resolve this ambiguity by selecting one stable, well-behaved solution.
 
 >> Regularization introduces an additional constraint or penalty that selects a *single, stable* solution from among the infinite possibilities.
 
@@ -101,7 +101,7 @@ where $n$ is the number of columns of $A$.
 >> Thus, regularization resolves ambiguity by imposing structure or preference on the solution—favoring smaller or sparser coefficient vectors—and making the regression problem well-posed even when $A$ is rank-deficient.
 
 > #### Feasible Directions:  
-> In a constrained optimization problem of the form \( Ax = b \), the null space of \( A \) characterizes the directions along which one can move without violating the constraints. If \( d \in N(A) \), then moving from a feasible point \( x \) to \( x + d \) preserves feasibility, since  \( A(x + d) = Ax + Ad = b + 0 = b \). Thus, the null space defines the *space of free movement*—directions in which optimization algorithms can explore solutions while remaining within the constraint surface.
+> In a constrained optimization problem of the form \( Ax = b \), the null space of \( A \) characterizes the directions along which one can move without violating the constraints. If \( d \in N(A) \), then moving from a feasible point \( x \) to \( x + d \) preserves feasibility, since  \( A(x + d) = Ax + Ad = b \). Thus, the null space defines the *space of free movement*—directions in which optimization algorithms can explore solutions while remaining within the constraint surface.
 
 > #### Row Space:  
 > The row space of \( A \), denoted \( R(A) \), is the span of the rows of \( A \) (viewed as vectors). It represents all possible linear combinations of the rows and has the same dimension as the column space, equal to \( \mathrm{rank}(A) \). The row space is orthogonal to the null space of \( A \):  \( R(A) \perp N(A) \).  

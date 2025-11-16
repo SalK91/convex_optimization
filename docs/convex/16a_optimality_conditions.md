@@ -39,8 +39,7 @@ $$
 \min_{x \in \mathcal{X}} f(x).
 $$
 
-Even for simple convex objectives, we need a way to check when a point $\hat{x}$ is optimal. In unconstrained problems, this means no direction can reduce $f$.  
-With constraints, we only consider feasible directions — those that stay inside $\mathcal{X}$.
+Even for simple convex objectives, we need a way to check when a point $\hat{x}$ is optimal. In unconstrained problems, this means no direction can reduce $f$. With constraints, we only consider feasible directions — those that stay inside $\mathcal{X}$.
 
 In both cases, optimality can be understood as an *equilibrium condition*:  
 the gradient (or subgradient) of $f$ is balanced by the “forces’’ from the constraints. These equilibrium conditions are the first-order optimality conditions.
@@ -136,7 +135,4 @@ At optimality:
 - The gradient (or a subgradient) points into the normal cone of the feasible set.  
 - The tangent cone defines all directions along which the function cannot decrease.  
 - The inclusion $0 \in \partial f(\hat{x}) + N_{\mathcal{X}}(\hat{x})$ encodes equilibrium between descent forces and boundary constraints.
-
-This picture generalizes the intuitive idea from single-variable calculus:  
-the derivative changes sign at a minimum, while with constraints, the derivative at the boundary is balanced by the constraint’s barrier.
 

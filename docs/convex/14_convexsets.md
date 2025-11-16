@@ -18,7 +18,7 @@ $$
 - An $\ell_\infty$ ball: $\{ x : \|x\|_\infty \le r \}$, which is a box.
 - The probability simplex: $\{ x \in \mathbb{R}^n : x \ge 0, \sum_i x_i = 1 \}$.
 
-Convexity means “no caves or holes” — you can mix any two feasible points and stay feasible.
+Convexity means “no caves or holes”, you can mix any two feasible points and stay feasible.
 
 Geometrically:  
 
@@ -89,11 +89,7 @@ Polyhedra are convex and cane be unbounded. If $P$ is also bounded, it is called
 In linear programming, we minimise a linear objective $c^\top x$ over a polyhedron. The optimal solution, if it exists, is always attained at an extreme point (vertex) of the feasible polyhedron.
 
 Linear programs (LPs) minimize $c^\top x$ over polyhedra. Since the objective is linear, the optimum lies at a vertex (extreme point) of the feasible region.
-
-In ML:
-
-- LPs describe support vector machines (linear margin constraints).  
-- Polyhedral feasible regions define sparsity-inducing $\ell_1$ regularizers (via linear inequalities).
+ 
 
 ## 4.5 Extreme points
 

@@ -1,7 +1,6 @@
 # Chapter 15: Advanced Large-Scale and Structured Methods
 
-Modern convex optimization often operates at massive scales — millions of variables, billions of data points, or constraints distributed across devices and networks.  
-Classical Newton or interior-point algorithms, while theoretically elegant, become computationally impractical in these regimes.  
+Modern convex optimization often operates at massive scales — millions of variables, billions of data points, or constraints distributed across devices and networks. Classical Newton or interior-point algorithms, while theoretically elegant, become computationally impractical in these regimes.  
 
 This chapter introduces methods that exploit structure, sparsity, separability, and stochasticity to solve large-scale convex problems efficiently.  
 These ideas underpin the optimization engines behind most machine learning systems.
@@ -24,6 +23,7 @@ $$
 f(x) = \frac{1}{N}\sum_{i=1}^N f_i(x) + R(x),
 $$
 where:
+
 - each $f_i(x)$ represents a data-sample loss term, and  
 - $R(x)$ is a regularizer (possibly nonsmooth, such as $\lambda\|x\|_1$).
 
@@ -51,6 +51,7 @@ If $f$ is convex with Lipschitz-continuous partial derivatives, cyclic or random
 
 ### ML Context
 Coordinate descent is widely used in:
+
 - LASSO and Elastic Net regression (where updates are closed-form soft-thresholding),
 - logistic regression with $\ell_1$ penalty,
 - matrix factorization and dictionary learning.
@@ -58,9 +59,11 @@ Coordinate descent is widely used in:
 ## 15.3 Stochastic Gradient and Variance-Reduced Methods
 
 When the dataset is large, computing the full gradient
+
 $$
 \nabla f(x) = \frac{1}{N} \sum_{i=1}^N \nabla f_i(x)
 $$
+
 can be prohibitively expensive, since it requires evaluating all $N$ samples at every iteration. Stochastic methods overcome this by using *unbiased gradient estimates* based on small random subsets (mini-batches) of the data.
 
 
@@ -71,7 +74,9 @@ At each iteration, choose a random sample (or mini-batch) $\mathcal{B}_k$ and pe
 $$
 x_{k+1} = x_k - \eta_k \, \widehat{\nabla f}(x_k),
 $$
+
 where
+
 $$
 \widehat{\nabla f}(x_k)
 = \frac{1}{|\mathcal{B}_k|} \sum_{i \in \mathcal{B}_k} \nabla f_i(x_k)
@@ -90,10 +95,12 @@ and $\eta_k > 0$ is the step size (learning rate).
 ### 15.3.2 Step Size and Averaging
 
 The step size $\eta_k$ controls the bias–variance tradeoff:
+
 - If $\eta_k$ is too large → iterates oscillate due to stochastic noise.
 - If $\eta_k$ is too small → progress slows down.
 
 Common choices:
+
 $$
 \eta_k = \frac{c}{\sqrt{k}} \quad \text{(for convex $f$)}, 
 \qquad
@@ -203,11 +210,13 @@ $$
 $$
 
 ### Intuition
+
 - The gradient step moves in a descent direction for $g$.  
 - The proximal step performs a local “denoising” or shrinkage under $R$ (e.g., soft-thresholding for $\ell_1$ norms).
 
 ### ML Context
 Proximal methods underpin:
+
 - Sparse regression (LASSO, Elastic Net),
 - matrix completion and compressed sensing,
 - total-variation image denoising,
@@ -248,6 +257,7 @@ It is particularly effective when the subproblems are simple (e.g., proximal ope
 
 ### ML Context
 ADMM is a key tool for:
+
 - distributed LASSO and logistic regression,
 - matrix decomposition and factorization,
 - consensus optimization in federated learning,

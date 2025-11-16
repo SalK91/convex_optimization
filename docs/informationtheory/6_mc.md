@@ -159,6 +159,7 @@ Metropolis–Hastings is flexible and works with virtually any distribution from
 Gibbs sampling is a special case of MCMC designed for multivariate distributions where sampling from the full conditional distributions is easy. Instead of proposing a new state and accepting or rejecting it, Gibbs sampling updates one variable at a time by drawing directly from its exact conditional distribution.
 
 For a latent vector:
+
 $$z = (z_1, z_2, \dots, z_d)$$
 
 
@@ -188,41 +189,180 @@ However, Gibbs sampling can mix slowly when variables are strongly correlated, s
  
 ### 4.3 Slice Sampling
 
-Slice sampling chooses a height $u$ and samples uniformly along the slice:
+Slice sampling is an MCMC method that avoids choosing a proposal distribution by sampling uniformly from the region (the slice) where the probability density is above a randomly chosen threshold. Given the current point $z$, slice sampling introduces an auxiliary variable $u$:
 
-$$
-\{z : p(z) > u \}.
-$$
+1. Draw a height
 
-It adapts automatically to the local shape of the distribution and requires minimal tuning.
+     $$u \sim \text{Uniform}(0,\, p(z))$$
 
+
+2. Define the horizontal slice
+
+     $$S = \{ z' : p(z') > u \}$$
+
+3. Sample the next state
+
+     $$z' \sim \text{Uniform}(S)$$
+
+This procedure constructs a Markov chain whose stationary distribution is $p(z)$. Intuitively, the algorithm first chooses a horizontal level $u$ below the current density value and then samples uniformly from the region of the density that lies above this level.
+
+Slice sampling adapts naturally to the local geometry of the target distribution: narrow peaks produce narrow slices, and broad regions produce wide slices, without requiring manual tuning of proposal scales. In practice, slice sampling often mixes better than basic random-walk proposals, especially when the target density varies in amplitude across different regions.
+
+However, slice sampling requires an efficient way to identify or approximate the slice region, which may be challenging in high-dimensional or multimodal settings.
  
 ## 5. Reducing Random-Walk Behaviour
 
-Basic MCMC methods suffer from slow exploration due to random-walk behavior.  
-Advanced methods reduce this inefficiency.
+Basic MCMC algorithms such as Metropolis–Hastings often move in small, local steps and therefore explore the state space slowly. This random-walk behaviour leads to poor mixing and long autocorrelation times, especially in high-dimensional or strongly correlated distributions.
 
- 
+Several advanced MCMC techniques attempt to reduce random-walk dynamics by proposing more informed or distant moves.
+
 ### 5.1 Hamiltonian Monte Carlo (HMC)
 
-HMC introduces momentum variables and uses Hamiltonian dynamics to propose long-distance moves with high acceptance probability.
+Hamiltonian Monte Carlo reduces random-walk behaviour by introducing an auxiliary momentum variable and using Hamiltonian dynamics to propose transitions. Instead of taking small, diffusive steps, HMC simulates the motion of a particle moving smoothly through the probability landscape.
 
-Advantages:
+Let $z$ denote the position (the latent variable) and let $r$ denote an auxiliary momentum variable. The joint density of $(z, r)$ is defined through a Hamiltonian:
 
-- avoids random walk behaviour  
-- efficient in high dimensions  
-- uses gradients of $\log p(z)$  
+$$
+H(z, r) = -\log p(z) + \frac{1}{2} r^\top r.
+$$
 
-HMC is widely used in probabilistic programming systems (Stan, PyMC).
+The first term acts like a potential energy, and the second acts like kinetic energy. The total Hamiltonian is approximately conserved under Hamiltonian dynamics governed by:
+
+$$
+\frac{dz}{dt} = r, \qquad
+\frac{dr}{dt} = \nabla_z \log p(z).
+$$
+
+Following these dynamics moves the system along continuous trajectories that remain mostly in high-probability regions, allowing the sampler to travel long distances without being rejected.
+
+  
+#### Leapfrog Integration and Step Size
+
+Exact Hamiltonian dynamics cannot be simulated analytically, so HMC uses a numerical integrator, typically the leapfrog method. Leapfrog integration updates position and momentum in small steps of size $\epsilon$:
+
+1. half-step momentum update  
+   $$
+   r_{t+\tfrac{1}{2}} = r_t + \frac{\epsilon}{2}\,\nabla_z \log p(z_t)
+   $$
+
+2. full-step position update  
+   $$
+   z_{t+1} = z_t + \epsilon\, r_{t+\tfrac{1}{2}}
+   $$
+
+3. half-step momentum update  
+   $$
+   r_{t+1} = r_{t+\tfrac{1}{2}} + \frac{\epsilon}{2}\,\nabla_z \log p(z_{t+1})
+   $$
+
+These updates are repeated $L$ times, producing a proposal $(z', r')$ after a simulated trajectory of length $L \epsilon$.
+
+The step size $\epsilon$ strongly influences performance:
+
+- if $\epsilon$ is too large, numerical integration becomes inaccurate and proposals are rejected  
+- if $\epsilon$ is too small, trajectories progress slowly and exploration becomes inefficient  
+
+Adaptive schemes such as dual averaging automatically tune $\epsilon$.
+
+
+#### Acceptance Step
+
+Although leapfrog integration nearly preserves energy, numerical error accumulates. Therefore HMC applies a Metropolis acceptance step:
+
+$$
+\alpha = \min\left(1,\,
+\exp\big(-H(z',r') + H(z,r)\big)
+\right).
+$$
+
+Because leapfrog integration is reversible and volume-preserving, acceptance rates remain high even for long trajectories.
+
+ 
+#### Choosing the Trajectory Length
+
+The number of leapfrog steps $L$ (or total integration time $L\epsilon$) affects how far the sampler travels:
+
+- small $L$ results in short trajectories, similar to random-walk proposals  
+- large $L$ explores further but may waste computation or return near the starting point  
+
+The No-U-Turn Sampler (NUTS) automatically selects an appropriate integration length and forms the basis of modern HMC implementations such as Stan.
+
+ 
+#### Summary of Advantages
+Hamiltonian Monte Carlo reduces random-walk behaviour by introducing an auxiliary momentum variable and using Hamiltonian dynamics to propose transitions. Instead of taking small, diffusive steps, HMC simulates the motion of a particle moving through the probability landscape.
+
+Hamiltonian Monte Carlo offers several advantages:
+
+- efficient exploration in high-dimensional or correlated distributions  
+- large, directed moves that avoid random-walk behaviour  
+- low autocorrelation between samples  
+- high acceptance rates due to approximate energy conservation  
+- uses gradients of $\log p(z)$ to guide proposals  
+
+HMC is widely used in probabilistic programming frameworks such as Stan, PyMC, and NumPyro, largely because of its scalability and efficiency in challenging Bayesian inference problems.
+
 
  
 ### 5.2 Overrelaxation
 
-Overrelaxation proposes samples that are negatively correlated with the previous ones, improving mixing speed.
+Overrelaxation modifies proposals so that successive samples are negatively correlated. Instead of randomly perturbing the current state, overrelaxation proposes a point on the opposite side of the conditional mean.
 
----
+Intuitively, if the current sample lies above the mean, the overrelaxation proposal nudges it below the mean, and vice versa. This helps the chain avoid local sticking and oscillation.
 
+Overrelaxation is most effective when the conditional distribution is approximately Gaussian or when the model exhibits strong linear structure.
 
+ 
+## 6. Sensitivity to Step Size
+
+The efficiency of MCMC algorithms depends critically on the choice of step size (or proposal scale):
+
+- If the step size is too small, the chain takes tiny moves and mixes slowly.  
+- If the step size is too large, most proposals are rejected.
+
+Finding an appropriate step size is essential for balancing exploration and acceptance.  
+
+For random-walk Metropolis–Hastings:
+
+- acceptance rates near 0.2–0.4 often work well in high dimensions  
+- smaller dimensions tolerate larger acceptance rates
+
+For HMC, step size affects both the numerical integration quality and the acceptance probability. Too large a step size causes integration error and rejections; too small a step size results in slow exploration.
+
+Adaptive MCMC methods automatically tune the step size to achieve target acceptance rates.
+
+ 
+## 7. When to Stop: Convergence and Diagnostics
+
+Running an MCMC chain forever is impossible, so practical inference requires diagnosing convergence.
+
+Several indicators are commonly used:
+
+### 7.1 Burn-in
+
+The initial part of the chain (the burn-in period) may not represent the target distribution. These early samples are discarded until the chain reaches a stable region.
+
+### 7.2 Autocorrelation
+
+High autocorrelation indicates slow mixing. Effective sample size (ESS) measures the number of independent samples equivalent to the correlated MCMC draws.
+
+### 7.3 Multiple chains
+
+Running several independent chains allows comparison. If chains converge to the same region, the sampler is more likely to have reached equilibrium.
+
+### 7.4 Gelman–Rubin statistic (R-hat)
+
+R-hat compares within-chain and between-chain variance. Values close to 1 indicate convergence.
+
+### 7.5 Visual inspection
+
+Trace plots, autocorrelation plots, and histograms provide qualitative insight into mixing and stability.
+
+There is no single perfect test, but combining multiple diagnostics provides reasonable confidence that the Markov chain has approximated the target distribution.
+ 
+
+--- 
 Sampling methods approximate expectations and posterior distributions when closed-form solutions are unavailable. Independent methods such as importance and rejection sampling are simple but limited. Monte Carlo estimation provides a general framework for approximating integrals, and MCMC allows sampling from complex, high-dimensional distributions by constructing Markov chains. Advanced methods such as Hamiltonian Monte Carlo improve mixing and efficiency.
 
 Sampling is a central tool for Bayesian inference and underlies many modern machine learning models, from deep generative architectures to reinforcement learning algorithms.
+
+Random-walk behaviour limits the efficiency of basic MCMC methods. Hamiltonian Monte Carlo reduces this by exploiting gradient information and simulating Hamiltonian dynamics, while overrelaxation introduces negative correlation to speed up mixing. Step size must be chosen carefully to balance exploration and acceptance. Convergence diagnostics such as burn-in, effective sample size, and R-hat help determine when to stop sampling and assess the quality of the generated samples.

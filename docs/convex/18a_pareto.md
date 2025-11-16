@@ -1,6 +1,6 @@
 # Chapter 10: Pareto Optimality and Multi-Objective Convex Optimization
 
-Optimization often focuses on a single objective function — minimizing one measure of performance. However, real-world problems rarely involve a single criterion. In practice, we must balance multiple conflicting goals: accuracy vs. complexity, fairness vs. utility, return vs. risk, etc.  
+So far we have focused on a single objective function i.e. minimizing one measure of performance. However, real-world problems rarely involve a single criterion. In practice, we must balance multiple conflicting goals: accuracy vs. complexity, fairness vs. utility, return vs. risk, etc.  
 
 This chapter introduces Pareto optimality, which generalizes classical convex optimization to the multi-objective setting, and explores how scalarisation connects multi-objective problems to duality and regularisation.
  
@@ -182,6 +182,7 @@ $$
 $$
 
 Here we balance two objectives:
+
 - Reconstruction accuracy ($f_1$)
 - Latent simplicity ($f_2$)
 

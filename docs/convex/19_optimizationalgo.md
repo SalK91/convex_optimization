@@ -402,7 +402,7 @@ In ML, CG is widely used for large-scale convex quadratic subproblems:
 | Newton’s Method | $O(n^2)$ | Full Hessian | Quadratic (local) | Small/medium convex |
 | Conjugate Gradient | $O(n)$ | Implicit (via $A$-conjugacy) | Fast linear / finite-step | Large quadratic systems |
 
--
+
 
 ### Key Insight
 
@@ -570,45 +570,6 @@ For large, ill-conditioned, or nonsmooth problems, first-order or proximal metho
 > Newton-Raphson: The Newton step solves $\nabla^2 f(x_k) p_k=-\nabla f(x_k)$ and updates $x_{k+1}=x_k+p_k$ with line search or trust-region safeguards. Complexity hinges on solving linear systems; use sparse Cholesky, conjugate gradients with preconditioning, or low-rank structure to scale. For generalized linear models, iteratively reweighted least squares converges in few iterations, but regularization and damping are needed when data are nearly separable.
 
 > Gauss-Newton: For nonlinear least squares $f(x)=\tfrac12\|r(x)\|^2$, the Gauss–Newton approximation uses $H\approx J^\top J$ where $J$ is the Jacobian of $r$. Solve $(J^\top J)\Delta=-J^\top r$ to get a step; Levenberg–Marquardt adds damping $(J^\top J+\lambda I)\Delta=-J^\top r$ interpolating between gradient and Gauss–Newton. Effective for residual models where second-order residual terms are small; widely used in curve fitting and some deep learning layerwise updates.
-
-## 12.7 Constraints and nonsmooth terms: projection and proximal methods
-
-In practice, most convex optimization problems are not purely smooth.  
-They often include:
-
-- Constraints: $x \in \mathcal{X}$,
-- Nonsmooth regularisers: such as $\|x\|_1$,
-- Penalties: promoting robustness or sparsity (see Chapter 6).
-
-Two core strategies handle such settings:
-
-1. Projected gradient methods — where we project each iterate back into the feasible set $\mathcal{X}$.  
-2. Proximal gradient methods — which generalize projection to handle nonsmooth but structured terms.
-
-These methods extend the ideas of gradient and Newton updates to the broader world of constrained and composite optimization.
-
-### 12.7.2 Convergence behaviour
-- Near the minimiser of a strictly convex, twice-differentiable $f$, Newton’s method converges quadratically: roughly, the number of correct digits doubles every iteration.
-- This is dramatically faster than $O(1/k)$ or $O(1/k^2)$, but only once you’re in the “basin of attraction.”
-- Far from the minimiser, Newton can misbehave, so we pair it with a line search or trust region.
-
-### 12.7.3 Computational cost
-Each Newton step requires solving a linear system involving $\nabla^2 f(x_k)$, which costs about as much as factoring the Hessian (or an approximation). This is expensive in very high dimensions, which is why Newton is most attractive for medium-scale problems where high accuracy matters.
-
-### 12.7.4 Why convexity helps
-If $f$ is convex, then $\nabla^2 f(x_k)$ is positive semidefinite (Chapter 5). This means:
-
-- The quadratic model is bowl-shaped, so the Newton step makes sense.
-- Regularised Newton steps (adding a multiple of the identity to the Hessian) behave very predictably.
-
-### 12.7.5 Quasi-Newton
-When Hessians are too expensive, we can build low-rank approximations of $\nabla^2 f(x_k)$ or its inverse. Famous examples include BFGS and L-BFGS. These methods keep much of Newton’s fast local convergence but with per-iteration cost closer to first-order methods.
-
-### 12.7.6 When to use Newton / quasi-Newton
-- You need high-accuracy solutions.
-- The problem is smooth and reasonably well-conditioned.
-- The dimension is moderate, or Hessian systems can be solved efficiently (e.g. via sparse linear algebra).
-
 
  
 

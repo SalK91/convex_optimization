@@ -1,7 +1,7 @@
 ### Current state
 
 1. Convex optimization notes:
-pyOD
+  pyOD
   earh mover distance
   branch and bound
   variational inferences?
@@ -67,9 +67,6 @@ Black Box Optimization
 
 12. Autograd lecture my Andre Kapathry
 
-13. EM - Expected maximization
-
+ 
 14. Causal Analysis
-
-15. variantional inference
-    variational autoencoders
+ 

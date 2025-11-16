@@ -1,5 +1,5 @@
 # Chapter 3: Multivariable Calculus for Optimization
-Optimization seeks to find points that minimize or maximize a real-valued function. To analyze and solve such problems, we rely on tools from multivariable calculus — gradients, Jacobians, Hessians, and Taylor expansions — which describe how a function changes locally.
+Optimization seeks to find points that minimize or maximize a real-valued function. To analyze and solve such problems, we rely on tools from multivariable calculus: gradients, Jacobians, Hessians, and Taylor expansions which describe how a function changes locally.
 
 This chapter provides the differential calculus foundation essential for convex analysis and gradient-based learning algorithms.  It links geometric intuition and analytical tools that underlie optimization methods such as gradient descent, Newton’s method, and backpropagation.
 
@@ -129,12 +129,14 @@ $$
 
 
 The Hessian encodes curvature information:
+
 - $\nabla^2 f(x) \succeq 0$ (positive semidefinite) ⟹ $f$ is convex near $x$.  
 - $\nabla^2 f(x) \succ 0$ ⟹ $f$ is strictly convex.  
 - Negative eigenvalues ⟹ directions of local decrease.
 
  
-Example – quadratic function: $f(x) = \frac{1}{2}x^TQx - b^T x$. Here $\nabla f(x) = Qx - b$ (linear), and $\nabla^2 f(x) = Q$. Solving $\nabla f=0$ yields $Qx=b$, so if $Q \succ 0$ the unique minimizer is $x^* = Q^{-1}b$. The Hessian being $Q \succ 0$ confirms convexity. If $Q$ has large eigenvalues, gradient $Qx - b$ changes rapidly in some directions (steep narrow valley); if some eigenvalues are tiny, gradient hardly changes in those directions (flat valley). This aligns with earlier discussions: condition number of $Q$ controls difficulty of minimizing $f$.
+Example:
+Quadratic function: $f(x) = \frac{1}{2}x^TQx - b^T x$. Here $\nabla f(x) = Qx - b$ (linear), and $\nabla^2 f(x) = Q$. Solving $\nabla f=0$ yields $Qx=b$, so if $Q \succ 0$ the unique minimizer is $x^* = Q^{-1}b$. The Hessian being $Q \succ 0$ confirms convexity. If $Q$ has large eigenvalues, gradient $Qx - b$ changes rapidly in some directions (steep narrow valley); if some eigenvalues are tiny, gradient hardly changes in those directions (flat valley). This aligns with earlier discussions: condition number of $Q$ controls difficulty of minimizing $f$.
 
 > Eigenvalues of the Hessian describe curvature along principal directions. Large eigenvalues correspond to steep curvature; small ones correspond to flat regions. Understanding this curvature is essential in designing stable optimization algorithms.
 
@@ -255,8 +257,7 @@ Strong convexity ensures a minimum curvature: f grows at least as fast as a para
 
 ## 3.9 Subgradients and Nonsmooth Extensions
 
-Many useful convex functions are nonsmooth — e.g., hinge loss, $\ell_1$ norm, ReLU.  
-They lack a gradient at certain points but admit a subgradient.
+Many useful convex functions are nonsmooth — e.g., hinge loss, $\ell_1$ norm, ReLU. They lack a gradient at certain points but admit a subgradient.
 
 A vector $g$ is a subgradient of $f$ at $x$ if
 $$
@@ -266,6 +267,7 @@ $$
 The set of all such vectors is the subdifferential $\partial f(x)$.  
 
 Examples:
+
 - $f(x) = \|x\|_1$ has
   $$
   (\partial f(x))_i =
@@ -276,6 +278,5 @@ Examples:
   $$
 - For $f(x) = \max_i x_i$, any unit vector supported on the active index is a subgradient.
 
-Subgradients generalize the gradient concept, allowing optimization even when derivatives do not exist.  
-They are the backbone of nonsmooth convex optimization and proximal methods.  In machine learning, they make it possible to minimize losses such as the hinge or absolute deviation, where gradients are undefined at corners.
+Subgradients generalize the gradient concept, allowing optimization even when derivatives do not exist. They are the backbone of nonsmooth convex optimization and proximal methods. In machine learning, they make it possible to minimize losses such as the hinge or absolute deviation, where gradients are undefined at corners.
 

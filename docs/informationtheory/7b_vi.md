@@ -1,10 +1,4 @@
-## Chapter — Variational Inference
-
 Variational inference (VI) provides a general framework for approximating difficult probability distributions with simpler, tractable ones. Many modern machine-learning models rely on VI, including variational autoencoders (VAEs), Bayesian neural networks, latent-variable models, and diffusion models. VI offers a scalable alternative to sampling-based inference and converts the inference problem into an optimization problem.
-
-This chapter introduces the idea of variational inference, derives the Evidence Lower Bound (ELBO), explains its components, and connects VI to VAEs and probabilistic deep learning.
-
----
 
 ## 1. The Problem of Inference
 
@@ -29,8 +23,7 @@ $$
 
 which is often intractable in high-dimensional or complex models. Exact Bayesian inference becomes impossible, which motivates approximate methods. Variational inference addresses this challenge.
 
----
-
+ 
 ## 2. The Idea of Variational Inference
 
 Variational inference replaces the intractable posterior with a tractable approximation. Instead of trying to compute $p(z|x)$ exactly, VI introduces a family of simpler distributions
@@ -54,8 +47,7 @@ $$
 
 However, the KL depends on $p(z|x)$, which is unknown, making direct minimization impossible. The key insight is that the KL can be rewritten in terms of computable quantities, leading to the Evidence Lower Bound (ELBO).
 
----
-
+ 
 ## 3. Deriving the ELBO
 
 We start from the marginal likelihood:
@@ -112,8 +104,7 @@ $$
 
 Maximizing the ELBO is equivalent to minimizing the KL divergence between $q_\phi(z|x)$ and the true posterior.
 
----
-
+ 
 ## 4. Interpreting the ELBO
 
 The ELBO can be decomposed into two terms that have clear interpretations. Writing
@@ -153,8 +144,7 @@ The ELBO therefore expresses a balance:
 - the first term rewards informative latent variables  
 - the second term penalizes overly complex or irregular latent distributions  
 
----
-
+ 
 ## 5. Why VI Uses Reverse KL
 
 Variational inference minimizes
@@ -177,8 +167,7 @@ As a result:
 
 This behavior explains why VAEs sometimes produce smooth or blurry samples: the latent space favors safe, central modes.
 
----
-
+ 
 ## 6. Variational Autoencoders (VAEs)
 
 A VAE applies variational inference to a deep latent-variable model. It introduces:
@@ -231,8 +220,7 @@ $$
 
 The first term encourages correct reconstruction; the second keeps latent codes regularized.
 
----
-
+ 
 ## 7. The Reparameterization Trick
 
 The expectation in the ELBO involves sampling from $q_\phi(z|x)$. To differentiate through this sampling step, VAEs use the reparameterization:
@@ -246,8 +234,7 @@ This expresses sampling as a deterministic transformation of noise, allowing gra
 
 This trick is central to making VI scalable and efficient in deep learning.
 
----
-
+ 
 ## 8. Consequences of Reverse KL in VAEs
 
 The reverse KL term shapes the behavior of the VAE:
@@ -260,8 +247,7 @@ The reverse KL term shapes the behavior of the VAE:
 
 Extensions such as the $\beta$-VAE, hierarchical VAEs, and flows inside the encoder allow for more expressive or disentangled representations.
 
----
-
+ 
 ## 9. Variational Inference Beyond VAEs
 
 VI provides a general-purpose framework for approximate inference in many settings.
@@ -286,7 +272,6 @@ VI therefore offers a unifying viewpoint across deep generative models, Bayesian
 
 ---
 
-## Summary
-
+ 
 Variational inference replaces an intractable posterior distribution with a tractable approximation and optimizes this approximation by maximizing the ELBO. The ELBO decomposes into a reconstruction term and a KL regularization term, capturing the trade-off between accuracy and complexity. VAEs are an important application of VI, using neural networks to parameterize both the generative model and the approximate posterior. Reverse KL explains the conservative behavior of VI-based models. Variational inference provides a flexible approach for approximate Bayesian inference and underlies many modern generative and representation-learning techniques.
 

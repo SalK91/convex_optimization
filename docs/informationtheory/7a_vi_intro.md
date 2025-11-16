@@ -1,5 +1,3 @@
-## Chapter — Optimization-Based Inference: MAP, EM, and the Path to Variational Inference
-
 Monte Carlo methods provide a sampling-based approach to approximate expectations and posterior distributions. Although sampling is flexible and asymptotically exact, it can be computationally expensive, difficult to tune, or slow to converge in high dimensions. For many models, especially those involving latent variables or large datasets, it is more practical to replace sampling with optimization.
 
 This chapter introduces three optimization-based inference strategies:
@@ -10,8 +8,7 @@ This chapter introduces three optimization-based inference strategies:
 
 Together, these methods motivate the full treatment of variational inference in the following chapter.
 
----
-
+ 
 ## 1. Motivation for Optimization-Based Inference
 
 Bayesian inference requires the posterior
@@ -35,8 +32,7 @@ which is almost always intractable. Monte Carlo sampling approximates this integ
 
 This motivates an alternative strategy: instead of drawing samples, we can transform inference into an optimization problem.
 
----
-
+ 
 ## 2. Maximum A Posteriori (MAP) Estimation
 
 MAP estimation finds the most likely value of a latent variable or parameter after observing the data. Starting from Bayes’ rule:
@@ -63,7 +59,7 @@ MAP is efficient and easy to compute. It reduces inference to optimization and i
 
 MAP is thus a limited but useful form of Bayesian inference, often interpreted as maximum likelihood augmented with a regularization term.
 
----
+--- 
 
 ## 3. Expectation–Maximization (EM)
 
@@ -101,7 +97,7 @@ EM guarantees that the likelihood increases with each iteration. It is widely us
 
 EM can be interpreted as a form of variational inference where the variational distribution is constrained to be the exact posterior $q(z) = p_\theta(z|x)$.
 
----
+ 
 
 ## 4. EM and MAP: MAP-EM
 
@@ -119,7 +115,7 @@ $$
 
 This version, often called MAP-EM, incorporates prior structure into the estimation procedure.
 
----
+ 
 
 ## 5. Limitations of MAP and EM
 
@@ -138,7 +134,7 @@ Both MAP and EM have limitations that motivate more general methods:
 
 These limitations lead naturally to variational inference.
 
----
+ 
 
 ## 6. A Brief Introduction to Variational Inference (VI)
 
@@ -184,8 +180,6 @@ VI:
 The next chapter explores variational inference in detail.
 
 ---
-
-## 7. Summary of the Chapter
 
 Monte Carlo sampling approximates integrals using random samples, but can be slow or difficult to tune. Optimization-based inference provides an alternative strategy.
 

@@ -14,8 +14,8 @@ $$
 
 If the inequality is strict whenever $x \ne y$ and $\theta \in (0,1)$, then $f$ is strictly convex.
 
-Geometrically, the chord between two points on the graph of f lies above the graph itself.  
-This means that f never “bends downward” — it has a single valley rather than multiple dips.  
+Geometrically, the chord between two points on the graph of f lies above the graph itself. This means that f never “bends downward” — it has a single valley rather than multiple dips.  
+
 Equivalently, the **epigraph** of f,
 
 $$
@@ -45,7 +45,7 @@ This inequality is sometimes called the first-order condition for convexity.
 
 > For a convex differentiable $f$, we have $f(y) - f(x) \ge \nabla f(x)^T (y-x)$, so moving from $x$ in any direction, the actual increase in $f$ is at least as large as the linear prediction by $\nabla f(x)$ (since the function bends upward or straight). At optimum $\hat{x}$, a necessary and sufficient condition (for convex differentiable $f$) is $\nabla f(\hat{x}) = 0$. This ties to optimality: $\nabla f(\hat{x})=0$ means $f(y)\ge f(\hat{x}) + \nabla f(\hat{x})^T (y-\hat{x}) = f(\hat{x})$ for all $y$, so $\hat{x}$ is global minimizer.
 
-> If $f$ is not differentiable, a similar condition holds with subgradients (see next chapter): $f$ is convex iff for all $x,y$ there exists a (sub)gradient $g \in \partial f(x)$ such that $f(y) \ge f(x) + g^T(y-x)$. The set of all subgradients $\partial f(x)$ is a convex set (the subdifferential). At optimum, $0 \in \partial f(\hat{x})$ is the condition. 
+> If $f$ is not differentiable, a similar condition holds with subgradients (see next chapter): $f$ is convex iff for all $x,y$ there exists a subgradient $g \in \partial f(x)$ such that $f(y) \ge f(x) + g^T(y-x)$. The set of all subgradients $\partial f(x)$ is a convex set (the subdifferential). At optimum, $0 \in \partial f(\hat{x})$ is the condition. 
 
 ## 5.3 Second-order characterisation
 

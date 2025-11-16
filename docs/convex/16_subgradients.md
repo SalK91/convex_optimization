@@ -7,8 +7,7 @@ Many of the most important convex functions are not differentiable everywhere:
 - the hinge loss $\max\{0, 1 - y w^\top x\}$ (used in SVMs) is not smooth at the kink.
 
  
-For a convex but nonsmooth $f$, the usual condition “$\nabla f(x^*) = 0$” may not make sense, because $\nabla f(x^*)$ may not exist. But geometrically, convex functions still have supporting hyperplanes at every point. That is the key.
-
+For a convex but nonsmooth $f$, the usual condition “$\nabla f(x^*) = 0$” may not make sense, because $\nabla f(x^*)$ may not exist. But geometrically, convex functions still have supporting hyperplanes at every point.
 
 ## 6.1 Subgradients and the subdifferential
 
@@ -103,7 +102,7 @@ $$
 0 \in \partial f(x^*).
 $$
 
-The condition $0\in\partial f(x^*)$ means no subgradient points in a direction that can reduce $f$.  In optimization geometry, this corresponds to the supporting hyperplane being *horizontal* at $x^*$ — the flat bottom of the convex bowl. In constrained problems, this generalizes to $0\in\partial f(x^)+A^\top\lambda^$, the KKT stationarity condition (see Chapter 8).
+The condition $0\in\partial f(x^*)$ means no subgradient points in a direction that can reduce $f$.  In optimization geometry, this corresponds to the supporting hyperplane being *horizontal* at $x^*$ — the flat bottom of the convex bowl.
 
 
 

@@ -1,7 +1,6 @@
 # Chapter 17: Canonical Problems in Convex Optimization
 
-Convex optimization encompasses a wide range of problem classes.  
-Despite their diversity, many real-world models reduce to a few canonical forms — each with characteristic geometry, structure, and algorithms.
+Convex optimization encompasses a wide range of problem classes.  Despite their diversity, many real-world models reduce to a few canonical forms — each with characteristic geometry, structure, and algorithms.
 
  
 ## 17.1 Hierarchy of Canonical Problems
