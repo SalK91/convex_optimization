@@ -1,41 +1,4 @@
 ### Current state
-
-1. Convex optimization notes:
-  pyOD
-  earh mover distance
-  branch and bound
-  variational inferences?
-  aduto diff
-
-  
-Curvatura amtricies: 
-
-why better than hessian?
-1, generatlized gaull netwon matric
-2. Fisher infmaiton
-3. Emberincal fisher
- BArrier to 2nd order order
- 1. Computation
- 2. Storate
- 3. Invesrsion.
-
- This is solved by:
- 1. Diagonal approximation
- 2. Block0diagonal approximation
- 
-
-
-Derivative Free Optimization
-Coordinate Descent
- Nelder-Mead
-Simulated Annealing
- Multi-Starts
-Evolutionary Algorithms
-Genetic Algorithms 
-Evolution Strategies
-Numerical Encodings
-Black Box Optimization
-
  
 
 4. MIT 6.824: Distributed Systems:
@@ -66,7 +29,7 @@ Black Box Optimization
 11. Pytorch
 
 12. Autograd lecture my Andre Kapathry
-
+    https://www.youtube.com/watch?v=VMj-3S1tku0&list=PLAqhIrjkxbuWI23v9cThsA9GvCAUhRvKZ
  
 14. Causal Analysis
  
