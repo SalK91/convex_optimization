@@ -1,0 +1,1584 @@
+<!DOCTYPE html><html lang="en" class="no-js"><head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Structured lecture notes on optimization, convex analysis, and algorithms.">
+      
+      
+        <meta name="author" content="Salman Khan">
+      
+      
+        <link rel="canonical" href="https://salk91.github.io/convex_optimization/nn_training/2_initial/">
+      
+      
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.20">
+    
+    
+      
+        <title>Practical Guide to Weight Initialization, Activation Distributions, Dead Neurons, and Gradient Flow in Deep Neural Networks - Mathematics for Machine Learning</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.e53b48f4.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Merriweather:300,300i,400,400i,700,700i%7CFira+Code:400,400i,700,700i&amp;display=fallback">
+        <style>:root{--md-text-font:"Merriweather";--md-code-font:"Fira Code"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../css/print-site.css">
+    
+      <link rel="stylesheet" href="../../css/print-site-material.css">
+    
+      <link rel="stylesheet" href="../../styles/extra.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  <link href="../../assets/stylesheets/glightbox.min.css" rel="stylesheet"><script src="../../assets/javascripts/glightbox.min.js"></script><style id="glightbox-style">
+            html.glightbox-open { overflow: initial; height: 100%; }
+            .gslide-title { margin-top: 0px; user-select: text; }
+            .gslide-desc { color: #666; user-select: text; }
+            .gslide-image img { background: white; }
+            .gscrollbar-fixer { padding-right: 15px; }
+            .gdesc-inner { font-size: 0.75rem; }
+            body[data-md-color-scheme="slate"] .gdesc-inner { background: var(--md-default-bg-color); }
+            body[data-md-color-scheme="slate"] .gslide-title { color: var(--md-default-fg-color); }
+            body[data-md-color-scheme="slate"] .gslide-desc { color: var(--md-default-fg-color); }
+        </style></head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="cyan">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#practical-guide-to-weight-initialization-activation-distributions-dead-neurons-and-gradient-flow-in-deep-neural-networks" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="Mathematics for Machine Learning" class="md-header__button md-logo" aria-label="Mathematics for Machine Learning" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"></path></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"></path></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Mathematics for Machine Learning
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Practical Guide to Weight Initialization, Activation Distributions, Dead Neurons, and Gradient Flow in Deep Neural Networks
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="cyan" aria-label="Switch to light mode" type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3zm3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95zm-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31"></path></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="cyan" aria-label="Switch to dark mode" type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m3.55 19.09 1.41 1.41 1.8-1.79-1.42-1.42M12 6c-3.31 0-6 2.69-6 6s2.69 6 6 6 6-2.69 6-6c0-3.32-2.69-6-6-6m8 7h3v-2h-3m-2.76 7.71 1.8 1.79 1.41-1.41-1.79-1.8M20.45 5l-1.41-1.4-1.8 1.79 1.42 1.42M13 1h-2v3h2M6.76 5.39 4.96 3.6 3.55 5l1.79 1.81zM1 13h3v-2H1m12 9h-2v3h2"></path></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"></path></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"></path></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"></path></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"></path></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/SalK91/convex_optimization" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.0.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"></path></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+  
+
+<nav class="md-nav md-nav--primary md-nav--integrated" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Mathematics for Machine Learning" class="md-nav__button md-logo" aria-label="Mathematics for Machine Learning" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"></path></svg>
+
+    </a>
+    Mathematics for Machine Learning
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/SalK91/convex_optimization" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.0.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"></path></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Home
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2">
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Convex Optimization
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            Convex Optimization
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../convex/11_intro/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    1. Introduction and Overview
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../convex/12_vector/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    2. Linear Algebra Foundations
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../convex/13_calculus/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    3. Multivariable Calculus for Optimization
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../convex/14_convexsets/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    4. Convex Sets and Geometric Fundamentals
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../convex/15_convexfunctions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    5. Convex Functions
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../convex/16_subgradients/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    6. Nonsmooth Convex Optimization – Subgradients
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../convex/16a_optimality_conditions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    7. First-Order Optimality Conditions in Convex Optimization
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../convex/17_kkt/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    8. Optimization Principles – From Gradient Descent to KKT
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../convex/18_duality/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    9. Lagrange Duality Theory
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../convex/18a_pareto/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    10. Pareto Optimality and Multi-Objective Convex Optimization
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../convex/18b_regularization/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    11. Regularized Approximation – Balancing Fit and Complexity
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../convex/19_optimizationalgo/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    12. Algorithms for Convex Optimization
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../convex/19a_optimization_constraints/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    13. Optimization Algorithms for Equality-Constrained Problems
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../convex/19b_optimization_constraints/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    14. Optimization Algorithms for Inequality-Constrained Problems
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../convex/20_advanced/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    15. Advanced Large-Scale and Structured Methods
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../convex/21_models/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    16. Modelling Patterns and Algorithm Selection in Practice
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../convex/30_canonical_problems/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    17. Canonical Problems in Convex Optimization
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../convex/35_modern/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    18. Modern Optimizers in Machine Learning Frameworks
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../convex/40_nonconvex/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    19. Beyond Convexity – Nonconvex and Global Optimization
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../convex/42_derivativefree/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    20. Derivative-Free and Black-Box Optimization
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../convex/44_metaheuristic/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    21. Metaheuristic and Evolutionary Optimization
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../convex/48_advanced_combinatorial/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    22. Advanced Topics in Combinatorial Optimization
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../convex/50_future/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    23. The Future of Optimization — Learning, Adaptation, and Intelligence
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3">
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Cheat Sheets
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            Cheat Sheets
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../cheatsheets/20a_cheatsheet/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Optimization Algos - Cheat Sheet
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4">
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Appendices
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            Appendices
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../appendices/120_ineqaulities/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Appendix A - Common Inequalities and Identities
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../appendices/130_projections/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Appendix B - Projection and Proximal Operators
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../appendices/140_support/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Appendix C - Support Functions and Dual Geometry (Advanced)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../appendices/160_conjugates/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Appendix D - Convex Conjugates and Fenchel Duality (Advanced)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../appendices/170_probability/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Appendix E - Convexity in Probability and Statistics (Advanced)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../appendices/180_subgradient_methods/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Appendix F - Subgradient Method and Variants (Advanced)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../appendices/190_proximal/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Appendix G - Proximal Operators
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../appendices/200_mirror/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Appendix H - Mirror Descent and Bregman Geometry
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../appendices/300_matrixfactorization/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Appendix I - Matrix Factorization
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../print_page/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Print Site
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+    <a href="https://github.com/SalK91/convex_optimization/edit/master/docs/nn_training/2_initial.md" title="Edit this page" class="md-content__button md-icon" rel="edit">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M10 20H6V4h7v5h5v3.1l2-2V8l-6-6H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h4zm10.2-7c.1 0 .3.1.4.2l1.3 1.3c.2.2.2.6 0 .8l-1 1-2.1-2.1 1-1c.1-.1.2-.2.4-.2m0 3.9L14.1 23H12v-2.1l6.1-6.1z"></path></svg>
+    </a>
+  
+  
+    
+      
+    
+    <a href="https://github.com/SalK91/convex_optimization/raw/master/docs/nn_training/2_initial.md" title="View source of this page" class="md-content__button md-icon">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 18c.56 0 1 .44 1 1s-.44 1-1 1-1-.44-1-1 .44-1 1-1m0-3c-2.73 0-5.06 1.66-6 4 .94 2.34 3.27 4 6 4s5.06-1.66 6-4c-.94-2.34-3.27-4-6-4m0 6.5a2.5 2.5 0 0 1-2.5-2.5 2.5 2.5 0 0 1 2.5-2.5 2.5 2.5 0 0 1 2.5 2.5 2.5 2.5 0 0 1-2.5 2.5M9.27 20H6V4h7v5h5v4.07c.7.08 1.36.25 2 .49V8l-6-6H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h4.5a8.2 8.2 0 0 1-1.23-2"></path></svg>
+    </a>
+  
+
+
+<h1 id="practical-guide-to-weight-initialization-activation-distributions-dead-neurons-and-gradient-flow-in-deep-neural-networks">Practical Guide to Weight Initialization, Activation Distributions, Dead Neurons, and Gradient Flow in Deep Neural Networks<a class="headerlink" href="#practical-guide-to-weight-initialization-activation-distributions-dead-neurons-and-gradient-flow-in-deep-neural-networks" title="Permanent link">¶</a></h1>
+<h1 id="1-why-weight-initialization-matters">1. Why Weight Initialization Matters<a class="headerlink" href="#1-why-weight-initialization-matters" title="Permanent link">¶</a></h1>
+<p>Initialization determines:</p>
+<ul>
+<li>how activations propagate forward  </li>
+<li>how gradients propagate backward  </li>
+<li>whether neurons remain active  </li>
+<li>whether the optimizer can begin learning  </li>
+<li>whether training is stable or diverges  </li>
+</ul>
+<p>Poor initialization leads to:</p>
+<ul>
+<li>vanishing gradients  </li>
+<li>exploding gradients  </li>
+<li>saturated activations (tanh = ±1)  </li>
+<li>dead neurons (ReLU stuck at 0)  </li>
+<li>slow “hockey-stick” learning curves  </li>
+<li>unstable early training  </li>
+</ul>
+<p>Modern deep learning succeeds because initializations are designed to maintain statistical stability across depth.</p>
+<hr>
+<h1 id="2-the-role-of-n-why-we-divide-by-sqrtn">2. The Role of <span class="arithmatex">\(N\)</span>: Why We Divide by <span class="arithmatex">\(\sqrt{N}\)</span><a class="headerlink" href="#2-the-role-of-n-why-we-divide-by-sqrtn" title="Permanent link">¶</a></h1>
+<p>Consider a neuron:</p>
+<div class="arithmatex">\[
+z = \sum_{i=1}^{N} w_i x_i
+\]</div>
+<p>If weights and inputs are independent and zero-mean:</p>
+<div class="arithmatex">\[
+\mathrm{Var}(z) = N \cdot \mathrm{Var}(w) \cdot \mathrm{Var}(x)
+\]</div>
+<p>Thus:</p>
+<ul>
+<li>large <span class="arithmatex">\(N\)</span> → exploded activations  </li>
+<li>small <span class="arithmatex">\(N\)</span> → collapsed activations  </li>
+</ul>
+<p>To keep the variance stable:</p>
+<div class="arithmatex">\[
+\mathrm{Var}(w) = \frac{1}{N}
+\quad \Rightarrow \quad
+\text{std}(w) = \frac{1}{\sqrt{N}}
+\]</div>
+<p>This is the core idea behind all modern weight initializers.</p>
+<h3 id="what-exactly-is-n">What exactly is <span class="arithmatex">\(N\)</span>?<a class="headerlink" href="#what-exactly-is-n" title="Permanent link">¶</a></h3>
+<p>It depends on the layer:</p>
+<ul>
+<li>Dense layer: <span class="arithmatex">\(N = \text{fan\_in}\)</span>  </li>
+<li>Conv layer: <span class="arithmatex">\(N = \text{in\_channels} \times k_h \times k_w\)</span>  </li>
+<li>Transformer linear layer: <span class="arithmatex">\(N = d_{\text{model}}\)</span> or <span class="arithmatex">\(d_{\text{ff}}\)</span>  </li>
+<li>RNN input/recurrent matrix: input or hidden size  </li>
+</ul>
+<p>The goal is always to stabilize forward and backward signal flow.</p>
+<hr>
+<h1 id="3-activation-functions-and-their-stability-regions">3. Activation Functions and Their Stability Regions<a class="headerlink" href="#3-activation-functions-and-their-stability-regions" title="Permanent link">¶</a></h1>
+<h3 id="tanh">Tanh<a class="headerlink" href="#tanh" title="Permanent link">¶</a></h3>
+<ul>
+<li>useful only near 0  </li>
+<li>saturates at ±1 outside a small input range  </li>
+<li>derivative approaches 0 → vanishing gradients  </li>
+</ul>
+<h3 id="relu">ReLU<a class="headerlink" href="#relu" title="Permanent link">¶</a></h3>
+<p>
+<script type="math/tex; mode=display">
+\text{ReLU}(z) = \max(0, z)
+</script>
+- linear for <span class="arithmatex">\(z &gt; 0\)</span><br>
+- zero output + zero gradient for <span class="arithmatex">\(z \le 0\)</span>  </p>
+<h3 id="gelu-silu-swish-softplus">GELU / SiLU (Swish) / SoftPlus<a class="headerlink" href="#gelu-silu-swish-softplus" title="Permanent link">¶</a></h3>
+<ul>
+<li>smoother transitions  </li>
+<li>reduce probability of dead neurons  </li>
+<li>default in Transformers (GELU)</li>
+</ul>
+<p>Initialization must place activations in the high-gradient region of whichever activation is used.</p>
+<hr>
+<h1 id="4-how-tanh-saturation-happens">4. How Tanh Saturation Happens<a class="headerlink" href="#4-how-tanh-saturation-happens" title="Permanent link">¶</a></h1>
+<p>If pre-activations <span class="arithmatex">\(z\)</span> have high variance, tanh outputs cluster near ±1:</p>
+<p>This is saturation.</p>
+<h3 id="why-its-bad">Why it’s bad:<a class="headerlink" href="#why-its-bad" title="Permanent link">¶</a></h3>
+<div class="arithmatex">\[
+\tanh'(z) = 1 - \tanh^2(z) \approx 0
+\]</div>
+<p>Thus almost no gradient flows backward.</p>
+<p>Tanh neurons become <em>functionally dead</em> when always saturated.</p>
+<hr>
+<h1 id="5-dead-neurons-in-practice">5. Dead Neurons in Practice<a class="headerlink" href="#5-dead-neurons-in-practice" title="Permanent link">¶</a></h1>
+<h2 id="51-dead-tanh-neurons">5.1 Dead Tanh Neurons<a class="headerlink" href="#51-dead-tanh-neurons" title="Permanent link">¶</a></h2>
+<p>A tanh neuron is effectively dead if:</p>
+<ul>
+<li><span class="arithmatex">\(z\)</span> is always large positive or negative  </li>
+<li>output always ±1  </li>
+<li>derivative ≈ 0  </li>
+</ul>
+<p>Causes include:</p>
+<ul>
+<li>too-large initial weight variance  </li>
+<li>unnormalized inputs  </li>
+<li>deep networks without residuals or normalization  </li>
+</ul>
+<hr>
+<h2 id="52-dead-relu-neurons">5.2 Dead ReLU Neurons<a class="headerlink" href="#52-dead-relu-neurons" title="Permanent link">¶</a></h2>
+<p>A ReLU neuron is dead if:</p>
+<ul>
+<li><span class="arithmatex">\(z \le 0\)</span> for all inputs  </li>
+<li>output always 0  </li>
+<li>gradient always 0  </li>
+</ul>
+<p>Common causes:</p>
+<ul>
+<li>weights initialized too negative  </li>
+<li>bias drift  </li>
+<li>large learning rates  </li>
+<li>skewed input distributions  </li>
+<li>poor initial variance  </li>
+</ul>
+<p>Dead ReLUs can sometimes recover (with normalization), but often remain inactive.</p>
+<hr>
+<h1 id="6-classical-initialization-methods">6. Classical Initialization Methods<a class="headerlink" href="#6-classical-initialization-methods" title="Permanent link">¶</a></h1>
+<h2 id="61-xavier-glorot-tanh-sigmoid">6.1 Xavier / Glorot (Tanh, Sigmoid)<a class="headerlink" href="#61-xavier-glorot-tanh-sigmoid" title="Permanent link">¶</a></h2>
+<div class="arithmatex">\[
+\mathrm{Var}(W) = \frac{2}{\text{fan}_{\text{in}} + \text{fan}_{\text{out}}}
+\]</div>
+<p>Balances forward and backward variance.</p>
+<hr>
+<h2 id="62-he-kaiming-relu-gelu">6.2 He / Kaiming (ReLU, GELU)<a class="headerlink" href="#62-he-kaiming-relu-gelu" title="Permanent link">¶</a></h2>
+<div class="arithmatex">\[
+\mathrm{Var}(W) = \frac{2}{\text{fan}_{\text{in}}}
+\]</div>
+<p>Based on the fact that ReLU zeroes about half of normally distributed inputs.</p>
+<hr>
+<h2 id="63-orthogonal-initialization-rnns">6.3 Orthogonal Initialization (RNNs)<a class="headerlink" href="#63-orthogonal-initialization-rnns" title="Permanent link">¶</a></h2>
+<p>Stabilizes recurrent dynamics by preserving vector norms.</p>
+<hr>
+<h2 id="64-lsuv-initialization">6.4 LSUV Initialization<a class="headerlink" href="#64-lsuv-initialization" title="Permanent link">¶</a></h2>
+<p>Adjusts initial weights empirically to achieve unit variance layer-by-layer.</p>
+<hr>
+<h1 id="7-modern-initialization-for-deep-architectures">7. Modern Initialization for Deep Architectures<a class="headerlink" href="#7-modern-initialization-for-deep-architectures" title="Permanent link">¶</a></h1>
+<p>Deep networks (especially Transformers and ResNets) require additional considerations.</p>
+<h2 id="71-layernorm-rmsnorm">7.1 LayerNorm / RMSNorm<a class="headerlink" href="#71-layernorm-rmsnorm" title="Permanent link">¶</a></h2>
+<p>LayerNorm normalizes activations:</p>
+<ul>
+<li>keeps means near zero  </li>
+<li>standard deviation controlled  </li>
+<li>prevents drift or saturation  </li>
+<li>stabilizes attention layers and deep MLP stacks  </li>
+</ul>
+<p>Transformers rely heavily on LayerNorm to make training depth-independent.</p>
+<hr>
+<h2 id="72-residual-connections">7.2 Residual Connections<a class="headerlink" href="#72-residual-connections" title="Permanent link">¶</a></h2>
+<p>Residual blocks:</p>
+<div class="arithmatex">\[
+x_{l+1} = x_l + f(x_l)
+\]</div>
+<p>This provides:</p>
+<ul>
+<li>an identity path for forward activations  </li>
+<li>a direct gradient path backward  </li>
+<li>stability for very deep networks  </li>
+<li>reduced sensitivity to initialization  </li>
+</ul>
+<p>Residuals make it possible to train 50–1000+ layer networks.</p>
+<hr>
+<h2 id="73-transformer-specific-initialization">7.3 Transformer-Specific Initialization<a class="headerlink" href="#73-transformer-specific-initialization" title="Permanent link">¶</a></h2>
+<p>Transformers often use:</p>
+<ul>
+<li>weight variance similar to He init  </li>
+<li>embedding scaling by <span class="arithmatex">\(1/\sqrt{d_{\text{model}}}\)</span>  </li>
+<li>residual scaling by <span class="arithmatex">\(1/\sqrt{L}\)</span> or similar  </li>
+<li>pre-LayerNorm to stabilize depth  </li>
+<li>μ-parameterization for width-scaling consistency  </li>
+<li>DeepNorm or FixUp for extremely deep models  </li>
+</ul>
+<p>Modern LLMs <em>do not</em> use plain Xavier or He initialization alone.</p>
+<hr>
+<h1 id="8-expected-loss-at-initialization">8. Expected Loss at Initialization<a class="headerlink" href="#8-expected-loss-at-initialization" title="Permanent link">¶</a></h1>
+<p>For a softmax classifier with <span class="arithmatex">\(C\)</span> classes:</p>
+<div class="arithmatex">\[
+\mathbb{E}[L_{\text{init}}] = \log C
+\]</div>
+<p>This baseline helps diagnose early training issues:</p>
+<ul>
+<li>higher than expected → variance too large  </li>
+<li>lower → bias in logits or incorrect initialization  </li>
+</ul>
+<hr>
+<h1 id="9-diagnosing-initialization-problems-practical">9. Diagnosing Initialization Problems (Practical)<a class="headerlink" href="#9-diagnosing-initialization-problems-practical" title="Permanent link">¶</a></h1>
+<h3 id="symptom-cause-fix">Symptom → Cause → Fix<a class="headerlink" href="#symptom-cause-fix" title="Permanent link">¶</a></h3>
+<h4 id="1-loss-flatlines-early">1. Loss flatlines early<a class="headerlink" href="#1-loss-flatlines-early" title="Permanent link">¶</a></h4>
+<ul>
+<li>Cause: saturation or dead neurons  </li>
+<li>Fix: use Xavier/He, reduce LR, add normalization  </li>
+</ul>
+<h4 id="2-relu-units-all-zero">2. ReLU units all zero<a class="headerlink" href="#2-relu-units-all-zero" title="Permanent link">¶</a></h4>
+<ul>
+<li>Cause: dead ReLUs  </li>
+<li>Fix: He init, LeakyReLU, LayerNorm, smaller LR  </li>
+</ul>
+<h4 id="3-tanh-outputs-at-1">3. Tanh outputs at ±1<a class="headerlink" href="#3-tanh-outputs-at-1" title="Permanent link">¶</a></h4>
+<ul>
+<li>Cause: activation variance too large  </li>
+<li>Fix: Xavier init, normalize inputs, reduce bias scale  </li>
+</ul>
+<h4 id="4-exploding-loss">4. Exploding loss<a class="headerlink" href="#4-exploding-loss" title="Permanent link">¶</a></h4>
+<ul>
+<li>Cause: weight scale too large  </li>
+<li>Fix: reduce std, residual scaling, gradient clipping  </li>
+</ul>
+<h4 id="5-hockey-stick-learning-curve">5. Hockey-stick learning curve<a class="headerlink" href="#5-hockey-stick-learning-curve" title="Permanent link">¶</a></h4>
+<ul>
+<li>Cause: poor initialization or poorly scheduled LR warmup  </li>
+<li>Fix: check activations, add normalization, adjust LR schedule  </li>
+</ul>
+<hr>
+<h1 id="10-architecture-specific-recommendations">10. Architecture-Specific Recommendations<a class="headerlink" href="#10-architecture-specific-recommendations" title="Permanent link">¶</a></h1>
+<h2 id="cnns">CNNs<a class="headerlink" href="#cnns" title="Permanent link">¶</a></h2>
+<ul>
+<li>Init: He  </li>
+<li>Norm: BatchNorm  </li>
+<li>Activation: ReLU or GELU  </li>
+<li>Notes: BN stabilizes variance, makes init forgiving  </li>
+</ul>
+<hr>
+<h2 id="transformers-llms">Transformers / LLMs<a class="headerlink" href="#transformers-llms" title="Permanent link">¶</a></h2>
+<ul>
+<li>Init: He-like + residual scaling  </li>
+<li>Norm: LayerNorm or RMSNorm  </li>
+<li>Activation: GELU  </li>
+<li>Notes: initialization must consider depth and residual structure  </li>
+</ul>
+<hr>
+<h2 id="rnns">RNNs<a class="headerlink" href="#rnns" title="Permanent link">¶</a></h2>
+<ul>
+<li>Init: orthogonal for recurrent matrices  </li>
+<li>Activation: tanh or ReLU  </li>
+<li>Notes: highly sensitive to saturation; normalization helps  </li>
+</ul>
+<hr>
+<h1 id="11-summary">11. Summary<a class="headerlink" href="#11-summary" title="Permanent link">¶</a></h1>
+<p>Initialization controls:</p>
+<ul>
+<li>activation scale  </li>
+<li>gradient scale  </li>
+<li>neuron activity  </li>
+<li>numerical stability  </li>
+<li>early learning speed  </li>
+</ul>
+<p>Modern deep learning relies on three pillars:</p>
+<ol>
+<li>Variance-preserving initialization (Xavier, He, scaled residuals)  </li>
+<li>Normalization layers (BN, LN, RMSNorm)  </li>
+<li>Residual connections ensuring robust gradient flow  </li>
+</ol>
+<p>Together, they make deep networks trainable, stable, and efficient.</p>
+<p>If your network isn't learning, the first suspects should be:</p>
+<ul>
+<li>initialization  </li>
+<li>activation distributions  </li>
+<li>normalization  </li>
+<li>residual pathways  </li>
+<li>learning rate  </li>
+</ul>
+<p>Understanding these fundamentals is essential for building stable, scalable modern neural networks.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var labels=set.querySelector(".tabbed-labels");for(var tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"></path></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      © 2025 Salman Khan — Educational Use Only
+    </div>
+  
+  
+</div>
+      
+        
+<div class="md-social">
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://github.com/SalK91/convex_optimization" target="_blank" rel="noopener" title="github.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.0.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"></path></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.top", "toc.integrate", "content.code.copy", "content.code.annotate", "content.action.edit", "content.action.view", "content.tabs.link", "search.suggest", "search.highlight"], "search": "../../assets/javascripts/workers/search.973d3a69.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.f55a23d4.min.js"></script>
+      
+        <script src="../../js/print-site.js"></script>
+      
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+      
+    
+  
+<script id="init-glightbox">const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});
+document$.subscribe(()=>{ lightbox.reload(); });
+</script></body></html>
