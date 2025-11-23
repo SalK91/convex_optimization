@@ -1,152 +1,220 @@
 # Chapter 5: Convex Functions
 
-Convex functions are the objectives we minimise. Understanding them is essential, because convexity of the objective is what turns an optimisation problem from "possibly impossible" to "provably solvable".
+Convex functions play a central role in optimisation and machine learning. When the objective function is convex, the optimisation landscape has a single global minimum, gradient-based algorithms behave predictably, and optimality conditions have clean geometric interpretations. Many common ML losses—least squares, logistic loss, hinge loss, Huber loss—are convex precisely for these reasons.
 
+This chapter develops the basic tools for understanding convex functions: their definitions, geometric characterisations, first- and second-order tests, and operations that preserve convexity. These tools will later support duality, optimality conditions, and algorithmic analysis.
 
+ 
 ## 5.1 Definitions of convexity
-A function $f : \mathbb{R}^n \to \mathbb{R}$ is convex if for all $x,y$ in its domain and all $\theta \in [0,1]$,
 
+A function $f : \mathbb{R}^n \to \mathbb{R}$ is convex if for all $x,y$ in its domain and all $\theta \in [0,1]$,
 $$
 f(\theta x + (1-\theta) y)
 \le
-\theta f(x) + (1-\theta) f(y)~.
+\theta f(x) + (1-\theta) f(y).
 $$
 
-If the inequality is strict whenever $x \ne y$ and $\theta \in (0,1)$, then $f$ is strictly convex.
+The graph of $f$ never dips below the straight line between $(x,f(x))$ and $(y,f(y))$. If the inequality is strict whenever $x \neq y$, the function is *strictly convex*.
 
-Geometrically, the chord between two points on the graph of f lies above the graph itself. This means that f never “bends downward” — it has a single valley rather than multiple dips.  
-
-Equivalently, the **epigraph** of f,
-
+A powerful geometric viewpoint comes from the epigraph:
 $$
-\mathrm{epi}(f) = \{ (x, t) \in \mathbb{R}^n \times \mathbb{R} : f(x) \le t \}.
+\mathrm{epi}(f) = 
+\{ (x,t) \in \mathbb{R}^n \times \mathbb{R} : f(x) \le t \}.
 $$
+The function $f$ is convex if and only if its epigraph is a convex set. This connects convex functions to the convex sets studied earlier.
 
-is a convex set.
-
+ 
 ## 5.2 First-order characterisation
 
 If $f$ is differentiable, then $f$ is convex if and only if
-
 $$
 f(y) \ge f(x) + \nabla f(x)^\top (y - x)
-\quad \text{for all } x,y.
+\quad\text{for all } x,y.
 $$
 
 Interpretation:
 
-- The first-order Taylor approximation is always a global underestimator.
-- The gradient at $x$ defines a supporting hyperplane to the epigraph of $f$ at $(x, f(x))$.
+- The tangent plane at any point $x$ lies below the function everywhere.
+- $\nabla f(x)$ defines a supporting hyperplane to the epigraph.
+- The gradient provides a global linear underestimator of $f$.
 
-This inequality is sometimes called the first-order condition for convexity.
-
-
-> This is a powerful characterization: it says the tangent hyperplane at any point $x$ lies below the graph of $f$ everywhere. In other words, the gradient at $x$ provides a global underestimator of $f$ (supporting hyperplane to epigraph). Geometrically, this means no tangent line ever goes above the function. 
-
-> For a convex differentiable $f$, we have $f(y) - f(x) \ge \nabla f(x)^T (y-x)$, so moving from $x$ in any direction, the actual increase in $f$ is at least as large as the linear prediction by $\nabla f(x)$ (since the function bends upward or straight). At optimum $\hat{x}$, a necessary and sufficient condition (for convex differentiable $f$) is $\nabla f(\hat{x}) = 0$. This ties to optimality: $\nabla f(\hat{x})=0$ means $f(y)\ge f(\hat{x}) + \nabla f(\hat{x})^T (y-\hat{x}) = f(\hat{x})$ for all $y$, so $\hat{x}$ is global minimizer.
-
-> If $f$ is not differentiable, a similar condition holds with subgradients (see next chapter): $f$ is convex iff for all $x,y$ there exists a subgradient $g \in \partial f(x)$ such that $f(y) \ge f(x) + g^T(y-x)$. The set of all subgradients $\partial f(x)$ is a convex set (the subdifferential). At optimum, $0 \in \partial f(\hat{x})$ is the condition. 
-
-## 5.3 Second-order characterisation
-
-If $f$ is twice continuously differentiable, then $f$ is convex if and only if its Hessian is positive semidefinite everywhere:
-
+This geometric picture is crucial in optimisation:
+at a minimiser $x^\star$, convexity implies  
 $$
-\nabla^2 f(x) \succeq 0
-\quad \text{for all } x~.
+\nabla f(x^\star) = 0 \quad \Longleftrightarrow \quad x^\star \text{ is a global minimiser}.
 $$
 
-If $\nabla^2 f(x) \succ 0$ for all $x$, then $f$ is strictly convex.
+For nondifferentiable convex functions, the gradient is replaced by a subgradient, which plays the same role in forming supporting hyperplanes.
 
  
+## 5.3 Second-order characterisation
 
+If $f$ is twice continuously differentiable, then convexity can be checked via curvature:
+
+$$
+f \text{ is convex } \iff \nabla^2 f(x) \succeq 0 \text{ for all } x.
+$$
+
+- If the Hessian is positive semidefinite everywhere, the function bends upward.  
+- If $\nabla^2 f(x) \succ 0$ everywhere, the function is strictly convex.  
+- Negative eigenvalues indicate directions of negative curvature — impossible for convex functions.
+
+This characterisation connects convexity to the spectral properties of the Hessian discussed earlier.
+
+ 
 ## 5.4 Examples of convex functions
 
 1. Affine functions:  
-   $f(x) = a^\top x + b$.  
-   Always convex (and concave).
+   $$
+   f(x) = a^\top x + b.
+   $$  
+   Always convex (and concave). They define supporting hyperplanes.
 
 2. Quadratic functions with PSD Hessian:  
-   $f(x) = \tfrac12 x^\top Q x + c^\top x + d$,  
-   where $Q \succeq 0$ (symmetric positive semidefinite).  
-   Convex because $\nabla^2 f(x) = Q \succeq 0$.
+   $$
+   f(x) = \tfrac12 x^\top Q x + c^\top x + d,\quad Q \succeq 0.
+   $$  
+   Convex because the curvature matrix $Q$ is PSD.
 
 3. Norms:  
-   $f(x) = \|x\|$ for any norm.  
-   All norms are convex.
+   $$
+   f(x) = \|x\|_p \quad (p \ge 1).
+   $$  
+   All norms are convex; in ML, norms induce regularisers (Lasso, ridge).
 
 4. Maximum of affine functions:  
-   $f(x) = \max_i (a_i^\top x + b_i)$.  
-   Convex because it is the pointwise maximum of convex functions.
+   $$
+   f(x) = \max_i (a_i^\top x + b_i).
+   $$  
+   Convex because the maximum of convex functions is convex.  
+   (Important in SVM hinge loss.)
 
-5. Log-sum-exp function:  
-   $f(x) = \log \left( \sum_{i=1}^k \exp(a_i^\top x + b_i) \right)$.  
-   This function is convex and is ubiquitous in statistics and machine learning (softmax, logistic regression). The convexity follows from Jensen’s inequality and properties of the exponential (Boyd and Vandenberghe, 2004).
+5. Log-sum-exp:  
+   $$
+   f(x) = \log\!\left( \sum_{i=1}^k \exp(a_i^\top x + b_i) \right).
+   $$  
+   A smooth approximation to the max; convex by Jensen’s inequality. Appears in softmax, logistic regression, partition functions.
 
+ 
 ## 5.5 Jensen’s inequality
 
-Let $f$ be convex, and let $X$ be a random variable taking values in the domain of $f$. Then
+Let $f$ be convex and $X$ a random variable in its domain. Then:
 $$
-f(\mathbb{E}[X]) \le \mathbb{E}[f(X)]~.
+f(\mathbb{E}[X]) \le \mathbb{E}[f(X)].
 $$
 
-> the function value at the mean is always less than or equal to the mean of function values.
+This generalises the definition of convexity from finite averages to expectations.  
+Practically:
 
-This is Jensen’s inequality. It generalises the definition of convexity from two-point averages to arbitrary expectations. As a special case, for scalars $x_1,\dots,x_n$ and weights $\theta_i \ge 0$ with $\sum_i \theta_i = 1$,
+- convex functions “pull upward” under averaging,
+- log-sum-exp is convex because exponential is convex,
+- EM and variational methods rely on Jensen to construct lower bounds.
+
+As a finite form, for $\theta_i \ge 0$ with $\sum \theta_i = 1$,
 $$
 f\!\left(\sum_i \theta_i x_i\right)
 \le
 \sum_i \theta_i f(x_i).
 $$
 
-
-> Jensen’s inequality has many uses: in machine learning, it justifies algorithms like EM (which use the inequality to create surrogate objectives), and it provides bounds like $\log(\mathbb{E}[e^X]) \ge \mathbb{E}[X]$ (by convexity of $\log$ or $e^x$). As a simple example, taking $f(x)=x^2$ and $X$ uniform in ${-1,1}$, Jensen says $(\mathbb{E}[X])^2 = 0^2 \le \mathbb{E}[X^2] = 1$, which is true. Or $f(x)=\frac{1}{x}$ convex on $(0,\infty)$ implies $\frac{1}{\mathbb{E}[X]} \le \mathbb{E}[\frac{1}{X}]$ for positive $X$. In optimization, Jensen’s inequality often helps in proving convexity of expectations: if you mix some distributions or uncertain inputs, the expected loss is convex if the loss function is convex.
-
+ 
 ## 5.6 Operations that preserve convexity
 
-If $f$ and $g$ are convex, then:
+Convexity is preserved under many natural constructions:
 
-- $f + g$ is convex.
-- $\alpha f$ is convex for any $\alpha \ge 0$.
-- $\max\{f,g\}$ is convex.
-- Composition with an affine map preserves convexity:  
-  If $A$ is a matrix and $b$ a vector, then $x \mapsto f(Ax + b)$ is convex.
+- Nonnegative scaling:  
+  If $f$ is convex and $\alpha \ge 0$, then $\alpha f$ is convex.
 
-If $f$ is convex and nondecreasing in each argument, and each $g_i$ is convex, then the composition $x \mapsto f(g_1(x), \dots, g_k(x))$ is convex. This helps you build new convex functions from known ones.
+- Addition:  
+  If $f$ and $g$ are convex, then $f+g$ is convex.
 
+- Maximum:  
+  $\max\{f,g\}$ is convex.
+
+- Affine pre-composition:  
+  If $A$ is a matrix,
+  $$
+  x \mapsto f(Ax + b)
+  $$
+  is convex.
+
+- Monotone composition rule:  
+  If $f$ is convex and nondecreasing in each argument, and each $g_i$ is convex,  
+  then $x \mapsto f(g_1(x), \dots, g_k(x))$ is convex.
+
+These rules allow construction of complex convex models from simple building blocks.
+
+ 
 ## 5.7 Level sets of convex functions
 
-For $\alpha \in \mathbb{R}$, define the sublevel set
+For $\alpha \in \mathbb{R}$, the sublevel set is
 $$
 \{ x : f(x) \le \alpha \}.
 $$
 
-> Geometrically, these are the “contour slices” of a convex bowl — cross-sections below certain heights.  
+If $f$ is convex, every sublevel set is convex.  
+This property is crucial because inequalities $f(x) \le \alpha$ are ubiquitous in constraints.
 
+Examples:
 
-If $f$ is convex, then every sublevel set is convex. This is crucial: constraints of the form $f(x) \le \alpha$ are convex constraints.
+- Norm balls:  
+  $\{ x : \|x\|_2 \le r \}$  
+- Linear regression confidence ellipsoids:  
+  $\{ x : \|Ax - b\|_2 \le \epsilon \}$
 
-For example, the set
-$$
-\{ x : \|Ax - b\|_2 \le \epsilon \}
-$$
-is convex because $x \mapsto \|Ax-b\|_2$ is convex.
+These sets enable convex constrained optimisation formulations.
 
+ 
 ## 5.8 Strict and strong convexity
 
-- $f$ is strictly convex if
+### Strict convexity
+
+A function is strictly convex if
 $$
-f(\theta x + (1-\theta) y) < \theta f(x) + (1-\theta) f(y)
+f(\theta x + (1-\theta) y)
+<
+\theta f(x) + (1-\theta) f(y)
 $$
-for all $x \ne y$ and $\theta \in (0,1)$.
+for all $x \neq y$ and $\theta \in (0,1)$.
 
-> Strict convexity ensures uniqueness of the minimizer: there can be only one bottom to the bowl.
+Strict convexity implies unique minimisers.
 
+### Strong convexity
 
-- $f$ is strongly convex with parameter $m>0$ if
+A differentiable function is $\mu$-strongly convex if
 $$
-f(y) \ge f(x) + \nabla f(x)^\top (y-x) + \frac{m}{2} \|y-x\|_2^2.
+f(y) 
+\ge 
+f(x) + \nabla f(x)^\top (y - x) + \frac{\mu}{2}\|y - x\|_2^2.
 $$
 
-Strong convexity implies a unique minimiser and gives quantitative convergence rates for gradient methods.
+Strong convexity adds *quantitative curvature*: the function grows at least quadratically away from its minimiser.
 
+Consequences:
+
+- unique minimiser,
+- gradient descent achieves linear convergence rate,  
+  error shrinks as  
+  $$
+  \|x_{k+1} - x^\star\| \le (1 - \eta\mu)\|x_k - x^\star\| ,
+  $$
+- conditioning ($\kappa = L/\mu$) governs algorithmic difficulty.
+
+Strong convexity is frequently induced by regularisation (e.g., ridge regression adds $\tfrac{\lambda}{2}\|x\|_2^2$).
+
+ 
+## Summary
+
+Convex functions form the analytical backbone of convex optimisation.  
+They provide:
+
+- predictable geometry,
+- clean gradient conditions,
+- reliable convergence behaviour,
+- tractable constraints via convex sublevel sets,
+- stability under composition and modelling operations.
+
+These properties make convex objectives indispensable across machine learning, signal processing, and optimisation theory.
+
+    
+   

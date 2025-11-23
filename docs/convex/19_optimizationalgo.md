@@ -1,13 +1,12 @@
 # Chapter 12: Algorithms for Convex Optimization
-In the previous chapters, we built the mathematical foundations of convex optimization — convex sets, convex functions, gradients, subgradients, KKT conditions, and duality. Now we answer the practical question: How do we actually solve convex optimization problems in practice?
+In the previous chapters, we built the mathematical foundations of convex optimization: convex sets, convex functions, gradients, subgradients, KKT conditions, and duality. Now we answer the practical question: How do we actually solve convex optimization problems in practice?
 
 This chapter now serves as the algorithmic backbone of the book. It bridges theoretical convex analysis (Chapters 3–11) with the practical numerical methods that solve those problems. Each algorithm here can be seen as a computational lens on a convex geometry concept — gradients as supporting planes, Hessians as curvature maps, and proximal maps as projection operators. Later chapters (13–15) extend these ideas to constrained, stochastic, and large-scale environments.
 
  
 ## 12.1 Problem classes vs method classes
 
-Different convex problems call for different algorithmic structures.  
-Here is the broad landscape:
+Different convex problems call for different algorithmic structures. Here is the broad landscape:
 
 | Problem Type | Typical Formulation | Representative Methods | Examples |
 |---------------|--------------------|-------------------------|-----------|
@@ -21,7 +20,6 @@ Here is the broad landscape:
 
 ## 12.2 First-order methods: Gradient descent
 
-### 12.2.1 Setting
 We solve
 $$
 \min_x f(x),
@@ -30,27 +28,30 @@ where $f$ is convex, differentiable, and (ideally) $L$-smooth: its gradient is L
 $$
 \|\nabla f(x) - \nabla f(y)\|_2 \le L \|x-y\|_2 \quad \text{for all } x,y.
 $$
-Smoothness lets us control step sizes.
+> Smoothness lets us control step sizes.
 
-### 12.2.2 Algorithm
 Gradient descent iterates
 $$
 x_{k+1} = x_k - \alpha_k \nabla f(x_k),
 $$
-where $\alpha_k>0$ is the step size (also called learning rate in machine learning). A common choice is a constant $\alpha_k = 1/L$ when $L$ is known, or a backtracking line search when it is not.
+where $\alpha_k>0$ is the step size (also called learning rate in machine learning). Typical choices:
+
+- constant $\alpha_k = 1/L$ when $L$ is known,
+- backtracking line search when $L$ is unknown,
+- diminishing step sizes in some settings.
 
 
-> Derivation: Around $x_t$, we approximate $f$ using its Taylor expansion:
+
+> Derivation: 
+
+> Around $x_t$, we can approximate $f$ using its Taylor expansion:
 
 > $$
 f(x) \approx f(x_t) + \langle \nabla f(x_t), x - x_t \rangle.
 $$
 
 
-> - We assume $f$ behaves approximately like its tangent plane near $x_t$.  
-> - If we were to minimize just this linear model, we would move infinitely far in the direction of steepest descent $-\nabla f(x_t)$, which is not realistic or stable.
-
-> This motivates adding a locality restriction — we trust the linear approximation near $x_t$, not globally. To prevent taking arbitrarily large steps, we add a quadratic penalty for moving away from $x_t$:
+> We assume $f$ behaves approximately like its tangent plane near $x_t$.  But tf we were to minimize just this linear model, we would move infinitely far in the direction of steepest descent $-\nabla f(x_t)$, which is not realistic or stable. This motivates adding a locality restriction: we trust the linear approximation near $x_t$, not globally. To prevent taking arbitrarily large steps, we add a quadratic penalty for moving away from $x_t$:
 
 > $$
 f(x) \approx f(x_t) + \langle \nabla f(x_t), x - x_t \rangle + \frac{1}{2\eta} \|x - x_t\|^2,
@@ -83,28 +84,20 @@ $$
 x_{t+1} = x_t - \eta \nabla f(x_t)
 $$
 
-
-### 12.2.3 Geometric meaning
-From Chapter 3, the first-order Taylor model is
-$$
-f(x + d) \approx f(x) + \nabla f(x)^\top d.
-$$
-This is minimised (under a step length constraint) by taking $d$ in the direction $-\nabla f(x)$. So gradient descent is just “take a cautious step downhill”.
-
-### 12.2.4 Convergence
-For convex, $L$-smooth $f$, gradient descent with a suitable fixed step size satisfies
+Convergence: For convex, $L$-smooth $f$, gradient descent with a suitable fixed step size satisfies
 $$
 f(x_k) - f^\star = O\!\left(\frac{1}{k}\right),
 $$
 where $f^\star$ is the global minimum. This $O(1/k)$ sublinear rate is slow compared to second-order methods, but each step is extremely cheap: you only need $\nabla f(x_k)$.
 
-### 12.2.5 When to use gradient descent
-- Problems with millions of variables (large-scale ML).
-- You can afford many cheap iterations.
-- You only have access to gradients (or stochastic gradients).
-- You do not need very high precision.
+When to use gradient descent:
 
-Gradient descent is the baseline first-order method. But we can do better.
+- High-dimensional smooth convex problems (e.g. large-scale logistic regression).
+- You can compute gradients cheaply.
+- You only need moderate accuracy.
+- Memory constraints rule out storing or factoring Hessians.
+
+
 
  
 ## 12.3 Accelerated first-order methods
@@ -112,7 +105,7 @@ Gradient descent is the baseline first-order method. But we can do better.
 Plain gradient descent has an $O(1/k)$ rate for smooth convex problems. Remarkably, we can do better — and in fact, provably optimal — by adding *momentum*.
 
 ### 12.3.1 Nesterov acceleration
-Nesterov’s accelerated gradient method modifies the update using a momentum-like extrapolation. One common presentation is:
+Nesterov’s accelerated gradient method modifies the update using a momentum-like extrapolation. One common form of Nesterov acceleration uses two sequences $x_k$ and $y_k$:
 
 1. Maintain two sequences $x_k$ and $y_k$.
 2. Take a gradient step from $y_k$:
@@ -124,37 +117,28 @@ Nesterov’s accelerated gradient method modifies the update using a momentum-li
    y_{k+1} = x_{k+1} + \beta_k (x_{k+1} - x_k).
    $$
 
-The extra $\beta_k$ term “looks ahead,” helping the method exploit curvature better than plain gradient descent.
+The extra momentum term $\beta_k (x_{k+1}-x_k)$ uses past iterates to “look ahead” and can significantly accelerate convergence.
 
-### 12.3.2 Optimal first-order rate
-For smooth convex $f$, accelerated gradient achieves
+Convergece: For smooth convex $f$, accelerated gradient achieves
 $$
 f(x_k) - f^\star = O\!\left(\frac{1}{k^2}\right),
 $$
-which is *optimal* for any algorithm that uses only gradient information and not higher derivatives. In other words, you cannot beat $O(1/k^2)$ in the worst case using only first-order oracle calls.
+which is *optimal* for any algorithm that uses only gradient information and not higher derivatives.
 
 
-### 12.3.3 When to use acceleration
-- Same setting as gradient descent (large-scale smooth convex problems),
-- but you want to converge in fewer iterations.
-- You can tolerate a little more instability/parameter tuning (acceleration can overshoot if step sizes are not chosen carefully).
+- Acceleration is effective for well-behaved smooth convex problems.
+- It can be more sensitive to step size and noise than plain gradient descent.
+- Variants such as FISTA apply acceleration in the composite setting $f + R$.
 
-Acceleration is the default upgrade from vanilla gradient descent in many smooth convex machine learning problems.
-
-
-The convergence of gradient descent depends strongly on the geometry of the level sets of the objective function. When these level sets are poorly conditioned—that is, highly anisotropic or elongated (not spherical)—the gradient directions tend to oscillate across narrow valleys, leading to zig-zag behavior and slow convergence.
-
-In contrast, when the level sets are well-conditioned (approximately spherical), gradient descent progresses efficiently toward the minimum. Thus, the efficiency of gradient-based methods is governed by how aspherical (anisotropic) the level sets are, which is directly related to the condition number of the Hessian.
+> The convergence of gradient descent depends strongly on the geometry of the level sets of the objective function. When these level sets are poorly conditioned—that is, highly anisotropic or elongated (not spherical) the gradient directions tend to oscillate across narrow valleys, leading to zig-zag behavior and slow convergence. In contrast, when the level sets are well-conditioned (approximately spherical), gradient descent progresses efficiently toward the minimum. Thus, the efficiency of gradient-based methods is governed by how aspherical (anisotropic) the level sets are, which is directly related to the condition number of the Hessian.
 
 ## 12.4 Steepest Descent Method
  
 The steepest descent method generalizes gradient descent by depending on the choice of norm used to measure step size or direction. It finds the direction of *maximum decrease* of the objective function under a unit norm constraint.
 
 
-> The norm defines the “geometry” of optimization.
-> Gradient descent is steepest descent under the Euclidean norm.
-> Changing the norm changes what “steepest” means, and can greatly affect convergence, especially for ill-conditioned or anisotropic problems.
- 
+> The norm defines the “geometry” of optimization.cGradient descent is steepest descent under the Euclidean norm. Changing the norm changes what “steepest” means, and can greatly affect convergence, especially for ill-conditioned or anisotropic problems.The norm in steepest descent determines the geometry of the descent and choosing an appropriate norm effectively makes the level sets of the function more rounded (more isotropic), which greatly improves convergence.
+  
 At a point $x$, and for a chosen norm $|\cdot|$:
 
 $$
@@ -275,7 +259,9 @@ Interpretation:
 $$
 \Delta x_{\text{nsd}} = -e_i, \quad i = \arg\max_j \left|\frac{\partial f}{\partial x_j}\right|
 $$
+
 and
+
 $$
 \Delta x_{\text{sd}} = -|\nabla f(x)|_\infty e_i
 $$
@@ -293,131 +279,129 @@ The $\ell_1$-unit ball is a diamond; its corners align with coordinate axes, so 
 
 Hence, the norm defines the geometry of what “steepest” means.
 
-## 12.5 Conjugate Gradient Method — Efficient Optimization for Quadratic Objectives
 
-Gradient descent can be slow when the objective’s level sets are highly elongated, a symptom of ill-conditioning in the Hessian. For quadratic functions of the form
+## 12.5 Conjugate Gradient Method — Fast Optimization for Quadratic Objectives
 
-$$
-f(x) = \tfrac{1}{2} x^\top A x - b^\top x, \quad A \succ 0,
-$$
+Gradient descent can be painfully slow when the level sets of the objective are long and skinny an indication that the Hessian has very different curvature in different directions (poor conditioning). The Conjugate Gradient (CG) method fixes this without forming or inverting the Hessian. It exploits the exact structure of quadratic functions to build advanced search directions that incorporate curvature information at almost no extra cost.
 
-plain gradient descent takes many small steps along shallow directions of $A$.
-
-The Conjugate Gradient (CG) method accelerates convergence dramatically for such problems — it exploits the structure of the quadratic and uses curvature-aware search directions without explicitly forming or inverting the Hessian.
+CG is a *first-order* method that behaves like a *second-order* method for quadratics.
 
 
-### Problem Setup
-
-Minimize a strictly convex quadratic:
+For a quadratic objective function:
 
 $$
-\min_x f(x) = \tfrac{1}{2} x^\top A x - b^\top x, \quad A \in \mathbb{R}^{n \times n}, \; A \succ 0.
+f(x) = \tfrac12 x^\top A x - b^\top x 
 $$
 
-This is equivalent to solving the linear system
+with $A \succ 0$, the level sets are ellipses shaped by the eigenvalues of $A$. If $A$ is ill-conditioned, these ellipses are highly elongated. Gradient descent follows the steepest Euclidean descent direction, which points perpendicular to level sets. On elongated ellipses, this produces a zig-zag path that wastes many iterations.
+
+CG replaces the steepest-descent directions with conjugate directions. Two nonzero vectors $p_i, p_j$ are said to be A-conjugate if
 
 $$
-A x = b.
+p_i^\top A p_j = 0.
 $$
 
+This is orthogonality measured in the geometry induced by the Hessian $A$. Why is this useful?
 
-### Algorithm (Linear CG)
+- Moving along an A-conjugate direction eliminates error components associated with a different eigen-direction of $A$.
+- Once you minimize along a conjugate direction, you never need to correct that direction again.
+- After $n$ mutually A-conjugate directions, all curvature directions are resolved → exact solution.
 
-Given an initial $x_0$, define the residual $r_0 = b - A x_0$  and the initial direction $p_0 = r_0$.
+In contrast, gradient descent repeatedly re-corrects previous progress.
 
-For $k = 0, 1, 2, \dots$ until convergence:
 
-1. Compute step size  
+Algorithm (Linear CG): We solve the quadratic minimization problem or, equivalently, the linear system $Ax = b$. Let
+
+$$
+r_0 = b - A x_0, \qquad p_0 = r_0.
+$$
+
+For $k = 0,1,2,\dots$:
+
+1. Step size
    $$
    \alpha_k = \frac{r_k^\top r_k}{p_k^\top A p_k}.
    $$
-2. Update the iterate  
+
+2. Update iterate
    $$
    x_{k+1} = x_k + \alpha_k p_k.
    $$
-3. Update the residual  
+
+3. Update residual (negative gradient)
    $$
    r_{k+1} = r_k - \alpha_k A p_k.
    $$
-4. Compute the new direction coefficient  
+
+4. Direction scaling
    $$
    \beta_k = \frac{r_{k+1}^\top r_{k+1}}{r_k^\top r_k}.
    $$
-5. Update the direction  
+
+5. New conjugate direction
    $$
    p_{k+1} = r_{k+1} + \beta_k p_k.
    $$
 
-Terminate when $\|r_k\|$ is below tolerance $\varepsilon$.
+Stop when $\|r_k\|$ is below tolerance.
 
+Every new direction $p_{k+1}$ is constructed to be A-conjugate to all previous ones, and this is preserved automatically by the recurrence.
 
-### Geometric Intuition
-
-Each search direction $p_k$ is $A$-conjugate to the previous ones:
+Why CG Is Fast: For an $n$-dimensional quadratic, CG solves the problem in at most $n$ iterations in exact arithmetic. In practice, due to floating-point errors and finite precision, it converges much earlier, typically in $O(\sqrt{\kappa})$ iterations, where $\kappa = \lambda_{\max}/\lambda_{\min}$ is the condition number. The convergence bound in the A-norm is:
 
 $$
-p_i^\top A p_j = 0 \quad \text{for } i \ne j.
+\|x_k - x^\star\|_A \le 
+2\left(\frac{\sqrt{\kappa}-1}{\sqrt{\kappa}+1}\right)^k 
+\|x_0 - x^\star\|_A.
 $$
 
-That means successive steps explore independent curvature directions of the quadratic. The residual $r_k$ (the negative gradient) becomes orthogonal to all previous directions, so the method never re-searches the same subspace.
-
-As a result, in exact arithmetic, CG finds the exact minimizer in at most $n$ steps.
+This is dramatically better than the $O(1/k)$ rate of gradient descent.
 
 
-### Convergence Properties
+CG is ideal when:
 
-- For SPD $A$, CG converges monotonically to the minimizer $x^\star = A^{-1} b$.
-- The rate depends on the condition number $\kappa(A) = \frac{\lambda_{\max}}{\lambda_{\min}}$:
-  $$
-  \|x_k - x^\star\|_A \le 2 \left( \frac{\sqrt{\kappa}-1}{\sqrt{\kappa}+1} \right)^k \|x_0 - x^\star\|_A.
-  $$
-- Preconditioning (using $M^{-1}A$ with well-chosen $M$) further improves convergence.
+- The problem is a quadratic or a linear system with symmetric positive definite (SPD) matrix $A$.
+- $A$ is large and sparse or available as a matrix–vector product.
+- You cannot form or store $A^{-1}$ or even the full matrix $A$.
+- You want a Hessian-aware method but cannot afford Newton’s method.
 
+Typical scenarios:
 
-### Machine Learning Context
-
-In ML, CG is widely used for large-scale convex quadratic subproblems:
-
-| Application | Formulation | Notes |
-|--------------|--------------|-------|
-| Ridge regression | $\min_x \|A x - b\|_2^2 + \lambda\|x\|_2^2$ | Normal equations are SPD; CG avoids explicit inversion. |
-| Kernel ridge regression | $(K + \lambda I)\alpha = y$ | CG solves this efficiently without forming full $K^{-1}$. |
-| Linear least squares | $\min_x \tfrac{1}{2}\|A x - b\|^2$ | Equivalent to solving $A^\top A x = A^\top b$. |
-| Large-scale Newton steps | Solve $\nabla^2 f(x_k)p = -\nabla f(x_k)$ | CG acts as an inner solver for the Newton direction. |
+| Application | Why CG fits |
+|------------|-------------|
+| Large linear systems $A x = b$ | Only requires $A p$, not factorization. |
+| Ridge regression | Normal equations form an SPD matrix. |
+| Kernel ridge regression | Solves $(K+\lambda I)\alpha = y$ efficiently. |
+| Newton steps in ML | Inner solver for Hessian systems without forming Hessian. |
+| PDEs and scientific computing | Sparse SPD matrices, ideal for CG. |
 
 
+Assumptions Required for CG: To guarantee correctness of *linear CG*, we require:
 
-### Practical Notes
+- $A$ is symmetric
+- $A$ is positive definite
+- Objective is strictly convex quadratic
+- Arithmetic is exact (for the finite-step guarantee)
 
-- CG requires only matrix–vector products with $A$, not explicit storage.  
-  It’s ideal when $A$ is large, sparse, or implicitly defined.
-- Sensitive to rounding errors; residual re-orthogonalization may be needed for long runs.
-- Preconditioners (Jacobi, incomplete Cholesky, etc.) can drastically reduce iterations.
-
-### Comparison Summary
-
-| Method | Memory | Curvature Use | Convergence | Typical Use |
-|--------|---------|----------------|--------------|--------------|
-| Gradient Descent | $O(n)$ | None | $O(1/k)$ | General smooth convex |
-| Newton’s Method | $O(n^2)$ | Full Hessian | Quadratic (local) | Small/medium convex |
-| Conjugate Gradient | $O(n)$ | Implicit (via $A$-conjugacy) | Fast linear / finite-step | Large quadratic systems |
+If the function is *not* quadratic or Hessian is not SPD, use Nonlinear CG, which generalizes the idea but loses finite-step guarantees.
 
 
+Practical Notes:
 
-### Key Insight
+- You only need matrix–vector products $Ap$.  
+- Storage cost is $O(n)$.  
+- Preconditioning (replacing the system with $M^{-1} A$) improves conditioning and accelerates convergence dramatically.  
+- Periodic re-orthogonalization can help in long runs with floating-point drift.
 
-> The Conjugate Gradient method is the exact gradient method for quadratic objectives  
-> that automatically builds curvature information through orthogonalized directions,  
-> achieving Newton-like efficiency without forming the Hessian.
+
+> CG is the optimal descent method for quadratic objectives:  it constructs Hessian-aware conjugate directions that efficiently resolve curvature, giving Newton-like speed while requiring only gradient-level operations.
+
 
 
 ## 12.6 Newton’s method and second-order methods
 
 First-order methods (like gradient descent) only use gradient information. Newton’s method, in contrast, incorporates curvature information from the Hessian to take steps that better adapt to the local geometry of the function. This often leads to much faster convergence near the optimum.
 
-
-
-### 12.6.1 Local quadratic model
 
 From Chapter 3, the second-order Taylor approximation of $f(x)$ around a point $x_k$ is:
 
@@ -429,8 +413,7 @@ f(x_k)
 + \tfrac{1}{2} d^\top \nabla^2 f(x_k) d.
 $$
 
-If we temporarily trust this quadratic model, we can choose $d$ to minimize the right-hand side.  
-Differentiating with respect to $d$ and setting to zero gives:
+If we temporarily trust this quadratic model, we can choose $d$ to minimize the right-hand side. Differentiating with respect to $d$ and setting to zero gives:
 
 $$
 \nabla^2 f(x_k) \, d_{\text{newton}} = - \nabla f(x_k).
@@ -444,92 +427,89 @@ d_{\text{newton}} = - [\nabla^2 f(x_k)]^{-1} \nabla f(x_k),
 x_{k+1} = x_k + d_{\text{newton}}.
 $$
 
-This step points toward the minimizer of the local quadratic model, and near the true minimizer, Newton’s method exhibits quadratic convergence.
 
+This step aims directly at the stationary point of the local quadratic model. When the iterates are sufficiently close to the true minimizer of a strictly convex $f$, Newton’s method achieves quadratic convergence—dramatically faster than the $O(1/k)$ or $O(1/k^2)$ rates typical of first-order algorithms.
 
+However, far from the minimizer the quadratic model may be inaccurate, the Hessian may be indefinite, or the step may be unreasonably large. For stability, Newton’s method is almost always paired with a line search or trust-region strategy that adjusts step length based on how well the model predicts actual decrease.
 
-### 12.6.2 Convergence behaviour
-
-- Near the minimiser of a strictly convex, twice-differentiable $f$, Newton’s method converges quadratically: roughly, the number of correct digits doubles every iteration.  
-- This is dramatically faster than the $O(1/k)$ or $O(1/k^2)$ rates typical of first-order methods — but only once the iterates enter the basin of attraction.  
-- Far from the minimiser, Newton’s method can behave erratically or even diverge.  
-  To stabilise it, we typically pair it with a line search or trust region strategy to control step size.
-
-
-
-### 12.6.3 Implementation
-
-The main computational effort in each iteration lies in evaluating derivatives and solving the Newton system:
+### Solving the Newton System
+Each iteration requires solving
 
 $$
-H \, \Delta x = -g,
+H \,\Delta x = -g,
+\qquad
+H = \nabla^2 f(x), \;\; g = \nabla f(x).
 $$
 
-where
+If $H$ is symmetric positive definite, a Cholesky factorization
 
 $$
-H = \nabla^2 f(x), \quad g = \nabla f(x).
+H = L L^\top
 $$
 
-#### Solving via Cholesky factorization
-
-If $H$ is symmetric and positive definite, we can efficiently solve this system using a Cholesky factorization:
-
-$$
-H = L L^{\top},
-$$
-
-where $L$ is lower triangular.  
-The Newton step is then:
-
-$$
-\Delta x_{\text{nt}} = -L^{-\top} L^{-1} g.
-$$
-
-This involves two triangular solves:
+allows efficient and numerically stable solution via two triangular solves:
 
 1. $L y = -g$
-2. $L^{\top} \Delta x_{\text{nt}} = y$
+2. $L^\top \Delta x_{\text{nt}} = y$
 
-This avoids explicitly computing $H^{-1}$ and ensures numerical stability.
+This avoids forming $H^{-1}$ explicitly.
 
-#### Newton decrement
 
-A useful measure of progress is the Newton decrement:
+The Newton decrement:
 
 $$
-\lambda(x) = \| L^{-1} g \|_2,
+\lambda(x) = \|L^{-1} g\|_2
 $$
 
-which approximates how far we are from the optimum.  
-A common stopping criterion is $\lambda(x)^2 / 2 < \varepsilon$.
+gauges proximity to the optimum and provides a natural stopping criterion: $\lambda(x)^2/2 < \varepsilon$.
+
+Computationally, the dominant cost is solving the Newton system. For dense, unstructured problems this costs $\approx (1/3)n^3$ operations, though sparsity or structure can reduce this dramatically. Because of this cost, Newton’s method is most appealing for problems of moderate dimension or for situations where Hessian systems can be solved efficiently using sparse linear algebra or matrix–free iterative methods.
+
+
+### Gauss–Newton Method
+
+The Gauss–Newton method is a specialization of Newton’s method for nonlinear least squares problems
+
+$$
+f(x) = \tfrac12 \| r(x) \|^2,
+$$
+
+where $r(x)$ is a vector of residual functions and a nonlinear function of $x$ and $J$ is its Jacobian. Newton’s Hessian decomposes as
+
+$$
+\nabla^2 f(x) = J^\top J \;+\; \sum_i r_i(x)\, \nabla^2 r_i(x).
+$$
+
+The second term involves the curvature of the residuals. When $r(x)$ is approximately linear near the optimum, this term is small. Gauss–Newton drops it, giving the approximation
+
+$$
+\nabla^2 f(x) \approx J^\top J,
+$$
+
+leading to the Gauss–Newton step:
+
+$$
+(J^\top J)\, \Delta = -J^\top r.
+$$
+
+Thus each iteration reduces to solving a (potentially large but structured) least-squares system, avoiding full Hessians entirely. The Levenberg–Marquardt method adds a damping term,
+
+$$
+(J^\top J + \lambda I)\, \Delta = -J^\top r,
+$$
+
+which interpolates smoothly between  
+
+- gradient descent (large $\lambda$), and  
+- Gauss–Newton (small $\lambda$).
+
+Damping improves robustness when the Jacobian is rank-deficient or when the neglected second-order terms are not negligible Gauss–Newton and Levenberg–Marquardt are highly effective when the residuals are nearly linear—common in curve fitting, bundle adjustment, and certain layerwise training procedures in deep learning—yielding fast convergence without the expense of full second derivatives.
 
 
 
-### 12.6.4 Computational cost
+### Quasi-Newton methods
 
-Each Newton step requires solving a linear system involving $\nabla^2 f(x_k)$, which costs about as much as factoring the Hessian (or an approximation).
-
-- For an unstructured, dense Hessian, Cholesky factorization requires approximately $(1/3) n^3$ floating-point operations.  
-- If $H$ is sparse, banded, or has special structure, the cost can be much lower.  
-- Because of this cubic scaling, Newton’s method is most attractive for medium-scale problems where high accuracy is required.
-
-
-
-### 12.6.5 Why convexity helps
-
-If $f$ is convex, then $\nabla^2 f(x_k)$ is positive semidefinite (Chapter 5).  
-This has two important implications:
-
-- The local quadratic model is bowl-shaped, so the Newton direction points toward a minimiser.  
-- Regularised Newton steps (e.g. using $H + \mu I$ for small $\mu > 0$) are guaranteed to be descent directions and behave predictably.
-
-
-
-### 12.6.6 Quasi-Newton methods
-
-When computing or storing the Hessian is too expensive, we can build low-rank approximations of $\nabla^2 f(x_k)$ or its inverse.  
-These methods use gradient information from previous steps to estimate curvature.
+When computing or storing the Hessian is too expensive, we can build low-rank approximations of $\nabla^2 f(x_k)$ or its inverse. These methods use gradient information from previous steps to estimate curvature.
 
 The most famous examples are:
 
@@ -537,11 +517,7 @@ The most famous examples are:
 - DFP (Davidon–Fletcher–Powell)  
 - L-BFGS (Limited-memory BFGS) — for very large-scale problems.
 
-Quasi-Newton methods (BFGS, L-BFGS) build inverse-Hessian approximations from gradient differences, achieving superlinear convergence with low memory
-
-They maintain many of Newton’s fast local convergence properties, but with per-iteration costs similar to first-order methods.
-
-For instance, BFGS maintains an approximation $B_k \approx \nabla^2 f(x_k)^{-1}$ updated via gradient and step differences:
+Quasi-Newton methods (BFGS, L-BFGS) build inverse-Hessian approximations from gradient differences, achieving superlinear convergence with low memory. They maintain many of Newton’s fast local convergence properties, but with per-iteration costs similar to first-order methods. For instance, BFGS maintains an approximation $B_k \approx \nabla^2 f(x_k)^{-1}$ updated via gradient and step differences:
 
 $$
 B_{k+1} = B_k + \frac{(s_k^\top y_k + y_k^\top B_k y_k)}{(s_k^\top y_k)^2} s_k s_k^\top
@@ -554,9 +530,7 @@ These methods achieve superlinear convergence in practice, making them popular f
 
 
 
-### 12.6.7 When to use Newton or quasi-Newton methods
-
-Use Newton or quasi-Newton methods when:
+When to use Newton or quasi-Newton methods:
 
 - You need high-accuracy solutions.  
 - The problem is smooth and reasonably well-conditioned.  
@@ -564,12 +538,6 @@ Use Newton or quasi-Newton methods when:
 
 For large, ill-conditioned, or nonsmooth problems, first-order or proximal methods (Chapter 10) are typically more suitable.
 
-
-
-
-> Newton-Raphson: The Newton step solves $\nabla^2 f(x_k) p_k=-\nabla f(x_k)$ and updates $x_{k+1}=x_k+p_k$ with line search or trust-region safeguards. Complexity hinges on solving linear systems; use sparse Cholesky, conjugate gradients with preconditioning, or low-rank structure to scale. For generalized linear models, iteratively reweighted least squares converges in few iterations, but regularization and damping are needed when data are nearly separable.
-
-> Gauss-Newton: For nonlinear least squares $f(x)=\tfrac12\|r(x)\|^2$, the Gauss–Newton approximation uses $H\approx J^\top J$ where $J$ is the Jacobian of $r$. Solve $(J^\top J)\Delta=-J^\top r$ to get a step; Levenberg–Marquardt adds damping $(J^\top J+\lambda I)\Delta=-J^\top r$ interpolating between gradient and Gauss–Newton. Effective for residual models where second-order residual terms are small; widely used in curve fitting and some deep learning layerwise updates.
 
  
 
@@ -585,8 +553,7 @@ Two core ideas handle this: projected gradient and proximal gradient.
 
 ### 12.8.1 Projected gradient descent
 
-Setting:  
-Minimise convex, differentiable $f(x)$ subject to $x \in \mathcal{X}$, where $\mathcal{X}$ is a simple closed convex set (Chapter 4).
+Setting: Minimise convex, differentiable $f(x)$ subject to $x \in \mathcal{X}$, where $\mathcal{X}$ is a simple closed convex set (Chapter 4).
 
 Algorithm:
 
@@ -618,8 +585,7 @@ Projected gradient is the constrained version of gradient descent. It maintains 
 
 ### 12.8.2 Proximal gradient (forward–backward splitting)
 
-Setting:  
-Composite convex minimisation
+Setting: Composite convex minimisation
 $$
 \min_x \; F(x) := f(x) + R(x),
 $$
@@ -681,14 +647,11 @@ So far we’ve assumed either:
 - simple constraints we can project onto,
 - or nonsmooth terms we can prox.
 
-What if the constraints are general convex inequalities $g_i(x)\le0$?  
-Enter penalty methods, barrier methods, and (ultimately) interior-point methods.
+What if the constraints are general convex inequalities $g_i(x)\le0$: Enter penalty methods, barrier methods, and (ultimately) interior-point methods.
 
 ### 12.9.1 Penalty methods
 
-Turn constrained optimisation into unconstrained optimisation by adding a penalty for violating constraints.
-
-Suppose we want
+Turn constrained optimisation into unconstrained optimisation by adding a penalty for violating constraints. Suppose we want
 $$
 \min_x f(x)
 \quad \text{s.t.} \quad g_i(x) \le 0,\ i=1,\dots,m.
@@ -711,13 +674,47 @@ This is conceptually simple and is sometimes effective, but:
 - choosing $\rho$ is tricky,
 - very large $\rho$ can make the landscape ill-conditioned and hard for gradient/Newton to solve.
 
-Penalty methods are closely linked to robust formulations and Huber-like losses: you replace a hard requirement by a soft cost. This is exactly what you do in robust regression and in $\epsilon$-insensitive / Huber losses (see Section 9.7).
+### Algorithm: Basic Penalty Method (Quadratic or General Penalization)
+
+Goal:  Solve  
+$$
+\min_x f(x) \quad \text{s.t. } g_i(x) \le 0,\; i=1,\dots,m.
+$$
+
+Penalty formulation:  
+$$
+F_\rho(x) = f(x) + \rho \sum_{i=1}^m \phi(g_i(x)),
+$$
+where  
+
+- $\phi(r) = 0$ if $r \le 0$,  
+- $\phi(r)$ grows when $r>0$ (e.g., $\phi(r)=\max\{0,r\}^2$),  
+- $\rho > 0$ is the penalty weight.
+
+Inputs:  
+
+- objective $f(x)$  
+- constraints $g_i(x)$  
+- penalty function $\phi$  
+- initial point $x_0$  
+- initial penalty parameter $\rho_0 > 0$  
+- penalty update factor $\gamma > 1$  
+- tolerance $\varepsilon$
+
+
+Procedure:
+
+1. Choose $x_0$, $\rho_0 > 0$.  
+2. For $k = 0, 1, 2, \dots$:  
+      1. Solve the penalized subproblem  $x_{k+1} = \arg\min_x F_{\rho_k}(x)$ using Newton’s method, gradient descent, quasi-Newton, etc.  
+       2. Check feasibility / stopping:  If $\max_i g_i(x_{k+1}) \le \varepsilon, \quad   \|x_{k+1} - x_k\| \le \varepsilon$  stop and return $x_{k+1}$.  
+      3. Increase penalty parameter  $\rho_{k+1} = \gamma\, \rho_k$   with typical $\gamma \in [5,10]$.  
+3. End.
+
 
 ### 12.9.2 Barrier methods
 
-Penalty methods penalise violation *after* you cross the boundary. Barrier methods make it impossible to even touch the boundary.
-
-For inequality constraints $g_i(x) \le 0$, define the logarithmic barrier
+Penalty methods penalise violation *after* you cross the boundary. Barrier methods make it impossible to even touch the boundary. For inequality constraints $g_i(x) \le 0$, define the logarithmic barrier
 $$
 b(x) = - \sum_{i=1}^m \log(-g_i(x)).
 $$
@@ -738,40 +735,141 @@ Key points:
 - Each Newton step solves a linear system involving the Hessian of $F_t$, so the inner loop looks like a damped Newton method.
 - Increasing $t$ tightens the approximation; we “home in” on the boundary of feasibility.
 
-This is the core idea of interior-point methods.
 
-### 12.9.3 Interior-point methods in practice
+### Algorithm: Barrier Method (Logarithmic Barrier / Interior Approximation)
 
-Interior-point methods:
+Goal: Solve the constrained problem  
+$$
+\min_x f(x) \quad \text{s.t. } g_i(x) \le 0,\; i=1,\dots,m.
+$$
 
-- Are globally convergent for convex problems under mild assumptions (Slater’s condition; see Chapter 8).
-- Solve a series of smooth, strictly feasible subproblems.
-- Use Newton-like steps to update primal (and, implicitly, dual) variables.
-- Produce both primal and dual iterates — so they naturally produce a duality gap, which certifies how close you are to optimality (Chapter 8).
+Logarithmic barrier:  
+$$
+b(x) = -\sum_{i=1}^m \log\!\big(-g_i(x)\big),
+$$
+defined only for strictly feasible points $g_i(x)<0$.
 
-Interior-point methods are the engine behind modern general-purpose convex solvers for:
+Barrier subproblem:  
+$$
+F_t(x) = t\, f(x) + b(x),
+$$
+where $t>0$ is the barrier parameter.
 
-- linear programs (LP),
-- quadratic programs (QP),
-- second-order cone programs (SOCP),
-- semidefinite programs (SDP).
+As $t \to \infty$, minimizers of $F_t$ approach the constrained optimum.
 
-They give high-accuracy answers and KKT-based optimality certificates. They are more expensive per iteration than gradient methods, but need far fewer iterations, and they handle fully general convex constraints.
+ Inputs:  
+
+- objective $f(x)$  
+- inequality constraints $g_i(x)$  
+- barrier function $b(x)$  
+- strictly feasible starting point $x_0$ ($g_i(x_0) < 0$)  
+- initial barrier parameter $t_0 > 0$  
+- barrier growth factor $\mu > 1$ (often $\mu = 10$)  
+- tolerance $\varepsilon$
+
+ 
+Procedure:
+
+1. Choose strictly feasible $x_0$, and pick $t_0 > 0$.  
+2. For $k = 0,1,2,\dots$:  
+    1. Centering step (inner loop):  Solve the barrier subproblem  $
+      x_{k+1} = \arg\min_x F_{t_k}(x)
+      \quad\text{with} g_i(x)<0. $  Typically use Newton’s method (damped) on $F_{t_k}$.  Stop when the Newton decrement satisfies  $\lambda(x_{k+1})^2/2 \le \varepsilon$
+      2. Optimality / stopping test:    If  $\frac{m}{t_k} \le \varepsilon,$
+      then $x_{k+1}$ is an $\varepsilon$-approximate solution of the original constrained problem; stop and return $x_{k+1}$.  
+      3. Increase barrier parameter:  $t_{k+1} = \mu\, t_k,$   which tightens the approximation and moves closer to the boundary.  
+3. End.
+ 
+### 12.9.3 Interior-point methods
+
+Interior-point methods combine barrier functions with Newton’s method to solve general convex programs:
+
+- They maintain strict feasibility throughout.
+- Each iteration solves a Newton system for the barrier-augmented objective.
+- They naturally generate primal–dual pairs and duality gap estimates.
+- Under standard assumptions (e.g., Slater’s condition), they converge in a predictable number of iterations.
+
+Interior-point methods are the foundation of modern solvers for LP, QP, SOCP, and SDP. They are more expensive per iteration than first-order methods but converge in far fewer steps and achieve high accuracy.
+
+### Algorithm: Primal–Dual Interior-Point Method (for convex inequality constraints)
+
+We consider the problem
+$$
+\min_x\; f(x) \quad \text{s.t. } g_i(x) \le 0,\; i=1,\dots,m.
+$$
+
+Introduce Lagrange multipliers $\lambda \ge 0$. The KKT conditions are
+$$
+\begin{aligned}
+\nabla f(x) + \sum_i \lambda_i \nabla g_i(x) &= 0, \\
+g_i(x) &\le 0, \\
+\lambda_i &\ge 0, \\
+\lambda_i\, g_i(x) &= 0.
+\end{aligned}
+$$
+
+Interior-point methods enforce the relaxed condition
+$$
+\lambda_i\, g_i(x) = -\frac{1}{t},
+$$
+which keeps iterates strictly feasible.
+
+ 
+### Inputs
+- objective $f(x)$  
+- inequality constraints $g_i(x)$  
+- initial primal point $x_0$ with $g_i(x_0)<0$  
+- initial dual variable $\lambda_0 > 0$  
+- initial barrier parameter $t_0 > 0$  
+- growth factor $\mu > 1$  
+- tolerance $\varepsilon$
 
 
-Summary: Penalty vs Barrier vs Interior-Point
 
-| Method | Feasibility During Iteration | Mechanism | Typical Behavior |
-|--||||
-| Penalty | May violate constraints | Adds large penalty outside feasible region | Easy to implement but can be ill-conditioned |
-| Barrier | Stays strictly feasible | Adds infinite cost near constraint boundary | Smooth approximation to constrained problem |
-| Interior-Point | Always feasible (uses barrier) | Solves a sequence of barrier problems with increasing precision | Follows central path to true optimum |
+### Procedure
+
+1. Choose strictly feasible $x_0$, positive $\lambda_0$, and $t_0$.
+
+2. For $k = 0,1,2,\dots$:
+
+      (a) Form the perturbed KKT system.  Solve for the Newton direction $(\Delta x, \Delta \lambda)$:
+
+      $$
+   \begin{bmatrix}
+   \nabla^2 f(x) + \sum_i \lambda_i \nabla^2 g_i(x) & \nabla g(x) \\
+   \text{diag}(\lambda)\,\nabla g(x)^\top & \text{diag}(g(x))
+   \end{bmatrix}
+   \begin{bmatrix}
+   \Delta x \\
+   \Delta \lambda
+   \end{bmatrix}
+   =
+   -
+   \begin{bmatrix}
+   \nabla f(x) + \sum_i \lambda_i \nabla g_i(x) \\
+   \lambda \circ g(x) + \tfrac{1}{t}\mathbf{1}
+   \end{bmatrix}.
+   $$
+
+      (b) Line search to keep strict feasibility. Choose the maximum $\alpha\in(0,1]$ such that:
+      
+      - $g_i(x + \alpha \Delta x) < 0$,
+      - $\lambda + \alpha \Delta \lambda > 0$.
+
+      (c) Update: $x \leftarrow x + \alpha \Delta x,
+   \qquad  \lambda \leftarrow \lambda + \alpha \Delta \lambda.$
+
+      (d) Check duality gap: $\text{gap} = - g(x)^\top \lambda$ If $\text{gap} \le \varepsilon$, stop.
+
+      (e) Increase barrier parameter $t \leftarrow \mu t.$
+
+3. Return $x$.
+
 
 
 
 ## 12.10 Choosing the right method in practice
 
-Let’s summarise the chapter in the form of a decision guide.
 
 Case A. Smooth, unconstrained, very high dimensional.  
 Example: logistic regression on millions of samples.  

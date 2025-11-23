@@ -1,195 +1,245 @@
 # Chapter 4: Convex Sets and Geometric Fundamentals
 
-Optimisation problems almost always include constraints. The feasible region, the set of points allowed by those constraints, is often a convex set. This chapter builds geometric intuition for convex sets, affine sets, hyperplanes, polyhedra, and supporting hyperplanes.
+Most optimization problems are constrained. The set of points that satisfy these constraints the feasible region determines where an algorithm is allowed to search. In many machine learning and convex optimization problems, this feasible region is a convex set. Convex sets have a simple but powerful geometric property: any line segment between two feasible points remains entirely within the set. This structure eliminates irregularities and makes optimization far more predictable.
+
+This chapter develops the geometric foundations needed to reason about convexity. We introduce affine sets, convex sets, hyperplanes, halfspaces, polyhedra, and supporting hyperplanes. These objects form the geometric language of convex analysis. Understanding their structure is essential for interpreting constraints, proving optimality conditions, and designing efficient algorithms for convex optimization.
 
 ## 4.1 Convex sets
 
-A set $C \subseteq \mathbb{R}^n$ is convex if for any $x,y \in C$ and any $\theta \in [0,1]$,
+A set $ C \subseteq \mathbb{R}^n $ is convex if for any two points $ x, y \in C $ and any $ \theta \in [0,1] $,
 $$
-\theta x + (1-\theta) y \in C~.
+\theta x + (1 - \theta) y \in C.
 $$
-
-> For any two feasible points, the entire line segment between them is also feasible. No “indentations.”
+That is, the entire line segment between $x$ and $y$ lies inside the set. Convex sets have no “holes” or “indentations,” and this geometric regularity is what makes optimization over them tractable.
 
 ### Examples
-- An affine subspace: $\{ x : Ax = b \}$.
-- A halfspace: $\{ x : a^\top x \le b \}$.
-- An $\ell_2$ ball: $\{ x : \|x\|_2 \le r \}$.
-- An $\ell_\infty$ ball: $\{ x : \|x\|_\infty \le r \}$, which is a box.
-- The probability simplex: $\{ x \in \mathbb{R}^n : x \ge 0, \sum_i x_i = 1 \}$.
+- Affine subspaces: $ \{ x : Ax = b \} $.  
+- Halfspaces: $ \{ x : a^\top x \le b \} $.  
+- Euclidean balls: $ \{ x : \|x\|_2 \le r \} $.  
+- $ \ell_\infty $ balls (axis-aligned boxes): $ \{ x : \|x\|_\infty \le r \} $.  
+- Probability simplex: $ \{ x \in \mathbb{R}^n : x \ge 0, \ \sum_i x_i = 1 \} $.  
 
-Convexity means “no caves or holes”, you can mix any two feasible points and stay feasible.
-
-Geometrically:  
-
-- Convex sets are closed under averaging.  
-- Optimization over convex sets is stable: small perturbations to data do not create new local minima.  
-- Convex sets preserve feasibility under stochastic mixing — a key property in probabilistic ML models.
-
-> A set that is not convex: a crescent shape or annulus. The defining failure is: there exist $x,y$ in the set such that some convex combination leaves the set.
+A set fails to be convex whenever some segment between two feasible points leaves the set—for example, a crescent or an annulus.
 
  
-
 ## 4.2 Affine sets, hyperplanes, and halfspaces
 
-An affine set is a translate of a subspace:
+Affine sets generalize linear subspaces by allowing a shift. A set $A$ is affine if for some point $x_0$ and subspace $S$,
 $$
-\{ x_0 + v : v \in S \},
+A = \{ x_0 + v : v \in S \}.
 $$
-where $S$ is a subspace. Affine sets are convex.
+Affine sets are always convex, since adding a fixed offset does not affect the convexity of the underlying subspace.
 
-A hyperplane in $\mathbb{R}^n$ is a set of the form
+A hyperplane is an affine set defined by a single linear equation:
 $$
-H = \{ x : a^\top x = b \}
+H = \{ x : a^\top x = b \}, \qquad a \neq 0.
 $$
-for some nonzero $a \in \mathbb{R}^n$.
+Hyperplanes act as the “flat boundaries” of higher-dimensional space and are the fundamental building blocks of polyhedra.
 
-A halfspace is
+A halfspace is one side of a hyperplane:
 $$
 \{ x : a^\top x \le b \}.
 $$
-
-> Every affine set is convex, and every hyperplane is both affine and convex.
-
-> Halfspaces are convex; intersections of halfspaces are convex. Linear inequality constraints define intersections of halfspaces, and therefore give convex feasible regions.
+Halfspaces are convex and serve as basic local approximations to general convex sets.
 
  
-## 4.3 Convex combinations, convex hulls
+## 4.3 Convex combinations and convex hulls
 
-A convex combination of points $x_1,\dots,x_k$ is
+A convex combination of points $ x_1, \dots, x_k $ is a weighted average
 $$
-\sum_{i=1}^k \theta_i x_i
-\quad\text{with}\quad
-\theta_i \ge 0,\ \sum_{i=1}^k \theta_i = 1.
+\sum_{i=1}^k \theta_i x_i, 
+\qquad
+\theta_i \ge 0, \qquad \sum_{i=1}^k \theta_i = 1.
 $$
+Convex sets are precisely those that contain all convex combinations of their points.
 
-The convex hull of a set $S$ is the set of all convex combinations of finitely many points of $S$. It is the “smallest” convex set containing $S$.
+The convex hull of a set $S$, denoted $\operatorname{conv}(S)$, is the set of all convex combinations of finitely many points in $S$. It is the smallest convex set containing $S$. Geometrically, it is the shape you obtain by stretching a tight rubber band around the points.
 
-Convex hulls matter because:
+Convex hulls are important because:
 
-- Polytopes (bounded polyhedra) can be described as convex hulls of finitely many points (their vertices).
-- Many relaxations in optimisation replace a complicated nonconvex feasible set by its convex hull.
+- Polytopes can be represented either as intersections of halfspaces or as convex hulls of their vertices.
+- Many optimization relaxations replace a difficult nonconvex set by its convex hull, enabling the use of convex optimization techniques.
 
-Convex hulls appear everywhere:
 
-- In machine learning, convex combinations define *mixtures* (e.g., mixture of experts, convex combination of base classifiers).
-- In optimization, many relaxations approximate hard discrete sets by their convex hull — making problems solvable with convex tools.
-
-Geometric intuition: the convex hull of points is like wrapping a rubber band around them.
-
- 
 ## 4.4 Polyhedra and polytopes
 
 A polyhedron is an intersection of finitely many halfspaces:
 $$
 P = \{ x : Ax \le b \}.
 $$
-Polyhedra are convex and cane be unbounded. If $P$ is also bounded, it is called a polytope.
+Polyhedra are always convex; they may be bounded or unbounded.
 
-In linear programming, we minimise a linear objective $c^\top x$ over a polyhedron. The optimal solution, if it exists, is always attained at an extreme point (vertex) of the feasible polyhedron.
+If a polyhedron is also bounded, it is called a polytope. Polytopes include familiar shapes such as cubes, simplices, and more general polytopes that arise as feasible regions in linear programs.
 
-Linear programs (LPs) minimize $c^\top x$ over polyhedra. Since the objective is linear, the optimum lies at a vertex (extreme point) of the feasible region.
  
-
 ## 4.5 Extreme points
 
-Let $C$ be a convex set. A point $x \in C$ is an extreme point if it cannot be expressed as a strict convex combination of two other distinct points in $C$. Formally, $x$ is extreme in $C$ if whenever
+Let $ C $ be a convex set. A point $x \in C$ is an extreme point if it cannot be written as a nontrivial convex combination of other points in the set. Formally, if
 $$
-x = \theta y + (1-\theta) z,
-\quad
-0<\theta<1,
-\quad
-y,z \in C,
+x = \theta y + (1 - \theta) z,
+\qquad 0 < \theta < 1, \qquad y, z \in C,
 $$
-then $y = z = x$.
+implies $ y = z = x $.
 
-Geometric meaning:
+Geometrically, extreme points are the “corners” of a convex set. For polytopes, the extreme points are exactly the vertices. Extreme points are essential in optimization because many convex problems—such as linear programs—achieve their optima at extreme points of the feasible region. This geometric fact underlies simplex-type algorithms and supports duality theory.
 
-- Extreme points are the “corners.”
-- In a polytope, extreme points are precisely the vertices.
-
-This is why linear programming solutions are found at vertices.
 
 ## 4.6 Cones
 
-A set $K$ is a cone if for any $x \in K$ and $\alpha \ge 0$, $\alpha x \in K$. A cone is convex if additionally $x,y\in K$ implies $x+y \in K$. Convex cones are important (e.g. nonnegative orthant, PSD matrices cone) because many optimization problems can be cast as cone programs. Cones have extreme rays instead of points (directions that generate edges of the cone). For instance, the extreme rays of the positive orthant in $\mathbb{R}^n$ are the coordinate axes (each axis direction can’t be formed by positive combos of others).
+Cones generalize the idea of “directions” in geometry. They capture sets that are closed under nonnegative scaling and play a central role in convex analysis and constrained optimization.
 
-- Cones are closed under nonnegative scaling, but not necessarily addition.  
-- Conic hull (convex cone): Collection of all conic combinations of points in $S$.
-- A cone is not necessarily a subspace (negative multiples may not be included).  
-- A convex cone is closed under addition and nonnegative scaling.  
-- Polar Cones: Given a cone $K \subseteq \mathbb{R}^n$, the polar cone is:
+### Basic definition
 
-    $$
-    K^\circ = \{ y \in \mathbb{R}^n \mid \langle y, x \rangle \le 0, \; \forall x \in K \}.
-    $$
+A set $K \subseteq \mathbb{R}^n$ is a cone if
+$$
+x \in K, \ \alpha \ge 0
+\quad\Longrightarrow\quad
+\alpha x \in K.
+$$
+A cone is convex if it is also closed under addition:
+$$
+x, y \in K \quad\Longrightarrow\quad x + y \in K.
+$$
 
-    - Intuition: polar cone vectors form non-acute angles with every vector in $K$.  
-    - Properties:  
-        - Always a closed convex cone.  
-        - If $K$ is a subspace, $K^\circ$ is the orthogonal complement.  
-        - Duality: $(K^\circ)^\circ = K$ for closed convex cones.  
+Cones are not required to contain negative multiples of a vector, so they are generally not subspaces. Instead of extreme points, cones have extreme rays, which represent directions that cannot be formed as positive combinations of other rays. For example, in the nonnegative orthant $ \mathbb{R}^n_{\ge 0} $, each coordinate axis direction is an extreme ray.
 
-- Tangent Cone: For a set $C$ and point $x \in C$, the tangent cone $T_C(x)$ contains all directions in which one can “move infinitesimally” while remaining in $C$:
+### Conic hull
 
-    $$
-    T_C(x) = \Big\{ d \in \mathbb{R}^n \;\Big|\; \exists t_k \downarrow 0, \; x_k \in C, \; x_k \to x, \; \frac{x_k - x}{t_k} \to d \Big\}.
-    $$
-    
-    - Interior point: $T_C(x) = \mathbb{R}^n$.  
-    - Boundary point: $T_C(x)$ restricts movement to directions staying inside $C$. 
-    - Tangent cones define feasible directions for projected gradient steps or constrained optimization.
-
- - Normal Cone: For a convex set $C$ at point $x \in C$:
-    $$
-    N_C(x) = \{ v \in \mathbb{R}^n \mid \langle v, y - x \rangle \le 0, \; \forall y \in C \}.
-    $$
-    - Each $v \in N_C(x)$ defines a supporting hyperplane at $x$.  
-    - Relation: $N_C(x) = \big(T_C(x)\big)^\circ$ — polar of tangent cone.  
-    - Interior point: $N_C(x) = \{0\}$.  
-    - Boundary/corner: $N_C(x)$ is a cone of outward normals.- Appears in first-order optimality conditions:
-    $$
-    0 \in \partial f(x^) + N_C(x^),
-    $$
-    where the subgradient of $f$ is balanced by the “push-back” of constraints.
+Given any set $S$, its conic hull is the set of all conic combinations:
+$$
+\operatorname{cone}(S)
+=
+\left\{
+\sum_{i=1}^k \alpha_i s_i : \alpha_i \ge 0,\ s_i \in S
+\right\}.
+$$
+This is the smallest convex cone containing $S$. Conic hulls appear frequently in duality theory and in convex relaxations for optimization.
 
  
+### Polar cones
 
-## 4.7 Supporting hyperplanes and separation
-
-Convex sets can be “touched” or “separated” by hyperplanes.
-
-
-### Supporting hyperplane theorem
-Let $C \subseteq \mathbb{R}^n$ be a nonempty closed convex set, and let $x_0$ be a boundary point of $C$. Then there exists a nonzero $a$ such that
+For a cone $K$, the polar cone is defined as
 $$
-a^\top x \le a^\top x_0 \quad \text{for all } x \in C~.
+K^\circ
+=
+\left\{
+y \in \mathbb{R}^n : \langle y, x \rangle \le 0 \ \forall x \in K
+\right\}.
 $$
-In words, there is a hyperplane $a^\top x = a^\top x_0$ that “supports” $C$ at $x_0$: it touches $C$ but does not cut through it.
 
-### Separating hyperplane theorem
-If $C$ and $D$ are two disjoint nonempty convex sets, then there exists a hyperplane that separates them: some nonzero $a$ and scalar $b$ such that
+Intuition:
+
+- Polar vectors make a nonacute angle with every vector in $K$.  
+
+Key properties:
+
+- $K^\circ$ is always a closed convex cone.  
+- If $K$ is a subspace, then $K^\circ$ is the orthogonal complement.  
+- For any closed convex cone,  
+  $$
+  (K^\circ)^\circ = K.
+  $$
+
+Polar cones provide the geometric foundation for normal cones, dual cones, and many optimality conditions.
+
+ 
+### Tangent cones
+
+For a set $C$ and a point $x \in C$, the tangent cone $T_C(x)$ consists of all feasible “infinitesimal directions” from $x$:
+$$
+T_C(x)
+=
+\left\{
+d : \exists\, t_k \downarrow 0,\ x_k \in C,\ x_k \to x,\ 
+\frac{x_k - x}{t_k} \to d
+\right\}.
+$$
+
+Intuition:
+
+- At an interior point, $T_C(x) = \mathbb{R}^n$: all small moves are allowed.  
+- At a boundary point, some directions are blocked; only directions that stay inside the set are feasible.
+
+Tangent cones describe feasible directions for methods such as projected gradient descent or interior-point algorithms.
+
+ 
+### Normal cones
+
+For a convex set $C$, the normal cone at a point $x \in C$ is
+$$
+N_C(x)
+=
+\left\{
+v : \langle v, y - x \rangle \le 0 \ \forall y \in C
+\right\}.
+$$
+
+Interpretation:
+
+- Every $v \in N_C(x)$ defines a supporting hyperplane to $C$ at $x$.  
+- At interior points, the normal cone is $\{0\}$.  
+- At boundary or corner points, it becomes a pointed cone of outward normals.
+
+A fundamental relationship ties tangent and normal cones together:
+$$
+N_C(x) = \big( T_C(x) \big)^\circ.
+$$
+
+Normal cones appear directly in first-order optimality conditions. For a constrained problem  
+$$
+\min_{x \in C} f(x),
+$$
+a point $x^*$ is optimal only if
+$$
+0 \in \nabla f(x^*) + N_C(x^*).
+$$
+This expresses a balance between the objective’s slope and the “pushback’’ from the constraint set.
+
+ 
+Cones,especially tangent and normal cones, are geometric tools that allow us to describe feasibility, optimality, and duality in convex optimization using directional information. They generalize the role that orthogonal complements play in linear algebra to nonlinear and constrained settings.
+
+
+## 4.7 Supporting Hyperplanes and Separation
+
+One of the most important geometric facts about convex sets is that they can be *supported* or *separated* by hyperplanes. These results show that convex sets always admit linear boundaries that describe their shape. Later, these ideas reappear in duality, subgradients, and the KKT conditions.
+
+### Supporting Hyperplane Theorem
+
+Let $C \subseteq \mathbb{R}^n$ be nonempty, closed, and convex, and let $x_0$ be a boundary point of $C$. Then there exists a nonzero vector $a$ such that
+
+$$
+a^\top x \le a^\top x_0 \qquad \forall x \in C.
+$$
+
+This means that the hyperplane
+
+$$
+a^\top x = a^\top x_0
+$$
+
+touches $C$ at $x_0$ but does not cut through it. The vector $a$ is normal to the hyperplane. Intuitively, a supporting hyperplane is like a flat board pressed against the edge of a convex object. Supporting hyperplanes will later correspond exactly to subgradients of convex functions.
+
+### Separating Hyperplane Theorem
+
+If $C$ and $D$ are nonempty, disjoint convex sets, then a hyperplane exists that separates them. That is, there are a nonzero vector $a$ and scalar $b$ such that
+
 $$
 a^\top x \le b \quad \forall x \in C,
 \qquad
-a^\top y \ge b \quad \forall y \in D~.
+a^\top y \ge b \quad \forall y \in D.
 $$
 
-Why do we care?
+The hyperplane $a^\top x = b$ places all points of $C$ on one side and all points of $D$ on the other. This is guaranteed purely by convexity. Separation is the geometric foundation of duality, where we attempt to separate the primal feasible region from violations of the constraints.
 
-- These theorems are the geometric heart of duality.
-- KKT conditions can be interpreted as existence of a supporting hyperplane that is simultaneously aligned with objective and constraints.
-- Subgradients of convex functions correspond to supporting hyperplanes of epigraphs.
+### Why This Matters for Optimisation
 
- 
-## 4.7 Feasible regions in convex optimisation
+These geometric results are central to convex optimisation:
 
-In convex optimisation, the feasible set is typically something like
-$$
-\{ x : g_i(x) \le 0,\ i=1,\dots,m,\ h_j(x)=0,\ j=1,\dots,p \}.
-$$
+- Subgradients correspond to supporting hyperplanes of the epigraph of a convex function.
+- Dual variables arise from separating infeasible points from the feasible region.
+- KKT conditions express the balance between the gradient of the objective and the normals of active constraints.
+- Projection onto convex sets is well-defined because convex sets admit supporting hyperplanes.
 
-- If each $g_i$ is convex and each $h_j$ is affine, then the feasible set is convex.
-- If $f$ is also convex, then the entire problem is a convex optimisation problem.
+Supporting and separating hyperplanes are therefore the geometric machinery behind optimality conditions and convex duality.
 
  

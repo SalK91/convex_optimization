@@ -1,5 +1,6 @@
 ### Current state
- 
+
+1. Convex Optimization - done upto and including chapter 12
 
 4. MIT 6.824: Distributed Systems:
    https://pdos.csail.mit.edu/6.824/schedule.html
