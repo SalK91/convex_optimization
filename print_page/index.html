@@ -2110,7 +2110,7 @@ L_c = \{\, x \in \mathbb{R}^n : f(x) = c \,\}.
 <h2 id="convex-13_calculus-32-jacobians">3.2  Jacobians<a class="headerlink" href="#convex-13_calculus-32-jacobians" title="Permanent link">¶</a></h2>
 <p>In optimization and machine learning, functions often map many inputs to many outputs for example, neural network layers, physical simulators, and vector-valued transformations. To understand how such functions change locally, we use the Jacobian matrix, which captures how each output responds to each input.</p>
 <h3 id="convex-13_calculus-from-derivative-to-gradient">From derivative to gradient<a class="headerlink" href="#convex-13_calculus-from-derivative-to-gradient" title="Permanent link">¶</a></h3>
-<p>For a scalar function <span class="arithmatex">\( f : \mathbb{R}^n \to \mathbb{R} \)</span>, differentiability means that near any point <span class="arithmatex">\( x \)</span>,
+<p>For a scalar function <script type="math/tex"> f : \mathbb{R}^n \to \mathbb{R} </script>, differentiability means that near any point <script type="math/tex"> x </script>,
 <script type="math/tex; mode=display">
 f(x + h) \approx f(x) + \nabla f(x)^\top h.
 </script>
@@ -2178,7 +2178,7 @@ Thus, locally, the nonlinear map <span class="arithmatex">\(F\)</span> behaves l
 </table>
 <p>The Jacobian is therefore a compact representation of local sensitivity. In optimization, Jacobians appear in gradient-based methods, backpropagation, implicit differentiation, and the analysis of constraints and dynamics.</p>
 <h2 id="convex-13_calculus-33-the-hessian-and-curvature">3.3 The Hessian and Curvature<a class="headerlink" href="#convex-13_calculus-33-the-hessian-and-curvature" title="Permanent link">¶</a></h2>
-<p>For a twice–differentiable function <span class="arithmatex">\( f : \mathbb{R}^n \to \mathbb{R} \)</span>, the Hessian matrix collects all second-order partial derivatives:
+<p>For a twice–differentiable function <script type="math/tex"> f : \mathbb{R}^n \to \mathbb{R} </script>, the Hessian matrix collects all second-order partial derivatives:
 <script type="math/tex; mode=display">
 \nabla^{2} f(x) \;=\;
 \begin{bmatrix}
@@ -2192,8 +2192,8 @@ Thus, locally, the nonlinear map <span class="arithmatex">\(F\)</span> behaves l
 <h3 id="convex-13_calculus-curvature-and-positive-definiteness">Curvature and positive definiteness<a class="headerlink" href="#convex-13_calculus-curvature-and-positive-definiteness" title="Permanent link">¶</a></h3>
 <p>The eigenvalues of the Hessian determine its geometric behavior:</p>
 <ul>
-<li>If <span class="arithmatex">\( \nabla^{2}f(x) \succeq 0 \)</span> (all eigenvalues nonnegative), the function is locally convex near <span class="arithmatex">\(x\)</span>.  </li>
-<li>If <span class="arithmatex">\( \nabla^{2}f(x) \succ 0 \)</span>, the surface curves upward in all directions, guaranteeing local (and for convex functions, global) uniqueness of the minimizer.  </li>
+<li>If <script type="math/tex"> \nabla^{2}f(x) \succeq 0 </script> (all eigenvalues nonnegative), the function is locally convex near <span class="arithmatex">\(x\)</span>.  </li>
+<li>If <script type="math/tex"> \nabla^{2}f(x) \succ 0 </script>, the surface curves upward in all directions, guaranteeing local (and for convex functions, global) uniqueness of the minimizer.  </li>
 <li>If the Hessian has both positive and negative eigenvalues, the point is a saddle: some directions curve up, others curve down.</li>
 </ul>
 <p>Thus, curvature is directly encoded in the spectrum of the Hessian. Large eigenvalues correspond to steep curvature; small eigenvalues correspond to gently sloping or flat regions.</p>
@@ -2250,7 +2250,7 @@ f(x)
 </script>
 The quadratic term measures how the gradient itself changes with direction. The behavior of this term depends on the Hessian:</p>
 <ul>
-<li>If <span class="arithmatex">\( \nabla^2 f(x) \succeq 0 \)</span>, the quadratic term is nonnegative and the function curves upward—locally bowl-shaped.</li>
+<li>If <script type="math/tex"> \nabla^2 f(x) \succeq 0 </script>, the quadratic term is nonnegative and the function curves upward—locally bowl-shaped.</li>
 <li>If the Hessian has both positive and negative eigenvalues, the function bends up in some directions and down in others—characteristic of saddle points.</li>
 </ul>
 <h3 id="convex-13_calculus-role-in-optimization-algorithms">Role in optimization algorithms<a class="headerlink" href="#convex-13_calculus-role-in-optimization-algorithms" title="Permanent link">¶</a></h3>
@@ -2263,7 +2263,7 @@ which balances descent direction and local curvature. Trust-region and quasi-New
 <h2 id="convex-13_calculus-35-smoothness-and-strong-convexity">3.5 Smoothness and Strong Convexity<a class="headerlink" href="#convex-13_calculus-35-smoothness-and-strong-convexity" title="Permanent link">¶</a></h2>
 <p>In optimization, the behavior of a function’s curvature strongly influences how algorithms perform. Two fundamental properties Lipschitz smoothness and strong convexity describe how rapidly the gradient can change and how much curvature the function must have.</p>
 <h3 id="convex-13_calculus-lipschitz-continuous-gradients-l-smoothness">Lipschitz continuous gradients (L-smoothness)<a class="headerlink" href="#convex-13_calculus-lipschitz-continuous-gradients-l-smoothness" title="Permanent link">¶</a></h3>
-<p>A differentiable function <span class="arithmatex">\( f \)</span> has an <span class="arithmatex">\(L\)</span>-Lipschitz continuous gradient if
+<p>A differentiable function <script type="math/tex"> f </script> has an <span class="arithmatex">\(L\)</span>-Lipschitz continuous gradient if
 <script type="math/tex; mode=display">
 \|\nabla f(x) - \nabla f(y)\| \le L \|x - y\| \qquad \forall x, y.
 </script>
@@ -2284,7 +2284,7 @@ This inequality states that every <span class="arithmatex">\(L\)</span>-smooth f
 </script>
 ensures that each update decreases the function value for convex objectives. In machine learning, the constant <span class="arithmatex">\(L\)</span> effectively controls how large the learning rate can be before training becomes unstable.</p>
 <h3 id="convex-13_calculus-strong-convexity">Strong convexity<a class="headerlink" href="#convex-13_calculus-strong-convexity" title="Permanent link">¶</a></h3>
-<p>A differentiable function <span class="arithmatex">\( f \)</span> is <span class="arithmatex">\( \mu \)</span>-strongly convex if, for some <span class="arithmatex">\( \mu &gt; 0 \)</span>,
+<p>A differentiable function <script type="math/tex"> f </script> is <script type="math/tex"> \mu </script>-strongly convex if, for some <script type="math/tex"> \mu > 0 </script>,
 <script type="math/tex; mode=display">
 f(y)
 \ge
@@ -2318,18 +2318,19 @@ Smoothness prevents the curvature from being too large, while strong convexity p
 <p>Most optimization problems are constrained. The set of points that satisfy these constraints the feasible region determines where an algorithm is allowed to search. In many machine learning and convex optimization problems, this feasible region is a convex set. Convex sets have a simple but powerful geometric property: any line segment between two feasible points remains entirely within the set. This structure eliminates irregularities and makes optimization far more predictable.</p>
 <p>This chapter develops the geometric foundations needed to reason about convexity. We introduce affine sets, convex sets, hyperplanes, halfspaces, polyhedra, and supporting hyperplanes. These objects form the geometric language of convex analysis. Understanding their structure is essential for interpreting constraints, proving optimality conditions, and designing efficient algorithms for convex optimization.</p>
 <h2 id="convex-14_convexsets-41-convex-sets">4.1 Convex sets<a class="headerlink" href="#convex-14_convexsets-41-convex-sets" title="Permanent link">¶</a></h2>
-<p>A set <span class="arithmatex">\( C \subseteq \mathbb{R}^n \)</span> is convex if for any two points <span class="arithmatex">\( x, y \in C \)</span> and any <span class="arithmatex">\( \theta \in [0,1] \)</span>,
+<p>A set <script type="math/tex"> C \subseteq \mathbb{R}^n </script> is convex if for any two points <script type="math/tex"> x, y \in C </script> and any <script type="math/tex"> \theta \in [0,1] </script>,
 <script type="math/tex; mode=display">
 \theta x + (1 - \theta) y \in C.
 </script>
 That is, the entire line segment between <span class="arithmatex">\(x\)</span> and <span class="arithmatex">\(y\)</span> lies inside the set. Convex sets have no “holes” or “indentations,” and this geometric regularity is what makes optimization over them tractable.</p>
 <h3 id="convex-14_convexsets-examples">Examples<a class="headerlink" href="#convex-14_convexsets-examples" title="Permanent link">¶</a></h3>
 <ul>
-<li>Affine subspaces: <span class="arithmatex">\( \{ x : Ax = b \} \)</span>.  </li>
-<li>Halfspaces: <span class="arithmatex">\( \{ x : a^\top x \le b \} \)</span>.  </li>
-<li>Euclidean balls: <span class="arithmatex">\( \{ x : \|x\|_2 \le r \} \)</span>.  </li>
-<li><span class="arithmatex">\( \ell_\infty \)</span> balls (axis-aligned boxes): <span class="arithmatex">\( \{ x : \|x\|_\infty \le r \} \)</span>.  </li>
-<li>Probability simplex: <span class="arithmatex">\( \{ x \in \mathbb{R}^n : x \ge 0, \ \sum_i x_i = 1 \} \)</span>.  </li>
+<li>Affine subspaces: <script type="math/tex"> \{ x : Ax = b \} </script>.  </li>
+<li>Halfspaces: <script type="math/tex"> \{ x : a^\top x \le b \} </script>.  </li>
+<li>Euclidean balls: <script type="math/tex"> \{ x : \|x\|_2 \le r \} </script>.  </li>
+<li>
+<script type="math/tex"> \ell_\infty </script> balls (axis-aligned boxes): <script type="math/tex"> \{ x : \|x\|_\infty \le r \} </script>.  </li>
+<li>Probability simplex: <script type="math/tex"> \{ x \in \mathbb{R}^n : x \ge 0, \ \sum_i x_i = 1 \} </script>.  </li>
 </ul>
 <p>A set fails to be convex whenever some segment between two feasible points leaves the set—for example, a crescent or an annulus.</p>
 <h2 id="convex-14_convexsets-42-affine-sets-hyperplanes-and-halfspaces">4.2 Affine sets, hyperplanes, and halfspaces<a class="headerlink" href="#convex-14_convexsets-42-affine-sets-hyperplanes-and-halfspaces" title="Permanent link">¶</a></h2>
@@ -2349,7 +2350,7 @@ Hyperplanes act as the “flat boundaries” of higher-dimensional space and are
 </script>
 Halfspaces are convex and serve as basic local approximations to general convex sets.</p>
 <h2 id="convex-14_convexsets-43-convex-combinations-and-convex-hulls">4.3 Convex combinations and convex hulls<a class="headerlink" href="#convex-14_convexsets-43-convex-combinations-and-convex-hulls" title="Permanent link">¶</a></h2>
-<p>A convex combination of points <span class="arithmatex">\( x_1, \dots, x_k \)</span> is a weighted average
+<p>A convex combination of points <script type="math/tex"> x_1, \dots, x_k </script> is a weighted average
 <script type="math/tex; mode=display">
 \sum_{i=1}^k \theta_i x_i, 
 \qquad
@@ -2370,12 +2371,12 @@ P = \{ x : Ax \le b \}.
 Polyhedra are always convex; they may be bounded or unbounded.</p>
 <p>If a polyhedron is also bounded, it is called a polytope. Polytopes include familiar shapes such as cubes, simplices, and more general polytopes that arise as feasible regions in linear programs.</p>
 <h2 id="convex-14_convexsets-45-extreme-points">4.5 Extreme points<a class="headerlink" href="#convex-14_convexsets-45-extreme-points" title="Permanent link">¶</a></h2>
-<p>Let <span class="arithmatex">\( C \)</span> be a convex set. A point <span class="arithmatex">\(x \in C\)</span> is an extreme point if it cannot be written as a nontrivial convex combination of other points in the set. Formally, if
+<p>Let <script type="math/tex"> C </script> be a convex set. A point <span class="arithmatex">\(x \in C\)</span> is an extreme point if it cannot be written as a nontrivial convex combination of other points in the set. Formally, if
 <script type="math/tex; mode=display">
 x = \theta y + (1 - \theta) z,
 \qquad 0 < \theta < 1, \qquad y, z \in C,
 </script>
-implies <span class="arithmatex">\( y = z = x \)</span>.</p>
+implies <script type="math/tex"> y = z = x </script>.</p>
 <p>Geometrically, extreme points are the “corners” of a convex set. For polytopes, the extreme points are exactly the vertices. Extreme points are essential in optimization because many convex problems—such as linear programs—achieve their optima at extreme points of the feasible region. This geometric fact underlies simplex-type algorithms and supports duality theory.</p>
 <h2 id="convex-14_convexsets-46-cones">4.6 Cones<a class="headerlink" href="#convex-14_convexsets-46-cones" title="Permanent link">¶</a></h2>
 <p>Cones generalize the idea of “directions” in geometry. They capture sets that are closed under nonnegative scaling and play a central role in convex analysis and constrained optimization.</p>
@@ -2391,7 +2392,7 @@ A cone is convex if it is also closed under addition:
 x, y \in K \quad\Longrightarrow\quad x + y \in K.
 </script>
 </p>
-<p>Cones are not required to contain negative multiples of a vector, so they are generally not subspaces. Instead of extreme points, cones have extreme rays, which represent directions that cannot be formed as positive combinations of other rays. For example, in the nonnegative orthant <span class="arithmatex">\( \mathbb{R}^n_{\ge 0} \)</span>, each coordinate axis direction is an extreme ray.</p>
+<p>Cones are not required to contain negative multiples of a vector, so they are generally not subspaces. Instead of extreme points, cones have extreme rays, which represent directions that cannot be formed as positive combinations of other rays. For example, in the nonnegative orthant <script type="math/tex"> \mathbb{R}^n_{\ge 0} </script>, each coordinate axis direction is an extreme ray.</p>
 <h3 id="convex-14_convexsets-conic-hull">Conic hull<a class="headerlink" href="#convex-14_convexsets-conic-hull" title="Permanent link">¶</a></h3>
 <p>Given any set <span class="arithmatex">\(S\)</span>, its conic hull is the set of all conic combinations:
 <script type="math/tex; mode=display">
@@ -2718,9 +2719,9 @@ They provide:</p>
         </head><body><h1 id="chapter-6-nonsmooth-convex-optimization-subgradients">Chapter 6: Nonsmooth Convex Optimization – Subgradients<a class="headerlink" href="#convex-16_subgradients-chapter-6-nonsmooth-convex-optimization-subgradients" title="Permanent link">¶</a></h1>
 <p>Many important convex objectives in machine learning are not differentiable everywhere. Examples include:</p>
 <ul>
-<li>the <span class="arithmatex">\( \ell_1 \)</span> norm <span class="arithmatex">\( \|x\|_1 = \sum_i |x_i| \)</span> (nondifferentiable at zero),</li>
-<li>pointwise-max functions such as <span class="arithmatex">\( f(x) = \max_i (a_i^\top x + b_i) \)</span>,</li>
-<li>the hinge loss <span class="arithmatex">\( \max\{0,\, 1 - y w^\top x\} \)</span> used in SVMs,</li>
+<li>the <script type="math/tex"> \ell_1 </script> norm <script type="math/tex"> \|x\|_1 = \sum_i |x_i| </script> (nondifferentiable at zero),</li>
+<li>pointwise-max functions such as <script type="math/tex"> f(x) = \max_i (a_i^\top x + b_i) </script>,</li>
+<li>the hinge loss <script type="math/tex"> \max\{0,\, 1 - y w^\top x\} </script> used in SVMs,</li>
 <li>regularisers like total variation or indicator functions of convex sets.</li>
 </ul>
 <p>Although these functions have “kinks”, they remain convex—and convexity guarantees the existence of supporting hyperplanes at every point. Subgradients formalise this idea and allow optimisation algorithms to operate even when no derivative exists.</p>
@@ -2746,7 +2747,8 @@ f(y) \ge f(x) + g^\top (y - x) \quad \text{for all } y.
 </p>
 <p>Properties:</p>
 <ul>
-<li><span class="arithmatex">\( \partial f(x) \)</span> is always a nonempty convex set (if <span class="arithmatex">\(x\)</span> is in the interior of the domain).</li>
+<li>
+<script type="math/tex"> \partial f(x) </script> is always a nonempty convex set (if <span class="arithmatex">\(x\)</span> is in the interior of the domain).</li>
 <li>If <span class="arithmatex">\(f\)</span> is differentiable at <span class="arithmatex">\(x\)</span>, then<br>
 <script type="math/tex; mode=display">
   \partial f(x) = \{\nabla f(x)\}.
@@ -2769,7 +2771,7 @@ Then:</p>
 </li>
 </ul>
 <p>At the kink, any slope between <span class="arithmatex">\(-1\)</span> and <span class="arithmatex">\(1\)</span> supports the graph from below.</p>
-<h3 id="convex-16_subgradients-the-ell_1-norm">The <span class="arithmatex">\( \ell_1 \)</span> norm<a class="headerlink" href="#convex-16_subgradients-the-ell_1-norm" title="Permanent link">¶</a></h3>
+<h3 id="convex-16_subgradients-the-ell_1-norm">The <script type="math/tex"> \ell_1 </script> norm<a class="headerlink" href="#convex-16_subgradients-the-ell_1-norm" title="Permanent link">¶</a></h3>
 <p>For <span class="arithmatex">\(f(x) = \|x\|_1 = \sum_i |x_i|\)</span>:</p>
 <div class="arithmatex">\[
 g \in \partial \|x\|_1
@@ -2821,7 +2823,7 @@ f(x) = \max_{i=1,\dots,k} (a_i^\top x + b_i).
 <ul>
 <li>At optimality, no subgradient points to a direction that would decrease <span class="arithmatex">\(f\)</span>.</li>
 <li>Geometrically, the supporting hyperplane at <span class="arithmatex">\(x^\star\)</span> is horizontal, forming the flat bottom of the convex bowl.</li>
-<li>This generalises the smooth condition <span class="arithmatex">\( \nabla f(x^\star)=0 \)</span>.</li>
+<li>This generalises the smooth condition <script type="math/tex"> \nabla f(x^\star)=0 </script>.</li>
 </ul>
 <h2 id="convex-16_subgradients-64-subgradient-calculus-useful-rules">6.4 Subgradient Calculus (Useful Rules)<a class="headerlink" href="#convex-16_subgradients-64-subgradient-calculus-useful-rules" title="Permanent link">¶</a></h2>
 <p>Subgradients satisfy powerful calculus rules that allow us to work with complex functions. Let <span class="arithmatex">\(f\)</span> and <span class="arithmatex">\(g\)</span> be convex.</p>
@@ -2857,7 +2859,7 @@ x_{k+1} = x_k - \alpha_k g_k,
 <ul>
 <li>Requires only a subgradient (no differentiability needed).</li>
 <li>Works for any convex function.</li>
-<li>Stepsizes must typically decrease (e.g. <span class="arithmatex">\( \alpha_k = c/\sqrt{k} \)</span>, <span class="arithmatex">\( \alpha_k = c/k \)</span>).</li>
+<li>Stepsizes must typically decrease (e.g. <script type="math/tex"> \alpha_k = c/\sqrt{k} </script>, <script type="math/tex"> \alpha_k = c/k </script>).</li>
 <li>Guaranteed convergence for convex <span class="arithmatex">\(f\)</span>, but generally slow.</li>
 </ul>
 <h3 id="convex-16_subgradients-convergence-rates-worst-case">Convergence rates (worst case)<a class="headerlink" href="#convex-16_subgradients-convergence-rates-worst-case" title="Permanent link">¶</a></h3>
@@ -2874,7 +2876,8 @@ x_{k+1} = x_k - \alpha_k g_k,
 <p>Many training objectives behave nonsmoothly:</p>
 <ul>
 <li>SVM hinge loss  </li>
-<li><span class="arithmatex">\( \ell_1 \)</span>-regularised models (sparse optimisation)  </li>
+<li>
+<script type="math/tex"> \ell_1 </script>-regularised models (sparse optimisation)  </li>
 <li>ReLUs and piecewise-linear networks  </li>
 <li>Projections onto convex sets  </li>
 </ul>
@@ -2893,7 +2896,8 @@ f(x) + \frac{1}{2\alpha}\|x-y\|^2
 </p>
 <p>Proximal algorithms (e.g., ISTA, FISTA, ADMM) can handle nonsmooth terms like:</p>
 <ul>
-<li><span class="arithmatex">\( \ell_1 \)</span> regularisation,</li>
+<li>
+<script type="math/tex"> \ell_1 </script> regularisation,</li>
 <li>indicator functions of convex sets,</li>
 <li>total variation penalties.</li>
 </ul>
@@ -2901,9 +2905,9 @@ f(x) + \frac{1}{2\alpha}\|x-y\|^2
 <h3 id="convex-16_subgradients-2-smoothing-techniques">(2) Smoothing techniques<a class="headerlink" href="#convex-16_subgradients-2-smoothing-techniques" title="Permanent link">¶</a></h3>
 <p>Many nonsmooth convex functions have smooth approximations:</p>
 <ul>
-<li>Replace <span class="arithmatex">\( |t| \)</span> with the Huber loss.</li>
-<li>Replace <span class="arithmatex">\( \max\{0,z\} \)</span> with softplus.</li>
-<li>Replace <span class="arithmatex">\( \max_i(a_i^\top x) \)</span> with log-sum-exp, a smooth convex approximation.</li>
+<li>Replace <script type="math/tex"> |t| </script> with the Huber loss.</li>
+<li>Replace <script type="math/tex"> \max\{0,z\} </script> with softplus.</li>
+<li>Replace <script type="math/tex"> \max_i(a_i^\top x) </script> with log-sum-exp, a smooth convex approximation.</li>
 </ul>
 <p>Smoothing preserves convexity while allowing the use of fast gradient methods.</p>
 <h2 id="convex-16_subgradients-summary">Summary<a class="headerlink" href="#convex-16_subgradients-summary" title="Permanent link">¶</a></h2>
@@ -3111,7 +3115,7 @@ where <span class="arithmatex">\(\lambda = (\lambda_1,\dots,\lambda_p)\)</span> 
 </ol>
 <p>Geometric meaning:</p>
 <ul>
-<li>The feasible set <span class="arithmatex">\( \{x : h_j(x)=0\} \)</span> is typically a smooth manifold.</li>
+<li>The feasible set <script type="math/tex"> \{x : h_j(x)=0\} </script> is typically a smooth manifold.</li>
 <li>At an optimum, the gradient of the objective must be orthogonal to all feasible directions.</li>
 <li>The multipliers <span class="arithmatex">\(\lambda_j^*\)</span> weight the constraint normals to exactly cancel the objective’s gradient.</li>
 </ul>
@@ -3136,8 +3140,10 @@ L(x,\lambda,\mu)
 </script>
 with:</p>
 <ul>
-<li><span class="arithmatex">\( \lambda_j \in \mathbb{R} \)</span> (equality multipliers),</li>
-<li><span class="arithmatex">\( \mu_i \ge 0 \)</span> (inequality multipliers).</li>
+<li>
+<script type="math/tex"> \lambda_j \in \mathbb{R} </script> (equality multipliers),</li>
+<li>
+<script type="math/tex"> \mu_i \ge 0 </script> (inequality multipliers).</li>
 </ul>
 <p>A point <span class="arithmatex">\(x^*\)</span> with multipliers <span class="arithmatex">\((\lambda^*,\mu^*)\)</span> satisfies the KKT conditions:</p>
 <h3 id="convex-17_kkt-1-primal-feasibility">1. Primal feasibility<a class="headerlink" href="#convex-17_kkt-1-primal-feasibility" title="Permanent link">¶</a></h3>
@@ -3818,11 +3824,10 @@ b = Ax + \varepsilon,\qquad \varepsilon \sim \mathcal{N}(0,\sigma^2 I).
         })
         </script>
         </head><body><h1 id="chapter-12-algorithms-for-convex-optimization">Chapter 12: Algorithms for Convex Optimization<a class="headerlink" href="#convex-19_optimizationalgo-chapter-12-algorithms-for-convex-optimization" title="Permanent link">¶</a></h1>
-<p>In the previous chapters, we built the mathematical foundations of convex optimization — convex sets, convex functions, gradients, subgradients, KKT conditions, and duality. Now we answer the practical question: How do we actually solve convex optimization problems in practice?</p>
+<p>In the previous chapters, we built the mathematical foundations of convex optimization: convex sets, convex functions, gradients, subgradients, KKT conditions, and duality. Now we answer the practical question: How do we actually solve convex optimization problems in practice?</p>
 <p>This chapter now serves as the algorithmic backbone of the book. It bridges theoretical convex analysis (Chapters 3–11) with the practical numerical methods that solve those problems. Each algorithm here can be seen as a computational lens on a convex geometry concept — gradients as supporting planes, Hessians as curvature maps, and proximal maps as projection operators. Later chapters (13–15) extend these ideas to constrained, stochastic, and large-scale environments.</p>
 <h2 id="convex-19_optimizationalgo-121-problem-classes-vs-method-classes">12.1 Problem classes vs method classes<a class="headerlink" href="#convex-19_optimizationalgo-121-problem-classes-vs-method-classes" title="Permanent link">¶</a></h2>
-<p>Different convex problems call for different algorithmic structures.<br>
-Here is the broad landscape:</p>
+<p>Different convex problems call for different algorithmic structures. Here is the broad landscape:</p>
 <table>
 <thead>
 <tr>
@@ -3860,7 +3865,6 @@ Here is the broad landscape:</p>
 </tbody>
 </table>
 <h2 id="convex-19_optimizationalgo-122-first-order-methods-gradient-descent">12.2 First-order methods: Gradient descent<a class="headerlink" href="#convex-19_optimizationalgo-122-first-order-methods-gradient-descent" title="Permanent link">¶</a></h2>
-<h3 id="convex-19_optimizationalgo-1221-setting">12.2.1 Setting<a class="headerlink" href="#convex-19_optimizationalgo-1221-setting" title="Permanent link">¶</a></h3>
 <p>We solve
 <script type="math/tex; mode=display">
 \min_x f(x),
@@ -3869,23 +3873,27 @@ where <span class="arithmatex">\(f\)</span> is convex, differentiable, and (idea
 <script type="math/tex; mode=display">
 \|\nabla f(x) - \nabla f(y)\|_2 \le L \|x-y\|_2 \quad \text{for all } x,y.
 </script>
-Smoothness lets us control step sizes.</p>
-<h3 id="convex-19_optimizationalgo-1222-algorithm">12.2.2 Algorithm<a class="headerlink" href="#convex-19_optimizationalgo-1222-algorithm" title="Permanent link">¶</a></h3>
+</p>
+<blockquote>
+<p>Smoothness lets us control step sizes.</p>
+</blockquote>
 <p>Gradient descent iterates
 <script type="math/tex; mode=display">
 x_{k+1} = x_k - \alpha_k \nabla f(x_k),
 </script>
-where <span class="arithmatex">\(\alpha_k&gt;0\)</span> is the step size (also called learning rate in machine learning). A common choice is a constant <span class="arithmatex">\(\alpha_k = 1/L\)</span> when <span class="arithmatex">\(L\)</span> is known, or a backtracking line search when it is not.</p>
+where <span class="arithmatex">\(\alpha_k&gt;0\)</span> is the step size (also called learning rate in machine learning). Typical choices:</p>
+<ul>
+<li>constant <span class="arithmatex">\(\alpha_k = 1/L\)</span> when <span class="arithmatex">\(L\)</span> is known,</li>
+<li>backtracking line search when <span class="arithmatex">\(L\)</span> is unknown,</li>
+<li>diminishing step sizes in some settings.</li>
+</ul>
 <blockquote>
-<p>Derivation: Around <span class="arithmatex">\(x_t\)</span>, we approximate <span class="arithmatex">\(f\)</span> using its Taylor expansion:</p>
+<p>Derivation: </p>
+<p>Around <span class="arithmatex">\(x_t\)</span>, we can approximate <span class="arithmatex">\(f\)</span> using its Taylor expansion:</p>
 <div class="arithmatex">\[
 f(x) \approx f(x_t) + \langle \nabla f(x_t), x - x_t \rangle.
 \]</div>
-<ul>
-<li>We assume <span class="arithmatex">\(f\)</span> behaves approximately like its tangent plane near <span class="arithmatex">\(x_t\)</span>.  </li>
-<li>If we were to minimize just this linear model, we would move infinitely far in the direction of steepest descent <span class="arithmatex">\(-\nabla f(x_t)\)</span>, which is not realistic or stable.</li>
-</ul>
-<p>This motivates adding a locality restriction — we trust the linear approximation near <span class="arithmatex">\(x_t\)</span>, not globally. To prevent taking arbitrarily large steps, we add a quadratic penalty for moving away from <span class="arithmatex">\(x_t\)</span>:</p>
+<p>We assume <span class="arithmatex">\(f\)</span> behaves approximately like its tangent plane near <span class="arithmatex">\(x_t\)</span>.  But tf we were to minimize just this linear model, we would move infinitely far in the direction of steepest descent <span class="arithmatex">\(-\nabla f(x_t)\)</span>, which is not realistic or stable. This motivates adding a locality restriction: we trust the linear approximation near <span class="arithmatex">\(x_t\)</span>, not globally. To prevent taking arbitrarily large steps, we add a quadratic penalty for moving away from <span class="arithmatex">\(x_t\)</span>:</p>
 <div class="arithmatex">\[
 f(x) \approx f(x_t) + \langle \nabla f(x_t), x - x_t \rangle + \frac{1}{2\eta} \|x - x_t\|^2,
 \]</div>
@@ -3912,30 +3920,22 @@ x_{t+1} = \arg\min_{x \in \mathcal{X}} \Big[ f(x_t) + \langle \nabla f(x_t), x -
 x_{t+1} = x_t - \eta \nabla f(x_t)
 \]</div>
 </blockquote>
-<h3 id="convex-19_optimizationalgo-1223-geometric-meaning">12.2.3 Geometric meaning<a class="headerlink" href="#convex-19_optimizationalgo-1223-geometric-meaning" title="Permanent link">¶</a></h3>
-<p>From Chapter 3, the first-order Taylor model is
-<script type="math/tex; mode=display">
-f(x + d) \approx f(x) + \nabla f(x)^\top d.
-</script>
-This is minimised (under a step length constraint) by taking <span class="arithmatex">\(d\)</span> in the direction <span class="arithmatex">\(-\nabla f(x)\)</span>. So gradient descent is just “take a cautious step downhill”.</p>
-<h3 id="convex-19_optimizationalgo-1224-convergence">12.2.4 Convergence<a class="headerlink" href="#convex-19_optimizationalgo-1224-convergence" title="Permanent link">¶</a></h3>
-<p>For convex, <span class="arithmatex">\(L\)</span>-smooth <span class="arithmatex">\(f\)</span>, gradient descent with a suitable fixed step size satisfies
+<p>Convergence: For convex, <span class="arithmatex">\(L\)</span>-smooth <span class="arithmatex">\(f\)</span>, gradient descent with a suitable fixed step size satisfies
 <script type="math/tex; mode=display">
 f(x_k) - f^\star = O\!\left(\frac{1}{k}\right),
 </script>
 where <span class="arithmatex">\(f^\star\)</span> is the global minimum. This <span class="arithmatex">\(O(1/k)\)</span> sublinear rate is slow compared to second-order methods, but each step is extremely cheap: you only need <span class="arithmatex">\(\nabla f(x_k)\)</span>.</p>
-<h3 id="convex-19_optimizationalgo-1225-when-to-use-gradient-descent">12.2.5 When to use gradient descent<a class="headerlink" href="#convex-19_optimizationalgo-1225-when-to-use-gradient-descent" title="Permanent link">¶</a></h3>
+<p>When to use gradient descent:</p>
 <ul>
-<li>Problems with millions of variables (large-scale ML).</li>
-<li>You can afford many cheap iterations.</li>
-<li>You only have access to gradients (or stochastic gradients).</li>
-<li>You do not need very high precision.</li>
+<li>High-dimensional smooth convex problems (e.g. large-scale logistic regression).</li>
+<li>You can compute gradients cheaply.</li>
+<li>You only need moderate accuracy.</li>
+<li>Memory constraints rule out storing or factoring Hessians.</li>
 </ul>
-<p>Gradient descent is the baseline first-order method. But we can do better.</p>
 <h2 id="convex-19_optimizationalgo-123-accelerated-first-order-methods">12.3 Accelerated first-order methods<a class="headerlink" href="#convex-19_optimizationalgo-123-accelerated-first-order-methods" title="Permanent link">¶</a></h2>
 <p>Plain gradient descent has an <span class="arithmatex">\(O(1/k)\)</span> rate for smooth convex problems. Remarkably, we can do better — and in fact, provably optimal — by adding <em>momentum</em>.</p>
 <h3 id="convex-19_optimizationalgo-1231-nesterov-acceleration">12.3.1 Nesterov acceleration<a class="headerlink" href="#convex-19_optimizationalgo-1231-nesterov-acceleration" title="Permanent link">¶</a></h3>
-<p>Nesterov’s accelerated gradient method modifies the update using a momentum-like extrapolation. One common presentation is:</p>
+<p>Nesterov’s accelerated gradient method modifies the update using a momentum-like extrapolation. One common form of Nesterov acceleration uses two sequences <span class="arithmatex">\(x_k\)</span> and <span class="arithmatex">\(y_k\)</span>:</p>
 <ol>
 <li>Maintain two sequences <span class="arithmatex">\(x_k\)</span> and <span class="arithmatex">\(y_k\)</span>.</li>
 <li>Take a gradient step from <span class="arithmatex">\(y_k\)</span>:
@@ -3949,28 +3949,24 @@ where <span class="arithmatex">\(f^\star\)</span> is the global minimum. This <s
    </script>
 </li>
 </ol>
-<p>The extra <span class="arithmatex">\(\beta_k\)</span> term “looks ahead,” helping the method exploit curvature better than plain gradient descent.</p>
-<h3 id="convex-19_optimizationalgo-1232-optimal-first-order-rate">12.3.2 Optimal first-order rate<a class="headerlink" href="#convex-19_optimizationalgo-1232-optimal-first-order-rate" title="Permanent link">¶</a></h3>
-<p>For smooth convex <span class="arithmatex">\(f\)</span>, accelerated gradient achieves
+<p>The extra momentum term <span class="arithmatex">\(\beta_k (x_{k+1}-x_k)\)</span> uses past iterates to “look ahead” and can significantly accelerate convergence.</p>
+<p>Convergece: For smooth convex <span class="arithmatex">\(f\)</span>, accelerated gradient achieves
 <script type="math/tex; mode=display">
 f(x_k) - f^\star = O\!\left(\frac{1}{k^2}\right),
 </script>
-which is <em>optimal</em> for any algorithm that uses only gradient information and not higher derivatives. In other words, you cannot beat <span class="arithmatex">\(O(1/k^2)\)</span> in the worst case using only first-order oracle calls.</p>
-<h3 id="convex-19_optimizationalgo-1233-when-to-use-acceleration">12.3.3 When to use acceleration<a class="headerlink" href="#convex-19_optimizationalgo-1233-when-to-use-acceleration" title="Permanent link">¶</a></h3>
+which is <em>optimal</em> for any algorithm that uses only gradient information and not higher derivatives.</p>
 <ul>
-<li>Same setting as gradient descent (large-scale smooth convex problems),</li>
-<li>but you want to converge in fewer iterations.</li>
-<li>You can tolerate a little more instability/parameter tuning (acceleration can overshoot if step sizes are not chosen carefully).</li>
+<li>Acceleration is effective for well-behaved smooth convex problems.</li>
+<li>It can be more sensitive to step size and noise than plain gradient descent.</li>
+<li>Variants such as FISTA apply acceleration in the composite setting <span class="arithmatex">\(f + R\)</span>.</li>
 </ul>
-<p>Acceleration is the default upgrade from vanilla gradient descent in many smooth convex machine learning problems.</p>
-<p>The convergence of gradient descent depends strongly on the geometry of the level sets of the objective function. When these level sets are poorly conditioned—that is, highly anisotropic or elongated (not spherical)—the gradient directions tend to oscillate across narrow valleys, leading to zig-zag behavior and slow convergence.</p>
-<p>In contrast, when the level sets are well-conditioned (approximately spherical), gradient descent progresses efficiently toward the minimum. Thus, the efficiency of gradient-based methods is governed by how aspherical (anisotropic) the level sets are, which is directly related to the condition number of the Hessian.</p>
+<blockquote>
+<p>The convergence of gradient descent depends strongly on the geometry of the level sets of the objective function. When these level sets are poorly conditioned—that is, highly anisotropic or elongated (not spherical) the gradient directions tend to oscillate across narrow valleys, leading to zig-zag behavior and slow convergence. In contrast, when the level sets are well-conditioned (approximately spherical), gradient descent progresses efficiently toward the minimum. Thus, the efficiency of gradient-based methods is governed by how aspherical (anisotropic) the level sets are, which is directly related to the condition number of the Hessian.</p>
+</blockquote>
 <h2 id="convex-19_optimizationalgo-124-steepest-descent-method">12.4 Steepest Descent Method<a class="headerlink" href="#convex-19_optimizationalgo-124-steepest-descent-method" title="Permanent link">¶</a></h2>
 <p>The steepest descent method generalizes gradient descent by depending on the choice of norm used to measure step size or direction. It finds the direction of <em>maximum decrease</em> of the objective function under a unit norm constraint.</p>
 <blockquote>
-<p>The norm defines the “geometry” of optimization.
-Gradient descent is steepest descent under the Euclidean norm.
-Changing the norm changes what “steepest” means, and can greatly affect convergence, especially for ill-conditioned or anisotropic problems.</p>
+<p>The norm defines the “geometry” of optimization.cGradient descent is steepest descent under the Euclidean norm. Changing the norm changes what “steepest” means, and can greatly affect convergence, especially for ill-conditioned or anisotropic problems.The norm in steepest descent determines the geometry of the descent and choosing an appropriate norm effectively makes the level sets of the function more rounded (more isotropic), which greatly improves convergence.</p>
 </blockquote>
 <p>At a point <span class="arithmatex">\(x\)</span>, and for a chosen norm <span class="arithmatex">\(|\cdot|\)</span>:</p>
 <div class="arithmatex">\[
@@ -4090,9 +4086,9 @@ The dual norm is <span class="arithmatex">\(|y|_* = (y^T P^{-1} y)^{1/2}\)</span
 <h3 id="convex-19_optimizationalgo-c-ell_1-norm">(c) <span class="arithmatex">\(\ell_1\)</span>-Norm<a class="headerlink" href="#convex-19_optimizationalgo-c-ell_1-norm" title="Permanent link">¶</a></h3>
 <div class="arithmatex">\[
 \Delta x_{\text{nsd}} = -e_i, \quad i = \arg\max_j \left|\frac{\partial f}{\partial x_j}\right|
-$$
-and
-$$
+\]</div>
+<p>and</p>
+<div class="arithmatex">\[
 \Delta x_{\text{sd}} = -|\nabla f(x)|_\infty e_i
 \]</div>
 <p>The step moves along the coordinate with the largest gradient component, resembling a coordinate descent update.</p>
@@ -4104,154 +4100,134 @@ The <span class="arithmatex">\(\ell_1\)</span>-unit ball is a diamond; its corne
 <li>In quadratic norms: the unit ball is an ellipsoid → the steepest direction follows the metric-adjusted gradient.</li>
 </ul>
 <p>Hence, the norm defines the geometry of what “steepest” means.</p>
-<h2 id="convex-19_optimizationalgo-125-conjugate-gradient-method-efficient-optimization-for-quadratic-objectives">12.5 Conjugate Gradient Method — Efficient Optimization for Quadratic Objectives<a class="headerlink" href="#convex-19_optimizationalgo-125-conjugate-gradient-method-efficient-optimization-for-quadratic-objectives" title="Permanent link">¶</a></h2>
-<p>Gradient descent can be slow when the objective’s level sets are highly elongated, a symptom of ill-conditioning in the Hessian. For quadratic functions of the form</p>
+<h2 id="convex-19_optimizationalgo-125-conjugate-gradient-method-fast-optimization-for-quadratic-objectives">12.5 Conjugate Gradient Method — Fast Optimization for Quadratic Objectives<a class="headerlink" href="#convex-19_optimizationalgo-125-conjugate-gradient-method-fast-optimization-for-quadratic-objectives" title="Permanent link">¶</a></h2>
+<p>Gradient descent can be painfully slow when the level sets of the objective are long and skinny an indication that the Hessian has very different curvature in different directions (poor conditioning). The Conjugate Gradient (CG) method fixes this without forming or inverting the Hessian. It exploits the exact structure of quadratic functions to build advanced search directions that incorporate curvature information at almost no extra cost.</p>
+<p>CG is a <em>first-order</em> method that behaves like a <em>second-order</em> method for quadratics.</p>
+<p>For a quadratic objective function:</p>
 <div class="arithmatex">\[
-f(x) = \tfrac{1}{2} x^\top A x - b^\top x, \quad A \succ 0,
+f(x) = \tfrac12 x^\top A x - b^\top x 
 \]</div>
-<p>plain gradient descent takes many small steps along shallow directions of <span class="arithmatex">\(A\)</span>.</p>
-<p>The Conjugate Gradient (CG) method accelerates convergence dramatically for such problems — it exploits the structure of the quadratic and uses curvature-aware search directions without explicitly forming or inverting the Hessian.</p>
-<h3 id="convex-19_optimizationalgo-problem-setup">Problem Setup<a class="headerlink" href="#convex-19_optimizationalgo-problem-setup" title="Permanent link">¶</a></h3>
-<p>Minimize a strictly convex quadratic:</p>
+<p>with <span class="arithmatex">\(A \succ 0\)</span>, the level sets are ellipses shaped by the eigenvalues of <span class="arithmatex">\(A\)</span>. If <span class="arithmatex">\(A\)</span> is ill-conditioned, these ellipses are highly elongated. Gradient descent follows the steepest Euclidean descent direction, which points perpendicular to level sets. On elongated ellipses, this produces a zig-zag path that wastes many iterations.</p>
+<p>CG replaces the steepest-descent directions with conjugate directions. Two nonzero vectors <span class="arithmatex">\(p_i, p_j\)</span> are said to be A-conjugate if</p>
 <div class="arithmatex">\[
-\min_x f(x) = \tfrac{1}{2} x^\top A x - b^\top x, \quad A \in \mathbb{R}^{n \times n}, \; A \succ 0.
+p_i^\top A p_j = 0.
 \]</div>
-<p>This is equivalent to solving the linear system</p>
+<p>This is orthogonality measured in the geometry induced by the Hessian <span class="arithmatex">\(A\)</span>. Why is this useful?</p>
+<ul>
+<li>Moving along an A-conjugate direction eliminates error components associated with a different eigen-direction of <span class="arithmatex">\(A\)</span>.</li>
+<li>Once you minimize along a conjugate direction, you never need to correct that direction again.</li>
+<li>After <span class="arithmatex">\(n\)</span> mutually A-conjugate directions, all curvature directions are resolved → exact solution.</li>
+</ul>
+<p>In contrast, gradient descent repeatedly re-corrects previous progress.</p>
+<p>Algorithm (Linear CG): We solve the quadratic minimization problem or, equivalently, the linear system <span class="arithmatex">\(Ax = b\)</span>. Let</p>
 <div class="arithmatex">\[
-A x = b.
+r_0 = b - A x_0, \qquad p_0 = r_0.
 \]</div>
-<h3 id="convex-19_optimizationalgo-algorithm-linear-cg">Algorithm (Linear CG)<a class="headerlink" href="#convex-19_optimizationalgo-algorithm-linear-cg" title="Permanent link">¶</a></h3>
-<p>Given an initial <span class="arithmatex">\(x_0\)</span>, define the residual <span class="arithmatex">\(r_0 = b - A x_0\)</span>  and the initial direction <span class="arithmatex">\(p_0 = r_0\)</span>.</p>
-<p>For <span class="arithmatex">\(k = 0, 1, 2, \dots\)</span> until convergence:</p>
+<p>For <span class="arithmatex">\(k = 0,1,2,\dots\)</span>:</p>
 <ol>
-<li>Compute step size<br>
-<script type="math/tex; mode=display">
+<li>
+<p>Step size
+   <script type="math/tex; mode=display">
    \alpha_k = \frac{r_k^\top r_k}{p_k^\top A p_k}.
    </script>
+</p>
 </li>
-<li>Update the iterate<br>
-<script type="math/tex; mode=display">
+<li>
+<p>Update iterate
+   <script type="math/tex; mode=display">
    x_{k+1} = x_k + \alpha_k p_k.
    </script>
+</p>
 </li>
-<li>Update the residual<br>
-<script type="math/tex; mode=display">
+<li>
+<p>Update residual (negative gradient)
+   <script type="math/tex; mode=display">
    r_{k+1} = r_k - \alpha_k A p_k.
    </script>
+</p>
 </li>
-<li>Compute the new direction coefficient<br>
-<script type="math/tex; mode=display">
+<li>
+<p>Direction scaling
+   <script type="math/tex; mode=display">
    \beta_k = \frac{r_{k+1}^\top r_{k+1}}{r_k^\top r_k}.
    </script>
+</p>
 </li>
-<li>Update the direction<br>
-<script type="math/tex; mode=display">
+<li>
+<p>New conjugate direction
+   <script type="math/tex; mode=display">
    p_{k+1} = r_{k+1} + \beta_k p_k.
    </script>
+</p>
 </li>
 </ol>
-<p>Terminate when <span class="arithmatex">\(\|r_k\|\)</span> is below tolerance <span class="arithmatex">\(\varepsilon\)</span>.</p>
-<h3 id="convex-19_optimizationalgo-geometric-intuition">Geometric Intuition<a class="headerlink" href="#convex-19_optimizationalgo-geometric-intuition" title="Permanent link">¶</a></h3>
-<p>Each search direction <span class="arithmatex">\(p_k\)</span> is <span class="arithmatex">\(A\)</span>-conjugate to the previous ones:</p>
+<p>Stop when <span class="arithmatex">\(\|r_k\|\)</span> is below tolerance.</p>
+<p>Every new direction <span class="arithmatex">\(p_{k+1}\)</span> is constructed to be A-conjugate to all previous ones, and this is preserved automatically by the recurrence.</p>
+<p>Why CG Is Fast: For an <span class="arithmatex">\(n\)</span>-dimensional quadratic, CG solves the problem in at most <span class="arithmatex">\(n\)</span> iterations in exact arithmetic. In practice, due to floating-point errors and finite precision, it converges much earlier, typically in <span class="arithmatex">\(O(\sqrt{\kappa})\)</span> iterations, where <span class="arithmatex">\(\kappa = \lambda_{\max}/\lambda_{\min}\)</span> is the condition number. The convergence bound in the A-norm is:</p>
 <div class="arithmatex">\[
-p_i^\top A p_j = 0 \quad \text{for } i \ne j.
+\|x_k - x^\star\|_A \le 
+2\left(\frac{\sqrt{\kappa}-1}{\sqrt{\kappa}+1}\right)^k 
+\|x_0 - x^\star\|_A.
 \]</div>
-<p>That means successive steps explore independent curvature directions of the quadratic. The residual <span class="arithmatex">\(r_k\)</span> (the negative gradient) becomes orthogonal to all previous directions, so the method never re-searches the same subspace.</p>
-<p>As a result, in exact arithmetic, CG finds the exact minimizer in at most <span class="arithmatex">\(n\)</span> steps.</p>
-<h3 id="convex-19_optimizationalgo-convergence-properties">Convergence Properties<a class="headerlink" href="#convex-19_optimizationalgo-convergence-properties" title="Permanent link">¶</a></h3>
+<p>This is dramatically better than the <span class="arithmatex">\(O(1/k)\)</span> rate of gradient descent.</p>
+<p>CG is ideal when:</p>
 <ul>
-<li>For SPD <span class="arithmatex">\(A\)</span>, CG converges monotonically to the minimizer <span class="arithmatex">\(x^\star = A^{-1} b\)</span>.</li>
-<li>The rate depends on the condition number <span class="arithmatex">\(\kappa(A) = \frac{\lambda_{\max}}{\lambda_{\min}}\)</span>:
-  <script type="math/tex; mode=display">
-  \|x_k - x^\star\|_A \le 2 \left( \frac{\sqrt{\kappa}-1}{\sqrt{\kappa}+1} \right)^k \|x_0 - x^\star\|_A.
-  </script>
-</li>
-<li>Preconditioning (using <span class="arithmatex">\(M^{-1}A\)</span> with well-chosen <span class="arithmatex">\(M\)</span>) further improves convergence.</li>
+<li>The problem is a quadratic or a linear system with symmetric positive definite (SPD) matrix <span class="arithmatex">\(A\)</span>.</li>
+<li><span class="arithmatex">\(A\)</span> is large and sparse or available as a matrix–vector product.</li>
+<li>You cannot form or store <span class="arithmatex">\(A^{-1}\)</span> or even the full matrix <span class="arithmatex">\(A\)</span>.</li>
+<li>You want a Hessian-aware method but cannot afford Newton’s method.</li>
 </ul>
-<h3 id="convex-19_optimizationalgo-machine-learning-context">Machine Learning Context<a class="headerlink" href="#convex-19_optimizationalgo-machine-learning-context" title="Permanent link">¶</a></h3>
-<p>In ML, CG is widely used for large-scale convex quadratic subproblems:</p>
+<p>Typical scenarios:</p>
 <table>
 <thead>
 <tr>
 <th>Application</th>
-<th>Formulation</th>
-<th>Notes</th>
+<th>Why CG fits</th>
 </tr>
 </thead>
 <tbody>
 <tr>
+<td>Large linear systems <span class="arithmatex">\(A x = b\)</span></td>
+<td>Only requires <span class="arithmatex">\(A p\)</span>, not factorization.</td>
+</tr>
+<tr>
 <td>Ridge regression</td>
-<td><span class="arithmatex">\(\min_x \|A x - b\|_2^2 + \lambda\|x\|_2^2\)</span></td>
-<td>Normal equations are SPD; CG avoids explicit inversion.</td>
+<td>Normal equations form an SPD matrix.</td>
 </tr>
 <tr>
 <td>Kernel ridge regression</td>
-<td><span class="arithmatex">\((K + \lambda I)\alpha = y\)</span></td>
-<td>CG solves this efficiently without forming full <span class="arithmatex">\(K^{-1}\)</span>.</td>
+<td>Solves <span class="arithmatex">\((K+\lambda I)\alpha = y\)</span> efficiently.</td>
 </tr>
 <tr>
-<td>Linear least squares</td>
-<td><span class="arithmatex">\(\min_x \tfrac{1}{2}\|A x - b\|^2\)</span></td>
-<td>Equivalent to solving <span class="arithmatex">\(A^\top A x = A^\top b\)</span>.</td>
+<td>Newton steps in ML</td>
+<td>Inner solver for Hessian systems without forming Hessian.</td>
 </tr>
 <tr>
-<td>Large-scale Newton steps</td>
-<td>Solve <span class="arithmatex">\(\nabla^2 f(x_k)p = -\nabla f(x_k)\)</span></td>
-<td>CG acts as an inner solver for the Newton direction.</td>
+<td>PDEs and scientific computing</td>
+<td>Sparse SPD matrices, ideal for CG.</td>
 </tr>
 </tbody>
 </table>
-<h3 id="convex-19_optimizationalgo-practical-notes">Practical Notes<a class="headerlink" href="#convex-19_optimizationalgo-practical-notes" title="Permanent link">¶</a></h3>
+<p>Assumptions Required for CG: To guarantee correctness of <em>linear CG</em>, we require:</p>
 <ul>
-<li>CG requires only matrix–vector products with <span class="arithmatex">\(A\)</span>, not explicit storage.<br>
-  It’s ideal when <span class="arithmatex">\(A\)</span> is large, sparse, or implicitly defined.</li>
-<li>Sensitive to rounding errors; residual re-orthogonalization may be needed for long runs.</li>
-<li>Preconditioners (Jacobi, incomplete Cholesky, etc.) can drastically reduce iterations.</li>
+<li><span class="arithmatex">\(A\)</span> is symmetric</li>
+<li><span class="arithmatex">\(A\)</span> is positive definite</li>
+<li>Objective is strictly convex quadratic</li>
+<li>Arithmetic is exact (for the finite-step guarantee)</li>
 </ul>
-<h3 id="convex-19_optimizationalgo-comparison-summary">Comparison Summary<a class="headerlink" href="#convex-19_optimizationalgo-comparison-summary" title="Permanent link">¶</a></h3>
-<table>
-<thead>
-<tr>
-<th>Method</th>
-<th>Memory</th>
-<th>Curvature Use</th>
-<th>Convergence</th>
-<th>Typical Use</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Gradient Descent</td>
-<td><span class="arithmatex">\(O(n)\)</span></td>
-<td>None</td>
-<td><span class="arithmatex">\(O(1/k)\)</span></td>
-<td>General smooth convex</td>
-</tr>
-<tr>
-<td>Newton’s Method</td>
-<td><span class="arithmatex">\(O(n^2)\)</span></td>
-<td>Full Hessian</td>
-<td>Quadratic (local)</td>
-<td>Small/medium convex</td>
-</tr>
-<tr>
-<td>Conjugate Gradient</td>
-<td><span class="arithmatex">\(O(n)\)</span></td>
-<td>Implicit (via <span class="arithmatex">\(A\)</span>-conjugacy)</td>
-<td>Fast linear / finite-step</td>
-<td>Large quadratic systems</td>
-</tr>
-</tbody>
-</table>
-<h3 id="convex-19_optimizationalgo-key-insight">Key Insight<a class="headerlink" href="#convex-19_optimizationalgo-key-insight" title="Permanent link">¶</a></h3>
+<p>If the function is <em>not</em> quadratic or Hessian is not SPD, use Nonlinear CG, which generalizes the idea but loses finite-step guarantees.</p>
+<p>Practical Notes:</p>
+<ul>
+<li>You only need matrix–vector products <span class="arithmatex">\(Ap\)</span>.  </li>
+<li>Storage cost is <span class="arithmatex">\(O(n)\)</span>.  </li>
+<li>Preconditioning (replacing the system with <span class="arithmatex">\(M^{-1} A\)</span>) improves conditioning and accelerates convergence dramatically.  </li>
+<li>Periodic re-orthogonalization can help in long runs with floating-point drift.</li>
+</ul>
 <blockquote>
-<p>The Conjugate Gradient method is the exact gradient method for quadratic objectives<br>
-that automatically builds curvature information through orthogonalized directions,<br>
-achieving Newton-like efficiency without forming the Hessian.</p>
+<p>CG is the optimal descent method for quadratic objectives:  it constructs Hessian-aware conjugate directions that efficiently resolve curvature, giving Newton-like speed while requiring only gradient-level operations.</p>
 </blockquote>
 <h2 id="convex-19_optimizationalgo-126-newtons-method-and-second-order-methods">12.6 Newton’s method and second-order methods<a class="headerlink" href="#convex-19_optimizationalgo-126-newtons-method-and-second-order-methods" title="Permanent link">¶</a></h2>
 <p>First-order methods (like gradient descent) only use gradient information. Newton’s method, in contrast, incorporates curvature information from the Hessian to take steps that better adapt to the local geometry of the function. This often leads to much faster convergence near the optimum.</p>
-<h3 id="convex-19_optimizationalgo-1261-local-quadratic-model">12.6.1 Local quadratic model<a class="headerlink" href="#convex-19_optimizationalgo-1261-local-quadratic-model" title="Permanent link">¶</a></h3>
 <p>From Chapter 3, the second-order Taylor approximation of <span class="arithmatex">\(f(x)\)</span> around a point <span class="arithmatex">\(x_k\)</span> is:</p>
 <div class="arithmatex">\[
 f(x_k + d)
@@ -4260,8 +4236,7 @@ f(x_k)
 + \nabla f(x_k)^\top d
 + \tfrac{1}{2} d^\top \nabla^2 f(x_k) d.
 \]</div>
-<p>If we temporarily trust this quadratic model, we can choose <span class="arithmatex">\(d\)</span> to minimize the right-hand side.<br>
-Differentiating with respect to <span class="arithmatex">\(d\)</span> and setting to zero gives:</p>
+<p>If we temporarily trust this quadratic model, we can choose <span class="arithmatex">\(d\)</span> to minimize the right-hand side. Differentiating with respect to <span class="arithmatex">\(d\)</span> and setting to zero gives:</p>
 <div class="arithmatex">\[
 \nabla^2 f(x_k) \, d_{\text{newton}} = - \nabla f(x_k).
 \]</div>
@@ -4271,90 +4246,80 @@ d_{\text{newton}} = - [\nabla^2 f(x_k)]^{-1} \nabla f(x_k),
 \quad
 x_{k+1} = x_k + d_{\text{newton}}.
 \]</div>
-<p>This step points toward the minimizer of the local quadratic model, and near the true minimizer, Newton’s method exhibits quadratic convergence.</p>
-<h3 id="convex-19_optimizationalgo-1262-convergence-behaviour">12.6.2 Convergence behaviour<a class="headerlink" href="#convex-19_optimizationalgo-1262-convergence-behaviour" title="Permanent link">¶</a></h3>
-<ul>
-<li>Near the minimiser of a strictly convex, twice-differentiable <span class="arithmatex">\(f\)</span>, Newton’s method converges quadratically: roughly, the number of correct digits doubles every iteration.  </li>
-<li>This is dramatically faster than the <span class="arithmatex">\(O(1/k)\)</span> or <span class="arithmatex">\(O(1/k^2)\)</span> rates typical of first-order methods — but only once the iterates enter the basin of attraction.  </li>
-<li>Far from the minimiser, Newton’s method can behave erratically or even diverge.<br>
-  To stabilise it, we typically pair it with a line search or trust region strategy to control step size.</li>
-</ul>
-<h3 id="convex-19_optimizationalgo-1263-implementation">12.6.3 Implementation<a class="headerlink" href="#convex-19_optimizationalgo-1263-implementation" title="Permanent link">¶</a></h3>
-<p>The main computational effort in each iteration lies in evaluating derivatives and solving the Newton system:</p>
+<p>This step aims directly at the stationary point of the local quadratic model. When the iterates are sufficiently close to the true minimizer of a strictly convex <span class="arithmatex">\(f\)</span>, Newton’s method achieves quadratic convergence—dramatically faster than the <span class="arithmatex">\(O(1/k)\)</span> or <span class="arithmatex">\(O(1/k^2)\)</span> rates typical of first-order algorithms.</p>
+<p>However, far from the minimizer the quadratic model may be inaccurate, the Hessian may be indefinite, or the step may be unreasonably large. For stability, Newton’s method is almost always paired with a line search or trust-region strategy that adjusts step length based on how well the model predicts actual decrease.</p>
+<h3 id="convex-19_optimizationalgo-solving-the-newton-system">Solving the Newton System<a class="headerlink" href="#convex-19_optimizationalgo-solving-the-newton-system" title="Permanent link">¶</a></h3>
+<p>Each iteration requires solving</p>
 <div class="arithmatex">\[
-H \, \Delta x = -g,
+H \,\Delta x = -g,
+\qquad
+H = \nabla^2 f(x), \;\; g = \nabla f(x).
 \]</div>
-<p>where</p>
+<p>If <span class="arithmatex">\(H\)</span> is symmetric positive definite, a Cholesky factorization</p>
 <div class="arithmatex">\[
-H = \nabla^2 f(x), \quad g = \nabla f(x).
+H = L L^\top
 \]</div>
-<h4 id="convex-19_optimizationalgo-solving-via-cholesky-factorization">Solving via Cholesky factorization<a class="headerlink" href="#convex-19_optimizationalgo-solving-via-cholesky-factorization" title="Permanent link">¶</a></h4>
-<p>If <span class="arithmatex">\(H\)</span> is symmetric and positive definite, we can efficiently solve this system using a Cholesky factorization:</p>
-<div class="arithmatex">\[
-H = L L^{\top},
-\]</div>
-<p>where <span class="arithmatex">\(L\)</span> is lower triangular.<br>
-The Newton step is then:</p>
-<div class="arithmatex">\[
-\Delta x_{\text{nt}} = -L^{-\top} L^{-1} g.
-\]</div>
-<p>This involves two triangular solves:</p>
+<p>allows efficient and numerically stable solution via two triangular solves:</p>
 <ol>
 <li><span class="arithmatex">\(L y = -g\)</span></li>
-<li><span class="arithmatex">\(L^{\top} \Delta x_{\text{nt}} = y\)</span></li>
+<li><span class="arithmatex">\(L^\top \Delta x_{\text{nt}} = y\)</span></li>
 </ol>
-<p>This avoids explicitly computing <span class="arithmatex">\(H^{-1}\)</span> and ensures numerical stability.</p>
-<h4 id="convex-19_optimizationalgo-newton-decrement">Newton decrement<a class="headerlink" href="#convex-19_optimizationalgo-newton-decrement" title="Permanent link">¶</a></h4>
-<p>A useful measure of progress is the Newton decrement:</p>
+<p>This avoids forming <span class="arithmatex">\(H^{-1}\)</span> explicitly.</p>
+<p>The Newton decrement:</p>
 <div class="arithmatex">\[
-\lambda(x) = \| L^{-1} g \|_2,
+\lambda(x) = \|L^{-1} g\|_2
 \]</div>
-<p>which approximates how far we are from the optimum.<br>
-A common stopping criterion is <span class="arithmatex">\(\lambda(x)^2 / 2 &lt; \varepsilon\)</span>.</p>
-<h3 id="convex-19_optimizationalgo-1264-computational-cost">12.6.4 Computational cost<a class="headerlink" href="#convex-19_optimizationalgo-1264-computational-cost" title="Permanent link">¶</a></h3>
-<p>Each Newton step requires solving a linear system involving <span class="arithmatex">\(\nabla^2 f(x_k)\)</span>, which costs about as much as factoring the Hessian (or an approximation).</p>
+<p>gauges proximity to the optimum and provides a natural stopping criterion: <span class="arithmatex">\(\lambda(x)^2/2 &lt; \varepsilon\)</span>.</p>
+<p>Computationally, the dominant cost is solving the Newton system. For dense, unstructured problems this costs <span class="arithmatex">\(\approx (1/3)n^3\)</span> operations, though sparsity or structure can reduce this dramatically. Because of this cost, Newton’s method is most appealing for problems of moderate dimension or for situations where Hessian systems can be solved efficiently using sparse linear algebra or matrix–free iterative methods.</p>
+<h3 id="convex-19_optimizationalgo-gaussnewton-method">Gauss–Newton Method<a class="headerlink" href="#convex-19_optimizationalgo-gaussnewton-method" title="Permanent link">¶</a></h3>
+<p>The Gauss–Newton method is a specialization of Newton’s method for nonlinear least squares problems</p>
+<div class="arithmatex">\[
+f(x) = \tfrac12 \| r(x) \|^2,
+\]</div>
+<p>where <span class="arithmatex">\(r(x)\)</span> is a vector of residual functions and a nonlinear function of <span class="arithmatex">\(x\)</span> and <span class="arithmatex">\(J\)</span> is its Jacobian. Newton’s Hessian decomposes as</p>
+<div class="arithmatex">\[
+\nabla^2 f(x) = J^\top J \;+\; \sum_i r_i(x)\, \nabla^2 r_i(x).
+\]</div>
+<p>The second term involves the curvature of the residuals. When <span class="arithmatex">\(r(x)\)</span> is approximately linear near the optimum, this term is small. Gauss–Newton drops it, giving the approximation</p>
+<div class="arithmatex">\[
+\nabla^2 f(x) \approx J^\top J,
+\]</div>
+<p>leading to the Gauss–Newton step:</p>
+<div class="arithmatex">\[
+(J^\top J)\, \Delta = -J^\top r.
+\]</div>
+<p>Thus each iteration reduces to solving a (potentially large but structured) least-squares system, avoiding full Hessians entirely. The Levenberg–Marquardt method adds a damping term,</p>
+<div class="arithmatex">\[
+(J^\top J + \lambda I)\, \Delta = -J^\top r,
+\]</div>
+<p>which interpolates smoothly between  </p>
 <ul>
-<li>For an unstructured, dense Hessian, Cholesky factorization requires approximately <span class="arithmatex">\((1/3) n^3\)</span> floating-point operations.  </li>
-<li>If <span class="arithmatex">\(H\)</span> is sparse, banded, or has special structure, the cost can be much lower.  </li>
-<li>Because of this cubic scaling, Newton’s method is most attractive for medium-scale problems where high accuracy is required.</li>
+<li>gradient descent (large <span class="arithmatex">\(\lambda\)</span>), and  </li>
+<li>Gauss–Newton (small <span class="arithmatex">\(\lambda\)</span>).</li>
 </ul>
-<h3 id="convex-19_optimizationalgo-1265-why-convexity-helps">12.6.5 Why convexity helps<a class="headerlink" href="#convex-19_optimizationalgo-1265-why-convexity-helps" title="Permanent link">¶</a></h3>
-<p>If <span class="arithmatex">\(f\)</span> is convex, then <span class="arithmatex">\(\nabla^2 f(x_k)\)</span> is positive semidefinite (Chapter 5).<br>
-This has two important implications:</p>
-<ul>
-<li>The local quadratic model is bowl-shaped, so the Newton direction points toward a minimiser.  </li>
-<li>Regularised Newton steps (e.g. using <span class="arithmatex">\(H + \mu I\)</span> for small <span class="arithmatex">\(\mu &gt; 0\)</span>) are guaranteed to be descent directions and behave predictably.</li>
-</ul>
-<h3 id="convex-19_optimizationalgo-1266-quasi-newton-methods">12.6.6 Quasi-Newton methods<a class="headerlink" href="#convex-19_optimizationalgo-1266-quasi-newton-methods" title="Permanent link">¶</a></h3>
-<p>When computing or storing the Hessian is too expensive, we can build low-rank approximations of <span class="arithmatex">\(\nabla^2 f(x_k)\)</span> or its inverse.<br>
-These methods use gradient information from previous steps to estimate curvature.</p>
+<p>Damping improves robustness when the Jacobian is rank-deficient or when the neglected second-order terms are not negligible Gauss–Newton and Levenberg–Marquardt are highly effective when the residuals are nearly linear—common in curve fitting, bundle adjustment, and certain layerwise training procedures in deep learning—yielding fast convergence without the expense of full second derivatives.</p>
+<h3 id="convex-19_optimizationalgo-quasi-newton-methods">Quasi-Newton methods<a class="headerlink" href="#convex-19_optimizationalgo-quasi-newton-methods" title="Permanent link">¶</a></h3>
+<p>When computing or storing the Hessian is too expensive, we can build low-rank approximations of <span class="arithmatex">\(\nabla^2 f(x_k)\)</span> or its inverse. These methods use gradient information from previous steps to estimate curvature.</p>
 <p>The most famous examples are:</p>
 <ul>
 <li>BFGS (Broyden–Fletcher–Goldfarb–Shanno)  </li>
 <li>DFP (Davidon–Fletcher–Powell)  </li>
 <li>L-BFGS (Limited-memory BFGS) — for very large-scale problems.</li>
 </ul>
-<p>Quasi-Newton methods (BFGS, L-BFGS) build inverse-Hessian approximations from gradient differences, achieving superlinear convergence with low memory</p>
-<p>They maintain many of Newton’s fast local convergence properties, but with per-iteration costs similar to first-order methods.</p>
-<p>For instance, BFGS maintains an approximation <span class="arithmatex">\(B_k \approx \nabla^2 f(x_k)^{-1}\)</span> updated via gradient and step differences:</p>
+<p>Quasi-Newton methods (BFGS, L-BFGS) build inverse-Hessian approximations from gradient differences, achieving superlinear convergence with low memory. They maintain many of Newton’s fast local convergence properties, but with per-iteration costs similar to first-order methods. For instance, BFGS maintains an approximation <span class="arithmatex">\(B_k \approx \nabla^2 f(x_k)^{-1}\)</span> updated via gradient and step differences:</p>
 <div class="arithmatex">\[
 B_{k+1} = B_k + \frac{(s_k^\top y_k + y_k^\top B_k y_k)}{(s_k^\top y_k)^2} s_k s_k^\top
 - \frac{B_k y_k s_k^\top + s_k y_k^\top B_k}{s_k^\top y_k},
 \]</div>
 <p>where <span class="arithmatex">\(s_k = x_{k+1} - x_k\)</span> and <span class="arithmatex">\(y_k = \nabla f(x_{k+1}) - \nabla f(x_k)\)</span>.</p>
 <p>These methods achieve superlinear convergence in practice, making them popular for large smooth optimization problems.</p>
-<h3 id="convex-19_optimizationalgo-1267-when-to-use-newton-or-quasi-newton-methods">12.6.7 When to use Newton or quasi-Newton methods<a class="headerlink" href="#convex-19_optimizationalgo-1267-when-to-use-newton-or-quasi-newton-methods" title="Permanent link">¶</a></h3>
-<p>Use Newton or quasi-Newton methods when:</p>
+<p>When to use Newton or quasi-Newton methods:</p>
 <ul>
 <li>You need high-accuracy solutions.  </li>
 <li>The problem is smooth and reasonably well-conditioned.  </li>
 <li>The dimension is moderate, or Hessian systems can be solved efficiently (e.g., using sparse linear algebra).  </li>
 </ul>
 <p>For large, ill-conditioned, or nonsmooth problems, first-order or proximal methods (Chapter 10) are typically more suitable.</p>
-<blockquote>
-<p>Newton-Raphson: The Newton step solves <span class="arithmatex">\(\nabla^2 f(x_k) p_k=-\nabla f(x_k)\)</span> and updates <span class="arithmatex">\(x_{k+1}=x_k+p_k\)</span> with line search or trust-region safeguards. Complexity hinges on solving linear systems; use sparse Cholesky, conjugate gradients with preconditioning, or low-rank structure to scale. For generalized linear models, iteratively reweighted least squares converges in few iterations, but regularization and damping are needed when data are nearly separable.</p>
-<p>Gauss-Newton: For nonlinear least squares <span class="arithmatex">\(f(x)=\tfrac12\|r(x)\|^2\)</span>, the Gauss–Newton approximation uses <span class="arithmatex">\(H\approx J^\top J\)</span> where <span class="arithmatex">\(J\)</span> is the Jacobian of <span class="arithmatex">\(r\)</span>. Solve <span class="arithmatex">\((J^\top J)\Delta=-J^\top r\)</span> to get a step; Levenberg–Marquardt adds damping <span class="arithmatex">\((J^\top J+\lambda I)\Delta=-J^\top r\)</span> interpolating between gradient and Gauss–Newton. Effective for residual models where second-order residual terms are small; widely used in curve fitting and some deep learning layerwise updates.</p>
-</blockquote>
 <h2 id="convex-19_optimizationalgo-128-constraints-and-nonsmooth-terms-projection-and-proximal-methods">12.8 Constraints and nonsmooth terms: projection and proximal methods<a class="headerlink" href="#convex-19_optimizationalgo-128-constraints-and-nonsmooth-terms-projection-and-proximal-methods" title="Permanent link">¶</a></h2>
 <p>In practice, most convex objectives are not just “nice smooth <span class="arithmatex">\(f(x)\)</span>”. They often have:</p>
 <ul>
@@ -4364,8 +4329,7 @@ B_{k+1} = B_k + \frac{(s_k^\top y_k + y_k^\top B_k y_k)}{(s_k^\top y_k)^2} s_k s
 </ul>
 <p>Two core ideas handle this: projected gradient and proximal gradient.</p>
 <h3 id="convex-19_optimizationalgo-1281-projected-gradient-descent">12.8.1 Projected gradient descent<a class="headerlink" href="#convex-19_optimizationalgo-1281-projected-gradient-descent" title="Permanent link">¶</a></h3>
-<p>Setting:<br>
-Minimise convex, differentiable <span class="arithmatex">\(f(x)\)</span> subject to <span class="arithmatex">\(x \in \mathcal{X}\)</span>, where <span class="arithmatex">\(\mathcal{X}\)</span> is a simple closed convex set (Chapter 4).</p>
+<p>Setting: Minimise convex, differentiable <span class="arithmatex">\(f(x)\)</span> subject to <span class="arithmatex">\(x \in \mathcal{X}\)</span>, where <span class="arithmatex">\(\mathcal{X}\)</span> is a simple closed convex set (Chapter 4).</p>
 <p>Algorithm:</p>
 <ol>
 <li>Gradient step:
@@ -4396,8 +4360,7 @@ Minimise convex, differentiable <span class="arithmatex">\(f(x)\)</span> subject
 </ul>
 <p>Projected gradient is the constrained version of gradient descent. It maintains feasibility at every iterate.</p>
 <h3 id="convex-19_optimizationalgo-1282-proximal-gradient-forwardbackward-splitting">12.8.2 Proximal gradient (forward–backward splitting)<a class="headerlink" href="#convex-19_optimizationalgo-1282-proximal-gradient-forwardbackward-splitting" title="Permanent link">¶</a></h3>
-<p>Setting:<br>
-Composite convex minimisation
+<p>Setting: Composite convex minimisation
 <script type="math/tex; mode=display">
 \min_x \; F(x) := f(x) + R(x),
 </script>
@@ -4458,11 +4421,9 @@ R(x) + \frac{1}{2\alpha} \|x-y\|_2^2
 <li>simple constraints we can project onto,</li>
 <li>or nonsmooth terms we can prox.</li>
 </ul>
-<p>What if the constraints are general convex inequalities <span class="arithmatex">\(g_i(x)\le0\)</span>?<br>
-Enter penalty methods, barrier methods, and (ultimately) interior-point methods.</p>
+<p>What if the constraints are general convex inequalities <span class="arithmatex">\(g_i(x)\le0\)</span>: Enter penalty methods, barrier methods, and (ultimately) interior-point methods.</p>
 <h3 id="convex-19_optimizationalgo-1291-penalty-methods">12.9.1 Penalty methods<a class="headerlink" href="#convex-19_optimizationalgo-1291-penalty-methods" title="Permanent link">¶</a></h3>
-<p>Turn constrained optimisation into unconstrained optimisation by adding a penalty for violating constraints.</p>
-<p>Suppose we want
+<p>Turn constrained optimisation into unconstrained optimisation by adding a penalty for violating constraints. Suppose we want
 <script type="math/tex; mode=display">
 \min_x f(x)
 \quad \text{s.t.} \quad g_i(x) \le 0,\ i=1,\dots,m.
@@ -4484,10 +4445,45 @@ where:</p>
 <li>choosing <span class="arithmatex">\(\rho\)</span> is tricky,</li>
 <li>very large <span class="arithmatex">\(\rho\)</span> can make the landscape ill-conditioned and hard for gradient/Newton to solve.</li>
 </ul>
-<p>Penalty methods are closely linked to robust formulations and Huber-like losses: you replace a hard requirement by a soft cost. This is exactly what you do in robust regression and in <span class="arithmatex">\(\epsilon\)</span>-insensitive / Huber losses (see Section 9.7).</p>
+<h3 id="convex-19_optimizationalgo-algorithm-basic-penalty-method-quadratic-or-general-penalization">Algorithm: Basic Penalty Method (Quadratic or General Penalization)<a class="headerlink" href="#convex-19_optimizationalgo-algorithm-basic-penalty-method-quadratic-or-general-penalization" title="Permanent link">¶</a></h3>
+<p>Goal:  Solve<br>
+<script type="math/tex; mode=display">
+\min_x f(x) \quad \text{s.t. } g_i(x) \le 0,\; i=1,\dots,m.
+</script>
+</p>
+<p>Penalty formulation:<br>
+<script type="math/tex; mode=display">
+F_\rho(x) = f(x) + \rho \sum_{i=1}^m \phi(g_i(x)),
+</script>
+where  </p>
+<ul>
+<li><span class="arithmatex">\(\phi(r) = 0\)</span> if <span class="arithmatex">\(r \le 0\)</span>,  </li>
+<li><span class="arithmatex">\(\phi(r)\)</span> grows when <span class="arithmatex">\(r&gt;0\)</span> (e.g., <span class="arithmatex">\(\phi(r)=\max\{0,r\}^2\)</span>),  </li>
+<li><span class="arithmatex">\(\rho &gt; 0\)</span> is the penalty weight.</li>
+</ul>
+<p>Inputs:  </p>
+<ul>
+<li>objective <span class="arithmatex">\(f(x)\)</span>  </li>
+<li>constraints <span class="arithmatex">\(g_i(x)\)</span>  </li>
+<li>penalty function <span class="arithmatex">\(\phi\)</span>  </li>
+<li>initial point <span class="arithmatex">\(x_0\)</span>  </li>
+<li>initial penalty parameter <span class="arithmatex">\(\rho_0 &gt; 0\)</span>  </li>
+<li>penalty update factor <span class="arithmatex">\(\gamma &gt; 1\)</span>  </li>
+<li>tolerance <span class="arithmatex">\(\varepsilon\)</span></li>
+</ul>
+<p>Procedure:</p>
+<ol>
+<li>Choose <span class="arithmatex">\(x_0\)</span>, <span class="arithmatex">\(\rho_0 &gt; 0\)</span>.  </li>
+<li>For <span class="arithmatex">\(k = 0, 1, 2, \dots\)</span>:  <ol>
+<li>Solve the penalized subproblem  <span class="arithmatex">\(x_{k+1} = \arg\min_x F_{\rho_k}(x)\)</span> using Newton’s method, gradient descent, quasi-Newton, etc.  </li>
+<li>Check feasibility / stopping:  If <span class="arithmatex">\(\max_i g_i(x_{k+1}) \le \varepsilon, \quad   \|x_{k+1} - x_k\| \le \varepsilon\)</span>  stop and return <span class="arithmatex">\(x_{k+1}\)</span>.  </li>
+<li>Increase penalty parameter  <span class="arithmatex">\(\rho_{k+1} = \gamma\, \rho_k\)</span>   with typical <span class="arithmatex">\(\gamma \in [5,10]\)</span>.  </li>
+</ol>
+</li>
+<li>End.</li>
+</ol>
 <h3 id="convex-19_optimizationalgo-1292-barrier-methods">12.9.2 Barrier methods<a class="headerlink" href="#convex-19_optimizationalgo-1292-barrier-methods" title="Permanent link">¶</a></h3>
-<p>Penalty methods penalise violation <em>after</em> you cross the boundary. Barrier methods make it impossible to even touch the boundary.</p>
-<p>For inequality constraints <span class="arithmatex">\(g_i(x) \le 0\)</span>, define the logarithmic barrier
+<p>Penalty methods penalise violation <em>after</em> you cross the boundary. Barrier methods make it impossible to even touch the boundary. For inequality constraints <span class="arithmatex">\(g_i(x) \le 0\)</span>, define the logarithmic barrier
 <script type="math/tex; mode=display">
 b(x) = - \sum_{i=1}^m \log(-g_i(x)).
 </script>
@@ -4505,56 +4501,128 @@ subject to strict feasibility <span class="arithmatex">\(g_i(x)&lt;0\)</span>.</
 <li>Each Newton step solves a linear system involving the Hessian of <span class="arithmatex">\(F_t\)</span>, so the inner loop looks like a damped Newton method.</li>
 <li>Increasing <span class="arithmatex">\(t\)</span> tightens the approximation; we “home in” on the boundary of feasibility.</li>
 </ul>
-<p>This is the core idea of interior-point methods.</p>
-<h3 id="convex-19_optimizationalgo-1293-interior-point-methods-in-practice">12.9.3 Interior-point methods in practice<a class="headerlink" href="#convex-19_optimizationalgo-1293-interior-point-methods-in-practice" title="Permanent link">¶</a></h3>
-<p>Interior-point methods:</p>
+<h3 id="convex-19_optimizationalgo-algorithm-barrier-method-logarithmic-barrier-interior-approximation">Algorithm: Barrier Method (Logarithmic Barrier / Interior Approximation)<a class="headerlink" href="#convex-19_optimizationalgo-algorithm-barrier-method-logarithmic-barrier-interior-approximation" title="Permanent link">¶</a></h3>
+<p>Goal: Solve the constrained problem<br>
+<script type="math/tex; mode=display">
+\min_x f(x) \quad \text{s.t. } g_i(x) \le 0,\; i=1,\dots,m.
+</script>
+</p>
+<p>Logarithmic barrier:<br>
+<script type="math/tex; mode=display">
+b(x) = -\sum_{i=1}^m \log\!\big(-g_i(x)\big),
+</script>
+defined only for strictly feasible points <span class="arithmatex">\(g_i(x)&lt;0\)</span>.</p>
+<p>Barrier subproblem:<br>
+<script type="math/tex; mode=display">
+F_t(x) = t\, f(x) + b(x),
+</script>
+where <span class="arithmatex">\(t&gt;0\)</span> is the barrier parameter.</p>
+<p>As <span class="arithmatex">\(t \to \infty\)</span>, minimizers of <span class="arithmatex">\(F_t\)</span> approach the constrained optimum.</p>
+<p>Inputs:  </p>
 <ul>
-<li>Are globally convergent for convex problems under mild assumptions (Slater’s condition; see Chapter 8).</li>
-<li>Solve a series of smooth, strictly feasible subproblems.</li>
-<li>Use Newton-like steps to update primal (and, implicitly, dual) variables.</li>
-<li>Produce both primal and dual iterates — so they naturally produce a duality gap, which certifies how close you are to optimality (Chapter 8).</li>
+<li>objective <span class="arithmatex">\(f(x)\)</span>  </li>
+<li>inequality constraints <span class="arithmatex">\(g_i(x)\)</span>  </li>
+<li>barrier function <span class="arithmatex">\(b(x)\)</span>  </li>
+<li>strictly feasible starting point <span class="arithmatex">\(x_0\)</span> (<span class="arithmatex">\(g_i(x_0) &lt; 0\)</span>)  </li>
+<li>initial barrier parameter <span class="arithmatex">\(t_0 &gt; 0\)</span>  </li>
+<li>barrier growth factor <span class="arithmatex">\(\mu &gt; 1\)</span> (often <span class="arithmatex">\(\mu = 10\)</span>)  </li>
+<li>tolerance <span class="arithmatex">\(\varepsilon\)</span></li>
 </ul>
-<p>Interior-point methods are the engine behind modern general-purpose convex solvers for:</p>
+<p>Procedure:</p>
+<ol>
+<li>Choose strictly feasible <span class="arithmatex">\(x_0\)</span>, and pick <span class="arithmatex">\(t_0 &gt; 0\)</span>.  </li>
+<li>For <span class="arithmatex">\(k = 0,1,2,\dots\)</span>:  <ol>
+<li>Centering step (inner loop):  Solve the barrier subproblem  <script type="math/tex">
+  x_{k+1} = \arg\min_x F_{t_k}(x)
+  \quad\text{with} g_i(x)<0. </script>  Typically use Newton’s method (damped) on <span class="arithmatex">\(F_{t_k}\)</span>.  Stop when the Newton decrement satisfies  <span class="arithmatex">\(\lambda(x_{k+1})^2/2 \le \varepsilon\)</span></li>
+<li>Optimality / stopping test:    If  <span class="arithmatex">\(\frac{m}{t_k} \le \varepsilon,\)</span>
+  then <span class="arithmatex">\(x_{k+1}\)</span> is an <span class="arithmatex">\(\varepsilon\)</span>-approximate solution of the original constrained problem; stop and return <span class="arithmatex">\(x_{k+1}\)</span>.  </li>
+<li>Increase barrier parameter:  <span class="arithmatex">\(t_{k+1} = \mu\, t_k,\)</span>   which tightens the approximation and moves closer to the boundary.  </li>
+</ol>
+</li>
+<li>End.</li>
+</ol>
+<h3 id="convex-19_optimizationalgo-1293-interior-point-methods">12.9.3 Interior-point methods<a class="headerlink" href="#convex-19_optimizationalgo-1293-interior-point-methods" title="Permanent link">¶</a></h3>
+<p>Interior-point methods combine barrier functions with Newton’s method to solve general convex programs:</p>
 <ul>
-<li>linear programs (LP),</li>
-<li>quadratic programs (QP),</li>
-<li>second-order cone programs (SOCP),</li>
-<li>semidefinite programs (SDP).</li>
+<li>They maintain strict feasibility throughout.</li>
+<li>Each iteration solves a Newton system for the barrier-augmented objective.</li>
+<li>They naturally generate primal–dual pairs and duality gap estimates.</li>
+<li>Under standard assumptions (e.g., Slater’s condition), they converge in a predictable number of iterations.</li>
 </ul>
-<p>They give high-accuracy answers and KKT-based optimality certificates. They are more expensive per iteration than gradient methods, but need far fewer iterations, and they handle fully general convex constraints.</p>
-<p>Summary: Penalty vs Barrier vs Interior-Point</p>
-<table>
-<thead>
-<tr>
-<th>Method</th>
-<th>Feasibility During Iteration</th>
-<th>Mechanism</th>
-<th>Typical Behavior</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Penalty</td>
-<td>May violate constraints</td>
-<td>Adds large penalty outside feasible region</td>
-<td>Easy to implement but can be ill-conditioned</td>
-</tr>
-<tr>
-<td>Barrier</td>
-<td>Stays strictly feasible</td>
-<td>Adds infinite cost near constraint boundary</td>
-<td>Smooth approximation to constrained problem</td>
-</tr>
-<tr>
-<td>Interior-Point</td>
-<td>Always feasible (uses barrier)</td>
-<td>Solves a sequence of barrier problems with increasing precision</td>
-<td>Follows central path to true optimum</td>
-</tr>
-</tbody>
-</table>
+<p>Interior-point methods are the foundation of modern solvers for LP, QP, SOCP, and SDP. They are more expensive per iteration than first-order methods but converge in far fewer steps and achieve high accuracy.</p>
+<h3 id="convex-19_optimizationalgo-algorithm-primaldual-interior-point-method-for-convex-inequality-constraints">Algorithm: Primal–Dual Interior-Point Method (for convex inequality constraints)<a class="headerlink" href="#convex-19_optimizationalgo-algorithm-primaldual-interior-point-method-for-convex-inequality-constraints" title="Permanent link">¶</a></h3>
+<p>We consider the problem
+<script type="math/tex; mode=display">
+\min_x\; f(x) \quad \text{s.t. } g_i(x) \le 0,\; i=1,\dots,m.
+</script>
+</p>
+<p>Introduce Lagrange multipliers <span class="arithmatex">\(\lambda \ge 0\)</span>. The KKT conditions are
+<script type="math/tex; mode=display">
+\begin{aligned}
+\nabla f(x) + \sum_i \lambda_i \nabla g_i(x) &= 0, \\
+g_i(x) &\le 0, \\
+\lambda_i &\ge 0, \\
+\lambda_i\, g_i(x) &= 0.
+\end{aligned}
+</script>
+</p>
+<p>Interior-point methods enforce the relaxed condition
+<script type="math/tex; mode=display">
+\lambda_i\, g_i(x) = -\frac{1}{t},
+</script>
+which keeps iterates strictly feasible.</p>
+<h3 id="convex-19_optimizationalgo-inputs">Inputs<a class="headerlink" href="#convex-19_optimizationalgo-inputs" title="Permanent link">¶</a></h3>
+<ul>
+<li>objective <span class="arithmatex">\(f(x)\)</span>  </li>
+<li>inequality constraints <span class="arithmatex">\(g_i(x)\)</span>  </li>
+<li>initial primal point <span class="arithmatex">\(x_0\)</span> with <span class="arithmatex">\(g_i(x_0)&lt;0\)</span>  </li>
+<li>initial dual variable <span class="arithmatex">\(\lambda_0 &gt; 0\)</span>  </li>
+<li>initial barrier parameter <span class="arithmatex">\(t_0 &gt; 0\)</span>  </li>
+<li>growth factor <span class="arithmatex">\(\mu &gt; 1\)</span>  </li>
+<li>tolerance <span class="arithmatex">\(\varepsilon\)</span></li>
+</ul>
+<h3 id="convex-19_optimizationalgo-procedure">Procedure<a class="headerlink" href="#convex-19_optimizationalgo-procedure" title="Permanent link">¶</a></h3>
+<ol>
+<li>
+<p>Choose strictly feasible <span class="arithmatex">\(x_0\)</span>, positive <span class="arithmatex">\(\lambda_0\)</span>, and <span class="arithmatex">\(t_0\)</span>.</p>
+</li>
+<li>
+<p>For <span class="arithmatex">\(k = 0,1,2,\dots\)</span>:</p>
+<p>(a) Form the perturbed KKT system.  Solve for the Newton direction <span class="arithmatex">\((\Delta x, \Delta \lambda)\)</span>:</p>
+<p>
+<script type="math/tex; mode=display">
+   \begin{bmatrix}
+   \nabla^2 f(x) + \sum_i \lambda_i \nabla^2 g_i(x) & \nabla g(x) \\
+   \text{diag}(\lambda)\,\nabla g(x)^\top & \text{diag}(g(x))
+   \end{bmatrix}
+   \begin{bmatrix}
+   \Delta x \\
+   \Delta \lambda
+   \end{bmatrix}
+   =
+   -
+   \begin{bmatrix}
+   \nabla f(x) + \sum_i \lambda_i \nabla g_i(x) \\
+   \lambda \circ g(x) + \tfrac{1}{t}\mathbf{1}
+   \end{bmatrix}.
+   </script>
+</p>
+<p>(b) Line search to keep strict feasibility. Choose the maximum <span class="arithmatex">\(\alpha\in(0,1]\)</span> such that:</p>
+<ul>
+<li><span class="arithmatex">\(g_i(x + \alpha \Delta x) &lt; 0\)</span>,</li>
+<li><span class="arithmatex">\(\lambda + \alpha \Delta \lambda &gt; 0\)</span>.</li>
+</ul>
+<p>(c) Update: <span class="arithmatex">\(x \leftarrow x + \alpha \Delta x,
+   \qquad  \lambda \leftarrow \lambda + \alpha \Delta \lambda.\)</span></p>
+<p>(d) Check duality gap: <span class="arithmatex">\(\text{gap} = - g(x)^\top \lambda\)</span> If <span class="arithmatex">\(\text{gap} \le \varepsilon\)</span>, stop.</p>
+<p>(e) Increase barrier parameter <span class="arithmatex">\(t \leftarrow \mu t.\)</span></p>
+</li>
+<li>
+<p>Return <span class="arithmatex">\(x\)</span>.</p>
+</li>
+</ol>
 <h2 id="convex-19_optimizationalgo-1210-choosing-the-right-method-in-practice">12.10 Choosing the right method in practice<a class="headerlink" href="#convex-19_optimizationalgo-1210-choosing-the-right-method-in-practice" title="Permanent link">¶</a></h2>
-<p>Let’s summarise the chapter in the form of a decision guide.</p>
 <p>Case A. Smooth, unconstrained, very high dimensional.<br>
 Example: logistic regression on millions of samples.<br>
 Use: gradient descent or (better) accelerated gradient.<br>

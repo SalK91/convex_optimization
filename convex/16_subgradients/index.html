@@ -1255,9 +1255,9 @@
 <h1 id="chapter-6-nonsmooth-convex-optimization-subgradients">Chapter 6: Nonsmooth Convex Optimization – Subgradients<a class="headerlink" href="#chapter-6-nonsmooth-convex-optimization-subgradients" title="Permanent link">¶</a></h1>
 <p>Many important convex objectives in machine learning are not differentiable everywhere. Examples include:</p>
 <ul>
-<li>the <span class="arithmatex">\( \ell_1 \)</span> norm <span class="arithmatex">\( \|x\|_1 = \sum_i |x_i| \)</span> (nondifferentiable at zero),</li>
-<li>pointwise-max functions such as <span class="arithmatex">\( f(x) = \max_i (a_i^\top x + b_i) \)</span>,</li>
-<li>the hinge loss <span class="arithmatex">\( \max\{0,\, 1 - y w^\top x\} \)</span> used in SVMs,</li>
+<li>the <script type="math/tex"> \ell_1 </script> norm <script type="math/tex"> \|x\|_1 = \sum_i |x_i| </script> (nondifferentiable at zero),</li>
+<li>pointwise-max functions such as <script type="math/tex"> f(x) = \max_i (a_i^\top x + b_i) </script>,</li>
+<li>the hinge loss <script type="math/tex"> \max\{0,\, 1 - y w^\top x\} </script> used in SVMs,</li>
 <li>regularisers like total variation or indicator functions of convex sets.</li>
 </ul>
 <p>Although these functions have “kinks”, they remain convex—and convexity guarantees the existence of supporting hyperplanes at every point. Subgradients formalise this idea and allow optimisation algorithms to operate even when no derivative exists.</p>
@@ -1283,7 +1283,8 @@ f(y) \ge f(x) + g^\top (y - x) \quad \text{for all } y.
 </p>
 <p>Properties:</p>
 <ul>
-<li><span class="arithmatex">\( \partial f(x) \)</span> is always a nonempty convex set (if <span class="arithmatex">\(x\)</span> is in the interior of the domain).</li>
+<li>
+<script type="math/tex"> \partial f(x) </script> is always a nonempty convex set (if <span class="arithmatex">\(x\)</span> is in the interior of the domain).</li>
 <li>If <span class="arithmatex">\(f\)</span> is differentiable at <span class="arithmatex">\(x\)</span>, then<br>
 <script type="math/tex; mode=display">
   \partial f(x) = \{\nabla f(x)\}.
@@ -1306,7 +1307,7 @@ Then:</p>
 </li>
 </ul>
 <p>At the kink, any slope between <span class="arithmatex">\(-1\)</span> and <span class="arithmatex">\(1\)</span> supports the graph from below.</p>
-<h3 id="the-ell_1-norm">The <span class="arithmatex">\( \ell_1 \)</span> norm<a class="headerlink" href="#the-ell_1-norm" title="Permanent link">¶</a></h3>
+<h3 id="the-ell_1-norm">The <script type="math/tex"> \ell_1 </script> norm<a class="headerlink" href="#the-ell_1-norm" title="Permanent link">¶</a></h3>
 <p>For <span class="arithmatex">\(f(x) = \|x\|_1 = \sum_i |x_i|\)</span>:</p>
 <div class="arithmatex">\[
 g \in \partial \|x\|_1
@@ -1358,7 +1359,7 @@ f(x) = \max_{i=1,\dots,k} (a_i^\top x + b_i).
 <ul>
 <li>At optimality, no subgradient points to a direction that would decrease <span class="arithmatex">\(f\)</span>.</li>
 <li>Geometrically, the supporting hyperplane at <span class="arithmatex">\(x^\star\)</span> is horizontal, forming the flat bottom of the convex bowl.</li>
-<li>This generalises the smooth condition <span class="arithmatex">\( \nabla f(x^\star)=0 \)</span>.</li>
+<li>This generalises the smooth condition <script type="math/tex"> \nabla f(x^\star)=0 </script>.</li>
 </ul>
 <h2 id="64-subgradient-calculus-useful-rules">6.4 Subgradient Calculus (Useful Rules)<a class="headerlink" href="#64-subgradient-calculus-useful-rules" title="Permanent link">¶</a></h2>
 <p>Subgradients satisfy powerful calculus rules that allow us to work with complex functions. Let <span class="arithmatex">\(f\)</span> and <span class="arithmatex">\(g\)</span> be convex.</p>
@@ -1394,7 +1395,7 @@ x_{k+1} = x_k - \alpha_k g_k,
 <ul>
 <li>Requires only a subgradient (no differentiability needed).</li>
 <li>Works for any convex function.</li>
-<li>Stepsizes must typically decrease (e.g. <span class="arithmatex">\( \alpha_k = c/\sqrt{k} \)</span>, <span class="arithmatex">\( \alpha_k = c/k \)</span>).</li>
+<li>Stepsizes must typically decrease (e.g. <script type="math/tex"> \alpha_k = c/\sqrt{k} </script>, <script type="math/tex"> \alpha_k = c/k </script>).</li>
 <li>Guaranteed convergence for convex <span class="arithmatex">\(f\)</span>, but generally slow.</li>
 </ul>
 <h3 id="convergence-rates-worst-case">Convergence rates (worst case)<a class="headerlink" href="#convergence-rates-worst-case" title="Permanent link">¶</a></h3>
@@ -1411,7 +1412,8 @@ x_{k+1} = x_k - \alpha_k g_k,
 <p>Many training objectives behave nonsmoothly:</p>
 <ul>
 <li>SVM hinge loss  </li>
-<li><span class="arithmatex">\( \ell_1 \)</span>-regularised models (sparse optimisation)  </li>
+<li>
+<script type="math/tex"> \ell_1 </script>-regularised models (sparse optimisation)  </li>
 <li>ReLUs and piecewise-linear networks  </li>
 <li>Projections onto convex sets  </li>
 </ul>
@@ -1430,7 +1432,8 @@ f(x) + \frac{1}{2\alpha}\|x-y\|^2
 </p>
 <p>Proximal algorithms (e.g., ISTA, FISTA, ADMM) can handle nonsmooth terms like:</p>
 <ul>
-<li><span class="arithmatex">\( \ell_1 \)</span> regularisation,</li>
+<li>
+<script type="math/tex"> \ell_1 </script> regularisation,</li>
 <li>indicator functions of convex sets,</li>
 <li>total variation penalties.</li>
 </ul>
@@ -1438,9 +1441,9 @@ f(x) + \frac{1}{2\alpha}\|x-y\|^2
 <h3 id="2-smoothing-techniques">(2) Smoothing techniques<a class="headerlink" href="#2-smoothing-techniques" title="Permanent link">¶</a></h3>
 <p>Many nonsmooth convex functions have smooth approximations:</p>
 <ul>
-<li>Replace <span class="arithmatex">\( |t| \)</span> with the Huber loss.</li>
-<li>Replace <span class="arithmatex">\( \max\{0,z\} \)</span> with softplus.</li>
-<li>Replace <span class="arithmatex">\( \max_i(a_i^\top x) \)</span> with log-sum-exp, a smooth convex approximation.</li>
+<li>Replace <script type="math/tex"> |t| </script> with the Huber loss.</li>
+<li>Replace <script type="math/tex"> \max\{0,z\} </script> with softplus.</li>
+<li>Replace <script type="math/tex"> \max_i(a_i^\top x) </script> with log-sum-exp, a smooth convex approximation.</li>
 </ul>
 <p>Smoothing preserves convexity while allowing the use of fast gradient methods.</p>
 <h2 id="summary">Summary<a class="headerlink" href="#summary" title="Permanent link">¶</a></h2>

@@ -1291,7 +1291,7 @@ L_c = \{\, x \in \mathbb{R}^n : f(x) = c \,\}.
 <h2 id="32-jacobians">3.2  Jacobians<a class="headerlink" href="#32-jacobians" title="Permanent link">¶</a></h2>
 <p>In optimization and machine learning, functions often map many inputs to many outputs for example, neural network layers, physical simulators, and vector-valued transformations. To understand how such functions change locally, we use the Jacobian matrix, which captures how each output responds to each input.</p>
 <h3 id="from-derivative-to-gradient">From derivative to gradient<a class="headerlink" href="#from-derivative-to-gradient" title="Permanent link">¶</a></h3>
-<p>For a scalar function <span class="arithmatex">\( f : \mathbb{R}^n \to \mathbb{R} \)</span>, differentiability means that near any point <span class="arithmatex">\( x \)</span>,
+<p>For a scalar function <script type="math/tex"> f : \mathbb{R}^n \to \mathbb{R} </script>, differentiability means that near any point <script type="math/tex"> x </script>,
 <script type="math/tex; mode=display">
 f(x + h) \approx f(x) + \nabla f(x)^\top h.
 </script>
@@ -1359,7 +1359,7 @@ Thus, locally, the nonlinear map <span class="arithmatex">\(F\)</span> behaves l
 </table>
 <p>The Jacobian is therefore a compact representation of local sensitivity. In optimization, Jacobians appear in gradient-based methods, backpropagation, implicit differentiation, and the analysis of constraints and dynamics.</p>
 <h2 id="33-the-hessian-and-curvature">3.3 The Hessian and Curvature<a class="headerlink" href="#33-the-hessian-and-curvature" title="Permanent link">¶</a></h2>
-<p>For a twice–differentiable function <span class="arithmatex">\( f : \mathbb{R}^n \to \mathbb{R} \)</span>, the Hessian matrix collects all second-order partial derivatives:
+<p>For a twice–differentiable function <script type="math/tex"> f : \mathbb{R}^n \to \mathbb{R} </script>, the Hessian matrix collects all second-order partial derivatives:
 <script type="math/tex; mode=display">
 \nabla^{2} f(x) \;=\;
 \begin{bmatrix}
@@ -1373,8 +1373,8 @@ Thus, locally, the nonlinear map <span class="arithmatex">\(F\)</span> behaves l
 <h3 id="curvature-and-positive-definiteness">Curvature and positive definiteness<a class="headerlink" href="#curvature-and-positive-definiteness" title="Permanent link">¶</a></h3>
 <p>The eigenvalues of the Hessian determine its geometric behavior:</p>
 <ul>
-<li>If <span class="arithmatex">\( \nabla^{2}f(x) \succeq 0 \)</span> (all eigenvalues nonnegative), the function is locally convex near <span class="arithmatex">\(x\)</span>.  </li>
-<li>If <span class="arithmatex">\( \nabla^{2}f(x) \succ 0 \)</span>, the surface curves upward in all directions, guaranteeing local (and for convex functions, global) uniqueness of the minimizer.  </li>
+<li>If <script type="math/tex"> \nabla^{2}f(x) \succeq 0 </script> (all eigenvalues nonnegative), the function is locally convex near <span class="arithmatex">\(x\)</span>.  </li>
+<li>If <script type="math/tex"> \nabla^{2}f(x) \succ 0 </script>, the surface curves upward in all directions, guaranteeing local (and for convex functions, global) uniqueness of the minimizer.  </li>
 <li>If the Hessian has both positive and negative eigenvalues, the point is a saddle: some directions curve up, others curve down.</li>
 </ul>
 <p>Thus, curvature is directly encoded in the spectrum of the Hessian. Large eigenvalues correspond to steep curvature; small eigenvalues correspond to gently sloping or flat regions.</p>
@@ -1431,7 +1431,7 @@ f(x)
 </script>
 The quadratic term measures how the gradient itself changes with direction. The behavior of this term depends on the Hessian:</p>
 <ul>
-<li>If <span class="arithmatex">\( \nabla^2 f(x) \succeq 0 \)</span>, the quadratic term is nonnegative and the function curves upward—locally bowl-shaped.</li>
+<li>If <script type="math/tex"> \nabla^2 f(x) \succeq 0 </script>, the quadratic term is nonnegative and the function curves upward—locally bowl-shaped.</li>
 <li>If the Hessian has both positive and negative eigenvalues, the function bends up in some directions and down in others—characteristic of saddle points.</li>
 </ul>
 <h3 id="role-in-optimization-algorithms">Role in optimization algorithms<a class="headerlink" href="#role-in-optimization-algorithms" title="Permanent link">¶</a></h3>
@@ -1444,7 +1444,7 @@ which balances descent direction and local curvature. Trust-region and quasi-New
 <h2 id="35-smoothness-and-strong-convexity">3.5 Smoothness and Strong Convexity<a class="headerlink" href="#35-smoothness-and-strong-convexity" title="Permanent link">¶</a></h2>
 <p>In optimization, the behavior of a function’s curvature strongly influences how algorithms perform. Two fundamental properties Lipschitz smoothness and strong convexity describe how rapidly the gradient can change and how much curvature the function must have.</p>
 <h3 id="lipschitz-continuous-gradients-l-smoothness">Lipschitz continuous gradients (L-smoothness)<a class="headerlink" href="#lipschitz-continuous-gradients-l-smoothness" title="Permanent link">¶</a></h3>
-<p>A differentiable function <span class="arithmatex">\( f \)</span> has an <span class="arithmatex">\(L\)</span>-Lipschitz continuous gradient if
+<p>A differentiable function <script type="math/tex"> f </script> has an <span class="arithmatex">\(L\)</span>-Lipschitz continuous gradient if
 <script type="math/tex; mode=display">
 \|\nabla f(x) - \nabla f(y)\| \le L \|x - y\| \qquad \forall x, y.
 </script>
@@ -1465,7 +1465,7 @@ This inequality states that every <span class="arithmatex">\(L\)</span>-smooth f
 </script>
 ensures that each update decreases the function value for convex objectives. In machine learning, the constant <span class="arithmatex">\(L\)</span> effectively controls how large the learning rate can be before training becomes unstable.</p>
 <h3 id="strong-convexity">Strong convexity<a class="headerlink" href="#strong-convexity" title="Permanent link">¶</a></h3>
-<p>A differentiable function <span class="arithmatex">\( f \)</span> is <span class="arithmatex">\( \mu \)</span>-strongly convex if, for some <span class="arithmatex">\( \mu &gt; 0 \)</span>,
+<p>A differentiable function <script type="math/tex"> f </script> is <script type="math/tex"> \mu </script>-strongly convex if, for some <script type="math/tex"> \mu > 0 </script>,
 <script type="math/tex; mode=display">
 f(y)
 \ge

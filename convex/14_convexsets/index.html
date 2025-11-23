@@ -1256,18 +1256,19 @@
 <p>Most optimization problems are constrained. The set of points that satisfy these constraints the feasible region determines where an algorithm is allowed to search. In many machine learning and convex optimization problems, this feasible region is a convex set. Convex sets have a simple but powerful geometric property: any line segment between two feasible points remains entirely within the set. This structure eliminates irregularities and makes optimization far more predictable.</p>
 <p>This chapter develops the geometric foundations needed to reason about convexity. We introduce affine sets, convex sets, hyperplanes, halfspaces, polyhedra, and supporting hyperplanes. These objects form the geometric language of convex analysis. Understanding their structure is essential for interpreting constraints, proving optimality conditions, and designing efficient algorithms for convex optimization.</p>
 <h2 id="41-convex-sets">4.1 Convex sets<a class="headerlink" href="#41-convex-sets" title="Permanent link">¶</a></h2>
-<p>A set <span class="arithmatex">\( C \subseteq \mathbb{R}^n \)</span> is convex if for any two points <span class="arithmatex">\( x, y \in C \)</span> and any <span class="arithmatex">\( \theta \in [0,1] \)</span>,
+<p>A set <script type="math/tex"> C \subseteq \mathbb{R}^n </script> is convex if for any two points <script type="math/tex"> x, y \in C </script> and any <script type="math/tex"> \theta \in [0,1] </script>,
 <script type="math/tex; mode=display">
 \theta x + (1 - \theta) y \in C.
 </script>
 That is, the entire line segment between <span class="arithmatex">\(x\)</span> and <span class="arithmatex">\(y\)</span> lies inside the set. Convex sets have no “holes” or “indentations,” and this geometric regularity is what makes optimization over them tractable.</p>
 <h3 id="examples">Examples<a class="headerlink" href="#examples" title="Permanent link">¶</a></h3>
 <ul>
-<li>Affine subspaces: <span class="arithmatex">\( \{ x : Ax = b \} \)</span>.  </li>
-<li>Halfspaces: <span class="arithmatex">\( \{ x : a^\top x \le b \} \)</span>.  </li>
-<li>Euclidean balls: <span class="arithmatex">\( \{ x : \|x\|_2 \le r \} \)</span>.  </li>
-<li><span class="arithmatex">\( \ell_\infty \)</span> balls (axis-aligned boxes): <span class="arithmatex">\( \{ x : \|x\|_\infty \le r \} \)</span>.  </li>
-<li>Probability simplex: <span class="arithmatex">\( \{ x \in \mathbb{R}^n : x \ge 0, \ \sum_i x_i = 1 \} \)</span>.  </li>
+<li>Affine subspaces: <script type="math/tex"> \{ x : Ax = b \} </script>.  </li>
+<li>Halfspaces: <script type="math/tex"> \{ x : a^\top x \le b \} </script>.  </li>
+<li>Euclidean balls: <script type="math/tex"> \{ x : \|x\|_2 \le r \} </script>.  </li>
+<li>
+<script type="math/tex"> \ell_\infty </script> balls (axis-aligned boxes): <script type="math/tex"> \{ x : \|x\|_\infty \le r \} </script>.  </li>
+<li>Probability simplex: <script type="math/tex"> \{ x \in \mathbb{R}^n : x \ge 0, \ \sum_i x_i = 1 \} </script>.  </li>
 </ul>
 <p>A set fails to be convex whenever some segment between two feasible points leaves the set—for example, a crescent or an annulus.</p>
 <h2 id="42-affine-sets-hyperplanes-and-halfspaces">4.2 Affine sets, hyperplanes, and halfspaces<a class="headerlink" href="#42-affine-sets-hyperplanes-and-halfspaces" title="Permanent link">¶</a></h2>
@@ -1287,7 +1288,7 @@ Hyperplanes act as the “flat boundaries” of higher-dimensional space and are
 </script>
 Halfspaces are convex and serve as basic local approximations to general convex sets.</p>
 <h2 id="43-convex-combinations-and-convex-hulls">4.3 Convex combinations and convex hulls<a class="headerlink" href="#43-convex-combinations-and-convex-hulls" title="Permanent link">¶</a></h2>
-<p>A convex combination of points <span class="arithmatex">\( x_1, \dots, x_k \)</span> is a weighted average
+<p>A convex combination of points <script type="math/tex"> x_1, \dots, x_k </script> is a weighted average
 <script type="math/tex; mode=display">
 \sum_{i=1}^k \theta_i x_i, 
 \qquad
@@ -1308,12 +1309,12 @@ P = \{ x : Ax \le b \}.
 Polyhedra are always convex; they may be bounded or unbounded.</p>
 <p>If a polyhedron is also bounded, it is called a polytope. Polytopes include familiar shapes such as cubes, simplices, and more general polytopes that arise as feasible regions in linear programs.</p>
 <h2 id="45-extreme-points">4.5 Extreme points<a class="headerlink" href="#45-extreme-points" title="Permanent link">¶</a></h2>
-<p>Let <span class="arithmatex">\( C \)</span> be a convex set. A point <span class="arithmatex">\(x \in C\)</span> is an extreme point if it cannot be written as a nontrivial convex combination of other points in the set. Formally, if
+<p>Let <script type="math/tex"> C </script> be a convex set. A point <span class="arithmatex">\(x \in C\)</span> is an extreme point if it cannot be written as a nontrivial convex combination of other points in the set. Formally, if
 <script type="math/tex; mode=display">
 x = \theta y + (1 - \theta) z,
 \qquad 0 < \theta < 1, \qquad y, z \in C,
 </script>
-implies <span class="arithmatex">\( y = z = x \)</span>.</p>
+implies <script type="math/tex"> y = z = x </script>.</p>
 <p>Geometrically, extreme points are the “corners” of a convex set. For polytopes, the extreme points are exactly the vertices. Extreme points are essential in optimization because many convex problems—such as linear programs—achieve their optima at extreme points of the feasible region. This geometric fact underlies simplex-type algorithms and supports duality theory.</p>
 <h2 id="46-cones">4.6 Cones<a class="headerlink" href="#46-cones" title="Permanent link">¶</a></h2>
 <p>Cones generalize the idea of “directions” in geometry. They capture sets that are closed under nonnegative scaling and play a central role in convex analysis and constrained optimization.</p>
@@ -1329,7 +1330,7 @@ A cone is convex if it is also closed under addition:
 x, y \in K \quad\Longrightarrow\quad x + y \in K.
 </script>
 </p>
-<p>Cones are not required to contain negative multiples of a vector, so they are generally not subspaces. Instead of extreme points, cones have extreme rays, which represent directions that cannot be formed as positive combinations of other rays. For example, in the nonnegative orthant <span class="arithmatex">\( \mathbb{R}^n_{\ge 0} \)</span>, each coordinate axis direction is an extreme ray.</p>
+<p>Cones are not required to contain negative multiples of a vector, so they are generally not subspaces. Instead of extreme points, cones have extreme rays, which represent directions that cannot be formed as positive combinations of other rays. For example, in the nonnegative orthant <script type="math/tex"> \mathbb{R}^n_{\ge 0} </script>, each coordinate axis direction is an extreme ray.</p>
 <h3 id="conic-hull">Conic hull<a class="headerlink" href="#conic-hull" title="Permanent link">¶</a></h3>
 <p>Given any set <span class="arithmatex">\(S\)</span>, its conic hull is the set of all conic combinations:
 <script type="math/tex; mode=display">
