@@ -51,11 +51,11 @@ Rank and nullity facts:
 - The rank-nullity theorem states: $\mathrm{rank}(A) + \mathrm{nullity}(A) = n,$ where $n$ is the number of columns of $A$.
 
 
-> Column Space: The column space of a matrix \( A \), denoted \( C(A) \), is the set of all possible output vectors \( b \) that can be written as \( Ax \) for some \( x \). In other words, it contains all vectors that the matrix can “reach” through linear combinations of its columns. The question “Does the system \( Ax = b \) have a solution?” is equivalent to asking whether \( b \in C(A) \). If \( b \) lies in the column space, a solution exists; otherwise, it does not.
+> Column Space: The column space of a matrix $ A $, denoted $ C(A) $, is the set of all possible output vectors $ b $ that can be written as $ Ax $ for some $ x $. In other words, it contains all vectors that the matrix can “reach” through linear combinations of its columns. The question “Does the system $ Ax = b $ have a solution?” is equivalent to asking whether $ b \in C(A) $. If $ b $ lies in the column space, a solution exists; otherwise, it does not.
 
-> Null Space: The null space (or kernel) of \( A \), denoted \( N(A) \), is the set of all input vectors \( x \) that are mapped to zero:  \( N(A) = \{ x : Ax = 0 \} \). It answers a different question: *If a solution to \( Ax = b \) exists, is it unique?* If the null space contains only the zero vector (\( \mathrm{nullity}(A) = 0 \)), the solution is unique. But if \( N(A) \) contains nonzero vectors, there are infinitely many distinct solutions that yield the same output.
+> Null Space: The null space (or kernel) of $ A $, denoted $ N(A) $, is the set of all input vectors $ x $ that are mapped to zero:  $ N(A) = \{ x : Ax = 0 \} $. It answers a different question: *If a solution to $ Ax = b $ exists, is it unique?* If the null space contains only the zero vector ($ \mathrm{nullity}(A) = 0 $), the solution is unique. But if $ N(A) $ contains nonzero vectors, there are infinitely many distinct solutions that yield the same output.
 
-> Multicollinearity: When one feature in the data matrix \( A \) is a linear combination of others for example, \( \text{feature}_3 = 2 \times \text{feature}_1 + \text{feature}_2 \)—the columns of \( A \) become linearly dependent. This creates a nonzero vector in the null space of \( A \), meaning multiple weight vectors \( x \) can produce the same predictions. The model is then *unidentifiable* (Underdetermined – the number of unknowns (parameters) exceeds the number of independent equations (information)), and \( A^\top A \) becomes singular (non-invertible). Regularization methods such as Ridge or Lasso regression are used to resolve this ambiguity by selecting one stable, well-behaved solution.
+> Multicollinearity: When one feature in the data matrix $ A $ is a linear combination of others for example, $ \text{feature}_3 = 2 \times \text{feature}_1 + \text{feature}_2 $—the columns of $ A $ become linearly dependent. This creates a nonzero vector in the null space of $ A $, meaning multiple weight vectors $ x $ can produce the same predictions. The model is then *unidentifiable* (Underdetermined – the number of unknowns (parameters) exceeds the number of independent equations (information)), and $ A^\top A $ becomes singular (non-invertible). Regularization methods such as Ridge or Lasso regression are used to resolve this ambiguity by selecting one stable, well-behaved solution.
 
 >> Regularization introduces an additional constraint or penalty that selects a *single, stable* solution from among the infinite possibilities.
 
@@ -73,37 +73,37 @@ Rank and nullity facts:
 
 >> Thus, regularization resolves ambiguity by imposing structure or preference on the solution favoring smaller or sparser coefficient vectors—and making the regression problem well-posed even when $A$ is rank-deficient.
 
-> Feasible Directions: In a constrained optimization problem of the form \( Ax = b \), the null space of \( A \) characterizes the directions along which one can move without violating the constraints. If \( d \in N(A) \), then moving from a feasible point \( x \) to \( x + d \) preserves feasibility, since  \( A(x + d) = Ax + Ad = b \). Thus, the null space defines the *space of free movement* directions in which optimization algorithms can explore solutions while remaining within the constraint surface.
+> Feasible Directions: In a constrained optimization problem of the form $ Ax = b $, the null space of $ A $ characterizes the directions along which one can move without violating the constraints. If $ d \in N(A) $, then moving from a feasible point $ x $ to $ x + d $ preserves feasibility, since  $ A(x + d) = Ax + Ad = b $. Thus, the null space defines the *space of free movement* directions in which optimization algorithms can explore solutions while remaining within the constraint surface.
 
-> Row Space: The row space of \( A \), denoted \( R(A) \), is the span of the rows of \( A \) (viewed as vectors). It represents all possible linear combinations of the rows and has the same dimension as the column space, equal to \( \mathrm{rank}(A) \). The row space is orthogonal to the null space of \( A \):  \( R(A) \perp N(A) \).  In optimization, the row space corresponds to the set of active constraints or the directions along which changes in \( x \) affect the constraints.
+> Row Space: The row space of $ A $, denoted $ R(A) $, is the span of the rows of $ A $ (viewed as vectors). It represents all possible linear combinations of the rows and has the same dimension as the column space, equal to $ \mathrm{rank}(A) $. The row space is orthogonal to the null space of $ A $:  $ R(A) \perp N(A) $.  In optimization, the row space corresponds to the set of active constraints or the directions along which changes in $ x $ affect the constraints.
 
-> Left Null Space: The left null space, denoted \( N(A^\top) \), is the set of all vectors \( y \) such that \( A^\top y = 0 \). These vectors are orthogonal to the columns of \( A \), and therefore orthogonal to the column space itself. In least squares problems, \( N(A^\top) \) represents residual directions—components of \( b \) that cannot be explained by the model \( Ax = b \).
+> Left Null Space: The left null space, denoted $ N(A^\top) $, is the set of all vectors $ y $ such that $ A^\top y = 0 $. These vectors are orthogonal to the columns of $ A $, and therefore orthogonal to the column space itself. In least squares problems, $ N(A^\top) $ represents residual directions—components of $ b $ that cannot be explained by the model $ Ax = b $.
 
-> Projection Interpretation (Least Squares):  When \( Ax = b \) has no exact solution (as in overdetermined systems), the least squares solution finds \( x \) such that \( Ax \) is the projection of \( b \) onto the column space of \( A \):  
-> \[
+> Projection Interpretation (Least Squares):  When $ Ax = b $ has no exact solution (as in overdetermined systems), the least squares solution finds $ x $ such that $ Ax $ is the projection of $ b $ onto the column space of $ A $:  
+> $$
 > x^* = (A^\top A)^{-1} A^\top b,
-> \]
+> $$
 > and the residual  
-> \[
+> $$
 > r = b - Ax^*
-> \]
-> lies in the left null space \( N(A^\top) \).  
-> This provides a geometric view: the solution projects \( b \) onto the closest point in the subspace that \( A \) can reach.
+> $$
+> lies in the left null space $ N(A^\top) $.  
+> This provides a geometric view: the solution projects $ b $ onto the closest point in the subspace that $ A $ can reach.
 
-> Rank–Nullity Relationship: The rank of \( A \) is the dimension of both its column and row spaces, and the nullity is the dimension of its null space. Together they satisfy the Rank–Nullity Theorem:
-> \[
+> Rank–Nullity Relationship: The rank of $ A $ is the dimension of both its column and row spaces, and the nullity is the dimension of its null space. Together they satisfy the Rank–Nullity Theorem:
+> $$
 > \mathrm{rank}(A) + \mathrm{nullity}(A) = n,
-> \]
-> where \( n \) is the number of columns of \( A \). This theorem reflects the balance between the number of independent constraints and the number of degrees of freedom in \( x \).
+> $$
+> where $ n $ is the number of columns of $ A $. This theorem reflects the balance between the number of independent constraints and the number of degrees of freedom in $ x $.
 
 > Geometric Interpretation:  
 
 > - The column space represents all *reachable outputs*.  
 > - The null space represents all *indistinguishable inputs* that map to zero.  
-> - The row space represents all *independent constraints* imposed by \( A \).  
+> - The row space represents all *independent constraints* imposed by $ A $.  
 > - The left null space captures *inconsistencies* or residual directions that cannot be explained by the model.  
 >  
-> Together, these four subspaces define the complete geometry of the linear map \( A: \mathbb{R}^n \to \mathbb{R}^m \).
+> Together, these four subspaces define the complete geometry of the linear map $ A: \mathbb{R}^n \to \mathbb{R}^m $.
 
 ## 2.3 Inner products and orthogonality
 Inner products provide the geometric structure that underlies most optimization algorithms. They allow us to define lengths, angles, projections, gradients, and orthogonality—concepts that appear repeatedly in convex optimization and machine learning.
@@ -271,14 +271,14 @@ Many aspects of optimization depend on how a matrix transforms vectors: how much
 ### Operator norms
 
 Given a matrix $A : \mathbb{R}^n \to \mathbb{R}^m$ and norms $\|\cdot\|_p$ on $\mathbb{R}^n$ and $\|\cdot\|_q$ on $\mathbb{R}^m$, the induced operator norm is defined as
-\[
+$$
 \|A\|_{p \to q}
 =
 \sup_{x \neq 0}
 \frac{\|A x\|_q}{\|x\|_p}
 =
 \sup_{\|x\|_p \le 1} \|A x\|_q.
-\]
+$$
 This quantity measures the largest amount by which $A$ can magnify a vector when measured with the chosen norms. Several important special cases are widely used:
 
 - $\|A\|_{2 \to 2}$, the spectral norm, equals the largest singular value of $A$.
@@ -286,25 +286,25 @@ This quantity measures the largest amount by which $A$ can magnify a vector when
 - $\|A\|_{\infty \to \infty}$ is the maximum absolute row sum.
 
 In optimization, operator norms play a central role in determining stability. For example, gradient descent on the quadratic function  
-\[
+$$
 f(x) = \tfrac{1}{2} x^\top Q x - b^\top x
-\]
+$$
 converges for step sizes $\alpha < 2 / \|Q\|_2$. This shows that controlling the operator norm of the Hessian—or a Lipschitz constant of the gradient—directly governs how aggressively an algorithm can move.
 
 ### Singular Value Decomposition (SVD)
 
 Any matrix $A \in \mathbb{R}^{m \times n}$ admits a factorization
-\[
+$$
 A = U \Sigma V^\top,
-\]
+$$
 where $U$ and $V$ are orthogonal matrices and $\Sigma$ is diagonal with nonnegative entries $\sigma_1 \ge \sigma_2 \ge \cdots$. The $\sigma_i$ are the singular values of $A$.
 
 Geometrically, the SVD shows how $A$ transforms the unit ball into an ellipsoid. The columns of $V$ give the principal input directions, the singular values are the lengths of the ellipsoid’s axes, and the columns of $U$ give the output directions. The largest singular value $\sigma_{\max}$ equals the spectral norm $\|A\|_2$, while the smallest $\sigma_{\min}$ describes the least expansion (or exact flattening if $\sigma_{\min} = 0$).
 
 SVD is a powerful diagnostic tool in optimization. The ratio
-\[
+$$
 \kappa(A) = \frac{\sigma_{\max}}{\sigma_{\min}}
-\]
+$$
 is the condition number of $A$. A large condition number implies that the map stretches some directions much more than others, leading to slow or unstable convergence in gradient methods. A small condition number means $A$ behaves more like a uniform scaling, which is ideal for optimization.
 
 ### Low-rank structure

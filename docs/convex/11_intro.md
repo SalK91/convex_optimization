@@ -15,11 +15,11 @@ This web-book is written for practitioners who have basic familiarity with optim
 
 Many supervised learning problems can be written in a common form:
 
-\[
+$$
 \min_{x \in \mathcal{X}} 
 \; \frac{1}{N}\sum_{i=1}^{N} \ell(a_i^\top x, b_i) 
 + \lambda R(x),
-\]
+$$
 
 where
 
@@ -34,18 +34,18 @@ Many widely used losses and regularizers are convex. Examples include least squa
 
 A set $\mathcal{C}$ is convex if, whenever you pick two points in the set, the line segment between them stays entirely inside the set:
 
-\[
+$$
 \theta x + (1-\theta)y \in \mathcal{C} 
 \quad \text{for all } x,y \in \mathcal{C},\; \theta \in [0,1].
-\]
+$$
 
 Convex functions follow a similar idea. A function $f$ is convex if its graph never dips below the straight line connecting two points on the function:
 
-\[
+$$
 f(\theta x + (1-\theta)y)
 \le
 \theta f(x) + (1-\theta) f(y).
-\]
+$$
 
 Intuitively, convex functions look like bowls: they curve upward and have at most one global minimum. Affine functions are both convex and concave, and quadratics with positive semidefinite Hessians are convex. Many ML loss functions share this shape, which makes them easy to optimize.
 
