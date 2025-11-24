@@ -1,56 +1,74 @@
 # Chapter 13: Optimization Algorithms for Equality-Constrained Problems
 
-Equality-constrained optimization arises whenever the variables must satisfy one or more exact relations — such as conservation laws, normalization, or fairness criteria. We study algorithms for minimizing a function subject to linear or nonlinear equality constraints:
+Equality-constrained optimization arises whenever variables must satisfy exact relationships, such as conservation laws, normalization, or linear invariants. In this chapter we focus on problems of the form
 
 $$
 \min_x \; f(x) \quad \text{s.t.} \quad A x = b.
 $$
 
-Such problems are fundamental in convex optimization, quadratic programming, and many ML formulations involving exact invariants.
+where $f : \mathbb{R}^n \to \mathbb{R}$ is (typically convex and differentiable) and $A \in \mathbb{R}^{p \times n}$ has rank $p$. This linear equality structure appears in constrained least squares, portfolio optimization, and many ML formulations that impose exact balance or normalization constraints.
+
 
  
 ## 13.1 Geometric View — Optimization on an Affine Manifold
 
-The constraint $A x = b$ defines an affine set, a lower-dimensional plane within $\mathbb{R}^n$. The feasible region is:
+The constraint $A x = b$ defines an affine set
 
 $$
 \mathcal{X} = \{ x \in \mathbb{R}^n \mid A x = b \}.
 $$
 
-If $A \in \mathbb{R}^{p \times n}$ has full row rank ($\operatorname{rank}(A)=p$), then $\mathcal{X}$ is an $(n-p)$-dimensional affine manifold.
 
-Geometrically, optimization proceeds not over all $\mathbb{R}^n$, but along this manifold. At the optimum, the gradient $\nabla f(x^\star)$ cannot point in a direction that stays feasible—hence it must be orthogonal to the feasible surface. This gives the first key optimality relation:
+If $\operatorname{rank}(A) = p$, then $\mathcal{X}$ is an $(n-p)$-dimensional affine subspace of $\mathbb{R}^n$: a “flat” lower-dimensional plane embedded in the ambient space. Optimization now happens *along this plane*, not in all of $\mathbb{R}^n$. Any feasible direction $d$ must keep us in $\mathcal{X}$, so it must satisfy
 
 $$
-\nabla f(x^\star) = A^\top \nu^\star,
+A (x + d) = b \quad \Rightarrow \quad A d = 0.
 $$
 
-where $\nu^\star$ is a vector of Lagrange multipliers capturing how sensitive the objective is to constraint perturbations.
+Thus, feasible directions lie in the null space of $A$:
 
-> Intuition:  
-> The gradient of the objective at the optimum lies in the span of the constraint normals (rows of $A$).  
-> Any feasible direction must lie in the null space of $A$, orthogonal to $\nabla f(x^\star)$.
+$$
+\mathcal{D}_{\text{feas}} = \{ d \in \mathbb{R}^n \mid A d = 0 \} = \operatorname{Null}(A).
+$$
 
- 
+At an optimal point $x^\star \in \mathcal{X}$, moving in any feasible direction $d$ cannot decrease $f$. For differentiable $f$, this means
+
+$$
+\nabla f(x^\star)^\top d \ge 0 \quad \text{for all } d \text{ with } A d = 0.
+$$
+
+Equivalently, $\nabla f(x^\star)$ must be orthogonal to all feasible directions, i.e. it lies in the row space of $A$. Therefore there exists a vector of Lagrange multipliers $\nu^\star$ such that
+
+$$
+\nabla f(x^\star) = A^\top \nu^\star.
+$$
+
+This is the basic geometric optimality condition: at the optimum, the gradient of $f$ is a linear combination of the constraint normals (rows of $A$), and every feasible direction is orthogonal to $\nabla f(x^\star)$.
+
+
 
 ## 13.2 Lagrange Function and KKT System
 
-Define the Lagrangian:
+The Lagrangian for the equality-constrained problem is
 
 $$
-\mathcal{L}(x, \nu) = f(x) + \nu^\top (A x - b).
+\mathcal{L}(x,\nu)
+=
+f(x) + \nu^\top (A x - b),
 $$
 
-The first-order (KKT) conditions for a feasible point $(x^\star, \nu^\star)$ to be optimal are:
+where $\nu \in \mathbb{R}^p$ are Lagrange multipliers. The first-order (KKT) conditions for a point $(x^\star,\nu^\star)$ to be optimal are
 
 $$
 \begin{aligned}
-\nabla f(x^\star) + A^\top \nu^\star &= 0, \\
-A x^\star &= b.
+\nabla_x \mathcal{L}(x^\star,\nu^\star) &= \nabla f(x^\star) + A^\top \nu^\star = 0 
+\quad &\text{(stationarity)},\\
+A x^\star &= b 
+\quad &\text{(primal feasibility)}.
 \end{aligned}
 $$
 
-These equations express stationarity and feasibility simultaneously. They can be combined into the KKT linear system:
+When $f$ is convex and $A$ has full row rank, these conditions are necessary and sufficient for global optimality. For Newton-type methods we linearize these conditions around a current iterate $(x,\nu)$ and solve for corrections $(\Delta x,\Delta \nu)$ from
 
 $$
 \begin{bmatrix}
@@ -58,8 +76,7 @@ $$
 A & 0
 \end{bmatrix}
 \begin{bmatrix}
-\Delta x \\
-\Delta \nu
+\Delta x \\ \Delta \nu
 \end{bmatrix}
 =
 -
@@ -69,20 +86,25 @@ A x - b
 \end{bmatrix}.
 $$
 
-At the optimum, the right-hand side is zero.
+This linear system is called the (equality-constrained) KKT system. At the optimum the right-hand side is zero.
 
-> ML Connection:  
-> Lagrange multipliers $\nu$ quantify trade-offs between objectives and hard constraints —  
-> for instance, enforcing weight normalization in a neural layer, balance constraints in fair classification, or conservation laws in physics-informed networks.
 
- 
-## 13.3 The Quadratic Case
+## 13.3 Quadratic Objectives
 
-For a quadratic objective
+A particularly important case is a convex quadratic objective
+
 $$
-f(x) = \tfrac{1}{2}x^\top P x + q^\top x + r,
+f(x) = \tfrac{1}{2} x^\top P x + q^\top x + r,
 $$
-with $P \succeq 0$, the KKT conditions reduce to a linear system:
+
+with $P \succeq 0$. The equality-constrained problem
+
+$$
+\min_x \tfrac{1}{2} x^\top P x + q^\top x + r 
+\quad \text{s.t.} \quad A x = b
+$$
+
+has KKT conditions
 
 $$
 \begin{bmatrix}
@@ -99,50 +121,86 @@ q \\ -b
 \end{bmatrix}.
 $$
 
-This is a saddle-point system, solvable by factorization or elimination. If $P \succ 0$ and $A$ has full row rank, the solution $(x^\star, \nu^\star)$ is unique.
+If $P \succ 0$ and $A$ has full row rank, this system has a unique solution $(x^\star,\nu^\star)$. This is the standard linear system solved in equality-constrained least squares and quadratic programming.
 
-> In ML, such systems appear in constrained least squares, e.g. enforcing $\sum_i w_i = 1$ in portfolio optimization or convex combination weights in mixture models.
+Examples in ML and statistics:
+
+- constrained least squares with sum-to-one constraints on coefficients;  
+- portfolio optimization with $ \mathbf{1}^\top w = 1$;  
+- quadratic surrogate subproblems inside second-order methods.
+
+The structure of the KKT matrix (symmetric, indefinite, with blocks $P$, $A$) can be exploited by specialized linear solvers and factorizations.
 
  
-## 13.4 The Null-Space (Reduced Variable) Method
+## 13.4 Null-Space (Reduced Variable) Method
 
-If $A$ has full row rank, we can find a particular feasible point $x_0$ such that $A x_0 = b$, and a basis $Z$ for the null space of $A$ satisfying $A Z = 0$.  
-Then any feasible $x$ can be written as:
+When the constraints are linear and of full row rank, a natural approach is to eliminate them explicitly.
+
+Choose:
+
+- a particular feasible point $x_0$ satisfying $A x_0 = b$,  
+- a matrix $Z \in \mathbb{R}^{n \times (n-p)}$ whose columns form a basis of the null space of $A$:
+  $$
+  A Z = 0.
+  $$
+
+Then every feasible $x$ can be written as
 
 $$
 x = x_0 + Z y, \quad y \in \mathbb{R}^{n-p}.
 $$
 
-Substituting into the objective gives a reduced problem:
+Substituting into the objective yields an unconstrained reduced problem in the smaller variable $y$:
 
 $$
-\min_y \; f(x_0 + Z y).
+\min_{y} \; \phi(y) := f(x_0 + Z y).
 $$
 
-This is an unconstrained problem in $y$, solvable by gradient or Newton methods.  
-The reduced gradient and Hessian are:
+Gradients and Hessians transform as
 
 $$
-\nabla_y f = Z^\top \nabla_x f, \qquad \nabla_y^2 f = Z^\top \nabla_x^2 f \, Z.
+\nabla_y \phi(y) = Z^\top \nabla_x f(x_0 + Z y), \qquad
+\nabla_y^2 \phi(y) = Z^\top \nabla_x^2 f(x_0 + Z y) \, Z.
 $$
 
-> Interpretation: Optimization proceeds only along feasible directions — those that do not violate the constraints (i.e., within $\operatorname{Null}(A)$).  
-> This is equivalent to projecting all gradient steps onto the tangent space of the constraint manifold.
+We can now apply any unconstrained method (gradient descent, CG, Newton) to $\phi(y)$. The corresponding updates in the original space are mapped back via $x = x_0 + Z y$.
 
- 
+Key points:
+
+- Optimization is restricted to feasible directions $\operatorname{Null}(A)$ by construction.  
+- The dimension drops from $n$ to $n-p$, which can be advantageous if $p$ is large.  
+- The cost is computing and storing a suitable null-space basis $Z$, which may destroy sparsity and be expensive for large-scale problems.
+
+Null-space methods are attractive when:
+
+- the number of constraints is moderate,  
+- a good factorization of $A$ is available,  
+- and we want an unconstrained algorithm in reduced coordinates.
+
+---
 
 ## 13.5 Newton’s Method for Equality-Constrained Problems
 
-For a twice differentiable $f$, the equality-constrained Newton step solves the quadratic subproblem:
+For a twice-differentiable convex $f$, we can derive an equality-constrained Newton step by solving a local quadratic approximation subject to linearized constraints.
+
+At a point $x$, approximate $f(x+d)$ by its second-order Taylor expansion:
+
+$$
+f(x+d) \approx f(x)
++ \nabla f(x)^\top d
++ \tfrac{1}{2} d^\top \nabla^2 f(x) d.
+$$
+
+We seek a step $d$ that approximately minimizes this quadratic model while remaining feasible to first order, i.e.
 
 $$
 \begin{aligned}
-\min_d & \quad \tfrac{1}{2} d^\top \nabla^2 f(x) d + \nabla f(x)^\top d, \\
+\min_d & \quad \tfrac{1}{2} d^\top \nabla^2 f(x) d + \nabla f(x)^\top d\\
 \text{s.t.} & \quad A d = 0.
 \end{aligned}
 $$
 
-This produces the step $(d, \lambda)$ from the linearized KKT system:
+The KKT conditions for this quadratic subproblem are
 
 $$
 \begin{bmatrix}
@@ -159,89 +217,39 @@ d \\ \lambda
 \end{bmatrix}.
 $$
 
-The update is $x_{k+1} = x_k + \alpha d$, ensuring $A x_{k+1} = b$ if $A x_k = b$.
-
-Geometric insight:  
-The Newton direction is the projection of the unconstrained Newton step onto the tangent space of the feasible set (directions satisfying $A d = 0$).  
-Thus, each step stays within the affine constraint manifold.
-
-> In practice:  
-> The KKT system is typically solved by *Schur complement factorization*:
-> $$
-> (A (\nabla^2 f)^{-1} A^\top) \lambda = A (\nabla^2 f)^{-1} \nabla f,
-> $$
-> which then yields $d = -(\nabla^2 f)^{-1} (\nabla f + A^\top \lambda)$.
-
- 
-## 13.6 Infeasible Start Newton Method
-
-When starting from an infeasible point ($A x_0 \ne b$),  
-we relax the constraint and drive feasibility progressively.  
-At iteration $k$, compute $(\Delta x, \Delta \nu)$ by solving:
+Solving this system gives the Newton step $d_{\text{nt}}$ and a multiplier update $\lambda$. The primal update is
 
 $$
-\begin{bmatrix}
-\nabla^2 f(x_k) & A^\top \\
-A & 0
-\end{bmatrix}
-\begin{bmatrix}
-\Delta x \\ \Delta \nu
-\end{bmatrix}
-=
--
-\begin{bmatrix}
-\nabla f(x_k) + A^\top \nu_k \\
-A x_k - b
-\end{bmatrix}.
+x_{k+1} = x_k + \alpha_k d_{\text{nt}},
 $$
 
-Then update:
+with a step size $\alpha_k \in (0,1]$ chosen by line search to ensure sufficient decrease and preservation of feasibility (for equality constraints, $A d_{\text{nt}} = 0$ guarantees $A x_{k+1} = b$ whenever $A x_k = b$).
 
-$$
-x_{k+1} = x_k + \alpha \Delta x, \quad
-\nu_{k+1} = \nu_k + \alpha \Delta \nu.
-$$
+Geometrically:
 
-This method enforces feasibility gradually, converging to $(x^\star, \nu^\star)$ under mild conditions.
+- unconstrained Newton would move by $-\nabla^2 f(x)^{-1} \nabla f(x)$;  
+- equality-constrained Newton projects this step onto the tangent space $\{ d : A d = 0 \}$ of the affine constraint set.
 
-> In ML contexts, infeasible starts are typical — we rarely have feasible initialization (e.g., in constrained autoencoders or regularized fairness models).  
-> The infeasible Newton method ensures consistent progress in both primal feasibility ($A x = b$) and dual stationarity ($\nabla f + A^\top \nu = 0$).
+For strictly convex $f$ with positive definite Hessian on the feasible directions, this method enjoys quadratic convergence near the solution, much like the unconstrained Newton method.
 
  
 
-## 13.7 Computational Considerations
+## 13.6 Connections to Machine Learning and Signal Processing
 
-- Factorization: KKT systems can be large but structured. Exploiting sparsity in $\nabla^2 f$ and $A$ is essential in high-dimensional problems.
-- Stability: Adding small regularization to the (0,0) block of the KKT matrix improves conditioning:
-  $$
-  \begin{bmatrix}
-  \nabla^2 f + \delta I & A^\top \\
-  A & -\delta I
-  \end{bmatrix}.
-  $$
-- Schur Complement: Eliminating $\Delta x$ yields a smaller linear system in $\Delta \nu$, which can be more efficient when $p \ll n$.
+Linear equality constraints appear naturally in ML and related areas:
 
- 
+| Setting | Equality constraint | Interpretation |
+|--------|---------------------|----------------|
+| Portfolio optimization | $\mathbf{1}^\top w = 1$ | Weights sum to one (full investment) |
+| Constrained regression | $C x = d$ | Enforce domain-specific linear relations between coefficients |
+| Mixture models / convex combinations | $\mathbf{1}^\top \alpha = 1, \; \alpha \ge 0$ | Mixture weights form a probability simplex |
+| Fairness constraints (linearized) | $A w = 0$ | Enforce equal averages across groups or balance conditions |
+| Physics-informed models (discretized) | $A x = b$ | Discrete conservation laws (mass, charge, energy) |
 
-## 13.8 Connections to Machine Learning
+More generally, nonlinear equality constraints (e.g. $W^\top W = I$ for orthonormal embeddings, or $\|w\|_2^2 = 1$ for normalized weights) lead to optimization on curved manifolds. Techniques from this chapter extend to those settings when combined with Riemannian optimization or local parameterizations, but here we focus on the linear case as the fundamental building block.
 
-Equality-constrained optimization appears in several ML and signal processing settings:
 
-| Example | Equality Constraint | Interpretation |
-|----------|---------------------|----------------|
-| Portfolio optimization | $\mathbf{1}^\top w = 1$ | Weights must sum to 1 |
-| Fair classification | $A w = 0$ | Enforces equal outcomes across groups |
-| Orthogonal embeddings | $W^\top W = I$ | Preserves independence / energy |
-| Normalization layers | $\|w\|_2^2 = 1$ | Scale invariance constraint |
-| Physics-informed models | $\text{div}(F)=0$ | Conservation of mass / charge |
 
-### Summary: Approaches to Equality-Constrained Optimization
 
-| Approach | Constraint Type | Feasibility (Local/Global) | Core Idea | Advantages | Limitations / Drawbacks | Typical ML / Optimization Use |
-|---------------|--------------------|--------------------------------|----------------|----------------|-----------------------------|-----------------------------------|
-| Null-Space (Variable Elimination) | Linear, full-rank $A$ | Global | Parameterize feasible $x = x_0 + Z y$ with $A Z = 0$ | Converts to unconstrained problem; dimension reduction; exact | Requires null-space basis $Z$; destroys sparsity; expensive for large $A$ | Constrained least squares, small-scale convex programs |
-| Local Parameterization (Manifold Method) | Nonlinear $g(x) = 0$ | Local (around feasible point) | Use implicit function theorem: locally express $x = x(y)$ | Captures nonlinear manifold structure; geometric insight | Valid only locally; requires Jacobians; expensive | Manifold learning, orthogonal embeddings, equality-regularized networks |
-| KKT / Lagrange System | Linear or nonlinear | Global (if convex) | Solve coupled system $\nabla f + A^\top \nu = 0$, $A x = b$ | Keeps structure; allows dual interpretation; works for large sparse systems | Larger system; more variables | Quadratic programming, convex solvers, equality-constrained ML models |
-| Primal–Dual Newton Method | Linear or nonlinear | Global (convex) | Newton’s method on full KKT system | Quadratic convergence near optimum; stable numerically | Requires Hessians and factorizations | Interior-point solvers, primal–dual optimization, barrier methods |
-| Penalty / Augmented Lagrangian | General (convex or nonconvex) | Approximate (drives feasibility) | Add penalty term $\tfrac{\rho}{2}\|A x - b\|^2$ or dual updates | Simple to implement; smooth transition from unconstrained | Needs tuning of $\rho$; slow convergence to exact feasibility | Regularized fairness, soft constraints, physics-informed networks |
-| Projection / Normalization Step | Linear or nonlinear (simple form) | Iterative (after each step) | Project back to feasible set: $x_{k+1} = \Pi_{\{A x = b\}}(x_{k+1})$ | Keeps updates feasible; easy for simple constraints | Costly for complex $A$; may distort gradient direction | Normalization layers, unit-norm or balance constraints |
+
+
