@@ -128,10 +128,7 @@ This structure cleanly separates: - how data is processed
 (Transforms) - how data is accessed (Dataset) - how data is
 delivered to the model (DataLoader)
 
-------------------------------------------------------------------------
 
 ## Conclusion
 
-PyTorch's data utilities provide a flexible and powerful way to prepare
-data for deep learning workflows. Understanding these components enables
-practitioners to build efficient, scalable training pipelines.
+PyTorch's data utilities provide a flexible and powerful way to prepare data for deep learning workflows. Understanding these components enables practitioners to build efficient, scalable training pipelines.

@@ -6,39 +6,43 @@ Real-world modelling starts not with algorithms but with data, assumptions, and 
 ## 16.1 Regularized estimation and the accuracy–simplicity tradeoff
 
 Many learning tasks use a regularized risk minimization form:
-\[
+$$
 \min_x \; \underbrace{\text{loss}(x)}_{\text{data-fit}} \;+\; \lambda\;\underbrace{\text{penalty}(x)}_{\text{complexity}}.
-\]
+$$
 Here the loss measures fit to data (often from a likelihood) and the penalty (regularizer) enforces simplicity or structure.  Increasing $\lambda$ trades accuracy for simplicity (e.g. model sparsity or shrinkage).
 
 - Ridge regression (ℓ₂ penalty):  
-  \[
+  $$
   \min_x \|Ax - b\|_2^2 + \lambda \|x\|_2^2.
-  \]  
+  $$  
   This arises from Gaussian noise (squared-error loss) plus a quadratic prior on $x$.  It is a smooth, strongly convex quadratic problem (Hessian $A^TA + \lambda I \succ 0$).  One can solve it via Newton’s method or closed‐form normal equations, or for large problems via (accelerated) gradient descent or conjugate gradient.  Strong convexity means fast, reliable convergence with second-order or accelerated first-order methods.
 
 - LASSO / Sparse regression (ℓ₁ penalty):  
-  \[
+  $$
   \min_x \tfrac12\|Ax - b\|_2^2 + \lambda \|x\|_1.
-  \]  
+  $$  
   The $\ell_1$ penalty encourages many $x_i=0$ (sparsity) for interpretability.  The problem is convex but nonsmooth (since $|\cdot|$ is nondifferentiable at 0).  A standard solver is proximal gradient: take a gradient step on the smooth squared loss, then apply the proximal (soft-thresholding) step for $\ell_1$, which sets small entries to zero.  Coordinate descent is another popular solver – updating one coordinate at a time with a closed-form soft-thresholding step.  Proximal methods and coordinate descent scale to very high dimensions.  
 
 - Elastic net (mixed ℓ₁+ℓ₂):  
-  \[
+  $$
   \min_x \|Ax - b\|_2^2 + \lambda_1\|x\|_1 + \lambda_2\|x\|_2^2.
-  \]  
+  $$  
   This combines the sparsity of LASSO with the stability of ridge regression.  It is still convex and (for $\lambda_2>0$) strongly convex[^4].  One can still use proximal gradient (prox operator splits into soft-threshold and shrink) or coordinate descent.  Because of the ℓ₂ term, the objective is smooth and unique solution.
 
 - Group lasso, nuclear norm, etc.: Similar composite objectives arise when enforcing block-sparsity or low-rank structure.  Each adds a convex penalty (block $\ell_{2,1}$ norms, nuclear norm) to the loss.  These remain convex, often separable or prox-friendly.  Proximal methods (using known proximal maps for each norm) or ADMM can handle these.
 
-Algorithmic pointers for 11.1:  
+Algorithms Summary:  
 
-- *Smooth+ℓ₂ (strongly convex)* → Newton / quasi-Newton or (accelerated) gradient descent (Chapter 9).  Closed-form if possible.  
-- *Smooth + ℓ₁* → Proximal gradient or coordinate descent (Chapter 9/10).  These exploit separable nonsmoothness.  
-- *Mixed penalties (ℓ₁+ℓ₂)* → Still convex; often handle like ℓ₁ case since smooth part dominates curvature.  
-- *Large-scale data* → Stochastic/mini-batch variants of first-order methods (SGD, SVRG, etc.).  
+- Smooth + ℓ₂ (strongly convex):  
+  Newton / quasi-Newton, conjugate gradient, or accelerated gradient.
+- Smooth + ℓ₁ (and variants):  
+  proximal gradient or coordinate descent; for huge data, stochastic/proximal variants.
+- Mixed penalties (ℓ₁ + ℓ₂):  
+  treat as composite smooth + nonsmooth; prox and coordinate methods still apply.
+- Large $N$ or $n$:  
+  mini-batch / stochastic gradients (SGD, SVRG, etc.) on the smooth part + prox for the regulariser.
 
-*Remarks:*  Choose $\lambda$ via cross-validation or hold-out to balance fit vs simplicity.  In high dimensions ($n$ large), coordinate or stochastic methods often outperform direct second-order methods.
+Regularisation strength $\lambda$ is usually chosen via cross-validation or a validation set, exploring the accuracy–simplicity trade-off.
 
 ## 16.2 Robust regression and outlier resistance
 
@@ -124,9 +128,7 @@ How to solve it:
     You can apply proximal gradient methods, since each term is simple and has a known prox.
 
 3. As a conic program (SOCP).  
-    The Huber objective can be written with auxiliary variables and second-order cone constraints.  
-    That means you can feed it to an SOCP solver and let an interior-point method handle it efficiently and robustly.  
-    This is attractive when you want high accuracy and dual certificates.
+    The Huber objective can be written with auxiliary variables and second-order cone constraints. That means you can feed it to an SOCP solver and let an interior-point method handle it efficiently and robustly. This is attractive when you want high accuracy and dual certificates.
 
 
 
@@ -268,7 +270,7 @@ If constraints are complex (e.g. second-order cones, semidefinite, or many coupl
 
     2. Conic formulation + solver: Write the problem as an LP/QP/SOCP/SDP and use specialized solvers (like MOSEK, Gurobi) that exploit sparse structure. If only first-order methods are feasible for huge problems, one can apply dual decomposition or ADMM by splitting constraints (Chapter 10), but convergence will be slower.
 
-Algorithmic pointers for 11.4:
+Algorithmic pointers:
 
 - Projection-friendly constraints → Projected (stochastic) gradient or proximal methods (fast, maintain feasibility).
 - Complex constraints (cones, PSD, many linear) → Use interior-point/conic solvers (Chapter 9) for moderate size. Alternatively, use operator-splitting (ADMM) if parallel/distributed solution is needed (Chapter 10).

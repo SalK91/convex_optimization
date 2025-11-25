@@ -149,7 +149,6 @@ Emerging research seeks to unify:
 
 This convergence blurs the line between *optimizer* and *learner*.
 
- ---
 
 From the geometry of convex sets to the dynamics of neural networks, optimization has evolved from a theory of guarantees into a framework of discovery. The next generation of algorithms will not only solve problems but learn how to solve — autonomously, efficiently, and creatively.
 

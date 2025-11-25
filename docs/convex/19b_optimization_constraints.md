@@ -218,7 +218,7 @@ Given:
 
 repeat:
 
-1. **Centering step**  
+1. Centering step  
    Solve the equality-constrained problem
    $$
    \min_x \; t f_0(x) - \sum_{i=1}^m \log(-f_i(x))
@@ -227,10 +227,10 @@ repeat:
    using an equality-constrained Newton method.  
    (In practice, we start from the previous solution and take a small number of Newton steps rather than “solve exactly”.)
 
-2. **Update iterate**  
+2. Update iterate  
    Let $x$ be the resulting point (the approximate minimizer for current $t$).
 
-3. **Check stopping criterion**  
+3. Check stopping criterion  
    For the barrier problem, one can show
    $$
    f_0(x) - p^\star \le \frac{m}{t},
@@ -242,7 +242,7 @@ repeat:
    $$
    then stop: $x$ is guaranteed to be within $\varepsilon$ (in objective value) of optimal.
 
-4. **Increase $t$**  
+4. Increase $t$  
    Set $t := \mu t$ to weaken the barrier and move closer to the true boundary, then go back to Step 1.
 
 Key parameters:
@@ -293,25 +293,25 @@ You do not need to implement these methods from scratch to use them: in practice
 
 Some important practical aspects:
 
-1. **Equality-constrained Newton inside**  
+1. Equality-constrained Newton inside  
    Each barrier subproblem is solved by equality-constrained Newton (Chapter 13). The main cost is solving the KKT linear system at each Newton step.
 
-2. **Strict feasibility**  
+2. Strict feasibility  
    Barrier and interior-point methods require a strictly feasible starting point $x$ with $f_i(x) < 0$.  
    - Sometimes this is easy (e.g. nonnegativity constraints with a positive initial vector).  
    - Otherwise, a separate *phase I* problem is solved to find such a point or to certify infeasibility.
 
-3. **Step size control**  
+3. Step size control  
    Because the barrier blows up near the boundary, too aggressive Newton steps may try to leave the feasible region. A backtracking line search is used to ensure:
    - sufficient decrease in the barrier objective,
    - and preservation of strict feasibility ($f_i(x) < 0$ remains true).
 
-4. **Accuracy vs cost**  
+4. Accuracy vs cost  
    The duality-gap bound $m/t$ provides a clear trade-off:
    - small $m/t$ (large $t$) → high accuracy, more iterations,
    - larger $m/t$ → faster but less precise.
 
-5. **Sparsity and structure**  
+5. Sparsity and structure  
    For large problems, exploiting sparsity in $A$ and in the Hessians $\nabla^2 f_i(x)$ is crucial. Interior-point methods scale well when linear algebra is carefully optimized.
 
 ---

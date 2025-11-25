@@ -1,7 +1,6 @@
 # Chapter 19: Beyond Convexity – Nonconvex and Global Optimization
 
-Optimization extends far beyond the comfortable world of convexity. 
-In practice, most problems in machine learning, signal processing, control, and engineering design are nonconvex: their objective functions have multiple valleys, peaks, and saddle points.  
+Optimization extends far beyond the comfortable world of convexity. In practice, most problems in machine learning, signal processing, control, and engineering design are nonconvex: their objective functions have multiple valleys, peaks, and saddle points.  
 
 Convex optimization gives us strong guarantees — every local minimum is global, and algorithms converge predictably.  
 But the moment convexity is lost, these guarantees vanish, and new techniques become necessary.
