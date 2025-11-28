@@ -1,5 +1,8 @@
 ### Current state
 
+1. RL
+  
+  https://www.youtube.com/watch?v=WsvFL-LjA6U&list=PLoROMvodv4rN4wG6Nk6sNpTEbuOSosZdX
 
 4. MIT 6.824: Distributed Systems:
    https://pdos.csail.mit.edu/6.824/schedule.html

@@ -138,7 +138,19 @@ nav:
       - 21. Metaheuristic and Evolutionary Optimization: "convex/44_metaheuristic.md"
       - 22. Advanced Topics in Combinatorial Optimization: "convex/48_advanced_combinatorial.md"
       - 23. The Future of Optimization — Learning, Adaptation, and Intelligence: "convex/50_future.md"
- 
+  - Reinforcement Learning:
+      - 1. Introduction to Reinforcement Learning: "reinforcement/1_intro.md"
+      - 2. Markov Decision Processes (MDPs) & Dynamic Programming: "reinforcement/2_mdp.md"
+      - 3. Model-Free Prediction: "reinforcement/3_modelfree.md"
+      - 4. Model-Free Control: "reinforcement/4_model_free_control.md"
+      
+      
+      - 2. Multi-Armed Bandits: "reinforcement/2_bandits.md"
+      - 7. Policy Gradient Methods: "reinforcement/7_policy_gradient.md"
+      - 8. Deep Reinforcement Learning: "reinforcement/8_deep_rl.md"
+      - 9. Exploration Strategies: "reinforcement/9_exploration.md"
+      - 10. Multi-Agent Reinforcement Learning: "reinforcement/10_multi_agent.md"
+      - 11. Applications of Reinforcement Learning: "reinforcement/11_applications.md"
   # - Deep Learning:
   #     - 1. Introduction to Deep Learning Optimization: "deeplearning/1_mlp.md"
   #     - 2. Convolutional Neural Networks (CNNs): "deeplearning/2_convnets.md"
