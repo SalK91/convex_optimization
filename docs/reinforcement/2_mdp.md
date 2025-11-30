@@ -1,12 +1,13 @@
-Reinforcement Learning (RL) is fundamentally the science of sequential decision-making under uncertainty. When an agent possesses a complete mathematical description (a model) of its environment's rules and rewards, this complex problem is rigorously formalized by the Markov Decision Process (MDP). Understanding the MDP hierarchy—from simple state transitions to optimal policy discovery—is the bedrock of modern RL.
+# Chapter 2: Markov Decision Processes and Dynamic Programming
+Reinforcement Learning relies on the mathematical framework of Markov Decision Processes (MDPs) to formalize sequential decision-making under uncertainty. The key idea is that an agent interacts with an environment, making decisions that influence both immediate and future rewards.
 
-> Reinforcement Learning (RL) is about selecting actions over time to maximize long-term reward.
+> Reinforcement Learning is about selecting actions over time to maximize long-term reward.
 
-## I. The Markovian Hierarchy
+## The Markovian Hierarchy
 
 The RL framework is built upon three foundational models, each adding complexity and agency.
 
-### 1. The Markov Process (MP)
+### The Markov Process
 A Markov Process, or Markov Chain, is the simplest model, concerned only with the flow of states. It is defined by the set of States ($S$) and the Transition Model ($P(s' \mid s)$).
 
 The defining characteristic is the Markov Property: the next state is independent of the past states, given only the current state.
@@ -18,29 +19,31 @@ $$
 
 > *Intuition: MPs describe what happens but do not assign any value to these events.*
 
-### 2. The Markov Reward Process (MRP)
-An MRP introduces the concept of value by adding Rewards ($R(s)$) and the Discount Factor ($\gamma \in [0,1]$). The central concept here is the Return ($G_t$), the sum of all future rewards, discounted exponentially:
+### The Markov Reward Process (MRP)
+
+A Markov Reward Process (MRP) extends an MP by adding rewards and discounting. An MRP is a tuple $(S, P, R, \gamma)$ where $R(s)$ is the expected reward for being in state $s$ and $\gamma$ is the discount factor. The return is:
 
 $$
-G_t = r_t + \gamma r_{t+1} + \gamma^2 r_{t+2} + \cdots
+G_t = r_{t+1} + \gamma r_{t+2} + \gamma^2 r_{t+3} + \dots
 $$
 
-The goal of an MRP is to calculate the Value Function ($V(s)$), the expected return from state $s$: $V(s) = \mathbb{E}[G_t \mid s_t = s]$.
-
-This gives rise to the Bellman Equation for MRPs: a linear system where the value of a state is the sum of its immediate reward and the discounted, expected value of its successor states.
+The goal is to compute the value function, which is the expected return starting from a state $s$:
 
 $$
-V(s) = R(s) + \gamma \sum_{s'} P(s' \mid s) V(s')
+V(s) = \mathbb{E}[G_t | s_t = s]
 $$
 
-In matrix form (for solving via direct inversion or iteration):
+The value function satisfies the Bellman Expectation Equation:
 
 $$
-V = R + \gamma P V \implies V = (I - \gamma P)^{-1}R
+V(s) = R(s) + \gamma \sum_{s'} P(s'|s)V(s')
 $$
 
-### 3. The Markov Decision Process (MDP)
+This recursive structure relates the value of a state to the values of its successor states.
+
+### The Markov Decision Process (MDP)
 An MDP introduces agency. Defined by the tuple $(S, A, P, R, \gamma)$, it extends the MRP by giving the agent a set of Actions ($A$) to choose from.
+
 * Action-Dependent Transition: $P(s' \mid s, a)$
 * Action-Dependent Reward: $R(s, a)$
 
@@ -55,18 +58,18 @@ $$
 P_\pi(s'|s) = \sum_a \pi(a|s) P(s'|s,a)
 $$
 
-## II. Value Functions and Expectation
+## Value Functions and Expectation
 
 To evaluate a fixed policy $\pi$, we define two inter-related value functions based on the Bellman Expectation Equations.
 
-### 1. State Value Function ($V^\pi(s)$)
+### State Value Function ($V^\pi(s)$)
 $V^\pi(s)$ quantifies the long-term expected return starting from state $s$ and strictly following policy $\pi$.
 $$
 V^\pi(s) = \mathbb{E}[G_t \mid s_t = s, \pi]
 $$
 > How much total reward should I expect if I start in state s and follow policy $\pi$: forever?
 
-### 2. State-Action Value Function ($Q^\pi(s,a)$)
+### State-Action Value Function ($Q^\pi(s,a)$)
 $Q^\pi(s,a)$ is a more granular measure, quantifying the expected return if the agent takes action $a$ in state $s$ first, and *then* follows policy $\pi$.
 $$
 Q^\pi(s,a) = R(s,a) + \gamma \sum_{s'} P(s'|s,a) V^\pi(s')
@@ -82,7 +85,7 @@ V^\pi(s) = \sum_a \pi(a \mid s) \left[ R(s,a) + \gamma \sum_{s'} P(s'|s,a) V^\pi
 $$
 
  
-## III. Optimal Control: Finding $\pi^*$
+## Optimal Control: Finding $\pi^*$
 
 The ultimate goal of solving an MDP is to find the optimal policy ($\pi^*$) that maximizes the expected return from every state $s$.
 
@@ -92,7 +95,7 @@ $$
 
 This optimal policy is characterized by the Optimal Value Functions ($V^*$ and $Q^*$).
 
-### 1. The Bellman Optimality Equations
+### The Bellman Optimality Equations
 These equations are fundamental, describing the unique value functions that arise when acting optimally. Unlike the expectation equations, they contain a $\max$ operator, making them non-linear.
 
 * Optimal State Value ($V^*$): The optimal value of a state equals the maximum expected return achievable from any single action $a$ taken from that state:
@@ -112,12 +115,14 @@ $$
 \pi^*(s) = \operatorname*{arg\,max}_{a} Q^*(s,a)
 $$
 
+These equations are non-linear due to the max operator and must be solved iteratively.
 
-## IV. Dynamic Programming Algorithms
+## Dynamic Programming Algorithms
 
 For MDPs where the model ($P$ and $R$) is fully known, Dynamic Programming methods are used to solve the Bellman Optimality Equations iteratively.
 
-### 1. Policy Iteration (PI)
+
+### Policy Iteration (PI)
 Policy Iteration (PI) follows an alternating cycle of Evaluation and Improvement. It takes fewer, but more expensive, iterations to converge.
 
 1.  Policy Evaluation: For the current policy $\pi_k$, compute $V^{\pi_k}$ by iteratively applying the Bellman Expectation Equation until full convergence. This is the computationally intensive step.
@@ -131,8 +136,8 @@ Policy Iteration (PI) follows an alternating cycle of Evaluation and Improvement
     
 The process repeats until the policy stabilizes ($\pi_{k+1} = \pi_k$), guaranteeing convergence to $\pi^*$.
 
-### 2. Value Iteration (VI)
-Value Iteration (VI) is a single, continuous process that combines evaluation and improvement by repeatedly applying the Bellman Optimality Equation. It takes many, but computationally cheap, iterations.
+### Value Iteration
+Value Iteration is a single, continuous process that combines evaluation and improvement by repeatedly applying the Bellman Optimality Equation. It takes many, but computationally cheap, iterations.
 
 1.  Iterative Update: For every state $s$, update the value function $V_k(s)$ using the $\max$ operation. This immediately incorporates a greedy improvement step into the value update.
     $$
@@ -149,3 +154,103 @@ Value Iteration (VI) is a single, continuous process that combines evaluation an
 | Cost | High cost per iteration (due to full evaluation). | Low cost per iteration (due to one-step backup). |
 
  
+
+## MDPs Mental Map  
+
+
+```text
+                   Markov Decision Processes (MDPs)
+        Formalizing Sequential Decision-Making under Uncertainty
+                                  │
+                                  ▼
+                       Progression of Markov Models
+       ┌─────────────────────────────────────────────────────────┐
+       │  Markov Process (MP): States & Transition Probabilities │
+       │   [S, P(s'|s)] — No rewards, no decisions               │
+       └─────────────────────────────────────────────────────────┘
+                                  │
+                                  ▼
+       ┌─────────────────────────────────────────────────────────┐
+       │  Markov Reward Process (MRP): MP + Rewards + γ          │
+       │  [S, P(s'|s), R(s), γ]                                  │
+       │    Value Function: V(s) = E[Gt | st = s]                │
+       │     Bellman Expectation Eqn:                            │
+       │     V(s) = R(s) + γ ∑ P(s'|s)V(s')                      │
+       └─────────────────────────────────────────────────────────┘
+                                  │
+                                  ▼
+       ┌─────────────────────────────────────────────────────────┐
+       │  Markov Decision Process (MDP): MRP + Actions           │
+       │   [S, A, P(s'|s,a), R(s,a), γ]                          │
+       │    Adds Agency: Agent chooses actions                   │
+       └─────────────────────────────────────────────────────────┘
+                                  │
+                                  ▼
+                             Policy π(a|s)
+                        Agent’s decision strategy
+                                  │
+                                  ▼
+                          Value Functions
+     ┌────────────────────────────────────────────────────────────────┐
+     │ State Value Vπ(s): Expected return following π                 │
+     │ Qπ(s,a): Expected return from (s,a) then follow π              │
+     │ Relationship: Vπ(s) = ∑ π(a|s) Qπ(s,a)                         │
+     └────────────────────────────────────────────────────────────────┘
+                                  │
+                                  ▼
+                    Bellman Expectation Equations
+     ┌────────────────────────────────────────────────────────────────┐
+     │ Vπ(s) = ∑ π(a|s)[R(s,a) + γ ∑ P(s'|s,a)Vπ(s')]                 │
+     │ Qπ(s,a) = R(s,a) + γ ∑ P(s'|s,a) Vπ(s')                        │
+     └────────────────────────────────────────────────────────────────┘
+                                  │
+                                  ▼
+               Goal: Find Optimal Policy π*
+     ┌─────────────────────────────────────────────────────────────┐
+     │ π*(s) = argmaxₐ Q*(s,a)                                     │
+     │ V*(s): Max possible value from state s under the optimal    |
+     |        policy                                               │
+     │ Q*(s,a): Max possible return state s by taking action a     |
+     |          and thereafter following the optimal policy        │
+     └─────────────────────────────────────────────────────────────┘
+                                  │
+                                  ▼
+                      Bellman Optimality Equations
+     ┌─────────────────────────────────────────────────────────────┐
+     │ V*(s) = maxₐ [R(s,a) + γ ∑ P(s'|s,a)V*(s')]                 │
+     │ Q*(s,a) = R(s,a) + γ ∑ P(s'|s,a) maxₐ' Q*(s',a')            │
+     └─────────────────────────────────────────────────────────────┘
+                                  │
+                                  ▼
+                 Solution when Model (P,R) is known:
+                    Dynamic Programming (DP)
+     ┌───────────────────────────────────────────────┬───────────────────┐
+     │ Policy Iteration                              │ Value Iteration - │
+     │ (Alternating Evaluation & Improvement)        │ Single update step│
+     │                                               │ repeatedly        │
+     └───────────────────────────────────────────────┴───────────────────┘
+          │                                               │
+          ▼                                               ▼
+  ┌─────────────────┐                          ┌─────────────────────────┐
+  │ Policy Eval     │                          │ Bellman Optimality      │
+  │ Using Vπ until  │                          │ Update every iteration  │
+  │ convergence     │                          │ V_(k+1) = max_a[....]   │
+  └─────────────────┘                          └─────────────────────────┘
+          │                                               │
+          ▼                                               ▼
+  ┌─────────────────┐                          ┌─────────────────────────┐
+  │ Policy          │                          │ After convergence:      │
+  │ Improvement:    │                          │ extract π* from Q*      │
+  │ π_(k+1)=argmax Q│                          └─────────────────────────┘
+  └─────────────────┘
+                                  │
+                                  ▼
+             Outcome: Optimal Policy and Value Functions
+       ┌─────────────────────────────────────────────────────┐
+       │ π*(s) — Best action at each state                   │
+       │ V*(s) — Max return achievable                       │
+       │ Q*(s,a) — Max return from (s,a)                     │
+       └─────────────────────────────────────────────────────┘
+
+
+```

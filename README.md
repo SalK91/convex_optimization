@@ -1,8 +1,7 @@
 ### Current state
 
 1. RL
-  
-  https://www.youtube.com/watch?v=WsvFL-LjA6U&list=PLoROMvodv4rN4wG6Nk6sNpTEbuOSosZdX
+    https://www.youtube.com/watch?v=WsvFL-LjA6U&list=PLoROMvodv4rN4wG6Nk6sNpTEbuOSosZdX
 
 4. MIT 6.824: Distributed Systems:
    https://pdos.csail.mit.edu/6.824/schedule.html
@@ -14,8 +13,6 @@
    https://www.youtube.com/watch?v=Ub3GoFaUcds
 
 6. MCP
-
-7. Non Convex Articel
 
 8. RL
    why can't we using backpropogation on RL policy and end to end learning
@@ -30,6 +27,7 @@
 10. Amazon
 
 11. Pytorch
+   Coursera
 
 12. Autograd lecture my Andre Kapathry
     https://www.youtube.com/watch?v=VMj-3S1tku0&list=PLAqhIrjkxbuWI23v9cThsA9GvCAUhRvKZ

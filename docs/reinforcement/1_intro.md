@@ -1,37 +1,73 @@
-Reinforcement Learning (RL) is defined as learning through experience and data to make good decisions under uncertainty. RL differs from other learning types because it involves four specific challenges:
+# Chapter 1: Introduction to Reinforcement Learning
 
-1.  Optimization: The goal is to find an optimal way to make decisions that yield the best outcomes (utility).
-2.  Delayed Consequences: Decisions made now can impact things much later.
-    * $\star$ *Challenge:* Temporal credit assignment is hard—it is difficult to determine which past action caused a later high or low reward.
-3.  Exploration: The agent acts as a scientist, learning about the world by trying actions.
-    * $\star$ *Challenge:* You only get a reward for the decision made; you do not know what would have happened if you chose differently.
-4.  Generalization: The policy ($\pi$) is a learned mapping from past experience to action, rather than a pre-programmed rule set.
+Reinforcement Learning is a paradigm in machine learning where an agent learns to make sequential decisions through interaction with an environment. Unlike supervised learning, where the agent learns from labeled examples, or unsupervised learning, where it learns patterns from unlabeled data, reinforcement learning is driven by the goal of maximizing cumulative reward through trial and error. The agent is not told which actions to take but must discover them by exploring the consequences of its actions.
 
-RL particularly powerful:
+Sequential decision-making under uncertainty is at the heart of reinforcement learning. The agent must balance exploration and exploitation. Exploration is needed to gather information about the environment, while exploitation uses this information to select actions that appear best.
 
-1.  No Examples: When there are no examples of desired behavior (e.g., aiming for superhuman performance or no existing data).
-2.  Complex Search: When solving enormous search or optimization problems with delayed outcomes (e.g., Matrix multiplication optimization in AlphaTensor).
+
+A key characteristic of reinforcement learning is that the outcome of an action may not be immediately known. Rewards can be delayed, making it hard to determine which past actions are responsible for future outcomes. This challenge is known as temporal credit assignment. Successful reinforcement learning algorithms must learn to attribute long-term consequences to earlier decisions.
+
+At each time step, the agent observes some representation of the world, takes an action, and receives a reward. The world then transitions to a new state. This interaction continues over time, forming an experience trajectory:
+$$
+s_0, a_0, r_1, s_1, a_1, r_2, \dots
+$$
+The agent’s goal is to learn a policy, which is a mapping from states to actions, that maximizes the total reward it collects over time.
+
+The total future reward is defined through the notion of return. The most common formulation is the discounted return:
+$$
+G_t = r_{t+1} + \gamma r_{t+2} + \gamma^2 r_{t+3} + \dots
+$$
+where $0 \le \gamma \le 1$ is called the discount factor. It determines how much the agent values immediate rewards compared to future rewards. A smaller $\gamma$ encourages short-term decisions, while a larger $\gamma$ favors long-term planning.
+
+
+
+Reinforcement learning involves four fundamental challenges:
+
+1. Optimization: The agent must find an optimal policy that maximizes expected return.
+2. Delayed consequences: Actions can affect rewards far into the future, making credit assignment difficult.
+3. Exploration: The agent must try actions to learn their consequences, even though some actions may seem suboptimal in the short term.
+4. Generalization: The agent must use limited experience to generalize to states it has never seen before.
+
+The main components of a reinforcement learning system are the agent, the environment, actions, states, and rewards. The agent chooses an action based on its current state. The environment responds with the next state and a reward. From this interaction, the agent must infer how to improve its decisions over time.
+
+The concept of state is crucial. A state is a summary of information that can influence future outcomes. In theory, a state is Markov if it satisfies:
+$$
+p(s_{t+1} | s_t, a_t) = p(s_{t+1} | h_t, a_t)
+$$
+where $h_t$ is the full history of past observations, actions, and rewards. This means that the future depends only on the current state, not on the entire past. The Markov property is important because it simplifies the learning problem and allows powerful mathematical tools to be applied.
+
+
+Reinforcement learning is particularly useful in domains where optimal behavior is not easily specified, data is limited or must be collected through interaction, and long-term consequences matter. Examples include robotics, autonomous vehicles, game playing, resource allocation, recommendation systems, and online decision-making.
 
 ---
+Key Concepts:
 
-Sequential Decision Making:  The core of RL is the interaction loop between the Agent and the World.
-
-At each time step $t$:
-
-1.  The Agent takes an action $a_t$.
-2.  The World updates given $a_t$ and emits an observation $o_t$ and reward $r_t$.
-3.  The Agent receives observation $o_t$ and reward $r_t$.
-
-Goal: Select actions to maximize total expected future reward. May require balancing immediate and long term rewards.
+### Episodic vs Continuing:
+Reinforcement learning problems can be episodic or continuing. In episodic tasks, interactions end after a finite number of steps, and the agent resets for a new episode. In continuing tasks, the interactions never formally end, and the agent must learn to behave well indefinitely. In episodic settings, the return is naturally finite. In continuing tasks, discounting or average reward formulations are used to ensure the return is well-defined.
 
 
-* History ($h_t$): The sequence of past observations, actions, and rewards.
-    $$h_t = (a_1, o_1, r_1, \dots, a_t, o_t, r_t)$$
-* State ($s_t$): Information assumed to determine what happens next. It is a function of history:
-    $$s_t = f(h_t)$$
+### Types of RL tasks:
+There are several types of learning tasks in RL:
 
-A state $s_t$ is Markov if and only if the future is independent of the past, given the present:
+1. Policy Evaluation: Estimating how good a given policy is.
+2. Control: Finding an optimal policy that maximizes expected return.
+3. Planning: Computing optimal policies using a known model of the environment.
+4. Prediction: Estimating value functions that represent long-term returns.
 
-$$p(s_{t+1}|s_t, a_t) = p(s_{t+1}|h_t, a_t)$$
+### Model based vs Model-free
+Reinforcement learning algorithms can be classified into two major categories: model-based and model-free. Model-based methods assume that the transition dynamics and reward function of the environment are known or learned. They use this information for planning. Model-free methods do not assume access to this knowledge and must learn directly from interaction.
 
-This assumption is popular because it reduces computational complexity and data requirements.
+### On-policy vs off-policy
+
+* On-policy learning:
+    - Direct experience.
+    - Learn to estimate and evaluate a policy from experience obtained from following that policy.
+
+* Off-policy Learning
+    - Learn to estimate and evaluate a policy using experience gathered from following a different policy.
+
+### Tabular vs Function Approximation
+
+In small environments with a limited number of states and actions, value functions and policies can be represented using tables. This is known as the tabular setting. However, real-world problems often involve very large or continuous state spaces, where it is impossible to maintain a separate entry for every state or action.
+
+In such cases, we approximate the value function or policy using a parameterized function, such as a linear model or neural network. This approach is called function approximation. Function approximation enables generalization: knowledge gained from one state can be applied to many similar states, making learning feasible in large or continuous environments.

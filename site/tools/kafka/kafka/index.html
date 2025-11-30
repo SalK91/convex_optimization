@@ -9,24 +9,24 @@
         <meta name="author" content="Salman Khan">
       
       
-        <link rel="canonical" href="https://salk91.github.io/convex_optimization/tools/1_pytorch/">
+        <link rel="canonical" href="https://salk91.github.io/convex_optimization/tools/kafka/kafka/">
       
       
       
       
-      <link rel="icon" href="../../assets/images/favicon.png">
+      <link rel="icon" href="../../../assets/images/favicon.png">
       <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.20">
     
     
       
-        <title>PyTorch - Mathematics for Machine Learning</title>
+        <title>Apache Kafka - Mathematics for Machine Learning</title>
       
     
     
-      <link rel="stylesheet" href="../../assets/stylesheets/main.e53b48f4.min.css">
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.e53b48f4.min.css">
       
         
-        <link rel="stylesheet" href="../../assets/stylesheets/palette.06af60db.min.css">
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.06af60db.min.css">
       
       
 
@@ -45,20 +45,20 @@
       
     
     
-      <link rel="stylesheet" href="../../css/print-site.css">
+      <link rel="stylesheet" href="../../../css/print-site.css">
     
-      <link rel="stylesheet" href="../../css/print-site-material.css">
+      <link rel="stylesheet" href="../../../css/print-site-material.css">
     
-      <link rel="stylesheet" href="../../styles/extra.css">
+      <link rel="stylesheet" href="../../../styles/extra.css">
     
-    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
 
     
     
     
-  <link href="../../assets/stylesheets/glightbox.min.css" rel="stylesheet"><script src="../../assets/javascripts/glightbox.min.js"></script><style id="glightbox-style">
+  <link href="../../../assets/stylesheets/glightbox.min.css" rel="stylesheet"><script src="../../../assets/javascripts/glightbox.min.js"></script><style id="glightbox-style">
             html.glightbox-open { overflow: initial; height: 100%; }
             .gslide-title { margin-top: 0px; user-select: text; }
             .gslide-desc { color: #666; user-select: text; }
@@ -87,7 +87,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#pytorch" class="md-skip">
+        <a href="#apache-kafka" class="md-skip">
           Skip to content
         </a>
       
@@ -103,7 +103,7 @@
 
 <header class="md-header md-header--shadow" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="Header">
-    <a href="../.." title="Mathematics for Machine Learning" class="md-header__button md-logo" aria-label="Mathematics for Machine Learning" data-md-component="logo">
+    <a href="../../.." title="Mathematics for Machine Learning" class="md-header__button md-logo" aria-label="Mathematics for Machine Learning" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"></path></svg>
@@ -123,7 +123,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              PyTorch
+              Apache Kafka
             
           </span>
         </div>
@@ -243,7 +243,7 @@
 
 <nav class="md-nav md-nav--primary md-nav--integrated" aria-label="Navigation" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href="../.." title="Mathematics for Machine Learning" class="md-nav__button md-logo" aria-label="Mathematics for Machine Learning" data-md-component="logo">
+    <a href="../../.." title="Mathematics for Machine Learning" class="md-nav__button md-logo" aria-label="Mathematics for Machine Learning" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"></path></svg>
@@ -273,7 +273,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../.." class="md-nav__link">
+      <a href="../../.." class="md-nav__link">
         
   
   
@@ -333,7 +333,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../convex/11_intro/" class="md-nav__link">
+      <a href="../../../convex/11_intro/" class="md-nav__link">
         
   
   
@@ -356,7 +356,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../convex/12_vector/" class="md-nav__link">
+      <a href="../../../convex/12_vector/" class="md-nav__link">
         
   
   
@@ -379,7 +379,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../convex/13_calculus/" class="md-nav__link">
+      <a href="../../../convex/13_calculus/" class="md-nav__link">
         
   
   
@@ -402,7 +402,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../convex/14_convexsets/" class="md-nav__link">
+      <a href="../../../convex/14_convexsets/" class="md-nav__link">
         
   
   
@@ -425,7 +425,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../convex/15_convexfunctions/" class="md-nav__link">
+      <a href="../../../convex/15_convexfunctions/" class="md-nav__link">
         
   
   
@@ -448,7 +448,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../convex/16_subgradients/" class="md-nav__link">
+      <a href="../../../convex/16_subgradients/" class="md-nav__link">
         
   
   
@@ -471,7 +471,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../convex/16a_optimality_conditions/" class="md-nav__link">
+      <a href="../../../convex/16a_optimality_conditions/" class="md-nav__link">
         
   
   
@@ -494,7 +494,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../convex/17_kkt/" class="md-nav__link">
+      <a href="../../../convex/17_kkt/" class="md-nav__link">
         
   
   
@@ -517,7 +517,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../convex/18_duality/" class="md-nav__link">
+      <a href="../../../convex/18_duality/" class="md-nav__link">
         
   
   
@@ -540,7 +540,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../convex/18a_pareto/" class="md-nav__link">
+      <a href="../../../convex/18a_pareto/" class="md-nav__link">
         
   
   
@@ -563,7 +563,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../convex/18b_regularization/" class="md-nav__link">
+      <a href="../../../convex/18b_regularization/" class="md-nav__link">
         
   
   
@@ -586,7 +586,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../convex/19_optimizationalgo/" class="md-nav__link">
+      <a href="../../../convex/19_optimizationalgo/" class="md-nav__link">
         
   
   
@@ -609,7 +609,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../convex/19a_optimization_constraints/" class="md-nav__link">
+      <a href="../../../convex/19a_optimization_constraints/" class="md-nav__link">
         
   
   
@@ -632,7 +632,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../convex/19b_optimization_constraints/" class="md-nav__link">
+      <a href="../../../convex/19b_optimization_constraints/" class="md-nav__link">
         
   
   
@@ -655,7 +655,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../convex/20_advanced/" class="md-nav__link">
+      <a href="../../../convex/20_advanced/" class="md-nav__link">
         
   
   
@@ -678,7 +678,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../convex/21_models/" class="md-nav__link">
+      <a href="../../../convex/21_models/" class="md-nav__link">
         
   
   
@@ -701,7 +701,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../convex/30_canonical_problems/" class="md-nav__link">
+      <a href="../../../convex/30_canonical_problems/" class="md-nav__link">
         
   
   
@@ -724,7 +724,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../convex/35_modern/" class="md-nav__link">
+      <a href="../../../convex/35_modern/" class="md-nav__link">
         
   
   
@@ -747,7 +747,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../convex/40_nonconvex/" class="md-nav__link">
+      <a href="../../../convex/40_nonconvex/" class="md-nav__link">
         
   
   
@@ -770,7 +770,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../convex/42_derivativefree/" class="md-nav__link">
+      <a href="../../../convex/42_derivativefree/" class="md-nav__link">
         
   
   
@@ -793,7 +793,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../convex/44_metaheuristic/" class="md-nav__link">
+      <a href="../../../convex/44_metaheuristic/" class="md-nav__link">
         
   
   
@@ -816,7 +816,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../convex/48_advanced_combinatorial/" class="md-nav__link">
+      <a href="../../../convex/48_advanced_combinatorial/" class="md-nav__link">
         
   
   
@@ -839,7 +839,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../convex/50_future/" class="md-nav__link">
+      <a href="../../../convex/50_future/" class="md-nav__link">
         
   
   
@@ -885,7 +885,7 @@
   
   
   <span class="md-ellipsis">
-    Cheat Sheets
+    Reinforcement Learning
     
   </span>
   
@@ -896,7 +896,7 @@
         <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_3">
             <span class="md-nav__icon md-icon"></span>
-            Cheat Sheets
+            Reinforcement Learning
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
             
@@ -907,12 +907,219 @@
   
   
     <li class="md-nav__item">
-      <a href="../../cheatsheets/20a_cheatsheet/" class="md-nav__link">
+      <a href="../../../reinforcement/1_intro/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
-    Optimization Algos - Cheat Sheet
+    1. Introduction to Reinforcement Learning
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../reinforcement/2_mdp/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    2. MDPs &amp; Dynamic Programming
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../reinforcement/3_modelfree/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    3. Model-Free Prediction
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../reinforcement/4_model_free_control/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    4. Model-Free Control
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../reinforcement/5_policy_gradient/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    5. Policy Gradient Methods
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../reinforcement/2_bandits.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    2. Multi-Armed Bandits
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../reinforcement/8_deep_rl.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    8. Deep Reinforcement Learning
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../reinforcement/9_exploration.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    9. Exploration Strategies
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../reinforcement/10_multi_agent.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    10. Multi-Agent Reinforcement Learning
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../reinforcement/11_applications.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    11. Applications of Reinforcement Learning
     
   </span>
   
@@ -953,7 +1160,7 @@
   
   
   <span class="md-ellipsis">
-    Appendices
+    Deep Learning
     
   </span>
   
@@ -963,6 +1170,624 @@
         
         <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            Deep Learning
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../deeplearning/1_mlp/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    1. Introduction to Deep Learning Optimization
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../deeplearning/2_convnets/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    2. Convolutional Neural Networks (CNNs)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../deeplearning/3_sequence_data/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    3. Sequence Data and Recurrent Neural Networks (RNNs)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../deeplearning/4_nlp/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    4. Natural Language Processing (NLP) with Deep Learning
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../deeplearning/5_attention/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    5. Transformers and Attention Mechanisms
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../deeplearning/6_gans/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    6. Generative Models and GANs
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../deeplearning/7_unsuper/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    7. Unsupervised and Self-Supervised Learning
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../deeplearning/8_latentvariables/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    8. Latent Variable Models
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../deeplearning/1_intro.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    2. Optimization Algorithms for Deep Learning
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../deep_learning/1_intro.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    3. Regularization Techniques in Deep Learning
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../deep_learning/1_intro.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    4. Advanced Topics in Deep Learning Optimization
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5">
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Information Theory
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            Information Theory
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../informationtheory/1_intro_to_infotheory/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    1. Introduction
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../informationtheory/2_entropy/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    2. Entropy, Self-Information &amp; Cross-Entropy
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../informationtheory/3_KL/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    3. Kullback-Leibler Divergence
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../informationtheory/4_bayes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    4. Bayesian Inference
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../informationtheory/5_mc_intro/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    5. Probability toolbox
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../informationtheory/6_mc/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    6. Monte Carlo Methods
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../informationtheory/7a_vi_intro/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    8. Optimization-Based Inference
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../informationtheory/7b_vi/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    7. Variatonal Inference
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../informationtheory/8_representation.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    8. Representation Learning
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6">
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Cheat Sheets
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            Cheat Sheets
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../cheatsheets/20a_cheatsheet/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Optimization Algos - Cheat Sheet
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7">
+        
+          
+          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Appendices
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7">
             <span class="md-nav__icon md-icon"></span>
             Appendices
           </label>
@@ -975,7 +1800,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../appendices/120_ineqaulities/" class="md-nav__link">
+      <a href="../../../appendices/120_ineqaulities/" class="md-nav__link">
         
   
   
@@ -998,7 +1823,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../appendices/130_projections/" class="md-nav__link">
+      <a href="../../../appendices/130_projections/" class="md-nav__link">
         
   
   
@@ -1021,12 +1846,12 @@
   
   
     <li class="md-nav__item">
-      <a href="../../appendices/140_support/" class="md-nav__link">
+      <a href="../../../appendices/140_support/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
-    Appendix C - Support Functions and Dual Geometry (Advanced)
+    Appendix C - Support Functions and Dual Geometry
     
   </span>
   
@@ -1044,12 +1869,12 @@
   
   
     <li class="md-nav__item">
-      <a href="../../appendices/160_conjugates/" class="md-nav__link">
+      <a href="../../../appendices/160_conjugates/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
-    Appendix D - Convex Conjugates and Fenchel Duality (Advanced)
+    Appendix D - Convex Conjugates and Fenchel Duality
     
   </span>
   
@@ -1067,12 +1892,12 @@
   
   
     <li class="md-nav__item">
-      <a href="../../appendices/170_probability/" class="md-nav__link">
+      <a href="../../../appendices/170_probability/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
-    Appendix E - Convexity in Probability and Statistics (Advanced)
+    Appendix E - Convexity in Probability and Statistics
     
   </span>
   
@@ -1090,12 +1915,12 @@
   
   
     <li class="md-nav__item">
-      <a href="../../appendices/180_subgradient_methods/" class="md-nav__link">
+      <a href="../../../appendices/180_subgradient_methods/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
-    Appendix F - Subgradient Method and Variants (Advanced)
+    Appendix F - Subgradient Method and Variants
     
   </span>
   
@@ -1113,7 +1938,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../appendices/190_proximal/" class="md-nav__link">
+      <a href="../../../appendices/190_proximal/" class="md-nav__link">
         
   
   
@@ -1136,7 +1961,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../appendices/200_mirror/" class="md-nav__link">
+      <a href="../../../appendices/200_mirror/" class="md-nav__link">
         
   
   
@@ -1159,7 +1984,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../appendices/300_matrixfactorization/" class="md-nav__link">
+      <a href="../../../appendices/300_matrixfactorization/" class="md-nav__link">
         
   
   
@@ -1189,7 +2014,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../print_page/" class="md-nav__link">
+      <a href="../../../print_page/" class="md-nav__link">
         
   
   
@@ -1220,7 +2045,7 @@
 
 
   
-    <a href="https://github.com/SalK91/convex_optimization/edit/master/docs/tools/1_pytorch.md" title="Edit this page" class="md-content__button md-icon" rel="edit">
+    <a href="https://github.com/SalK91/convex_optimization/edit/master/docs/tools/kafka/kafka.md" title="Edit this page" class="md-content__button md-icon" rel="edit">
       
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M10 20H6V4h7v5h5v3.1l2-2V8l-6-6H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h4zm10.2-7c.1 0 .3.1.4.2l1.3 1.3c.2.2.2.6 0 .8l-1 1-2.1-2.1 1-1c.1-.1.2-.2.4-.2m0 3.9L14.1 23H12v-2.1l6.1-6.1z"></path></svg>
     </a>
@@ -1229,70 +2054,223 @@
     
       
     
-    <a href="https://github.com/SalK91/convex_optimization/raw/master/docs/tools/1_pytorch.md" title="View source of this page" class="md-content__button md-icon">
+    <a href="https://github.com/SalK91/convex_optimization/raw/master/docs/tools/kafka/kafka.md" title="View source of this page" class="md-content__button md-icon">
       
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 18c.56 0 1 .44 1 1s-.44 1-1 1-1-.44-1-1 .44-1 1-1m0-3c-2.73 0-5.06 1.66-6 4 .94 2.34 3.27 4 6 4s5.06-1.66 6-4c-.94-2.34-3.27-4-6-4m0 6.5a2.5 2.5 0 0 1-2.5-2.5 2.5 2.5 0 0 1 2.5-2.5 2.5 2.5 0 0 1 2.5 2.5 2.5 2.5 0 0 1-2.5 2.5M9.27 20H6V4h7v5h5v4.07c.7.08 1.36.25 2 .49V8l-6-6H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h4.5a8.2 8.2 0 0 1-1.23-2"></path></svg>
     </a>
   
 
 
-<h1 id="pytorch">PyTorch<a class="headerlink" href="#pytorch" title="Permanent link">¶</a></h1>
-<div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">torch</span>
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-</code></pre></div>
-<hr>
-<h2 id="1-creating-tensors">1. Creating Tensors<a class="headerlink" href="#1-creating-tensors" title="Permanent link">¶</a></h2>
-<h3 id="torchzeros"><code>torch.zeros</code><a class="headerlink" href="#torchzeros" title="Permanent link">¶</a></h3>
-<div class="highlight"><pre><span></span><code><span class="n">x_zeros</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
-</code></pre></div>
-<h3 id="torchones"><code>torch.ones</code><a class="headerlink" href="#torchones" title="Permanent link">¶</a></h3>
-<div class="highlight"><pre><span></span><code><span class="n">x_ones</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
-</code></pre></div>
-<h3 id="torchrand"><code>torch.rand</code><a class="headerlink" href="#torchrand" title="Permanent link">¶</a></h3>
-<div class="highlight"><pre><span></span><code><span class="n">x_rand</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
-</code></pre></div>
-<hr>
-<h2 id="2-tensor-from-a-python-list">2. Tensor from a Python List<a class="headerlink" href="#2-tensor-from-a-python-list" title="Permanent link">¶</a></h2>
-<div class="highlight"><pre><span></span><code><span class="n">data</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">],[</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">]]</span>
-<span class="n">x_from_list</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
-</code></pre></div>
-<hr>
-<h2 id="3-tensor-from-numpy-array">3. Tensor from NumPy Array<a class="headerlink" href="#3-tensor-from-numpy-array" title="Permanent link">¶</a></h2>
-<div class="highlight"><pre><span></span><code><span class="n">np_array</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">],[</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">]])</span>
-<span class="n">x_from_np</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">from_numpy</span><span class="p">(</span><span class="n">np_array</span><span class="p">)</span>
-</code></pre></div>
-<hr>
-<h2 id="4-shape-batch-dimension">4. Shape &amp; Batch Dimension<a class="headerlink" href="#4-shape-batch-dimension" title="Permanent link">¶</a></h2>
-<div class="highlight"><pre><span></span><code><span class="n">images</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="mi">32</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">64</span><span class="p">,</span><span class="mi">64</span><span class="p">)</span>
-<span class="n">batch</span> <span class="o">=</span> <span class="n">images</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
-<span class="n">sample</span> <span class="o">=</span> <span class="n">images</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span>
-</code></pre></div>
-<hr>
-<h2 id="5-dtype">5. Dtype<a class="headerlink" href="#5-dtype" title="Permanent link">¶</a></h2>
-<div class="highlight"><pre><span></span><code><span class="n">torch</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="n">dtype</span><span class="o">=</span><span class="n">torch</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span>
-</code></pre></div>
-<hr>
-<h2 id="6-reshaping">6. Reshaping<a class="headerlink" href="#6-reshaping" title="Permanent link">¶</a></h2>
-<h3 id="unsqueeze">Unsqueeze<a class="headerlink" href="#unsqueeze" title="Permanent link">¶</a></h3>
-<div class="highlight"><pre><span></span><code><span class="n">x</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">])</span>
-<span class="n">x</span><span class="o">.</span><span class="n">unsqueeze</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
-</code></pre></div>
-<h3 id="squeeze">Squeeze<a class="headerlink" href="#squeeze" title="Permanent link">¶</a></h3>
-<div class="highlight"><pre><span></span><code><span class="n">y</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">4</span><span class="p">)</span>
-<span class="n">y</span><span class="o">.</span><span class="n">squeeze</span><span class="p">()</span>
-</code></pre></div>
-<hr>
-<h2 id="7-slicing">7. Slicing<a class="headerlink" href="#7-slicing" title="Permanent link">¶</a></h2>
-<div class="highlight"><pre><span></span><code><span class="n">x</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">12</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">)</span>
-<span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
-<span class="n">x</span><span class="p">[:,</span><span class="mi">1</span><span class="p">]</span>
-<span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">2</span><span class="p">,</span><span class="mi">1</span><span class="p">:</span><span class="mi">3</span><span class="p">]</span>
-</code></pre></div>
-<hr>
-<h2 id="8-item">8. .item()<a class="headerlink" href="#8-item" title="Permanent link">¶</a></h2>
-<div class="highlight"><pre><span></span><code><span class="n">loss</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">(</span><span class="mf">3.14</span><span class="p">)</span>
-<span class="n">loss</span><span class="o">.</span><span class="n">item</span><span class="p">()</span>
-</code></pre></div>
+<h1 id="apache-kafka">Apache Kafka<a class="headerlink" href="#apache-kafka" title="Permanent link">¶</a></h1>
+<h2 id="1-what-is-kafka">1. What Is Kafka?<a class="headerlink" href="#1-what-is-kafka" title="Permanent link">¶</a></h2>
+<p>Apache Kafka is a distributed event streaming platform designed for:
+- High-throughput data ingestion<br>
+- Real-time analytics<br>
+- Decoupling microservices<br>
+- Reliable event storage and replay  </p>
+<p>Kafka acts like a conveyor belt for data: producers place events on the belt; consumers pick them up independently.</p>
+<blockquote>
+<p>fundamental ideas behind Kafka: messages sent and received through Kafka require a user specified distribution strategy</p>
+</blockquote>
+<h2 id="2-why-kafka-problems-it-solves">2. Why Kafka? (Problems It Solves)<a class="headerlink" href="#2-why-kafka-problems-it-solves" title="Permanent link">¶</a></h2>
+<h3 id="a-the-problem-with-tightly-coupled-microservices">A. The Problem With Tightly Coupled Microservices<a class="headerlink" href="#a-the-problem-with-tightly-coupled-microservices" title="Permanent link">¶</a></h3>
+<p>Traditional microservices call each other directly (REST, RPC).</p>
+<p>Issues:
+1. Tight Coupling<br>
+   If Service A depends on Service B, and B slows or fails → A also fails.</p>
+<ol>
+<li>
+<p>Single Point of Failure<br>
+   One service outage disrupts the entire chain.</p>
+</li>
+<li>
+<p>Scalability Limitations<br>
+   Upstream must handle downstream load directly.</p>
+</li>
+<li>
+<p>Lost Analytics Data<br>
+   If analytics is down, events are lost.</p>
+</li>
+</ol>
+<p>Kafka solves this by decoupling communication and introducing an event broker.</p>
+<h2 id="3-kafka-as-an-event-broker">3. Kafka as an Event Broker<a class="headerlink" href="#3-kafka-as-an-event-broker" title="Permanent link">¶</a></h2>
+<p>Microservices no longer call each other.<br>
+Instead:</p>
+<ul>
+<li>Producers publish events to Kafka.</li>
+<li>Topics organize those events.</li>
+<li>Consumers independently subscribe and process them.</li>
+</ul>
+<p>This supports:
+- Asynchronous communication<br>
+- Fault isolation<br>
+- Independent scaling<br>
+- Reliable buffering<br>
+- Replay of past events  </p>
+<h2 id="4-core-concepts">4. Core Concepts<a class="headerlink" href="#4-core-concepts" title="Permanent link">¶</a></h2>
+<h3 id="a-events">A. Events<a class="headerlink" href="#a-events" title="Permanent link">¶</a></h3>
+<p>An event records that something happened.</p>
+<p>Structure:
+- Key
+- Value
+- Timestamp
+- Optional metadata (headers)</p>
+<p>Example:
+</p><div class="highlight"><pre><span></span><code><span class="nt">Key</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">orderId=123</span>
+<span class="nt">Value</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">{</span><span class="s">"status"</span><span class="p p-Indicator">:</span><span class="w"> </span><span class="s">"CREATED"</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">"amount"</span><span class="p p-Indicator">:</span><span class="w"> </span><span class="nv">200</span><span class="p p-Indicator">}</span>
+</code></pre></div><p></p>
+<h3 id="b-topics">B. Topics<a class="headerlink" href="#b-topics" title="Permanent link">¶</a></h3>
+<p>A topic is a category for events of the same type (e.g., <code>orders</code>, <code>payments</code>).</p>
+<h4 id="where-are-topics-stored">Where Are Topics Stored?<a class="headerlink" href="#where-are-topics-stored" title="Permanent link">¶</a></h4>
+<p>On Kafka brokers, distributed into partitions.</p>
+<h3 id="c-partitions">C. Partitions<a class="headerlink" href="#c-partitions" title="Permanent link">¶</a></h3>
+<p>Partition = append-only, ordered event log.</p>
+<p>Benefits:
+- Scalability (multiple partitions)
+- High throughput
+- Parallel processing
+- Ordering (guaranteed only within a partition)</p>
+<blockquote>
+<p>A topic is a logical grouping of messages. A partition is a physical grouping of messages. A topic can have multiple partitions, and each partition can be on a different broker. Topics are just a way to organize your data, while partitions are a way to scale your data.</p>
+</blockquote>
+<h3 id="d-kafka-broker">D. Kafka Broker<a class="headerlink" href="#d-kafka-broker" title="Permanent link">¶</a></h3>
+<p>A broker is a Kafka server.</p>
+<p>Responsibilities:
+- Store topic partitions<br>
+- Handle reads/writes from producers/consumers<br>
+- Replicate data for fault tolerance  </p>
+<p>Replication:
+- Each partition has:
+  - Leader (handles requests)
+  - Followers (replicas for failover)</p>
+<h3 id="e-consumers-consumer-groups">E. Consumers &amp; Consumer Groups<a class="headerlink" href="#e-consumers-consumer-groups" title="Permanent link">¶</a></h3>
+<h4 id="consumer">Consumer<a class="headerlink" href="#consumer" title="Permanent link">¶</a></h4>
+<p>Reads records from topics.</p>
+<h4 id="consumer-group">Consumer Group<a class="headerlink" href="#consumer-group" title="Permanent link">¶</a></h4>
+<p>A group of consumers sharing the work of reading a topic.</p>
+<p>Rules:
+- One consumer per partition (within a group)
+- But multiple groups can read the same topic independently</p>
+<p>Examples:
+- One group processes orders<br>
+- Another group replays events for analytics<br>
+- Another group trains ML models  </p>
+<h2 id="5-kafka-vs-traditional-message-queues-rabbitmq-activemq">5. Kafka vs Traditional Message Queues (RabbitMQ, ActiveMQ)<a class="headerlink" href="#5-kafka-vs-traditional-message-queues-rabbitmq-activemq" title="Permanent link">¶</a></h2>
+<table>
+<thead>
+<tr>
+<th>Feature</th>
+<th>Kafka</th>
+<th>Traditional MQ</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Message deletion</td>
+<td>Stored for retention period</td>
+<td>Deleted after consumption</td>
+</tr>
+<tr>
+<td>Replay messages</td>
+<td>Yes</td>
+<td>No</td>
+</tr>
+<tr>
+<td>Storage</td>
+<td>Disk-backed log</td>
+<td>Often in-memory</td>
+</tr>
+<tr>
+<td>Primary use</td>
+<td>Event streaming &amp; analytics</td>
+<td>Task queues</td>
+</tr>
+</tbody>
+</table>
+<p>Kafka is not a database, but it <em>reliably stores events</em> and allows consumers to replay them.</p>
+<h2 id="6-kafka-for-real-time-processing">6. Kafka for Real-Time Processing<a class="headerlink" href="#6-kafka-for-real-time-processing" title="Permanent link">¶</a></h2>
+<h3 id="a-kafka-streams-api">A. Kafka Streams API<a class="headerlink" href="#a-kafka-streams-api" title="Permanent link">¶</a></h3>
+<p>A powerful library for real-time event processing.</p>
+<p>Features:
+- Continuous streaming (no polls)
+- Functional transformations:<br>
+  - map<br>
+  - filter<br>
+  - join<br>
+  - aggregate<br>
+- Windowing<br>
+- Stateful processing  </p>
+<p>Use cases:
+- Fraud detection<br>
+- Real-time dashboards<br>
+- Metric aggregation<br>
+- Data enrichment  </p>
+<h2 id="7-kafka-architecture-components-summary-table">7. Kafka Architecture Components (Summary Table)<a class="headerlink" href="#7-kafka-architecture-components-summary-table" title="Permanent link">¶</a></h2>
+<table>
+<thead>
+<tr>
+<th>Component</th>
+<th>Role</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Producer</td>
+<td>Writes events to topics</td>
+</tr>
+<tr>
+<td>Topic</td>
+<td>Category of events</td>
+</tr>
+<tr>
+<td>Partition</td>
+<td>Ordered log segment for scalability</td>
+</tr>
+<tr>
+<td>Consumer</td>
+<td>Reads events</td>
+</tr>
+<tr>
+<td>Consumer Group</td>
+<td>Enables parallel processing</td>
+</tr>
+<tr>
+<td>Broker</td>
+<td>Stores partitions and handles traffic</td>
+</tr>
+<tr>
+<td>Cluster</td>
+<td>Multiple brokers working together</td>
+</tr>
+</tbody>
+</table>
+<h2 id="8-kafka-coordination-zookeeper-vs-kafka-raft-kraft">8. Kafka Coordination: Zookeeper vs Kafka Raft (KRaft)<a class="headerlink" href="#8-kafka-coordination-zookeeper-vs-kafka-raft-kraft" title="Permanent link">¶</a></h2>
+<h3 id="originally-zookeeper">Originally: Zookeeper<a class="headerlink" href="#originally-zookeeper" title="Permanent link">¶</a></h3>
+<p>Used for:
+- Metadata management<br>
+- Leader election<br>
+- Cluster configuration  </p>
+<h3 id="now-kafka-kraft-kafka-raft">Now: Kafka KRaft (Kafka Raft)<a class="headerlink" href="#now-kafka-kraft-kafka-raft" title="Permanent link">¶</a></h3>
+<ul>
+<li>Built-in consensus protocol  </li>
+<li>No Zookeeper dependency  </li>
+<li>Simplifies deployment  </li>
+<li>Better scalability and reliability  </li>
+</ul>
+<p>Zookeeper is being phased out.</p>
+<h2 id="9-key-benefits-of-kafka">9. Key Benefits of Kafka<a class="headerlink" href="#9-key-benefits-of-kafka" title="Permanent link">¶</a></h2>
+<ul>
+<li>High throughput  </li>
+<li>Low latency  </li>
+<li>Durable storage  </li>
+<li>Scalable horizontally  </li>
+<li>Fault-tolerant  </li>
+<li>Can replay historical events  </li>
+<li>Decouples microservices  </li>
+<li>Supports real-time analytics  </li>
+</ul>
+<p>https://www.youtube.com/watch?v=QkdkLdMBuL0</p>
+<p>https://www.youtube.com/watch?v=B7CwU_tNYIE</p>
 
 
 
@@ -1364,12 +2342,12 @@
     
     
       
-      <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.top", "toc.integrate", "content.code.copy", "content.code.annotate", "content.action.edit", "content.action.view", "content.tabs.link", "search.suggest", "search.highlight"], "search": "../../assets/javascripts/workers/search.973d3a69.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+      <script id="__config" type="application/json">{"base": "../../..", "features": ["navigation.top", "toc.integrate", "content.code.copy", "content.code.annotate", "content.action.edit", "content.action.view", "content.tabs.link", "search.suggest", "search.highlight"], "search": "../../../assets/javascripts/workers/search.973d3a69.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
     
     
-      <script src="../../assets/javascripts/bundle.f55a23d4.min.js"></script>
+      <script src="../../../assets/javascripts/bundle.f55a23d4.min.js"></script>
       
-        <script src="../../js/print-site.js"></script>
+        <script src="../../../js/print-site.js"></script>
       
         <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
       
