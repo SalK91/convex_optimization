@@ -402,3 +402,4 @@ $\quad\quad\quad$ $\Delta \mathbf{w} = \alpha \left( y_i - \hat{Q}(s_i, a_i; \ma
        └───────────────────────────────────────────────────────┘
 
 ```
+

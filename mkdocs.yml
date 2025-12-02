@@ -144,7 +144,9 @@ nav:
       - 3. Model-Free Prediction: "reinforcement/3_modelfree.md"
       - 4. Model-Free Control: "reinforcement/4_model_free_control.md"
       - 5. Policy Gradient Methods: "reinforcement/5_policy_gradient.md"
-      
+      - 6. Polcy Gradient Method - Advanced Topics: "reinforcement/6_policy_gradient_advanced.md"
+      - 7. Hierarchical Reinforcement Learning: "reinforcement/7_hierarchical.md"
+
       
       - 2. Multi-Armed Bandits: "reinforcement/2_bandits.md"
       - 8. Deep Reinforcement Learning: "reinforcement/8_deep_rl.md"

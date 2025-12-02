@@ -231,7 +231,7 @@ $$
 \Delta \theta = \alpha \nabla_\theta \log \pi_\theta(a_t|s_t)\, R_t
 $$
 
-**Algorithm:**
+Algorithm:
 
 1: Initialize policy parameters $\theta$  
 2: loop (for each episode)  
@@ -244,56 +244,91 @@ $$
 9: end loop  
 
 
-## 11. Actor-Critic Methods
-
-Actor update:
-
-$$
-\theta \leftarrow \theta +
-\alpha \nabla_\theta \log \pi_\theta(a_t|s_t) \, A_t
-$$
-
-Critic update:
-
-$$
-w \leftarrow w +
-\beta \left[r_t + \gamma V_w(s_{t+1}) - V_w(s_t)\right]
-$$
-
- 
-## 12. Advantage Estimation
-
-Advantage function:
-
-$$
-A_\pi(s,a) = Q_\pi(s,a) - V_\pi(s)
-$$
-
-n-step returns:
-
-$$
-\hat{R}^{(1)}_t = r_t + \gamma V(s_{t+1})
-$$
-
-$$
-\hat{R}^{(\infty)}_t = G_t
-$$
-
-Bias–variance trade-off:
-
-| Estimator | Variance | Bias |
-|-----------|----------|------|
-| $A^{(1)}_t$ | Low | High |
-| $A^{(\infty)}_t$ | High | Low |
-
- 
-## 13. Summary of Policy-Based RL
-
-| Concept | Description |
-|---------|-------------|
-| REINFORCE | Unbiased Monte-Carlo policy gradient |
-| Baseline | Variance reduction technique |
-| Actor-Critic | Uses function approximation and TD |
-| Softmax/Gaussian | Policy parameterizations |
-| Advantage | $A(s,a) = Q(s,a) - V(s)$ |
-| Goal | Learn optimal policy parameters directly |
+## Policy Gradient Methods — Mental Map
+```text
+                     Policy Gradient Methods
+    Goal: Learn the optimal policy π* directly (no Q or V tables)
+                               │
+                               ▼
+         Key Concept: Parameterized Policy πθ(a|s)
+       ┌─────────────────────────────────────────────┐
+       │ Policy is a function with parameters θ      │
+       │ πθ(a|s) gives probability of taking action a│
+       │ Optimization targets J(θ)=Expected Return   │
+       └─────────────────────────────────────────────┘
+                               │
+                    Direct Policy Optimization
+                               │
+                               ▼
+                 Optimization Objective (J(θ))
+       ┌─────────────────────────────────────────────┐
+       │ θ* = argmaxθ V(θ) = argmaxθ Eπθ[G₀]         │
+       │ Search in parameter space for best policy   │
+       └─────────────────────────────────────────────┘
+                               │
+                               ▼
+              Two Families of Policy Optimization
+       ┌────────────────────────────┬────────────────────────────┐
+       │  Gradient-Free Methods     │   Gradient-Based Methods   │
+       └────────────────────────────┴────────────────────────────┘
+                │                                      │
+                │                                      ▼
+                │                          Policy Gradient Methods
+                │                                      │
+                ▼                                      ▼
+   No gradient needed                     Uses ∇θ log πθ(a|s) * Return
+   – Hill Climbing                        – REINFORCE
+   – CEM, CMA                             – Actor-Critic
+   – Genetic Algorithms                   – Advantage Methods
+   │                                      │
+   └──── Flexible & parallelizable        └──── Sample efficient
+                               │
+                               ▼
+                   Policy Gradient Core Idea
+       ┌───────────────────────────────────────────────┐
+       │ Increase probability of good actions          │
+       │ Decrease probability of poor actions          │
+       │ Gradient term: ∇θ log πθ(a|s)(score function) │
+       └───────────────────────────────────────────────┘
+                               │
+                               ▼
+                     REINFORCE Algorithm (MC)
+       ┌───────────────────────────────────────────────┐
+       │ Sample full episodes (Monte Carlo)            │
+       │ Compute return Gt at each time step           │
+       │ Update: θ ← θ + α ∇θ log πθ(a_t|s_t) * G_t    │
+       └───────────────────────────────────────────────┘
+                               │
+                               ▼
+                   Variance Reduction Techniques
+       ┌───────────────────────────────────────────────┐
+       │ Baseline: use A_t = G_t - b(s_t)              │
+       │ Reduces variance without introducing bias     │
+       │ b(s) ≈ V(s) → leads to Actor-Critic methods   │
+       └───────────────────────────────────────────────┘
+                               │
+                               ▼
+                        Actor-Critic Methods
+       ┌───────────────────────────────────────────────┐
+       │ Actor: updates policy parameters θ            │
+       │ Critic: learns V(s;w) or Q(s,a;w) (baseline)  │
+       │ Update uses TD error δt instead of full return│
+       └───────────────────────────────────────────────┘
+                               │
+                               ▼
+                      Policy Parameterization
+       ┌────────────────────────────┬────────────────────────────┐
+       │ Softmax Policy (Discrete)  │ Gaussian Policy(Continuous)│
+       │ πθ(a|s) = exp(...)         │ a ~ N(μ(s), σ²)            │
+       │ ∇θ log πθ = φ - Eφ         │ ∇θ log πθ = (a-μ)/σ² * φ   │
+       └────────────────────────────┴────────────────────────────┘
+                               │
+                               ▼
+                         Final Outcome
+       ┌─────────────────────────────────────────────────┐
+       │ Learn π* directly (no need for Q or V tables)   │
+       │ Works naturally with stochastic & continuous    │
+       │ Supports neural network policy parameterization │
+       │ Foundation of modern deep RL (PPO, A3C, DDPG)   │
+       └─────────────────────────────────────────────────┘
+```
