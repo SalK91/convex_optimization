@@ -5,26 +5,24 @@ In Chapter 3, we learned how to estimate the value of a fixed policy using Monte
 
 ## From State Values to Action Values
 
-In model-based methods like Dynamic Programming, policy improvement relies on knowing the model and using the Bellman optimality equation. For example:
+In model-based methods like Dynamic Programming, policy improvement depends on knowing the environment model. To improve a policy, we use the Bellman optimality equation:
 
 $$
 \pi_{k+1}(s) = \arg\max_a \left[ R(s,a) + \gamma \sum_{s'} P(s'|s,a)V^{\pi_k}(s') \right]
 $$
+This update requires two things:
 
-This calculation is impossible when $P$ and $R$ are unknown. Instead, we learn the action-value function directly:
+ - the transition probabilities $P(s'|s,a)$
+ - the expected reward R(s,a)$
 
+If either of these is unknown, we cannot compute the right-hand side, so model-based policy improvement becomes impossible.
+
+Instead of learning the state-value function $V^\pi(s)$ and using the model to evaluate the effect of each action, model-free RL learns the value of actions themselves.
 $$
 Q^\pi(s,a) = \mathbb{E}_\pi[G_t \mid s_t = s, a_t = a]
 $$
 
-Once we have $Q^\pi(s,a)$, policy improvement does not require the model:
-
-$$
-\pi'(s) = \arg\max_a Q^\pi(s,a)
-$$
-
-
-The Model-Free Policy Iteration loop thus becomes:
+The Model-Free Policy Iteration loop:
 
 1.  Policy Evaluation: Compute $Q^{\pi}$ from experience.
 2.  Policy Improvement: Update the policy $\pi$ given the estimated $Q^{\pi}$.

@@ -8,16 +8,13 @@ Reinforcement Learning relies on the mathematical framework of Markov Decision P
 The RL framework is built upon three foundational models, each adding complexity and agency.
 
 ### The Markov Process
-A Markov Process, or Markov Chain, is the simplest model, concerned only with the flow of states. It is defined by the set of States ($S$) and the Transition Model ($P(s' \mid s)$).
+A Markov Process, or Markov Chain, is the simplest model, concerned only with the flow of states. It is defined by the set of States ($S$) and the Transition Model ($P(s' \mid s)$). The defining characteristic is the Markov Property: the next state is independent of the past states, given only the current state.
 
-The defining characteristic is the Markov Property: the next state is independent of the past states, given only the current state.
 $$
 P(s_{t+1} \mid s_t, s_{t-1}, \ldots) = P(s_{t+1} \mid s_t)
 $$
 
->  The future is conditionally independent of the past given the present/
-
-> *Intuition: MPs describe what happens but do not assign any value to these events.*
+>  The future is conditionally independent of the past given the present. *Intuition: MPs describe what happens but do not assign any value to these events.*
 
 ### The Markov Reward Process (MRP)
 
@@ -57,6 +54,16 @@ $$
 $$
 P_\pi(s'|s) = \sum_a \pi(a|s) P(s'|s,a)
 $$
+
+
+> Once actions are introduced in an MDP, it becomes useful to evaluate not only how good a state is, but how good a particular action is *relative to the policy’s expected behavior*. This leads to the advantage functio/
+
+> The state-value function measures how good it is to be in a state: $V_\pi(s) = \mathbb{E}_\pi[G_t \mid s_t = s]$
+> The action-value function measures how good it is to take action $a$ in state $s$:$Q_\pi(s,a) = \mathbb{E}_\pi[G_t \mid s_t = s,\; a_t = a]$
+> The **advantage function** compares these two: $A_\pi(s,a) = Q_\pi(s,a) - V_\pi(s).$
+> - $V_\pi(s)$ is how well the policy performs *on average* from state $s$.
+> - $Q_\pi(s,a)$ is how well it performs if it specifically takes action $a$.
+> Therefore, the advantage tells us: How much better or worse action $a$ is compared to what the policy would normally do in state $s$.
 
 ## Value Functions and Expectation
 
@@ -122,8 +129,8 @@ These equations are non-linear due to the max operator and must be solved iterat
 For MDPs where the model ($P$ and $R$) is fully known, Dynamic Programming methods are used to solve the Bellman Optimality Equations iteratively.
 
 
-### Policy Iteration (PI)
-Policy Iteration (PI) follows an alternating cycle of Evaluation and Improvement. It takes fewer, but more expensive, iterations to converge.
+### Policy Iteration
+Policy Iteration follows an alternating cycle of Evaluation and Improvement. It takes fewer, but more expensive, iterations to converge.
 
 1.  Policy Evaluation: For the current policy $\pi_k$, compute $V^{\pi_k}$ by iteratively applying the Bellman Expectation Equation until full convergence. This is the computationally intensive step.
     $$
@@ -146,6 +153,7 @@ Value Iteration is a single, continuous process that combines evaluation and imp
 2.  Convergence: The iterations stop when $V_{k+1}$ is sufficiently close to $V^*$.
 3.  Extraction: The optimal policy $\pi^*$ is then extracted greedily from the final $V^*$.
 
+### PI vs VI
 | Feature | Policy Iteration (PI) | Value Iteration (VI) |
 | :--- | :--- | :--- |
 | Core Idea | Evaluate completely, then improve. | Greedily improve values in every step. |

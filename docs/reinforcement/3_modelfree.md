@@ -1,9 +1,6 @@
 # Chapter 3: Model-Free Policy Evaluation: Learning the Value of a Fixed Policy
 
-In Dynamic Programming, value functions are computed using a known model of the environment. In reality, however, the model is almost always unknown. This necessitates a shift to Model-Free Reinforcement Learning, where the agent must learn the values of states and actions solely from direct experience (i.e., collecting trajectories of states, actions, and rewards).
-
-
-The goal is to estimate the value function $V^\pi(s)$ or $Q^\pi(s,a)$ for a given policy $\pi$ using data of the form:
+In Dynamic Programming, value functions are computed using a known model of the environment. In reality, however, the model is almost always unknown. This necessitates a shift to Model-Free Reinforcement Learning, where the agent must learn the values of states and actions solely from direct experience (i.e., collecting trajectories of states, actions, and rewards). The goal is to estimate the value function $V^\pi(s)$ or $Q^\pi(s,a)$ for a given policy $\pi$ using data of the form:
 
 $$
 s_0, a_0, r_1, s_1, a_1, r_2, s_2, \dots
@@ -21,10 +18,6 @@ Model-Free methods can be divided into two main categories based on how they est
 
 1. Monte Carlo (MC) methods: learn from complete episodes by averaging returns.
 2. Temporal Difference (TD) methods: learn from incomplete episodes by bootstrapping from existing estimates.
-
-These two approaches represent different strategies for estimating expected returns from data.
-
-
  
 ## Monte Carlo Policy Evaluation
 
@@ -75,9 +68,7 @@ While MC uses the full return $G_t$, TD learning is the fundamental shift in pol
 
 ### Bootstrapping: The Core Idea
 
-Bootstrapping means updating a value estimate using another value estimate. In the context of Policy Evaluation, TD methods use the estimated value of the *next* state, $V(s_{t+1})$, to update the value of the *current* state, $V(s_t)$. 
-
-The standard TD algorithm is TD(0) (or one-step TD).
+Bootstrapping means updating a value estimate using another value estimate. In the context of Policy Evaluation, TD methods use the estimated value of the *next* state, $V(s_{t+1})$, to update the value of the *current* state, $V(s_t)$. The standard TD algorithm is TD(0) (or one-step TD).
 
 ### The TD(0) Update Rule
 The TD(0) update replaces the full return $G_t$ with the TD Target ($r_t + \gamma V(s_{t+1})$):

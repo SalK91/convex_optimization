@@ -300,22 +300,6 @@ Algorithm:
        └───────────────────────────────────────────────┘
                                │
                                ▼
-                   Variance Reduction Techniques
-       ┌───────────────────────────────────────────────┐
-       │ Baseline: use A_t = G_t - b(s_t)              │
-       │ Reduces variance without introducing bias     │
-       │ b(s) ≈ V(s) → leads to Actor-Critic methods   │
-       └───────────────────────────────────────────────┘
-                               │
-                               ▼
-                        Actor-Critic Methods
-       ┌───────────────────────────────────────────────┐
-       │ Actor: updates policy parameters θ            │
-       │ Critic: learns V(s;w) or Q(s,a;w) (baseline)  │
-       │ Update uses TD error δt instead of full return│
-       └───────────────────────────────────────────────┘
-                               │
-                               ▼
                       Policy Parameterization
        ┌────────────────────────────┬────────────────────────────┐
        │ Softmax Policy (Discrete)  │ Gaussian Policy(Continuous)│
