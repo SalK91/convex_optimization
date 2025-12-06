@@ -771,10 +771,10 @@ and form the foundation of modern deep RL algorithms used in practice (PPO, TRPO
        │ + Unbiased                 │  + Low variance            │
        │ – High variance            │  – Biased                  │
        ├────────────────────────────┴────────────────────────────┤
-       │ n-Step Returns: Blend of TD and MC                     │
-       │ Control bias–variance by choosing n                    │
-       │ Larger n → MC-like; smaller n → TD-like                │
-       └────────────────────────────────────────────────────────┘
+       │ n-Step Returns: Blend of TD and MC                      │
+       │ Control bias–variance by choosing n                     │
+       │ Larger n → MC-like; smaller n → TD-like                 │
+       └─────────────────────────────────────────────────────────┘
                                │
                                ▼
              Fundamental Problems with Vanilla Policy Gradient
@@ -789,7 +789,7 @@ and form the foundation of modern deep RL algorithms used in practice (PPO, TRPO
             Safe Policy Improvement Theory → TRPO & PPO
        ┌────────────────────────────────────────────────────────┐
        │ Policy Performance Difference Lemma                    │
-       │   J(π') − J(π) = Eπ' [Aπ(s,a)]                        │
+       │   J(π') − J(π) = Eπ' [Aπ(s,a)]                         │
        │ KL Divergence as policy distance metric                │
        │   D_KL(π'||π) small → safe update                      │
        │ Monotonic Improvement Bound                            │
