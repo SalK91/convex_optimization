@@ -56,13 +56,18 @@ P_\pi(s'|s) = \sum_a \pi(a|s) P(s'|s,a)
 $$
 
 
-> Once actions are introduced in an MDP, it becomes useful to evaluate not only how good a state is, but how good a particular action is *relative to the policy’s expected behavior*. This leads to the advantage functio/
+> Once actions are introduced in an MDP, it becomes useful to evaluate not only how good a state is, but how good a particular action is *relative to the policy’s expected behavior*. This leads to the advantage function.
 
-> The state-value function measures how good it is to be in a state: $V_\pi(s) = \mathbb{E}_\pi[G_t \mid s_t = s]$
+> The state-value function measures how good it is to be in a state: $V_\pi(s) = \mathbb{E}_\pi[G_t \mid s_t = s]$.
+
 > The action-value function measures how good it is to take action $a$ in state $s$:$Q_\pi(s,a) = \mathbb{E}_\pi[G_t \mid s_t = s,\; a_t = a]$
+
 > The **advantage function** compares these two: $A_\pi(s,a) = Q_\pi(s,a) - V_\pi(s).$
-> - $V_\pi(s)$ is how well the policy performs *on average* from state $s$.
-> - $Q_\pi(s,a)$ is how well it performs if it specifically takes action $a$.
+
+> $V_\pi(s)$ is how well the policy performs *on average* from state $s$.
+
+> $Q_\pi(s,a)$ is how well it performs if it specifically takes action $a$.
+
 > Therefore, the advantage tells us: How much better or worse action $a$ is compared to what the policy would normally do in state $s$.
 
 ## Value Functions and Expectation

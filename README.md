@@ -3,6 +3,8 @@
 1. RL
     https://www.youtube.com/watch?v=WsvFL-LjA6U&list=PLoROMvodv4rN4wG6Nk6sNpTEbuOSosZdX
 
+
+ Stanford CS330 Deep Multi-Task & Meta Learning
 2. MIT 6.824: Distributed Systems:
    https://pdos.csail.mit.edu/6.824/schedule.html
    https://www.youtube.com/@6.824

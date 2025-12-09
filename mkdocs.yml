@@ -144,7 +144,11 @@ nav:
       - 3. Model-Free Prediction: "reinforcement/3_modelfree.md"
       - 4. Model-Free Control: "reinforcement/4_model_free_control.md"
       - 5. Policy Gradient Methods: "reinforcement/5_policy_gradient.md"
-      - 6. Polcy Gradient Method - Advanced Topics: "reinforcement/6_policy_gradient_advanced.md"
+      - 6. Policy Gradient Variance Reduction and Actor-Critic: "reinforcement/6_pg2.md"
+      - 7. Advances in Policy Optimization – GAE, TRPO, and PPO: "reinforcement/7_gae.md"
+      - 8. Imitation Learning: "reinforcement/8_imitation_learning.md"
+      - 9. RLHF: "reinforcement/9_rlhf.md"
+      
       - 7. Hierarchical Reinforcement Learning: "reinforcement/7_hierarchical.md"
 
       

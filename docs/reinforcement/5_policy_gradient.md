@@ -135,7 +135,7 @@ Trajectory probability:
 
 $$
 P(\tau|\theta) =
-\P(s_0)
+P(s_0)
 \prod_{t=0}^{T-1}
 \pi_\theta(a_t|s_t)\cdot P(s_{t+1}|s_t,a_t)
 $$
