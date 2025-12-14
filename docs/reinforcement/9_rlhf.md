@@ -1,4 +1,4 @@
-# Chapter 10: Reinforcement Learning from Human Feedback and Value Alignment
+# Chapter 9: Reinforcement Learning from Human Feedback and Value Alignment
 
 
 Designing a reward function that captures exactly what we want from a  model is extremely difficult. In open-ended tasks such as in langugae models for dialogue or summarization, we cannot easily hand-craft a numeric reward for “good” behavior. This is where Reinforcement Learning from Human Feedback (RLHF) comes in. RLHF is a strategy to achieve value alignment – ensuring an AI’s behavior aligns with human preferences and values – by using human feedback as the source of reward. Instead of explicitly writing a reward function, we ask humans to compare or rank outputs, and use those preferences as a training signal. Humans find it much easier to choose which of two responses is better than to define a precise numerical reward for each outcome. For example, it's simpler for a person to say which of two summaries is more accurate and polite than to assign an absolute “score” to a single summary. By leveraging these relative judgments, RLHF turns human preference data into a reward model that guides the training of our policy (the language model) toward preferred behaviors.
@@ -147,3 +147,121 @@ $$\ell_{\text{DPO}}(\theta)
 
 where $\sigma$ is the sigmoid function. This loss is low (i.e. good) when $\log \pi_\theta(y_+|x) \gg \log \pi_\theta(y_-|x)$, meaning the model assigns much higher probability to the preferred outcome – which is what we want. If the model hasn’t yet learned the preference, the loss will be higher, and gradient descent on this loss will push $\pi_\theta$ to increase the probability of $y_+$ and decrease that of $y_-$. Notice that this is very analogous to the Bradley-Terry formulation earlier, except now we embed the reward model inside the policy’s logits: effectively, $\log \pi_\theta(y|x)$ plays the role of a reward score for how good $y$ is, up to the scaling factor $1/\beta$. In fact, the DPO derivation can be seen as combining the preference loss on $r_\phi$ with the $\pi^*$ solution formula to produce a preference loss on $\pi_\theta$. The original DPO paper calls this approach “your language model is secretly a reward model” – by training the language model with this loss, we are directly teaching it to act as if it were the reward model trying to distinguish preferred vs. non-preferred outputs.
  
+ ## Mental map
+
+ ``` text
+         Reinforcement Learning from Human Feedback (RLHF)
+   Goal: Align model behavior with human preferences and values
+          when explicit reward design is impractical
+                                │
+                                ▼
+           Why Dense Rewards Are Hard for Language Models
+ ┌───────────────────────────────────────────────────────────┐
+ │ Open-ended tasks (dialogue, summarization, reasoning)     │
+ │ No clear numeric notion of “good” behavior                │
+ │ Hand-crafted dense rewards → miss nuance, reward hacking  │
+ │ Metrics (BLEU, ROUGE, length) poorly reflect human values │
+ │ Human values are subjective, contextual, and fuzzy        │
+ └───────────────────────────────────────────────────────────┘
+                                │
+                                ▼
+            From Imitation Learning to Human Preferences
+ ┌───────────────────────────────────────────────────────────┐
+ │ Behavioral Cloning (IL): imitate demonstrations           │
+ │ + Simple, safe, no reward needed                          │
+ │ – Cannot exceed expert, sensitive to distribution shift   │
+ │ DAgger: fixes BC but requires step-by-step human labeling │
+ │ Pairwise preferences = middle ground                      │
+ │ → no dense rewards, no per-step supervision               │
+ └───────────────────────────────────────────────────────────┘
+                                │
+                                ▼
+           Pairwise Preference Feedback (Key Idea)
+ ┌───────────────────────────────────────────────────────────┐
+ │ Humans compare two outputs and choose the better one      │
+ │ Easier than assigning numeric rewards                     │
+ │ More informative than raw demonstrations                  │
+ │ Scales to complex, open-ended behaviors                   │
+ │ Forms basis of reward learning in RLHF                    │
+ └───────────────────────────────────────────────────────────┘
+                                │
+                                ▼
+        Bradley–Terry Model: Preferences → Reward Signal
+ ┌───────────────────────────────────────────────────────────┐
+ │ Model noisy human comparisons probabilistically           │
+ │ P(b_i ≻ b_j) = exp(r(b_i)) / (exp(r(b_i))+exp(r(b_j)))    │
+ │ r(b): latent scalar reward                                │
+ │ Fit r(·) by maximizing likelihood / cross-entropy         │
+ │ Preferred outputs get higher reward scores                │
+ └───────────────────────────────────────────────────────────┘
+                                │
+                                ▼
+             RLHF Training Pipeline (3 Stages)
+ ┌───────────────────────────────────────────────────────────┐
+ │ 1. Supervised Fine-Tuning (SFT)                           │
+ │    – Behavioral cloning on human-written demos            │
+ │    – Produces reference policy π_ref                      │
+ │                                                           │
+ │ 2. Reward Model Training                                  │
+ │    – Human pairwise preferences                           │
+ │    – Train r_φ(x,y) via Bradley–Terry loss                │
+ │                                                           │
+ │ 3. RL Fine-Tuning (PPO)                                   │
+ │    – Maximize reward r_φ(x,y)                             │
+ │    – KL penalty keeps π_θ close to π_ref                  │
+ │    – Prevents reward hacking & language drift             │
+ └───────────────────────────────────────────────────────────┘
+                                │
+                                ▼
+              RLHF Objective (KL-Regularized RL)
+ ┌───────────────────────────────────────────────────────────┐
+ │ Maximize:                                                 │
+ │   E[r_φ(x,y)] − β · KL(π_θ || π_ref)                      │
+ │ β controls tradeoff:                                      │
+ │   Low β → reward hacking / mode collapse                  │
+ │   High β → little improvement over SFT                    │
+ │ PPO provides stable policy updates                        │
+ └───────────────────────────────────────────────────────────┘
+                                │
+                                ▼
+          Limitations of Standard RLHF (PPO-based)
+ ┌───────────────────────────────────────────────────────────┐
+ │ Requires training multiple models                         │
+ │ Many hyperparameters (β, PPO clip, value loss, etc.)      │
+ │ Sampling-based RL can be unstable                         │
+ │ Expensive and complex pipeline                            │
+ └───────────────────────────────────────────────────────────┘
+                                │
+                                ▼
+      Direct Preference Optimization (DPO): RLHF without RL
+ ┌───────────────────────────────────────────────────────────┐
+ │ Solve RLHF objective in closed form                       │
+ │ Optimal policy:                                           │
+ │   π*(y|x) ∝ π_ref(y|x) · exp(r_φ(x,y)/β)                  |
+ │ Use probability ratios → normalization cancels            │
+ │ Train π_θ directly on preference pairs                    │
+ │ Loss: sigmoid on log-prob difference                      │
+ │ “Your LM is secretly a reward model”                      │
+ └───────────────────────────────────────────────────────────┘
+                                │
+                                ▼
+              DPO vs PPO-based RLHF
+ ┌─────────────────────────────┬─────────────────────────────┐
+ │ RLHF (PPO)                  │ DPO                         │
+ │ + Explicit RL optimization  │ + Pure supervised learning  │
+ │ – Complex & unstable        │ – Assumes KL-optimal form   │
+ │ – Many hyperparameters      │ + Simple, stable, efficient │
+ │                             │ + No separate reward model  │
+ └─────────────────────────────┴─────────────────────────────┘
+                                │
+                                ▼
+              Final Takeaway (Chapter Summary)
+ ┌───────────────────────────────────────────────────────────┐
+ │ Dense rewards are hard for language tasks                 │
+ │ Pairwise preferences provide natural human feedback       │
+ │ RLHF learns rewards from preferences + optimizes policy   │
+ │ DPO simplifies RLHF by removing explicit RL               │
+ │ Together, they extend imitation learning toward           │
+ │ scalable value alignment for modern language models       │
+ └───────────────────────────────────────────────────────────┘
+```
