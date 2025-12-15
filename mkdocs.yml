@@ -148,6 +148,7 @@ nav:
       - 7. Advances in Policy Optimization – GAE, TRPO, and PPO: "reinforcement/7_gae.md"
       - 8. Imitation Learning: "reinforcement/8_imitation_learning.md"
       - 9. RLHF: "reinforcement/9_rlhf.md"
+      - 10. Offline Reinforcement Learning: "reinforcement/10_offline_rl.md"
       
       - 7. Hierarchical Reinforcement Learning: "reinforcement/7_hierarchical.md"
 
