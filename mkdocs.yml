@@ -149,15 +149,8 @@ nav:
       - 8. Imitation Learning: "reinforcement/8_imitation_learning.md"
       - 9. RLHF: "reinforcement/9_rlhf.md"
       - 10. Offline Reinforcement Learning: "reinforcement/10_offline_rl.md"
+      - 11. Data-Efficient Reinforcement Learning: "reinforcement/11_fast_rl.md"
       
-      - 7. Hierarchical Reinforcement Learning: "reinforcement/7_hierarchical.md"
-
-      
-      - 2. Multi-Armed Bandits: "reinforcement/2_bandits.md"
-      - 8. Deep Reinforcement Learning: "reinforcement/8_deep_rl.md"
-      - 9. Exploration Strategies: "reinforcement/9_exploration.md"
-      - 10. Multi-Agent Reinforcement Learning: "reinforcement/10_multi_agent.md"
-      - 11. Applications of Reinforcement Learning: "reinforcement/11_applications.md"
   
   - Deep Learning:
       - 1. Introduction to Deep Learning Optimization: "deeplearning/1_mlp.md"

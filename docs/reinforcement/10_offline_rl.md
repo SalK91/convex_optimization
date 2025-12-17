@@ -141,3 +141,167 @@ Once we've evaluated the policy using offline methods, the next step is to optim
 
 
 Offline RL provides a valuable framework for learning policies from existing data when exploration is not feasible. By using batch policy evaluation techniques like Importance Sampling, Fitted Q Iteration, and Pessimistic Learning, we can develop policies that perform well even with limited or imperfect data. However, challenges such as distribution mismatch and model misspecification need careful handling to avoid overfitting or biased outcomes.
+
+
+## Mental Map
+
+```text
+                 Offline / Batch Reinforcement Learning
+        Goal: Learn and evaluate policies from fixed historical data
+           when exploration is unsafe, expensive, or impossible
+                                │
+                                ▼
+              Why Online RL Is Not Always Feasible
+ ┌─────────────────────────────────────────────────────────────┐
+ │ Exploration can be dangerous (healthcare, driving, robotics)│
+ │ Data already exists from past decisions                     │
+ │ Real systems cannot reset or freely experiment              │
+ │ We must learn without interacting with the environment      │
+ └─────────────────────────────────────────────────────────────┘
+                                │
+                                ▼
+              Offline RL vs Standard RL
+ ┌─────────────────────────────────────────────────────────────┐
+ │ Standard RL:                                                │
+ │  – Collect data with current policy                         │
+ │  – Explore → improve → repeat                               │
+ │                                                             │
+ │ Offline RL:                                                 │
+ │  – Fixed dataset D from behavior policy π_b                 │
+ │  – No new interaction allowed                               │
+ │  – Must generalize only from observed data                  │
+ └─────────────────────────────────────────────────────────────┘
+                                │
+                                ▼
+             Why “Just Use Q-Learning” Fails Offline
+ ┌─────────────────────────────────────────────────────────────┐
+ │ Q-learning is off-policy — but not offline-safe             │
+ │ Deadly triad:                                               │
+ │   • Bootstrapping                                           │
+ │   • Function approximation                                  │
+ │   • Off-policy learning                                     │
+ │ Leads to divergence & overestimation                        │
+ │ Especially severe with distribution mismatch                │
+ └─────────────────────────────────────────────────────────────┘
+                                │
+                                ▼
+        Offline RL Decomposed into Two Core Problems
+ ┌───────────────────────────────┬─────────────────────────────┐
+ │ 1. Policy Evaluation (OPE)    │ 2. Policy Optimization      │
+ │    “How good is this policy?” │    “How can we improve it?” │
+ │    Without running it         │    Without new data         │
+ └───────────────────────────────┴─────────────────────────────┘
+                                │
+                                ▼
+            Batch / Offline Policy Evaluation (OPE)
+ ┌─────────────────────────────────────────────────────────────┐
+ │ Estimate V^π or J(π) using only dataset D                   │
+ │ Three major approaches:                                     │
+ │  1. Model-based evaluation                                  │
+ │  2. Model-free evaluation (FQE)                             │
+ │  3. Importance Sampling                                     │
+ └─────────────────────────────────────────────────────────────┘
+                                │
+                                ▼
+        1. Model-Based Offline Policy Evaluation
+ ┌─────────────────────────────────────────────────────────────┐
+ │ Learn a model from data:                                    │
+ │   • Reward model: r̂(s,a)                                    │
+ │   • Transition model: P̂(s'|s,a)                             │
+ │ Treat batch data as supervised learning                     │
+ │ Then simulate policy π inside learned model                 │
+ │ Use Bellman backups on (P̂, r̂)                               │
+ └─────────────────────────────────────────────────────────────┘
+                                │
+                                ▼
+        Model-Based OPE: Key Limitation
+ ┌─────────────────────────────────────────────────────────────┐
+ │ Model is only reliable where data exists                    │
+ │ Policy visiting unseen states/actions → extrapolation error │
+ │ Model hallucination → highly biased value estimates         │
+ └─────────────────────────────────────────────────────────────┘
+                                │
+                                ▼
+        2. Model-Free Evaluation: Fitted Q Evaluation (FQE)
+ ┌─────────────────────────────────────────────────────────────┐
+ │ Evaluate a *fixed policy* π                                 │
+ │ Learn Q^π(s,a) from offline data via regression             │
+ │ Bellman target:                                             │
+ │   y = c + γ Q(s', π(s'))                                    │
+ │ Pure supervised learning loop                               │
+ │ Stable compared to Q-learning / DQN                         │
+ └─────────────────────────────────────────────────────────────┘
+                                │
+                                ▼
+             FQE vs DQN (Key Insight)
+ ┌─────────────────────────────┬─────────────────────────────┐
+ │ DQN                         │ FQE                         │
+ │ Learns optimal policy       │ Evaluates fixed policy      │
+ │ Uses max over actions       │ Uses given π(s')            │
+ │ Online data collection      │ Fully offline               │
+ │ Overestimation bias         │ No max → more stable        │
+ └─────────────────────────────┴─────────────────────────────┘
+                                │
+                                ▼
+        3. Importance Sampling (IS) Evaluation
+ ┌─────────────────────────────────────────────────────────────┐
+ │ Treat OPE as statistical estimation                         │
+ │ Reweight trajectories by π / π_b                            │
+ │ Unbiased if coverage holds                                  │
+ │ Severe variance for long horizons or policy mismatch        │
+ │ Variants:                                                   │
+ │   • Per-decision IS                                         │
+ │   • Weighted IS                                             │
+ │   • Doubly robust estimators                                │
+ └─────────────────────────────────────────────────────────────┘
+                                │
+                                ▼
+            Offline Policy Optimization
+ ┌─────────────────────────────────────────────────────────────┐
+ │ Goal: improve policy using only dataset D                   │
+ │ Model-free: Fitted Q Iteration (FQI)                        │
+ │ Model-based: planning inside learned model                  │
+ │ Core challenge: distribution shift                          │
+ └─────────────────────────────────────────────────────────────┘
+                                │
+                                ▼
+        The Central Problem: Distribution Mismatch
+ ┌─────────────────────────────────────────────────────────────┐
+ │ Learned policy chooses actions unseen in data               │
+ │ Q-values extrapolate → overly optimistic                    │
+ │ Performance collapses at deployment                         │
+ │ Offline RL ≠ just off-policy RL                             │
+ └─────────────────────────────────────────────────────────────┘
+                                │
+                                ▼
+        Conservative / Pessimistic Offline RL
+ ┌─────────────────────────────────────────────────────────────┐
+ │ Assume unknown actions are risky                            │
+ │ Penalize state-action pairs with low data support           │
+ │ Prefer policies close to behavior policy                    │
+ │ Examples (conceptually):                                    │
+ │   • Conservative Q-Learning (CQL)                           │
+ │   • Regularization toward π_b                               │
+ └─────────────────────────────────────────────────────────────┘
+                                │
+                                ▼
+              Key Challenges in Offline RL
+ ┌─────────────────────────────────────────────────────────────┐
+ │ Coverage / overlap requirement                              │
+ │ Model misspecification                                      │
+ │ Value overestimation                                        │
+ │ Bias–variance tradeoffs                                     │
+ │ Safety vs optimality                                        │
+ └─────────────────────────────────────────────────────────────┘
+                                │
+                                ▼
+               Final Takeaway (Chapter Summary)
+ ┌─────────────────────────────────────────────────────────────┐
+ │ Offline RL learns entirely from past experience             │
+ │ Policy evaluation is foundational before optimization       │
+ │ Model-based, FQE, and IS provide OPE tools                  │
+ │ Main risk: distribution shift & extrapolation               │
+ │ Conservative methods trade performance for safety           │
+ │ Offline RL is essential for real-world decision systems     │
+ └─────────────────────────────────────────────────────────────┘
+```
