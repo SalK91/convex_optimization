@@ -113,12 +113,22 @@ Algorithm:
 $$a_t = \arg\max_{a \in \mathcal{A}} \left[ U_t(a) \right]$$
 
 
-> Hoeffding Bound Justification
-> Given i.i.d. bounded rewards $X_i \in [0,1]$,
-> $$\mathbb{P}\left[ \mathbb{E}[X] > \bar{X}_n + u \right] \le \exp(-2nu^2)$$
-
-
-
+> Hoeffding Bound Justification:  Given i.i.d. bounded rewards $X_i \in [0,1]$,
+> $$
+> \mathbb{P}\!\left[ \mathbb{E}[X] > \bar{X}_n + u \right]
+> \;\le\; \exp(-2 n u^2).
+> $$
+>
+> Setting the right-hand side equal to $\delta$ and solving for $u$,
+> $$
+> u = \sqrt{\frac{\log(1/\delta)}{2n}}.
+> $$
+> Here, $\delta$ is the failure probability, and the confidence interval
+> holds with probability at least $1 - \delta$.
+> This means that, with probability at least $1 - \delta$,
+> $$
+> \bar{X}_n - u \;\le\; \mathbb{E}[X] \;\le\; \bar{X}_n + u.
+> $$
 
 
 $$
@@ -129,30 +139,42 @@ $$
 ### UCB1 Algorithm
 
 $$
-\text{UCB}_t(a) = \hat{Q}_t(a) + \sqrt{\frac{2 \log t}{N_t(a)}}
+\text{UCB}_t(a) = \hat{Q}_t(a) + \sqrt{\frac{2 \log \frac{1}{\delta} }{N_t(a)}}
 $$
 
+- where $\hat{Q}_t(a)$ is empirical average
+- $N_t(a)$ is number of samples of $a$ after $t$ timesteps.
 - Provable sublinear regret.
 - Balances estimated value and exploration bonus.
 
+Algorithm: UCB1 (Auer, Cesa-Bianchi, Fischer, 2002)
 
----
+1: Initialize for each arm $a \in \mathcal{A}$:  $\quad N(a) \leftarrow 0,\;\; \hat{Q}(a) \leftarrow 0$
+2: Warm start (sample each arm once):  
+3: for each arm $a \in \mathcal{A}$ do  
+4: $\quad$ Pull arm $a$, observe reward $r \in [0,1]$  
+5: $\quad N(a) \leftarrow 1$  
+6: $\quad \hat{Q}(a) \leftarrow r$  
+7: end for  
+8: Set $t \leftarrow |\mathcal{A}|$
 
-## 11.5 Lower Bounds and Problem Hardness
+9: for $t = |\mathcal{A}|+1, |\mathcal{A}|+2, \dots$ do  
+10: $\quad$ Compute UCB for each arm: $\quad \mathrm{UCB}_t(a) = \hat{Q}(a) + \sqrt{\frac{2\log t}{N(a)}}$
 
-### Lai & Robbins Lower Bound
+11: $\quad$ Select action:$\quad a_t \leftarrow \arg\max_{a \in \mathcal{A}} \mathrm{UCB}_t(a)$
 
-No algorithm can do better (asymptotically) than:
+12: $\quad$ Pull arm $a_t$, observe reward $r_t$
+
+13: $\quad$ Update count: $\quad N(a_t) \leftarrow N(a_t) + 1$
+
+14: $\quad$ Update empirical mean (incremental):  
 $$
-\lim_{T \to \infty} L_T \ge \log T \sum_{a: \Delta_a > 0} \frac{\Delta_a}{\text{KL}(R_a || R_{a^*})}
+\quad \hat{Q}(a_t) \leftarrow \hat{Q}(a_t) + \frac{1}{N(a_t)}\Big(r_t - \hat{Q}(a_t)\Big)
 $$
 
-Where $\text{KL}(R_a || R_{a^*})$ is the Kullback-Leibler divergence between reward distributions.  
-Hard problems have similar distributions across arms.
+15: end for
 
----
-
-## 11.6 Bayesian Regret and Thompson Sampling
+## 11.5 Bayesian Regret and Thompson Sampling
 
 Instead of upper bounds, use posterior distributions over arm values.
 
@@ -164,9 +186,8 @@ For each $a$:
 
 Probabilistic matching between belief and action. Known to achieve near-optimal regret bounds both empirically and theoretically.
 
----
 
-## 11.7 Summary of Approaches
+## 11.6 Summary of Approaches
 
 | Algorithm          | Exploration | Regret Behavior  | Notes                               |
 |-------------------|-------------|------------------|--------------------------------------|
@@ -175,9 +196,8 @@ Probabilistic matching between belief and action. Known to achieve near-optimal 
 | UCB1              | Optimistic  | $O(\log T)$      | Theoretical guarantees               |
 | Thompson Sampling | Posterior   | $O(\log T)$      | Bayesian, flexible                   |
 
----
 
-## 11.8 Key Takeaways
+## 11.7 Key Takeaways
 
 - Bandits abstract the exploration challenge and help benchmark RL algorithms.
 - Regret is a key theoretical tool for assessing efficiency.
