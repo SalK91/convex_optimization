@@ -5,6 +5,7 @@ site_name: Mathematics for Machine Learning
 site_description: "Structured lecture notes on optimization, convex analysis, and algorithms."
 site_author: "Salman Khan"
 repo_url: "https://github.com/SalK91/convex_optimization"
+edit_uri: edit/main/docs/
 repo_name: "GitHub"
 site_url: "https://salk91.github.io/convex_optimization"
 copyright: "© 2025 Salman Khan — Educational Use Only"

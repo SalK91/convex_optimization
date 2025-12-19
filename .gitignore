@@ -1,3 +1,6 @@
-**/internalfolder/
+# Ignore this folder anywhere
+internalfolder/
+
+# Ignore all README files anywhere (any extension)
 README*
 readme*
