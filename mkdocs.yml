@@ -150,7 +150,7 @@ nav:
       - 9. RLHF: "reinforcement/9_rlhf.md"
       - 10. Offline Reinforcement Learning: "reinforcement/10_offline_rl.md"
       - 11. Data-Efficient Reinforcement Learning: "reinforcement/11_fast_rl.md"
-      
+      - 12. Fast Reinforcement Learning in MDPs and Generalization: "reinforcement/12_fast_mdps.md"
   
   - Deep Learning:
       - 1. Introduction to Deep Learning Optimization: "deeplearning/1_mlp.md"
