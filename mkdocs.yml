@@ -1,7 +1,7 @@
 # ==========================================================
 # Project Information
 # ==========================================================
-site_name: Mathematics for Machine Learning
+site_name: Machine Learning Lecture Notes
 site_description: "Structured lecture notes on optimization, convex analysis, and algorithms."
 site_author: "Salman Khan"
 repo_url: "https://github.com/SalK91/convex_optimization"
