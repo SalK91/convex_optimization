@@ -122,8 +122,7 @@ $$
 
 where $\tau$ controls exploration vs exploitation.
 
----
-
+ 
 ## 13.8 Self-Play and Training
 
 AlphaZero uses self-play to generate training data:
@@ -141,8 +140,7 @@ $$
 
 This allows continual improvement without human supervision.
 
----
-
+ 
 ## 13.9 Evaluation and Impact
 
 - MCTS dramatically improves performance over raw policy/value networks.
@@ -155,8 +153,7 @@ Insights:
 - Neural nets guide and accelerate MCTS.
 - MCTS can be used in any environment where lookahead is possible.
 
----
-
+ 
 ## 13.10 Summary
 
 - MCTS uses simulation-based planning with a growing search tree.

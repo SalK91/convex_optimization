@@ -1,0 +1,199 @@
+# ==========================================================
+# Project Information
+# ==========================================================
+site_name: Mathematics for Machine Learning
+site_description: "Structured lecture notes on optimization, convex analysis, and algorithms."
+site_author: "Salman Khan"
+repo_url: "https://github.com/SalK91/convex_optimization"
+repo_name: "GitHub"
+site_url: "https://salk91.github.io/convex_optimization"
+copyright: "© 2025 Salman Khan — Educational Use Only"
+
+# ==========================================================
+# Theme Configuration (Material)
+# ==========================================================
+theme:
+  name: material
+  language: en
+
+  # ---- Color Palette ----
+  palette:
+    - scheme: slate     # dark academic background
+      primary: indigo
+      accent: cyan
+      toggle:
+        icon: material/weather-night
+        name: Switch to light mode
+    - scheme: default   # optional light mode
+      primary: indigo
+      accent: cyan
+      toggle:
+        icon: material/white-balance-sunny
+        name: Switch to dark mode
+
+  # ---- Fonts ----
+  font:
+    text: "Merriweather"
+    code: "Fira Code"
+
+  # ---- Features ----
+  features:
+    # Navigation / Layout
+    #- navigation.instant
+    - navigation.top
+    #- navigation.expand
+    #- navigation.sections
+    #- navigation.footer
+    #- header.autohide
+    - toc.integrate
+
+    # Content UX
+    - content.code.copy
+    - content.code.annotate
+    - content.action.edit
+    - content.action.view
+    - content.tabs.link
+
+    # Search
+    - search.suggest
+    - search.highlight
+
+# ==========================================================
+# Plugins
+# ==========================================================
+plugins:
+  - search
+  - autorefs
+  - glightbox       # image lightbox support
+  - print-site:
+      add_to_navigation: true     # adds a "Print Site" link in the nav
+      print_page_title: "Print Site"
+      include_nav: true
+      include_footer: true
+      
+
+# ==========================================================
+# Markdown Extensions
+# ==========================================================
+markdown_extensions:
+  - admonition
+  - footnotes
+  - def_list
+  - attr_list
+  - mdx_math:
+      enable_dollar_delimiter: true
+  - pymdownx.details
+  - pymdownx.superfences
+  - pymdownx.arithmatex:
+      generic: true
+  - toc:
+      permalink: true
+      toc_depth: 1   # only top-level headings in sidebar
+
+# ==========================================================
+# Extra JavaScript and Styling
+# ==========================================================
+extra_javascript:
+  - https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML
+
+extra_css:
+  - styles/extra.css
+
+# ==========================================================
+# Footer and Social Links
+# ==========================================================
+extra:
+  social:
+    - icon: fontawesome/brands/github
+      link: https://github.com/SalK91/convex_optimization
+  generator: false
+
+# ==========================================================
+# Navigation
+# ==========================================================
+nav:
+  - Home: "index.md"
+
+  - Convex Optimization:
+      - 1. Introduction and Overview: "convex/11_intro.md"
+      - 2. Linear Algebra Foundations: "convex/12_vector.md"
+      - 3. Multivariable Calculus for Optimization: "convex/13_calculus.md"
+      - 4. Convex Sets and Geometric Fundamentals: "convex/14_convexsets.md"
+      - 5. Convex Functions: "convex/15_convexfunctions.md"
+      - 6. Nonsmooth Convex Optimization – Subgradients: "convex/16_subgradients.md"
+      - 7. First-Order Optimality Conditions in Convex Optimization: "convex/16a_optimality_conditions.md"
+      - 8. Optimization Principles – From Gradient Descent to KKT: "convex/17_kkt.md"
+      - 9. Lagrange Duality Theory: "convex/18_duality.md"
+      - 10. Pareto Optimality and Multi-Objective Convex Optimization: "convex/18a_pareto.md"
+      - 11. Regularized Approximation – Balancing Fit and Complexity: "convex/18b_regularization.md"
+      - 12. Algorithms for Convex Optimization: "convex/19_optimizationalgo.md"
+      - 13. Optimization Algorithms for Equality-Constrained Problems: "convex/19a_optimization_constraints.md"
+      - 14. Optimization Algorithms for Inequality-Constrained Problems: "convex/19b_optimization_constraints.md"
+      - 15. Advanced Large-Scale and Structured Methods: "convex/20_advanced.md"
+      - 16. Modelling Patterns and Algorithm Selection in Practice: "convex/21_models.md"
+      - 17. Canonical Problems in Convex Optimization: "convex/30_canonical_problems.md"
+      - 18. Modern Optimizers in Machine Learning Frameworks: "convex/35_modern.md"
+      - 19. Beyond Convexity – Nonconvex and Global Optimization: "convex/40_nonconvex.md"
+      - 20. Derivative-Free and Black-Box Optimization: "convex/42_derivativefree.md"
+      - 21. Metaheuristic and Evolutionary Optimization: "convex/44_metaheuristic.md"
+      - 22. Advanced Topics in Combinatorial Optimization: "convex/48_advanced_combinatorial.md"
+      - 23. The Future of Optimization — Learning, Adaptation, and Intelligence: "convex/50_future.md"
+
+  - Reinforcement Learning:
+      - 1. Introduction to Reinforcement Learning: "reinforcement/1_intro.md"
+      - 2. MDPs & Dynamic Programming: "reinforcement/2_mdp.md"
+      - 3. Model-Free Prediction: "reinforcement/3_modelfree.md"
+      - 4. Model-Free Control: "reinforcement/4_model_free_control.md"
+      - 5. Policy Gradient Methods: "reinforcement/5_policy_gradient.md"
+      - 6. Policy Gradient Variance Reduction and Actor-Critic: "reinforcement/6_pg2.md"
+      - 7. Advances in Policy Optimization – GAE, TRPO, and PPO: "reinforcement/7_gae.md"
+      - 8. Imitation Learning: "reinforcement/8_imitation_learning.md"
+      - 9. RLHF: "reinforcement/9_rlhf.md"
+      - 10. Offline Reinforcement Learning: "reinforcement/10_offline_rl.md"
+      - 11. Data-Efficient Reinforcement Learning: "reinforcement/11_fast_rl.md"
+      - 12. Fast Reinforcement Learning in MDPs and Generalization: "reinforcement/12_fast_mdps.md"
+      - 13. Monte Carlo Tree Search and Planning: "reinforcement/13_montecarlo.md"
+      - 14. Summary and Overview: "reinforcement/14_final.md"
+  
+  - Deep Learning:
+      - 1. Introduction to Deep Learning Optimization: "deeplearning/1_mlp.md"
+      - 2. Convolutional Neural Networks (CNNs): "deeplearning/2_convnets.md"
+      - 3. Sequence Data and Recurrent Neural Networks (RNNs): "deeplearning/3_sequence_data.md"
+      - 4. Natural Language Processing (NLP) with Deep Learning: "deeplearning/4_nlp.md"
+      - 5. Transformers and Attention Mechanisms: "deeplearning/5_attention.md"
+      - 6. Generative Models and GANs: "deeplearning/6_gans.md"
+      - 7. Unsupervised and Self-Supervised Learning: "deeplearning/7_unsuper.md"
+      - 8. Latent Variable Models: "deeplearning/8_latentvariables.md"
+      - 2. Optimization Algorithms for Deep Learning: "deeplearning/1_intro.md"
+      - 3. Regularization Techniques in Deep Learning: "deep_learning/1_intro.md"
+      - 4. Advanced Topics in Deep Learning Optimization: "deep_learning/1_intro.md"
+
+  # - Distributed Systems:
+  #     - Introduction: "distributedsystems/0_intro.md"
+  #     - 1. MapReduce: "distributedsystems/1_mapreduce.md"
+  #     - 2. Threads and RPC: "distributedsystems/2_threads.md"
+
+  - Information Theory:
+      - 1. Introduction: "informationtheory/1_intro_to_infotheory.md"
+      - 2. Entropy, Self-Information & Cross-Entropy: "informationtheory/2_entropy.md"
+      - 3. Kullback-Leibler Divergence: "informationtheory/3_KL.md"
+      - 4. Bayesian Inference: "informationtheory/4_bayes.md"
+      - 5. Probability toolbox: "informationtheory/5_mc_intro.md"
+      - 6. Monte Carlo Methods: "informationtheory/6_mc.md"
+      - 8. Optimization-Based Inference: "informationtheory/7a_vi_intro.md"
+      - 7. Variatonal Inference: "informationtheory/7b_vi.md"
+      - 8. Representation Learning: "informationtheory/8_representation.md"
+    
+  - Cheat Sheets:
+      - Optimization Algos - Cheat Sheet: "cheatsheets/20a_cheatsheet.md"
+
+  - Appendices:
+      - Appendix A - Common Inequalities and Identities: "appendices/120_ineqaulities.md"
+      - Appendix B - Projection and Proximal Operators: "appendices/130_projections.md"
+      - Appendix C - Support Functions and Dual Geometry: "appendices/140_support.md"
+      - Appendix D - Convex Conjugates and Fenchel Duality: "appendices/160_conjugates.md"
+      - Appendix E - Convexity in Probability and Statistics: "appendices/170_probability.md"
+      - Appendix F - Subgradient Method and Variants: "appendices/180_subgradient_methods.md"
+      - Appendix G - Proximal Operators: "appendices/190_proximal.md"
+      - Appendix H - Mirror Descent and Bregman Geometry: "appendices/200_mirror.md"
+      - Appendix I - Matrix Factorization: "appendices/300_matrixfactorization.md"
