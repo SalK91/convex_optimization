@@ -15,7 +15,7 @@
         <link rel="prev" href="../4_model_free_control/">
       
       
-        <link rel="next" href="../../deeplearning/1_mlp/">
+        <link rel="next" href="../6_pg2/">
       
       
       <link rel="icon" href="../../assets/images/favicon.png">
@@ -82,7 +82,7 @@
     
     
     
-    <body dir="ltr" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="cyan">
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="cyan">
   
     
     <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
@@ -103,9 +103,7 @@
     
       
 
-  
-
-<header class="md-header md-header--shadow" data-md-component="header">
+<header class="md-header" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="Header">
     <a href="../.." title="Mathematics for Machine Learning" class="md-header__button md-logo" aria-label="Mathematics for Machine Learning" data-md-component="logo">
       
@@ -140,9 +138,9 @@
     
     
     
-    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="cyan" aria-label="Switch to light mode" type="radio" name="__palette" id="__palette_0">
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="cyan" aria-label="Switch to dark mode" type="radio" name="__palette" id="__palette_0">
     
-      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_1" hidden>
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3zm3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95zm-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31"></path></svg>
       </label>
     
@@ -150,9 +148,9 @@
     
     
     
-    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="cyan" aria-label="Switch to dark mode" type="radio" name="__palette" id="__palette_1">
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="cyan" aria-label="Switch to light mode" type="radio" name="__palette" id="__palette_1">
     
-      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_0" hidden>
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m3.55 19.09 1.41 1.41 1.8-1.79-1.42-1.42M12 6c-3.31 0-6 2.69-6 6s2.69 6 6 6 6-2.69 6-6c0-3.32-2.69-6-6-6m8 7h3v-2h-3m-2.76 7.71 1.8 1.79 1.41-1.41-1.79-1.8M20.45 5l-1.41-1.4-1.8 1.79 1.42 1.42M13 1h-2v3h2M6.76 5.39 4.96 3.6 3.55 5l1.79 1.81zM1 13h3v-2H1m12 9h-2v3h2"></path></svg>
       </label>
     
@@ -229,6 +227,187 @@
       
         
           
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Home
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../convex/11_intro/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Convex Optimization
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../1_intro/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Reinforcement Learning
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../deeplearning/1_mlp/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Deep Learning
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../informationtheory/1_intro_to_infotheory/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Information Theory
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../cheatsheets/20a_cheatsheet/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Cheat Sheets
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../appendices/120_ineqaulities/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Appendices
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../print_page/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Print/PDF
+
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
         
       
       <main class="md-main" data-md-component="main">
@@ -242,10 +421,10 @@
                     
 
 
-
   
 
-<nav class="md-nav md-nav--primary md-nav--integrated" aria-label="Navigation" data-md-level="0">
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
     <a href="../.." title="Mathematics for Machine Learning" class="md-nav__button md-logo" aria-label="Mathematics for Machine Learning" data-md-component="logo">
       
@@ -300,14 +479,69 @@
   
     
     
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
     
+    
+    
+      
+      
+        
+      
     
     
     <li class="md-nav__item md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2">
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2">
         
           
           <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
@@ -876,17 +1110,55 @@
   
     
     
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
     
     
     
-    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
       
         
         
         <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
         
           
-          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
             
   
   
@@ -1014,6 +1286,19 @@
         
       
       
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    5. Policy Gradient Methods
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
       <a href="./" class="md-nav__link md-nav__link--active">
         
   
@@ -1025,6 +1310,70 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#value-based-vs-policy-based-rl" class="md-nav__link">
+    <span class="md-ellipsis">
+      Value-Based vs Policy-Based RL
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#policy-optimization-objective" class="md-nav__link">
+    <span class="md-ellipsis">
+      Policy Optimization Objective
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#policy-gradient" class="md-nav__link">
+    <span class="md-ellipsis">
+      Policy Gradient
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#reinforce-algorithm-monte-carlo-policy-gradient" class="md-nav__link">
+    <span class="md-ellipsis">
+      REINFORCE Algorithm (Monte Carlo Policy Gradient)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#policy-gradient-methods-mental-map" class="md-nav__link">
+    <span class="md-ellipsis">
+      Policy Gradient Methods — Mental Map
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
       
     </li>
   
@@ -1038,12 +1387,12 @@
   
   
     <li class="md-nav__item">
-      <a href="../2_bandits.md" class="md-nav__link">
+      <a href="../6_pg2/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
-    2. Multi-Armed Bandits
+    6. Policy Gradient Variance Reduction and Actor-Critic
     
   </span>
   
@@ -1061,12 +1410,12 @@
   
   
     <li class="md-nav__item">
-      <a href="../8_deep_rl.md" class="md-nav__link">
+      <a href="../7_gae/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
-    8. Deep Reinforcement Learning
+    7. Advances in Policy Optimization – GAE, TRPO, and PPO
     
   </span>
   
@@ -1084,12 +1433,12 @@
   
   
     <li class="md-nav__item">
-      <a href="../9_exploration.md" class="md-nav__link">
+      <a href="../8_imitation_learning/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
-    9. Exploration Strategies
+    8. Imitation Learning
     
   </span>
   
@@ -1107,12 +1456,12 @@
   
   
     <li class="md-nav__item">
-      <a href="../10_multi_agent.md" class="md-nav__link">
+      <a href="../9_rlhf/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
-    10. Multi-Agent Reinforcement Learning
+    9. RLHF
     
   </span>
   
@@ -1130,12 +1479,104 @@
   
   
     <li class="md-nav__item">
-      <a href="../11_applications.md" class="md-nav__link">
+      <a href="../10_offline_rl/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
-    11. Applications of Reinforcement Learning
+    10. Offline Reinforcement Learning
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../11_fast_rl/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    11. Data-Efficient Reinforcement Learning
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../12_fast_mdps/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    12. Fast Reinforcement Learning in MDPs and Generalization
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../13_montecarlo/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    13. Monte Carlo Tree Search and Planning
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../14_final/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    14. Summary and Overview
     
   </span>
   
@@ -1161,14 +1602,45 @@
   
     
     
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
     
+    
+    
+      
+      
+        
+      
     
     
     <li class="md-nav__item md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4">
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4">
         
           
           <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
@@ -1459,14 +1931,41 @@
   
     
     
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
     
+    
+    
+      
+      
+        
+      
     
     
     <li class="md-nav__item md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5">
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_5">
         
           
           <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
@@ -1711,14 +2210,25 @@
   
     
     
+      
+        
+      
     
+    
+    
+      
+      
+        
+      
     
     
     <li class="md-nav__item md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6">
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_6">
         
           
           <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
@@ -1779,14 +2289,41 @@
   
     
     
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
     
+    
+    
+      
+      
+        
+      
     
     
     <li class="md-nav__item md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7">
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_7">
         
           
           <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="0">
@@ -2035,7 +2572,7 @@
   
   
   <span class="md-ellipsis">
-    Print Site
+    Print/PDF
     
   </span>
   
@@ -2051,6 +2588,77 @@
                 </div>
               </div>
             
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#value-based-vs-policy-based-rl" class="md-nav__link">
+    <span class="md-ellipsis">
+      Value-Based vs Policy-Based RL
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#policy-optimization-objective" class="md-nav__link">
+    <span class="md-ellipsis">
+      Policy Optimization Objective
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#policy-gradient" class="md-nav__link">
+    <span class="md-ellipsis">
+      Policy Gradient
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#reinforce-algorithm-monte-carlo-policy-gradient" class="md-nav__link">
+    <span class="md-ellipsis">
+      REINFORCE Algorithm (Monte Carlo Policy Gradient)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#policy-gradient-methods-mental-map" class="md-nav__link">
+    <span class="md-ellipsis">
+      Policy Gradient Methods — Mental Map
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
             
           
           
@@ -2207,7 +2815,7 @@ R(\tau^{(i)})
 <p>Trajectory probability:</p>
 <div class="arithmatex">\[
 P(\tau|\theta) =
-\P(s_0)
+P(s_0)
 \prod_{t=0}^{T-1}
 \pi_\theta(a_t|s_t)\cdot P(s_{t+1}|s_t,a_t)
 \]</div>
@@ -2274,7 +2882,7 @@ This simple idea is the core of policy gradient methods.</p>
 <div class="arithmatex">\[
 \Delta \theta = \alpha \nabla_\theta \log \pi_\theta(a_t|s_t)\, R_t
 \]</div>
-<p><strong>Algorithm:</strong></p>
+<p>Algorithm:</p>
 <p>1: Initialize policy parameters <span class="arithmatex">\(\theta\)</span><br>
 2: loop (for each episode)<br>
 3: <span class="arithmatex">\(\quad\)</span> Generate a trajectory <span class="arithmatex">\(\tau = (s_0, a_0, r_1, \dots, s_T)\)</span> using <span class="arithmatex">\(\pi_\theta\)</span><br>
@@ -2284,86 +2892,77 @@ This simple idea is the core of policy gradient methods.</p>
 7: <span class="arithmatex">\(\quad\quad\)</span> Update policy parameters: <span class="arithmatex">\(\theta \leftarrow \theta + \alpha \nabla_\theta \log \pi_\theta(a_t|s_t)\, R_t\)</span><br>
 8: <span class="arithmatex">\(\quad\)</span> end for<br>
 9: end loop  </p>
-<h2 id="11-actor-critic-methods">11. Actor-Critic Methods<a class="headerlink" href="#11-actor-critic-methods" title="Permanent link">¶</a></h2>
-<p>Actor update:</p>
-<div class="arithmatex">\[
-\theta \leftarrow \theta +
-\alpha \nabla_\theta \log \pi_\theta(a_t|s_t) \, A_t
-\]</div>
-<p>Critic update:</p>
-<div class="arithmatex">\[
-w \leftarrow w +
-\beta \left[r_t + \gamma V_w(s_{t+1}) - V_w(s_t)\right]
-\]</div>
-<h2 id="12-advantage-estimation">12. Advantage Estimation<a class="headerlink" href="#12-advantage-estimation" title="Permanent link">¶</a></h2>
-<p>Advantage function:</p>
-<div class="arithmatex">\[
-A_\pi(s,a) = Q_\pi(s,a) - V_\pi(s)
-\]</div>
-<p>n-step returns:</p>
-<div class="arithmatex">\[
-\hat{R}^{(1)}_t = r_t + \gamma V(s_{t+1})
-\]</div>
-<div class="arithmatex">\[
-\hat{R}^{(\infty)}_t = G_t
-\]</div>
-<p>Bias–variance trade-off:</p>
-<table>
-<thead>
-<tr>
-<th>Estimator</th>
-<th>Variance</th>
-<th>Bias</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><span class="arithmatex">\(A^{(1)}_t\)</span></td>
-<td>Low</td>
-<td>High</td>
-</tr>
-<tr>
-<td><span class="arithmatex">\(A^{(\infty)}_t\)</span></td>
-<td>High</td>
-<td>Low</td>
-</tr>
-</tbody>
-</table>
-<h2 id="13-summary-of-policy-based-rl">13. Summary of Policy-Based RL<a class="headerlink" href="#13-summary-of-policy-based-rl" title="Permanent link">¶</a></h2>
-<table>
-<thead>
-<tr>
-<th>Concept</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>REINFORCE</td>
-<td>Unbiased Monte-Carlo policy gradient</td>
-</tr>
-<tr>
-<td>Baseline</td>
-<td>Variance reduction technique</td>
-</tr>
-<tr>
-<td>Actor-Critic</td>
-<td>Uses function approximation and TD</td>
-</tr>
-<tr>
-<td>Softmax/Gaussian</td>
-<td>Policy parameterizations</td>
-</tr>
-<tr>
-<td>Advantage</td>
-<td><span class="arithmatex">\(A(s,a) = Q(s,a) - V(s)\)</span></td>
-</tr>
-<tr>
-<td>Goal</td>
-<td>Learn optimal policy parameters directly</td>
-</tr>
-</tbody>
-</table>
+<h2 id="policy-gradient-methods-mental-map">Policy Gradient Methods — Mental Map<a class="headerlink" href="#policy-gradient-methods-mental-map" title="Permanent link">¶</a></h2>
+<div class="highlight"><pre><span></span><code>                     Policy Gradient Methods
+    Goal: Learn the optimal policy π* directly (no Q or V tables)
+                               │
+                               ▼
+         Key Concept: Parameterized Policy πθ(a|s)
+       ┌─────────────────────────────────────────────┐
+       │ Policy is a function with parameters θ      │
+       │ πθ(a|s) gives probability of taking action a│
+       │ Optimization targets J(θ)=Expected Return   │
+       └─────────────────────────────────────────────┘
+                               │
+                    Direct Policy Optimization
+                               │
+                               ▼
+                 Optimization Objective (J(θ))
+       ┌─────────────────────────────────────────────┐
+       │ θ* = argmaxθ V(θ) = argmaxθ Eπθ[G₀]         │
+       │ Search in parameter space for best policy   │
+       └─────────────────────────────────────────────┘
+                               │
+                               ▼
+              Two Families of Policy Optimization
+       ┌────────────────────────────┬────────────────────────────┐
+       │  Gradient-Free Methods     │   Gradient-Based Methods   │
+       └────────────────────────────┴────────────────────────────┘
+                │                                      │
+                │                                      ▼
+                │                          Policy Gradient Methods
+                │                                      │
+                ▼                                      ▼
+   No gradient needed                     Uses ∇θ log πθ(a|s) * Return
+   – Hill Climbing                        – REINFORCE
+   – CEM, CMA                             – Actor-Critic
+   – Genetic Algorithms                   – Advantage Methods
+   │                                      │
+   └──── Flexible &amp; parallelizable        └──── Sample efficient
+                               │
+                               ▼
+                   Policy Gradient Core Idea
+       ┌───────────────────────────────────────────────┐
+       │ Increase probability of good actions          │
+       │ Decrease probability of poor actions          │
+       │ Gradient term: ∇θ log πθ(a|s)(score function) │
+       └───────────────────────────────────────────────┘
+                               │
+                               ▼
+                     REINFORCE Algorithm (MC)
+       ┌───────────────────────────────────────────────┐
+       │ Sample full episodes (Monte Carlo)            │
+       │ Compute return Gt at each time step           │
+       │ Update: θ ← θ + α ∇θ log πθ(a_t|s_t) * G_t    │
+       └───────────────────────────────────────────────┘
+                               │
+                               ▼
+                      Policy Parameterization
+       ┌────────────────────────────┬────────────────────────────┐
+       │ Softmax Policy (Discrete)  │ Gaussian Policy(Continuous)│
+       │ πθ(a|s) = exp(...)         │ a ~ N(μ(s), σ²)            │
+       │ ∇θ log πθ = φ - Eφ         │ ∇θ log πθ = (a-μ)/σ² * φ   │
+       └────────────────────────────┴────────────────────────────┘
+                               │
+                               ▼
+                         Final Outcome
+       ┌─────────────────────────────────────────────────┐
+       │ Learn π* directly (no need for Q or V tables)   │
+       │ Works naturally with stochastic &amp; continuous    │
+       │ Supports neural network policy parameterization │
+       │ Foundation of modern deep RL (PPO, A3C, DDPG)   │
+       └─────────────────────────────────────────────────┘
+</code></pre></div>
 
 
 
@@ -2381,8 +2980,6 @@ A_\pi(s,a) = Q_\pi(s,a) - V_\pi(s)
             </div>
           
           
-  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var labels=set.querySelector(".tabbed-labels");for(var tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
-
 <script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
         </div>
         
@@ -2395,6 +2992,46 @@ A_\pi(s,a) = Q_\pi(s,a) - V_\pi(s)
       </main>
       
         <footer class="md-footer">
+  
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="Footer">
+        
+          
+          <a href="../4_model_free_control/" class="md-footer__link md-footer__link--prev" aria-label="Previous: 4. Model-Free Control">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"></path></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              <div class="md-ellipsis">
+                4. Model-Free Control
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="../6_pg2/" class="md-footer__link md-footer__link--next" aria-label="Next: 6. Policy Gradient Variance Reduction and Actor-Critic">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              <div class="md-ellipsis">
+                6. Policy Gradient Variance Reduction and Actor-Critic
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"></path></svg>
+            </div>
+          </a>
+        
+      </nav>
+    
   
   <div class="md-footer-meta md-typeset">
     <div class="md-footer-meta__inner md-grid">
@@ -2435,7 +3072,7 @@ A_\pi(s,a) = Q_\pi(s,a) - V_\pi(s)
     
     
       
-      <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.top", "toc.integrate", "content.code.copy", "content.code.annotate", "content.action.edit", "content.action.view", "content.tabs.link", "search.suggest", "search.highlight"], "search": "../../assets/javascripts/workers/search.973d3a69.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+      <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.tabs", "navigation.sections", "navigation.expand", "navigation.indexes", "navigation.path", "navigation.top", "navigation.footer", "toc.follow", "content.code.copy", "content.action.edit", "content.action.view", "search.suggest", "search.highlight"], "search": "../../assets/javascripts/workers/search.973d3a69.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
     
     
       <script src="../../assets/javascripts/bundle.f55a23d4.min.js"></script>
