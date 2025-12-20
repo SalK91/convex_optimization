@@ -115,7 +115,6 @@ extra:
 nav:
   - Home: "index.md"
   - Case-studies:
-      #- 1. Least Squareswith CVXPY: "convex/tutorials/1_ls.ipynb"
       - 1. Linear Programming for Transportation Problems: "convex/tutorials/2_lp_transport.ipynb"
       - 2. Portfolio Optimization with CVXPY: "convex/tutorials/3_portfolio.ipynb"
 
