@@ -1,4 +1,4 @@
-# Mathematics for Machine Learning
+# Mathematics for Machine Learning - Optimisation and Algorithms
 
 Welcome to *Mathematics for Machine Learning*, a structured set of lecture notes designed to build the mathematical foundation needed to understand and develop modern machine learning and optimization algorithms.
 
