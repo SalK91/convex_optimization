@@ -831,45 +831,45 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#101-classical-optimality-one-objective" class="md-nav__link">
+  <a href="#classical-optimality-one-objective" class="md-nav__link">
     <span class="md-ellipsis">
-      10.1 Classical Optimality (One Objective)
+      Classical Optimality (One Objective)
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#102-multi-objective-convex-optimization" class="md-nav__link">
+  <a href="#multi-objective-convex-optimization" class="md-nav__link">
     <span class="md-ellipsis">
-      10.2 Multi-Objective Convex Optimization
+      Multi-Objective Convex Optimization
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#103-pareto-optimality" class="md-nav__link">
+  <a href="#pareto-optimality" class="md-nav__link">
     <span class="md-ellipsis">
-      10.3 Pareto Optimality
+      Pareto Optimality
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#104-scalarization-turning-many-objectives-into-one" class="md-nav__link">
+  <a href="#scalarization-turning-many-objectives-into-one" class="md-nav__link">
     <span class="md-ellipsis">
-      10.4 Scalarization: Turning Many Objectives into One
+      Scalarization: Turning Many Objectives into One
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#105-examples-and-applications" class="md-nav__link">
+  <a href="#examples-and-applications" class="md-nav__link">
     <span class="md-ellipsis">
-      10.5 Examples and Applications
+      Examples and Applications
     </span>
   </a>
   
@@ -2609,45 +2609,45 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#101-classical-optimality-one-objective" class="md-nav__link">
+  <a href="#classical-optimality-one-objective" class="md-nav__link">
     <span class="md-ellipsis">
-      10.1 Classical Optimality (One Objective)
+      Classical Optimality (One Objective)
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#102-multi-objective-convex-optimization" class="md-nav__link">
+  <a href="#multi-objective-convex-optimization" class="md-nav__link">
     <span class="md-ellipsis">
-      10.2 Multi-Objective Convex Optimization
+      Multi-Objective Convex Optimization
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#103-pareto-optimality" class="md-nav__link">
+  <a href="#pareto-optimality" class="md-nav__link">
     <span class="md-ellipsis">
-      10.3 Pareto Optimality
+      Pareto Optimality
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#104-scalarization-turning-many-objectives-into-one" class="md-nav__link">
+  <a href="#scalarization-turning-many-objectives-into-one" class="md-nav__link">
     <span class="md-ellipsis">
-      10.4 Scalarization: Turning Many Objectives into One
+      Scalarization: Turning Many Objectives into One
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#105-examples-and-applications" class="md-nav__link">
+  <a href="#examples-and-applications" class="md-nav__link">
     <span class="md-ellipsis">
-      10.5 Examples and Applications
+      Examples and Applications
     </span>
   </a>
   
@@ -2696,7 +2696,7 @@
 </ul>
 <p>Multi-objective optimization provides the mathematical framework for balancing such competing goals. In convex settings, these trade-offs have elegant geometric and analytic structure, captured by Pareto optimality and by scalarization techniques that convert multiple objectives into a single convex problem.</p>
 <p>This chapter introduces these ideas and connects them to regularization, duality, and common ML formulations.</p>
-<h2 id="101-classical-optimality-one-objective">10.1 Classical Optimality (One Objective)<a class="headerlink" href="#101-classical-optimality-one-objective" title="Permanent link">¶</a></h2>
+<h2 id="classical-optimality-one-objective">Classical Optimality (One Objective)<a class="headerlink" href="#classical-optimality-one-objective" title="Permanent link">¶</a></h2>
 <p>In standard convex optimization, we solve:</p>
 <div class="arithmatex">\[
 x^* \in \arg\min_{x \in \mathcal{X}} f(x),
@@ -2704,7 +2704,7 @@ x^* \in \arg\min_{x \in \mathcal{X}} f(x),
 <p>where <span class="arithmatex">\(f\)</span> is convex and <span class="arithmatex">\(\mathcal{X}\)</span> is convex.<br>
 In this setting, it is natural to speak of the minimizer — or set of minimizers — because the task is governed by a single quantitative measure.</p>
 <p>However, when multiple objectives <span class="arithmatex">\((f_1,\dots,f_k)\)</span> must be minimized simultaneously, a single “best” point usually does not exist.  Improving one objective can worsen another. Multi-objective optimization replaces the idea of a unique minimizer with the idea of efficient trade-offs.</p>
-<h2 id="102-multi-objective-convex-optimization">10.2 Multi-Objective Convex Optimization<a class="headerlink" href="#102-multi-objective-convex-optimization" title="Permanent link">¶</a></h2>
+<h2 id="multi-objective-convex-optimization">Multi-Objective Convex Optimization<a class="headerlink" href="#multi-objective-convex-optimization" title="Permanent link">¶</a></h2>
 <p>A multi-objective optimization problem takes the form</p>
 <div class="arithmatex">\[
 \min_{x \in \mathcal{X}} F(x) = (f_1(x), \dots, f_k(x)),
@@ -2748,7 +2748,7 @@ This framework appears in many ML and statistical tasks:</p>
 </tbody>
 </table>
 <p>Because objectives typically conflict, one cannot minimize all simultaneously. The natural notion of optimality becomes <em>Pareto efficiency</em>.</p>
-<h2 id="103-pareto-optimality">10.3 Pareto Optimality<a class="headerlink" href="#103-pareto-optimality" title="Permanent link">¶</a></h2>
+<h2 id="pareto-optimality">Pareto Optimality<a class="headerlink" href="#pareto-optimality" title="Permanent link">¶</a></h2>
 <h3 id="strong-pareto-optimality">Strong Pareto Optimality<a class="headerlink" href="#strong-pareto-optimality" title="Permanent link">¶</a></h3>
 <p>A point <span class="arithmatex">\(x^*\)</span> is Pareto optimal if there is no other <span class="arithmatex">\(x\)</span> such that</p>
 <div class="arithmatex">\[
@@ -2768,7 +2768,7 @@ f_i(x) &lt; f_i(x^*)\quad \forall i.
 <li>Points <em>above</em> or <em>inside</em> the region are dominated and thus suboptimal.</li>
 </ul>
 <p>The Pareto frontier explicitly exposes the structure of trade-offs in a problem.</p>
-<h2 id="104-scalarization-turning-many-objectives-into-one">10.4 Scalarization: Turning Many Objectives into One<a class="headerlink" href="#104-scalarization-turning-many-objectives-into-one" title="Permanent link">¶</a></h2>
+<h2 id="scalarization-turning-many-objectives-into-one">Scalarization: Turning Many Objectives into One<a class="headerlink" href="#scalarization-turning-many-objectives-into-one" title="Permanent link">¶</a></h2>
 <p>Multi-objective problems rarely have a unique minimizer. Scalarization constructs a single-objective surrogate problem whose solutions lie on the Pareto frontier.</p>
 <h3 id="weighted-sum-scalarization">Weighted-Sum Scalarization<a class="headerlink" href="#weighted-sum-scalarization" title="Permanent link">¶</a></h3>
 <div class="arithmatex">\[
@@ -2798,7 +2798,7 @@ f_i(x) &lt; f_i(x^*)\quad \forall i.
 <li>Moving along <span class="arithmatex">\(\lambda\)</span> traces the Pareto frontier between data fit and model complexity.</li>
 </ul>
 <p>This connection explains why tuning regularization is equivalent to choosing a point on a trade-off curve.</p>
-<h2 id="105-examples-and-applications">10.5 Examples and Applications<a class="headerlink" href="#105-examples-and-applications" title="Permanent link">¶</a></h2>
+<h2 id="examples-and-applications">Examples and Applications<a class="headerlink" href="#examples-and-applications" title="Permanent link">¶</a></h2>
 <h3 id="example-1-regularized-least-squares">Example 1: Regularized Least Squares<a class="headerlink" href="#example-1-regularized-least-squares" title="Permanent link">¶</a></h3>
 <p>Consider</p>
 <div class="arithmatex">\[

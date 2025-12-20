@@ -670,45 +670,54 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#31-gradients-and-directional-derivatives" class="md-nav__link">
+  <a href="#gradients-and-directional-derivatives" class="md-nav__link">
     <span class="md-ellipsis">
-      3.1 Gradients and Directional Derivatives
+      Gradients and Directional Derivatives
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#32-jacobians" class="md-nav__link">
+  <a href="#jacobians" class="md-nav__link">
     <span class="md-ellipsis">
-      3.2 Jacobians
+      Jacobians
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#33-the-hessian-and-curvature" class="md-nav__link">
+  <a href="#the-hessian-and-curvature" class="md-nav__link">
     <span class="md-ellipsis">
-      3.3 The Hessian and Curvature
+      The Hessian and Curvature
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#34-taylor-approximation" class="md-nav__link">
+  <a href="#taylor-approximation" class="md-nav__link">
     <span class="md-ellipsis">
-      3.4 Taylor approximation
+      Taylor approximation
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#35-smoothness-and-strong-convexity" class="md-nav__link">
+  <a href="#smoothness-and-strong-convexity" class="md-nav__link">
     <span class="md-ellipsis">
-      3.5 Smoothness and Strong Convexity
+      Smoothness and Strong Convexity
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#mental-map" class="md-nav__link">
+    <span class="md-ellipsis">
+      Mental map
     </span>
   </a>
   
@@ -2609,45 +2618,54 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#31-gradients-and-directional-derivatives" class="md-nav__link">
+  <a href="#gradients-and-directional-derivatives" class="md-nav__link">
     <span class="md-ellipsis">
-      3.1 Gradients and Directional Derivatives
+      Gradients and Directional Derivatives
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#32-jacobians" class="md-nav__link">
+  <a href="#jacobians" class="md-nav__link">
     <span class="md-ellipsis">
-      3.2 Jacobians
+      Jacobians
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#33-the-hessian-and-curvature" class="md-nav__link">
+  <a href="#the-hessian-and-curvature" class="md-nav__link">
     <span class="md-ellipsis">
-      3.3 The Hessian and Curvature
+      The Hessian and Curvature
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#34-taylor-approximation" class="md-nav__link">
+  <a href="#taylor-approximation" class="md-nav__link">
     <span class="md-ellipsis">
-      3.4 Taylor approximation
+      Taylor approximation
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#35-smoothness-and-strong-convexity" class="md-nav__link">
+  <a href="#smoothness-and-strong-convexity" class="md-nav__link">
     <span class="md-ellipsis">
-      3.5 Smoothness and Strong Convexity
+      Smoothness and Strong Convexity
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#mental-map" class="md-nav__link">
+    <span class="md-ellipsis">
+      Mental map
     </span>
   </a>
   
@@ -2689,7 +2707,7 @@
 <p>Optimization problems are ultimately questions about how a function changes when we move in different directions. To understand this behavior, we rely on multivariable calculus. Concepts such as gradients, Jacobians, Hessians, and Taylor expansions describe how a real-valued function behaves locally and how its value varies as we adjust its inputs.</p>
 <p>These tools form the analytical backbone of modern optimization. Gradients determine descent directions and guide first-order algorithms such as gradient descent and stochastic gradient methods. Hessians quantify curvature and enable second-order methods like Newton’s method, which adapt their steps to the shape of the objective. Jacobians and chain rules underpin backpropagation in neural networks, linking calculus to large-scale machine learning practice.</p>
 <p>This chapter develops the differential calculus needed for convex analysis and for understanding why many optimization algorithms work. We emphasize geometric intuition, how functions curve, how directions interact, and how local approximations guide global behavior, while providing the formal tools required to analyze convergence and stability in later chapters.</p>
-<h2 id="31-gradients-and-directional-derivatives">3.1 Gradients and Directional Derivatives<a class="headerlink" href="#31-gradients-and-directional-derivatives" title="Permanent link">¶</a></h2>
+<h2 id="gradients-and-directional-derivatives">Gradients and Directional Derivatives<a class="headerlink" href="#gradients-and-directional-derivatives" title="Permanent link">¶</a></h2>
 <p>Let <span class="arithmatex">\(f : \mathbb{R}^n \to \mathbb{R}\)</span>. The function is differentiable at a point <span class="arithmatex">\(x\)</span> if there exists a vector <span class="arithmatex">\(\nabla f(x)\)</span> such that
 <script type="math/tex; mode=display">
 f(x + h)
@@ -2721,7 +2739,7 @@ L_c = \{\, x \in \mathbb{R}^n : f(x) = c \,\}.
 </p>
 <p>At any point <span class="arithmatex">\(x\)</span> with <span class="arithmatex">\(\nabla f(x) \ne 0\)</span>, the gradient <span class="arithmatex">\(\nabla f(x)\)</span> is orthogonal to the level set <span class="arithmatex">\(L_{f(x)}\)</span>. Geometrically, level sets are like contour lines on a topographic map, and the gradient points perpendicular to them — in the direction of the steepest ascent of <span class="arithmatex">\(f\)</span>. If we wish to decrease <span class="arithmatex">\(f\)</span>, we move roughly in the opposite direction, <span class="arithmatex">\(-\nabla f(x)\)</span> (the direction of steepest descent). This geometric fact becomes central in constrained optimization:  at optimality, the gradient of the objective lies in the span of gradients of active constraints.</p>
 </blockquote>
-<h2 id="32-jacobians">3.2  Jacobians<a class="headerlink" href="#32-jacobians" title="Permanent link">¶</a></h2>
+<h2 id="jacobians">Jacobians<a class="headerlink" href="#jacobians" title="Permanent link">¶</a></h2>
 <p>In optimization and machine learning, functions often map many inputs to many outputs for example, neural network layers, physical simulators, and vector-valued transformations. To understand how such functions change locally, we use the Jacobian matrix, which captures how each output responds to each input.</p>
 <h3 id="from-derivative-to-gradient">From derivative to gradient<a class="headerlink" href="#from-derivative-to-gradient" title="Permanent link">¶</a></h3>
 <p>For a scalar function <script type="math/tex"> f : \mathbb{R}^n \to \mathbb{R} </script>, differentiability means that near any point <script type="math/tex"> x </script>,
@@ -2791,7 +2809,7 @@ Thus, locally, the nonlinear map <span class="arithmatex">\(F\)</span> behaves l
 </tbody>
 </table>
 <p>The Jacobian is therefore a compact representation of local sensitivity. In optimization, Jacobians appear in gradient-based methods, backpropagation, implicit differentiation, and the analysis of constraints and dynamics.</p>
-<h2 id="33-the-hessian-and-curvature">3.3 The Hessian and Curvature<a class="headerlink" href="#33-the-hessian-and-curvature" title="Permanent link">¶</a></h2>
+<h2 id="the-hessian-and-curvature">The Hessian and Curvature<a class="headerlink" href="#the-hessian-and-curvature" title="Permanent link">¶</a></h2>
 <p>For a twice–differentiable function <script type="math/tex"> f : \mathbb{R}^n \to \mathbb{R} </script>, the Hessian matrix collects all second-order partial derivatives:
 <script type="math/tex; mode=display">
 \nabla^{2} f(x) \;=\;
@@ -2843,7 +2861,7 @@ is the unique minimizer. The Hessian <span class="arithmatex">\(Q\)</span> being
 <li>In convex optimization, positive semidefiniteness of the Hessian is a fundamental characterization of convexity.</li>
 </ul>
 <p>Understanding the Hessian therefore helps us understand the geometry of an objective, predict algorithm performance, and design methods that behave reliably on challenging landscapes.</p>
-<h2 id="34-taylor-approximation">3.4 Taylor approximation<a class="headerlink" href="#34-taylor-approximation" title="Permanent link">¶</a></h2>
+<h2 id="taylor-approximation">Taylor approximation<a class="headerlink" href="#taylor-approximation" title="Permanent link">¶</a></h2>
 <p>Taylor expansions provide local approximations of a function using its derivatives. These approximations form the basis of nearly all gradient-based optimization methods.</p>
 <h3 id="first-order-approximation">First-order approximation<a class="headerlink" href="#first-order-approximation" title="Permanent link">¶</a></h3>
 <p>If <span class="arithmatex">\(f\)</span> is differentiable at <span class="arithmatex">\(x\)</span>, then for small steps <span class="arithmatex">\(d\)</span>,
@@ -2874,7 +2892,7 @@ d \approx - \left(\nabla^2 f(x)\right)^{-1} \nabla f(x),
 </script>
 which balances descent direction and local curvature. Trust-region and quasi-Newton methods also rely on this quadratic approximation, modifying or regularizing it to ensure stable progress.</p>
 <p>Thus, Taylor expansions connect a function’s derivatives to practical optimization steps, bridging geometry and algorithm design.</p>
-<h2 id="35-smoothness-and-strong-convexity">3.5 Smoothness and Strong Convexity<a class="headerlink" href="#35-smoothness-and-strong-convexity" title="Permanent link">¶</a></h2>
+<h2 id="smoothness-and-strong-convexity">Smoothness and Strong Convexity<a class="headerlink" href="#smoothness-and-strong-convexity" title="Permanent link">¶</a></h2>
 <p>In optimization, the behavior of a function’s curvature strongly influences how algorithms perform. Two fundamental properties Lipschitz smoothness and strong convexity describe how rapidly the gradient can change and how much curvature the function must have.</p>
 <h3 id="lipschitz-continuous-gradients-l-smoothness">Lipschitz continuous gradients (L-smoothness)<a class="headerlink" href="#lipschitz-continuous-gradients-l-smoothness" title="Permanent link">¶</a></h3>
 <p>A differentiable function <script type="math/tex"> f </script> has an <span class="arithmatex">\(L\)</span>-Lipschitz continuous gradient if
@@ -2922,7 +2940,71 @@ This condition guarantees that <span class="arithmatex">\(f\)</span> has at leas
 \mu I \;\preceq\; \nabla^2 f(x) \;\preceq\; L I.
 </script>
 Smoothness prevents the curvature from being too large, while strong convexity prevents it from being too small. Many convergence guarantees in optimization depend on this pair of inequalities.</p>
-<p>These concepts—, imiting curvature from above via <span class="arithmatex">\(L\)</span> and from below via <span class="arithmatex">\(\mu\)</span>, form the foundation for analyzing the performance of first-order algorithms and understanding how learning rates, conditioning, and geometry interact.</p>
+<p>These concepts, imiting curvature from above via <span class="arithmatex">\(L\)</span> and from below via <span class="arithmatex">\(\mu\)</span>, form the foundation for analyzing the performance of first-order algorithms and understanding how learning rates, conditioning, and geometry interact.</p>
+<h2 id="mental-map">Mental map<a class="headerlink" href="#mental-map" title="Permanent link">¶</a></h2>
+<div class="highlight"><pre><span></span><code>                Multivariable Calculus for Optimization
+        How objectives change, how curvature shapes algorithms
+                              │
+                              ▼
+                 Local change of a scalar function f(x)
+                              │
+                              ▼
+     ┌───────────────────────────────────────────────────────────┐
+     │ Differentiability &amp; First-Order Model                     │
+     │ f(x+h) = f(x) + ∇f(x)ᵀh + o(‖h‖)                          │
+     │ - ∇f(x): best linear approximation                        │
+     │ - Directional derivative: D_v f(x) = ∇f(x)ᵀv              │
+     │ - Steepest descent: move along -∇f(x)                     │
+     └───────────────────────────────────────────────────────────┘
+                              │
+                              ▼
+     ┌─────────────────────────────────────────────────────────────┐
+     │ Geometry of Level Sets                                      │
+     │ L_c = {x : f(x)=c}                                          │
+     │ - If ∇f(x) ≠ 0, then ∇f(x) ⟂ level set at x                 │
+     │ - Connects to constrained optimality (later: KKT)           │
+     └─────────────────────────────────────────────────────────────┘
+                              │
+                              ▼
+     ┌─────────────────────────────────────────────────────────────┐
+     │ Vector-Valued Maps &amp; Jacobians                              │
+     │ F: ℝⁿ → ℝᵐ                                                  │
+     │ - Jacobian J_F(x) stacks gradients of outputs               │
+     │ - Linearization: F(x+h) ≈ F(x) + J_F(x) h                   │
+     │ - Chain rule foundation for backprop / sensitivity analysis │
+     └─────────────────────────────────────────────────────────────┘
+                              │
+                              ▼
+     ┌───────────────────────────────────────────────────────────┐
+     │ Second-Order Structure: Hessian &amp; Curvature               │
+     │ ∇²f(x): matrix of second partials                         │
+     │ - Curvature along v: vᵀ∇²f(x)v                            │
+     │ - Eigenvalues quantify steep/flat directions              │
+     │ - PSD/PD Hessian ties directly to convexity (Ch.5)        │
+     └───────────────────────────────────────────────────────────┘
+                              │
+                              ▼
+     ┌───────────────────────────────────────────────────────────┐
+     │ Taylor Models → Algorithm Design                          │
+     │ First-order:  f(x+d) ≈ f(x) + ∇f(x)ᵀd                     │
+     │ Second-order: f(x+d) ≈ f(x) + ∇f(x)ᵀd + ½ dᵀ∇²f(x)d       │
+     │ - Gradient descent uses the linear model                  │
+     │ - Newton uses the quadratic model: d ≈ -(∇²f)^{-1}∇f      │
+     │ - Trust-region / quasi-Newton approximate curvature       │
+     └───────────────────────────────────────────────────────────┘
+                              │
+                              ▼
+     ┌────────────────────────────────────────────────────────────────┐
+     │ Global Control of Local Behavior: Smoothness &amp; Strong Convexity│
+     │ L-smooth: ‖∇f(x)-∇f(y)‖ ≤ L‖x-y‖                               │
+     │ - Descent Lemma gives a quadratic upper bound                  │
+     │ - Sets safe step size: η ≤ 1/L (for convex objectives)         │
+     │ μ-strongly convex: f lies above tangents by (μ/2)‖y-x‖²        │
+     │ - Unique minimizer, linear convergence of gradient descent     │
+     │ Combined curvature bounds: μI ⪯ ∇²f(x) ⪯ LI                   │
+     │ - Condition number κ = L/μ governs difficulty                  │
+     └────────────────────────────────────────────────────────────────┘
+</code></pre></div>
 
 
 

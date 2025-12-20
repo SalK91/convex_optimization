@@ -762,36 +762,36 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#71-orders-of-optimality-why-first-order-is-enough-in-convex-optimization" class="md-nav__link">
+  <a href="#orders-of-optimality-why-first-order-is-enough-in-convex-optimization" class="md-nav__link">
     <span class="md-ellipsis">
-      7.1 Orders of Optimality: Why First Order is Enough in Convex Optimization
+      Orders of Optimality: Why First Order is Enough in Convex Optimization
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#72-motivation" class="md-nav__link">
+  <a href="#motivation" class="md-nav__link">
     <span class="md-ellipsis">
-      7.2 Motivation
+      Motivation
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#73-unconstrained-convex-problems" class="md-nav__link">
+  <a href="#unconstrained-convex-problems" class="md-nav__link">
     <span class="md-ellipsis">
-      7.3 Unconstrained Convex Problems
+      Unconstrained Convex Problems
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#74-constrained-convex-problems" class="md-nav__link">
+  <a href="#constrained-convex-problems" class="md-nav__link">
     <span class="md-ellipsis">
-      7.4 Constrained Convex Problems
+      Constrained Convex Problems
     </span>
   </a>
   
@@ -2600,36 +2600,36 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#71-orders-of-optimality-why-first-order-is-enough-in-convex-optimization" class="md-nav__link">
+  <a href="#orders-of-optimality-why-first-order-is-enough-in-convex-optimization" class="md-nav__link">
     <span class="md-ellipsis">
-      7.1 Orders of Optimality: Why First Order is Enough in Convex Optimization
+      Orders of Optimality: Why First Order is Enough in Convex Optimization
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#72-motivation" class="md-nav__link">
+  <a href="#motivation" class="md-nav__link">
     <span class="md-ellipsis">
-      7.2 Motivation
+      Motivation
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#73-unconstrained-convex-problems" class="md-nav__link">
+  <a href="#unconstrained-convex-problems" class="md-nav__link">
     <span class="md-ellipsis">
-      7.3 Unconstrained Convex Problems
+      Unconstrained Convex Problems
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#74-constrained-convex-problems" class="md-nav__link">
+  <a href="#constrained-convex-problems" class="md-nav__link">
     <span class="md-ellipsis">
-      7.4 Constrained Convex Problems
+      Constrained Convex Problems
     </span>
   </a>
   
@@ -2670,7 +2670,7 @@
 <h1 id="chapter-7-first-order-and-geometric-optimality-conditions">Chapter 7: First-Order and Geometric Optimality Conditions<a class="headerlink" href="#chapter-7-first-order-and-geometric-optimality-conditions" title="Permanent link">¶</a></h1>
 <p>Optimization problems seek points where no infinitesimal movement can improve the objective. For convex functions, first-order conditions give precise geometric and analytic criteria for such points to be optimal. They extend the familiar “zero gradient” condition to nonsmooth and constrained settings, linking gradients, subgradients, and the geometry of feasible regions.</p>
 <p>These conditions form the conceptual bridge between unconstrained minimization and the Karush–Kuhn–Tucker (KKT) framework developed in the next chapter.</p>
-<h2 id="71-orders-of-optimality-why-first-order-is-enough-in-convex-optimization">7.1 Orders of Optimality: Why First Order is Enough in Convex Optimization<a class="headerlink" href="#71-orders-of-optimality-why-first-order-is-enough-in-convex-optimization" title="Permanent link">¶</a></h2>
+<h2 id="orders-of-optimality-why-first-order-is-enough-in-convex-optimization">Orders of Optimality: Why First Order is Enough in Convex Optimization<a class="headerlink" href="#orders-of-optimality-why-first-order-is-enough-in-convex-optimization" title="Permanent link">¶</a></h2>
 <p>For a differentiable function <span class="arithmatex">\(f : \mathbb{R}^n \to \mathbb{R}\)</span>, the “order’’ of an optimality condition refers to how many derivatives (or generalized derivatives) we examine around a candidate minimizer <span class="arithmatex">\(x^\star\)</span>:</p>
 <table>
 <thead>
@@ -2709,7 +2709,7 @@
 <li>if the function is proper and lower semicontinuous, first-order conditions are enough to guarantee global optimality.</li>
 </ul>
 <p>As a result, in convex optimization we typically rely only on first-order conditions, possibly expressed in terms of subgradients and geometric objects (normal cones, tangent cones). This collapse of the hierarchy is one of the key simplifications that makes convex analysis powerful.</p>
-<h2 id="72-motivation">7.2 Motivation<a class="headerlink" href="#72-motivation" title="Permanent link">¶</a></h2>
+<h2 id="motivation">Motivation<a class="headerlink" href="#motivation" title="Permanent link">¶</a></h2>
 <p>Consider the basic convex problem
 <script type="math/tex; mode=display">
 \min_{x \in \mathcal{X}} f(x),
@@ -2727,7 +2727,7 @@ where <span class="arithmatex">\(f\)</span> is convex and <span class="arithmate
 <li>training until the force from regularization/constraints balances the data fit term (e.g., in <span class="arithmatex">\(\ell_1\)</span>-regularized models).</li>
 </ul>
 <p>First-order optimality conditions formalize this equilibrium in both smooth and nonsmooth, constrained and unconstrained settings.</p>
-<h2 id="73-unconstrained-convex-problems">7.3 Unconstrained Convex Problems<a class="headerlink" href="#73-unconstrained-convex-problems" title="Permanent link">¶</a></h2>
+<h2 id="unconstrained-convex-problems">Unconstrained Convex Problems<a class="headerlink" href="#unconstrained-convex-problems" title="Permanent link">¶</a></h2>
 <p>For the unconstrained problem
 <script type="math/tex; mode=display">
 \min_x f(x),
@@ -2753,7 +2753,7 @@ with <span class="arithmatex">\(f\)</span> convex, the optimality conditions are
 <li>No direction in <span class="arithmatex">\(\mathbb{R}^n\)</span> gives a first-order improvement in the objective.</li>
 </ul>
 <p>For smooth <span class="arithmatex">\(f\)</span>, this reduces to the usual condition <span class="arithmatex">\(\nabla f(\hat{x}) = 0\)</span>.</p>
-<h2 id="74-constrained-convex-problems">7.4 Constrained Convex Problems<a class="headerlink" href="#74-constrained-convex-problems" title="Permanent link">¶</a></h2>
+<h2 id="constrained-convex-problems">Constrained Convex Problems<a class="headerlink" href="#constrained-convex-problems" title="Permanent link">¶</a></h2>
 <p>Now consider the constrained problem
 <script type="math/tex; mode=display">
 \min_{x \in \mathcal{X}} f(x),
