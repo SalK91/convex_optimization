@@ -19,7 +19,7 @@
     
     
       
-        <title>2 lp - Machine Learning Lecture Notes -  Optimization &amp; Algorithms</title>
+        <title>Transportation LP with CVXPY (Min-Cost Shipping) - Machine Learning Lecture Notes -  Optimization &amp; Algorithms</title>
       
     
     
@@ -87,7 +87,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#download-data" class="md-skip">
+        <a href="#transportation-lp-with-cvxpy-min-cost-shipping" class="md-skip">
           Skip to content
         </a>
       
@@ -121,7 +121,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              2 lp
+              Transportation LP with CVXPY (Min-Cost Shipping)
             
           </span>
         </div>
@@ -1124,21 +1124,14 @@
   
   
   
+    
+  
   
     <label class="md-nav__title" for="__toc">
       <span class="md-nav__icon md-icon"></span>
       Table of contents
     </label>
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#download-data" class="md-nav__link">
-    <span class="md-ellipsis">
-      Download Data
-    </span>
-  </a>
-  
-</li>
       
         <li class="md-nav__item">
   <a href="#cvxpy-solver" class="md-nav__link">
@@ -1180,8 +1173,6 @@
     </a>
   
 
-
-  <h1>2 lp</h1>
 
 <script>
 (function (global, factory) {
@@ -1619,13 +1610,34 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 
 </style>
 <!-- End of mermaid configuration --><div class="jupyter-wrapper">
 <div class="jp-Notebook" data-jp-theme-light="true" data-jp-theme-name="JupyterLab Light">
-<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=a3d3e19a">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h1 id="transportation-lp-with-cvxpy-min-cost-shipping">Transportation LP with CVXPY (Min-Cost Shipping)<a class="anchor-link" href="#transportation-lp-with-cvxpy-min-cost-shipping">¶</a></h1><p>This notebook builds and solves a transportation / min-cost flow linear program (LP):</p>
+<ul>
+<li>Plants have supply capacities.</li>
+<li>Orders require demand to be met.</li>
+<li>Lanes (plant → order links) have per-unit shipping costs.</li>
+<li>We choose shipment quantities on each lane to minimize total cost while meeting all order demand and respecting plant capacities.</li>
+</ul>
+<p>Key idea: indexing is the contract. CVXPY never “knows” plant/order IDs — we make it true by building:</p>
+<ul>
+<li>a cost vector <code>c</code> aligned with the lane (arc) ordering, and</li>
+<li>sparse incidence matrices <code>A_order</code>, <code>A_plant</code> aligned with the order and plant index ordering.</li>
+</ul>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
 <div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=e23d5b6e">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[1]:</div><div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div><div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="CodeMirror cm-s-jupyter">
 <div class="zeroclipboard-container">
 <clipboard-copy ,="" aria-label="Copy to Clipboard" for="cell-1">
@@ -1638,9 +1650,7 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 
 </div>
 </clipboard-copy>
 </div>
-<div class="highlight-ipynb hl-python"><pre><span></span><span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">annotations</span>
-
-<span class="kn">import</span> <span class="nn">re</span>
+<div class="highlight-ipynb hl-python"><pre><span></span><span class="kn">import</span> <span class="nn">re</span>
 <span class="kn">import</span> <span class="nn">zipfile</span>
 <span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
 <span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">Tuple</span><span class="p">,</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">List</span>
@@ -1649,10 +1659,10 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 
 <span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
 <span class="kn">import</span> <span class="nn">cvxpy</span> <span class="k">as</span> <span class="nn">cp</span>
 <span class="kn">import</span> <span class="nn">requests</span>
-</pre></div>
-<div class="clipboard-copy-txt" id="cell-1">from __future__ import annotations
 
-import re
+<span class="kn">from</span> <span class="nn">scipy</span> <span class="kn">import</span> <span class="n">sparse</span>
+</pre></div>
+<div class="clipboard-copy-txt" id="cell-1">import re
 import zipfile
 from pathlib import Path
 from typing import Dict, Tuple, Optional, List
@@ -1661,7 +1671,8 @@ import numpy as np
 import pandas as pd
 import cvxpy as cp
 import requests
-</div>
+
+from scipy import sparse</div>
 </div>
 </div>
 </div>
@@ -1702,7 +1713,7 @@ import requests
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[3]:</div><div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div><div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="CodeMirror cm-s-jupyter">
 <div class="zeroclipboard-container">
 <clipboard-copy ,="" aria-label="Copy to Clipboard" for="cell-3">
@@ -1717,8 +1728,7 @@ import requests
 </div>
 <div class="highlight-ipynb hl-python"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">cp</span><span class="o">.</span><span class="n">installed_solvers</span><span class="p">())</span>
 </pre></div>
-<div class="clipboard-copy-txt" id="cell-3">print(cp.installed_solvers())
-</div>
+<div class="clipboard-copy-txt" id="cell-3">print(cp.installed_solvers())</div>
 </div>
 </div>
 </div>
@@ -1734,6 +1744,17 @@ import requests
 </pre>
 </div>
 </div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=ba55b229">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<p>Directory Structure</p>
 </div>
 </div>
 </div>
@@ -1785,7 +1806,7 @@ OUT_DIR.mkdir(parents=True, exist_ok=True)</div>
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h2 id="download-data">Download Data<a class="anchor-link" href="#download-data">¶</a></h2>
+<p>Download Data</p>
 </div>
 </div>
 </div>
@@ -1914,7 +1935,7 @@ def load_excel_sheets(xlsx_path: Path) -&gt; Dict[str, pd.DataFrame]:
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[6]:</div><div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[7]:</div><div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="CodeMirror cm-s-jupyter">
 <div class="zeroclipboard-container">
 <clipboard-copy ,="" aria-label="Copy to Clipboard" for="cell-6">
@@ -1943,7 +1964,7 @@ GITHUB_ZIP_URL = "https://github.com/jaredbach/LogisticsDataset/archive/refs/hea
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[7]:</div><div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[8]:</div><div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="CodeMirror cm-s-jupyter">
 <div class="zeroclipboard-container">
 <clipboard-copy ,="" aria-label="Copy to Clipboard" for="cell-7">
@@ -2002,7 +2023,7 @@ Extract dir exists: C:\Users\salmank\Documents\convex_optimization\docs\convex\t
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[8]:</div><div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[9]:</div><div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="CodeMirror cm-s-jupyter">
 <div class="zeroclipboard-container">
 <clipboard-copy ,="" aria-label="Copy to Clipboard" for="cell-8">
@@ -2029,7 +2050,7 @@ Extract dir exists: C:\Users\salmank\Documents\convex_optimization\docs\convex\t
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[9]:</div><div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[10]:</div><div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="CodeMirror cm-s-jupyter">
 <div class="zeroclipboard-container">
 <clipboard-copy ,="" aria-label="Copy to Clipboard" for="cell-9">
@@ -2064,13 +2085,24 @@ Loaded 7 sheets: ['orderlist', 'freightrates', 'whcosts', 'whcapacities', 'produ
 </div>
 </div>
 </div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=824369d5">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<p>Transform data</p>
+</div>
+</div>
+</div>
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell">
 <div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=356c0a8d">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[10]:</div><div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[24]:</div><div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="CodeMirror cm-s-jupyter">
 <div class="zeroclipboard-container">
 <clipboard-copy ,="" aria-label="Copy to Clipboard" for="cell-10">
@@ -2089,13 +2121,23 @@ Loaded 7 sheets: ['orderlist', 'freightrates', 'whcosts', 'whcapacities', 'produ
 <span class="n">orders</span> <span class="o">=</span> <span class="n">orders</span><span class="p">[</span><span class="n">orders</span><span class="p">[</span><span class="s2">"demand"</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
 <span class="n">orders</span><span class="p">[</span><span class="s2">"order_id"</span><span class="p">]</span> <span class="o">=</span> <span class="n">orders</span><span class="p">[</span><span class="s2">"order_id"</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">str</span><span class="p">)</span>
 <span class="n">orders</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+
+
+<span class="c1"># Total Demand capacity</span>
+<span class="n">total_demand</span> <span class="o">=</span> <span class="n">orders</span><span class="p">[</span><span class="s1">'demand'</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Total demand capacity: </span><span class="si">{</span><span class="n">total_demand</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
 </pre></div>
 <div class="clipboard-copy-txt" id="cell-10">## Demand measure
 orders  = sheets['orderlist'][['order_id','weight']]
 orders.columns = ["order_id", "demand"]
 orders = orders[orders["demand"] &gt; 0].copy()
 orders["order_id"] = orders["order_id"].astype(str)
-orders.head()</div>
+orders.head()
+
+
+# Total Demand capacity
+total_demand = orders['demand'].sum()
+print(f"Total demand capacity: {total_demand}")</div>
 </div>
 </div>
 </div>
@@ -2104,60 +2146,11 @@ orders.head()</div>
 <div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
 </div>
 <div class="jp-OutputArea jp-Cell-outputArea">
-<div class="jp-OutputArea-child jp-OutputArea-executeResult">
-<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[10]:</div>
-<div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/html" tabindex="0">
-<div>
-<style scoped="">
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-<thead>
-<tr style="text-align: right;">
-<th></th>
-<th>order_id</th>
-<th>demand</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<th>0</th>
-<td>1447296446.7</td>
-<td>14.30</td>
-</tr>
-<tr>
-<th>1</th>
-<td>1447158014.7</td>
-<td>87.94</td>
-</tr>
-<tr>
-<th>2</th>
-<td>1447138898.7</td>
-<td>61.20</td>
-</tr>
-<tr>
-<th>3</th>
-<td>1447363527.7</td>
-<td>16.16</td>
-</tr>
-<tr>
-<th>4</th>
-<td>1447363980.7</td>
-<td>52.34</td>
-</tr>
-</tbody>
-</table>
-</div>
+<div class="jp-OutputArea-child">
+<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
+<pre>Total demand capacity: 183117.6005242356
+</pre>
 </div>
 </div>
 </div>
@@ -2169,7 +2162,7 @@ orders.head()</div>
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[11]:</div><div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[27]:</div><div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="CodeMirror cm-s-jupyter">
 <div class="zeroclipboard-container">
 <clipboard-copy ,="" aria-label="Copy to Clipboard" for="cell-11">
@@ -2190,6 +2183,11 @@ orders.head()</div>
 <span class="n">plants</span> <span class="o">=</span> <span class="n">plants</span><span class="o">.</span><span class="n">dropna</span><span class="p">(</span><span class="n">subset</span><span class="o">=</span><span class="p">[</span><span class="s2">"supply_cap"</span><span class="p">])</span>
 <span class="c1">#plants = plants.merge(cap, on="plant_id", how="left")</span>
 <span class="n">plants</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+<span class="n">plants</span><span class="p">[</span><span class="s1">'supply_cap'</span><span class="p">]</span> <span class="o">=</span> <span class="n">plants</span><span class="p">[</span><span class="s1">'supply_cap'</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">float</span><span class="p">)</span><span class="o">*</span><span class="mi">50</span>
+
+<span class="c1"># Total Supply capacity</span>
+<span class="n">total_supply</span> <span class="o">=</span> <span class="n">plants</span><span class="p">[</span><span class="s1">'supply_cap'</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Total supply capacity: </span><span class="si">{</span><span class="n">total_supply</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
 </pre></div>
 <div class="clipboard-copy-txt" id="cell-11"># Plant capacities
 plants = sheets['whcapacities']
@@ -2198,7 +2196,12 @@ plants["plant_id"] = plants["plant_id"].astype(str)
 plants["supply_cap"] = pd.to_numeric(plants["supply_cap"], errors="coerce")
 plants = plants.dropna(subset=["supply_cap"])
 #plants = plants.merge(cap, on="plant_id", how="left")
-plants.head()</div>
+plants.head()
+plants['supply_cap'] = plants['supply_cap'].astype(float)*50
+
+# Total Supply capacity
+total_supply = plants['supply_cap'].sum()
+print(f"Total supply capacity: {total_supply}")</div>
 </div>
 </div>
 </div>
@@ -2207,72 +2210,23 @@ plants.head()</div>
 <div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
 </div>
 <div class="jp-OutputArea jp-Cell-outputArea">
-<div class="jp-OutputArea-child jp-OutputArea-executeResult">
-<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[11]:</div>
-<div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/html" tabindex="0">
-<div>
-<style scoped="">
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-<thead>
-<tr style="text-align: right;">
-<th></th>
-<th>plant_id</th>
-<th>supply_cap</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<th>0</th>
-<td>PLANT15</td>
-<td>11</td>
-</tr>
-<tr>
-<th>1</th>
-<td>PLANT17</td>
-<td>8</td>
-</tr>
-<tr>
-<th>2</th>
-<td>PLANT18</td>
-<td>111</td>
-</tr>
-<tr>
-<th>3</th>
-<td>PLANT05</td>
-<td>385</td>
-</tr>
-<tr>
-<th>4</th>
-<td>PLANT02</td>
-<td>138</td>
-</tr>
-</tbody>
-</table>
+<div class="jp-OutputArea-child">
+<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
+<pre>Total supply capacity: 289550.0
+</pre>
 </div>
 </div>
 </div>
 </div>
 </div>
-</div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell">
-<div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=419dbaae">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
+<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=a36ad167">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[14]:</div><div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[28]:</div><div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="CodeMirror cm-s-jupyter">
 <div class="zeroclipboard-container">
 <clipboard-copy ,="" aria-label="Copy to Clipboard" for="cell-12">
@@ -2285,7 +2239,44 @@ plants.head()</div>
 </div>
 </clipboard-copy>
 </div>
-<div class="highlight-ipynb hl-python"><pre><span></span><span class="c1"># dummy unit cost between for each plant-order pair</span>
+<div class="highlight-ipynb hl-python"><pre><span></span><span class="c1"># Check Supply is enough to meet Demand</span>
+<span class="k">if</span> <span class="n">total_supply</span> <span class="o">&lt;</span> <span class="n">total_demand</span><span class="p">:</span>
+    <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Total supply (</span><span class="si">{</span><span class="n">total_supply</span><span class="si">}</span><span class="s2">) is less than total demand (</span><span class="si">{</span><span class="n">total_demand</span><span class="si">}</span><span class="s2">). Problem is infeasible."</span><span class="p">)</span>
+</pre></div>
+<div class="clipboard-copy-txt" id="cell-12"># Check Supply is enough to meet Demand
+if total_supply &lt; total_demand:
+    raise ValueError(f"Total supply ({total_supply}) is less than total demand ({total_demand}). Problem is infeasible.")</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell">
+<div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=419dbaae">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div><div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="CodeMirror cm-s-jupyter">
+<div class="zeroclipboard-container">
+<clipboard-copy ,="" aria-label="Copy to Clipboard" for="cell-13">
+<div>
+<span class="notice" hidden="">Copied!</span>
+<svg aria-hidden="true" class="clipboard-copy-icon" data-view-component="true" height="20" version="1.1" viewBox="0 0 16 16" width="20">
+<path d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z" fill="currentColor" fill-rule="evenodd"></path>
+<path d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z" fill="currentColor" fill-rule="evenodd"></path>
+</svg>
+</div>
+</clipboard-copy>
+</div>
+<div class="highlight-ipynb hl-python"><pre><span></span><span class="c1"># ----------------------------</span>
+<span class="c1"># Build lane table (arc list) and unit costs</span>
+<span class="c1"># ----------------------------</span>
+<span class="c1"># NOTE: In this notebook we generate a dense plant×order lane set with dummy unit costs.</span>
+<span class="c1">#       In real data, `lanes` would typically come from a file (only feasible shipping lanes).</span>
+<span class="c1"># dummy unit cost between for each plant-order pair</span>
+
 <span class="n">rng</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">default_rng</span><span class="p">(</span><span class="mi">7</span><span class="p">)</span>
 <span class="n">plant_factor</span> <span class="o">=</span> <span class="p">{</span><span class="n">pid</span><span class="p">:</span> <span class="mf">0.8</span> <span class="o">+</span> <span class="mf">0.4</span> <span class="o">*</span> <span class="n">rng</span><span class="o">.</span><span class="n">random</span><span class="p">()</span> <span class="k">for</span> <span class="n">pid</span> <span class="ow">in</span> <span class="n">plants</span><span class="p">[</span><span class="s2">"plant_id"</span><span class="p">]}</span>
 
@@ -2303,7 +2294,13 @@ plants.head()</div>
 <span class="n">lanes</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">lanes</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s2">"plant_id"</span><span class="p">,</span> <span class="s2">"order_id"</span><span class="p">,</span> <span class="s2">"unit_cost"</span><span class="p">])</span>
 <span class="n">lanes</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
 </pre></div>
-<div class="clipboard-copy-txt" id="cell-12"># dummy unit cost between for each plant-order pair
+<div class="clipboard-copy-txt" id="cell-13"># ----------------------------
+# Build lane table (arc list) and unit costs
+# ----------------------------
+# NOTE: In this notebook we generate a dense plant×order lane set with dummy unit costs.
+#       In real data, `lanes` would typically come from a file (only feasible shipping lanes).
+# dummy unit cost between for each plant-order pair
+
 rng = np.random.default_rng(7)
 plant_factor = {pid: 0.8 + 0.4 * rng.random() for pid in plants["plant_id"]}
 
@@ -2319,7 +2316,8 @@ for _, o in orders.iterrows():
         lanes.append((pid, oid, unit_cost))
 
 lanes = pd.DataFrame(lanes, columns=["plant_id", "order_id", "unit_cost"])
-lanes.head()</div>
+lanes.head()
+</div>
 </div>
 </div>
 </div>
@@ -2329,7 +2327,7 @@ lanes.head()</div>
 </div>
 <div class="jp-OutputArea jp-Cell-outputArea">
 <div class="jp-OutputArea-child jp-OutputArea-executeResult">
-<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[14]:</div>
+<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[&nbsp;]:</div>
 <div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/html" tabindex="0">
 <div>
 <style scoped="">
@@ -2393,84 +2391,13 @@ lanes.head()</div>
 </div>
 </div>
 </div>
-</div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=4cd653b3">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h2 id="cvxpy-solver">CVXPY Solver<a class="anchor-link" href="#cvxpy-solver">¶</a></h2>
-</div>
-</div>
-</div>
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
-<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=bc4b1d78">
+<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=5c3c0c53">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[15]:</div><div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-<div class="CodeMirror cm-s-jupyter">
-<div class="zeroclipboard-container">
-<clipboard-copy ,="" aria-label="Copy to Clipboard" for="cell-13">
-<div>
-<span class="notice" hidden="">Copied!</span>
-<svg aria-hidden="true" class="clipboard-copy-icon" data-view-component="true" height="20" version="1.1" viewBox="0 0 16 16" width="20">
-<path d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z" fill="currentColor" fill-rule="evenodd"></path>
-<path d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z" fill="currentColor" fill-rule="evenodd"></path>
-</svg>
-</div>
-</clipboard-copy>
-</div>
-<div class="highlight-ipynb hl-python"><pre><span></span><span class="c1"># Solve LP in CVXPY</span>
-
-<span class="c1"># Index maps</span>
-<span class="n">plant_ids</span> <span class="o">=</span> <span class="n">plants</span><span class="p">[</span><span class="s2">"plant_id"</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">str</span><span class="p">)</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
-<span class="n">order_ids</span> <span class="o">=</span> <span class="n">orders</span><span class="p">[</span><span class="s2">"order_id"</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">str</span><span class="p">)</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
-
-<span class="n">plant_index</span> <span class="o">=</span> <span class="p">{</span><span class="n">p</span><span class="p">:</span> <span class="n">i</span> <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">p</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">plant_ids</span><span class="p">)}</span>
-<span class="n">order_index</span> <span class="o">=</span> <span class="p">{</span><span class="n">o</span><span class="p">:</span> <span class="n">j</span> <span class="k">for</span> <span class="n">j</span><span class="p">,</span> <span class="n">o</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">order_ids</span><span class="p">)}</span>
-
-<span class="c1"># Keep only lanes with valid endpoints</span>
-<span class="n">lanes</span> <span class="o">=</span> <span class="n">lanes</span><span class="p">[</span><span class="n">lanes</span><span class="p">[</span><span class="s2">"plant_id"</span><span class="p">]</span><span class="o">.</span><span class="n">isin</span><span class="p">(</span><span class="n">plant_index</span><span class="p">)</span> <span class="o">&amp;</span> <span class="n">lanes</span><span class="p">[</span><span class="s2">"order_id"</span><span class="p">]</span><span class="o">.</span><span class="n">isin</span><span class="p">(</span><span class="n">order_index</span><span class="p">)]</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
-<span class="n">lanes</span> <span class="o">=</span> <span class="n">lanes</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(</span><span class="n">drop</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-
-<span class="n">nA</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">lanes</span><span class="p">)</span>
-<span class="n">nP</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">plant_ids</span><span class="p">)</span>
-<span class="n">nO</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">order_ids</span><span class="p">)</span>
-</pre></div>
-<div class="clipboard-copy-txt" id="cell-13"># Solve LP in CVXPY
-
-# Index maps
-plant_ids = plants["plant_id"].astype(str).tolist()
-order_ids = orders["order_id"].astype(str).tolist()
-
-plant_index = {p: i for i, p in enumerate(plant_ids)}
-order_index = {o: j for j, o in enumerate(order_ids)}
-
-# Keep only lanes with valid endpoints
-lanes = lanes[lanes["plant_id"].isin(plant_index) &amp; lanes["order_id"].isin(order_index)].copy()
-lanes = lanes.reset_index(drop=True)
-
-nA = len(lanes)
-nP = len(plant_ids)
-nO = len(order_ids)
-
-
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
-<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=307be4b8">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[16]:</div><div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div><div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="CodeMirror cm-s-jupyter">
 <div class="zeroclipboard-container">
 <clipboard-copy ,="" aria-label="Copy to Clipboard" for="cell-14">
@@ -2483,46 +2410,37 @@ nO = len(order_ids)
 </div>
 </clipboard-copy>
 </div>
-<div class="highlight-ipynb hl-python"><pre><span></span><span class="n">order_to_arcs</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">]]</span> <span class="o">=</span> <span class="p">[[]</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">nO</span><span class="p">)]</span>
-<span class="n">plant_to_arcs</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">]]</span> <span class="o">=</span> <span class="p">[[]</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">nP</span><span class="p">)]</span>
+<div class="highlight-ipynb hl-python"><pre><span></span><span class="c1"># ----------------------------</span>
+<span class="c1"># Data integrity checks</span>
+<span class="c1"># ----------------------------</span>
+<span class="c1"># Ensure IDs are unique before we rely on index-based alignment later.</span>
 
-<span class="k">for</span> <span class="n">a</span><span class="p">,</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">lanes</span><span class="o">.</span><span class="n">iterrows</span><span class="p">():</span>
-    <span class="n">i</span> <span class="o">=</span> <span class="n">plant_index</span><span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="s2">"plant_id"</span><span class="p">])]</span>
-    <span class="n">j</span> <span class="o">=</span> <span class="n">order_index</span><span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="s2">"order_id"</span><span class="p">])]</span>
-    <span class="n">plant_to_arcs</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
-    <span class="n">order_to_arcs</span><span class="p">[</span><span class="n">j</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
-
-<span class="c1"># Data vectors</span>
-<span class="n">cost</span> <span class="o">=</span> <span class="n">lanes</span><span class="p">[</span><span class="s2">"unit_cost"</span><span class="p">]</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">(</span><span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span>
-<span class="n">demand</span> <span class="o">=</span> <span class="n">orders</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="s2">"order_id"</span><span class="p">)</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">order_ids</span><span class="p">,</span> <span class="s2">"demand"</span><span class="p">]</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">(</span><span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span>
-<span class="n">supply</span> <span class="o">=</span> <span class="n">plants</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="s2">"plant_id"</span><span class="p">)</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">plant_ids</span><span class="p">,</span> <span class="s2">"supply_cap"</span><span class="p">]</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">(</span><span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span>
+<span class="k">if</span> <span class="ow">not</span> <span class="n">plants</span><span class="p">[</span><span class="s2">"plant_id"</span><span class="p">]</span><span class="o">.</span><span class="n">is_unique</span><span class="p">:</span>
+    <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"plants.plant_id is not unique. Deduplicate or aggregate supplies first."</span><span class="p">)</span>
+<span class="k">if</span> <span class="ow">not</span> <span class="n">orders</span><span class="p">[</span><span class="s2">"order_id"</span><span class="p">]</span><span class="o">.</span><span class="n">is_unique</span><span class="p">:</span>
+    <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"orders.order_id is not unique. Deduplicate or aggregate demands first."</span><span class="p">)</span>
 </pre></div>
-<div class="clipboard-copy-txt" id="cell-14">order_to_arcs: List[List[int]] = [[] for _ in range(nO)]
-plant_to_arcs: List[List[int]] = [[] for _ in range(nP)]
+<div class="clipboard-copy-txt" id="cell-14"># ----------------------------
+# Data integrity checks
+# ----------------------------
+# Ensure IDs are unique before we rely on index-based alignment later.
 
-for a, row in lanes.iterrows():
-    i = plant_index[str(row["plant_id"])]
-    j = order_index[str(row["order_id"])]
-    plant_to_arcs[i].append(a)
-    order_to_arcs[j].append(a)
-
-# Data vectors
-cost = lanes["unit_cost"].to_numpy(dtype=float)
-demand = orders.set_index("order_id").loc[order_ids, "demand"].to_numpy(dtype=float)
-supply = plants.set_index("plant_id").loc[plant_ids, "supply_cap"].to_numpy(dtype=float)
+if not plants["plant_id"].is_unique:
+    raise ValueError("plants.plant_id is not unique. Deduplicate or aggregate supplies first.")
+if not orders["order_id"].is_unique:
+    raise ValueError("orders.order_id is not unique. Deduplicate or aggregate demands first.")</div>
 </div>
 </div>
 </div>
 </div>
 </div>
-</div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
-<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=9bc13a90">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell">
+<div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=de78830b">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[21]:</div><div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div><div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="CodeMirror cm-s-jupyter">
 <div class="zeroclipboard-container">
 <clipboard-copy ,="" aria-label="Copy to Clipboard" for="cell-15">
@@ -2535,23 +2453,121 @@ supply = plants.set_index("plant_id").loc[plant_ids, "supply_cap"].to_numpy(dtyp
 </div>
 </clipboard-copy>
 </div>
-<div class="highlight-ipynb hl-python"><pre><span></span><span class="c1"># Decision variable</span>
-<span class="n">x</span> <span class="o">=</span> <span class="n">cp</span><span class="o">.</span><span class="n">Variable</span><span class="p">(</span><span class="n">nA</span><span class="p">,</span> <span class="n">nonneg</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<div class="highlight-ipynb hl-python"><pre><span></span><span class="c1"># ----------------------------</span>
+<span class="c1"># Clean / validate lanes</span>
+<span class="c1"># ----------------------------</span>
+<span class="c1"># 1) Drop lanes whose plant_id/order_id do not exist in the node tables.</span>
+<span class="c1"># 2) If duplicate (plant_id, order_id) lanes exist, aggregate them (here: keep the minimum unit cost).</span>
+
+<span class="c1"># Keep only lanes that connect to known plants/orders (avoid silent mismatches)</span>
+
+<span class="n">lanes</span> <span class="o">=</span> <span class="n">lanes</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">plants</span><span class="p">[[</span><span class="s2">"plant_id"</span><span class="p">]],</span> <span class="n">on</span><span class="o">=</span><span class="s2">"plant_id"</span><span class="p">,</span> <span class="n">how</span><span class="o">=</span><span class="s2">"inner"</span><span class="p">)</span>
+<span class="n">lanes</span> <span class="o">=</span> <span class="n">lanes</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">orders</span><span class="p">[[</span><span class="s2">"order_id"</span><span class="p">]],</span> <span class="n">on</span><span class="o">=</span><span class="s2">"order_id"</span><span class="p">,</span> <span class="n">how</span><span class="o">=</span><span class="s2">"inner"</span><span class="p">)</span>
+
+<span class="k">if</span> <span class="n">lanes</span><span class="o">.</span><span class="n">empty</span><span class="p">:</span>
+    <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"No valid lanes after matching plant_id/order_id against plants/orders."</span><span class="p">)</span>
+
+<span class="n">lanes</span> <span class="o">=</span> <span class="p">(</span><span class="n">lanes</span><span class="o">.</span><span class="n">groupby</span><span class="p">([</span><span class="s2">"plant_id"</span><span class="p">,</span> <span class="s2">"order_id"</span><span class="p">],</span> <span class="n">as_index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span><span class="o">.</span><span class="n">agg</span><span class="p">({</span><span class="s1">'unit_cost'</span><span class="p">:</span> <span class="s2">"min"</span><span class="p">}))</span>
+
+<span class="n">lanes</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
 </pre></div>
-<div class="clipboard-copy-txt" id="cell-15"># Decision variable
-x = cp.Variable(nA, nonneg=True)</div>
+<div class="clipboard-copy-txt" id="cell-15"># ----------------------------
+# Clean / validate lanes
+# ----------------------------
+# 1) Drop lanes whose plant_id/order_id do not exist in the node tables.
+# 2) If duplicate (plant_id, order_id) lanes exist, aggregate them (here: keep the minimum unit cost).
+
+# Keep only lanes that connect to known plants/orders (avoid silent mismatches)
+
+lanes = lanes.merge(plants[["plant_id"]], on="plant_id", how="inner")
+lanes = lanes.merge(orders[["order_id"]], on="order_id", how="inner")
+
+if lanes.empty:
+    raise ValueError("No valid lanes after matching plant_id/order_id against plants/orders.")
+
+lanes = (lanes.groupby(["plant_id", "order_id"], as_index=False).agg({'unit_cost': "min"}))
+
+lanes.head()</div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell-outputWrapper">
+<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
+</div>
+<div class="jp-OutputArea jp-Cell-outputArea">
+<div class="jp-OutputArea-child jp-OutputArea-executeResult">
+<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[&nbsp;]:</div>
+<div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/html" tabindex="0">
+<div>
+<style scoped="">
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+<thead>
+<tr style="text-align: right;">
+<th></th>
+<th>plant_id</th>
+<th>order_id</th>
+<th>unit_cost</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<th>0</th>
+<td>PLANT01</td>
+<td>1447125805.7</td>
+<td>1.103747</td>
+</tr>
+<tr>
+<th>1</th>
+<td>PLANT01</td>
+<td>1447132025.7</td>
+<td>1.178240</td>
+</tr>
+<tr>
+<th>2</th>
+<td>PLANT01</td>
+<td>1447133054.7</td>
+<td>1.148729</td>
+</tr>
+<tr>
+<th>3</th>
+<td>PLANT01</td>
+<td>1447133164.7</td>
+<td>1.109522</td>
+</tr>
+<tr>
+<th>4</th>
+<td>PLANT01</td>
+<td>1447133209.7</td>
+<td>1.097520</td>
+</tr>
+</tbody>
+</table>
+</div>
 </div>
 </div>
 </div>
 </div>
 </div>
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
-<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=2951bbe1">
+<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=131482dc">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div><div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[33]:</div><div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="CodeMirror cm-s-jupyter">
 <div class="zeroclipboard-container">
 <clipboard-copy ,="" aria-label="Copy to Clipboard" for="cell-16">
@@ -2564,63 +2580,64 @@ x = cp.Variable(nA, nonneg=True)</div>
 </div>
 </clipboard-copy>
 </div>
-<div class="highlight-ipynb hl-python"><pre><span></span><span class="n">constraints</span> <span class="o">=</span> <span class="p">[]</span>
+<div class="highlight-ipynb hl-python"><pre><span></span><span class="c1"># ----------------------------</span>
+<span class="c1"># Define a *single source of truth* for indices</span>
+<span class="c1"># ----------------------------</span>
+<span class="n">plant_ids</span> <span class="o">=</span> <span class="n">plants</span><span class="p">[</span><span class="s2">"plant_id"</span><span class="p">]</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">()</span>
+<span class="n">order_ids</span> <span class="o">=</span> <span class="n">orders</span><span class="p">[</span><span class="s2">"order_id"</span><span class="p">]</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">()</span>
 
-<span class="c1"># Order demand equalities</span>
-<span class="n">order_constraints</span> <span class="o">=</span> <span class="p">[]</span>
-<span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">nO</span><span class="p">):</span>
-    <span class="n">arcs_j</span> <span class="o">=</span> <span class="n">order_to_arcs</span><span class="p">[</span><span class="n">j</span><span class="p">]</span>
-    <span class="k">if</span> <span class="ow">not</span> <span class="n">arcs_j</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Order </span><span class="si">{</span><span class="n">order_ids</span><span class="p">[</span><span class="n">j</span><span class="p">]</span><span class="si">}</span><span class="s2"> has no incoming lanes; infeasible."</span><span class="p">)</span>
-    <span class="n">con</span> <span class="o">=</span> <span class="n">cp</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="n">arcs_j</span><span class="p">])</span> <span class="o">==</span> <span class="n">demand</span><span class="p">[</span><span class="n">j</span><span class="p">]</span>
-    <span class="n">constraints</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">con</span><span class="p">)</span>
-    <span class="n">order_constraints</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">con</span><span class="p">)</span>
+<span class="n">plant_to_i</span> <span class="o">=</span> <span class="p">{</span><span class="n">pid</span><span class="p">:</span> <span class="n">i</span> <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">pid</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">plant_ids</span><span class="p">)}</span>
+<span class="n">order_to_j</span> <span class="o">=</span> <span class="p">{</span><span class="n">oid</span><span class="p">:</span> <span class="n">j</span> <span class="k">for</span> <span class="n">j</span><span class="p">,</span> <span class="n">oid</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">order_ids</span><span class="p">)}</span>
 
-<span class="c1"># Plant supply inequalities</span>
-<span class="n">plant_constraints</span> <span class="o">=</span> <span class="p">[]</span>
-<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">nP</span><span class="p">):</span>
-    <span class="n">arcs_i</span> <span class="o">=</span> <span class="n">plant_to_arcs</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
-    <span class="k">if</span> <span class="ow">not</span> <span class="n">arcs_i</span><span class="p">:</span>
-        <span class="c1"># Plant unused; constraint 0 &lt;= supply holds trivially</span>
-        <span class="k">continue</span>
-    <span class="n">con</span> <span class="o">=</span> <span class="n">cp</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="n">arcs_i</span><span class="p">])</span> <span class="o">&lt;=</span> <span class="n">supply</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
-    <span class="n">constraints</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">con</span><span class="p">)</span>
-    <span class="n">plant_constraints</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">plant_ids</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">con</span><span class="p">))</span>
+<span class="c1"># Arc index = row index of lanes after reset</span>
+<span class="n">lanes</span> <span class="o">=</span> <span class="n">lanes</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(</span><span class="n">drop</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">nA</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">lanes</span><span class="p">)</span>
+<span class="n">nP</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">plant_ids</span><span class="p">)</span>
+<span class="n">nO</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">order_ids</span><span class="p">)</span>
+
+ <span class="c1"># Build arc endpoint index arrays</span>
+<span class="n">arc_i</span> <span class="o">=</span> <span class="n">lanes</span><span class="p">[</span><span class="s2">"plant_id"</span><span class="p">]</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="n">plant_to_i</span><span class="p">)</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">()</span>
+<span class="n">arc_j</span> <span class="o">=</span> <span class="n">lanes</span><span class="p">[</span><span class="s2">"order_id"</span><span class="p">]</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="n">order_to_j</span><span class="p">)</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">()</span>
+
+
+<span class="n">arc_i</span> <span class="o">=</span> <span class="n">arc_i</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span>
+<span class="n">arc_j</span> <span class="o">=</span> <span class="n">arc_j</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span>
 </pre></div>
-<div class="clipboard-copy-txt" id="cell-16">constraints = []
+<div class="clipboard-copy-txt" id="cell-16"># ----------------------------
+# Define a *single source of truth* for indices
+# ----------------------------
+plant_ids = plants["plant_id"].to_numpy()
+order_ids = orders["order_id"].to_numpy()
 
-# Order demand equalities
-order_constraints = []
-for j in range(nO):
-    arcs_j = order_to_arcs[j]
-    if not arcs_j:
-        raise ValueError(f"Order {order_ids[j]} has no incoming lanes; infeasible.")
-    con = cp.sum(x[arcs_j]) == demand[j]
-    constraints.append(con)
-    order_constraints.append(con)
+plant_to_i = {pid: i for i, pid in enumerate(plant_ids)}
+order_to_j = {oid: j for j, oid in enumerate(order_ids)}
 
-# Plant supply inequalities
-plant_constraints = []
-for i in range(nP):
-    arcs_i = plant_to_arcs[i]
-    if not arcs_i:
-        # Plant unused; constraint 0 &lt;= supply holds trivially
-        continue
-    con = cp.sum(x[arcs_i]) &lt;= supply[i]
-    constraints.append(con)
-    plant_constraints.append((plant_ids[i], con))</div>
+# Arc index = row index of lanes after reset
+lanes = lanes.reset_index(drop=True)
+nA = len(lanes)
+nP = len(plant_ids)
+nO = len(order_ids)
+
+ # Build arc endpoint index arrays
+arc_i = lanes["plant_id"].map(plant_to_i).to_numpy()
+arc_j = lanes["order_id"].map(order_to_j).to_numpy()
+
+
+arc_i = arc_i.astype(int)
+arc_j = arc_j.astype(int)
 </div>
 </div>
 </div>
 </div>
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
-<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=62f64e45">
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell">
+<div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=acadc3c9">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[25]:</div><div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[34]:</div><div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="CodeMirror cm-s-jupyter">
 <div class="zeroclipboard-container">
 <clipboard-copy ,="" aria-label="Copy to Clipboard" for="cell-17">
@@ -2633,23 +2650,126 @@ for i in range(nP):
 </div>
 </clipboard-copy>
 </div>
-<div class="highlight-ipynb hl-python"><pre><span></span><span class="n">obj</span> <span class="o">=</span> <span class="n">cp</span><span class="o">.</span><span class="n">Minimize</span><span class="p">(</span><span class="n">cost</span> <span class="o">@</span> <span class="n">x</span><span class="p">)</span>
-<span class="n">prob</span> <span class="o">=</span> <span class="n">cp</span><span class="o">.</span><span class="n">Problem</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="n">constraints</span><span class="p">)</span>
+<div class="highlight-ipynb hl-python"><pre><span></span><span class="n">lanes</span>
 </pre></div>
-<div class="clipboard-copy-txt" id="cell-17">obj = cp.Minimize(cost @ x)
-prob = cp.Problem(obj, constraints)</div>
+<div class="clipboard-copy-txt" id="cell-17">lanes</div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell-outputWrapper">
+<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
+</div>
+<div class="jp-OutputArea jp-Cell-outputArea">
+<div class="jp-OutputArea-child jp-OutputArea-executeResult">
+<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[34]:</div>
+<div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/html" tabindex="0">
+<div>
+<style scoped="">
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+<thead>
+<tr style="text-align: right;">
+<th></th>
+<th>plant_id</th>
+<th>order_id</th>
+<th>unit_cost</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<th>0</th>
+<td>PLANT01</td>
+<td>1447125805.7</td>
+<td>1.103747</td>
+</tr>
+<tr>
+<th>1</th>
+<td>PLANT01</td>
+<td>1447132025.7</td>
+<td>1.178240</td>
+</tr>
+<tr>
+<th>2</th>
+<td>PLANT01</td>
+<td>1447133054.7</td>
+<td>1.148729</td>
+</tr>
+<tr>
+<th>3</th>
+<td>PLANT01</td>
+<td>1447133164.7</td>
+<td>1.109522</td>
+</tr>
+<tr>
+<th>4</th>
+<td>PLANT01</td>
+<td>1447133209.7</td>
+<td>1.097520</td>
+</tr>
+<tr>
+<th>...</th>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+</tr>
+<tr>
+<th>175042</th>
+<td>PLANT19</td>
+<td>1447425025.7</td>
+<td>1.218510</td>
+</tr>
+<tr>
+<th>175043</th>
+<td>PLANT19</td>
+<td>1447425026.7</td>
+<td>1.245510</td>
+</tr>
+<tr>
+<th>175044</th>
+<td>PLANT19</td>
+<td>1447425027.7</td>
+<td>1.247534</td>
+</tr>
+<tr>
+<th>175045</th>
+<td>PLANT19</td>
+<td>1447425028.7</td>
+<td>1.222318</td>
+</tr>
+<tr>
+<th>175046</th>
+<td>PLANT19</td>
+<td>1447425230.7</td>
+<td>1.238708</td>
+</tr>
+</tbody>
+</table>
+<p>175047 rows × 3 columns</p>
+</div>
 </div>
 </div>
 </div>
 </div>
 </div>
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell">
-<div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=6a32963d">
+<div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=2d0f159c">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[26]:</div><div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[35]:</div><div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="CodeMirror cm-s-jupyter">
 <div class="zeroclipboard-container">
 <clipboard-copy ,="" aria-label="Copy to Clipboard" for="cell-18">
@@ -2662,9 +2782,31 @@ prob = cp.Problem(obj, constraints)</div>
 </div>
 </clipboard-copy>
 </div>
-<div class="highlight-ipynb hl-python"><pre><span></span><span class="n">prob</span><span class="o">.</span><span class="n">solve</span><span class="p">(</span><span class="n">verbose</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<div class="highlight-ipynb hl-python"><pre><span></span><span class="c1"># Cost vector corresponds to arc order (lanes row order).</span>
+<span class="n">c</span> <span class="o">=</span> <span class="n">lanes</span><span class="p">[</span><span class="s1">'unit_cost'</span><span class="p">]</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">(</span><span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span>
+
+<span class="n">supply</span> <span class="o">=</span> <span class="n">plants</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="s2">"plant_id"</span><span class="p">)</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">plant_ids</span><span class="p">,</span> <span class="s1">'supply_cap'</span><span class="p">]</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">(</span><span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span>
+<span class="n">demand</span> <span class="o">=</span> <span class="n">orders</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="s2">"order_id"</span><span class="p">)</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">order_ids</span><span class="p">,</span> <span class="s1">'demand'</span><span class="p">]</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">(</span><span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span>
+
+<span class="c1"># Ensure every order has at least one incoming lane</span>
+<span class="n">incoming_counts</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">bincount</span><span class="p">(</span><span class="n">arc_j</span><span class="p">,</span> <span class="n">minlength</span><span class="o">=</span><span class="n">nO</span><span class="p">)</span>
+<span class="n">missing_orders</span> <span class="o">=</span> <span class="n">order_ids</span><span class="p">[</span><span class="n">incoming_counts</span> <span class="o">==</span> <span class="mi">0</span><span class="p">]</span>
+<span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">missing_orders</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+    <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Orders with no incoming lanes: </span><span class="si">{</span><span class="n">missing_orders</span><span class="p">[:</span><span class="mi">10</span><span class="p">]</span><span class="si">}{</span><span class="s1">'...'</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="nb">len</span><span class="p">(</span><span class="n">missing_orders</span><span class="p">)</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">10</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="s1">''</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+<span class="n">incoming_counts</span>
 </pre></div>
-<div class="clipboard-copy-txt" id="cell-18">prob.solve(verbose=False)</div>
+<div class="clipboard-copy-txt" id="cell-18"># Cost vector corresponds to arc order (lanes row order).
+c = lanes['unit_cost'].to_numpy(dtype=float)
+
+supply = plants.set_index("plant_id").loc[plant_ids, 'supply_cap'].to_numpy(dtype=float)
+demand = orders.set_index("order_id").loc[order_ids, 'demand'].to_numpy(dtype=float)
+
+# Ensure every order has at least one incoming lane
+incoming_counts = np.bincount(arc_j, minlength=nO)
+missing_orders = order_ids[incoming_counts == 0]
+if len(missing_orders) &gt; 0:
+    raise ValueError(f"Orders with no incoming lanes: {missing_orders[:10]}{'...' if len(missing_orders) &gt; 10 else ''}")
+incoming_counts</div>
 </div>
 </div>
 </div>
@@ -2674,21 +2816,21 @@ prob = cp.Problem(obj, constraints)</div>
 </div>
 <div class="jp-OutputArea jp-Cell-outputArea">
 <div class="jp-OutputArea-child jp-OutputArea-executeResult">
-<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[26]:</div>
+<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[35]:</div>
 <div class="jp-RenderedText jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/plain" tabindex="0">
-<pre>inf</pre>
+<pre>array([19, 19, 19, ..., 19, 19, 19], dtype=int64)</pre>
 </div>
 </div>
 </div>
 </div>
 </div>
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell">
-<div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=26628287">
+<div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=72505a85">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[27]:</div><div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[36]:</div><div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="CodeMirror cm-s-jupyter">
 <div class="zeroclipboard-container">
 <clipboard-copy ,="" aria-label="Copy to Clipboard" for="cell-19">
@@ -2701,13 +2843,39 @@ prob = cp.Problem(obj, constraints)</div>
 </div>
 </clipboard-copy>
 </div>
-<div class="highlight-ipynb hl-python"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">"</span><span class="se">\n</span><span class="s2">The optimal value is"</span><span class="p">,</span> <span class="n">prob</span><span class="o">.</span><span class="n">value</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">"The optimal x is"</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">value</span><span class="p">)</span>
+<div class="highlight-ipynb hl-python"><pre><span></span><span class="c1"># ----------------------------</span>
+<span class="c1"># 4) Build sparse incidence matrices</span>
+<span class="c1"># ----------------------------</span>
+<span class="c1"># A_order[j, a] = 1 if arc a goes into order j</span>
+<span class="n">A_order</span> <span class="o">=</span> <span class="n">sparse</span><span class="o">.</span><span class="n">coo_matrix</span><span class="p">(</span>
+    <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="n">nA</span><span class="p">),</span> <span class="p">(</span><span class="n">arc_j</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">nA</span><span class="p">))),</span>
+    <span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="n">nO</span><span class="p">,</span> <span class="n">nA</span><span class="p">)</span>
+<span class="p">)</span><span class="o">.</span><span class="n">tocsr</span><span class="p">()</span>
+
+<span class="c1"># A_plant[i, a] = 1 if arc a goes out of plant i</span>
+<span class="n">A_plant</span> <span class="o">=</span> <span class="n">sparse</span><span class="o">.</span><span class="n">coo_matrix</span><span class="p">(</span>
+    <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="n">nA</span><span class="p">),</span> <span class="p">(</span><span class="n">arc_i</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">nA</span><span class="p">))),</span>
+    <span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="n">nP</span><span class="p">,</span> <span class="n">nA</span><span class="p">)</span>
+<span class="p">)</span><span class="o">.</span><span class="n">tocsr</span><span class="p">()</span>
+
+<span class="n">A_order</span>
 </pre></div>
-<div class="clipboard-copy-txt" id="cell-19">print("\nThe optimal value is", prob.value)
-print("The optimal x is")
-print(x.value)</div>
+<div class="clipboard-copy-txt" id="cell-19"># ----------------------------
+# 4) Build sparse incidence matrices
+# ----------------------------
+# A_order[j, a] = 1 if arc a goes into order j
+A_order = sparse.coo_matrix(
+    (np.ones(nA), (arc_j, np.arange(nA))),
+    shape=(nO, nA)
+).tocsr()
+
+# A_plant[i, a] = 1 if arc a goes out of plant i
+A_plant = sparse.coo_matrix(
+    (np.ones(nA), (arc_i, np.arange(nA))),
+    shape=(nP, nA)
+).tocsr()
+
+A_order</div>
 </div>
 </div>
 </div>
@@ -2716,13 +2884,183 @@ print(x.value)</div>
 <div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
 </div>
 <div class="jp-OutputArea jp-Cell-outputArea">
-<div class="jp-OutputArea-child">
-<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
-<pre>The optimal value is inf
-The optimal x is
-None
-</pre>
+<div class="jp-OutputArea-child jp-OutputArea-executeResult">
+<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[36]:</div>
+<div class="jp-RenderedText jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/plain" tabindex="0">
+<pre>&lt;Compressed Sparse Row sparse matrix of dtype 'float64'
+	with 175047 stored elements and shape (9213, 175047)&gt;</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=4cd653b3">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h2 id="cvxpy-solver">CVXPY Solver<a class="anchor-link" href="#cvxpy-solver">¶</a></h2>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
+<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=1f2d9c4f">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[37]:</div><div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="CodeMirror cm-s-jupyter">
+<div class="zeroclipboard-container">
+<clipboard-copy ,="" aria-label="Copy to Clipboard" for="cell-20">
+<div>
+<span class="notice" hidden="">Copied!</span>
+<svg aria-hidden="true" class="clipboard-copy-icon" data-view-component="true" height="20" version="1.1" viewBox="0 0 16 16" width="20">
+<path d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z" fill="currentColor" fill-rule="evenodd"></path>
+<path d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z" fill="currentColor" fill-rule="evenodd"></path>
+</svg>
+</div>
+</clipboard-copy>
+</div>
+<div class="highlight-ipynb hl-python"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="n">cp</span><span class="o">.</span><span class="n">Variable</span><span class="p">(</span><span class="n">nA</span><span class="p">,</span> <span class="n">nonneg</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="n">constraints</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="n">A_order</span> <span class="o">@</span> <span class="n">x</span> <span class="o">==</span> <span class="n">demand</span><span class="p">,</span>
+    <span class="n">A_plant</span> <span class="o">@</span> <span class="n">x</span> <span class="o">&lt;=</span> <span class="n">supply</span>
+<span class="p">]</span>
+
+<span class="n">objective</span> <span class="o">=</span> <span class="n">cp</span><span class="o">.</span><span class="n">Minimize</span><span class="p">(</span><span class="n">c</span> <span class="o">@</span> <span class="n">x</span><span class="p">)</span>
+<span class="n">prob</span> <span class="o">=</span> <span class="n">cp</span><span class="o">.</span><span class="n">Problem</span><span class="p">(</span><span class="n">objective</span><span class="p">,</span> <span class="n">constraints</span><span class="p">)</span>
+
+<span class="n">solver</span> <span class="o">=</span> <span class="s2">"HIGHS"</span>
+<span class="n">solver</span> <span class="o">=</span> <span class="n">solver</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span>
+<span class="n">installed</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">cp</span><span class="o">.</span><span class="n">installed_solvers</span><span class="p">())</span>
+<span class="k">if</span> <span class="n">solver</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">installed</span><span class="p">:</span>
+    <span class="c1"># fall back to something likely available</span>
+    <span class="n">fallback</span> <span class="o">=</span> <span class="s2">"HIGHS"</span> <span class="k">if</span> <span class="s2">"HIGHS"</span> <span class="ow">in</span> <span class="n">installed</span> <span class="k">else</span> <span class="p">(</span><span class="s2">"GLPK"</span> <span class="k">if</span> <span class="s2">"GLPK"</span> <span class="ow">in</span> <span class="n">installed</span> <span class="k">else</span> <span class="kc">None</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">fallback</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Requested solver </span><span class="si">{</span><span class="n">solver</span><span class="si">}</span><span class="s2"> not installed; installed=</span><span class="si">{</span><span class="nb">sorted</span><span class="p">(</span><span class="n">installed</span><span class="p">)</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+    <span class="n">solver</span> <span class="o">=</span> <span class="n">fallback</span>
+
+<span class="n">value</span> <span class="o">=</span> <span class="n">prob</span><span class="o">.</span><span class="n">solve</span><span class="p">(</span><span class="n">solver</span><span class="o">=</span><span class="n">solver</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+<span class="k">if</span> <span class="n">prob</span><span class="o">.</span><span class="n">status</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">(</span><span class="s2">"optimal"</span><span class="p">,</span> <span class="s2">"optimal_inaccurate"</span><span class="p">):</span>
+    <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Solve failed: status=</span><span class="si">{</span><span class="n">prob</span><span class="o">.</span><span class="n">status</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+
+<span class="c1"># ----------------------------</span>
+<span class="c1"># 6) Attach solution back to lanes and provide audit diagnostics</span>
+<span class="c1"># ----------------------------</span>
+<span class="n">lanes_sol</span> <span class="o">=</span> <span class="n">lanes</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+<span class="n">lanes_sol</span><span class="p">[</span><span class="s2">"x"</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">value</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="c1"># residuals (sanity checks)</span>
+<span class="n">order_resid</span> <span class="o">=</span> <span class="p">(</span><span class="n">A_order</span> <span class="o">@</span> <span class="n">lanes_sol</span><span class="p">[</span><span class="s2">"x"</span><span class="p">]</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">())</span> <span class="o">-</span> <span class="n">demand</span>
+<span class="n">plant_resid</span> <span class="o">=</span> <span class="p">(</span><span class="n">A_plant</span> <span class="o">@</span> <span class="n">lanes_sol</span><span class="p">[</span><span class="s2">"x"</span><span class="p">]</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">())</span> <span class="o">-</span> <span class="n">supply</span>  <span class="c1"># should be &lt;= 0</span>
+
+<span class="n">diagnostics</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">"status"</span><span class="p">:</span> <span class="n">prob</span><span class="o">.</span><span class="n">status</span><span class="p">,</span>
+    <span class="s2">"objective"</span><span class="p">:</span> <span class="nb">float</span><span class="p">(</span><span class="n">prob</span><span class="o">.</span><span class="n">value</span><span class="p">),</span>
+    <span class="s2">"max_abs_order_residual"</span><span class="p">:</span> <span class="nb">float</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">order_resid</span><span class="p">)))</span> <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">order_resid</span><span class="p">)</span> <span class="k">else</span> <span class="mf">0.0</span><span class="p">,</span>
+    <span class="s2">"max_plant_violation"</span><span class="p">:</span> <span class="nb">float</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">plant_resid</span><span class="p">))</span> <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">plant_resid</span><span class="p">)</span> <span class="k">else</span> <span class="mf">0.0</span><span class="p">,</span>
+    <span class="s2">"solver_used"</span><span class="p">:</span> <span class="n">solver</span><span class="p">,</span>
+    <span class="s2">"n_plants"</span><span class="p">:</span> <span class="n">nP</span><span class="p">,</span>
+    <span class="s2">"n_orders"</span><span class="p">:</span> <span class="n">nO</span><span class="p">,</span>
+    <span class="s2">"n_lanes"</span><span class="p">:</span> <span class="n">nA</span><span class="p">,</span>
+<span class="p">}</span>
+</pre></div>
+<div class="clipboard-copy-txt" id="cell-20">x = cp.Variable(nA, nonneg=True)
+
+constraints = [
+    A_order @ x == demand,
+    A_plant @ x &lt;= supply
+]
+
+objective = cp.Minimize(c @ x)
+prob = cp.Problem(objective, constraints)
+
+solver = "HIGHS"
+solver = solver.upper()
+installed = set(cp.installed_solvers())
+if solver not in installed:
+    # fall back to something likely available
+    fallback = "HIGHS" if "HIGHS" in installed else ("GLPK" if "GLPK" in installed else None)
+    if fallback is None:
+        raise RuntimeError(f"Requested solver {solver} not installed; installed={sorted(installed)}")
+    solver = fallback
+
+value = prob.solve(solver=solver, verbose=False)
+
+if prob.status not in ("optimal", "optimal_inaccurate"):
+    raise RuntimeError(f"Solve failed: status={prob.status}")
+
+# ----------------------------
+# 6) Attach solution back to lanes and provide audit diagnostics
+# ----------------------------
+lanes_sol = lanes.copy()
+lanes_sol["x"] = np.asarray(x.value).reshape(-1)
+
+# residuals (sanity checks)
+order_resid = (A_order @ lanes_sol["x"].to_numpy()) - demand
+plant_resid = (A_plant @ lanes_sol["x"].to_numpy()) - supply  # should be &lt;= 0
+
+diagnostics = {
+    "status": prob.status,
+    "objective": float(prob.value),
+    "max_abs_order_residual": float(np.max(np.abs(order_resid))) if len(order_resid) else 0.0,
+    "max_plant_violation": float(np.max(plant_resid)) if len(plant_resid) else 0.0,
+    "solver_used": solver,
+    "n_plants": nP,
+    "n_orders": nO,
+    "n_lanes": nA,
+}</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell">
+<div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=f550fe9f">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[38]:</div><div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="CodeMirror cm-s-jupyter">
+<div class="zeroclipboard-container">
+<clipboard-copy ,="" aria-label="Copy to Clipboard" for="cell-21">
+<div>
+<span class="notice" hidden="">Copied!</span>
+<svg aria-hidden="true" class="clipboard-copy-icon" data-view-component="true" height="20" version="1.1" viewBox="0 0 16 16" width="20">
+<path d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z" fill="currentColor" fill-rule="evenodd"></path>
+<path d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z" fill="currentColor" fill-rule="evenodd"></path>
+</svg>
+</div>
+</clipboard-copy>
+</div>
+<div class="highlight-ipynb hl-python"><pre><span></span><span class="n">diagnostics</span>
+</pre></div>
+<div class="clipboard-copy-txt" id="cell-21">diagnostics</div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell-outputWrapper">
+<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
+</div>
+<div class="jp-OutputArea jp-Cell-outputArea">
+<div class="jp-OutputArea-child jp-OutputArea-executeResult">
+<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[38]:</div>
+<div class="jp-RenderedText jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/plain" tabindex="0">
+<pre>{'status': 'optimal',
+ 'objective': 175804.12050170772,
+ 'max_abs_order_residual': 4.5279335836312384e-12,
+ 'max_plant_violation': 6.548361852765083e-11,
+ 'solver_used': 'GLPK',
+ 'n_plants': 19,
+ 'n_orders': 9213,
+ 'n_lanes': 175047}</pre>
 </div>
 </div>
 </div>
