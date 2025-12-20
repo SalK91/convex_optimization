@@ -97,15 +97,11 @@
          <lastmod>2025-12-20</lastmod>
     </url>
     <url>
-         <loc>https://salk91.github.io/convex_optimization/convex/tutorials/1_ls/</loc>
+         <loc>https://salk91.github.io/convex_optimization/convex/tutorials/1_lp_transport/</loc>
          <lastmod>2025-12-20</lastmod>
     </url>
     <url>
-         <loc>https://salk91.github.io/convex_optimization/convex/tutorials/2_lp_transport/</loc>
-         <lastmod>2025-12-20</lastmod>
-    </url>
-    <url>
-         <loc>https://salk91.github.io/convex_optimization/convex/tutorials/3_portfolio/</loc>
+         <loc>https://salk91.github.io/convex_optimization/convex/tutorials/2_portfolio/</loc>
          <lastmod>2025-12-20</lastmod>
     </url>
 </urlset>
