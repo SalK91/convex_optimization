@@ -13,7 +13,7 @@ Multi-objective optimization provides the mathematical framework for balancing s
 This chapter introduces these ideas and connects them to regularization, duality, and common ML formulations.
 
 
-## 10.1 Classical Optimality (One Objective)
+## Classical Optimality (One Objective)
 
 In standard convex optimization, we solve:
 
@@ -28,7 +28,7 @@ However, when multiple objectives $(f_1,\dots,f_k)$ must be minimized simultaneo
 
 
 
-## 10.2 Multi-Objective Convex Optimization
+## Multi-Objective Convex Optimization
 
 A multi-objective optimization problem takes the form
 
@@ -49,7 +49,7 @@ This framework appears in many ML and statistical tasks:
 Because objectives typically conflict, one cannot minimize all simultaneously. The natural notion of optimality becomes *Pareto efficiency*.
 
 
-## 10.3 Pareto Optimality
+## Pareto Optimality
 
 ### Strong Pareto Optimality
 
@@ -81,7 +81,7 @@ For two objectives $(f_1, f_2)$, the feasible set in objective space is a region
 The Pareto frontier explicitly exposes the structure of trade-offs in a problem.
 
 
-## 10.4 Scalarization: Turning Many Objectives into One
+## Scalarization: Turning Many Objectives into One
 
 Multi-objective problems rarely have a unique minimizer. Scalarization constructs a single-objective surrogate problem whose solutions lie on the Pareto frontier.
 
@@ -119,7 +119,7 @@ Scalarization has a tight relationship with duality (Chapter 9):
 This connection explains why tuning regularization is equivalent to choosing a point on a trade-off curve.
 
 
-## 10.5 Examples and Applications
+## Examples and Applications
 
 ### Example 1: Regularized Least Squares
 

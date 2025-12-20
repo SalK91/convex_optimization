@@ -3,7 +3,7 @@
 Convex optimization encompasses a wide range of problem classes.  Despite their diversity, many real-world models reduce to a few canonical forms — each with characteristic geometry, structure, and algorithms.
 
  
-## 17.1 Hierarchy of Canonical Problems
+## Hierarchy of Canonical Problems
 
 Convex programs form a nested hierarchy:
 
@@ -25,7 +25,7 @@ Separately, Geometric Programs (GPs) and Maximum Likelihood Estimators (MLEs) fo
 | MLE / GLM | $\min_x -\sum_i \log p(b_i|a_i^\top x)+\mathcal{R}(x)$ | Log-concave likelihood | Newton, L-BFGS, Prox / SGD | Logistic regression, Poisson GLMs |
 
  
-## 17.2 Linear Programming (LP)
+## Linear Programming (LP)
 
 Form
 
@@ -42,7 +42,7 @@ Algorithms:
 3. Decomposition: exploits block structure for large LPs.
 
  
-## 17.3 Quadratic Programming (QP)
+## Quadratic Programming (QP)
 
 Form
 
@@ -60,7 +60,7 @@ Algorithms:
 - First-order methods for massive $n$.
 
  
-## 17.4 Quadratically Constrained QP (QCQP)
+## Quadratically Constrained QP (QCQP)
 
 Form
 
@@ -75,7 +75,7 @@ Applications: Robust control, filter design, trust-region.
 Algorithms: Interior-point (convex case), SOCP / SDP reformulations.
 
  
-## 17.5 Second-Order Cone Programming (SOCP)
+## Second-Order Cone Programming (SOCP)
 
 Form
 
@@ -92,7 +92,7 @@ Algorithms: Conic interior-point; scalable ADMM variants.
 Special case: Any QP or norm constraint can be written as an SOCP.
 
  
-## 17.6 Semidefinite Programming (SDP)
+## Semidefinite Programming (SDP)
 
 Form
 
@@ -107,7 +107,7 @@ Applications: Control synthesis, combinatorial relaxations, covariance estimatio
 Algorithms: Interior-point for moderate $n$; low-rank proximal / Frank–Wolfe for large-scale.
 
  
-## 17.7 Geometric Programming (GP)
+## Geometric Programming (GP)
 
 Original form
 
@@ -123,7 +123,7 @@ Applications: Circuit sizing, communication power control, resource allocation.
 Solvers: Convert to convex form → interior-point or primal-dual methods.
 
  
-## 17.8 Likelihood-Based Convex Models (MLE and GLMs)
+## Likelihood-Based Convex Models (MLE and GLMs)
 
 General form
 
@@ -146,7 +146,7 @@ Algorithms
 - Proximal or SGD (large-scale).
 
  
-## 17.9 Solver Selection Summary
+## Solver Selection Summary
 
 | Problem Type | Convex Form | Key Solvers | ML Examples |
 |---------------|-------------|--------------|--------------|

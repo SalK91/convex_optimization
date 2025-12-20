@@ -6,7 +6,7 @@ This chapter introduces methods that exploit structure, sparsity, separability, 
 
  
 
-## 15.1 Motivation: Structure and Scale
+## Motivation: Structure and Scale
 In large-scale convex optimization, the challenge is not “does a solution exist?” but rather “can we compute it in time and memory?”.
 
 Bottlenecks include:
@@ -34,7 +34,7 @@ The methods in this chapter are designed to exploit this structure:
 - or distribute computation across multiple machines (consensus methods).
 
 
-## 15.2 Coordinate Descent
+## Coordinate Descent
 Coordinate descent updates one coordinate (or a small block of coordinates) at a time, holding all others fixed. It is especially effective when updates along a single coordinate are cheap to compute. Given $x^{(k)}$, choose coordinate $i_k$ and define
 
 $$
@@ -71,14 +71,14 @@ ML context:
 
 
 
-## 15.3 Stochastic Gradient and Variance-Reduced Methods
+## Stochastic Gradient and Variance-Reduced Methods
 When $N$ (number of samples) is huge, computing the full gradient
 $$
 \nabla f(x) = \frac{1}{N}\sum_{i=1}^N \nabla f_i(x)
 $$
 every iteration is too expensive. Stochastic methods replace this full gradient with cheap, unbiased *estimates* based on small random subsets (mini-batches) of data.
 
-### 15.3.1 Stochastic Gradient Descent (SGD)
+### Stochastic Gradient Descent (SGD)
 
 At iteration $k$:
 
@@ -104,7 +104,7 @@ Properties:
 
 In convex settings, SGD trades off per-iteration cost against convergence speed: many cheap noisy steps instead of fewer expensive precise ones.
 
-### 15.3.2 Step Sizes and Averaging
+### Step Sizes and Averaging
 
 The step size $\eta_k$ is crucial:
 
@@ -127,7 +127,7 @@ Two important stabilization techniques:
 
 Mini-batch size can also grow with $k$, gradually reducing variance while keeping early iterations cheap.
 
-### 15.3.3 Convergence Rates
+### Convergence Rates
 
 For convex $f$:
 
@@ -141,7 +141,7 @@ For strongly convex $f$:
 
 These rates are optimal for unbiased first-order stochastic methods.
 
-### 15.3.4 Variance-Reduced Methods (SVRG, SAGA, SARAH)
+### Variance-Reduced Methods (SVRG, SAGA, SARAH)
 
 Plain SGD cannot easily reach very high accuracy because the gradient noise never fully disappears. Variance-reduced methods reduce this noise, especially near the solution, by periodically using the full gradient.
 
@@ -158,7 +158,7 @@ Example: SVRG (Stochastic Variance-Reduced Gradient)
 
 Here $v_k$ is still an unbiased estimator of $\nabla f(x_k)$, but its variance decays as $x_k$ approaches $\tilde{x}$. For strongly convex $f$, methods like SVRG and SAGA achieve linear convergence, comparable to full gradient descent but at near-SGD cost.
 
-### 15.3.5 Momentum and Adaptive Methods
+### Momentum and Adaptive Methods
 
 In practice, large-scale learning often uses SGD with various modifications:
 
@@ -174,7 +174,7 @@ In practice, large-scale learning often uses SGD with various modifications:
 
 These methods are especially popular in deep learning. For convex problems, their theoretical behavior is subtle, but empirically they often converge faster in wall-clock time.
 
-## 15.4 Proximal and Composite Optimization
+## Proximal and Composite Optimization
 Many large-scale convex problems are composite:
 $$
 \min_x \; F(x) := g(x) + R(x),
@@ -215,7 +215,7 @@ For large-scale problems:
 
 
 
-## 15.5 Alternating Direction Method of Multipliers (ADMM)
+## Alternating Direction Method of Multipliers (ADMM)
 When objectives naturally split into simpler pieces depending on different variables, ADMM is a powerful tool. It is especially useful when:
 
 - $f$ and $g$ have simple prox operators,
@@ -262,7 +262,7 @@ ML use cases:
 - consensus optimization (each worker has local data but shares a global model),
 - some federated learning formulations.
 
-## 15.6 Majorization–Minimization (MM) and EM Algorithms
+## Majorization–Minimization (MM) and EM Algorithms
 The Majorization–Minimization (MM) principle constructs at each iterate $x_k$ a surrogate function $g(\cdot \mid x_k)$ that upper-bounds $f$ and is easier to minimize.
 
 Requirements:
@@ -291,15 +291,15 @@ Other examples:
 - mixture models and variational inference.
 
  
-## 15.7 Distributed and Parallel Optimization
+## Distributed and Parallel Optimization
 When data or variables are split across machines, we need distributed or parallel optimization schemes.
 
-### 15.7.1 Synchronous vs Asynchronous
+### Synchronous vs Asynchronous
 
 - Synchronous methods: all workers compute local gradients or updates, then synchronize (e.g. parameter server, federated averaging).
 - Asynchronous methods: workers update parameters without global synchronization, improving hardware utilization but introducing staleness and variance.
 
-### 15.7.2 Consensus Optimization
+### Consensus Optimization
 
 A standard pattern is consensus form:
 $$
@@ -317,7 +317,7 @@ ADMM applied to this problem:
 
 This template underlies many federated learning and parameter-server architectures.
 
-### 15.7.3 ML Context
+### ML Context
 
 - Federated learning (phone/edge devices update local models and send summaries to a server),
 - Large-scale convex optimization over sharded datasets,
@@ -327,7 +327,7 @@ This template underlies many federated learning and parameter-server architectur
  
 
  
-## 15.8 Handling Structure: Sparsity and Low Rank
+## Handling Structure: Sparsity and Low Rank
 Large-scale convex problems often have additional structure that we can exploit algorithmically:
 
 | Structure          | Typical Regularizer / Constraint     | Algorithmic Benefit                               |
@@ -347,7 +347,7 @@ Examples:
 Exploiting structure can yield orders-of-magnitude speedups compared to generic solvers.
 
 
-## 15.9 Summary and Practical Guidance
+## Summary and Practical Guidance
 Different large-scale methods are appropriate in different regimes:
 
 | Method                     | Gradient Access      | Scalability | Parallelization          | Convexity Needed | Typical Uses                          |

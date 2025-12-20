@@ -785,45 +785,45 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#81-unconstrained-convex-minimization" class="md-nav__link">
+  <a href="#unconstrained-convex-minimization" class="md-nav__link">
     <span class="md-ellipsis">
-      8.1 Unconstrained Convex Minimization
+      Unconstrained Convex Minimization
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#82-equality-constrained-problems-and-lagrange-multipliers" class="md-nav__link">
+  <a href="#equality-constrained-problems-and-lagrange-multipliers" class="md-nav__link">
     <span class="md-ellipsis">
-      8.2 Equality-Constrained Problems and Lagrange Multipliers
+      Equality-Constrained Problems and Lagrange Multipliers
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#83-inequality-constraints-and-the-kkt-conditions" class="md-nav__link">
+  <a href="#inequality-constraints-and-the-kkt-conditions" class="md-nav__link">
     <span class="md-ellipsis">
-      8.3 Inequality Constraints and the KKT Conditions
+      Inequality Constraints and the KKT Conditions
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#84-slaters-condition-guaranteeing-strong-duality" class="md-nav__link">
+  <a href="#slaters-condition-guaranteeing-strong-duality" class="md-nav__link">
     <span class="md-ellipsis">
-      8.4 Slater’s Condition — Guaranteeing Strong Duality
+      Slater’s Condition — Guaranteeing Strong Duality
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#85-geometric-and-physical-interpretation" class="md-nav__link">
+  <a href="#geometric-and-physical-interpretation" class="md-nav__link">
     <span class="md-ellipsis">
-      8.5 Geometric and Physical Interpretation
+      Geometric and Physical Interpretation
     </span>
   </a>
   
@@ -2609,45 +2609,45 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#81-unconstrained-convex-minimization" class="md-nav__link">
+  <a href="#unconstrained-convex-minimization" class="md-nav__link">
     <span class="md-ellipsis">
-      8.1 Unconstrained Convex Minimization
+      Unconstrained Convex Minimization
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#82-equality-constrained-problems-and-lagrange-multipliers" class="md-nav__link">
+  <a href="#equality-constrained-problems-and-lagrange-multipliers" class="md-nav__link">
     <span class="md-ellipsis">
-      8.2 Equality-Constrained Problems and Lagrange Multipliers
+      Equality-Constrained Problems and Lagrange Multipliers
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#83-inequality-constraints-and-the-kkt-conditions" class="md-nav__link">
+  <a href="#inequality-constraints-and-the-kkt-conditions" class="md-nav__link">
     <span class="md-ellipsis">
-      8.3 Inequality Constraints and the KKT Conditions
+      Inequality Constraints and the KKT Conditions
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#84-slaters-condition-guaranteeing-strong-duality" class="md-nav__link">
+  <a href="#slaters-condition-guaranteeing-strong-duality" class="md-nav__link">
     <span class="md-ellipsis">
-      8.4 Slater’s Condition — Guaranteeing Strong Duality
+      Slater’s Condition — Guaranteeing Strong Duality
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#85-geometric-and-physical-interpretation" class="md-nav__link">
+  <a href="#geometric-and-physical-interpretation" class="md-nav__link">
     <span class="md-ellipsis">
-      8.5 Geometric and Physical Interpretation
+      Geometric and Physical Interpretation
     </span>
   </a>
   
@@ -2694,7 +2694,7 @@
 </ul>
 <p>This chapter unifies these ideas. We begin with unconstrained minimization and then incorporate equality and inequality constraints. The resulting system of conditions—the Karush–Kuhn–Tucker (KKT) conditions—is the central optimality framework for constrained convex optimization.</p>
 <p>In constrained problems, the gradient of the objective cannot vanish freely. Instead, it must be balanced by “forces’’ coming from the constraints. Lagrange multipliers measure these forces, and the KKT conditions express this balance algebraically and geometrically.</p>
-<h2 id="81-unconstrained-convex-minimization">8.1 Unconstrained Convex Minimization<a class="headerlink" href="#81-unconstrained-convex-minimization" title="Permanent link">¶</a></h2>
+<h2 id="unconstrained-convex-minimization">Unconstrained Convex Minimization<a class="headerlink" href="#unconstrained-convex-minimization" title="Permanent link">¶</a></h2>
 <p>Consider the problem
 <script type="math/tex; mode=display">
 \min_x f(x),
@@ -2712,7 +2712,7 @@ with step size <span class="arithmatex">\(\alpha_k &gt; 0\)</span>.</p>
 <li>If <span class="arithmatex">\(f\)</span> is <em>strongly convex</em>, the minimizer is unique and convergence is faster (linear rate with an appropriate step size).</li>
 </ul>
 <p>In machine learning, this is the foundation of back-propagation and weight training: each update follows the negative gradient of the loss.</p>
-<h2 id="82-equality-constrained-problems-and-lagrange-multipliers">8.2 Equality-Constrained Problems and Lagrange Multipliers<a class="headerlink" href="#82-equality-constrained-problems-and-lagrange-multipliers" title="Permanent link">¶</a></h2>
+<h2 id="equality-constrained-problems-and-lagrange-multipliers">Equality-Constrained Problems and Lagrange Multipliers<a class="headerlink" href="#equality-constrained-problems-and-lagrange-multipliers" title="Permanent link">¶</a></h2>
 <p>Now consider minimizing <span class="arithmatex">\(f\)</span> subject to equality constraints:
 <script type="math/tex; mode=display">
 \begin{array}{ll}
@@ -2750,7 +2750,7 @@ where <span class="arithmatex">\(\lambda = (\lambda_1,\dots,\lambda_p)\)</span> 
 <li>The multipliers <span class="arithmatex">\(\lambda_j^*\)</span> weight the constraint normals to exactly cancel the objective’s gradient.</li>
 </ul>
 <p>In other words, the objective tries to decrease, the constraints push back, and at the optimum these forces balance.</p>
-<h2 id="83-inequality-constraints-and-the-kkt-conditions">8.3 Inequality Constraints and the KKT Conditions<a class="headerlink" href="#83-inequality-constraints-and-the-kkt-conditions" title="Permanent link">¶</a></h2>
+<h2 id="inequality-constraints-and-the-kkt-conditions">Inequality Constraints and the KKT Conditions<a class="headerlink" href="#inequality-constraints-and-the-kkt-conditions" title="Permanent link">¶</a></h2>
 <p>Now consider the general convex problem:
 <script type="math/tex; mode=display">
 \begin{array}{ll}
@@ -2776,24 +2776,24 @@ with:</p>
 <script type="math/tex"> \mu_i \ge 0 </script> (inequality multipliers).</li>
 </ul>
 <p>A point <span class="arithmatex">\(x^*\)</span> with multipliers <span class="arithmatex">\((\lambda^*,\mu^*)\)</span> satisfies the KKT conditions:</p>
-<h3 id="1-primal-feasibility">1. Primal feasibility<a class="headerlink" href="#1-primal-feasibility" title="Permanent link">¶</a></h3>
+<h3 id="primal-feasibility">Primal feasibility<a class="headerlink" href="#primal-feasibility" title="Permanent link">¶</a></h3>
 <div class="arithmatex">\[
 g_i(x^*) \le 0,\quad \forall i,
 \qquad
 h_j(x^*) = 0,\quad \forall j.
 \]</div>
-<h3 id="2-dual-feasibility">2. Dual feasibility<a class="headerlink" href="#2-dual-feasibility" title="Permanent link">¶</a></h3>
+<h3 id="dual-feasibility">Dual feasibility<a class="headerlink" href="#dual-feasibility" title="Permanent link">¶</a></h3>
 <div class="arithmatex">\[
 \mu_i^* \ge 0,\quad \forall i.
 \]</div>
-<h3 id="3-stationarity">3. Stationarity<a class="headerlink" href="#3-stationarity" title="Permanent link">¶</a></h3>
+<h3 id="stationarity">Stationarity<a class="headerlink" href="#stationarity" title="Permanent link">¶</a></h3>
 <div class="arithmatex">\[
 \nabla f(x^*) 
 + \sum_{j=1}^p \lambda_j^* \nabla h_j(x^*)
 + \sum_{i=1}^m \mu_i^* \nabla g_i(x^*)
 = 0.
 \]</div>
-<h3 id="4-complementary-slackness">4. Complementary slackness<a class="headerlink" href="#4-complementary-slackness" title="Permanent link">¶</a></h3>
+<h3 id="complementary-slackness">Complementary slackness<a class="headerlink" href="#complementary-slackness" title="Permanent link">¶</a></h3>
 <div class="arithmatex">\[
 \mu_i^*\, g_i(x^*) = 0, \quad i=1,\dots,m.
 \]</div>
@@ -2803,7 +2803,7 @@ h_j(x^*) = 0,\quad \forall j.
 <li>If a constraint is active at the boundary, it may exert a force: <span class="arithmatex">\(\mu_i^* &gt; 0\)</span>, and then <span class="arithmatex">\(g_i(x^*) = 0\)</span>.</li>
 </ul>
 <p>Only active constraints can push back against the objective.</p>
-<h2 id="84-slaters-condition-guaranteeing-strong-duality">8.4 Slater’s Condition — Guaranteeing Strong Duality<a class="headerlink" href="#84-slaters-condition-guaranteeing-strong-duality" title="Permanent link">¶</a></h2>
+<h2 id="slaters-condition-guaranteeing-strong-duality">Slater’s Condition — Guaranteeing Strong Duality<a class="headerlink" href="#slaters-condition-guaranteeing-strong-duality" title="Permanent link">¶</a></h2>
 <p>The KKT conditions always provide <em>necessary</em> conditions for optimality. For them to also be <em>sufficient</em> (and to guarantee zero duality gap), the problem must satisfy a regularity condition.</p>
 <p>For convex problems with convex <span class="arithmatex">\(g_i\)</span> and affine <span class="arithmatex">\(h_j\)</span>, Slater’s condition holds if there exists a strictly feasible point:
 <script type="math/tex; mode=display">
@@ -2846,8 +2846,7 @@ p^* - d^* \ge 0.
 <li>Slater’s condition ensures the gap is zero.</li>
 </ul>
 <p>This link between geometry (interior feasibility) and algebra (zero gap) is fundamental.</p>
-<hr>
-<h2 id="85-geometric-and-physical-interpretation">8.5 Geometric and Physical Interpretation<a class="headerlink" href="#85-geometric-and-physical-interpretation" title="Permanent link">¶</a></h2>
+<h2 id="geometric-and-physical-interpretation">Geometric and Physical Interpretation<a class="headerlink" href="#geometric-and-physical-interpretation" title="Permanent link">¶</a></h2>
 <p>The KKT conditions describe an equilibrium of forces:</p>
 <ul>
 <li>The objective gradient pushes the point in the direction of steepest decrease.</li>

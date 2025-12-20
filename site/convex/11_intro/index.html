@@ -624,54 +624,36 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#11-motivation-optimization-in-machine-learning" class="md-nav__link">
+  <a href="#motivation-optimization-in-machine-learning" class="md-nav__link">
     <span class="md-ellipsis">
-      1.1 Motivation: Optimization in Machine Learning
+      Motivation: Optimization in Machine Learning
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#12-convex-sets-and-convex-functions-first-intuition" class="md-nav__link">
+  <a href="#why-convex-optimization-remains-central-in-ml" class="md-nav__link">
     <span class="md-ellipsis">
-      1.2 Convex Sets and Convex Functions — First Intuition
+      Why Convex Optimization Remains Central in ML
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#13-why-convex-optimization-remains-central-in-ml" class="md-nav__link">
+  <a href="#web-book-roadmap-and-how-to-use-it" class="md-nav__link">
     <span class="md-ellipsis">
-      1.3 Why Convex Optimization Remains Central in ML
+      Web-Book Roadmap and How to Use It
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#14-from-global-optima-to-algorithms" class="md-nav__link">
+  <a href="#acknowledgments" class="md-nav__link">
     <span class="md-ellipsis">
-      1.4 From Global Optima to Algorithms
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#15-canonical-convex-ml-problems-at-a-glance" class="md-nav__link">
-    <span class="md-ellipsis">
-      1.5 Canonical Convex ML Problems at a Glance
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#16-web-book-roadmap-and-how-to-use-it" class="md-nav__link">
-    <span class="md-ellipsis">
-      1.6 Web-Book Roadmap and How to Use It
+      Acknowledgments
     </span>
   </a>
   
@@ -2618,54 +2600,36 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#11-motivation-optimization-in-machine-learning" class="md-nav__link">
+  <a href="#motivation-optimization-in-machine-learning" class="md-nav__link">
     <span class="md-ellipsis">
-      1.1 Motivation: Optimization in Machine Learning
+      Motivation: Optimization in Machine Learning
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#12-convex-sets-and-convex-functions-first-intuition" class="md-nav__link">
+  <a href="#why-convex-optimization-remains-central-in-ml" class="md-nav__link">
     <span class="md-ellipsis">
-      1.2 Convex Sets and Convex Functions — First Intuition
+      Why Convex Optimization Remains Central in ML
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#13-why-convex-optimization-remains-central-in-ml" class="md-nav__link">
+  <a href="#web-book-roadmap-and-how-to-use-it" class="md-nav__link">
     <span class="md-ellipsis">
-      1.3 Why Convex Optimization Remains Central in ML
+      Web-Book Roadmap and How to Use It
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#14-from-global-optima-to-algorithms" class="md-nav__link">
+  <a href="#acknowledgments" class="md-nav__link">
     <span class="md-ellipsis">
-      1.4 From Global Optima to Algorithms
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#15-canonical-convex-ml-problems-at-a-glance" class="md-nav__link">
-    <span class="md-ellipsis">
-      1.5 Canonical Convex ML Problems at a Glance
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#16-web-book-roadmap-and-how-to-use-it" class="md-nav__link">
-    <span class="md-ellipsis">
-      1.6 Web-Book Roadmap and How to Use It
+      Acknowledgments
     </span>
   </a>
   
@@ -2711,8 +2675,7 @@
 <li>Solutions are easy to verify: convex problems come with simple mathematical conditions that tell us when we have reached the optimum.</li>
 </ol>
 <p>These features make convex optimization a reliable tool for building and analyzing machine-learning models. Even though many modern models are nonconvex, a surprising amount of ML still depends on convex ideas. Common loss functions, regularizers, and inner algorithmic steps often rely on convex structure.</p>
-<p>This web-book is written for practitioners who have basic familiarity with optimization, especially gradient-based methods, and want to understand how convex optimization principles help guide reliable machine-learning practice.</p>
-<h2 id="11-motivation-optimization-in-machine-learning">1.1 Motivation: Optimization in Machine Learning<a class="headerlink" href="#11-motivation-optimization-in-machine-learning" title="Permanent link">¶</a></h2>
+<h2 id="motivation-optimization-in-machine-learning">Motivation: Optimization in Machine Learning<a class="headerlink" href="#motivation-optimization-in-machine-learning" title="Permanent link">¶</a></h2>
 <p>Many supervised learning problems can be written in a common form:</p>
 <div class="arithmatex">\[
 \min_{x \in \mathcal{X}} 
@@ -2726,21 +2689,8 @@
 <li><span class="arithmatex">\(\mathcal{X}\)</span> is a set of allowed parameter values, often simple and convex.</li>
 </ul>
 <p>Many widely used losses and regularizers are convex. Examples include least squares, logistic loss, hinge loss, Huber loss, the <span class="arithmatex">\(\ell_1\)</span> norm, and the <span class="arithmatex">\(\ell_2\)</span> norm. Convexity is what makes these problems tractable and allows them to be solved efficiently at scale using well-behaved optimization algorithms.</p>
-<h2 id="12-convex-sets-and-convex-functions-first-intuition">1.2 Convex Sets and Convex Functions — First Intuition<a class="headerlink" href="#12-convex-sets-and-convex-functions-first-intuition" title="Permanent link">¶</a></h2>
-<p>A set <span class="arithmatex">\(\mathcal{C}\)</span> is convex if, whenever you pick two points in the set, the line segment between them stays entirely inside the set:</p>
-<div class="arithmatex">\[
-\theta x + (1-\theta)y \in \mathcal{C} 
-\quad \text{for all } x,y \in \mathcal{C},\; \theta \in [0,1].
-\]</div>
-<p>Convex functions follow a similar idea. A function <span class="arithmatex">\(f\)</span> is convex if its graph never dips below the straight line connecting two points on the function:</p>
-<div class="arithmatex">\[
-f(\theta x + (1-\theta)y)
-\le
-\theta f(x) + (1-\theta) f(y).
-\]</div>
-<p>Intuitively, convex functions look like bowls: they curve upward and have at most one global minimum. Affine functions are both convex and concave, and quadratics with positive semidefinite Hessians are convex. Many ML loss functions share this shape, which makes them easy to optimize.</p>
-<h2 id="13-why-convex-optimization-remains-central-in-ml">1.3 Why Convex Optimization Remains Central in ML<a class="headerlink" href="#13-why-convex-optimization-remains-central-in-ml" title="Permanent link">¶</a></h2>
-<p>Although many modern models are nonconvex, convex optimization continues to play a major role in three ways:</p>
+<h2 id="why-convex-optimization-remains-central-in-ml">Why Convex Optimization Remains Central in ML<a class="headerlink" href="#why-convex-optimization-remains-central-in-ml" title="Permanent link">¶</a></h2>
+<p>Although many modern models are nonconvex, convex optimization continues to play a major role:</p>
 <ol>
 <li>
 <p>Convex surrogate losses: Losses such as logistic, hinge, and Huber are convex substitutes for harder objectives like the <span class="arithmatex">\(0\text{–}1\)</span> loss. They make optimization practical while still leading to models that generalize well.</p>
@@ -2748,103 +2698,80 @@ f(\theta x + (1-\theta)y)
 <li>
 <p>Convex subproblems inside larger algorithms:  Many nonconvex methods solve convex problems as part of their inner loop. Examples include least-squares steps in matrix factorization, proximal updates in regularized learning, and simple convex problems that appear in line-search procedures.</p>
 </li>
-<li>
-<p>Implicit bias in linear models:  In overparameterized linear least-squares problems, gradient descent starting from zero converges to the minimum-norm solution. This phenomenon helps explain generalization and implicit regularization in linear and kernel models.</p>
-</li>
 </ol>
 <p>These roles make convex optimization a key component of modern ML toolkits, even when the main model is nonconvex.</p>
-<h2 id="14-from-global-optima-to-algorithms">1.4 From Global Optima to Algorithms<a class="headerlink" href="#14-from-global-optima-to-algorithms" title="Permanent link">¶</a></h2>
-<p>A major advantage of convex optimization is that it eliminates the possibility of non-global local minima. For a differentiable convex function on an open domain:</p>
-<div class="arithmatex">\[
-\nabla f(x^*) = 0 
-\quad \Rightarrow \quad
-x^* \text{ is a global minimizer}.
-\]</div>
-<p>This means that simply finding a point where the gradient is zero is enough. For constrained or nondifferentiable problems, optimality is checked using subgradients or KKT conditions:</p>
-<div class="arithmatex">\[
-0 \in \partial f(x^*) + N_{\mathcal{X}}(x^*),
-\]</div>
-<p>where <span class="arithmatex">\(N_{\mathcal{X}}(x^*)\)</span> represents the outward directions that are blocked by the constraint set. These conditions are useful because many iterative algorithms aim to drive the gradient or subgradient toward zero.</p>
-<h2 id="15-canonical-convex-ml-problems-at-a-glance">1.5 Canonical Convex ML Problems at a Glance<a class="headerlink" href="#15-canonical-convex-ml-problems-at-a-glance" title="Permanent link">¶</a></h2>
-<table>
-<thead>
-<tr>
-<th>Problem</th>
-<th>Objective</th>
-<th>Typical Solver</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Least squares</td>
-<td><span class="arithmatex">\(\|A x - b\|_2^2\)</span></td>
-<td>Gradient descent, conjugate gradient</td>
-</tr>
-<tr>
-<td>Ridge regression</td>
-<td><span class="arithmatex">\(\|A x - b\|_2^2 + \lambda\|x\|_2^2\)</span></td>
-<td>Closed form, gradient methods</td>
-</tr>
-<tr>
-<td>LASSO</td>
-<td><span class="arithmatex">\(\|A x - b\|_2^2 + \lambda\|x\|_1\)</span></td>
-<td>Proximal gradient (ISTA/FISTA)</td>
-</tr>
-<tr>
-<td>Logistic regression</td>
-<td><span class="arithmatex">\(\sum_i \log(1+\exp(-y_i a_i^\top x)) + \lambda\|x\|_2^2\)</span></td>
-<td>Newton, quasi-Newton, SGD</td>
-</tr>
-<tr>
-<td>SVM (hinge loss)</td>
-<td><span class="arithmatex">\(\tfrac{1}{2}\|x\|^2 + C\sum_i \max(0,1-y_i a_i^\top x)\)</span></td>
-<td>Subgradient, coordinate methods, SMO</td>
-</tr>
-<tr>
-<td>Robust regression</td>
-<td><span class="arithmatex">\(\|A x - b\|_1\)</span></td>
-<td>Linear programming</td>
-</tr>
-<tr>
-<td>Elastic Net</td>
-<td><span class="arithmatex">\(\|A x-b\|_2^2 + \lambda_1\|x\|_1 + \lambda_2\|x\|_2^2\)</span></td>
-<td>Coordinate descent</td>
-</tr>
-</tbody>
-</table>
-<p>These problems illustrate how convex models appear throughout ML.</p>
-<h2 id="16-web-book-roadmap-and-how-to-use-it">1.6 Web-Book Roadmap and How to Use It<a class="headerlink" href="#16-web-book-roadmap-and-how-to-use-it" title="Permanent link">¶</a></h2>
-<table>
-<thead>
-<tr>
-<th>Question</th>
-<th>Where to Look</th>
-<th>Key Idea</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>What makes a function or set convex?</td>
-<td>Chapters 2–5</td>
-<td>Geometry and basic properties of convexity</td>
-</tr>
-<tr>
-<td>How do gradients, subgradients, and KKT conditions define optimality?</td>
-<td>Chapters 6–9</td>
-<td>Optimality conditions and duality</td>
-</tr>
-<tr>
-<td>How are convex problems solved in practice?</td>
-<td>Chapters 10–14</td>
-<td>First-order, second-order, and interior-point methods</td>
-</tr>
-<tr>
-<td>How to choose an algorithm for a given optimization problem?</td>
-<td>Chapters 15–17</td>
-<td>Large-scale and structured optimization techniques</td>
-</tr>
-</tbody>
-</table>
+<h2 id="web-book-roadmap-and-how-to-use-it">Web-Book Roadmap and How to Use It<a class="headerlink" href="#web-book-roadmap-and-how-to-use-it" title="Permanent link">¶</a></h2>
+<ul>
+<li>
+<p>Chapter 2: Linear Algebra Foundations. Basic vector/matrix operations and linear algebra needed for optimization.</p>
+</li>
+<li>
+<p>Chapter 3: Multivariable Calculus. Differentiation and derivatives of functions of many variables (gradients, Hessians).</p>
+</li>
+<li>
+<p>Chapter 4: Convex Sets and Geometry. Definitions and examples of convex sets, cones, affine spaces, and geometric properties.</p>
+</li>
+<li>
+<p>Chapter 5: Convex Functions. Convexity for functions, epigraphs, and key examples (norms, quadratic functions, log-sum-exp, etc.).</p>
+</li>
+<li>
+<p>Chapter 6: Nonsmooth Optimization – Subgradients. Generalized derivatives for convex functions that are not differentiable, and subgradient methods.</p>
+</li>
+<li>
+<p>Chapter 7: First-Order Optimality Conditions. Gradient-based optimality for smooth problems, supporting theory for necessary and sufficient conditions.</p>
+</li>
+<li>
+<p>Chapter 8: Optimization Principles – From Gradient Descent to KKT. Unconstrained and constrained gradient methods, culminating in the Karush–Kuhn–Tucker (KKT) conditions.</p>
+</li>
+<li>
+<p>Chapter 9: Lagrange Duality Theory. Duality principles, weak/strong duality, and interpretations of Lagrange multipliers.</p>
+</li>
+<li>
+<p>Chapter 10: Pareto Optimality and Multi-Objective Optimization. Trade-offs in optimizing multiple goals and Pareto efficiency.</p>
+</li>
+<li>
+<p>Chapter 11: Regularized Approximation. Balancing fit vs. complexity with regularization (ℓ₁, ℓ₂, elastic net, etc.).</p>
+</li>
+<li>
+<p>Chapter 12: Algorithms for Convex Optimization. General convex optimization solvers and algorithmic frameworks (interior-point, gradient methods, etc.).</p>
+</li>
+<li>
+<p>Chapter 13: Equality-Constrained Problems. Specialized methods (e.g. KKT with only equalities, reduced-space methods).</p>
+</li>
+<li>
+<p>Chapter 14: Inequality-Constrained Problems. Algorithms handling general inequality constraints, barrier methods.</p>
+</li>
+<li>
+<p>Chapter 15: Advanced Large-Scale and Structured Methods. Techniques for very large or structured problems (decomposition, coordinate descent, etc.).</p>
+</li>
+<li>
+<p>Chapter 16: Modeling Patterns and Algorithm Selection. Practical guidance on modeling choices and selecting the right algorithm in practice.</p>
+</li>
+<li>
+<p>Chapter 17: Canonical Problems in Convex Optimization. Well-known problem templates (linear, quadratic, SOCP, SDP) and how to recognize them.</p>
+</li>
+<li>
+<p>Chapter 18: Modern Optimizers in Machine Learning Frameworks. How convex optimization appears in ML libraries and frameworks.</p>
+</li>
+<li>
+<p>Chapter 19: Beyond Convexity – Nonconvex and Global Optimization. Overview of nonconvex problems and global methods (to contrast with convex theory).</p>
+</li>
+<li>
+<p>Chapter 20: Derivative-Free and Black-Box Optimization. Techniques when gradients are not available.</p>
+</li>
+<li>
+<p>Chapter 21: Metaheuristic and Evolutionary Optimization. Heuristic algorithms (genetic algorithms, simulated annealing) for hard problems.</p>
+</li>
+<li>
+<p>Chapter 22: Advanced Topics in Combinatorial Optimization. Combinatorial optimization problems and convex relaxations.</p>
+</li>
+<li>
+<p>Chapter 23: The Future of Optimization – Learning, Adaptation, Intelligence. Emerging trends (e.g. data-driven optimization, connections to machine learning).</p>
+</li>
+</ul>
+<p>This roadmap helps the reader see how the material progresses from foundations (Ch.2–5) to theory (Ch.6–11) to algorithms (Ch.12–15) and on to specialized and modern topics (Ch.16–23).</p>
+<h2 id="acknowledgments">Acknowledgments<a class="headerlink" href="#acknowledgments" title="Permanent link">¶</a></h2>
+<p>The content and structure of this web book are strongly informed by the Stanford University course EE364A: Convex Optimization I, taught by Stephen Boyd. In particular, the presentation draws inspiration from the 2023 lecture notes and course materials, which are widely regarded as a foundational reference in modern convex optimization.</p>
 
 
 

@@ -10,7 +10,7 @@ where $f : \mathbb{R}^n \to \mathbb{R}$ is (typically convex and differentiable)
 
 
  
-## 13.1 Geometric View — Optimization on an Affine Manifold
+## Geometric View — Optimization on an Affine Manifold
 
 The constraint $A x = b$ defines an affine set
 
@@ -47,7 +47,7 @@ This is the basic geometric optimality condition: at the optimum, the gradient o
 
 
 
-## 13.2 Lagrange Function and KKT System
+## Lagrange Function and KKT System
 
 The Lagrangian for the equality-constrained problem is
 
@@ -89,7 +89,7 @@ $$
 This linear system is called the (equality-constrained) KKT system. At the optimum the right-hand side is zero.
 
 
-## 13.3 Quadratic Objectives
+## Quadratic Objectives
 
 A particularly important case is a convex quadratic objective
 
@@ -132,7 +132,7 @@ Examples in ML and statistics:
 The structure of the KKT matrix (symmetric, indefinite, with blocks $P$, $A$) can be exploited by specialized linear solvers and factorizations.
 
  
-## 13.4 Null-Space (Reduced Variable) Method
+## Null-Space (Reduced Variable) Method
 
 When the constraints are linear and of full row rank, a natural approach is to eliminate them explicitly.
 
@@ -177,9 +177,8 @@ Null-space methods are attractive when:
 - a good factorization of $A$ is available,  
 - and we want an unconstrained algorithm in reduced coordinates.
 
----
-
-## 13.5 Newton’s Method for Equality-Constrained Problems
+ 
+## Newton’s Method for Equality-Constrained Problems
 
 For a twice-differentiable convex $f$, we can derive an equality-constrained Newton step by solving a local quadratic approximation subject to linearized constraints.
 
@@ -234,7 +233,7 @@ For strictly convex $f$ with positive definite Hessian on the feasible direction
 
  
 
-## 13.6 Connections to Machine Learning and Signal Processing
+## Connections to Machine Learning and Signal Processing
 
 Linear equality constraints appear naturally in ML and related areas:
 

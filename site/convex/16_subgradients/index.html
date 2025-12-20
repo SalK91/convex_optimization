@@ -739,63 +739,36 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#61-subgradients-and-the-subdifferential" class="md-nav__link">
+  <a href="#subgradients-and-the-subdifferential" class="md-nav__link">
     <span class="md-ellipsis">
-      6.1 Subgradients and the Subdifferential
+      Subgradients and the Subdifferential
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#62-examples" class="md-nav__link">
+  <a href="#examples" class="md-nav__link">
     <span class="md-ellipsis">
-      6.2 Examples
+      Examples
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#63-subgradient-optimality-condition" class="md-nav__link">
+  <a href="#subgradient-optimality-condition" class="md-nav__link">
     <span class="md-ellipsis">
-      6.3 Subgradient Optimality Condition
+      Subgradient Optimality Condition
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#64-subgradient-calculus-useful-rules" class="md-nav__link">
+  <a href="#subgradient-calculus" class="md-nav__link">
     <span class="md-ellipsis">
-      6.4 Subgradient Calculus (Useful Rules)
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#65-subgradient-methods" class="md-nav__link">
-    <span class="md-ellipsis">
-      6.5 Subgradient Methods
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#66-proximal-and-smoothed-alternatives" class="md-nav__link">
-    <span class="md-ellipsis">
-      6.6 Proximal and Smoothed Alternatives
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#summary" class="md-nav__link">
-    <span class="md-ellipsis">
-      Summary
+      Subgradient Calculus
     </span>
   </a>
   
@@ -2627,63 +2600,36 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#61-subgradients-and-the-subdifferential" class="md-nav__link">
+  <a href="#subgradients-and-the-subdifferential" class="md-nav__link">
     <span class="md-ellipsis">
-      6.1 Subgradients and the Subdifferential
+      Subgradients and the Subdifferential
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#62-examples" class="md-nav__link">
+  <a href="#examples" class="md-nav__link">
     <span class="md-ellipsis">
-      6.2 Examples
+      Examples
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#63-subgradient-optimality-condition" class="md-nav__link">
+  <a href="#subgradient-optimality-condition" class="md-nav__link">
     <span class="md-ellipsis">
-      6.3 Subgradient Optimality Condition
+      Subgradient Optimality Condition
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#64-subgradient-calculus-useful-rules" class="md-nav__link">
+  <a href="#subgradient-calculus" class="md-nav__link">
     <span class="md-ellipsis">
-      6.4 Subgradient Calculus (Useful Rules)
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#65-subgradient-methods" class="md-nav__link">
-    <span class="md-ellipsis">
-      6.5 Subgradient Methods
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#66-proximal-and-smoothed-alternatives" class="md-nav__link">
-    <span class="md-ellipsis">
-      6.6 Proximal and Smoothed Alternatives
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#summary" class="md-nav__link">
-    <span class="md-ellipsis">
-      Summary
+      Subgradient Calculus
     </span>
   </a>
   
@@ -2729,9 +2675,8 @@
 <li>the hinge loss <script type="math/tex"> \max\{0,\, 1 - y w^\top x\} </script> used in SVMs,</li>
 <li>regularisers like total variation or indicator functions of convex sets.</li>
 </ul>
-<p>Although these functions have “kinks”, they remain convex—and convexity guarantees the existence of supporting hyperplanes at every point. Subgradients formalise this idea and allow optimisation algorithms to operate even when no derivative exists.</p>
-<p>This chapter introduces subgradients, subdifferentials, subgradient calculus, and the basic subgradient method.</p>
-<h2 id="61-subgradients-and-the-subdifferential">6.1 Subgradients and the Subdifferential<a class="headerlink" href="#61-subgradients-and-the-subdifferential" title="Permanent link">¶</a></h2>
+<p>Although these functions have “kinks”, they remain convex—and convexity guarantees the existence of supporting hyperplanes at every point.</p>
+<h2 id="subgradients-and-the-subdifferential">Subgradients and the Subdifferential<a class="headerlink" href="#subgradients-and-the-subdifferential" title="Permanent link">¶</a></h2>
 <p>Let <span class="arithmatex">\(f : \mathbb{R}^n \to \mathbb{R}\)</span> be convex.  A vector <span class="arithmatex">\(g \in \mathbb{R}^n\)</span> is a subgradient of <span class="arithmatex">\(f\)</span> at <span class="arithmatex">\(x\)</span> if</p>
 <div class="arithmatex">\[
 f(y) \ge f(x) + g^\top (y - x) \quad \text{for all } y.
@@ -2762,7 +2707,7 @@ f(y) \ge f(x) + g^\top (y - x) \quad \text{for all } y.
 <li>If <span class="arithmatex">\(f\)</span> is strictly convex, the subdifferential is a singleton except at boundary/kink points.</li>
 </ul>
 <p>Thus, subgradients generalise gradients to nonsmooth convex functions, preserving the same geometric meaning.</p>
-<h2 id="62-examples">6.2 Examples<a class="headerlink" href="#62-examples" title="Permanent link">¶</a></h2>
+<h2 id="examples">Examples<a class="headerlink" href="#examples" title="Permanent link">¶</a></h2>
 <h3 id="absolute-value-in-1d">Absolute value in 1D<a class="headerlink" href="#absolute-value-in-1d" title="Permanent link">¶</a></h3>
 <p>Let <span class="arithmatex">\(f(t) = |t|\)</span>.<br>
 Then:</p>
@@ -2814,8 +2759,7 @@ f(x) = \max_{i=1,\dots,k} (a_i^\top x + b_i).
 </li>
 </ul>
 <p>This structure underlies SVM hinge loss and ReLU-type functions.</p>
-<hr>
-<h2 id="63-subgradient-optimality-condition">6.3 Subgradient Optimality Condition<a class="headerlink" href="#63-subgradient-optimality-condition" title="Permanent link">¶</a></h2>
+<h2 id="subgradient-optimality-condition">Subgradient Optimality Condition<a class="headerlink" href="#subgradient-optimality-condition" title="Permanent link">¶</a></h2>
 <p>For the unconstrained convex minimisation problem</p>
 <div class="arithmatex">\[
 \min_x f(x),
@@ -2830,7 +2774,7 @@ f(x) = \max_{i=1,\dots,k} (a_i^\top x + b_i).
 <li>Geometrically, the supporting hyperplane at <span class="arithmatex">\(x^\star\)</span> is horizontal, forming the flat bottom of the convex bowl.</li>
 <li>This generalises the smooth condition <script type="math/tex"> \nabla f(x^\star)=0 </script>.</li>
 </ul>
-<h2 id="64-subgradient-calculus-useful-rules">6.4 Subgradient Calculus (Useful Rules)<a class="headerlink" href="#64-subgradient-calculus-useful-rules" title="Permanent link">¶</a></h2>
+<h2 id="subgradient-calculus">Subgradient Calculus<a class="headerlink" href="#subgradient-calculus" title="Permanent link">¶</a></h2>
 <p>Subgradients satisfy powerful calculus rules that allow us to work with complex functions. Let <span class="arithmatex">\(f\)</span> and <span class="arithmatex">\(g\)</span> be convex.</p>
 <h3 id="sum-rule">Sum rule<a class="headerlink" href="#sum-rule" title="Permanent link">¶</a></h3>
 <div class="arithmatex">\[
@@ -2854,77 +2798,6 @@ f(x) = \max_{i=1,\dots,k} (a_i^\top x + b_i).
 </script>
 </p>
 <p>This supports models based on hinge losses, margin-maximisation, and piecewise-linear architectures.</p>
-<h2 id="65-subgradient-methods">6.5 Subgradient Methods<a class="headerlink" href="#65-subgradient-methods" title="Permanent link">¶</a></h2>
-<p>Even when <span class="arithmatex">\(f\)</span> is not differentiable, we can minimise it using subgradient descent:</p>
-<div class="arithmatex">\[
-x_{k+1} = x_k - \alpha_k g_k,
-\qquad g_k \in \partial f(x_k).
-\]</div>
-<p>Key features:</p>
-<ul>
-<li>Requires only a subgradient (no differentiability needed).</li>
-<li>Works for any convex function.</li>
-<li>Stepsizes must typically decrease (e.g. <script type="math/tex"> \alpha_k = c/\sqrt{k} </script>, <script type="math/tex"> \alpha_k = c/k </script>).</li>
-<li>Guaranteed convergence for convex <span class="arithmatex">\(f\)</span>, but generally slow.</li>
-</ul>
-<h3 id="convergence-rates-worst-case">Convergence rates (worst case)<a class="headerlink" href="#convergence-rates-worst-case" title="Permanent link">¶</a></h3>
-<ul>
-<li>Smooth convex gradient descent: <span class="arithmatex">\(O(1/k)\)</span> or <span class="arithmatex">\(O(1/k^2)\)</span>.  </li>
-<li>Nonsmooth subgradient descent:<br>
-<script type="math/tex; mode=display">
-  f(x_k) - f(x^\star) = O(1/\sqrt{k}).
-  </script>
-</li>
-</ul>
-<p>This slower rate reflects the lack of curvature information at kinks.</p>
-<h3 id="why-it-still-matters-in-ml">Why it still matters in ML<a class="headerlink" href="#why-it-still-matters-in-ml" title="Permanent link">¶</a></h3>
-<p>Many training objectives behave nonsmoothly:</p>
-<ul>
-<li>SVM hinge loss  </li>
-<li>
-<script type="math/tex"> \ell_1 </script>-regularised models (sparse optimisation)  </li>
-<li>ReLUs and piecewise-linear networks  </li>
-<li>Projections onto convex sets  </li>
-</ul>
-<p>Even modern deep-learning optimisers operate as subgradient methods whenever the network contains nonsmooth operations.</p>
-<h2 id="66-proximal-and-smoothed-alternatives">6.6 Proximal and Smoothed Alternatives<a class="headerlink" href="#66-proximal-and-smoothed-alternatives" title="Permanent link">¶</a></h2>
-<p>Subgradient descent can be slow. Two important families of methods overcome this:</p>
-<h3 id="1-proximal-methods">(1) Proximal methods<a class="headerlink" href="#1-proximal-methods" title="Permanent link">¶</a></h3>
-<p>For a convex function <span class="arithmatex">\(f\)</span>, the proximal operator is
-<script type="math/tex; mode=display">
-\mathrm{prox}_{\alpha f}(y)
-=
-\arg\min_x \left\{
-f(x) + \frac{1}{2\alpha}\|x-y\|^2
-\right\}.
-</script>
-</p>
-<p>Proximal algorithms (e.g., ISTA, FISTA, ADMM) can handle nonsmooth terms like:</p>
-<ul>
-<li>
-<script type="math/tex"> \ell_1 </script> regularisation,</li>
-<li>indicator functions of convex sets,</li>
-<li>total variation penalties.</li>
-</ul>
-<p>They achieve faster and more stable convergence than basic subgradient descent.</p>
-<h3 id="2-smoothing-techniques">(2) Smoothing techniques<a class="headerlink" href="#2-smoothing-techniques" title="Permanent link">¶</a></h3>
-<p>Many nonsmooth convex functions have smooth approximations:</p>
-<ul>
-<li>Replace <script type="math/tex"> |t| </script> with the Huber loss.</li>
-<li>Replace <script type="math/tex"> \max\{0,z\} </script> with softplus.</li>
-<li>Replace <script type="math/tex"> \max_i(a_i^\top x) </script> with log-sum-exp, a smooth convex approximation.</li>
-</ul>
-<p>Smoothing preserves convexity while allowing the use of fast gradient methods.</p>
-<h2 id="summary">Summary<a class="headerlink" href="#summary" title="Permanent link">¶</a></h2>
-<ul>
-<li>Nonsmooth convex functions arise naturally in ML.  </li>
-<li>Subgradients generalise gradients: they give supporting hyperplanes.  </li>
-<li>Optimality: <span class="arithmatex">\(0 \in \partial f(x^\star)\)</span>.  </li>
-<li>Subgradient calculus enables reasoning about complex nonsmooth models.  </li>
-<li>Subgradient descent converges globally but slowly.  </li>
-<li>Proximal and smoothing methods yield faster practical algorithms.</li>
-</ul>
-<p>Subgradients complete the picture of convex analysis by extending optimisation tools beyond differentiable functions, setting the stage for modern first-order methods.</p>
 
 
 

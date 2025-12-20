@@ -1,11 +1,9 @@
 # Chapter 5: Convex Functions
 
-Convex functions play a central role in optimisation and machine learning. When the objective function is convex, the optimisation landscape has a single global minimum, gradient-based algorithms behave predictably, and optimality conditions have clean geometric interpretations. Many common ML losses—least squares, logistic loss, hinge loss, Huber loss—are convex precisely for these reasons.
-
 This chapter develops the basic tools for understanding convex functions: their definitions, geometric characterisations, first- and second-order tests, and operations that preserve convexity. These tools will later support duality, optimality conditions, and algorithmic analysis.
 
  
-## 5.1 Definitions of convexity
+## Definitions of convexity
 
 A function $f : \mathbb{R}^n \to \mathbb{R}$ is convex if for all $x,y$ in its domain and all $\theta \in [0,1]$,
 $$
@@ -24,7 +22,7 @@ $$
 The function $f$ is convex if and only if its epigraph is a convex set. This connects convex functions to the convex sets studied earlier.
 
  
-## 5.2 First-order characterisation
+## First-order characterisation
 
 If $f$ is differentiable, then $f$ is convex if and only if
 $$
@@ -47,7 +45,7 @@ $$
 For nondifferentiable convex functions, the gradient is replaced by a subgradient, which plays the same role in forming supporting hyperplanes.
 
  
-## 5.3 Second-order characterisation
+## Second-order characterisation
 
 If $f$ is twice continuously differentiable, then convexity can be checked via curvature:
 
@@ -62,7 +60,7 @@ $$
 This characterisation connects convexity to the spectral properties of the Hessian discussed earlier.
 
  
-## 5.4 Examples of convex functions
+## Examples of convex functions
 
 1. Affine functions:  
    $$
@@ -96,7 +94,7 @@ This characterisation connects convexity to the spectral properties of the Hessi
    A smooth approximation to the max; convex by Jensen’s inequality. Appears in softmax, logistic regression, partition functions.
 
  
-## 5.5 Jensen’s inequality
+## Jensen’s inequality
 
 Let $f$ be convex and $X$ a random variable in its domain. Then:
 $$
@@ -118,7 +116,7 @@ f\!\left(\sum_i \theta_i x_i\right)
 $$
 
  
-## 5.6 Operations that preserve convexity
+## Operations that preserve convexity
 
 Convexity is preserved under many natural constructions:
 
@@ -142,10 +140,8 @@ Convexity is preserved under many natural constructions:
   If $f$ is convex and nondecreasing in each argument, and each $g_i$ is convex,  
   then $x \mapsto f(g_1(x), \dots, g_k(x))$ is convex.
 
-These rules allow construction of complex convex models from simple building blocks.
-
  
-## 5.7 Level sets of convex functions
+## Level sets of convex functions
 
 For $\alpha \in \mathbb{R}$, the sublevel set is
 $$
@@ -165,7 +161,7 @@ Examples:
 These sets enable convex constrained optimisation formulations.
 
  
-## 5.8 Strict and strong convexity
+## Strict and strong convexity
 
 ### Strict convexity
 
@@ -201,20 +197,92 @@ Consequences:
 - conditioning ($\kappa = L/\mu$) governs algorithmic difficulty.
 
 Strong convexity is frequently induced by regularisation (e.g., ridge regression adds $\tfrac{\lambda}{2}\|x\|_2^2$).
-
  
-## Summary
+## Mental Map
 
-Convex functions form the analytical backbone of convex optimisation.  
-They provide:
-
-- predictable geometry,
-- clean gradient conditions,
-- reliable convergence behaviour,
-- tractable constraints via convex sublevel sets,
-- stability under composition and modelling operations.
-
-These properties make convex objectives indispensable across machine learning, signal processing, and optimisation theory.
-
-    
-   
+```text
+                      Convex Functions
+      Objective landscapes with predictable geometry and guarantees
+                              │
+                              ▼
+                Core idea: no bad local minima
+        (every local minimum is global; geometry is well-behaved)
+                              │
+                              ▼
+     ┌───────────────────────────────────────────────────────────┐
+     │ Definition of Convexity                                   │
+     │ f(θx+(1−θ)y) ≤ θf(x)+(1−θ)f(y)                            │
+     │ - Graph lies below all chords                             │
+     │ - Strict convexity: inequality is strict                  │
+     │ - Epigraph view: f convex ⇔ epi(f) is a convex set       │
+     └───────────────────────────────────────────────────────────┘
+                              │
+                              ▼
+     ┌────────────────────────────────────────────────────────────┐
+     │ First-Order Geometry (Supporting Hyperplanes)              │
+     │ f(y) ≥ f(x)+∇f(x)ᵀ(y−x)                                    │
+     │ - Tangent plane globally underestimates f                  │
+     │ - ∇f(x) defines a supporting hyperplane to epi(f)          │
+     │ - Optimality: ∇f(x*)=0 ⇔ x* global minimizer (smooth case)│
+     │ - Nonsmooth extension: subgradients (next chapter)         │
+     └────────────────────────────────────────────────────────────┘
+                              │
+                              ▼
+     ┌────────────────────────────────────────────────────────────┐
+     │ Second-Order Characterisation                              │
+     │ ∇²f(x) ⪰ 0  for all x                                      │
+     │ - PSD Hessian ⇔ upward curvature everywhere               │
+     │ - PD Hessian ⇔ strict convexity                           │
+     │ - Links convexity to eigenvalues and curvature (Ch.3)      │
+     └────────────────────────────────────────────────────────────┘
+                              │
+                              ▼
+     ┌─────────────────────────────────────────────────────────────┐
+     │ Canonical Examples                                          │
+     │ - Affine functions: supporting hyperplanes                  │
+     │ - Quadratics (Q⪰0): curvature from Hessian                  │
+     │ - Norms: regularization geometry                            │
+     │ - Max of affine functions: hinge loss, LPs                  │
+     │ - Log-sum-exp: smooth max, softmax, logistic regression     │
+     └─────────────────────────────────────────────────────────────┘
+                              │
+                              ▼
+     ┌─────────────────────────────────────────────────────────────┐
+     │ Jensen’s Inequality                                         │
+     │ f(E[X]) ≤ E[f(X)]                                           │
+     │ - Convex functions penalize variability                     │
+     │ - Basis for EM, variational bounds, log-sum-exp convexity   │
+     │ - Extends convexity from points to expectations             │
+     └─────────────────────────────────────────────────────────────┘
+                              │
+                              ▼
+     ┌─────────────────────────────────────────────────────────────┐
+     │ Convexity-Preserving Operations                             │
+     │ - Scaling (α≥0), addition                                   │
+     │ - Max of convex functions                                   │
+     │ - Affine pre-composition f(Ax+b)                            │
+     │ - Monotone composition rules                                │
+     │ Role: modular construction of convex models                 │
+     └─────────────────────────────────────────────────────────────┘
+                              │
+                              ▼
+     ┌─────────────────────────────────────────────────────────────┐
+     │ Sublevel Sets                                               │
+     │ {x : f(x) ≤ α}                                              │
+     │ - Always convex for convex f                                │
+     │ - Enables convex inequality constraints                     │
+     │ - Norm balls, confidence ellipsoids, feasibility regions    │
+     └─────────────────────────────────────────────────────────────┘
+                              │
+                              ▼
+     ┌─────────────────────────────────────────────────────────────┐
+     │ Strict vs Strong Convexity                                  │
+     │ Strict convexity: unique minimizer                          │
+     │ Strong convexity: f ≥ tangent + (μ/2)‖x−y‖²                 │
+     │ - Quantitative curvature                                    │
+     │ - Linear convergence of gradient descent                    │
+     │ - Conditioning κ=L/μ governs difficulty                     │
+     │ - Often induced via ℓ₂ regularization                       │
+     └─────────────────────────────────────────────────────────────┘
+                              
+```

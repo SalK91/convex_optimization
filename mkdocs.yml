@@ -65,6 +65,7 @@ plugins:
   - search
   - autorefs
   - glightbox       # image lightbox support
+  #- mkdocs-jupyter
   - print-site:
       add_to_navigation: true
       print_page_title: "Print/PDF"

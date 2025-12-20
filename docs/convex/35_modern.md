@@ -5,7 +5,7 @@ The past decade has seen an explosion of nonconvex optimization problems, driven
 This chapter connects the principles of convex optimization to the modern optimizers that power today’s machine learning systems. While these algorithms often lack formal global guarantees, they are remarkably effective in practice.
 
  
-## 18.1 Stochastic Optimization Overview
+## Stochastic Optimization Overview
 
 In machine learning, we often minimize an empirical risk:
 $$
@@ -18,14 +18,16 @@ Computing the full gradient $\nabla f(x)$ is infeasible when $N$ is large. Inste
 $$
 g_k = \frac{1}{|B_k|} \sum_{i \in B_k} \nabla \ell(x_k; z_i).
 $$
+
 This yields the Stochastic Gradient Descent (SGD) update:
+
 $$
 x_{k+1} = x_k - \alpha_k g_k.
 $$
 
 SGD is the foundation for nearly all deep learning optimizers.
 
-## 18.2 Momentum and Acceleration
+## Momentum and Acceleration
 
 SGD’s noisy gradients can cause slow convergence and oscillations. Momentum smooths the update by accumulating a moving average of past gradients:
 
@@ -43,12 +45,12 @@ $$
 Momentum-based methods help traverse ravines and saddle regions efficiently.
 
 
-## 18.3 Adaptive Learning Rate Methods
+## Adaptive Learning Rate Methods
 
 Different parameters often require different step sizes.  
 Adaptive methods adjust learning rates automatically using the history of squared gradients.
 
-### 18.3.1 AdaGrad
+### AdaGrad
 Keeps a cumulative sum of squared gradients:
 
 $$
@@ -62,7 +64,7 @@ $$
 Good for sparse data, but the learning rate can shrink too quickly.
 
 
-### 18.3.2 RMSProp
+### RMSProp
 A refinement of AdaGrad using exponential averaging:
 
 $$
@@ -76,7 +78,7 @@ $$
 RMSProp prevents the learning rate from vanishing and works well for nonstationary objectives.
 
 
-### 18.3.3 Adam: Adaptive Moment Estimation
+### Adam: Adaptive Moment Estimation
 Adam combines momentum and adaptive scaling:
 
 $$
@@ -94,7 +96,7 @@ $$
 Adam adapts quickly to changing gradient scales, converging faster than vanilla SGD.
 
 
-## 18.4 Variants and Modern Extensions
+## Variants and Modern Extensions
 
 | Optimizer | Key Idea | Notes |
 |----------------|---------------|------------|
@@ -108,7 +110,7 @@ These variants represent the frontier of stochastic optimization in deep learnin
 
  
 
-## 18.5 Implicit Regularization and Generalization
+## Implicit Regularization and Generalization
 
 Modern optimizers not only minimize loss—they also affect generalization. SGD and its variants exhibit implicit bias toward flat minima, which often correspond to models with better generalization properties.
 
@@ -121,7 +123,7 @@ Empirical findings suggest:
 This trade-off drives ongoing research into optimizer design.
 
 
-## 18.6 Practical Considerations
+## Practical Considerations
 
 | Aspect | Guideline |
 |-------------|---------------|
@@ -132,7 +134,7 @@ This trade-off drives ongoing research into optimizer design.
 | Mixed Precision | Use with adaptive optimizers for speed and memory savings |
 
 
-## 18.7 Comparative Behavior
+## Comparative Behavior
 
 | Method | Adaptivity | Speed | Memory | Typical Use |
 |-------------|----------------|------------|--------------|-----------------|
@@ -143,7 +145,7 @@ This trade-off drives ongoing research into optimizer design.
 
 
 
-## 18.8 Optimization in Modern Deep Networks
+## Optimization in Modern Deep Networks
 
 In deep learning, optimization interacts with architecture, loss, and regularization:
 
@@ -153,6 +155,5 @@ In deep learning, optimization interacts with architecture, loss, and regulariza
 
 Optimization is no longer an isolated procedure but part of the model’s design philosophy.
 
----
 
 Modern stochastic optimizers extend classical first-order methods into high-dimensional, noisy, nonconvex regimes. They are the engines behind deep learning—adapting dynamically, balancing efficiency and generalization.

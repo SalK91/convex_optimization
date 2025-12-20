@@ -3,7 +3,7 @@
 
 Real-world modelling starts not with algorithms but with data, assumptions, and design goals.  We choose a loss function from statistical assumptions (e.g. noise model, likelihood) and a complexity penalty or constraints from design preferences (simplicity, robustness, etc.).  The resulting convex (or nonconvex) optimization problem often *tells* us which solver class to use.  In practice, solving machine learning problems looks like: modeling → recognize structure → pick solver.  Familiar ML models (linear regression, logistic regression, etc.) can be viewed as convex programs.  Below we survey common patterns (convex and some nonconvex) and the recommended algorithms/tricks for each.
 
-## 16.1 Regularized estimation and the accuracy–simplicity tradeoff
+## Regularized estimation and the accuracy–simplicity tradeoff
 
 Many learning tasks use a regularized risk minimization form:
 $$
@@ -44,11 +44,11 @@ Algorithms Summary:
 
 Regularisation strength $\lambda$ is usually chosen via cross-validation or a validation set, exploring the accuracy–simplicity trade-off.
 
-## 16.2 Robust regression and outlier resistance
+## Robust regression and outlier resistance
 
 Standard least-squares uses squared loss, which penalizes large errors quadratically. This makes it sensitive to outliers. Robust alternatives replace the loss:
 
-### 16.2.1 Least absolute deviations (ℓ₁ loss)
+### Least absolute deviations (ℓ₁ loss)
 
 Formulation:
 $$
@@ -91,7 +91,7 @@ How to solve it:
 
 
 
-### 16.2.2 Huber loss
+### Huber loss
 
 Definition of the Huber penalty for residual \(r\):
 $$
@@ -132,7 +132,7 @@ How to solve it:
 
 
 
-### 16.2.3 Worst-case robust regression
+### Worst-case robust regression
 
 Sometimes we don’t just want “fit the data we saw,” but “fit any data within some uncertainty set.” This leads to min–max problems of the form:
 $$
@@ -161,7 +161,7 @@ How to solve it:
  
 
 
-## 16.3 Maximum likelihood and loss design
+## Maximum likelihood and loss design
 
 Choosing a loss often comes from a probabilistic noise model. The negative log-likelihood (NLL) of an assumed distribution gives a convex loss for many common cases:
 
@@ -245,7 +245,7 @@ Choosing a loss often comes from a probabilistic noise model. The negative log-l
     - Poisson regression for counts: convex NLL, solved by IRLS or gradient.
     - Probit models: convex but require iterative solvers.
 
-## 16.4 Structured constraints in engineering and design
+## Structured constraints in engineering and design
 
 Optimization problems often include explicit convex constraints from physical or resource limits: e.g. variable bounds, norm limits, budget constraints. The solver choice depends on how easily we can handle projections or barriers for $\mathcal{X}$:
 
@@ -278,7 +278,7 @@ Algorithmic pointers:
 
 Remarks: Encoding design requirements (actuator limits, stability margins, probability budgets) as convex constraints lets us leverage efficient convex solvers. Feasible set geometry dictates the method: easy projection → projective methods; otherwise → interior-point or operator-splitting.
 
-## 16.5 Linear and conic programming: the canonical models
+## Linear and conic programming: the canonical models
 
 Many practical problems reduce to linear programming (LP) or its convex extensions.  
 LP and related conic forms are the workhorses of operations research, control, and engineering optimization.
@@ -304,7 +304,7 @@ Algorithmic pointers for 11.5:
 - Large-scale LP/QP: Exploit sparsity; use decomposition (Benders, ADMM) if structure allows; use iterative methods (primal-dual hybrid gradient, etc.) for extreme scale.
 - Reformulate into standard form: Recognize when your problem is an LP/QP/SOCP/SDP to use mature solvers. (E.g. ℓ∞ regression → LP, ℓ2 regression with ℓ2 constraint → SOCP.)
 
-## 16.6 Risk, safety margins, and robust design
+## Risk, safety margins, and robust design
 
 Modern design often includes risk measures or robustness. Two common patterns:
 
@@ -325,7 +325,7 @@ Algorithmic pointers for 11.6:
  - Distributed or iterative solutions: If $\mathcal{U}$ or loss separable, ADMM can distribute the computation (Chapter 10).
 
 
-## 16.7 Cheat sheet: If your problem looks like this, use that
+## Cheat sheet: If your problem looks like this, use that
 
 This summary gives concrete patterns of models and recommended solvers/tricks:
 
@@ -395,7 +395,7 @@ Rule of thumb: Identify whether your objective is smooth vs nonsmooth, strongly 
 Convexity guarantees global optimum. When nonconvex (deep nets, latent variables, etc.), we rely on heuristics: SGD, random restarts, and often settle for local minima or approximate solutions.
 
 
-## 16.7 Matching Model Structure to Algorithm Type
+## Matching Model Structure to Algorithm Type
 
 | Model Type | Problem Form | Recommended Algorithms | Notes / ML Examples |
 |-------------|---------------|------------------------|---------------------|

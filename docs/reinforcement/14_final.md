@@ -1,4 +1,4 @@
-# Chapter 14: Reinforcement Learning – Review and Wrap-Up
+# Chapter 14: c
 
 In this final chapter, we recap the journey of reinforcement learning (RL) from its foundational ideas in multi-armed bandits through to the cutting-edge of deep RL. Along the way we will revisit key algorithmic concepts – including Upper Confidence Bounds (UCB), Thompson Sampling, Model-Based Interval Estimation with Exploration Bonus (MBIE-EB), and Monte Carlo Tree Search (MCTS) – and highlight how different approaches to exploration (optimism vs. probability matching) have shaped the field. We will also emphasize the theoretical foundations of RL (regret minimization, PAC guarantees, Bayesian methods) and illustrate how these principles connect to real-world successes like AlphaTensor and ChatGPT. Throughout, the aim is to provide a high-level summary and synthesis, reinforcing the insights gained across previous chapters.
 

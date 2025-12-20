@@ -10,7 +10,7 @@ Duality is one of the central organizing principles in convex optimization. Ever
 In convex optimization, duality is especially powerful: under mild conditions, the primal and dual attain the same optimal value. This equality — *strong duality* — lies behind the theory of KKT conditions, interior-point methods, and many ML algorithms such as SVMs.
 
 
-## 9.1 The Primal Problem
+## The Primal Problem
 
 Consider the general convex problem
 
@@ -35,7 +35,7 @@ $$
 
 The infimum allows for the possibility that the best value is approached but not attained.
 
-## 9.2 Why Duality?
+## Why Duality?
 
 A constrained problem can be viewed as:
 
@@ -49,7 +49,7 @@ If the penalties are chosen “correctly,” one can recover the original constr
 Duality converts constraints into prices, and transforms geometry into algebra.
 
 
-## 9.3 The Lagrangian
+## The Lagrangian
 
 The Lagrangian function is
 
@@ -70,7 +70,7 @@ Interpretation:
 - If $\mu_i = 0$, that constraint does not influence the Lagrangian at that point.
 
  
-## 9.4 The Dual Function: Lower Bounds from Penalties
+## The Dual Function: Lower Bounds from Penalties
 
 Fix $(\lambda,\mu)$ and minimize the Lagrangian with respect to $x$:
 
@@ -97,7 +97,7 @@ Thus $\theta$ always produces lower bounds on the true optimal value (weak duali
 - $\theta(\lambda,\mu)$ is always concave in $(\lambda,\mu)$ (infimum of affine functions).
 - It may be $-\infty$ if the Lagrangian is unbounded below.
 
-## 9.5 The Dual Problem
+## The Dual Problem
 
 The dual problem maximizes these lower bounds:
 
@@ -117,7 +117,7 @@ $$
 
 The dual problem is always a concave maximization, i.e., a convex optimization problem in $(\lambda,\mu)$.
 
-## 9.6 Strong Duality and the Duality Gap
+## Strong Duality and the Duality Gap
 
 If
 
@@ -147,21 +147,21 @@ then:
 Slater’s condition ensures the feasible region has interior — the constraints are not tight everywhere.
 
 
-## 9.7 Duality and the KKT Conditions
+## Duality and the KKT Conditions
 
 When strong duality holds, the primal and dual meet at a point satisfying the KKT conditions:
 
-### 1. Primal feasibility
+### Primal feasibility
 $$
 g_i(x^\star) \le 0,\qquad h_j(x^\star)=0.
 $$
 
-### 2. Dual feasibility
+### Dual feasibility
 $$
 \mu_i^\star \ge 0.
 $$
 
-### 3. Stationarity
+### Stationarity
 $$
 \nabla f(x^\star)
 + \sum_{i=1}^m \mu_i^\star \nabla g_i(x^\star)
@@ -169,7 +169,7 @@ $$
 = 0.
 $$
 
-### 4. Complementary slackness
+### Complementary slackness
 $$
 \mu_i^\star g_i(x^\star) = 0,\qquad \forall i.
 $$
@@ -184,7 +184,7 @@ $$
 Geometrically, the gradients of the active constraints form a supporting hyperplane that “touches’’ the objective exactly at the optimum.
 
 
-## 9.8 Interpretation of Dual Variables
+## Interpretation of Dual Variables
 
 Dual variables have consistent interpretations across optimization, ML, and economics.
 

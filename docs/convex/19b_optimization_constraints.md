@@ -4,7 +4,7 @@ In many applications, we must optimize an objective while respecting *inequality
 
 This chapter introduces algorithms for solving such problems, focusing on *logarithmic barrier* and *interior-point* methods. These are the workhorses behind modern general-purpose convex solvers (for LP, QP, SOCP, SDP) and provide a smooth way to enforce inequalities while still using Newton-type methods.
  
-## 14.1 Problem Setup
+## Problem Setup
 
 We consider the general convex problem with inequality and equality constraints
 $$
@@ -40,7 +40,7 @@ Under these assumptions:
 Many machine-learning training problems can be written in this template by expressing regularization, margins, fairness, or safety conditions as convex inequalities.
 
 
-## 14.2 Indicator-Function View of Constraints
+## Indicator-Function View of Constraints
 
 Conceptually, we can write inequality constraints using an indicator function. Define
 $$
@@ -69,7 +69,7 @@ This formulation is clean but not numerically friendly:
 The key idea of barrier methods is to *replace* the hard indicator with a smooth approximation that grows to $+\infty$ as we approach the boundary.
 
 
-## 14.3 Logarithmic Barrier Approximation
+## Logarithmic Barrier Approximation
 
 We approximate the indicator $I_{-}$ with a smooth barrier function
 $$
@@ -104,7 +104,7 @@ Interpretation:
 As $t \to \infty$, solutions of the barrier subproblem approach the solution of the original constrained problem.
 
  
-## 14.4 Derivatives of the Barrier
+## Derivatives of the Barrier
 
 Let
 $$
@@ -135,7 +135,7 @@ $$
 is a *smooth equality-constrained* problem. We can therefore apply equality-constrained Newton methods (Chapter 13) at each fixed $t$.
 
 
-## 14.5 Central Path and Approximate KKT Conditions
+## Central Path and Approximate KKT Conditions
 
 For each $t > 0$, let $x^\star(t)$ be a minimizer of the barrier problem
 $$
@@ -171,7 +171,7 @@ $$
 $$
 which tends to $0$ as $t \to \infty$. Hence the barrier formulation naturally yields approximate primal–dual solutions whose KKT residuals shrink as we increase $t$.
 
-## 14.6 Geometric and Physical Intuition
+## Geometric and Physical Intuition
 
 Consider the barrier-augmented objective
 $$
@@ -203,7 +203,7 @@ This picture explains both:
 - why the method naturally generates dual variables (the weights on constraint gradients).
 
  
-## 14.7 The Barrier Method
+## The Barrier Method
 
 The barrier method solves the original inequality-constrained problem by solving a sequence of barrier subproblems with increasing $t$.
 
@@ -260,9 +260,8 @@ In practice:
 - $\mu$ is chosen to balance outer iterations vs inner Newton steps,
 - the centering step is usually solved to modest accuracy, not exactness.
 
----
-
-## 14.8 From Barrier Methods to Interior-Point Methods
+ 
+## From Barrier Methods to Interior-Point Methods
 
 Pure barrier methods conceptually “solve a sequence of problems for increasing $t$”. Modern *interior-point methods* refine this idea:
 
@@ -287,9 +286,8 @@ Newton’s method applied to these equations yields search directions for $(x,\l
 
 You do not need to implement these methods from scratch to use them: in practice, you describe your problem in a modeling language (e.g. CVX, CVXPY, JuMP) and rely on an interior-point solver under the hood.
 
----
-
-## 14.9 Computational and Practical Notes
+ 
+## Computational and Practical Notes
 
 Some important practical aspects:
 
@@ -314,9 +312,8 @@ Some important practical aspects:
 5. Sparsity and structure  
    For large problems, exploiting sparsity in $A$ and in the Hessians $\nabla^2 f_i(x)$ is crucial. Interior-point methods scale well when linear algebra is carefully optimized.
 
----
-
-## 14.10 Equality vs Inequality-Constrained Algorithms
+ 
+## Equality vs Inequality-Constrained Algorithms
 
 Finally, it is helpful to contrast the equality-only case (Chapter 13) with the inequality case.
 

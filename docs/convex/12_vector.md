@@ -10,7 +10,7 @@ Later in this chapter, we will see that this objective finds the point in the co
 
 This chapter develops the linear-algebra tools that appear throughout convex optimization and machine learning. We focus on geometric ideas — projections, subspaces, orthogonality, eigenvalues, singular values, and norms — because these ideas directly shape how optimization behaves. Readers familiar with basic matrix operations will find that many optimization concepts become much simpler when viewed through the right geometric lens.
 
-## 2.1 Vector spaces, subspaces, and affine sets
+## Vector spaces, subspaces, and affine sets
 
 A vector space over $\mathbb{R}$ is a set of vectors that can be added and scaled without leaving the set. The familiar example is $\mathbb{R}^n$, where operations like $\alpha x + \beta y$ keep us within the same space.
 
@@ -20,17 +20,15 @@ Affine sets extend this idea by allowing a shift away from the origin. A set $A$
 
 Affine sets look like translated subspaces: lines or planes that do not need to pass through the origin. Every affine set can be written as: $A = x_0 + S = \{\, x_0 + s : s \in S \,\},$ where $S$ is a subspace and $x_0$ is any point in the set. This representation is extremely useful in optimization. If $Ax = b$ is a linear constraint, then its solution set is an affine set. A single particular solution $x_0$ gives one point satisfying the constraint, and the entire solution set is obtained by adding the null space of $A$. Thus, optimization under linear constraints means searching over an affine set determined by the constraint structure.
 
-Finally, affine transformations play a central role in both machine learning and optimization. A mapping of the form
-
 Affine Transformations: An affine transformation (or affine map) is a function $f : V \to W$ that can be written as $f(x) = A x + b,$ where $A$ is a linear map and $b$ is a fixed vector. Affine transformations preserve both affinity and convexity:
 if $C$ is convex, then $A C + b$ is also convex.
 is called an affine transformation. It represents a linear transformation followed by a translation. Affine transformations preserve the structure of affine sets and convex sets, meaning that if a feasible region is convex or affine, applying an affine transformation does not destroy that property. This matters for optimization because many models and algorithms implicitly perform affine transformations for example, when reparameterizing variables, scaling features, or mapping between coordinate systems. Convexity is preserved under these operations, so the essential geometry of the problem remains intact.
 
-In summary, vector spaces describe the ambient space in which optimization algorithms move, subspaces capture structural or constraint-related directions, and affine sets model the geometric shapes defined by linear constraints. These three ideas form the basic geometric toolkit for understanding optimization problems and will reappear repeatedly throughout the rest of the book.
+In summary, vector spaces describe the space in which optimization algorithms move, subspaces capture structural or constraint-related directions, and affine sets model the geometric shapes defined by linear constraints. These three ideas form the basic geometric toolkit for understanding optimization problems and will reappear repeatedly throughout the rest of the webbook.
 
 
  
-## 2.2 Linear combinations, span, basis, dimension
+## Linear combinations, span, basis, dimension
 Much of linear algebra revolves around understanding how vectors can be combined to generate new vectors. This idea is essential in optimization because gradients, search directions, feasible directions, and model predictions are often built from linear combinations of simpler components.
 
 Given vectors $v_1,\dots,v_k$, any vector of the form$
@@ -42,10 +40,8 @@ The span describes the collection of directions that can be reached from these v
 
 The concept of linear independence formalizes when a set of vectors contains no redundancy. A set of vectors is linearly independent if none of them can be written as a linear combination of the others. If a set is linearly dependent, at least one vector adds no new direction. 
 
-A basis of a space $V$ is a linearly independent set whose span equals $V$. The number of basis vectors is the dimension $\dim(V)$.
-
-Rank and nullity facts:
-
+- A basis of a space $V$ is a linearly independent set whose span equals $V$. 
+- The number of basis vectors is the dimension $\dim(V)$.
 - The column space of $A$ is the span of its columns. Its dimension is $\mathrm{rank}(A)$.
 - The nullspace of $A$ is $\{ x : Ax = 0 \}$.
 - The rank-nullity theorem states: $\mathrm{rank}(A) + \mathrm{nullity}(A) = n,$ where $n$ is the number of columns of $A$.
@@ -105,9 +101,8 @@ Rank and nullity facts:
 >  
 > Together, these four subspaces define the complete geometry of the linear map $ A: \mathbb{R}^n \to \mathbb{R}^m $.
 
-## 2.3 Inner products and orthogonality
-Inner products provide the geometric structure that underlies most optimization algorithms. They allow us to define lengths, angles, projections, gradients, and orthogonality—concepts that appear repeatedly in convex optimization and machine learning.
-
+## Inner products and orthogonality
+Inner products provide the geometric structure that underlies most optimization algorithms. They allow us to define lengths, angles, projections, gradients, and orthogonality.
 An inner product on $\mathbb{R}^n$ is a map $\langle \cdot,\cdot\rangle : \mathbb{R}^n \times \mathbb{R}^n \to \mathbb{R}$ such that for all $x,y,z$ and all scalars $\alpha$:
 
 1. $\langle x,y \rangle = \langle y,x\rangle$ (symmetry),
@@ -128,11 +123,9 @@ Two vectors are orthogonal if $\langle x,y\rangle = 0$. A set of vectors $\{v_i\
 
 > Geometry from the inner product: An inner product induces a norm $\|x\| = \sqrt{\langle x,x \rangle}$ and a notion of distance $d(x,y) = \|x-y\|$. It also defines angles: $\langle x,y \rangle = 0$ means $x$ and $y$ are orthogonal. Thus, inner products generalize the geometric concepts of lengths and angles to abstract vector spaces. Many results in Euclidean geometry (like the Pythagorean theorem and law of cosines) hold in any inner product space. For example, the parallelogram law holds: $\|x+y\|^2 + \|x-y\|^2 = 2\|x\|^2 + 2\|y\|^2$.  
 
-The Cauchy–Schwarz inequality: For any $x,y \in \mathbb{R}^n$:
-$$
-|\langle x,y\rangle| \le \|x\|\|y\|~,
-$$
-with equality iff $x$ and $y$ are linearly dependent Geometrically, it means the absolute inner product is maximized when $x$ and $y$ point in the same or opposite direction. 
+> The Cauchy–Schwarz inequality: For any $x,y \in \mathbb{R}^n$:
+> $$|\langle x,y\rangle| \le \|x\|\|y\|~,$$
+>with equality iff $x$ and $y$ are linearly dependent. Geometrically, it means the absolute inner product is maximized when $x$ and $y$ point in the same or opposite direction. 
 
 Examples of inner products:
 
@@ -156,7 +149,7 @@ Applications in optimization: Inner product geometry is indispensable in convex 
 - Conditioning and Gram matrix: The inner product concept leads to the Gram matrix $G_{ij} = \langle x_i, x_j\rangle$ for a set of vectors. In machine learning, the Gram matrix (or kernel matrix) encodes similarity of features and appears in the normal equations for least squares: $X^\top X$ is a Gram matrix whose eigenvalues tell us about problem conditioning. A well-conditioned Gram matrix (no tiny eigenvalues) means the problem is nicely scaled for gradient descent, whereas ill-conditioning (some nearly zero eigenvalues) means there are directions in weight space that are very flat, slowing convergence. Techniques like feature scaling or adding regularization (ridge regression) improve the Gram matrix’s condition number and thus algorithm performance.
 
 
-## 2.4 Norms and distances
+## Norms and distances
 
 A function $\|\cdot\|: \mathbb{R}^n \to \mathbb{R}$ is a norm if for all $x,y$ and scalar $\alpha$:
 
@@ -184,19 +177,24 @@ Every norm induces a metric (distance) $d(x,y) = |x-y|$ on the space. Norms thus
 Unit-ball geometry: The shape of the unit ball ${x: |x| \le 1}$ reveals how a norm treats different directions. For example, the $\ell_2$ unit ball in $\mathbb{R}^2$ is a perfect circle, treating all directions uniformly, whereas the $\ell_1$ unit ball is a diamond with corners along the axes, indicating that $\ell_1$ treats the coordinate axes as special (those are “cheaper” directions since the ball extends further along axes, touching them at $(\pm1,0)$ and $(0,\pm1)$). The $\ell_\infty$ unit ball is a square aligned with axes, suggesting it allows more combined motion in coordinates as long as no single coordinate exceeds the limit. These shapes are illustrated below: we see the red diamond ($\ell_1$), green circle ($\ell_2$), and blue square ($\ell_\infty$) in $\mathbb{R}^2$ . The geometry of the unit ball matters whenever we regularize or constrain solutions by a norm. For instance, using an $\ell_1$ norm ball as a constraint or regularizer encourages solutions on the corners (sparse solutions), while an $\ell_2$ ball encourages more evenly-distributed changes. An $\ell_\infty$ constraint limits the maximum absolute value of any component, leading to solutions that avoid any single large entry.
 
 
-Dual norms: Each norm $\|\cdot\|$ has a dual norm $\|\cdot\|_*$ defined by
-$$
-\|y\|_* = \sup_{\|x\|\le 1} x^\top y~.
-$$
-For example, the dual of $\ell_1$ is $\ell_\infty$, and the dual of $\ell_2$ is itself.
+> Dual norms. Each norm $\|\cdot\|$ has a dual norm $\|\cdot\|_*$ defined by
+> $$
+> \|y\|_* = \sup_{\|x\|\le 1} x^\top y~.
+> $$
+> For example, the dual of the $\ell_1$ norm is the $\ell_\infty$ norm, and the dual of the $\ell_2$ norm is itself.
+>
+> The dual norm captures how large a linear functional can be when applied to vectors of bounded size. Geometrically, consider the unit ball $\{x : \|x\|\le 1\}$. The dot product $x^\top y$ measures how well the vector $x$ aligns with $y$. The dual norm $\|y\|_*$ is the maximum possible alignment between $y$ and any vector $x$ inside this unit ball.
+>
+> If $\|y\|_*$ is large, then there exists a direction $x$ that is small according to the original norm yet strongly aligned with $y$, resulting in a large dot product. If $\|y\|_*$ is small, then $y$ is poorly aligned with all unit-norm vectors, and $x^\top y$ remains small for every feasible $x$.
+>
+> This perspective explains common dual norm pairs. The dual of $\ell_1$ is $\ell_\infty$, reflecting sensitivity to the largest coordinate, while the $\ell_2$ norm is self-dual due to rotational symmetry. Dual norms are fundamental in convex optimization, appearing in optimality conditions, error bounds, and regularization analysis.
 
-> Imagine the vector $x$ lives inside the original norm ball ($\|x\| \le 1$). The term $x^\top y$ is the dot product, which measures the alignment between $x$ and $y$. The dual norm $\|y\|_*$ is the maximum possible value you can get by taking the dot product of $y$ with any vector $x$ that fits inside the original norm ball.If the dual norm $\|y\|_*$ is large, it means $y$ is strongly aligned with a direction $x$ that is "small" (size $\le 1$) according to the original norm.If the dual norm is small, $y$ must be poorly aligned with all vectors $x$ in the ball.
 
 Norms in optimization algorithms: Different norms define different algorithmic behaviors. For example, gradient descent typically uses the Euclidean norm for step sizes and convergence analysis, but coordinate descent methods implicitly use $\ell_\infty$ (since one coordinate move at a time is like a step in $\ell_\infty$ unit ball). Mirror descent methods use non-Euclidean norms and their duals to get better performance on certain problems (e.g. using $\ell_1$ norm for sparse problems). The norm also figures in complexity bounds: an algorithm’s convergence rate may depend on the diameter of the feasible set in the chosen norm, $D = \max_{\text{feasible}}|x - x^*|$. For instance, in subgradient methods, having a smaller $\ell_2$ diameter or $\ell_1$ diameter can improve bounds. Moreover, when constraints are given by norms (like $|x|_1 \le t$), projections and proximal operators with respect to that norm become subroutines in algorithms.
 
 In summary, norms provide the metric backbone of optimization. They tell us how to measure progress ($|x_k - x^*|$), how to constrain solutions ($|x| \le R$), and how to bound errors. The choice of norm can induce sparsity, robustness, or other desired structure in solutions, and mastering norms and their geometry is key to understanding advanced optimization techniques.
 
-## 2.5 Eigenvalues, eigenvectors, and positive semidefinite matrices
+## Eigenvalues, eigenvectors, and positive semidefinite matrices
 
 If $A \in \mathbb{R}^{n\times n}$ is linear, a nonzero $v$ is an eigenvector with eigenvalue $\lambda$ if
 
@@ -235,7 +233,7 @@ $$
 \nabla^2 f(x) = Q~.
 $$
 
-So $f$ is convex iff $Q$ is PSD. Quadratic objectives with PSD Hessians are convex; with indefinite Hessians, they are not. This is the algebraic test for convexity of quadratic forms.
+So $f$ is convex iff $Q$ is PSD. 
 
 
 > Implications of definiteness: If $A \succ 0$, the quadratic function $x^T A x$ is strictly convex and has a unique minimizer at $x=0$. If $A \succeq 0$, $x^T A x$ is convex but could be flat in some directions (if some $\lambda_i = 0$, those eigenvectors lie in the nullspace and the form is constant along them). In optimization, PD Hessian $\nabla^2 f(x) \succ 0$ means $f$ has a unique local (and global, if domain convex) minimum at that $x$ (since the second-order condition for optimality is satisfied strictly). PD constraint matrices in quadratic programs ensure nice properties like Slater’s condition for strong duality.
@@ -244,7 +242,7 @@ So $f$ is convex iff $Q$ is PSD. Quadratic objectives with PSD Hessians are conv
 
 > Optimization interpretation of eigenvectors: The eigenvectors of $\nabla^2 f(x^*)$ at optimum indicate principal axes of the local quadratic approximation. Directions with small eigenvalues are flat directions where the function changes slowly (possibly requiring LARGE steps unless Newton’s method is used). Directions with large eigenvalues are steep, potentially requiring small step sizes to maintain stability if using gradient descent. Preconditioning or change of variables often aims to transform the problem so that in new coordinates the Hessian is closer to the identity (all eigenvalues ~1). 
 
-## 2.6 Orthogonal projections and least squares
+## Orthogonal projections and least squares
 
 Let $S$ be a subspace of $\mathbb{R}^n$. The orthogonal projection of a vector $b$ onto $S$ is the unique vector $p \in S$ minimising $\|b - p\|_2$. Geometrically, $p$ is the closest point in $S$ to $b$. If $S = \mathrm{span}\{a_1,\dots,a_k\}$ and $A = [a_1~\cdots~a_k]$, then projecting $b$ onto $S$ is equivalent to solving the least-squares problem
 
@@ -264,7 +262,7 @@ This is our first real convex optimisation problem:
 - there are no constraints,
 - we can solve it in closed form.
 
-## 2.7 Operator norms, singular values, and spectral structure
+## Operator norms, singular values, and spectral structure
 
 Many aspects of optimization depend on how a matrix transforms vectors: how much it stretches them, in which directions it amplifies or shrinks signals, and how sensitive it is to perturbations. Operator norms and singular values provide the tools to quantify these behaviors.
 
@@ -313,18 +311,52 @@ The rank of $A$ is the number of nonzero singular values. When $A$ has low rank,
 
 Low-rank structure is also a modeling target. Convex formulations such as nuclear-norm minimization encourage solutions whose matrices have small rank, reflecting latent low-dimensional structure in data.
 
-### Operator norms and optimization algorithms
 
-Operator norms help determine step sizes, convergence rates, and preconditioning strategies. For a general smooth convex function, the Lipschitz constant of its gradient often corresponds to a spectral norm of a Hessian or Jacobian, and this constant controls the safe step size for gradient descent. Preconditioning modifies the geometry of the problem—changing the inner product or scaling the variables—in order to reduce the effective operator norm and improve conditioning.
+## Mental Map
 
-These spectral considerations appear in both first-order and second-order methods. Newton’s method, for example, implicitly rescales the space using the inverse Hessian, which equalizes curvature by transforming eigenvalues toward 1. This explains its rapid local convergence when the Hessian is well behaved.
-
-### Summary
-
-- The operator norm measures the maximum stretching effect of a matrix.
-- Singular values give a complete geometric description of this stretching.
-- The condition number captures how unevenly the matrix acts in different directions.
-- Low-rank structure reveals underlying dimension and enables efficient computation.
-- All of these properties strongly influence the behavior and design of optimization algorithms.
-
-Understanding operator norms and singular values provides valuable insight into when optimization problems are well conditioned, how algorithms will behave, and how to modify a problem to improve performance.
+``` text
+                 Linear Algebra Foundations for Convex Optimization
+               Geometry + Computation for Understanding Algorithms
+                                   │
+                                   ▼
+                        Objects: Vectors, Matrices, Maps
+                                   │
+                                   ▼
+      ┌───────────────────────────────────────────────────────────────┐
+      │  Vector Spaces / Subspaces / Affine Sets                      │
+      │  - Feasible sets of Ax=b are affine: x = x0 + N(A)            │
+      │  - Feasible directions live in the null space                 │
+      └───────────────────────────────────────────────────────────────┘
+                                   │
+                                   ▼
+      ┌─────────────────────────────────────────────────────────────────┐
+      │  The Four Fundamental Subspaces of A                            │
+      │  - Column space C(A): reachable outputs (Ax)                    │
+      │  - Null space N(A): indistinguishable inputs (Ax=0)             │
+      │  - Row space R(A): constraint directions in x-space             │
+      │  - Left null space N(Aᵀ): residual directions (orthogonal to C) │
+      └─────────────────────────────────────────────────────────────────┘
+                                   │
+                                   ▼
+      ┌────────────────────────────────────────────────────────────────┐
+      │  Inner Products → Orthogonality → Projections                  │
+      │  - Defines angles/lengths                                      │
+      │  - Least squares = projection of b onto C(A)                   │
+      │  - QR / Gram–Schmidt give stable numerical tools               │
+      └────────────────────────────────────────────────────────────────┘
+                                   │
+                                   ▼
+      ┌────────────────────────────────────────────────────────────────┐
+      │  Norms & Dual Norms: "How we measure size"                     │
+      │  - Unit balls define geometry of constraints/regularizers      │
+      │  - Dual norms bound dot products and appear in optimality      │
+      └────────────────────────────────────────────────────────────────┘
+                                   │
+                                   ▼
+      ┌───────────────────────────────────────────────────────────────┐
+      │  Spectral Structure: Eigenvalues, PSD, SVD                    │
+      │  - PSD ⇔ convex quadratics (Hessians of quadratic objectives)│
+      │  - SVD shows stretching directions and conditioning           │
+      │  - Condition number ↔ convergence speed / numerical stability │
+      └───────────────────────────────────────────────────────────────┘
+```

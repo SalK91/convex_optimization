@@ -4,7 +4,7 @@ In the previous chapters, we built the mathematical foundations of convex optimi
 This chapter now serves as the algorithmic backbone of the book. It bridges theoretical convex analysis (Chapters 3–11) with the practical numerical methods that solve those problems. Each algorithm here can be seen as a computational lens on a convex geometry concept — gradients as supporting planes, Hessians as curvature maps, and proximal maps as projection operators. Later chapters (13–15) extend these ideas to constrained, stochastic, and large-scale environments.
 
  
-## 12.1 Problem classes vs method classes
+## Problem classes vs method classes
 
 Different convex problems call for different algorithmic structures. Here is the broad landscape:
 
@@ -18,7 +18,7 @@ Different convex problems call for different algorithmic structures. Here is the
 
      
 
-## 12.2 First-order methods: Gradient descent
+## First-order methods: Gradient descent
 
 We solve
 $$
@@ -100,11 +100,11 @@ When to use gradient descent:
 
 
  
-## 12.3 Accelerated first-order methods
+## Accelerated first-order methods
 
 Plain gradient descent has an $O(1/k)$ rate for smooth convex problems. Remarkably, we can do better — and in fact, provably optimal — by adding *momentum*.
 
-### 12.3.1 Nesterov acceleration
+### Nesterov acceleration
 Nesterov’s accelerated gradient method modifies the update using a momentum-like extrapolation. One common form of Nesterov acceleration uses two sequences $x_k$ and $y_k$:
 
 1. Maintain two sequences $x_k$ and $y_k$.
@@ -132,12 +132,75 @@ which is *optimal* for any algorithm that uses only gradient information and not
 
 > The convergence of gradient descent depends strongly on the geometry of the level sets of the objective function. When these level sets are poorly conditioned—that is, highly anisotropic or elongated (not spherical) the gradient directions tend to oscillate across narrow valleys, leading to zig-zag behavior and slow convergence. In contrast, when the level sets are well-conditioned (approximately spherical), gradient descent progresses efficiently toward the minimum. Thus, the efficiency of gradient-based methods is governed by how aspherical (anisotropic) the level sets are, which is directly related to the condition number of the Hessian.
 
-## 12.4 Steepest Descent Method
+
+
+## Subgradient Methods
+
+Even when $f$ is not differentiable, we can minimise it using subgradient descent:
+
+$$
+x_{k+1} = x_k - \alpha_k g_k,
+\qquad g_k \in \partial f(x_k).
+$$
+
+Key features:
+
+- Requires only a subgradient (no differentiability needed).
+- Works for any convex function.
+- Stepsizes must typically decrease (e.g. $ \alpha_k = c/\sqrt{k} $, $ \alpha_k = c/k $).
+- Guaranteed convergence for convex $f$, but generally slow.
+
+### Convergence rates (worst case)
+
+- Smooth convex gradient descent: $O(1/k)$ or $O(1/k^2)$.  
+- Nonsmooth subgradient descent:  
+  $$
+  f(x_k) - f(x^\star) = O(1/\sqrt{k}).
+  $$
+
+This slower rate reflects the lack of curvature information at kinks.
+
+
+## Proximal and Smoothed Alternatives
+
+Subgradient descent can be slow. Two important families of methods overcome this:
+
+### (1) Proximal methods
+
+For a convex function $f$, the proximal operator is
+$$
+\mathrm{prox}_{\alpha f}(y)
+=
+\arg\min_x \left\{
+f(x) + \frac{1}{2\alpha}\|x-y\|^2
+\right\}.
+$$
+
+Proximal algorithms (e.g., ISTA, FISTA, ADMM) can handle nonsmooth terms like:
+
+- $ \ell_1 $ regularisation,
+- indicator functions of convex sets,
+- total variation penalties.
+
+They achieve faster and more stable convergence than basic subgradient descent.
+
+
+### (2) Smoothing techniques
+
+Many nonsmooth convex functions have smooth approximations:
+
+- Replace $ |t| $ with the Huber loss.
+- Replace $ \max\{0,z\} $ with softplus.
+- Replace $ \max_i(a_i^\top x) $ with log-sum-exp, a smooth convex approximation.
+
+Smoothing preserves convexity while allowing the use of fast gradient methods.
+
+## Steepest Descent Method
  
 The steepest descent method generalizes gradient descent by depending on the choice of norm used to measure step size or direction. It finds the direction of *maximum decrease* of the objective function under a unit norm constraint.
 
 
-> The norm defines the “geometry” of optimization.cGradient descent is steepest descent under the Euclidean norm. Changing the norm changes what “steepest” means, and can greatly affect convergence, especially for ill-conditioned or anisotropic problems.The norm in steepest descent determines the geometry of the descent and choosing an appropriate norm effectively makes the level sets of the function more rounded (more isotropic), which greatly improves convergence.
+> The norm defines the “geometry” of optimization. Gradient descent is steepest descent under the Euclidean norm. Changing the norm changes what “steepest” means, and can greatly affect convergence, especially for ill-conditioned or anisotropic problems. The norm in steepest descent determines the geometry of the descent and choosing an appropriate norm effectively makes the level sets of the function more rounded (more isotropic), which greatly improves convergence.
   
 At a point $x$, and for a chosen norm $|\cdot|$:
 
@@ -163,48 +226,7 @@ To decrease $f$ most rapidly, we pick $v$ that minimizes this inner product — 
 
 Thus, the steepest descent direction always aligns with the negative gradient, but it is scaled and shaped according to the geometry induced by the chosen norm.
 
-
-## 12.4.1. Mathematical Properties
-
-### (a) Normalized direction
-
-$$
-\Delta x_{\text{nsd}} = \arg\min_{|v|=1} \nabla f(x)^T v
-$$
-→ unit vector with the most negative directional derivative.
-
-### (b) Unnormalized direction
-
-$$
-\Delta x_{\text{sd}} = |\nabla f(x)| , \Delta x*{\text{nsd}}
-$$
-This gives the actual direction and magnitude used in updates.
-
-### (c) Key identity
-
-$$
-\nabla f(x)^T \Delta x_{\text{sd}} = -|\nabla f(x)|_*^2
-$$
-The directional derivative equals the negative squared dual norm of the gradient.
-
-
-
-### 12.4.2. The Steepest Descent Method
-
-The iterative update rule is:
-$$
-x_{k+1} = x_k + t_k , \Delta x_{\text{sd}},
-$$
-where $t_k > 0$ is a step size (from line search or a fixed rule).
-
-* For the Euclidean norm, this reduces to ordinary gradient descent.
-* For other norms, it adapts the search direction to the geometry of the problem.
-
-Convergence: Similar to gradient descent — linear for general convex functions, potentially faster when level sets are well-conditioned.
-
-
-
-### 12.4.3. Role of the Norm and Its Influence
+   
 
 The choice of norm determines:
 
@@ -222,65 +244,9 @@ Different norms yield different “geometries” of descent:
 | Quadratic $(x^T P x)^{1/2}$ | Ellipsoid       | Weighted $\ell_2$ | Scales direction by preconditioner $P^{-1}$ |
 
 Thus, the norm defines how “distance” and “steepness” are perceived, shaping how the algorithm moves through the landscape of $f(x)$.
+ 
 
-### (a) Euclidean Norm $|v|_2$
-
-$$
-\Delta x_{\text{nsd}} = -\frac{\nabla f(x)}{|\nabla f(x)|*2},
-\quad
-\Delta x*{\text{sd}} = -\nabla f(x)
-$$
-
-This is standard gradient descent.
-The direction is exactly opposite the gradient, and steps are isotropic (same scaling in all directions).
-
-
-
-### (b) Quadratic Norm $|v|_P = (v^T P v)^{1/2}$, with $P \succ 0$
-
-Here, $P$ defines an ellipsoidal metric.
-The dual norm is $|y|_* = (y^T P^{-1} y)^{1/2}$.
-
-$$
-\Delta x_{\text{sd}} = -P^{-1}\nabla f(x)
-$$
-
-This corresponds to preconditioned gradient descent, where $P$ rescales directions to counter anisotropy in level sets.
-
-Interpretation:
-
-* If $P$ approximates the Hessian, this becomes Newton’s method.
-* If $P$ is diagonal, it acts like an adaptive step size per coordinate.
-
-
-
-### (c) $\ell_1$-Norm
-
-$$
-\Delta x_{\text{nsd}} = -e_i, \quad i = \arg\max_j \left|\frac{\partial f}{\partial x_j}\right|
-$$
-
-and
-
-$$
-\Delta x_{\text{sd}} = -|\nabla f(x)|_\infty e_i
-$$
-
-The step moves along the coordinate with the largest gradient component, resembling a coordinate descent update.
-
-Geometric intuition:
-The $\ell_1$-unit ball is a diamond; its corners align with coordinate axes, so the steepest direction is along one axis at a time.
-
-
-
-* In $\ell_2$-norm: the unit ball is a circle → the steepest direction is exactly opposite the gradient.
-* In $\ell_1$-norm: the unit ball is a diamond → the steepest direction points to a corner (one coordinate).
-* In quadratic norms: the unit ball is an ellipsoid → the steepest direction follows the metric-adjusted gradient.
-
-Hence, the norm defines the geometry of what “steepest” means.
-
-
-## 12.5 Conjugate Gradient Method — Fast Optimization for Quadratic Objectives
+## Conjugate Gradient Method — Fast Optimization for Quadratic Objectives
 
 Gradient descent can be painfully slow when the level sets of the objective are long and skinny an indication that the Hessian has very different curvature in different directions (poor conditioning). The Conjugate Gradient (CG) method fixes this without forming or inverting the Hessian. It exploits the exact structure of quadratic functions to build advanced search directions that incorporate curvature information at almost no extra cost.
 
@@ -398,7 +364,7 @@ Practical Notes:
 
 
 
-## 12.6 Newton’s method and second-order methods
+## Newton’s method and second-order methods
 
 First-order methods (like gradient descent) only use gradient information. Newton’s method, in contrast, incorporates curvature information from the Hessian to take steps that better adapt to the local geometry of the function. This often leads to much faster convergence near the optimum.
 
@@ -541,7 +507,7 @@ For large, ill-conditioned, or nonsmooth problems, first-order or proximal metho
 
  
 
-## 12.8 Constraints and nonsmooth terms: projection and proximal methods
+## Constraints and nonsmooth terms: projection and proximal methods
 
 In practice, most convex objectives are not just “nice smooth $f(x)$”. They often have:
 
@@ -551,7 +517,7 @@ In practice, most convex objectives are not just “nice smooth $f(x)$”. They 
 
 Two core ideas handle this: projected gradient and proximal gradient.
 
-### 12.8.1 Projected gradient descent
+### Projected gradient descent
 
 Setting: Minimise convex, differentiable $f(x)$ subject to $x \in \mathcal{X}$, where $\mathcal{X}$ is a simple closed convex set (Chapter 4).
 
@@ -583,7 +549,7 @@ Examples of $\mathcal{X}$ where projection is cheap:
 
 Projected gradient is the constrained version of gradient descent. It maintains feasibility at every iterate.
 
-### 12.8.2 Proximal gradient (forward–backward splitting)
+### Proximal gradient (forward–backward splitting)
 
 Setting: Composite convex minimisation
 $$
@@ -640,7 +606,7 @@ This unifies constraints and regularisation.
 This is the standard tool for modern large-scale convex learning problems.
 
 
-## 12.9 Penalties, barriers, and interior-point methods
+## Penalties, barriers, and interior-point methods
 
 So far we’ve assumed either:
 
@@ -649,7 +615,7 @@ So far we’ve assumed either:
 
 What if the constraints are general convex inequalities $g_i(x)\le0$: Enter penalty methods, barrier methods, and (ultimately) interior-point methods.
 
-### 12.9.1 Penalty methods
+### Penalty methods
 
 Turn constrained optimisation into unconstrained optimisation by adding a penalty for violating constraints. Suppose we want
 $$
@@ -712,7 +678,7 @@ Procedure:
 3. End.
 
 
-### 12.9.2 Barrier methods
+### Barrier methods
 
 Penalty methods penalise violation *after* you cross the boundary. Barrier methods make it impossible to even touch the boundary. For inequality constraints $g_i(x) \le 0$, define the logarithmic barrier
 $$
@@ -780,7 +746,7 @@ Procedure:
       3. Increase barrier parameter:  $t_{k+1} = \mu\, t_k,$   which tightens the approximation and moves closer to the boundary.  
 3. End.
  
-### 12.9.3 Interior-point methods
+### Interior-point methods
 
 Interior-point methods combine barrier functions with Newton’s method to solve general convex programs:
 
@@ -868,7 +834,7 @@ which keeps iterates strictly feasible.
 
 
 
-## 12.10 Choosing the right method in practice
+## Choosing the right method in practice
 
 
 Case A. Smooth, unconstrained, very high dimensional.  
@@ -893,3 +859,126 @@ Case E. General convex program with inequalities $g_i(x)\le 0$.
 Use: interior-point methods.  
 Why: they solve smooth barrier subproblems via Newton steps and give primal–dual certificates through KKT and duality (Chapters 7–8).  
   
+
+
+## Mental Map
+
+``` text
+                Algorithms for Convex Optimization
+     Turning convex geometry + optimality conditions into solvers
+                              │
+                              ▼
+            Core question: how do we actually solve problems?
+   Choose an algorithm class that matches problem structure + scale
+                              │
+                              ▼
+     ┌────────────────────────────────────────────────────────────┐
+     │ Problem Classes  →  Method Classes                         │
+     │ Smooth unconstrained:        GD, Acceleration, Newton      │
+     │ Smooth + simple constraints: Projected gradient            │
+     │ Composite (smooth+nonsmooth): Proximal/coordinate/splitting│
+     │ General constrained convex:  Interior-point / primal–dual  │
+     └────────────────────────────────────────────────────────────┘
+                              │
+                              ▼
+     ┌───────────────────────────────────────────────────────────┐
+     │ First-Order Core: Gradient Descent                        │
+     │ x_{k+1} = x_k − α_k ∇f(x_k)                               │
+     │ Requirements: convex + L-smooth                           │
+     │ - Step size from L or line search                         │
+     │ - Rate (smooth convex): O(1/k)                            │
+     │ Geometry: move opposite supporting hyperplane slope       
+     └───────────────────────────────────────────────────────────┘
+                              │
+                              ▼
+     ┌───────────────────────────────────────────────────────────┐
+     │ Acceleration (Nesterov / Momentum)                        │
+     │ Two sequences: gradient at y_k + extrapolation to y_{k+1} │
+     │ - Rate (smooth convex): O(1/k^2)                          │
+     │ - Best possible for gradient-only methods                 │
+     │ Tradeoff: faster but more sensitive to tuning/noise       │
+     └───────────────────────────────────────────────────────────┘
+                              │
+                              ▼
+     ┌──────────────────────────────────────────────────────────────┐
+     │ Nonsmooth First-Order: Subgradient Descent                   │
+     │ x_{k+1} = x_k − α_k g_k,   g_k ∈ ∂f(x_k)                     │
+     │ - Works for convex nonsmooth objectives                      │
+     │ - Needs diminishing step sizes                               │
+     │ - Worst-case rate: O(1/√k)                                   │
+     │ Use when: only subgradients available / simple implementation│
+     └──────────────────────────────────────────────────────────────┘
+                              │
+                              ▼
+     ┌───────────────────────────────────────────────────────────┐
+     │ Fixing Nonsmoothness: Proximal & Smoothing                │
+     │ Prox operator: prox_{αR}(y)=argmin_x R(x)+(1/2α)‖x−y‖²    │
+     │ - Handles ℓ₁, indicators, TV, etc.                        │
+     │ Smoothing: Huber / softplus / log-sum-exp                 │
+     │ - Enables fast smooth methods                             │
+     └───────────────────────────────────────────────────────────┘
+                              │
+                              ▼
+     ┌─────────────────────────────────────────────────────────────┐
+     │ Steepest Descent = Gradient Descent under a chosen norm     │
+     │ Δx_nsd = argmin_{‖v‖=1} ∇f(x)ᵀv                             │
+     │ - Dual norm controls gradient magnitude                     │
+     │ - ℓ₂ → standard GD                                          │
+     │ - Quadratic norm → preconditioned GD / Newton-like          │
+     │ - ℓ₁ → coordinate-like steps                                │
+     │ Purpose: change geometry to reduce anisotropy / improve rate│
+     └─────────────────────────────────────────────────────────────┘
+                              │
+                              ▼
+     ┌─────────────────────────────────────────────────────────────┐
+     │ Quadratic Structure: Conjugate Gradient (CG)                │
+     │ Solve: ½xᵀAx − bᵀx, A≻0  (equivalently Ax=b)                │
+     │ - Builds A-conjugate directions (Hessian-orthogonal)        │
+     │ - Uses only matrix–vector products Ap                       │
+     │ - Converges in ≤ n steps (exact arithmetic)                 │
+     │ - Practical iterations ~ O(√κ) with κ=λ_max/λ_min           │
+     │ - Preconditioning is key for speed                          │
+     └─────────────────────────────────────────────────────────────┘
+                              │
+                              ▼
+     ┌─────────────────────────────────────────────────────────────┐
+     │ Second-Order Methods: Newton & Variants                     │
+     │ Newton step:  ∇²f(x_k) d = −∇f(x_k)                         │
+     │ - Quadratic local model → fast local convergence            │
+     │ - Needs line search / trust region for robustness           │
+     │ Gauss–Newton / Levenberg–Marquardt: least-squares structure │
+     │ Quasi-Newton (BFGS/L-BFGS): Hessian inverse approximations  │
+     │ Use when: moderate dimension or efficient linear solves     │
+     └───────────────────────────────────────────────────────────┘
+                              │
+                              ▼
+     ┌──────────────────────────────────────────────────────────────┐
+     │ Handling Constraints: Projection & Proximal Splitting        │
+     │ Projected GD:  y=x−α∇f(x);  x⁺=Π_X(y)                        │
+     │ Proximal gradient: y=x−α∇f(x); x⁺=prox_{αR}(y)               │
+     │ Unification: indicator_R(X) ⇒ prox = projection              │
+     │ Use when: constraints/regularizers have cheap prox/project   │
+     └──────────────────────────────────────────────────────────────┘
+                              │
+                              ▼
+     ┌─────────────────────────────────────────────────────────────┐
+     │ General Inequalities: Penalties → Barriers → Interior-Point │
+     │ Penalty: f(x)+ρ Σ φ(g_i(x))                                 │
+     │ Barrier: tf(x) − Σ log(−g_i(x))  (strict feasibility)       │
+     │ Interior-point: Newton steps on (primal–dual) perturbed KKT │
+     │ - Few iterations, high accuracy, solver backbone for LP/QP  │
+     │ - Uses duality gap certificates                             │
+     └─────────────────────────────────────────────────────────────┘
+                              │
+                              ▼
+                 Practical selection (the decision logic)
+     ┌─────────────────────────────────────────────────────────────┐
+     │ Huge-scale smooth → GD / accelerated / L-BFGS               │
+     │ Moderate smooth, high accuracy → Newton / quasi-Newton      │
+     │ Simple constraints → projected gradient                     │
+     │ Smooth + nonsmooth regularizer → proximal gradient / FISTA  │
+     │ General constraints → interior-point / primal–dual          │
+     │ Quadratic / SPD linear systems → CG (+ preconditioning)     │
+     └─────────────────────────────────────────────────────────────┘
+                           
+```

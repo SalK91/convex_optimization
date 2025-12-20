@@ -7,7 +7,7 @@ Most real-world learning and estimation problems must balance two competing goal
 Regularization formalizes this trade-off by adding a convex penalty term to the objective. This chapter develops the structure, interpretation, and algorithms behind regularized convex problems, and shows how regularization corresponds directly to Pareto-optimal trade-offs (Chapter 10) between data fidelity and model simplicity.
 
 
-## 11.1 Motivation: Fit vs. Complexity
+## Motivation: Fit vs. Complexity
 
 Suppose we wish to estimate parameters $x$ from data via a loss function $f(x)$. If the data are noisy or the model is high-dimensional, solutions minimizing $f$ alone may be unstable or overly complex. We introduce a regularizer $R(x)$, typically convex, to encourage desirable structure:
 
@@ -24,7 +24,7 @@ $$
 This is a scalarized multi-objective optimization problem of $(f, R)$.
 
 
-## 11.2 Bicriterion Optimization and the Pareto Frontier
+## Bicriterion Optimization and the Pareto Frontier
 
 Regularization corresponds to the bicriterion objective:
 
@@ -47,7 +47,7 @@ For convex $f$ and $R$:
 Thus, tuning $\lambda$ moves the solution along the fit–complexity frontier.
 
  
-## 11.3 Why Control the Size of the Solution?
+## Why Control the Size of the Solution?
 
 Inverse problems such as $Ax \approx b$ are often ill-posed or ill-conditioned:
 
@@ -75,7 +75,7 @@ Benefits of L2 regularization:
 Interpretation: Regularization trades variance for stability by damping directions in which the data provide little information.
 
  
-## 11.4 Constrained vs. Penalized Formulations
+## Constrained vs. Penalized Formulations
 
 Regularized problems can be expressed equivalently as constrained problems:
 
@@ -116,7 +116,7 @@ Here:
 Thus $\lambda$ is the Lagrange multiplier controlling the slope of the Pareto frontier.
 
  
-## 11.5 Common Regularizers and Their Effects
+## Common Regularizers and Their Effects
 
 ### (a) L2 Regularization (Ridge)
 
@@ -167,7 +167,7 @@ $$
 Each regularizer defines a geometry for the solution — ellipsoids, diamonds, polytopes, or spectral shapes.
 
  
-## 11.6 Choosing the Regularization Parameter $\lambda$
+## Choosing the Regularization Parameter $\lambda$
 
 ### (a) Trade-Off Behavior
 
@@ -197,7 +197,7 @@ Guidelines:
 - Regularization paths: computing $x^*(\lambda)$ for many $\lambda$.
 
  
-## 11.7 Algorithmic View
+## Algorithmic View
 
 Most regularized problems have the form:
 
@@ -218,7 +218,7 @@ Common algorithms:
 Proximal operators allow efficient handling of nonsmooth penalties. FISTA achieves optimal $O(1/k^2)$ rate for smooth+convex problems.
 
  
-## 11.8 Bayesian Interpretation
+## Bayesian Interpretation
 
 Regularization corresponds to MAP (maximum a posteriori) inference.
 

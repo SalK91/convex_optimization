@@ -7,12 +7,9 @@ Many important convex objectives in machine learning are not differentiable ever
 - the hinge loss $ \max\{0,\, 1 - y w^\top x\} $ used in SVMs,
 - regularisers like total variation or indicator functions of convex sets.
 
-Although these functions have “kinks”, they remain convex—and convexity guarantees the existence of supporting hyperplanes at every point. Subgradients formalise this idea and allow optimisation algorithms to operate even when no derivative exists.
+Although these functions have “kinks”, they remain convex—and convexity guarantees the existence of supporting hyperplanes at every point.
 
-This chapter introduces subgradients, subdifferentials, subgradient calculus, and the basic subgradient method.
-
-
-## 6.1 Subgradients and the Subdifferential
+## Subgradients and the Subdifferential
 
 Let $f : \mathbb{R}^n \to \mathbb{R}$ be convex.  A vector $g \in \mathbb{R}^n$ is a subgradient of $f$ at $x$ if
 
@@ -46,7 +43,7 @@ Properties:
 Thus, subgradients generalise gradients to nonsmooth convex functions, preserving the same geometric meaning.
 
 
-## 6.2 Examples
+## Examples
 
 ### Absolute value in 1D
 
@@ -101,9 +98,8 @@ $$
 
 This structure underlies SVM hinge loss and ReLU-type functions.
 
----
 
-## 6.3 Subgradient Optimality Condition
+## Subgradient Optimality Condition
 
 For the unconstrained convex minimisation problem
 
@@ -123,7 +119,7 @@ Interpretation:
 - Geometrically, the supporting hyperplane at $x^\star$ is horizontal, forming the flat bottom of the convex bowl.
 - This generalises the smooth condition $ \nabla f(x^\star)=0 $.
 
-## 6.4 Subgradient Calculus (Useful Rules)
+## Subgradient Calculus
 
 Subgradients satisfy powerful calculus rules that allow us to work with complex functions. Let $f$ and $g$ be convex.
 
@@ -153,89 +149,7 @@ $$
 
 This supports models based on hinge losses, margin-maximisation, and piecewise-linear architectures.
 
-## 6.5 Subgradient Methods
 
-Even when $f$ is not differentiable, we can minimise it using subgradient descent:
-
-$$
-x_{k+1} = x_k - \alpha_k g_k,
-\qquad g_k \in \partial f(x_k).
-$$
-
-Key features:
-
-- Requires only a subgradient (no differentiability needed).
-- Works for any convex function.
-- Stepsizes must typically decrease (e.g. $ \alpha_k = c/\sqrt{k} $, $ \alpha_k = c/k $).
-- Guaranteed convergence for convex $f$, but generally slow.
-
-### Convergence rates (worst case)
-
-- Smooth convex gradient descent: $O(1/k)$ or $O(1/k^2)$.  
-- Nonsmooth subgradient descent:  
-  $$
-  f(x_k) - f(x^\star) = O(1/\sqrt{k}).
-  $$
-
-This slower rate reflects the lack of curvature information at kinks.
-
-### Why it still matters in ML
-
-Many training objectives behave nonsmoothly:
-
-- SVM hinge loss  
-- $ \ell_1 $-regularised models (sparse optimisation)  
-- ReLUs and piecewise-linear networks  
-- Projections onto convex sets  
-
-Even modern deep-learning optimisers operate as subgradient methods whenever the network contains nonsmooth operations.
-
-
-## 6.6 Proximal and Smoothed Alternatives
-
-Subgradient descent can be slow. Two important families of methods overcome this:
-
-### (1) Proximal methods
-
-For a convex function $f$, the proximal operator is
-$$
-\mathrm{prox}_{\alpha f}(y)
-=
-\arg\min_x \left\{
-f(x) + \frac{1}{2\alpha}\|x-y\|^2
-\right\}.
-$$
-
-Proximal algorithms (e.g., ISTA, FISTA, ADMM) can handle nonsmooth terms like:
-
-- $ \ell_1 $ regularisation,
-- indicator functions of convex sets,
-- total variation penalties.
-
-They achieve faster and more stable convergence than basic subgradient descent.
-
-
-### (2) Smoothing techniques
-
-Many nonsmooth convex functions have smooth approximations:
-
-- Replace $ |t| $ with the Huber loss.
-- Replace $ \max\{0,z\} $ with softplus.
-- Replace $ \max_i(a_i^\top x) $ with log-sum-exp, a smooth convex approximation.
-
-Smoothing preserves convexity while allowing the use of fast gradient methods.
-
-
-## Summary
-
-- Nonsmooth convex functions arise naturally in ML.  
-- Subgradients generalise gradients: they give supporting hyperplanes.  
-- Optimality: $0 \in \partial f(x^\star)$.  
-- Subgradient calculus enables reasoning about complex nonsmooth models.  
-- Subgradient descent converges globally but slowly.  
-- Proximal and smoothing methods yield faster practical algorithms.
-
-Subgradients complete the picture of convex analysis by extending optimisation tools beyond differentiable functions, setting the stage for modern first-order methods.
 
   
 

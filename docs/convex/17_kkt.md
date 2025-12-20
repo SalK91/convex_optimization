@@ -11,7 +11,7 @@ This chapter unifies these ideas. We begin with unconstrained minimization and t
 In constrained problems, the gradient of the objective cannot vanish freely. Instead, it must be balanced by “forces’’ coming from the constraints. Lagrange multipliers measure these forces, and the KKT conditions express this balance algebraically and geometrically.
 
 
-## 8.1 Unconstrained Convex Minimization
+## Unconstrained Convex Minimization
 
 Consider the problem
 $$
@@ -34,7 +34,7 @@ Intuition:
 In machine learning, this is the foundation of back-propagation and weight training: each update follows the negative gradient of the loss.
 
 
-## 8.2 Equality-Constrained Problems and Lagrange Multipliers
+## Equality-Constrained Problems and Lagrange Multipliers
 
 Now consider minimizing $f$ subject to equality constraints:
 $$
@@ -71,7 +71,7 @@ Geometric meaning:
 In other words, the objective tries to decrease, the constraints push back, and at the optimum these forces balance.
 
  
-## 8.3 Inequality Constraints and the KKT Conditions
+## Inequality Constraints and the KKT Conditions
 
 Now consider the general convex problem:
 $$
@@ -97,19 +97,19 @@ with:
 
 A point $x^*$ with multipliers $(\lambda^*,\mu^*)$ satisfies the KKT conditions:
 
-### 1. Primal feasibility
+### Primal feasibility
 $$
 g_i(x^*) \le 0,\quad \forall i,
 \qquad
 h_j(x^*) = 0,\quad \forall j.
 $$
 
-### 2. Dual feasibility
+### Dual feasibility
 $$
 \mu_i^* \ge 0,\quad \forall i.
 $$
 
-### 3. Stationarity
+### Stationarity
 $$
 \nabla f(x^*) 
 + \sum_{j=1}^p \lambda_j^* \nabla h_j(x^*)
@@ -117,7 +117,7 @@ $$
 = 0.
 $$
 
-### 4. Complementary slackness
+### Complementary slackness
 $$
 \mu_i^*\, g_i(x^*) = 0, \quad i=1,\dots,m.
 $$
@@ -129,7 +129,7 @@ Complementary slackness expresses a clear dichotomy:
 
 Only active constraints can push back against the objective.
 
-## 8.4 Slater’s Condition — Guaranteeing Strong Duality
+## Slater’s Condition — Guaranteeing Strong Duality
 
 The KKT conditions always provide *necessary* conditions for optimality. For them to also be *sufficient* (and to guarantee zero duality gap), the problem must satisfy a regularity condition.
 
@@ -170,9 +170,8 @@ $$
 
 This link between geometry (interior feasibility) and algebra (zero gap) is fundamental.
 
----
-
-## 8.5 Geometric and Physical Interpretation
+ 
+## Geometric and Physical Interpretation
 
 The KKT conditions describe an equilibrium of forces:
 

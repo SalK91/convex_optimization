@@ -6,7 +6,7 @@ Convex optimization gives us strong guarantees — every local minimum is global
 But the moment convexity is lost, these guarantees vanish, and new techniques become necessary.
 
 
-## 19.1 The Landscape of Nonconvex Optimization
+## The Landscape of Nonconvex Optimization
 
 A nonconvex function $f:\mathbb{R}^n \to \mathbb{R}$ violates convexity; i.e., for some $x, y$ and $\theta \in (0,1)$,
 $$
@@ -29,7 +29,7 @@ This function has multiple stationary points:
 Unlike convex problems, gradient descent may end in different minima depending on where it starts.
 
  
-## 19.2 Local vs. Global Minima
+## Local vs. Global Minima
 
 A point $x^*$ is a local minimum if:
 $$
@@ -44,7 +44,7 @@ $$
 In convex problems, every local minimum is automatically global. In nonconvex problems, local minima can be arbitrarily bad — and there may be exponentially many of them.
 
  
-## 19.3 Classes of Nonconvex Problems
+## Classes of Nonconvex Problems
 
 Nonconvex problems appear in several distinct forms:
 
@@ -58,7 +58,7 @@ Nonconvex problems appear in several distinct forms:
 Each category requires different algorithmic strategies — from stochastic gradient methods to evolutionary heuristics or surrogate modeling.
 
  
-## 19.4 Local Optimization Strategies
+## Local Optimization Strategies
 
 Even in nonconvex settings, local optimization remains useful when:
 - The problem is nearly convex (e.g., locally convex around good minima),
@@ -75,7 +75,7 @@ However, convergence is only to a *stationary point* — not necessarily a minim
 Escaping saddles: Adding small random noise (stochasticity) helps escape flat saddle regions common in high-dimensional problems.
 
  
-## 19.5 Global Optimization Strategies
+## Global Optimization Strategies
 
 To seek the *global* minimum, algorithms must explore the search space more broadly.  
 Common strategies include:
@@ -93,7 +93,7 @@ Common strategies include:
    Maintain a swarm or population of candidate solutions evolving by selection and variation — leading to metaheuristic algorithms like GA and PSO.
 
  
-## 19.6 Theoretical Challenges
+## Theoretical Challenges
 
 Without convexity, most strong results vanish:
 
@@ -107,14 +107,14 @@ However, theory is not hopeless:
 - Random initialization and overparameterization often aid convergence to global minima in practice.
 
 
-## 19.7 Geometry of Saddle Points
+## Geometry of Saddle Points
 
 A saddle point satisfies $\nabla f(x)=0$ but is not a local minimum because the Hessian has both positive and negative eigenvalues.
 
 In high dimensions, saddle points are far more common than local minima. Modern optimization methods (SGD, momentum) tend to escape saddles due to their stochastic nature.
 
 
-## 19.8 Deterministic vs. Stochastic Global Methods
+## Deterministic vs. Stochastic Global Methods
 
 | Deterministic Methods | Stochastic Methods |
 |----------------------------|------------------------|
@@ -125,7 +125,7 @@ In high dimensions, saddle points are far more common than local minima. Modern 
 In real-world large-scale problems, stochastic global optimization is often the only feasible approach.
 
  
-## 19.9 A Taxonomy of Optimization Beyond Convexity
+## A Taxonomy of Optimization Beyond Convexity
 
 | Family | Typical Algorithms | When to Use |
 |-------------|------------------------|-----------------|

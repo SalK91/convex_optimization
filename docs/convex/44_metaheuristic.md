@@ -1,14 +1,12 @@
 # Chapter 21: Metaheuristic and Evolutionary Algorithms
 
-When optimization problems are highly nonconvex, discrete, or black-box, deterministic methods often fail to find good solutions.  
-In these settings, metaheuristic algorithms—inspired by nature, biology, and collective behavior—provide robust and flexible alternatives.
+When optimization problems are highly nonconvex, discrete, or black-box, deterministic methods often fail to find good solutions.  In these settings, metaheuristic algorithms—inspired by nature, biology, and collective behavior—provide robust and flexible alternatives.
 
-Metaheuristics are general-purpose stochastic search methods that rely on repeated sampling, adaptation, and survival of the fittest ideas.  
-They are especially effective when the landscape is rugged, multimodal, or not well understood.
+Metaheuristics are general-purpose stochastic search methods that rely on repeated sampling, adaptation, and survival of the fittest ideas. They are especially effective when the landscape is rugged, multimodal, or not well understood.
 
 
 
-## 21.1 Principles of Metaheuristic Optimization
+## Principles of Metaheuristic Optimization
 
 All metaheuristics share three key principles:
 
@@ -24,18 +22,18 @@ All metaheuristics share three key principles:
 Unlike local methods, metaheuristics balance exploration (global search) and exploitation (local refinement).
 
 
-## 21.2 Genetic Algorithms (GA)
+## Genetic Algorithms (GA)
 
-### 21.2.1 Biological Inspiration
+### Biological Inspiration
 
 Genetic Algorithms mimic natural evolution, where populations evolve toward higher fitness through selection, crossover, and mutation.
 
-### 21.2.2 Representation
+### Representation
 
 A solution (individual) is represented as a chromosome—often a binary string, vector of reals, or permutation.  
 Each position (gene) encodes part of the decision variable.
 
-### 21.2.3 Algorithm Outline
+### Algorithm Outline
 
 1. Initialize a population $\{x_i\}_{i=1}^N$ randomly.  
 2. Evaluate fitness $f(x_i)$ for all individuals.  
@@ -47,22 +45,22 @@ Each position (gene) encodes part of the decision variable.
 
 5. Form a new population and repeat until convergence.
 
-### 21.2.4 Crossover and Mutation Examples
+### Crossover and Mutation Examples
 - Single-point crossover: exchange genes after a random index.  
 - Gaussian mutation: add small noise to continuous parameters.  
 
-### 21.2.5 Strengths and Weaknesses
+### Strengths and Weaknesses
 | Strengths | Weaknesses |
 |----------------|----------------|
 | Highly parallel, robust, domain-independent | Requires many function evaluations |
 | Effective for combinatorial and discrete optimization | Parameter tuning (mutation, crossover rates) is nontrivial |
 
  
-## 21.3 Differential Evolution (DE)
+## Differential Evolution (DE)
 
 Differential Evolution is a simple yet powerful algorithm for continuous optimization.
 
-### 21.3.1 Core Idea
+### Core Idea
 Mutation is performed using differences of population members:
 $$
 v_i = x_{r1} + F(x_{r2} - x_{r3}),
@@ -75,13 +73,13 @@ u_i = \text{crossover}(x_i, v_i),
 $$
 and selection chooses between $x_i$ and $u_i$ based on objective value.
 
-### 21.3.2 Features
+### Features
 - Self-adaptive exploration of the search space.
 - Suitable for continuous, multimodal functions.
 - Simple to implement, with few control parameters.
 
  
-## 21.4 Particle Swarm Optimization (PSO)
+## Particle Swarm Optimization (PSO)
 
 Inspired by social behavior of birds and fish, Particle Swarm Optimization maintains a swarm of particles moving through the search space.
 
@@ -101,20 +99,20 @@ where:
 
 Particles balance individual learning (self-experience) and social learning (group knowledge).
 
-### 21.4.1 Convergence Behavior
+### Convergence Behavior
 Initially, the swarm explores widely; as iterations proceed, velocities decrease, and the swarm converges near optima.
 
-### 21.4.2 Strengths
+### Strengths
 - Few parameters, easy to implement.
 - Works well for noisy or discontinuous problems.
 - Naturally parallelizable.
 
-## 21.5 Simulated Annealing (SA)
+## Simulated Annealing (SA)
 
 Simulated Annealing is one of the earliest and most fundamental stochastic optimization algorithms. It is inspired by annealing in metallurgy — a physical process in which a material is heated and then slowly cooled to minimize structural defects and reach a low-energy crystalline state. The key idea is to imitate this gradual “cooling” in the search for a global minimum.
 
  
-### 21.5.1 Physical Analogy
+### Physical Analogy
 
 In thermodynamics, a system at temperature $T$ has probability of occupying a state with energy $E$ given by the Boltzmann distribution:
 
@@ -131,7 +129,7 @@ Simulated Annealing maps this principle to optimization by treating:
 - The temperature $T$ as a control parameter determining randomness.
 
 
-### 21.5.2 Algorithm Outline
+### Algorithm Outline
 
 1. Initialization
    
@@ -157,7 +155,7 @@ Simulated Annealing maps this principle to optimization by treating:
 
       - Repeat until $T$ becomes sufficiently small or the system stabilizes.
 
-### 21.5.3 Interpretation
+### Interpretation
 
 - At high temperatures, SA accepts both better and worse moves → exploration.  
 
@@ -166,7 +164,7 @@ Simulated Annealing maps this principle to optimization by treating:
 This balance allows SA to escape local minima and approach the global optimum over time.
 
 
-### 21.5.4 Cooling Schedules
+### Cooling Schedules
 
 The temperature schedule determines convergence quality:
 
@@ -182,9 +180,9 @@ A slower cooling schedule improves accuracy but increases computational cost.
 
 
 
-## 21.6 Ant Colony Optimization (ACO)
+## Ant Colony Optimization (ACO)
 
-### 21.6.1 Biological Basis
+### Biological Basis
 Ant Colony Optimization models how real ants find shortest paths using pheromone trails.
 
 Each artificial ant builds a solution step by step, choosing components probabilistically based on pheromone intensity $\tau_{ij}$ and heuristic visibility $\eta_{ij}$:
@@ -192,7 +190,7 @@ $$
 P_{ij} = \frac{[\tau_{ij}]^\alpha [\eta_{ij}]^\beta}{\sum_k [\tau_{ik}]^\alpha [\eta_{ik}]^\beta}.
 $$
 
-### 21.6.2 Pheromone Update
+### Pheromone Update
 After all ants construct their tours:
 $$
 \tau_{ij} \leftarrow (1 - \rho)\tau_{ij} + \sum_{\text{ants}} \Delta \tau_{ij},
@@ -201,9 +199,10 @@ where $\rho$ controls evaporation and $\Delta\tau_{ij}$ reinforces paths used by
 
 ACO excels at combinatorial problems like the Traveling Salesman Problem (TSP) and scheduling.
 
-## 21.7 Exploration vs. Exploitation
+## Exploration vs. Exploitation
 
 Every metaheuristic must balance:
+
 - Exploration: sampling diverse regions to escape local minima.  
 - Exploitation: refining known good solutions to reach local optima.
 
@@ -216,7 +215,7 @@ Every metaheuristic must balance:
 Adaptive control of parameters (e.g., mutation rate, inertia weight) helps maintain balance dynamically.
 
 
-## 21.8 Hybrid and Memetic Algorithms
+## Hybrid and Memetic Algorithms
 
 Hybrid (or memetic) algorithms combine global metaheuristic exploration with local optimization refinement.
 
@@ -228,7 +227,7 @@ Example:
 This hybridization often yields faster convergence and improved accuracy.
 
  
-## 21.9 Performance and Practical Tips
+## Performance and Practical Tips
 
 | Aspect | Guideline |
 |-------------|---------------|
@@ -238,11 +237,5 @@ This hybridization often yields faster convergence and improved accuracy.
 | Parallelism | Evaluate populations concurrently for efficiency |
 | Stopping Criteria | Use both iteration limits and stagnation detection |
 
-Metaheuristics are heuristic by design — they do not guarantee global optimality, but offer practical success across many fields.
+Metaheuristics are heuristic by design — they do not guarantee global optimality, but offer practical success across many fields. Metaheuristic and evolutionary algorithms transform optimization into a process of adaptation and learning. Through populations, randomness, and natural analogies, they enable search in landscapes too complex for calculus or convexity.
 
----
-
-
-Metaheuristic and evolutionary algorithms transform optimization into a process of adaptation and learning. Through populations, randomness, and natural analogies, they enable search in landscapes too complex for calculus or convexity.
-
-In the next chapter, we turn to modern stochastic optimizers that bridge theoretical foundations and practical success in machine learning—methods like Adam, RMSProp, and Lion that dominate large-scale nonconvex optimization.

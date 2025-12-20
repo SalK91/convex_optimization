@@ -3,7 +3,7 @@
 Optimization has always been a dialogue between mathematics and computation.  From convex analysis and first-order methods to stochastic, heuristic, and learned algorithms, the field has evolved to match the increasing complexity of modern systems. This final chapter looks ahead — toward optimization methods that learn, adapt, and reason — merging human insight, data-driven modeling, and algorithmic intelligence.
 
 
-## 23.1 From Fixed Algorithms to Adaptive Systems
+## From Fixed Algorithms to Adaptive Systems
 
 Traditional optimization algorithms are designed by experts and fixed in form:
 
@@ -20,7 +20,7 @@ $$
 But real-world problems change over time — data evolves, constraints shift, and objectives drift. In such environments, adaptive optimizers adjust their internal behavior online, learning to respond to context rather than following a static rule.
 
 
-## 23.2 Optimization as Learning
+## Optimization as Learning
 
 Modern research reframes optimization itself as a learning problem. Rather than designing the optimizer, we can train it to perform well over a family of tasks.
 
@@ -35,7 +35,7 @@ where $\mathcal{D}$ is a distribution over problem instances.
 This approach produces optimizers that generalize to new problems, adapting their step sizes, directions, and search strategies automatically.
 
 
-## 23.3 Reinforcement-Learned Optimization
+## Reinforcement-Learned Optimization
 
 Reinforcement learning (RL) provides a natural framework for sequential decision-making in optimization.
 
@@ -55,7 +55,7 @@ RL-based optimizers have been successfully applied in:
 - Online control systems  
 - Adaptive sampling and scheduling
 
-## 23.4 Neuroevolution and Population Learning
+## Neuroevolution and Population Learning
 Neuroevolution applies evolutionary algorithms to optimize neural network architectures or weights directly.  
 Unlike gradient-based training, it requires no differentiability and is robust to nonconvex or discrete search spaces.
 
@@ -67,7 +67,7 @@ $$
 
 They parallelize easily, scale well, and integrate with reinforcement learning for hybrid exploration–exploitation.
 
-## 23.5 Optimization and Generative Models
+## Optimization and Generative Models
 
 Generative models like Variational Autoencoders (VAEs) and Diffusion Models have introduced a new perspective:  
 Optimization can occur in the latent space of data distributions rather than directly in parameter space.
@@ -80,7 +80,7 @@ For example:
 
 This blending of optimization and generation enables creativity — from molecule design to engineering shape synthesis.
 
-## 23.6 Federated and Decentralized Optimization
+## Federated and Decentralized Optimization
 
 The rise of distributed data (mobile devices, IoT, and edge computing) calls for federated optimization.  
 Each client $i$ holds local data $D_i$ and solves:
@@ -100,7 +100,7 @@ Challenges include:
 - Privacy and fairness constraints
 
 
-## 23.7 Optimization Under Uncertainty
+## Optimization Under Uncertainty
 
 Modern systems often face uncertain environments:
 - Random perturbations in data  
@@ -127,7 +127,7 @@ Approaches to manage uncertainty include:
 These frameworks connect convex theory with probabilistic reasoning and data-driven inference.
 
 
-## 23.8 Quantum and Analog Optimization
+## Quantum and Analog Optimization
 
 As hardware advances, new paradigms emerge:
 - Quantum Annealing: uses quantum tunneling to escape local minima.
@@ -137,7 +137,7 @@ As hardware advances, new paradigms emerge:
 Though still experimental, these systems promise exponential speedups or energy-efficient optimization for structured problems.
 
 
-## 23.9 Optimization and Intelligence
+## Optimization and Intelligence
 
 Optimization now underpins not only engineering but also learning, reasoning, and intelligence.  Deep learning, reinforcement learning, and symbolic AI all rely on iterative improvement processes — in essence, optimization loops.
 

@@ -6,7 +6,7 @@ Unlike gradient-based methods, which rely on analytical or automatic differentia
 
 
 
-## 20.1 Motivation and Challenges
+## Motivation and Challenges
 
 Let $f: \mathbb{R}^n \to \mathbb{R}$ be an objective function.  
 
@@ -23,7 +23,7 @@ Derivative-free optimization is thus a trade-off between exploration and exploit
 
 
 
-## 20.2 Classification of Derivative-Free Methods
+## Classification of Derivative-Free Methods
 
 | Category | Representative Algorithms | Main Idea |
 |---------------|-------------------------------|----------------|
@@ -33,11 +33,11 @@ Derivative-free optimization is thus a trade-off between exploration and exploit
 | Probabilistic / Bayesian | Bayesian Optimization | Use probabilistic surrogate models to guide exploration |
 
  
-## 20.3 Direct Search Methods
+## Direct Search Methods
 
 Direct search algorithms evaluate the objective function at structured sets of points and use comparisons, not gradients, to decide where to move.
 
-### 20.3.1 Nelder–Mead Simplex Method
+### Nelder–Mead Simplex Method
 Perhaps the most famous derivative-free algorithm, Nelder–Mead maintains a simplex — a polytope of $n+1$ vertices in $\mathbb{R}^n$.
 
 At each iteration:
@@ -49,7 +49,7 @@ At each iteration:
 Simple, intuitive, and effective for small-scale smooth problems, though it lacks formal convergence guarantees in general.
 
 
-### 20.3.2 Pattern Search Methods
+### Pattern Search Methods
 These methods (also called coordinate search or compass search) probe the function along coordinate directions or pre-defined patterns.
 
 Typical update rule:
@@ -61,15 +61,15 @@ where $d_i$ is a direction from a finite set (e.g., coordinate axes).
 If a direction yields improvement, move there; otherwise, shrink $\Delta_k$.
 
 
-### 20.3.3 Mesh Adaptive Direct Search (MADS)
+### Mesh Adaptive Direct Search (MADS)
 MADS refines pattern search by maintaining a mesh of candidate points and adaptively changing its resolution. It offers provable convergence to stationary points for certain classes of nonsmooth problems.
 
 
-## 20.4 Model-Based Methods
+## Model-Based Methods
 
 Instead of exploring blindly, model-based methods construct an approximation of the objective function from past evaluations.
 
-### 20.4.1 Trust-Region DFO
+### Trust-Region DFO
 A local model $m_k(x)$ (often quadratic) is built to approximate $f$ near the current iterate $x_k$:
 $$
 m_k(x) \approx f(x_k) + g_k^\top (x - x_k) + \tfrac{1}{2}(x - x_k)^\top H_k (x - x_k).
@@ -81,15 +81,15 @@ $$
 The trust region size $\Delta_k$ adapts based on how well $m_k$ predicts true function values.
 
  
-### 20.4.2 BOBYQA (Bound Optimization BY Quadratic Approximation)
+### BOBYQA (Bound Optimization BY Quadratic Approximation)
 BOBYQA builds and maintains a quadratic model using interpolation of previously evaluated points. It is highly efficient for medium-scale problems with simple box constraints and no noise.
 
  
-## 20.5 Evolution Strategies and Population Methods
+## Evolution Strategies and Population Methods
 
 These methods maintain a population of candidate solutions and update them using statistical principles.
 
-### 20.5.1 Covariance Matrix Adaptation Evolution Strategy (CMA-ES)
+### Covariance Matrix Adaptation Evolution Strategy (CMA-ES)
 CMA-ES is a powerful stochastic search algorithm.  
 It iteratively samples new points from a multivariate Gaussian distribution:
 $$
@@ -103,7 +103,7 @@ CMA-ES is invariant to linear transformations and excels in ill-conditioned, noi
 
 --- 
 
-### 20.5.2 Differential Evolution (DE)
+### Differential Evolution (DE)
 DE evolves a population $\{x_i\}$ via vector differences:
 $$
 v_i = x_{r1} + F(x_{r2} - x_{r3}),
@@ -122,11 +122,11 @@ where $r1, r2, r3$ are random distinct indices and $F$ controls mutation strengt
 DE combines simplicity and robustness, performing well across continuous and discrete spaces.
 
  
-## 20.6 Bayesian Optimization
+## Bayesian Optimization
 
 When function evaluations are *expensive* (e.g., training a neural network or running a CFD simulation), Bayesian Optimization (BO) is preferred.
 
-### 20.6.1 Core Idea
+### Core Idea
 Model the objective as a random function $f(x) \sim \mathcal{GP}(m(x), k(x,x'))$ (Gaussian Process prior).  
 After each evaluation, update the posterior mean and variance to quantify uncertainty.
 
@@ -143,7 +143,7 @@ Common acquisition functions:
 - Upper Confidence Bound (UCB)
 
 
-### 20.6.2 Surrogate Models Beyond Gaussian Processes
+### Surrogate Models Beyond Gaussian Processes
 When dimensionality is high or data is noisy, other surrogate models may replace GPs:
 - Tree-structured Parzen Estimators (TPE)
 - Random forests (SMAC)
@@ -152,7 +152,7 @@ When dimensionality is high or data is noisy, other surrogate models may replace
 These variants enable Bayesian optimization in complex or discrete search spaces.
 
 
-## 20.7 Hybrid and Adaptive Approaches
+## Hybrid and Adaptive Approaches
 
 Modern applications often combine derivative-free and gradient-based techniques:
 
@@ -164,7 +164,7 @@ Such hybridization reflects a pragmatic view: no single optimizer is best — ad
 
 
 
-## 20.8 Practical Considerations
+## Practical Considerations
 
 | Aspect | Guideline |
 |-------------|---------------|

@@ -5,7 +5,7 @@ Optimization problems seek points where no infinitesimal movement can improve th
 These conditions form the conceptual bridge between unconstrained minimization and the Karush–Kuhn–Tucker (KKT) framework developed in the next chapter.
 
  
-## 7.1 Orders of Optimality: Why First Order is Enough in Convex Optimization
+## Orders of Optimality: Why First Order is Enough in Convex Optimization
 
 For a differentiable function $f : \mathbb{R}^n \to \mathbb{R}$, the “order’’ of an optimality condition refers to how many derivatives (or generalized derivatives) we examine around a candidate minimizer $x^\star$:
 
@@ -31,7 +31,7 @@ Therefore:
 As a result, in convex optimization we typically rely only on first-order conditions, possibly expressed in terms of subgradients and geometric objects (normal cones, tangent cones). This collapse of the hierarchy is one of the key simplifications that makes convex analysis powerful.
 
  
-## 7.2 Motivation
+## Motivation
 
 Consider the basic convex problem
 $$
@@ -54,7 +54,7 @@ In machine learning, this appears as:
 First-order optimality conditions formalize this equilibrium in both smooth and nonsmooth, constrained and unconstrained settings.
 
  
-## 7.3 Unconstrained Convex Problems
+## Unconstrained Convex Problems
 
 For the unconstrained problem
 $$
@@ -87,7 +87,7 @@ Interpretation:
 For smooth $f$, this reduces to the usual condition $\nabla f(\hat{x}) = 0$.
 
 
-## 7.4 Constrained Convex Problems
+## Constrained Convex Problems
 
 Now consider the constrained problem
 $$
