@@ -175,7 +175,4 @@ Iteratively add valid inequalities (cuts) to tighten the feasible region of a re
 
 Combinatorial optimization forms the backbone of modern infrastructure and decision systems.
 
----
-
-
 Combinatorial optimization embodies the art of solving discrete, structured problems where convexity no longer applies.  It draws from graph theory, algebra, logic, and probabilistic reasoning. Relaxation and approximation techniques build a bridge between the continuous and the discrete, uniting convex and combinatorial worlds.
