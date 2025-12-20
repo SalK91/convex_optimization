@@ -12,6 +12,8 @@
         <link rel="canonical" href="https://salk91.github.io/convex_optimization/convex/tutorials/2_lp_transport/">
       
       
+        <link rel="prev" href="../1_ls/">
+      
       
       
       <link rel="icon" href="../../../assets/images/favicon.png">
@@ -19,7 +21,7 @@
     
     
       
-        <title>Transportation LP with CVXPY (Min-Cost Shipping) - Machine Learning Lecture Notes -  Optimization &amp; Algorithms</title>
+        <title>2. Linear Programming for Transportation Problems - Machine Learning Lecture Notes -  Optimization &amp; Algorithms</title>
       
     
     
@@ -87,7 +89,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#transportation-lp-with-cvxpy-min-cost-shipping" class="md-skip">
+        <a href="#transportation-optimization-problem" class="md-skip">
           Skip to content
         </a>
       
@@ -121,7 +123,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Transportation LP with CVXPY (Min-Cost Shipping)
+              2. Linear Programming for Transportation Problems
             
           </span>
         </div>
@@ -273,10 +275,12 @@
   
   
   
+    
+  
   
     
     
-      <li class="md-tabs__item">
+      <li class="md-tabs__item md-tabs__item--active">
         <a href="../1_ls/" class="md-tabs__link">
           
   
@@ -1010,10 +1014,14 @@
       
   
   
+    
   
   
+  
     
     
+      
+        
       
         
       
@@ -1021,21 +1029,22 @@
     
     
       
+        
+        
+      
       
         
       
     
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
       
         
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
         
           
-        
-        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3">
-        
-          
-          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
             
   
   
@@ -1048,7 +1057,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_3">
             <span class="md-nav__icon md-icon"></span>
             Tutorials
@@ -1073,6 +1082,142 @@
   
 
       </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    2. Linear Programming for Transportation Problems
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    2. Linear Programming for Transportation Problems
+    
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#transportation-optimization-problem" class="md-nav__link">
+    <span class="md-ellipsis">
+      📦 Transportation Optimization Problem
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="📦 Transportation Optimization Problem">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#problem-overview" class="md-nav__link">
+    <span class="md-ellipsis">
+      Problem overview
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#data-description" class="md-nav__link">
+    <span class="md-ellipsis">
+      Data description
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cvxpy-solver" class="md-nav__link">
+    <span class="md-ellipsis">
+      CVXPY Solver
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="CVXPY Solver">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#decision-variables" class="md-nav__link">
+    <span class="md-ellipsis">
+      Decision variables
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#mathematical-formulation" class="md-nav__link">
+    <span class="md-ellipsis">
+      Mathematical formulation
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#solution-approach" class="md-nav__link">
+    <span class="md-ellipsis">
+      Solution approach
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -1124,8 +1269,6 @@
   
   
   
-    
-  
   
     <label class="md-nav__title" for="__toc">
       <span class="md-nav__icon md-icon"></span>
@@ -1134,11 +1277,77 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
+  <a href="#transportation-optimization-problem" class="md-nav__link">
+    <span class="md-ellipsis">
+      📦 Transportation Optimization Problem
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="📦 Transportation Optimization Problem">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#problem-overview" class="md-nav__link">
+    <span class="md-ellipsis">
+      Problem overview
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#data-description" class="md-nav__link">
+    <span class="md-ellipsis">
+      Data description
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#cvxpy-solver" class="md-nav__link">
     <span class="md-ellipsis">
       CVXPY Solver
     </span>
   </a>
+  
+    <nav class="md-nav" aria-label="CVXPY Solver">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#decision-variables" class="md-nav__link">
+    <span class="md-ellipsis">
+      Decision variables
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#mathematical-formulation" class="md-nav__link">
+    <span class="md-ellipsis">
+      Mathematical formulation
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#solution-approach" class="md-nav__link">
+    <span class="md-ellipsis">
+      Solution approach
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -1173,6 +1382,8 @@
     </a>
   
 
+
+  <h1>2. Linear Programming for Transportation Problems</h1>
 
 <script>
 (function (global, factory) {
@@ -1610,23 +1821,39 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 
 </style>
 <!-- End of mermaid configuration --><div class="jupyter-wrapper">
 <div class="jp-Notebook" data-jp-theme-light="true" data-jp-theme-name="JupyterLab Light">
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=76d9b398">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=29ec36b4">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h1 id="transportation-lp-with-cvxpy-min-cost-shipping">Transportation LP with CVXPY (Min-Cost Shipping)<a class="anchor-link" href="#transportation-lp-with-cvxpy-min-cost-shipping">¶</a></h1><p>This notebook builds and solves a transportation / min-cost flow linear program (LP):</p>
+<h2 id="transportation-optimization-problem">📦 Transportation Optimization Problem<a class="anchor-link" href="#transportation-optimization-problem">¶</a></h2><h3 id="problem-overview">Problem overview<a class="anchor-link" href="#problem-overview">¶</a></h3><p>We solve a transportation (min-cost flow) problem that determines how much product to ship from a set of plants (supply nodes) to a set of orders (demand nodes) at minimum total cost, subject to capacity and connectivity constraints.</p>
+<p>The model decides shipment quantities on feasible plant → order lanes.</p>
+<h3 id="data-description">Data description<a class="anchor-link" href="#data-description">¶</a></h3><ul>
+<li><p>Plants (<code>plants</code>)</p>
 <ul>
-<li>Plants have supply capacities.</li>
-<li>Orders require demand to be met.</li>
-<li>Lanes (plant → order links) have per-unit shipping costs.</li>
-<li>We choose shipment quantities on each lane to minimize total cost while meeting all order demand and respecting plant capacities.</li>
+<li><code>plant_id</code>: unique identifier of a plant</li>
+<li><code>supply_cap</code>: maximum supply capacity available at the plant</li>
 </ul>
-<p>Key idea: indexing is the contract. CVXPY never “knows” plant/order IDs — we make it true by building:</p>
+</li>
+<li><p>Orders (<code>orders</code>)</p>
 <ul>
-<li>a cost vector <code>c</code> aligned with the lane (arc) ordering, and</li>
-<li>sparse incidence matrices <code>A_order</code>, <code>A_plant</code> aligned with the order and plant index ordering.</li>
+<li><code>order_id</code>: unique identifier of an order</li>
+<li><code>demand</code>: required demand that must be satisfied</li>
+</ul>
+</li>
+<li><p>Lanes (<code>lanes</code>)</p>
+<ul>
+<li>Each row represents a feasible shipping lane from a plant to an order</li>
+<li><code>plant_id</code>, <code>order_id</code>: endpoints of the lane</li>
+<li><code>unit_cost</code>: per-unit shipping cost on that lane</li>
+</ul>
+</li>
+</ul>
+<p>After preprocessing:</p>
+<ul>
+<li>all plants and orders included in the model have at least one feasible lane</li>
+<li>total supply is sufficient to meet total demand</li>
 </ul>
 </div>
 </div>
@@ -3000,7 +3227,7 @@ if len(missing_orders) &gt; 0:
 </div>
 </div>
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell">
-<div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=a86274ec">
+<div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=db75dac7">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -3160,6 +3387,45 @@ A_order</div>
 </div>
 </div>
 </div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=049e4f7b">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h3 id="decision-variables">Decision variables<a class="anchor-link" href="#decision-variables">¶</a></h3><p>Let<br>
+$$
+x_{ij} \ge 0
+$$
+denote the quantity shipped from plant ( i ) to order ( j ) on an existing lane.</p>
+<h3 id="mathematical-formulation">Mathematical formulation<a class="anchor-link" href="#mathematical-formulation">¶</a></h3><p>Objective (minimize total shipping cost):
+$$
+\min \sum_{(i,j)\in L} c_{ij}\,x_{ij}
+$$</p>
+<p>Demand satisfaction (for each order ( j )):
+$$
+\sum_{i:(i,j)\in L} x_{ij} = d_j
+$$</p>
+<p>Supply capacity (for each plant ( i )):
+$$
+\sum_{j:(i,j)\in L} x_{ij} \le s_i
+$$</p>
+<p>Optional constraint: limit number of supplying plants per order
+$$
+\sum_{i:(i,j)\in L} y_{ij} \le 5
+$$</p>
+<p>Link flow to usage (Big-M constraint):
+$$
+x_{ij} \le M\,y_{ij}
+$$</p>
+<h3 id="solution-approach">Solution approach<a class="anchor-link" href="#solution-approach">¶</a></h3><ul>
+<li>The problem is formulated and solved using CVXPY.</li>
+<li>With only continuous shipment variables, the model is a linear program (LP).</li>
+</ul>
+</div>
+</div>
+</div>
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
 <div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=1f2d9c4f">
 <div class="jp-Cell-inputWrapper" tabindex="0">
@@ -3299,7 +3565,7 @@ diagnostics
 </div>
 </div>
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell">
-<div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=d16f56f5">
+<div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=95df732f">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -3318,7 +3584,7 @@ diagnostics
 </clipboard-copy>
 </div>
 <div class="highlight-ipynb hl-python"><pre><span></span><span class="c1"># ----------------------------</span>
-<span class="c1"># Visual: heatmap of shipped amounts (plants x orders)</span>
+<span class="c1"># Heatmap of shipped amounts (plants x orders)</span>
 <span class="c1"># ----------------------------</span>
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
@@ -3367,7 +3633,7 @@ diagnostics
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 <div class="clipboard-copy-txt" id="cell-22"># ----------------------------
-# Visual: heatmap of shipped amounts (plants x orders)
+# Heatmap of shipped amounts (plants x orders)
 # ----------------------------
 import numpy as np
 import pandas as pd
@@ -3470,6 +3736,28 @@ plt.show()
       
         <footer class="md-footer">
   
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="Footer">
+        
+          
+          <a href="../1_ls/" class="md-footer__link md-footer__link--prev" aria-label="Previous: 1. Least Squareswith CVXPY">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"></path></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              <div class="md-ellipsis">
+                1. Least Squareswith CVXPY
+              </div>
+            </div>
+          </a>
+        
+        
+      </nav>
     
   
   <div class="md-footer-meta md-typeset">
