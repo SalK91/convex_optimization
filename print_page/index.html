@@ -22,7 +22,7 @@
     
     
       
-        <title>Print/PDF - Machine Learning Lecture Notes -  Optimization and Algorithms</title>
+        <title>Print/PDF - Machine Learning Lecture Notes -  Optimization & Algorithms</title>
       
     
     
@@ -86,7 +86,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#convex-11_intro" class="md-skip">
+        <a href="#index" class="md-skip">
           Skip to content
         </a>
       
@@ -100,7 +100,7 @@
 
 <header class="md-header" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="Header">
-    <a href=".." title="Machine Learning Lecture Notes -  Optimization and Algorithms" class="md-header__button md-logo" aria-label="Machine Learning Lecture Notes -  Optimization and Algorithms" data-md-component="logo">
+    <a href=".." title="Machine Learning Lecture Notes -  Optimization &amp; Algorithms" class="md-header__button md-logo" aria-label="Machine Learning Lecture Notes -  Optimization & Algorithms" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
@@ -114,7 +114,7 @@
       <div class="md-header__ellipsis">
         <div class="md-header__topic">
           <span class="md-ellipsis">
-            Machine Learning Lecture Notes -  Optimization and Algorithms
+            Machine Learning Lecture Notes -  Optimization & Algorithms
           </span>
         </div>
         <div class="md-header__topic" data-md-component="header-topic">
@@ -233,7 +233,7 @@
   
   
     <li class="md-tabs__item">
-      <a href="../convex/11_intro/" class="md-tabs__link">
+      <a href=".." class="md-tabs__link">
         
   
   
@@ -331,13 +331,13 @@
 
 <nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href=".." title="Machine Learning Lecture Notes -  Optimization and Algorithms" class="md-nav__button md-logo" aria-label="Machine Learning Lecture Notes -  Optimization and Algorithms" data-md-component="logo">
+    <a href=".." title="Machine Learning Lecture Notes -  Optimization &amp; Algorithms" class="md-nav__button md-logo" aria-label="Machine Learning Lecture Notes -  Optimization & Algorithms" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
 
     </a>
-    Machine Learning Lecture Notes -  Optimization and Algorithms
+    Machine Learning Lecture Notes -  Optimization & Algorithms
   </label>
   
     <div class="md-nav__source">
@@ -361,7 +361,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../convex/11_intro/" class="md-nav__link">
+      <a href=".." class="md-nav__link">
         
   
   
@@ -481,7 +481,7 @@
   
   
   <span class="md-ellipsis">
-    Home
+    1. Introduction and Overview
     
   </span>
   
@@ -1135,7 +1135,7 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#convex-11_intro" class="md-nav__link">
+  <a href="#index" class="md-nav__link">
     <span class="md-ellipsis">
       1 Home
     </span>
@@ -1156,7 +1156,7 @@
           <li class="md-nav__item">
   <a href="#convex-11_intro" class="md-nav__link">
     <span class="md-ellipsis">
-      2.1 Home
+      2.1 1. Introduction and Overview
     </span>
   </a>
   
@@ -1422,7 +1422,7 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#convex-11_intro" class="md-nav__link">
+  <a href="#index" class="md-nav__link">
     <span class="md-ellipsis">
       1 Home
     </span>
@@ -1443,7 +1443,7 @@
           <li class="md-nav__item">
   <a href="#convex-11_intro" class="md-nav__link">
     <span class="md-ellipsis">
-      2.1 Home
+      2.1 1. Introduction and Overview
     </span>
   </a>
   
@@ -1700,117 +1700,24 @@
                 </nav>
             </div>
         </section>
-        <section class="print-page" id="convex-11_intro" heading-number="1"><html><head>
+        <section class="print-page" id="index" heading-number="1"><html><head>
         <script type="text/javascript">
         document.addEventListener('DOMContentLoaded', function () {
             remove_material_navigation();remove_mkdocs_theme_navigation();generate_toc();
         })
         </script>
-        </head><body><h1 id="chapter-1-introduction-and-overview">Chapter 1:  Introduction and Overview<a class="headerlink" href="#convex-11_intro-chapter-1-introduction-and-overview" title="Permanent link">¶</a></h1>
-<p>Optimization is at the heart of most machine-learning methods. Whether training a linear model or a deep neural network, learning usually means adjusting parameters to minimize a loss that measures how well the model fits the data. Convex optimization is a particularly important and well-understood part of optimization. When both the objective and the constraints are convex, the problem has helpful properties:</p>
-<ol>
-<li>No bad local minima: any local minimum is also the global minimum.  </li>
-<li>Predictable behavior: algorithms like gradient descent have clear and well-studied convergence.  </li>
-<li>Solutions are easy to verify: convex problems come with simple mathematical conditions that tell us when we have reached the optimum.</li>
-</ol>
-<p>These features make convex optimization a reliable tool for building and analyzing machine-learning models. Even though many modern models are nonconvex, a surprising amount of ML still depends on convex ideas. Common loss functions, regularizers, and inner algorithmic steps often rely on convex structure.</p>
-<h2 id="convex-11_intro-motivation-optimization-in-machine-learning">Motivation: Optimization in Machine Learning<a class="headerlink" href="#convex-11_intro-motivation-optimization-in-machine-learning" title="Permanent link">¶</a></h2>
-<p>Many supervised learning problems can be written in a common form:</p>
-<div class="arithmatex">\[
-\min_{x \in \mathcal{X}} 
-\; \frac{1}{N}\sum_{i=1}^{N} \ell(a_i^\top x, b_i) 
-+ \lambda R(x),
-\]</div>
-<p>where</p>
+        </head><body><h1 id="mathematics-for-machine-learning-optimisation-and-algorithms">Mathematics for Machine Learning - Optimisation and Algorithms<a class="headerlink" href="#index-mathematics-for-machine-learning-optimisation-and-algorithms" title="Permanent link">¶</a></h1>
+<p>Welcome to <em>Mathematics for Machine Learning</em>, a structured set of lecture notes designed to build the mathematical foundation needed to understand and develop modern machine learning and optimization algorithms.</p>
+<p>This digital book provides a unified, intuition-driven exploration of key mathematical tools — from linear algebra and calculus to convex analysis, optimization, and algorithms used in deep learning and natural language processing.</p>
+<h2 id="index-motivation">Motivation<a class="headerlink" href="#index-motivation" title="Permanent link">¶</a></h2>
+<p>Machine Learning, Optimization, and AI systems all rest upon a shared mathematical backbone. This resource aims to bridge the gap between abstract theory and practical application by offering:</p>
 <ul>
-<li><span class="arithmatex">\(\ell(\cdot,\cdot)\)</span> is a loss function that measures how well the model predicts <span class="arithmatex">\(b_i\)</span> from <span class="arithmatex">\(a_i\)</span>,  </li>
-<li><span class="arithmatex">\(R(x)\)</span> is a regularizer that encourages certain structure (such as sparsity or small weights),  </li>
-<li><span class="arithmatex">\(\mathcal{X}\)</span> is a set of allowed parameter values, often simple and convex.</li>
+<li>Concise derivations of essential results</li>
+<li>Geometric intuition and figures where helpful</li>
+<li>Connections to real-world algorithms</li>
+<li>Appendices that extend into more advanced or specialized topics</li>
 </ul>
-<p>Many widely used losses and regularizers are convex. Examples include least squares, logistic loss, hinge loss, Huber loss, the <span class="arithmatex">\(\ell_1\)</span> norm, and the <span class="arithmatex">\(\ell_2\)</span> norm. Convexity is what makes these problems tractable and allows them to be solved efficiently at scale using well-behaved optimization algorithms.</p>
-<h2 id="convex-11_intro-why-convex-optimization-remains-central-in-ml">Why Convex Optimization Remains Central in ML<a class="headerlink" href="#convex-11_intro-why-convex-optimization-remains-central-in-ml" title="Permanent link">¶</a></h2>
-<p>Although many modern models are nonconvex, convex optimization continues to play a major role:</p>
-<ol>
-<li>
-<p>Convex surrogate losses: Losses such as logistic, hinge, and Huber are convex substitutes for harder objectives like the <span class="arithmatex">\(0\text{–}1\)</span> loss. They make optimization practical while still leading to models that generalize well.</p>
-</li>
-<li>
-<p>Convex subproblems inside larger algorithms:  Many nonconvex methods solve convex problems as part of their inner loop. Examples include least-squares steps in matrix factorization, proximal updates in regularized learning, and simple convex problems that appear in line-search procedures.</p>
-</li>
-</ol>
-<p>These roles make convex optimization a key component of modern ML toolkits, even when the main model is nonconvex.</p>
-<h2 id="convex-11_intro-web-book-roadmap-and-how-to-use-it">Web-Book Roadmap and How to Use It<a class="headerlink" href="#convex-11_intro-web-book-roadmap-and-how-to-use-it" title="Permanent link">¶</a></h2>
-<ul>
-<li>
-<p>Chapter 2: Linear Algebra Foundations. Basic vector/matrix operations and linear algebra needed for optimization.</p>
-</li>
-<li>
-<p>Chapter 3: Multivariable Calculus. Differentiation and derivatives of functions of many variables (gradients, Hessians).</p>
-</li>
-<li>
-<p>Chapter 4: Convex Sets and Geometry. Definitions and examples of convex sets, cones, affine spaces, and geometric properties.</p>
-</li>
-<li>
-<p>Chapter 5: Convex Functions. Convexity for functions, epigraphs, and key examples (norms, quadratic functions, log-sum-exp, etc.).</p>
-</li>
-<li>
-<p>Chapter 6: Nonsmooth Optimization – Subgradients. Generalized derivatives for convex functions that are not differentiable, and subgradient methods.</p>
-</li>
-<li>
-<p>Chapter 7: First-Order Optimality Conditions. Gradient-based optimality for smooth problems, supporting theory for necessary and sufficient conditions.</p>
-</li>
-<li>
-<p>Chapter 8: Optimization Principles – From Gradient Descent to KKT. Unconstrained and constrained gradient methods, culminating in the Karush–Kuhn–Tucker (KKT) conditions.</p>
-</li>
-<li>
-<p>Chapter 9: Lagrange Duality Theory. Duality principles, weak/strong duality, and interpretations of Lagrange multipliers.</p>
-</li>
-<li>
-<p>Chapter 10: Pareto Optimality and Multi-Objective Optimization. Trade-offs in optimizing multiple goals and Pareto efficiency.</p>
-</li>
-<li>
-<p>Chapter 11: Regularized Approximation. Balancing fit vs. complexity with regularization (ℓ₁, ℓ₂, elastic net, etc.).</p>
-</li>
-<li>
-<p>Chapter 12: Algorithms for Convex Optimization. General convex optimization solvers and algorithmic frameworks (interior-point, gradient methods, etc.).</p>
-</li>
-<li>
-<p>Chapter 13: Equality-Constrained Problems. Specialized methods (e.g. KKT with only equalities, reduced-space methods).</p>
-</li>
-<li>
-<p>Chapter 14: Inequality-Constrained Problems. Algorithms handling general inequality constraints, barrier methods.</p>
-</li>
-<li>
-<p>Chapter 15: Advanced Large-Scale and Structured Methods. Techniques for very large or structured problems (decomposition, coordinate descent, etc.).</p>
-</li>
-<li>
-<p>Chapter 16: Modeling Patterns and Algorithm Selection. Practical guidance on modeling choices and selecting the right algorithm in practice.</p>
-</li>
-<li>
-<p>Chapter 17: Canonical Problems in Convex Optimization. Well-known problem templates (linear, quadratic, SOCP, SDP) and how to recognize them.</p>
-</li>
-<li>
-<p>Chapter 18: Modern Optimizers in Machine Learning Frameworks. How convex optimization appears in ML libraries and frameworks.</p>
-</li>
-<li>
-<p>Chapter 19: Beyond Convexity – Nonconvex and Global Optimization. Overview of nonconvex problems and global methods (to contrast with convex theory).</p>
-</li>
-<li>
-<p>Chapter 20: Derivative-Free and Black-Box Optimization. Techniques when gradients are not available.</p>
-</li>
-<li>
-<p>Chapter 21: Metaheuristic and Evolutionary Optimization. Heuristic algorithms (genetic algorithms, simulated annealing) for hard problems.</p>
-</li>
-<li>
-<p>Chapter 22: Advanced Topics in Combinatorial Optimization. Combinatorial optimization problems and convex relaxations.</p>
-</li>
-<li>
-<p>Chapter 23: The Future of Optimization – Learning, Adaptation, Intelligence. Emerging trends (e.g. data-driven optimization, connections to machine learning).</p>
-</li>
-</ul>
-<p>This roadmap helps the reader see how the material progresses from foundations (Ch.2–5) to theory (Ch.6–11) to algorithms (Ch.12–15) and on to specialized and modern topics (Ch.16–23).</p>
-<h2 id="convex-11_intro-acknowledgments">Acknowledgments<a class="headerlink" href="#convex-11_intro-acknowledgments" title="Permanent link">¶</a></h2>
-<p>The content and structure of this web book are strongly informed by the Stanford University course EE364A: Convex Optimization I, taught by Stephen Boyd. In particular, the presentation draws inspiration from the 2023 lecture notes and course materials, which are widely regarded as a foundational reference in modern convex optimization.</p></body></html></section>
+<p>Whether you’re a student, researcher, or practitioner, this webbook provides both a reference and a learning guide.</p></body></html></section>
                     <section class='print-page md-section' id='section-2' heading-number='2'>
                         <h1>Convex Optimization<a class='headerlink' href='#section-2' title='Permanent link'></a>
                         </h1>
@@ -8663,13 +8570,13 @@ The norm of the residual is  4.453230704381374
         <style>
         ['pre { line-height: 125%; }\ntd.linenos .normal { color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px; }\nspan.linenos { color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px; }\ntd.linenos .special { color: #000000; background-color: #ffffc0; padding-left: 5px; padding-right: 5px; }\nspan.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 5px; padding-right: 5px; }\n.highlight-ipynb .hll { background-color: var(--jp-cell-editor-active-background) }\n.highlight-ipynb { background: var(--jp-cell-editor-background); color: var(--jp-mirror-editor-variable-color) }\n.highlight-ipynb .c { color: var(--jp-mirror-editor-comment-color); font-style: italic } /* Comment */\n.highlight-ipynb .err { color: var(--jp-mirror-editor-error-color) } /* Error */\n.highlight-ipynb .k { color: var(--jp-mirror-editor-keyword-color); font-weight: bold } /* Keyword */\n.highlight-ipynb .o { color: var(--jp-mirror-editor-operator-color); font-weight: bold } /* Operator */\n.highlight-ipynb .p { color: var(--jp-mirror-editor-punctuation-color) } /* Punctuation */\n.highlight-ipynb .ch { color: var(--jp-mirror-editor-comment-color); font-style: italic } /* Comment.Hashbang */\n.highlight-ipynb .cm { color: var(--jp-mirror-editor-comment-color); font-style: italic } /* Comment.Multiline */\n.highlight-ipynb .cp { color: var(--jp-mirror-editor-comment-color); font-style: italic } /* Comment.Preproc */\n.highlight-ipynb .cpf { color: var(--jp-mirror-editor-comment-color); font-style: italic } /* Comment.PreprocFile */\n.highlight-ipynb .c1 { color: var(--jp-mirror-editor-comment-color); font-style: italic } /* Comment.Single */\n.highlight-ipynb .cs { color: var(--jp-mirror-editor-comment-color); font-style: italic } /* Comment.Special */\n.highlight-ipynb .kc { color: var(--jp-mirror-editor-keyword-color); font-weight: bold } /* Keyword.Constant */\n.highlight-ipynb .kd { color: var(--jp-mirror-editor-keyword-color); font-weight: bold } /* Keyword.Declaration */\n.highlight-ipynb .kn { color: var(--jp-mirror-editor-keyword-color); font-weight: bold } /* Keyword.Namespace */\n.highlight-ipynb .kp { color: var(--jp-mirror-editor-keyword-color); font-weight: bold } /* Keyword.Pseudo */\n.highlight-ipynb .kr { color: var(--jp-mirror-editor-keyword-color); font-weight: bold } /* Keyword.Reserved */\n.highlight-ipynb .kt { color: var(--jp-mirror-editor-keyword-color); font-weight: bold } /* Keyword.Type */\n.highlight-ipynb .m { color: var(--jp-mirror-editor-number-color) } /* Literal.Number */\n.highlight-ipynb .s { color: var(--jp-mirror-editor-string-color) } /* Literal.String */\n.highlight-ipynb .ow { color: var(--jp-mirror-editor-operator-color); font-weight: bold } /* Operator.Word */\n.highlight-ipynb .pm { color: var(--jp-mirror-editor-punctuation-color) } /* Punctuation.Marker */\n.highlight-ipynb .w { color: var(--jp-mirror-editor-variable-color) } /* Text.Whitespace */\n.highlight-ipynb .mb { color: var(--jp-mirror-editor-number-color) } /* Literal.Number.Bin */\n.highlight-ipynb .mf { color: var(--jp-mirror-editor-number-color) } /* Literal.Number.Float */\n.highlight-ipynb .mh { color: var(--jp-mirror-editor-number-color) } /* Literal.Number.Hex */\n.highlight-ipynb .mi { color: var(--jp-mirror-editor-number-color) } /* Literal.Number.Integer */\n.highlight-ipynb .mo { color: var(--jp-mirror-editor-number-color) } /* Literal.Number.Oct */\n.highlight-ipynb .sa { color: var(--jp-mirror-editor-string-color) } /* Literal.String.Affix */\n.highlight-ipynb .sb { color: var(--jp-mirror-editor-string-color) } /* Literal.String.Backtick */\n.highlight-ipynb .sc { color: var(--jp-mirror-editor-string-color) } /* Literal.String.Char */\n.highlight-ipynb .dl { color: var(--jp-mirror-editor-string-color) } /* Literal.String.Delimiter */\n.highlight-ipynb .sd { color: var(--jp-mirror-editor-string-color) } /* Literal.String.Doc */\n.highlight-ipynb .s2 { color: var(--jp-mirror-editor-string-color) } /* Literal.String.Double */\n.highlight-ipynb .se { color: var(--jp-mirror-editor-string-color) } /* Literal.String.Escape */\n.highlight-ipynb .sh { color: var(--jp-mirror-editor-string-color) } /* Literal.String.Heredoc */\n.highlight-ipynb .si { color: var(--jp-mirror-editor-string-color) } /* Literal.String.Interpol */\n.highlight-ipynb .sx { color: var(--jp-mirror-editor-string-color) } /* Literal.String.Other */\n.highlight-ipynb .sr { color: var(--jp-mirror-editor-string-color) } /* Literal.String.Regex */\n.highlight-ipynb .s1 { color: var(--jp-mirror-editor-string-color) } /* Literal.String.Single */\n.highlight-ipynb .ss { color: var(--jp-mirror-editor-string-color) } /* Literal.String.Symbol */\n.highlight-ipynb .il { color: var(--jp-mirror-editor-number-color) } /* Literal.Number.Integer.Long */']
         </style>
-        </body></html></section></section></div><style>.print-site-enumerate-headings #convex-11_intro > h1:before { content: '1 ' }
+        </body></html></section></section></div><style>.print-site-enumerate-headings #index > h1:before { content: '1 ' }
 
-                .print-site-enumerate-headings #convex-11_intro h2:before { content: '1.' counter(counter-convex-11_intro-2) ' ' }
-                .print-site-enumerate-headings #convex-11_intro h2 {  counter-reset: counter-convex-11_intro-3 ;  counter-increment: counter-convex-11_intro-2 }
+                .print-site-enumerate-headings #index h2:before { content: '1.' counter(counter-index-2) ' ' }
+                .print-site-enumerate-headings #index h2 {  counter-reset: counter-index-3 ;  counter-increment: counter-index-2 }
             
-                .print-site-enumerate-headings #convex-11_intro h3:before { content: '1.' counter(counter-convex-11_intro-2) '.' counter(counter-convex-11_intro-3) ' ' }
-                .print-site-enumerate-headings #convex-11_intro h3 {  counter-increment: counter-convex-11_intro-3 }
+                .print-site-enumerate-headings #index h3:before { content: '1.' counter(counter-index-2) '.' counter(counter-index-3) ' ' }
+                .print-site-enumerate-headings #index h3 {  counter-increment: counter-index-3 }
             
 .print-site-enumerate-headings #section-2 > h1:before { content: '2 ' }
 .print-site-enumerate-headings #convex-11_intro > h1:before { content: '2.1 ' }
