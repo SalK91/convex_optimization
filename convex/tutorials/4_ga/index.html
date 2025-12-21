@@ -12,6 +12,10 @@
         <link rel="canonical" href="https://salk91.github.io/convex_optimization/convex/tutorials/4_ga/">
       
       
+        <link rel="prev" href="../3_meta/">
+      
+      
+        <link rel="next" href="../../11_intro/">
       
       
       <link rel="icon" href="../../../assets/images/favicon.png">
@@ -19,7 +23,7 @@
     
     
       
-        <title>4 ga - Machine Learning Lecture Notes -  Optimization &amp; Algorithms</title>
+        <title>IV – Cancer Gene Expression Feature Selection – Genetic Algorithm Case Study - Machine Learning Lecture Notes -  Optimization &amp; Algorithms</title>
       
     
     
@@ -86,6 +90,11 @@
     <label class="md-overlay" for="__drawer"></label>
     <div data-md-component="skip">
       
+        
+        <a href="#iv-cancer-gene-expression-feature-selection-genetic-algorithm-case-study" class="md-skip">
+          Skip to content
+        </a>
+      
     </div>
     <div data-md-component="announce">
       
@@ -116,7 +125,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              4 ga
+              IV – Cancer Gene Expression Feature Selection – Genetic Algorithm Case Study
             
           </span>
         </div>
@@ -246,10 +255,12 @@
   
   
   
+    
+  
   
     
     
-      <li class="md-tabs__item">
+      <li class="md-tabs__item md-tabs__item--active">
         <a href="../1_lp_transport/" class="md-tabs__link">
           
   
@@ -376,8 +387,10 @@
       
   
   
+    
   
   
+  
     
     
       
@@ -387,25 +400,28 @@
       
         
       
+        
+      
     
     
     
+      
+        
+        
       
       
         
       
     
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
       
         
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
         
           
-        
-        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2">
-        
-          
-          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
             
   
   
@@ -418,7 +434,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_2">
             <span class="md-nav__icon md-icon"></span>
             Case-studies
@@ -489,6 +505,107 @@
   
 
       </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    IV – Cancer Gene Expression Feature Selection – Genetic Algorithm Case Study
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    IV – Cancer Gene Expression Feature Selection – Genetic Algorithm Case Study
+    
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#genetic-algorithm-formulation" class="md-nav__link">
+    <span class="md-ellipsis">
+      Genetic Algorithm Formulation
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#implementation" class="md-nav__link">
+    <span class="md-ellipsis">
+      Implementation
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#why-ga-for-feature-selection" class="md-nav__link">
+    <span class="md-ellipsis">
+      Why GA for feature selection?
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#just-700-sample-and-2000-features" class="md-nav__link">
+    <span class="md-ellipsis">
+      Just ~700 Sample and ~2000 features!!
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -1169,6 +1286,52 @@
   
   
   
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#genetic-algorithm-formulation" class="md-nav__link">
+    <span class="md-ellipsis">
+      Genetic Algorithm Formulation
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#implementation" class="md-nav__link">
+    <span class="md-ellipsis">
+      Implementation
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#why-ga-for-feature-selection" class="md-nav__link">
+    <span class="md-ellipsis">
+      Why GA for feature selection?
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#just-700-sample-and-2000-features" class="md-nav__link">
+    <span class="md-ellipsis">
+      Just ~700 Sample and ~2000 features!!
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
   
 </nav>
                   </div>
@@ -1199,8 +1362,6 @@
     </a>
   
 
-
-  <h1>4 ga</h1>
 
 <script>
 (function (global, factory) {
@@ -1638,13 +1799,47 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 
 </style>
 <!-- End of mermaid configuration --><div class="jupyter-wrapper">
 <div class="jp-Notebook" data-jp-theme-light="true" data-jp-theme-name="JupyterLab Light">
-<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
-<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=f77cdc10">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=49d4ede9">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h1 id="iv-cancer-gene-expression-feature-selection-genetic-algorithm-case-study">IV – Cancer Gene Expression Feature Selection – Genetic Algorithm Case Study<a class="anchor-link" href="#iv-cancer-gene-expression-feature-selection-genetic-algorithm-case-study">¶</a></h1><p>Genetic algorithms (GAs) are population-based evolutionary optimization methods inspired by the principles of natural selection. They iteratively evolve a set of candidate solutions through selection, crossover, and mutation, enabling effective exploration of large and complex search spaces. GAs are particularly well suited for non-convex, discrete, and combinatorial optimization problems, where the objective function is non-differentiable and characterized by many local optima. In this case study, we apply a GA to the problem of gene selection from high-dimensional cancer gene expression data, with the goal of identifying a compact subset of genes that maximizes predictive performance.</p>
+<p>Gene expression datasets are a canonical example of a challenging optimization problem in biomedical machine learning. They typically contain thousands to tens of thousands of gene expression measurements for only a few hundred or thousand samples, resulting in an extreme high-dimensional, low-sample-size regime. Each sample corresponds to a patient, and the target label represents a clinical outcome such as cancer subtype or disease status. Predictive signal in such data rarely resides in individual genes; instead, it emerges from complex, nonlinear interactions among small groups of genes, often reflecting underlying biological pathways.</p>
+<h3 id="genetic-algorithm-formulation">Genetic Algorithm Formulation<a class="anchor-link" href="#genetic-algorithm-formulation">¶</a></h3><ul>
+<li><p>Variables: Each candidate solution is represented as a binary chromosome of length d, where d is the number of genes. A value of 1 indicates that the corresponding gene is included in the feature subset, while 0 indicates exclusion.</p>
+</li>
+<li><p>Objective: Maximize classifier accuracy on held-out validation folds. In our GA, the fitness of a mask is the cross-validated accuracy of a logistic regression model trained on the selected features.</p>
+</li>
+<li><p>Constraints: To encourage interpretability and biological plausibility, we optionally impose a maximum number of selected genes (e.g., 30–50). The GA naturally handles this discrete constraint without requiring relaxation or approximation.</p>
+</li>
+<li><p>GA Steps: An initial population of random masks is generated. In each generation, masks are evaluated (fitness), then the best are selected for reproduction. New offspring are created via crossover (combining bits from two parents) and mutation (flipping bits) to introduce diversity. Elite individuals may be carried over. This process repeats for many generations, gradually improving the feature subset.</p>
+</li>
+</ul>
+<h3 id="implementation">Implementation<a class="anchor-link" href="#implementation">¶</a></h3><p>We use the open-source Python library sklearn-genetic-opt (which is built on DEAP) to handle the GA mechanics. This library implements GAFeatureSelectionCV, which wraps scikit-learn estimators in a GA that optimizes cross-validation score while minimizing feature count.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=1a6a723c">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h2 id="why-ga-for-feature-selection">Why GA for feature selection?<a class="anchor-link" href="#why-ga-for-feature-selection">¶</a></h2><p>GA is particularly well suited for this problem because feature selection is a non-convex, combinatorial optimization task with an exponentially large search space ($2^d$ possible subsets). Ensemble-based permutation feature importance methods (e.g., random permutation in random forests or gradient-boosted trees) evaluate features largely in isolation or under conditional perturbations, implicitly assuming that the contribution of each feature can be separated from the rest. This assumption fails in the presence of feature interactions, redundancy, and multicollinearity, where the predictive power emerges only from specific combinations of features rather than individual ones.</p>
+<p>More importantly, permutation importance is diagnostic rather than optimization-driven: it explains a trained ensemble model but does not directly solve a well-defined optimization problem. Selecting features based on importance thresholds is heuristic and does not guarantee near-optimal performance for a downstream model. In contrast, a GA directly optimizes the target objective (e.g., cross-validated accuracy with a sparsity constraint) by evaluating entire feature subsets at once. By maintaining a population of candidate solutions and using crossover and mutation, GAs explore multiple regions of the non-convex landscape simultaneously and are far less prone to getting trapped in poor local optima. From an optimization standpoint, GAs are explicitly designed for discrete, non-differentiable, and non-convex problems, making them a principled and academically appropriate choice when the goal is global subset discovery rather than feature ranking.</p>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
+<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=9a0fe57e">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div><div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[2]:</div><div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="CodeMirror cm-s-jupyter">
 <div class="zeroclipboard-container">
 <clipboard-copy ,="" aria-label="Copy to Clipboard" for="cell-1">
@@ -1657,51 +1852,21 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 
 </div>
 </clipboard-copy>
 </div>
-<div class="highlight-ipynb hl-python"><pre><span></span><span class="c1">## Genetic Algorithm Implementation</span>
-<span class="n">The</span> <span class="n">VRPTW</span> <span class="ow">is</span> <span class="n">NP</span><span class="o">-</span><span class="n">hard</span> <span class="ow">and</span> <span class="n">has</span> <span class="n">many</span> <span class="n">local</span> <span class="n">optima</span><span class="p">,</span> <span class="n">making</span> <span class="n">exact</span> <span class="n">methods</span> <span class="n">slow</span> <span class="k">for</span> <span class="n">large</span> <span class="n">instances</span><span class="o">.</span> <span class="n">GAs</span> <span class="n">can</span> <span class="n">explore</span> <span class="n">diverse</span> <span class="n">solutions</span> <span class="n">via</span> <span class="n">crossover</span> <span class="ow">and</span> <span class="n">mutation</span><span class="p">,</span> <span class="ow">and</span> <span class="n">can</span> <span class="n">incorporate</span> <span class="n">problem</span><span class="o">-</span><span class="n">specific</span> <span class="n">constraints</span> <span class="ow">in</span> <span class="n">the</span> <span class="n">fitness</span> <span class="n">evaluation</span> <span class="p">(</span><span class="n">e</span><span class="o">.</span><span class="n">g</span><span class="o">.</span> <span class="n">penalizing</span> <span class="n">time</span><span class="o">-</span><span class="n">window</span> <span class="n">violations</span> <span class="ow">or</span> <span class="n">excessive</span> <span class="n">vehicles</span><span class="p">)</span><span class="o">.</span> <span class="n">Prior</span> <span class="n">research</span> <span class="n">has</span> <span class="n">shown</span> <span class="n">GAs</span> <span class="n">to</span> <span class="n">be</span> <span class="n">effective</span> <span class="n">heuristics</span> <span class="k">for</span> <span class="n">routing</span> <span class="n">problems</span> <span class="k">with</span> <span class="n">constraints</span><span class="o">.</span> <span class="n">In</span> <span class="n">this</span> <span class="n">study</span><span class="p">,</span> <span class="n">the</span> <span class="n">GA</span><span class="err">’</span><span class="n">s</span> <span class="n">evolutionary</span> <span class="n">search</span> <span class="n">provides</span> <span class="n">a</span> <span class="n">flexible</span> <span class="n">way</span> <span class="n">to</span> <span class="n">balance</span> <span class="n">distance</span><span class="p">,</span> <span class="n">time</span> <span class="n">windows</span><span class="p">,</span> <span class="ow">and</span> <span class="n">vehicle</span> <span class="n">usage</span><span class="o">.</span>
-
-<span class="n">We</span> <span class="n">represent</span> <span class="n">each</span> <span class="n">solution</span> <span class="p">(</span><span class="n">individual</span><span class="p">)</span> <span class="k">as</span> <span class="n">a</span> <span class="n">permutation</span> <span class="n">of</span> <span class="n">customer</span> <span class="n">visits</span><span class="o">.</span> <span class="n">A</span> <span class="n">chromosome</span> <span class="ow">is</span> <span class="n">an</span> <span class="n">ordering</span> <span class="n">of</span> <span class="n">the</span> <span class="n">customer</span> <span class="n">IDs</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="o">...</span><span class="p">,</span><span class="n">N</span><span class="p">]</span><span class="o">.</span> <span class="n">We</span> <span class="n">will</span> <span class="n">interpret</span> <span class="n">this</span> <span class="n">sequence</span> <span class="n">by</span> <span class="n">splitting</span> <span class="n">it</span> <span class="n">into</span> <span class="n">vehicle</span> <span class="n">routes</span><span class="p">:</span> <span class="n">iterate</span> <span class="n">through</span> <span class="n">the</span> <span class="nb">list</span><span class="p">,</span> <span class="n">adding</span> <span class="n">customers</span> <span class="n">to</span> <span class="n">the</span> <span class="n">current</span> <span class="n">vehicle</span><span class="err">’</span><span class="n">s</span> <span class="n">route</span> <span class="n">until</span> <span class="n">adding</span> <span class="n">the</span> <span class="nb">next</span> <span class="n">customer</span> <span class="n">would</span> <span class="n">exceed</span> <span class="n">capacity</span><span class="p">,</span> <span class="n">then</span> <span class="n">start</span> <span class="n">a</span> <span class="n">new</span> <span class="n">route</span><span class="o">.</span> <span class="n">Each</span> <span class="n">route</span> <span class="n">implicitly</span> <span class="n">starts</span> <span class="ow">and</span> <span class="n">ends</span> <span class="n">at</span> <span class="n">the</span> <span class="n">depot</span><span class="o">.</span> <span class="n">This</span> <span class="n">decoding</span> <span class="n">enforces</span> <span class="n">the</span> <span class="n">capacity</span> <span class="n">constraint</span><span class="o">.</span> <span class="n">The</span> <span class="n">time</span> <span class="n">windows</span> <span class="n">are</span> <span class="n">enforced</span> <span class="n">via</span> <span class="n">penalties</span> <span class="ow">in</span> <span class="n">the</span> <span class="n">fitness</span><span class="o">.</span>
-
-<span class="o">*</span> <span class="n">Fitness</span> <span class="n">Evaluation</span><span class="o">.</span> <span class="n">Given</span> <span class="n">a</span> <span class="n">candidate</span> <span class="n">route</span><span class="o">-</span><span class="n">sequence</span><span class="p">,</span> <span class="n">we</span> <span class="n">simulate</span> <span class="n">each</span> <span class="n">vehicle</span><span class="err">’</span><span class="n">s</span> <span class="n">route</span> <span class="ow">and</span> <span class="n">compute</span><span class="p">:</span>
-
-<span class="o">*</span> <span class="n">Travel</span> <span class="n">distance</span><span class="p">:</span> <span class="n">Sum</span> <span class="n">of</span> <span class="n">Euclidean</span> <span class="n">distances</span> <span class="n">along</span> <span class="n">each</span> <span class="n">route</span> <span class="p">(</span><span class="n">including</span> <span class="n">returns</span> <span class="n">to</span> <span class="n">depot</span><span class="p">)</span><span class="o">.</span>
-
-<span class="o">*</span> <span class="n">Time</span> <span class="n">tracking</span><span class="p">:</span> <span class="n">As</span> <span class="n">we</span> <span class="n">traverse</span><span class="p">,</span> <span class="n">we</span> <span class="n">track</span> <span class="n">the</span> <span class="n">current</span> <span class="n">time</span><span class="p">;</span> <span class="k">if</span> <span class="n">arrival</span> <span class="ow">is</span> <span class="n">before</span> <span class="n">the</span> <span class="n">customer</span><span class="err">’</span><span class="n">s</span> <span class="n">ready</span> <span class="n">time</span><span class="p">,</span> <span class="n">we</span> <span class="n">add</span> <span class="n">waiting</span> <span class="p">(</span><span class="n">to</span> <span class="n">start</span> <span class="n">service</span> <span class="n">at</span> <span class="n">ready</span><span class="p">),</span> <span class="ow">and</span> <span class="k">if</span> <span class="n">arrival</span> <span class="ow">is</span> <span class="n">after</span> <span class="n">the</span> <span class="n">due</span> <span class="n">time</span><span class="p">,</span> <span class="n">we</span> <span class="n">count</span> <span class="n">a</span> <span class="n">violation</span><span class="o">.</span>
-
-<span class="o">*</span> <span class="n">Load</span><span class="o">/</span><span class="n">vehicles</span><span class="p">:</span> <span class="n">We</span> <span class="n">increment</span> <span class="n">the</span> <span class="n">vehicle</span> <span class="n">count</span> <span class="n">each</span> <span class="n">time</span> <span class="n">a</span> <span class="n">new</span> <span class="n">route</span> <span class="n">starts</span> <span class="p">(</span><span class="n">each</span> <span class="n">vehicle</span><span class="p">)</span><span class="o">.</span>
-
-<span class="o">*</span> <span class="n">Penalties</span><span class="p">:</span> <span class="n">We</span> <span class="n">add</span> <span class="n">a</span> <span class="n">fixed</span> <span class="n">cost</span> <span class="n">per</span> <span class="n">vehicle</span> <span class="p">(</span><span class="n">encouraging</span> <span class="n">fewer</span> <span class="n">vehicles</span><span class="p">)</span> <span class="ow">and</span> <span class="n">a</span> <span class="n">large</span> <span class="n">penalty</span> <span class="k">for</span> <span class="n">time</span><span class="o">-</span><span class="n">window</span> <span class="n">violations</span> <span class="p">(</span><span class="n">to</span> <span class="n">discourage</span> <span class="n">infeasible</span> <span class="n">arrivals</span><span class="p">)</span><span class="o">.</span>
-
-<span class="n">The</span> <span class="n">objective</span> <span class="ow">is</span> <span class="n">to</span> <span class="n">minimize</span> <span class="n">the</span> <span class="nb">sum</span> <span class="n">of</span> <span class="n">distance</span> <span class="n">plus</span> <span class="n">these</span> <span class="n">penalties</span><span class="o">.</span> <span class="n">Below</span> <span class="ow">is</span> <span class="n">the</span> <span class="n">eval_solution</span> <span class="n">function</span> <span class="n">implementing</span> <span class="n">this</span><span class="o">.</span>
+<div class="highlight-ipynb hl-python"><pre><span></span><span class="ch">#!pip install sklearn-genetic-opt</span>
 </pre></div>
-<div class="clipboard-copy-txt" id="cell-1">## Genetic Algorithm Implementation
-The VRPTW is NP-hard and has many local optima, making exact methods slow for large instances. GAs can explore diverse solutions via crossover and mutation, and can incorporate problem-specific constraints in the fitness evaluation (e.g. penalizing time-window violations or excessive vehicles). Prior research has shown GAs to be effective heuristics for routing problems with constraints. In this study, the GA’s evolutionary search provides a flexible way to balance distance, time windows, and vehicle usage.
-
-We represent each solution (individual) as a permutation of customer visits. A chromosome is an ordering of the customer IDs [1,2,...,N]. We will interpret this sequence by splitting it into vehicle routes: iterate through the list, adding customers to the current vehicle’s route until adding the next customer would exceed capacity, then start a new route. Each route implicitly starts and ends at the depot. This decoding enforces the capacity constraint. The time windows are enforced via penalties in the fitness.
-
-* Fitness Evaluation. Given a candidate route-sequence, we simulate each vehicle’s route and compute:
-
-* Travel distance: Sum of Euclidean distances along each route (including returns to depot).
-
-* Time tracking: As we traverse, we track the current time; if arrival is before the customer’s ready time, we add waiting (to start service at ready), and if arrival is after the due time, we count a violation.
-
-* Load/vehicles: We increment the vehicle count each time a new route starts (each vehicle).
-
-* Penalties: We add a fixed cost per vehicle (encouraging fewer vehicles) and a large penalty for time-window violations (to discourage infeasible arrivals).
-
-The objective is to minimize the sum of distance plus these penalties. Below is the eval_solution function implementing this.</div>
+<div class="clipboard-copy-txt" id="cell-1">#!pip install sklearn-genetic-opt</div>
 </div>
 </div>
 </div>
 </div>
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
-<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=b628c169">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell">
+<div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=62e1461d">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div><div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[1]:</div><div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="CodeMirror cm-s-jupyter">
 <div class="zeroclipboard-container">
 <clipboard-copy ,="" aria-label="Copy to Clipboard" for="cell-2">
@@ -1714,45 +1879,69 @@ The objective is to minimize the sum of distance plus these penalties. Below is 
 </div>
 </clipboard-copy>
 </div>
-<div class="highlight-ipynb hl-python"><pre><span></span><span class="n">GA</span> <span class="n">Operators</span><span class="o">.</span> <span class="n">We</span> <span class="n">implement</span> <span class="n">a</span> <span class="n">standard</span> <span class="n">GA</span><span class="p">:</span>
+<div class="highlight-ipynb hl-python"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
 
-<span class="o">*</span> <span class="n">Initialization</span><span class="p">:</span> <span class="n">Start</span> <span class="k">with</span> <span class="n">a</span> <span class="n">population</span> <span class="n">of</span> <span class="n">random</span> <span class="n">permutations</span> <span class="n">of</span> <span class="n">customers</span><span class="o">.</span>
+<span class="kn">from</span> <span class="nn">sklearn.base</span> <span class="kn">import</span> <span class="n">clone</span>
+<span class="kn">from</span> <span class="nn">sklearn.datasets</span> <span class="kn">import</span> <span class="n">fetch_openml</span>
+<span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">train_test_split</span><span class="p">,</span> <span class="n">StratifiedKFold</span><span class="p">,</span> <span class="n">cross_val_score</span>
+<span class="kn">from</span> <span class="nn">sklearn.pipeline</span> <span class="kn">import</span> <span class="n">Pipeline</span>
+<span class="kn">from</span> <span class="nn">sklearn.preprocessing</span> <span class="kn">import</span> <span class="n">StandardScaler</span>
+<span class="kn">from</span> <span class="nn">sklearn.preprocessing</span> <span class="kn">import</span> <span class="n">StandardScaler</span><span class="p">,</span> <span class="n">OneHotEncoder</span>
+<span class="kn">from</span> <span class="nn">sklearn.ensemble</span> <span class="kn">import</span> <span class="n">RandomForestClassifier</span>
+<span class="kn">from</span> <span class="nn">sklearn.inspection</span> <span class="kn">import</span> <span class="n">permutation_importance</span>
+<span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">accuracy_score</span><span class="p">,</span> <span class="n">f1_score</span>
+<span class="kn">from</span> <span class="nn">sklearn.linear_model</span> <span class="kn">import</span> <span class="n">LogisticRegression</span>
+<span class="kn">from</span> <span class="nn">sklearn_genetic</span> <span class="kn">import</span> <span class="n">GAFeatureSelectionCV</span>
+<span class="kn">from</span> <span class="nn">sklearn.compose</span> <span class="kn">import</span> <span class="n">ColumnTransformer</span>
 
-<span class="o">*</span> <span class="n">Selection</span><span class="p">:</span> <span class="n">We</span> <span class="n">use</span> <span class="n">tournament</span> <span class="n">selection</span> <span class="p">(</span><span class="n">randomly</span> <span class="n">pick</span> <span class="n">a</span> <span class="n">few</span> <span class="n">individuals</span> <span class="ow">and</span> <span class="n">choose</span> <span class="n">the</span> <span class="n">best</span><span class="p">)</span><span class="o">.</span>
-
-<span class="o">*</span> <span class="n">Crossover</span><span class="p">:</span> <span class="n">Ordered</span> <span class="n">Crossover</span> <span class="p">(</span><span class="n">OX</span><span class="p">):</span> <span class="n">a</span> <span class="n">common</span> <span class="n">GA</span> <span class="n">crossover</span> <span class="k">for</span> <span class="n">permutations</span> <span class="n">that</span> <span class="n">preserves</span> <span class="n">relative</span> <span class="n">order</span><span class="o">.</span>
-
-<span class="o">*</span> <span class="n">Mutation</span><span class="p">:</span> <span class="n">Swap</span> <span class="n">Mutation</span><span class="p">:</span> <span class="n">randomly</span> <span class="n">swap</span> <span class="n">two</span> <span class="n">customer</span> <span class="n">positions</span> <span class="k">with</span> <span class="n">some</span> <span class="n">probability</span><span class="o">.</span>
-
-<span class="o">*</span> <span class="n">Evolution</span> <span class="n">Loop</span><span class="p">:</span> <span class="n">Over</span> <span class="n">generations</span><span class="p">,</span> <span class="n">we</span> <span class="n">select</span> <span class="n">parents</span><span class="p">,</span> <span class="n">apply</span> <span class="n">crossover</span> <span class="ow">and</span> <span class="n">mutation</span> <span class="n">to</span> <span class="n">produce</span> <span class="n">offspring</span><span class="p">,</span> <span class="n">evaluate</span> <span class="n">them</span><span class="p">,</span> <span class="ow">and</span> <span class="n">form</span> <span class="n">the</span> <span class="nb">next</span> <span class="n">population</span> <span class="p">(</span><span class="n">elitism</span> <span class="n">may</span> <span class="n">be</span> <span class="n">included</span> <span class="n">to</span> <span class="n">keep</span> <span class="n">best</span> <span class="n">solutions</span><span class="p">)</span><span class="o">.</span>
-
-<span class="o">*</span> <span class="n">Below</span> <span class="ow">is</span> <span class="n">a</span> <span class="n">simplified</span> <span class="n">GA</span> <span class="n">implementation</span><span class="o">.</span> <span class="p">(</span><span class="n">Details</span> <span class="n">like</span> <span class="n">elitism</span> <span class="n">rate</span> <span class="ow">or</span> <span class="n">exact</span> <span class="n">tournament</span> <span class="n">size</span> <span class="n">can</span> <span class="n">be</span> <span class="n">adjusted</span><span class="o">.</span><span class="p">)</span>
+<span class="n">SEED</span> <span class="o">=</span> <span class="mi">42</span>
+<span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="n">SEED</span><span class="p">)</span>
 </pre></div>
-<div class="clipboard-copy-txt" id="cell-2">GA Operators. We implement a standard GA:
+<div class="clipboard-copy-txt" id="cell-2">import numpy as np
+import pandas as pd
 
-* Initialization: Start with a population of random permutations of customers.
+from sklearn.base import clone
+from sklearn.datasets import fetch_openml
+from sklearn.model_selection import train_test_split, StratifiedKFold, cross_val_score
+from sklearn.pipeline import Pipeline
+from sklearn.preprocessing import StandardScaler
+from sklearn.preprocessing import StandardScaler, OneHotEncoder
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.inspection import permutation_importance
+from sklearn.metrics import accuracy_score, f1_score
+from sklearn.linear_model import LogisticRegression
+from sklearn_genetic import GAFeatureSelectionCV
+from sklearn.compose import ColumnTransformer
 
-* Selection: We use tournament selection (randomly pick a few individuals and choose the best).
-
-* Crossover: Ordered Crossover (OX): a common GA crossover for permutations that preserves relative order.
-
-* Mutation: Swap Mutation: randomly swap two customer positions with some probability.
-
-* Evolution Loop: Over generations, we select parents, apply crossover and mutation to produce offspring, evaluate them, and form the next population (elitism may be included to keep best solutions).
-
-* Below is a simplified GA implementation. (Details like elitism rate or exact tournament size can be adjusted.)</div>
+SEED = 42
+np.random.seed(SEED)</div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell-outputWrapper">
+<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
+</div>
+<div class="jp-OutputArea jp-Cell-outputArea">
+<div class="jp-OutputArea-child">
+<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
+<pre>c:\Users\salmank\anaconda3\envs\pymc_env_5\Lib\site-packages\tqdm\auto.py:21: TqdmWarning: IProgress not found. Please update jupyter and ipywidgets. See https://ipywidgets.readthedocs.io/en/stable/user_install.html
+  from .autonotebook import tqdm as notebook_tqdm
+</pre>
 </div>
 </div>
 </div>
 </div>
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
-<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=0e4236d2">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell">
+<div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=e31d6e48">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div><div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[3]:</div><div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="CodeMirror cm-s-jupyter">
 <div class="zeroclipboard-container">
 <clipboard-copy ,="" aria-label="Copy to Clipboard" for="cell-3">
@@ -1765,43 +1954,634 @@ The objective is to minimize the sum of distance plus these penalties. Below is 
 </div>
 </clipboard-copy>
 </div>
-<div class="highlight-ipynb hl-python"><pre><span></span><span class="n">The</span> <span class="n">GA</span> <span class="n">iteratively</span> <span class="n">improves</span> <span class="n">solutions</span><span class="o">.</span> <span class="n">The</span> <span class="n">best_history</span> <span class="nb">list</span> <span class="n">recorded</span> <span class="n">the</span> <span class="n">best</span> <span class="n">fitness</span> <span class="n">each</span> <span class="n">generation</span> <span class="p">(</span><span class="ow">not</span> <span class="n">plotted</span> <span class="n">here</span><span class="p">,</span> <span class="n">but</span> <span class="n">can</span> <span class="n">be</span> <span class="n">visualized</span><span class="p">)</span><span class="o">.</span> <span class="n">Finally</span><span class="p">,</span> <span class="n">we</span> <span class="nb">print</span> <span class="n">the</span> <span class="n">best</span><span class="o">-</span><span class="n">found</span> <span class="n">solution</span><span class="err">’</span><span class="n">s</span> <span class="n">cost</span><span class="p">,</span> <span class="n">total</span> <span class="n">distance</span><span class="p">,</span> <span class="n">number</span> <span class="n">of</span> <span class="n">vehicles</span><span class="p">,</span> <span class="ow">and</span> <span class="nb">any</span> <span class="n">time</span><span class="o">-</span><span class="n">window</span> <span class="n">violations</span><span class="o">.</span>
+<div class="highlight-ipynb hl-python"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">'data/brca_data_w_subtypes/brca_data_w_subtypes.csv'</span><span class="p">)</span>
 
-<span class="c1">### Results and Analysis</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Dataset shape:"</span><span class="p">,</span> <span class="n">df</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+<span class="n">df</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
 
-<span class="n">After</span> <span class="n">running</span> <span class="n">the</span> <span class="n">GA</span><span class="p">,</span> <span class="n">we</span> <span class="n">analyze</span> <span class="n">the</span> <span class="n">solution</span> <span class="n">quality</span><span class="p">:</span>
+<span class="n">target_col</span> <span class="o">=</span> <span class="s2">"vital.status"</span>
+<span class="n">X</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="n">target_col</span><span class="p">])</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">target_col</span><span class="p">]</span>
 
-<span class="o">*</span> <span class="n">Convergence</span><span class="p">:</span> <span class="n">We</span> <span class="n">tracked</span> <span class="n">the</span> <span class="n">best</span> <span class="n">cost</span> <span class="n">per</span> <span class="n">generation</span> <span class="p">(</span><span class="n">best_history</span><span class="p">)</span><span class="o">.</span> <span class="n">Typically</span><span class="p">,</span> <span class="n">the</span> <span class="n">best</span> <span class="n">cost</span> <span class="n">decreases</span> <span class="n">over</span> <span class="n">time</span><span class="p">,</span> <span class="n">indicating</span> <span class="n">convergence</span> <span class="p">(</span><span class="n">plateau</span> <span class="n">when</span> <span class="n">near</span><span class="o">-</span><span class="n">optimal</span><span class="p">)</span><span class="o">.</span> <span class="n">Visualizing</span> <span class="n">this</span> <span class="p">(</span><span class="n">e</span><span class="o">.</span><span class="n">g</span><span class="o">.</span> <span class="n">a</span> <span class="n">plot</span> <span class="n">of</span> <span class="n">cost</span> <span class="n">vs</span> <span class="n">generation</span><span class="p">)</span> <span class="n">would</span> <span class="n">show</span> <span class="n">rapid</span> <span class="n">improvement</span> <span class="n">early</span> <span class="n">on</span> <span class="ow">and</span> <span class="n">flattening</span> <span class="k">as</span> <span class="n">it</span> <span class="n">converges</span><span class="o">.</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Unique values:"</span><span class="p">,</span> <span class="n">y</span><span class="o">.</span><span class="n">unique</span><span class="p">())</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Value counts:</span><span class="se">\n</span><span class="s2">"</span><span class="p">,</span> <span class="n">y</span><span class="o">.</span><span class="n">value_counts</span><span class="p">())</span>
 
-<span class="o">*</span> <span class="n">Solution</span> <span class="n">Example</span><span class="p">:</span> <span class="n">The</span> <span class="n">best</span> <span class="n">solution</span> <span class="n">found</span> <span class="n">by</span> <span class="n">our</span> <span class="n">GA</span> <span class="n">had</span> <span class="n">cost</span> <span class="p">{</span><span class="n">best_cost</span><span class="p">:</span><span class="mf">.1</span><span class="n">f</span><span class="p">},</span> <span class="k">with</span> <span class="n">total</span> <span class="n">travel</span> <span class="n">distance</span> <span class="p">{</span><span class="n">best_dist</span><span class="p">:</span><span class="mf">.1</span><span class="n">f</span><span class="p">}</span><span class="o">.</span> <span class="n">It</span> <span class="n">used</span> <span class="p">{</span><span class="n">best_veh</span><span class="p">}</span> <span class="n">vehicles</span> <span class="ow">and</span> <span class="n">incurred</span> <span class="p">{</span><span class="n">best_viol</span><span class="p">}</span> <span class="n">time</span><span class="o">-</span><span class="n">window</span> <span class="n">violations</span><span class="o">.</span> <span class="n">A</span> <span class="n">small</span> <span class="n">number</span> <span class="n">of</span> <span class="n">violations</span> <span class="n">suggests</span> <span class="n">the</span> <span class="n">GA</span> <span class="n">respected</span> <span class="n">customer</span> <span class="n">deadlines</span> <span class="n">well</span> <span class="p">(</span><span class="n">we</span> <span class="n">heavily</span> <span class="n">penalized</span> <span class="n">violations</span><span class="p">)</span><span class="o">.</span> <span class="n">In</span> <span class="n">a</span> <span class="n">final</span> <span class="n">implementation</span><span class="p">,</span> <span class="n">we</span> <span class="n">could</span> <span class="n">increase</span> <span class="n">penalty</span> <span class="ow">or</span> <span class="n">do</span> <span class="n">a</span> <span class="n">repair</span> <span class="n">step</span> <span class="n">to</span> <span class="n">eliminate</span> <span class="nb">any</span> <span class="n">violations</span><span class="p">,</span> <span class="n">ensuring</span> <span class="n">feasibility</span><span class="o">.</span>
-
-<span class="o">*</span> <span class="n">Baselines</span><span class="p">:</span> <span class="n">As</span> <span class="n">a</span> <span class="n">naive</span> <span class="n">baseline</span><span class="p">,</span> <span class="n">one</span> <span class="n">could</span> <span class="n">compare</span> <span class="n">to</span> <span class="n">a</span> <span class="n">greedy</span> <span class="n">heuristic</span> <span class="p">(</span><span class="n">e</span><span class="o">.</span><span class="n">g</span><span class="o">.</span> <span class="n">nearest</span><span class="o">-</span><span class="n">neighbor</span> <span class="ow">or</span> <span class="n">simple</span> <span class="n">saving</span> <span class="n">algorithm</span><span class="p">)</span><span class="o">.</span> <span class="n">We</span> <span class="n">did</span> <span class="ow">not</span> <span class="n">implement</span> <span class="n">that</span> <span class="n">here</span><span class="p">,</span> <span class="n">but</span> <span class="n">typically</span> <span class="n">the</span> <span class="n">GA</span> <span class="n">yields</span> <span class="n">significantly</span> <span class="n">lower</span> <span class="n">cost</span> <span class="n">than</span> <span class="n">a</span> <span class="n">naive</span> <span class="n">solution</span><span class="p">,</span> <span class="n">especially</span> <span class="n">given</span> <span class="n">the</span> <span class="nb">complex</span> <span class="n">constraints</span><span class="o">.</span>
-
-<span class="o">*</span> <span class="n">Route</span> <span class="n">Visualization</span> <span class="p">(</span><span class="n">conceptual</span><span class="p">):</span> <span class="n">Each</span> <span class="n">route</span> <span class="kn">from</span> <span class="nn">the</span> <span class="n">best</span> <span class="n">solution</span> <span class="n">could</span> <span class="n">be</span> <span class="n">plotted</span> <span class="n">on</span> <span class="n">the</span> <span class="n">coordinates</span><span class="o">.</span> <span class="n">For</span> <span class="n">clarity</span><span class="p">,</span> <span class="n">suppose</span> <span class="n">the</span> <span class="n">best</span> <span class="n">solution</span> <span class="n">produced</span> <span class="mi">2</span> <span class="n">routes</span><span class="p">:</span> <span class="n">Route</span> <span class="mi">1</span> <span class="n">visits</span> <span class="n">customers</span> <span class="p">[</span><span class="mi">5</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">9</span><span class="p">,</span><span class="mi">7</span><span class="p">,</span><span class="mi">6</span><span class="p">]</span> <span class="ow">and</span> <span class="n">Route</span> <span class="mi">2</span> <span class="n">visits</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">10</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">8</span><span class="p">]</span> <span class="p">(</span><span class="n">example</span><span class="p">)</span><span class="o">.</span> <span class="n">These</span> <span class="n">routes</span> <span class="n">would</span> <span class="n">start</span> <span class="ow">and</span> <span class="n">end</span> <span class="n">at</span> <span class="n">the</span> <span class="n">depot</span> <span class="p">(</span><span class="n">node</span> <span class="mi">0</span><span class="p">)</span><span class="o">.</span> <span class="n">Plotting</span> <span class="n">them</span> <span class="n">on</span> <span class="n">a</span> <span class="nb">map</span> <span class="p">(</span><span class="k">with</span> <span class="n">lines</span><span class="p">)</span> <span class="n">would</span> <span class="n">show</span> <span class="n">efficient</span> <span class="n">coverage</span> <span class="n">of</span> <span class="n">the</span> <span class="n">points</span> <span class="ow">and</span> <span class="n">adherence</span> <span class="n">to</span> <span class="n">time</span> <span class="n">windows</span> <span class="p">(</span><span class="n">customers</span> <span class="n">visited</span> <span class="n">within</span> <span class="n">their</span> <span class="n">allowed</span> <span class="n">intervals</span><span class="p">)</span><span class="o">.</span> <span class="p">(</span><span class="n">Due</span> <span class="n">to</span> <span class="n">the</span> <span class="n">text</span> <span class="nb">format</span> <span class="n">here</span> <span class="n">we</span> <span class="n">omit</span> <span class="n">the</span> <span class="n">actual</span> <span class="n">plot</span><span class="p">,</span> <span class="n">but</span> <span class="n">it</span> <span class="n">would</span> <span class="n">validate</span> <span class="n">that</span> <span class="n">the</span> <span class="n">routes</span> <span class="n">are</span> <span class="n">spatially</span> <span class="n">sensible</span><span class="o">.</span><span class="p">)</span>
-
-<span class="o">*</span> <span class="n">Performance</span> <span class="n">vs</span><span class="o">.</span> <span class="n">Data</span> <span class="n">Size</span><span class="p">:</span> <span class="n">Our</span> <span class="n">toy</span> <span class="n">example</span> <span class="ow">is</span> <span class="n">small</span><span class="p">,</span> <span class="n">but</span> <span class="n">the</span> <span class="n">approach</span> <span class="n">scales</span> <span class="n">to</span> <span class="n">larger</span> <span class="n">datasets</span> <span class="p">(</span><span class="mi">100</span><span class="o">+</span> <span class="n">customers</span><span class="p">)</span><span class="o">.</span> <span class="n">GA</span> <span class="n">runtimes</span> <span class="n">grow</span> <span class="k">with</span> <span class="n">population</span> <span class="n">size</span> <span class="ow">and</span> <span class="n">fitness</span> <span class="n">complexity</span><span class="o">.</span> <span class="n">For</span> <span class="n">large</span> <span class="n">real</span> <span class="n">instances</span><span class="p">,</span> <span class="n">one</span> <span class="n">can</span> <span class="n">tune</span> <span class="n">GA</span> <span class="n">parameters</span><span class="p">,</span> <span class="n">add</span> <span class="n">parallelism</span><span class="p">,</span> <span class="ow">or</span> <span class="n">hybridize</span> <span class="k">with</span> <span class="n">local</span> <span class="n">search</span> <span class="n">to</span> <span class="n">improve</span> <span class="n">speed</span> <span class="ow">and</span> <span class="n">solution</span> <span class="n">quality</span><span class="o">.</span>
-
-<span class="n">Overall</span><span class="p">,</span> <span class="n">the</span> <span class="n">GA</span> <span class="n">found</span> <span class="n">a</span> <span class="n">feasible</span> <span class="n">routing</span> <span class="n">solution</span> <span class="n">that</span> <span class="n">appears</span> <span class="n">reasonable</span> <span class="n">given</span> <span class="n">the</span> <span class="n">randomly</span> <span class="n">generated</span> <span class="n">data</span><span class="o">.</span> <span class="n">The</span> <span class="n">number</span> <span class="n">of</span> <span class="n">vehicles</span> <span class="ow">is</span> <span class="n">minimized</span> <span class="n">given</span> <span class="n">the</span> <span class="n">capacity</span> <span class="n">constraint</span><span class="p">,</span> <span class="ow">and</span> <span class="n">most</span> <span class="n">time</span> <span class="n">windows</span> <span class="n">are</span> <span class="n">met</span> <span class="p">(</span><span class="n">few</span> <span class="ow">or</span> <span class="n">zero</span> <span class="n">violations</span><span class="p">)</span><span class="o">.</span> <span class="n">The</span> <span class="n">results</span> <span class="n">demonstrate</span> <span class="n">that</span> <span class="n">a</span> <span class="n">GA</span> <span class="n">can</span> <span class="n">effectively</span> <span class="n">handle</span> <span class="n">the</span> <span class="n">non</span><span class="o">-</span><span class="n">convex</span> <span class="n">VRPTW</span> <span class="k">with</span> <span class="nb">complex</span> <span class="n">constraints</span><span class="o">.</span>
+<span class="n">feature_names</span> <span class="o">=</span> <span class="n">X</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
 </pre></div>
-<div class="clipboard-copy-txt" id="cell-3">The GA iteratively improves solutions. The best_history list recorded the best fitness each generation (not plotted here, but can be visualized). Finally, we print the best-found solution’s cost, total distance, number of vehicles, and any time-window violations.
+<div class="clipboard-copy-txt" id="cell-3">df = pd.read_csv('data/brca_data_w_subtypes/brca_data_w_subtypes.csv')
 
-### Results and Analysis
+print("Dataset shape:", df.shape)
+df.head()
 
-After running the GA, we analyze the solution quality:
+target_col = "vital.status"
+X = df.drop(columns=[target_col])
+y = df[target_col]
 
-* Convergence: We tracked the best cost per generation (best_history). Typically, the best cost decreases over time, indicating convergence (plateau when near-optimal). Visualizing this (e.g. a plot of cost vs generation) would show rapid improvement early on and flattening as it converges.
+print("Unique values:", y.unique())
+print("Value counts:\n", y.value_counts())
 
-* Solution Example: The best solution found by our GA had cost {best_cost:.1f}, with total travel distance {best_dist:.1f}. It used {best_veh} vehicles and incurred {best_viol} time-window violations. A small number of violations suggests the GA respected customer deadlines well (we heavily penalized violations). In a final implementation, we could increase penalty or do a repair step to eliminate any violations, ensuring feasibility.
+feature_names = X.columns.tolist()</div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell-outputWrapper">
+<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
+</div>
+<div class="jp-OutputArea jp-Cell-outputArea">
+<div class="jp-OutputArea-child">
+<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
+<pre>Dataset shape: (705, 1941)
+Unique values: [0 1]
+Value counts:
+ vital.status
+0    611
+1     94
+Name: count, dtype: int64
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell">
+<div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=84c8efed">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div><div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="CodeMirror cm-s-jupyter">
+<div class="zeroclipboard-container">
+<clipboard-copy ,="" aria-label="Copy to Clipboard" for="cell-4">
+<div>
+<span class="notice" hidden="">Copied!</span>
+<svg aria-hidden="true" class="clipboard-copy-icon" data-view-component="true" height="20" version="1.1" viewBox="0 0 16 16" width="20">
+<path d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z" fill="currentColor" fill-rule="evenodd"></path>
+<path d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z" fill="currentColor" fill-rule="evenodd"></path>
+</svg>
+</div>
+</clipboard-copy>
+</div>
+<div class="highlight-ipynb hl-python"><pre><span></span><span class="c1"># Train / test split</span>
+<span class="c1"># Larger test split to stress generalization (common in genomics)</span>
+<span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span>
+    <span class="n">X</span><span class="p">,</span>
+    <span class="n">y</span><span class="p">,</span>
+    <span class="n">test_size</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span>
+    <span class="n">stratify</span><span class="o">=</span><span class="n">y</span><span class="p">,</span>
+    <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span>
+<span class="p">)</span>
 
-* Baselines: As a naive baseline, one could compare to a greedy heuristic (e.g. nearest-neighbor or simple saving algorithm). We did not implement that here, but typically the GA yields significantly lower cost than a naive solution, especially given the complex constraints.
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Samples: </span><span class="si">{</span><span class="n">X</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Genes: </span><span class="si">{</span><span class="n">X</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Train samples: </span><span class="si">{</span><span class="n">X_train</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Test samples: </span><span class="si">{</span><span class="n">X_test</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+</pre></div>
+<div class="clipboard-copy-txt" id="cell-4"># Train / test split
+# Larger test split to stress generalization (common in genomics)
+X_train, X_test, y_train, y_test = train_test_split(
+    X,
+    y,
+    test_size=0.5,
+    stratify=y,
+    random_state=42
+)
 
-* Route Visualization (conceptual): Each route from the best solution could be plotted on the coordinates. For clarity, suppose the best solution produced 2 routes: Route 1 visits customers [5,2,9,7,6] and Route 2 visits [3,4,10,1,8] (example). These routes would start and end at the depot (node 0). Plotting them on a map (with lines) would show efficient coverage of the points and adherence to time windows (customers visited within their allowed intervals). (Due to the text format here we omit the actual plot, but it would validate that the routes are spatially sensible.)
-
-* Performance vs. Data Size: Our toy example is small, but the approach scales to larger datasets (100+ customers). GA runtimes grow with population size and fitness complexity. For large real instances, one can tune GA parameters, add parallelism, or hybridize with local search to improve speed and solution quality.
-
-Overall, the GA found a feasible routing solution that appears reasonable given the randomly generated data. The number of vehicles is minimized given the capacity constraint, and most time windows are met (few or zero violations). The results demonstrate that a GA can effectively handle the non-convex VRPTW with complex constraints.
+print(f"Samples: {X.shape[0]}")
+print(f"Genes: {X.shape[1]}")
+print(f"Train samples: {X_train.shape[0]}")
+print(f"Test samples: {X_test.shape[0]}")
 
 </div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell-outputWrapper">
+<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
+</div>
+<div class="jp-OutputArea jp-Cell-outputArea">
+<div class="jp-OutputArea-child">
+<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
+<pre>Samples: 705
+Genes: 1940
+Train samples: 493
+Test samples: 212
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=219dd576">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h2 id="just-700-sample-and-2000-features">Just ~700 Sample and ~2000 features!!<a class="anchor-link" href="#just-700-sample-and-2000-features">¶</a></h2>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell">
+<div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=e5aac1cd">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[15]:</div><div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="CodeMirror cm-s-jupyter">
+<div class="zeroclipboard-container">
+<clipboard-copy ,="" aria-label="Copy to Clipboard" for="cell-5">
+<div>
+<span class="notice" hidden="">Copied!</span>
+<svg aria-hidden="true" class="clipboard-copy-icon" data-view-component="true" height="20" version="1.1" viewBox="0 0 16 16" width="20">
+<path d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z" fill="currentColor" fill-rule="evenodd"></path>
+<path d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z" fill="currentColor" fill-rule="evenodd"></path>
+</svg>
+</div>
+</clipboard-copy>
+</div>
+<div class="highlight-ipynb hl-python"><pre><span></span><span class="n">num_cols</span> <span class="o">=</span> <span class="n">X_train</span><span class="o">.</span><span class="n">select_dtypes</span><span class="p">(</span><span class="n">include</span><span class="o">=</span><span class="p">[</span><span class="s2">"int64"</span><span class="p">,</span> <span class="s2">"float64"</span><span class="p">])</span><span class="o">.</span><span class="n">columns</span>
+<span class="n">cat_cols</span> <span class="o">=</span> <span class="n">X_train</span><span class="o">.</span><span class="n">select_dtypes</span><span class="p">(</span><span class="n">include</span><span class="o">=</span><span class="p">[</span><span class="s2">"object"</span><span class="p">,</span> <span class="s2">"category"</span><span class="p">,</span> <span class="s2">"bool"</span><span class="p">])</span><span class="o">.</span><span class="n">columns</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Numeric features: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">num_cols</span><span class="p">)</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Categorical features: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">cat_cols</span><span class="p">)</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+</pre></div>
+<div class="clipboard-copy-txt" id="cell-5">num_cols = X_train.select_dtypes(include=["int64", "float64"]).columns
+cat_cols = X_train.select_dtypes(include=["object", "category", "bool"]).columns
+print(f"Numeric features: {len(num_cols)}")
+print(f"Categorical features: {len(cat_cols)}")</div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell-outputWrapper">
+<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
+</div>
+<div class="jp-OutputArea jp-Cell-outputArea">
+<div class="jp-OutputArea-child">
+<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
+<pre>Numeric features: 1936
+Categorical features: 4
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell">
+<div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=de96ccb2">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div><div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="CodeMirror cm-s-jupyter">
+<div class="zeroclipboard-container">
+<clipboard-copy ,="" aria-label="Copy to Clipboard" for="cell-6">
+<div>
+<span class="notice" hidden="">Copied!</span>
+<svg aria-hidden="true" class="clipboard-copy-icon" data-view-component="true" height="20" version="1.1" viewBox="0 0 16 16" width="20">
+<path d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z" fill="currentColor" fill-rule="evenodd"></path>
+<path d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z" fill="currentColor" fill-rule="evenodd"></path>
+</svg>
+</div>
+</clipboard-copy>
+</div>
+<div class="highlight-ipynb hl-python"><pre><span></span><span class="c1"># preprocessing</span>
+<span class="n">preprocess_only</span> <span class="o">=</span> <span class="n">ColumnTransformer</span><span class="p">(</span>
+    <span class="n">transformers</span><span class="o">=</span><span class="p">[</span>
+        <span class="p">(</span><span class="s2">"num"</span><span class="p">,</span> <span class="n">StandardScaler</span><span class="p">(),</span> <span class="n">num_cols</span><span class="p">),</span>
+        <span class="p">(</span><span class="s2">"cat"</span><span class="p">,</span> <span class="n">OneHotEncoder</span><span class="p">(</span><span class="n">handle_unknown</span><span class="o">=</span><span class="s2">"ignore"</span><span class="p">),</span> <span class="n">cat_cols</span><span class="p">),</span>
+    <span class="p">],</span>
+    <span class="n">remainder</span><span class="o">=</span><span class="s2">"drop"</span>
+<span class="p">)</span>
+
+<span class="c1"># Fit transform to get numeric matrix</span>
+<span class="n">X_train_enc</span> <span class="o">=</span> <span class="n">preprocess_only</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">X_train</span><span class="p">)</span>
+<span class="n">X_test_enc</span>  <span class="o">=</span> <span class="n">preprocess_only</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span>
+
+<span class="c1"># Get encoded feature names (for reporting)</span>
+<span class="n">feat_names</span> <span class="o">=</span> <span class="n">preprocess_only</span><span class="o">.</span><span class="n">get_feature_names_out</span><span class="p">()</span>
+
+<span class="c1"># Now GA runs on numeric encoded matrix</span>
+<span class="n">lr</span> <span class="o">=</span> <span class="n">LogisticRegression</span><span class="p">(</span>    <span class="n">max_iter</span><span class="o">=</span><span class="mi">10000</span><span class="p">,</span>
+    <span class="n">solver</span><span class="o">=</span><span class="s2">"saga"</span><span class="p">,</span>
+    <span class="n">class_weight</span><span class="o">=</span><span class="s2">"balanced"</span><span class="p">,</span>
+    <span class="n">n_jobs</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span>
+    <span class="n">random_state</span><span class="o">=</span><span class="n">SEED</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Total features: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">feat_names</span><span class="p">)</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+</pre></div>
+<div class="clipboard-copy-txt" id="cell-6"># preprocessing
+preprocess_only = ColumnTransformer(
+    transformers=[
+        ("num", StandardScaler(), num_cols),
+        ("cat", OneHotEncoder(handle_unknown="ignore"), cat_cols),
+    ],
+    remainder="drop"
+)
+
+# Fit transform to get numeric matrix
+X_train_enc = preprocess_only.fit_transform(X_train)
+X_test_enc  = preprocess_only.transform(X_test)
+
+# Get encoded feature names (for reporting)
+feat_names = preprocess_only.get_feature_names_out()
+
+# Now GA runs on numeric encoded matrix
+lr = LogisticRegression(    max_iter=10000,
+    solver="saga",
+    class_weight="balanced",
+    n_jobs=-1,
+    random_state=SEED)
+
+print(f"Total features: {len(feat_names)}")
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell-outputWrapper">
+<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
+</div>
+<div class="jp-OutputArea jp-Cell-outputArea">
+<div class="jp-OutputArea-child">
+<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
+<pre>Total features: 1955
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
+<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=c6f24908">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div><div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="CodeMirror cm-s-jupyter">
+<div class="zeroclipboard-container">
+<clipboard-copy ,="" aria-label="Copy to Clipboard" for="cell-7">
+<div>
+<span class="notice" hidden="">Copied!</span>
+<svg aria-hidden="true" class="clipboard-copy-icon" data-view-component="true" height="20" version="1.1" viewBox="0 0 16 16" width="20">
+<path d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z" fill="currentColor" fill-rule="evenodd"></path>
+<path d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z" fill="currentColor" fill-rule="evenodd"></path>
+</svg>
+</div>
+</clipboard-copy>
+</div>
+<div class="highlight-ipynb hl-python"><pre><span></span><span class="n">cv</span> <span class="o">=</span> <span class="n">StratifiedKFold</span><span class="p">(</span><span class="n">n_splits</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">shuffle</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="n">SEED</span><span class="p">)</span>
+</pre></div>
+<div class="clipboard-copy-txt" id="cell-7">cv = StratifiedKFold(n_splits=10, shuffle=True, random_state=SEED)</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
+<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=e9b76e00">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[29]:</div><div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="CodeMirror cm-s-jupyter">
+<div class="zeroclipboard-container">
+<clipboard-copy ,="" aria-label="Copy to Clipboard" for="cell-8">
+<div>
+<span class="notice" hidden="">Copied!</span>
+<svg aria-hidden="true" class="clipboard-copy-icon" data-view-component="true" height="20" version="1.1" viewBox="0 0 16 16" width="20">
+<path d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z" fill="currentColor" fill-rule="evenodd"></path>
+<path d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z" fill="currentColor" fill-rule="evenodd"></path>
+</svg>
+</div>
+</clipboard-copy>
+</div>
+<div class="highlight-ipynb hl-python"><pre><span></span><span class="c1"># Helper function: train/eval logistic regression on a given set of columns</span>
+<span class="k">def</span> <span class="nf">eval_logreg</span><span class="p">(</span><span class="n">col_idx</span><span class="p">,</span> <span class="n">label</span><span class="p">,</span> <span class="n">model</span><span class="o">=</span><span class="n">lr</span><span class="p">,</span> <span class="n">scoring_cv</span><span class="o">=</span><span class="s2">"f1"</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    col_idx: list/array of integer feature indices OR boolean mask</span>
+<span class="sd">    """</span>
+
+    <span class="n">m</span> <span class="o">=</span> <span class="n">clone</span><span class="p">(</span><span class="n">model</span><span class="p">)</span>
+
+    <span class="n">Xtr</span> <span class="o">=</span> <span class="n">X_train_enc</span><span class="p">[:,</span> <span class="n">col_idx</span><span class="p">]</span>
+    <span class="n">Xte</span> <span class="o">=</span> <span class="n">X_test_enc</span><span class="p">[:,</span> <span class="n">col_idx</span><span class="p">]</span>
+
+    <span class="c1"># Fit</span>
+    <span class="n">m</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">Xtr</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+
+    <span class="c1"># Test metrics</span>
+    <span class="n">y_pred</span> <span class="o">=</span> <span class="n">m</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">Xte</span><span class="p">)</span>
+    <span class="n">test_acc</span> <span class="o">=</span> <span class="n">accuracy_score</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">)</span>
+    <span class="n">test_f1</span>  <span class="o">=</span> <span class="n">f1_score</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">)</span>
+
+    <span class="c1"># CV on training</span>
+    <span class="n">cv_score</span> <span class="o">=</span> <span class="n">cross_val_score</span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="n">Xtr</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">cv</span><span class="o">=</span><span class="n">cv</span><span class="p">,</span> <span class="n">scoring</span><span class="o">=</span><span class="n">scoring_cv</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+
+    <span class="k">return</span> <span class="p">{</span>
+        <span class="s2">"Approach"</span><span class="p">:</span> <span class="n">label</span><span class="p">,</span>
+        <span class="s2">"NumFeatures"</span><span class="p">:</span> <span class="n">Xtr</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span>
+        <span class="sa">f</span><span class="s2">"CV_</span><span class="si">{</span><span class="n">scoring_cv</span><span class="si">}</span><span class="s2">_mean(train)"</span><span class="p">:</span> <span class="n">cv_score</span><span class="p">,</span>
+        <span class="s2">"Test_Accuracy"</span><span class="p">:</span> <span class="n">test_acc</span><span class="p">,</span>
+        <span class="s2">"Test_F1"</span><span class="p">:</span> <span class="n">test_f1</span><span class="p">,</span>
+    <span class="p">}</span>
+
+
+<span class="n">results</span> <span class="o">=</span> <span class="p">[]</span>
+</pre></div>
+<div class="clipboard-copy-txt" id="cell-8"># Helper function: train/eval logistic regression on a given set of columns
+def eval_logreg(col_idx, label, model=lr, scoring_cv="f1"):
+    """
+    col_idx: list/array of integer feature indices OR boolean mask
+    """
+
+    m = clone(model)
+
+    Xtr = X_train_enc[:, col_idx]
+    Xte = X_test_enc[:, col_idx]
+
+    # Fit
+    m.fit(Xtr, y_train)
+
+    # Test metrics
+    y_pred = m.predict(Xte)
+    test_acc = accuracy_score(y_test, y_pred)
+    test_f1  = f1_score(y_test, y_pred)
+
+    # CV on training
+    cv_score = cross_val_score(m, Xtr, y_train, cv=cv, scoring=scoring_cv).mean()
+
+    return {
+        "Approach": label,
+        "NumFeatures": Xtr.shape[1],
+        f"CV_{scoring_cv}_mean(train)": cv_score,
+        "Test_Accuracy": test_acc,
+        "Test_F1": test_f1,
+    }
+
+
+results = []
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
+<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=5a66226f">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[30]:</div><div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="CodeMirror cm-s-jupyter">
+<div class="zeroclipboard-container">
+<clipboard-copy ,="" aria-label="Copy to Clipboard" for="cell-9">
+<div>
+<span class="notice" hidden="">Copied!</span>
+<svg aria-hidden="true" class="clipboard-copy-icon" data-view-component="true" height="20" version="1.1" viewBox="0 0 16 16" width="20">
+<path d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z" fill="currentColor" fill-rule="evenodd"></path>
+<path d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z" fill="currentColor" fill-rule="evenodd"></path>
+</svg>
+</div>
+</clipboard-copy>
+</div>
+<div class="highlight-ipynb hl-python"><pre><span></span><span class="c1">## Baseline - all features</span>
+<span class="n">all_idx</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">X_train_enc</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+<span class="n">results</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">eval_logreg</span><span class="p">(</span><span class="n">all_idx</span><span class="p">,</span> <span class="s2">"All features (LogReg)"</span><span class="p">))</span>
+</pre></div>
+<div class="clipboard-copy-txt" id="cell-9">## Baseline - all features
+all_idx = np.arange(X_train_enc.shape[1])
+results.append(eval_logreg(all_idx, "All features (LogReg)"))</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell">
+<div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=9e7464a8">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[31]:</div><div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="CodeMirror cm-s-jupyter">
+<div class="zeroclipboard-container">
+<clipboard-copy ,="" aria-label="Copy to Clipboard" for="cell-10">
+<div>
+<span class="notice" hidden="">Copied!</span>
+<svg aria-hidden="true" class="clipboard-copy-icon" data-view-component="true" height="20" version="1.1" viewBox="0 0 16 16" width="20">
+<path d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z" fill="currentColor" fill-rule="evenodd"></path>
+<path d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z" fill="currentColor" fill-rule="evenodd"></path>
+</svg>
+</div>
+</clipboard-copy>
+</div>
+<div class="highlight-ipynb hl-python"><pre><span></span><span class="n">results</span>
+</pre></div>
+<div class="clipboard-copy-txt" id="cell-10">results</div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell-outputWrapper">
+<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
+</div>
+<div class="jp-OutputArea jp-Cell-outputArea">
+<div class="jp-OutputArea-child jp-OutputArea-executeResult">
+<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[31]:</div>
+<div class="jp-RenderedText jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/plain" tabindex="0">
+<pre>[{'Approach': 'All features (LogReg)',
+  'NumFeatures': 1955,
+  'CV_f1_mean(train)': 0.27673350041771094,
+  'Test_Accuracy': 0.8632075471698113,
+  'Test_F1': 0.32558139534883723}]</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=3ccc4493">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<p>The genetic algorithm maintains a population of candidate feature subsets and iteratively evolves them through selection, crossover, and mutation. Population size determines the diversity of candidate solutions explored in each generation, the number of generations controls the depth of evolutionary search, and elitism ensures that high-performing feature subsets are preserved across generations. A sparsity constraint limits the maximum number of selected features, guiding the search toward compact and generalizable solutions. Together, these parameters balance exploration and exploitation in a highly non-convex combinatorial search space.</p>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell">
+<div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=353b1f5d">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div><div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="CodeMirror cm-s-jupyter">
+<div class="zeroclipboard-container">
+<clipboard-copy ,="" aria-label="Copy to Clipboard" for="cell-11">
+<div>
+<span class="notice" hidden="">Copied!</span>
+<svg aria-hidden="true" class="clipboard-copy-icon" data-view-component="true" height="20" version="1.1" viewBox="0 0 16 16" width="20">
+<path d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z" fill="currentColor" fill-rule="evenodd"></path>
+<path d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z" fill="currentColor" fill-rule="evenodd"></path>
+</svg>
+</div>
+</clipboard-copy>
+</div>
+<div class="highlight-ipynb hl-python"><pre><span></span><span class="n">ga_selector</span> <span class="o">=</span> <span class="n">GAFeatureSelectionCV</span><span class="p">(</span>
+    <span class="n">estimator</span><span class="o">=</span><span class="n">lr</span><span class="p">,</span>              <span class="c1"># LogisticRegression(...)</span>
+    <span class="n">cv</span><span class="o">=</span><span class="n">cv</span><span class="p">,</span>
+    <span class="n">scoring</span><span class="o">=</span><span class="s2">"average_precision"</span><span class="p">,</span>              
+    <span class="n">population_size</span><span class="o">=</span><span class="mi">500</span><span class="p">,</span>
+    <span class="n">generations</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span>
+    <span class="n">keep_top_k</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span>
+    <span class="n">max_features</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span>           
+    <span class="n">verbose</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+    <span class="n">n_jobs</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+<span class="p">)</span>
+
+
+<span class="n">ga_selector</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train_enc</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+
+<span class="n">ga_mask</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">ga_selector</span><span class="o">.</span><span class="n">best_features_</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">bool</span><span class="p">)</span>
+<span class="n">ga_idx</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">ga_mask</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+
+<span class="n">ga_cols</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">feat_names</span><span class="p">)[</span><span class="n">ga_idx</span><span class="p">])</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Selected </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">ga_cols</span><span class="p">)</span><span class="si">}</span><span class="s2"> encoded features"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">ga_cols</span><span class="p">[:</span><span class="mi">20</span><span class="p">])</span>
+</pre></div>
+<div class="clipboard-copy-txt" id="cell-11">ga_selector = GAFeatureSelectionCV(
+    estimator=lr,              # LogisticRegression(...)
+    cv=cv,
+    scoring="average_precision",              
+    population_size=500,
+    generations=100,
+    keep_top_k=5,
+    max_features=1000,           
+    verbose=False,
+    n_jobs=1,
+)
+
+
+ga_selector.fit(X_train_enc, y_train)
+
+ga_mask = np.array(ga_selector.best_features_, dtype=bool)
+ga_idx = np.where(ga_mask)[0]
+
+ga_cols = list(np.array(feat_names)[ga_idx])
+
+print(f"Selected {len(ga_cols)} encoded features")
+print(ga_cols[:20])</div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell-outputWrapper">
+<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
+</div>
+<div class="jp-OutputArea jp-Cell-outputArea">
+<div class="jp-OutputArea-child">
+<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
+<pre>Selected 88 encoded features
+['num__rs_C4orf7', 'num__rs_FABP7', 'num__rs_TFF3', 'num__rs_DSG3', 'num__rs_AQP5', 'num__rs_CBLN2', 'num__rs_CDC20B', 'num__rs_ABCC8', 'num__rs_SPAG6', 'num__rs_ORM2', 'num__rs_DARC', 'num__rs_ALOX15B', 'num__rs_PKP1', 'num__rs_KRT13', 'num__rs_NCCRP1', 'num__rs_AKR1B10', 'num__rs_HRASLS5', 'num__rs_MAPK4', 'num__rs_GLYAT', 'num__rs_SHISA9']
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
+<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=37ebb215">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[36]:</div><div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="CodeMirror cm-s-jupyter">
+<div class="zeroclipboard-container">
+<clipboard-copy ,="" aria-label="Copy to Clipboard" for="cell-12">
+<div>
+<span class="notice" hidden="">Copied!</span>
+<svg aria-hidden="true" class="clipboard-copy-icon" data-view-component="true" height="20" version="1.1" viewBox="0 0 16 16" width="20">
+<path d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z" fill="currentColor" fill-rule="evenodd"></path>
+<path d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z" fill="currentColor" fill-rule="evenodd"></path>
+</svg>
+</div>
+</clipboard-copy>
+</div>
+<div class="highlight-ipynb hl-python"><pre><span></span><span class="n">results</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">eval_logreg</span><span class="p">(</span><span class="n">ga_idx</span><span class="p">,</span> <span class="sa">f</span><span class="s2">"GA-selected (n=</span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">ga_idx</span><span class="p">)</span><span class="si">}</span><span class="s2">)"</span><span class="p">,</span> <span class="n">scoring_cv</span><span class="o">=</span><span class="s2">"f1"</span><span class="p">))</span>
+</pre></div>
+<div class="clipboard-copy-txt" id="cell-12">results.append(eval_logreg(ga_idx, f"GA-selected (n={len(ga_idx)})", scoring_cv="f1"))
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell">
+<div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=2f1db763">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[37]:</div><div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="CodeMirror cm-s-jupyter">
+<div class="zeroclipboard-container">
+<clipboard-copy ,="" aria-label="Copy to Clipboard" for="cell-13">
+<div>
+<span class="notice" hidden="">Copied!</span>
+<svg aria-hidden="true" class="clipboard-copy-icon" data-view-component="true" height="20" version="1.1" viewBox="0 0 16 16" width="20">
+<path d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z" fill="currentColor" fill-rule="evenodd"></path>
+<path d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z" fill="currentColor" fill-rule="evenodd"></path>
+</svg>
+</div>
+</clipboard-copy>
+</div>
+<div class="highlight-ipynb hl-python"><pre><span></span><span class="n">results</span>
+</pre></div>
+<div class="clipboard-copy-txt" id="cell-13">results</div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell-outputWrapper">
+<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
+</div>
+<div class="jp-OutputArea jp-Cell-outputArea">
+<div class="jp-OutputArea-child jp-OutputArea-executeResult">
+<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[37]:</div>
+<div class="jp-RenderedText jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/plain" tabindex="0">
+<pre>[{'Approach': 'All features (LogReg)',
+  'NumFeatures': 1955,
+  'CV_f1_mean(train)': 0.27673350041771094,
+  'Test_Accuracy': 0.8632075471698113,
+  'Test_F1': 0.32558139534883723},
+ {'Approach': 'GA-selected (n=48)',
+  'NumFeatures': 48,
+  'CV_f1_mean(train)': 0.2914684603471789,
+  'Test_Accuracy': 0.8584905660377359,
+  'Test_F1': 0.21052631578947367},
+ {'Approach': 'GA-selected (n=88)',
+  'NumFeatures': 88,
+  'CV_f1_mean(train)': 0.40913804713804713,
+  'Test_Accuracy': 0.839622641509434,
+  'Test_F1': 0.2608695652173913}]</pre>
 </div>
 </div>
 </div>
@@ -1845,6 +2625,44 @@ Overall, the GA found a feasible routing solution that appears reasonable given 
       
         <footer class="md-footer">
   
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="Footer">
+        
+          
+          <a href="../3_meta/" class="md-footer__link md-footer__link--prev" aria-label="Previous: III - Vehicle Routing: A Metaheuristic Case Study.">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"></path></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              <div class="md-ellipsis">
+                III - Vehicle Routing: A Metaheuristic Case Study.
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="../../11_intro/" class="md-footer__link md-footer__link--next" aria-label="Next: 1. Introduction and Overview">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              <div class="md-ellipsis">
+                1. Introduction and Overview
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"></path></svg>
+            </div>
+          </a>
+        
+      </nav>
     
   
   <div class="md-footer-meta md-typeset">
