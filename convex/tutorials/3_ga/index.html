@@ -2077,7 +2077,7 @@ make the Vehicle Routing Problem with Time Windows (VRPTW) a mixed-integer optim
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[3]:</div><div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[31]:</div><div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="CodeMirror cm-s-jupyter">
 <div class="zeroclipboard-container">
 <clipboard-copy ,="" aria-label="Copy to Clipboard" for="cell-1">
@@ -2116,7 +2116,7 @@ import time
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[4]:</div><div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[32]:</div><div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="CodeMirror cm-s-jupyter">
 <div class="zeroclipboard-container">
 <clipboard-copy ,="" aria-label="Copy to Clipboard" for="cell-2">
@@ -2146,7 +2146,7 @@ import time
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[5]:</div><div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[33]:</div><div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="CodeMirror cm-s-jupyter">
 <div class="zeroclipboard-container">
 <clipboard-copy ,="" aria-label="Copy to Clipboard" for="cell-3">
@@ -2173,7 +2173,7 @@ import time
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[7]:</div><div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[34]:</div><div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="CodeMirror cm-s-jupyter">
 <div class="zeroclipboard-container">
 <clipboard-copy ,="" aria-label="Copy to Clipboard" for="cell-4">
@@ -2226,7 +2226,7 @@ and time-window constraints for a multi-vehicle delivery scenario.</p>
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div><div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[35]:</div><div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="CodeMirror cm-s-jupyter">
 <div class="zeroclipboard-container">
 <clipboard-copy ,="" aria-label="Copy to Clipboard" for="cell-5">
@@ -2248,8 +2248,8 @@ and time-window constraints for a multi-vehicle delivery scenario.</p>
 
 
 <span class="nb">print</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">df</span><span class="p">))</span>
-<span class="n">df</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">columns</span><span class="p">)</span>
+<span class="c1">#df.head()</span>
+<span class="c1">#print(df.columns)</span>
 </pre></div>
 <div class="clipboard-copy-txt" id="cell-5">df_raw = pd.read_csv('data/multiple time window VRP dataset/multiple time window VRP dataset/data/solomon/C101_MTW.csv')
 
@@ -2260,8 +2260,8 @@ df = pd.concat([pd.DataFrame([df_raw.iloc[0]]), df]).reset_index(drop=True)
 
 
 print(len(df))
-df.head()
-print(df.columns)</div>
+#df.head()
+#print(df.columns)</div>
 </div>
 </div>
 </div>
@@ -2274,9 +2274,6 @@ print(df.columns)</div>
 <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
 <pre>21
-Index(['CUST_NO', 'XCOORD', 'YCOORD', 'DEMAND', 'READY_TIME_1', 'DUE_TIME_1',
-       'READY_TIME_2', 'DUE_TIME_2', 'READY_TIME_3', 'DUE_TIME_3'],
-      dtype='object')
 </pre>
 </div>
 </div>
@@ -2289,7 +2286,7 @@ Index(['CUST_NO', 'XCOORD', 'YCOORD', 'DEMAND', 'READY_TIME_1', 'DUE_TIME_1',
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[10]:</div><div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[36]:</div><div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="CodeMirror cm-s-jupyter">
 <div class="zeroclipboard-container">
 <clipboard-copy ,="" aria-label="Copy to Clipboard" for="cell-6">
@@ -2375,7 +2372,7 @@ plt.show()
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[11]:</div><div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[37]:</div><div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="CodeMirror cm-s-jupyter">
 <div class="zeroclipboard-container">
 <clipboard-copy ,="" aria-label="Copy to Clipboard" for="cell-7">
@@ -2475,7 +2472,7 @@ plt.show()
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[12]:</div><div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[38]:</div><div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="CodeMirror cm-s-jupyter">
 <div class="zeroclipboard-container">
 <clipboard-copy ,="" aria-label="Copy to Clipboard" for="cell-8">
@@ -2510,7 +2507,7 @@ dist_matrix = np.sqrt(((coords_array[:,None,:] - coords_array[None,:,:])**2).sum
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[13]:</div><div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[39]:</div><div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="CodeMirror cm-s-jupyter">
 <div class="zeroclipboard-container">
 <clipboard-copy ,="" aria-label="Copy to Clipboard" for="cell-9">
@@ -2555,7 +2552,7 @@ scaled_dist_matrix = np.rint(dist_matrix * scale).astype(int)</div>
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[14]:</div><div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[40]:</div><div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="CodeMirror cm-s-jupyter">
 <div class="zeroclipboard-container">
 <clipboard-copy ,="" aria-label="Copy to Clipboard" for="cell-10">
@@ -2595,13 +2592,13 @@ data['depot'] = depot_index</div>
 </div>
 </div>
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell">
-<div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=81350106">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
+<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=81350106">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[15]:</div><div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div><div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="CodeMirror cm-s-jupyter">
 <div class="zeroclipboard-container">
 <clipboard-copy ,="" aria-label="Copy to Clipboard" for="cell-11">
@@ -2645,20 +2642,6 @@ print("Optimal total distance:", total_distance)</div>
 </div>
 </div>
 </div>
-<div class="jp-Cell-outputWrapper">
-<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
-</div>
-<div class="jp-OutputArea jp-Cell-outputArea">
-<div class="jp-OutputArea-child">
-<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
-<pre>Exact TSP (Held–Karp) took 218.8176 seconds
-Optimal total distance: 307
-</pre>
-</div>
-</div>
-</div>
-</div>
 </div>
 </div>
 <div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=490835b5">
@@ -2677,7 +2660,7 @@ Optimal total distance: 307
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[16]:</div><div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div><div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="CodeMirror cm-s-jupyter">
 <div class="zeroclipboard-container">
 <clipboard-copy ,="" aria-label="Copy to Clipboard" for="cell-12">
@@ -2793,7 +2776,7 @@ search_parameters.first_solution_strategy = (
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[17]:</div><div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div><div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="CodeMirror cm-s-jupyter">
 <div class="zeroclipboard-container">
 <clipboard-copy ,="" aria-label="Copy to Clipboard" for="cell-13">
@@ -2849,7 +2832,7 @@ def print_solution(manager, routing, solution):
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[18]:</div><div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div><div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="CodeMirror cm-s-jupyter">
 <div class="zeroclipboard-container">
 <clipboard-copy ,="" aria-label="Copy to Clipboard" for="cell-14">
@@ -2906,7 +2889,7 @@ Route distance: 307miles
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[19]:</div><div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div><div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="CodeMirror cm-s-jupyter">
 <div class="zeroclipboard-container">
 <clipboard-copy ,="" aria-label="Copy to Clipboard" for="cell-15">
@@ -3074,7 +3057,7 @@ Route distance: 307miles
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[20]:</div><div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div><div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="CodeMirror cm-s-jupyter">
 <div class="zeroclipboard-container">
 <clipboard-copy ,="" aria-label="Copy to Clipboard" for="cell-16">
@@ -3137,7 +3120,7 @@ Route distance: 307miles
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[24]:</div><div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div><div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="CodeMirror cm-s-jupyter">
 <div class="zeroclipboard-container">
 <clipboard-copy ,="" aria-label="Copy to Clipboard" for="cell-17">
@@ -3199,7 +3182,7 @@ data['depot'] = depot_index</div>
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[25]:</div><div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div><div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="CodeMirror cm-s-jupyter">
 <div class="zeroclipboard-container">
 <clipboard-copy ,="" aria-label="Copy to Clipboard" for="cell-18">
@@ -3316,7 +3299,7 @@ search_parameters.time_limit.FromSeconds(1)</div>
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[26]:</div><div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div><div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="CodeMirror cm-s-jupyter">
 <div class="zeroclipboard-container">
 <clipboard-copy ,="" aria-label="Copy to Clipboard" for="cell-19">
@@ -3343,7 +3326,7 @@ search_parameters.time_limit.FromSeconds(1)</div>
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[27]:</div><div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div><div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="CodeMirror cm-s-jupyter">
 <div class="zeroclipboard-container">
 <clipboard-copy ,="" aria-label="Copy to Clipboard" for="cell-20">
@@ -3623,7 +3606,7 @@ search_parameters.time_limit.FromSeconds(1)</div>
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[28]:</div><div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div><div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="CodeMirror cm-s-jupyter">
 <div class="zeroclipboard-container">
 <clipboard-copy ,="" aria-label="Copy to Clipboard" for="cell-21">
@@ -3687,12 +3670,77 @@ Per-vehicle: {0: 92.0, 1: 123.0, 2: 74.0, 3: 161.0}
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h2 id="scenario-3-vehicle-routing-with-time-windows">Scenario 3 – Vehicle Routing with Time Windows<a class="anchor-link" href="#scenario-3-vehicle-routing-with-time-windows">¶</a></h2><p>In this scenario, there are K vehicles available at a central depot. Each vehicle has a maximum load capacity, and customer demands must be delivered without exceeding that capacity. The objective is to design a set of routes that minimizes total travel cost (or distance) while ensuring all customer demands are served.</p>
+<h2 id="scenario-3-vehicle-routing-with-time-windows">Scenario 3 – Vehicle Routing with Time Windows<a class="anchor-link" href="#scenario-3-vehicle-routing-with-time-windows">¶</a></h2><p>In this scenario, a fleet of $K$ vehicles is available at a central depot. Each vehicle has a fixed load capacity, and customer demands must be delivered without exceeding vehicle capacity constraints. Each customer must also be visited within a specified time window.</p>
+<p>The objective is to design a set of vehicle routes that minimizes total travel cost (or distance) while ensuring that all customer demands are satisfied and all operational constraints are respected.</p>
 <ul>
-<li>K vehicles</li>
-<li>Capacity constraints (total demand on each route must not exceed vehicle capacity)</li>
-<li>Time window constraints on customer visits</li>
+<li>$K$ vehicles starting and ending at a central depot</li>
+<li>Capacity constraints: total demand served on each route must not exceed vehicle capacity</li>
+<li>Time window constraints on customer service times</li>
 </ul>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell">
+<div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=7eccdf7f">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div><div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="CodeMirror cm-s-jupyter">
+<div class="zeroclipboard-container">
+<clipboard-copy ,="" aria-label="Copy to Clipboard" for="cell-22">
+<div>
+<span class="notice" hidden="">Copied!</span>
+<svg aria-hidden="true" class="clipboard-copy-icon" data-view-component="true" height="20" version="1.1" viewBox="0 0 16 16" width="20">
+<path d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z" fill="currentColor" fill-rule="evenodd"></path>
+<path d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z" fill="currentColor" fill-rule="evenodd"></path>
+</svg>
+</div>
+</clipboard-copy>
+</div>
+<div class="highlight-ipynb hl-python"><pre><span></span><span class="c1">## Data Model</span>
+
+<span class="n">K</span> <span class="o">=</span> <span class="mi">4</span>
+
+<span class="n">vehicle_capacity</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="mf">1.2</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">ceil</span><span class="p">(</span><span class="nb">sum</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">'DEMAND'</span><span class="p">])</span> <span class="o">/</span> <span class="n">K</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">vehicle_capacity</span><span class="p">)</span>
+<span class="n">data</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="n">data</span><span class="p">[</span><span class="s1">'distance_matrix_scaled'</span><span class="p">]</span> <span class="o">=</span> <span class="n">scaled_dist_matrix</span>
+<span class="n">data</span><span class="p">[</span><span class="s1">'num_vehicles'</span><span class="p">]</span> <span class="o">=</span> <span class="n">K</span>
+<span class="n">data</span><span class="p">[</span><span class="s1">'demands'</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">'DEMAND'</span><span class="p">]</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
+<span class="n">data</span><span class="p">[</span><span class="s1">'vehicle_capacities'</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="n">vehicle_capacity</span><span class="p">]</span><span class="o">*</span><span class="n">K</span>
+<span class="n">data</span><span class="p">[</span><span class="s1">'time_windows'</span><span class="p">]</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">'READY_TIME_1'</span><span class="p">],</span> <span class="n">df</span><span class="p">[</span><span class="s1">'DUE_TIME_1'</span><span class="p">]))</span>  
+<span class="n">data</span><span class="p">[</span><span class="s1">'depot'</span><span class="p">]</span> <span class="o">=</span> <span class="n">depot_index</span>
+</pre></div>
+<div class="clipboard-copy-txt" id="cell-22">## Data Model
+
+K = 4
+
+vehicle_capacity = int(1.2*np.ceil(sum(df['DEMAND']) / K))
+print(vehicle_capacity)
+data = {}
+data['distance_matrix_scaled'] = scaled_dist_matrix
+data['num_vehicles'] = K
+data['demands'] = df['DEMAND'].tolist()
+data['vehicle_capacities'] = [vehicle_capacity]*K
+data['time_windows'] = list(zip(df['READY_TIME_1'], df['DUE_TIME_1']))  
+data['depot'] = depot_index</div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell-outputWrapper">
+<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
+</div>
+<div class="jp-OutputArea jp-Cell-outputArea">
+<div class="jp-OutputArea-child">
+<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
+<pre>108
+</pre>
+</div>
+</div>
 </div>
 </div>
 </div>
@@ -3702,10 +3750,10 @@ Per-vehicle: {0: 92.0, 1: 123.0, 2: 74.0, 3: 161.0}
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[20]:</div><div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div><div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="CodeMirror cm-s-jupyter">
 <div class="zeroclipboard-container">
-<clipboard-copy ,="" aria-label="Copy to Clipboard" for="cell-22">
+<clipboard-copy ,="" aria-label="Copy to Clipboard" for="cell-23">
 <div>
 <span class="notice" hidden="">Copied!</span>
 <svg aria-hidden="true" class="clipboard-copy-icon" data-view-component="true" height="20" version="1.1" viewBox="0 0 16 16" width="20">
@@ -3745,7 +3793,7 @@ Per-vehicle: {0: 92.0, 1: 123.0, 2: 74.0, 3: 161.0}
     <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Total distance of all routes: </span><span class="si">{</span><span class="n">total_distance</span><span class="si">}</span><span class="s2">m"</span><span class="p">)</span>
     <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Total load of all routes: </span><span class="si">{</span><span class="n">total_load</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
 </pre></div>
-<div class="clipboard-copy-txt" id="cell-22">def print_solution(data, manager, routing, solution):
+<div class="clipboard-copy-txt" id="cell-23">def print_solution(data, manager, routing, solution):
     """Prints solution on console."""
     print(f"Objective: {solution.ObjectiveValue()}")
     total_distance = 0
@@ -3789,7 +3837,7 @@ Per-vehicle: {0: 92.0, 1: 123.0, 2: 74.0, 3: 161.0}
 <div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div><div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="CodeMirror cm-s-jupyter">
 <div class="zeroclipboard-container">
-<clipboard-copy ,="" aria-label="Copy to Clipboard" for="cell-23">
+<clipboard-copy ,="" aria-label="Copy to Clipboard" for="cell-24">
 <div>
 <span class="notice" hidden="">Copied!</span>
 <svg aria-hidden="true" class="clipboard-copy-icon" data-view-component="true" height="20" version="1.1" viewBox="0 0 16 16" width="20">
@@ -3804,7 +3852,7 @@ Per-vehicle: {0: 92.0, 1: 123.0, 2: 74.0, 3: 161.0}
 <span class="k">if</span> <span class="n">total_demand</span> <span class="o">&gt;</span> <span class="n">total_capacity</span><span class="p">:</span>
     <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"Total demand exceeds total vehicle capacity."</span><span class="p">)</span>
 </pre></div>
-<div class="clipboard-copy-txt" id="cell-23">total_capacity = K * vehicle_capacity
+<div class="clipboard-copy-txt" id="cell-24">total_capacity = K * vehicle_capacity
 total_demand = sum(data['demands'])
 if total_demand &gt; total_capacity:
     raise ValueError("Total demand exceeds total vehicle capacity.")</div>
@@ -3822,7 +3870,7 @@ if total_demand &gt; total_capacity:
 <div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div><div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="CodeMirror cm-s-jupyter">
 <div class="zeroclipboard-container">
-<clipboard-copy ,="" aria-label="Copy to Clipboard" for="cell-24">
+<clipboard-copy ,="" aria-label="Copy to Clipboard" for="cell-25">
 <div>
 <span class="notice" hidden="">Copied!</span>
 <svg aria-hidden="true" class="clipboard-copy-icon" data-view-component="true" height="20" version="1.1" viewBox="0 0 16 16" width="20">
@@ -3837,7 +3885,7 @@ if total_demand &gt; total_capacity:
 <span class="n">vehicle_capacity</span> <span class="o">=</span> <span class="mi">100</span>
 <span class="n">vehicle_fix_cost</span> <span class="o">=</span> <span class="mi">1</span> <span class="c1">#dist[dist!=0].mean()</span>
 </pre></div>
-<div class="clipboard-copy-txt" id="cell-24">N = len(df)
+<div class="clipboard-copy-txt" id="cell-25">N = len(df)
 K = 20
 vehicle_capacity = 100
 vehicle_fix_cost = 1 #dist[dist!=0].mean()</div>
@@ -3855,7 +3903,7 @@ vehicle_fix_cost = 1 #dist[dist!=0].mean()</div>
 <div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div><div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="CodeMirror cm-s-jupyter">
 <div class="zeroclipboard-container">
-<clipboard-copy ,="" aria-label="Copy to Clipboard" for="cell-25">
+<clipboard-copy ,="" aria-label="Copy to Clipboard" for="cell-26">
 <div>
 <span class="notice" hidden="">Copied!</span>
 <svg aria-hidden="true" class="clipboard-copy-icon" data-view-component="true" height="20" version="1.1" viewBox="0 0 16 16" width="20">
@@ -3876,7 +3924,7 @@ vehicle_fix_cost = 1 #dist[dist!=0].mean()</div>
 <span class="n">data</span><span class="p">[</span><span class="s1">'time_windows'</span><span class="p">]</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">'READY_TIME_1'</span><span class="p">],</span> <span class="n">df</span><span class="p">[</span><span class="s1">'DUE_TIME_1'</span><span class="p">]))</span>
 <span class="n">data</span><span class="p">[</span><span class="s1">'depot'</span><span class="p">]</span> <span class="o">=</span> <span class="n">depot_index</span>
 </pre></div>
-<div class="clipboard-copy-txt" id="cell-25"># ------------------------
+<div class="clipboard-copy-txt" id="cell-26"># ------------------------
 # OR-Tools Data Model
 # ------------------------
 data = {}
@@ -3901,7 +3949,7 @@ data['depot'] = depot_index
 <div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div><div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="CodeMirror cm-s-jupyter">
 <div class="zeroclipboard-container">
-<clipboard-copy ,="" aria-label="Copy to Clipboard" for="cell-26">
+<clipboard-copy ,="" aria-label="Copy to Clipboard" for="cell-27">
 <div>
 <span class="notice" hidden="">Copied!</span>
 <svg aria-hidden="true" class="clipboard-copy-icon" data-view-component="true" height="20" version="1.1" viewBox="0 0 16 16" width="20">
@@ -3916,7 +3964,7 @@ data['depot'] = depot_index
 <span class="k">if</span> <span class="n">total_demand</span> <span class="o">&gt;</span> <span class="n">total_capacity</span><span class="p">:</span>
     <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"Total demand exceeds total vehicle capacity."</span><span class="p">)</span>
 </pre></div>
-<div class="clipboard-copy-txt" id="cell-26">total_capacity = K * vehicle_capacity
+<div class="clipboard-copy-txt" id="cell-27">total_capacity = K * vehicle_capacity
 total_demand = int(df['DEMAND'].sum())
 if total_demand &gt; total_capacity:
     raise ValueError("Total demand exceeds total vehicle capacity.")</div>
@@ -3934,7 +3982,7 @@ if total_demand &gt; total_capacity:
 <div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div><div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="CodeMirror cm-s-jupyter">
 <div class="zeroclipboard-container">
-<clipboard-copy ,="" aria-label="Copy to Clipboard" for="cell-27">
+<clipboard-copy ,="" aria-label="Copy to Clipboard" for="cell-28">
 <div>
 <span class="notice" hidden="">Copied!</span>
 <svg aria-hidden="true" class="clipboard-copy-icon" data-view-component="true" height="20" version="1.1" viewBox="0 0 16 16" width="20">
@@ -4053,7 +4101,7 @@ if total_demand &gt; total_capacity:
     <span class="n">routing_enums_pb2</span><span class="o">.</span><span class="n">FirstSolutionStrategy</span><span class="o">.</span><span class="n">PATH_CHEAPEST_ARC</span>
 <span class="p">)</span>
 </pre></div>
-<div class="clipboard-copy-txt" id="cell-27"># ------------------------
+<div class="clipboard-copy-txt" id="cell-28"># ------------------------
 # Routing Model
 # ------------------------
 # OR-Tools uses a RoutingIndexManager and RoutingModel to handle VRP problems.
@@ -4176,7 +4224,7 @@ search_parameters.first_solution_strategy = (
 <div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div><div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="CodeMirror cm-s-jupyter">
 <div class="zeroclipboard-container">
-<clipboard-copy ,="" aria-label="Copy to Clipboard" for="cell-28">
+<clipboard-copy ,="" aria-label="Copy to Clipboard" for="cell-29">
 <div>
 <span class="notice" hidden="">Copied!</span>
 <svg aria-hidden="true" class="clipboard-copy-icon" data-view-component="true" height="20" version="1.1" viewBox="0 0 16 16" width="20">
@@ -4191,7 +4239,7 @@ search_parameters.first_solution_strategy = (
 <span class="c1"># ------------------------</span>
 <span class="n">solution</span> <span class="o">=</span> <span class="n">routing</span><span class="o">.</span><span class="n">SolveWithParameters</span><span class="p">(</span><span class="n">search_parameters</span><span class="p">)</span>
 </pre></div>
-<div class="clipboard-copy-txt" id="cell-28"># ------------------------
+<div class="clipboard-copy-txt" id="cell-29"># ------------------------
 # Solve
 # ------------------------
 solution = routing.SolveWithParameters(search_parameters)
@@ -4210,7 +4258,7 @@ solution = routing.SolveWithParameters(search_parameters)
 <div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div><div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="CodeMirror cm-s-jupyter">
 <div class="zeroclipboard-container">
-<clipboard-copy ,="" aria-label="Copy to Clipboard" for="cell-29">
+<clipboard-copy ,="" aria-label="Copy to Clipboard" for="cell-30">
 <div>
 <span class="notice" hidden="">Copied!</span>
 <svg aria-hidden="true" class="clipboard-copy-icon" data-view-component="true" height="20" version="1.1" viewBox="0 0 16 16" width="20">
@@ -4287,7 +4335,7 @@ solution = routing.SolveWithParameters(search_parameters)
 <span class="k">else</span><span class="p">:</span>
     <span class="nb">print</span><span class="p">(</span><span class="s2">"No solution found!"</span><span class="p">)</span>
 </pre></div>
-<div class="clipboard-copy-txt" id="cell-29">if solution:
+<div class="clipboard-copy-txt" id="cell-30">if solution:
     total_distance = 0
     vehicles_used = 0
     fixed_cost = vehicle_fix_cost  # whatever you set
@@ -4384,7 +4432,7 @@ Total cost (distance + fixed cost): 2032
 <div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div><div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="CodeMirror cm-s-jupyter">
 <div class="zeroclipboard-container">
-<clipboard-copy ,="" aria-label="Copy to Clipboard" for="cell-30">
+<clipboard-copy ,="" aria-label="Copy to Clipboard" for="cell-31">
 <div>
 <span class="notice" hidden="">Copied!</span>
 <svg aria-hidden="true" class="clipboard-copy-icon" data-view-component="true" height="20" version="1.1" viewBox="0 0 16 16" width="20">
@@ -4414,7 +4462,7 @@ Total cost (distance + fixed cost): 2032
 <span class="n">routes</span> <span class="o">=</span> <span class="n">get_routes</span><span class="p">(</span><span class="n">manager</span><span class="p">,</span> <span class="n">routing</span><span class="p">,</span> <span class="n">solution</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">"Routes:"</span><span class="p">,</span> <span class="n">routes</span><span class="p">)</span>
 </pre></div>
-<div class="clipboard-copy-txt" id="cell-30"># ------------------------
+<div class="clipboard-copy-txt" id="cell-31"># ------------------------
 # Extract solution
 # ------------------------
 def get_routes(manager, routing, solution):
@@ -4486,7 +4534,7 @@ print("Routes:", routes)
 <div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div><div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="CodeMirror cm-s-jupyter">
 <div class="zeroclipboard-container">
-<clipboard-copy ,="" aria-label="Copy to Clipboard" for="cell-31">
+<clipboard-copy ,="" aria-label="Copy to Clipboard" for="cell-32">
 <div>
 <span class="notice" hidden="">Copied!</span>
 <svg aria-hidden="true" class="clipboard-copy-icon" data-view-component="true" height="20" version="1.1" viewBox="0 0 16 16" width="20">
@@ -4545,7 +4593,7 @@ print("Routes:", routes)
     <span class="n">cost</span> <span class="o">=</span> <span class="n">total_dist</span> <span class="o">+</span> <span class="n">vehicle_cost</span> <span class="o">*</span> <span class="n">vehicles</span> <span class="o">+</span> <span class="n">time_penalty</span> <span class="o">*</span> <span class="n">violations</span>
     <span class="k">return</span> <span class="n">cost</span><span class="p">,</span> <span class="n">total_dist</span><span class="p">,</span> <span class="n">vehicles</span><span class="p">,</span> <span class="n">violations</span>
 </pre></div>
-<div class="clipboard-copy-txt" id="cell-31">capacity = 25        # vehicle capacity
+<div class="clipboard-copy-txt" id="cell-32">capacity = 25        # vehicle capacity
 service_time = 5.0   # service duration per customer
 vehicle_cost = 50.0  # penalty cost per used vehicle
 time_penalty = 500.0 # penalty for each time-window violation
@@ -4633,7 +4681,7 @@ def eval_solution(chromosome):
 <div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div><div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="CodeMirror cm-s-jupyter">
 <div class="zeroclipboard-container">
-<clipboard-copy ,="" aria-label="Copy to Clipboard" for="cell-32">
+<clipboard-copy ,="" aria-label="Copy to Clipboard" for="cell-33">
 <div>
 <span class="notice" hidden="">Copied!</span>
 <svg aria-hidden="true" class="clipboard-copy-icon" data-view-component="true" height="20" version="1.1" viewBox="0 0 16 16" width="20">
@@ -4726,7 +4774,7 @@ def eval_solution(chromosome):
 <span class="n">best_cost</span><span class="p">,</span> <span class="n">best_dist</span><span class="p">,</span> <span class="n">best_veh</span><span class="p">,</span> <span class="n">best_viol</span> <span class="o">=</span> <span class="n">eval_solution</span><span class="p">(</span><span class="n">best_sol</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Best solution cost: </span><span class="si">{</span><span class="n">best_cost</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2"> (dist=</span><span class="si">{</span><span class="n">best_dist</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2">, vehicles=</span><span class="si">{</span><span class="n">best_veh</span><span class="si">}</span><span class="s2">, violations=</span><span class="si">{</span><span class="n">best_viol</span><span class="si">}</span><span class="s2">)"</span><span class="p">)</span>
 </pre></div>
-<div class="clipboard-copy-txt" id="cell-32">import random
+<div class="clipboard-copy-txt" id="cell-33">import random
 
 # GA parameters
 POP_SIZE = 50
