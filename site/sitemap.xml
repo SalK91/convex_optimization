@@ -2,106 +2,114 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
          <loc>https://salk91.github.io/convex_optimization/</loc>
-         <lastmod>2025-12-20</lastmod>
+         <lastmod>2025-12-21</lastmod>
     </url>
     <url>
          <loc>https://salk91.github.io/convex_optimization/convex/11_intro/</loc>
-         <lastmod>2025-12-20</lastmod>
+         <lastmod>2025-12-21</lastmod>
     </url>
     <url>
          <loc>https://salk91.github.io/convex_optimization/convex/12_vector/</loc>
-         <lastmod>2025-12-20</lastmod>
+         <lastmod>2025-12-21</lastmod>
     </url>
     <url>
          <loc>https://salk91.github.io/convex_optimization/convex/13_calculus/</loc>
-         <lastmod>2025-12-20</lastmod>
+         <lastmod>2025-12-21</lastmod>
     </url>
     <url>
          <loc>https://salk91.github.io/convex_optimization/convex/14_convexsets/</loc>
-         <lastmod>2025-12-20</lastmod>
+         <lastmod>2025-12-21</lastmod>
     </url>
     <url>
          <loc>https://salk91.github.io/convex_optimization/convex/15_convexfunctions/</loc>
-         <lastmod>2025-12-20</lastmod>
+         <lastmod>2025-12-21</lastmod>
     </url>
     <url>
          <loc>https://salk91.github.io/convex_optimization/convex/16_subgradients/</loc>
-         <lastmod>2025-12-20</lastmod>
+         <lastmod>2025-12-21</lastmod>
     </url>
     <url>
          <loc>https://salk91.github.io/convex_optimization/convex/16a_optimality_conditions/</loc>
-         <lastmod>2025-12-20</lastmod>
+         <lastmod>2025-12-21</lastmod>
     </url>
     <url>
          <loc>https://salk91.github.io/convex_optimization/convex/17_kkt/</loc>
-         <lastmod>2025-12-20</lastmod>
+         <lastmod>2025-12-21</lastmod>
     </url>
     <url>
          <loc>https://salk91.github.io/convex_optimization/convex/18_duality/</loc>
-         <lastmod>2025-12-20</lastmod>
+         <lastmod>2025-12-21</lastmod>
     </url>
     <url>
          <loc>https://salk91.github.io/convex_optimization/convex/18a_pareto/</loc>
-         <lastmod>2025-12-20</lastmod>
+         <lastmod>2025-12-21</lastmod>
     </url>
     <url>
          <loc>https://salk91.github.io/convex_optimization/convex/18b_regularization/</loc>
-         <lastmod>2025-12-20</lastmod>
+         <lastmod>2025-12-21</lastmod>
     </url>
     <url>
          <loc>https://salk91.github.io/convex_optimization/convex/19_optimizationalgo/</loc>
-         <lastmod>2025-12-20</lastmod>
+         <lastmod>2025-12-21</lastmod>
     </url>
     <url>
          <loc>https://salk91.github.io/convex_optimization/convex/19a_optimization_constraints/</loc>
-         <lastmod>2025-12-20</lastmod>
+         <lastmod>2025-12-21</lastmod>
     </url>
     <url>
          <loc>https://salk91.github.io/convex_optimization/convex/19b_optimization_constraints/</loc>
-         <lastmod>2025-12-20</lastmod>
+         <lastmod>2025-12-21</lastmod>
     </url>
     <url>
          <loc>https://salk91.github.io/convex_optimization/convex/20_advanced/</loc>
-         <lastmod>2025-12-20</lastmod>
+         <lastmod>2025-12-21</lastmod>
     </url>
     <url>
          <loc>https://salk91.github.io/convex_optimization/convex/21_models/</loc>
-         <lastmod>2025-12-20</lastmod>
+         <lastmod>2025-12-21</lastmod>
     </url>
     <url>
          <loc>https://salk91.github.io/convex_optimization/convex/30_canonical_problems/</loc>
-         <lastmod>2025-12-20</lastmod>
+         <lastmod>2025-12-21</lastmod>
     </url>
     <url>
          <loc>https://salk91.github.io/convex_optimization/convex/35_modern/</loc>
-         <lastmod>2025-12-20</lastmod>
+         <lastmod>2025-12-21</lastmod>
     </url>
     <url>
          <loc>https://salk91.github.io/convex_optimization/convex/40_nonconvex/</loc>
-         <lastmod>2025-12-20</lastmod>
+         <lastmod>2025-12-21</lastmod>
     </url>
     <url>
          <loc>https://salk91.github.io/convex_optimization/convex/42_derivativefree/</loc>
-         <lastmod>2025-12-20</lastmod>
+         <lastmod>2025-12-21</lastmod>
     </url>
     <url>
          <loc>https://salk91.github.io/convex_optimization/convex/44_metaheuristic/</loc>
-         <lastmod>2025-12-20</lastmod>
+         <lastmod>2025-12-21</lastmod>
     </url>
     <url>
          <loc>https://salk91.github.io/convex_optimization/convex/48_advanced_combinatorial/</loc>
-         <lastmod>2025-12-20</lastmod>
+         <lastmod>2025-12-21</lastmod>
     </url>
     <url>
          <loc>https://salk91.github.io/convex_optimization/convex/50_future/</loc>
-         <lastmod>2025-12-20</lastmod>
+         <lastmod>2025-12-21</lastmod>
     </url>
     <url>
          <loc>https://salk91.github.io/convex_optimization/convex/tutorials/1_lp_transport/</loc>
-         <lastmod>2025-12-20</lastmod>
+         <lastmod>2025-12-21</lastmod>
     </url>
     <url>
          <loc>https://salk91.github.io/convex_optimization/convex/tutorials/2_portfolio/</loc>
-         <lastmod>2025-12-20</lastmod>
+         <lastmod>2025-12-21</lastmod>
+    </url>
+    <url>
+         <loc>https://salk91.github.io/convex_optimization/convex/tutorials/3_meta/</loc>
+         <lastmod>2025-12-21</lastmod>
+    </url>
+    <url>
+         <loc>https://salk91.github.io/convex_optimization/convex/tutorials/4_ga/</loc>
+         <lastmod>2025-12-21</lastmod>
     </url>
 </urlset>

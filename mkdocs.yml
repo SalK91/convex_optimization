@@ -116,8 +116,10 @@ nav:
   - Home: "index.md"
 
   - Case-studies:
-      - 1. Linear Programming for Transportation Problems: "convex/tutorials/1_lp_transport.ipynb"
-      - 2. Portfolio Optimization: "convex/tutorials/2_portfolio.ipynb"
+  
+      - 1. I - Linear Programming for Transportation Problems: "convex/tutorials/1_lp_transport.ipynb"
+      - 2. II - Portfolio Optimization: "convex/tutorials/2_portfolio.ipynb"
+      - 3. III - Vehicle Routing with Time Windows: "convex/tutorials/3_meta.ipynb"
      # - 3. Gen
 
   - Convex Optimization:
