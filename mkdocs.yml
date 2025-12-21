@@ -120,6 +120,8 @@ nav:
       - 1. I - Linear Programming for Transportation Problems: "convex/tutorials/1_lp_transport.ipynb"
       - 2. II - Portfolio Optimization: "convex/tutorials/2_portfolio.ipynb"
       - 3. III - Vehicle Routing with Time Windows: "convex/tutorials/3_meta.ipynb"
+      - 4. IV – Cancer Gene Expression Feature Selection: "convex/tutorials/4_ga.ipynb"
+      - 5. V – Tail-Risk Portfolio Optimization: "convex/tutorials/5_cvar_portfolio.ipynb"
      # - 3. Gen
 
   - Convex Optimization:
