@@ -122,7 +122,9 @@ nav:
       - 3. III - Vehicle Routing with Time Windows: "convex/tutorials/3_meta.ipynb"
       - 4. IV – Cancer Gene Expression Feature Selection: "convex/tutorials/4_ga.ipynb"
       - 5. V – Tail-Risk Portfolio Optimization: "convex/tutorials/5_cvar_portfolio.ipynb"
-     # - 3. Gen
+      - 6. VI – Matchmaking - An Optimal Transport Case Study: "convex/tutorials/6_sinkhorn_speed_dating_ot.ipynb"
+      #- 7. VII – Image Denoising with Total Variation Minimization: "convex/tutorials/7_total_variation_denoising.ipynb"
+      
 
   - Convex Optimization:
       - 1. Introduction and Overview: "convex/11_intro.md"

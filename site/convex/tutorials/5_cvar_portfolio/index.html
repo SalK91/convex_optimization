@@ -15,7 +15,7 @@
         <link rel="prev" href="../4_ga/">
       
       
-        <link rel="next" href="../../11_intro/">
+        <link rel="next" href="../6_sinkhorn_speed_dating_ot/">
       
       
       <link rel="icon" href="../../../assets/images/favicon.png">
@@ -404,6 +404,8 @@
       
         
       
+        
+      
     
     
     
@@ -703,6 +705,29 @@
   
 </nav>
       
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../6_sinkhorn_speed_dating_ot/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    VI — Matchmaking - An Optimal Transport Case Study
+    
+  </span>
+  
+
+      </a>
     </li>
   
 
@@ -1998,7 +2023,7 @@ In other words: <em>“how bad are things in the worst tail?”</em></li>
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[126]:</div><div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[13]:</div><div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="CodeMirror cm-s-jupyter">
 <div class="zeroclipboard-container">
 <clipboard-copy ,="" aria-label="Copy to Clipboard" for="cell-1">
@@ -2038,7 +2063,7 @@ In other words: <em>“how bad are things in the worst tail?”</em></li>
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[127]:</div><div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[14]:</div><div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="CodeMirror cm-s-jupyter">
 <div class="zeroclipboard-container">
 <clipboard-copy ,="" aria-label="Copy to Clipboard" for="cell-2">
@@ -2092,7 +2117,7 @@ You can change the universe based on your use-case (e.g., region-specific, facto
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div><div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[15]:</div><div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="CodeMirror cm-s-jupyter">
 <div class="zeroclipboard-container">
 <clipboard-copy ,="" aria-label="Copy to Clipboard" for="cell-3">
@@ -2318,7 +2343,7 @@ print(len(tickers))</div>
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div><div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[16]:</div><div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="CodeMirror cm-s-jupyter">
 <div class="zeroclipboard-container">
 <clipboard-copy ,="" aria-label="Copy to Clipboard" for="cell-4">
@@ -2331,8 +2356,8 @@ print(len(tickers))</div>
 </div>
 </clipboard-copy>
 </div>
-<div class="highlight-ipynb hl-python"><pre><span></span><span class="c1"># Define asset tickers and download data (3 years of daily data)</span>
-<span class="n">start_date</span> <span class="o">=</span> <span class="s2">"2024-01-01"</span>
+<div class="highlight-ipynb hl-python"><pre><span></span><span class="c1"># Define asset tickers and download data </span>
+<span class="n">start_date</span> <span class="o">=</span> <span class="s2">"2021-01-01"</span>
 <span class="n">end_date</span> <span class="o">=</span> <span class="s2">"2025-12-20"</span>
 
 <span class="n">prices</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">()</span>
@@ -2348,8 +2373,8 @@ print(len(tickers))</div>
 <span class="n">prices</span> <span class="o">=</span> <span class="n">prices</span><span class="o">.</span><span class="n">sort_index</span><span class="p">()</span>
 <span class="n">prices</span><span class="o">.</span><span class="n">tail</span><span class="p">()</span>
 </pre></div>
-<div class="clipboard-copy-txt" id="cell-4"># Define asset tickers and download data (3 years of daily data)
-start_date = "2024-01-01"
+<div class="clipboard-copy-txt" id="cell-4"># Define asset tickers and download data 
+start_date = "2021-01-01"
 end_date = "2025-12-20"
 
 prices = pd.DataFrame()
@@ -2363,7 +2388,8 @@ for ticker in tickers:
     except Exception as e:
         print(f"Failed to download data for {ticker}: {e}")
 prices = prices.sort_index()
-prices.tail()</div>
+prices.tail()
+</div>
 </div>
 </div>
 </div>
@@ -2478,7 +2504,71 @@ Failed to download data for XLY.US: 'NoneType' object has no attribute 'group'
 Downloading data for XLI.US...
 Failed to download data for XLI.US: 'NoneType' object has no attribute 'group'
 Downloading data for XLRE.US...
+Failed to download data for XLRE.US: 'NoneType' object has no attribute 'group'
+Downloading data for IWM.US...
+Failed to download data for IWM.US: 'NoneType' object has no attribute 'group'
+Downloading data for QQQ.US...
+Failed to download data for QQQ.US: 'NoneType' object has no attribute 'group'
+Downloading data for EFA.US...
+Failed to download data for EFA.US: 'NoneType' object has no attribute 'group'
+Downloading data for EEM.US...
+Failed to download data for EEM.US: 'NoneType' object has no attribute 'group'
+Downloading data for VXUS.US...
+Failed to download data for VXUS.US: 'NoneType' object has no attribute 'group'
+Downloading data for IEF.US...
+Failed to download data for IEF.US: 'NoneType' object has no attribute 'group'
+Downloading data for TLT.US...
+Failed to download data for TLT.US: 'NoneType' object has no attribute 'group'
+Downloading data for SHY.US...
+Failed to download data for SHY.US: 'NoneType' object has no attribute 'group'
+Downloading data for LQD.US...
+Failed to download data for LQD.US: 'NoneType' object has no attribute 'group'
+Downloading data for HYG.US...
+Failed to download data for HYG.US: 'NoneType' object has no attribute 'group'
+Downloading data for GLD.US...
+Failed to download data for GLD.US: 'NoneType' object has no attribute 'group'
+Downloading data for SLV.US...
+Failed to download data for SLV.US: 'NoneType' object has no attribute 'group'
+Downloading data for DBC.US...
+Failed to download data for DBC.US: 'NoneType' object has no attribute 'group'
+Downloading data for USO.US...
+Failed to download data for USO.US: 'NoneType' object has no attribute 'group'
+Downloading data for UNG.US...
+Failed to download data for UNG.US: 'NoneType' object has no attribute 'group'
+Downloading data for VNQ.US...
+Failed to download data for VNQ.US: 'NoneType' object has no attribute 'group'
+Downloading data for ICLN.US...
+Failed to download data for ICLN.US: 'NoneType' object has no attribute 'group'
 </pre>
+</div>
+</div>
+<div class="jp-OutputArea-child jp-OutputArea-executeResult">
+<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[16]:</div>
+<div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/html" tabindex="0">
+<div>
+<style scoped="">
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+<thead>
+<tr style="text-align: right;">
+<th></th>
+</tr>
+</thead>
+<tbody>
+</tbody>
+</table>
+</div>
 </div>
 </div>
 </div>
@@ -2507,7 +2597,7 @@ We will treat historical daily returns as <em>scenarios</em> for the CVaR optimi
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[130]:</div><div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[12]:</div><div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="CodeMirror cm-s-jupyter">
 <div class="zeroclipboard-container">
 <clipboard-copy ,="" aria-label="Copy to Clipboard" for="cell-5">
@@ -2529,7 +2619,7 @@ We will treat historical daily returns as <em>scenarios</em> for the CVaR optimi
 <span class="n">R_test</span>  <span class="o">=</span> <span class="n">returns</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">split</span><span class="p">:]</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
 
 <span class="nb">print</span><span class="p">(</span><span class="s2">"Train days:"</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">R_train</span><span class="p">),</span> <span class="s2">"Test days:"</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">R_test</span><span class="p">))</span>
-<span class="n">returns</span><span class="o">.</span><span class="n">describe</span><span class="p">()</span><span class="o">.</span><span class="n">T</span>
+<span class="n">returns</span><span class="o">.</span><span class="n">describe</span><span class="p">()</span>
 </pre></div>
 <div class="clipboard-copy-txt" id="cell-5"># Daily simple returns
 returns = prices.pct_change().dropna()
@@ -2540,7 +2630,7 @@ R_train = returns.iloc[:split].copy()
 R_test  = returns.iloc[split:].copy()
 
 print("Train days:", len(R_train), "Test days:", len(R_test))
-returns.describe().T
+returns.describe()
 </div>
 </div>
 </div>
@@ -2553,339 +2643,60 @@ returns.describe().T
 <div class="jp-OutputArea-child">
 <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
-<pre>Train days: 345 Test days: 149
+<pre>Train days: 0 Test days: 0
 </pre>
 </div>
 </div>
 <div class="jp-OutputArea-child">
 <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>C:\Users\salmank\AppData\Local\Temp\ipykernel_22632\1929936623.py:2: FutureWarning: The default fill_method='pad' in DataFrame.pct_change is deprecated and will be removed in a future version. Either fill in any non-leading NA values prior to calling pct_change or specify 'fill_method=None' to not fill NA values.
-  returns = prices.pct_change().dropna()
-</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child jp-OutputArea-executeResult">
-<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[130]:</div>
-<div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/html" tabindex="0">
-<div>
-<style scoped="">
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
+<pre><span class="ansi-red-intense-fg ansi-bold">---------------------------------------------------------------------------</span>
+<span class="ansi-red-intense-fg ansi-bold">ValueError</span>                                Traceback (most recent call last)
+Cell <span class="ansi-green-intense-fg ansi-bold">In[12], line 10</span>
+<span class="ansi-green-fg">      7</span> R_test  <span style="color: rgb(98,98,98)">=</span> returns<span style="color: rgb(98,98,98)">.</span>iloc[split:]<span style="color: rgb(98,98,98)">.</span>copy()
+<span class="ansi-green-fg">      9</span> <span style="color: rgb(0,135,0)">print</span>(<span style="color: rgb(175,0,0)">"</span><span style="color: rgb(175,0,0)">Train days:</span><span style="color: rgb(175,0,0)">"</span>, <span style="color: rgb(0,135,0)">len</span>(R_train), <span style="color: rgb(175,0,0)">"</span><span style="color: rgb(175,0,0)">Test days:</span><span style="color: rgb(175,0,0)">"</span>, <span style="color: rgb(0,135,0)">len</span>(R_test))
+<span class="ansi-green-intense-fg ansi-bold">---&gt; 10</span> <span class="ansi-yellow-bg">returns</span><span class="ansi-yellow-bg" style="color: rgb(98,98,98)">.</span><span class="ansi-yellow-bg">describe</span><span class="ansi-yellow-bg">(</span><span class="ansi-yellow-bg">)</span>
 
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
+File <span class="ansi-green-intense-fg ansi-bold">c:\Users\salmank\anaconda3\envs\pymc_env_5\Lib\site-packages\pandas\core\generic.py:12041</span>, in <span class="ansi-cyan-fg">NDFrame.describe</span><span class="ansi-blue-intense-fg ansi-bold">(self, percentiles, include, exclude)</span>
+<span class="ansi-green-fg">  11799</span> <span style="color: rgb(175,0,255)">@final</span>
+<span class="ansi-green-fg">  11800</span> <span class="ansi-bold" style="color: rgb(0,135,0)">def</span> <span style="color: rgb(0,0,255)">describe</span>(
+<span class="ansi-green-fg">  11801</span>     <span style="color: rgb(0,135,0)">self</span>,
+<span class="ansi-green-intense-fg ansi-bold">   (...)</span>
+<span class="ansi-green-fg">  11804</span>     exclude<span style="color: rgb(98,98,98)">=</span><span class="ansi-bold" style="color: rgb(0,135,0)">None</span>,
+<span class="ansi-green-fg">  11805</span> ) <span style="color: rgb(98,98,98)">-</span><span style="color: rgb(98,98,98)">&gt;</span> Self:
+<span class="ansi-green-fg">  11806</span> <span style="color: rgb(188,188,188)">    </span><span style="color: rgb(175,0,0)">"""</span>
+<span class="ansi-green-fg">  11807</span> <span style="color: rgb(175,0,0)">    Generate descriptive statistics.</span>
+<span class="ansi-green-fg">  11808</span> 
+<span class="ansi-green-intense-fg ansi-bold">   (...)</span>
+<span class="ansi-green-fg">  12039</span> <span style="color: rgb(175,0,0)">    max            NaN      3.0</span>
+<span class="ansi-green-fg">  12040</span> <span style="color: rgb(175,0,0)">    """</span>
+<span class="ansi-green-intense-fg ansi-bold">&gt; 12041</span>     <span class="ansi-bold" style="color: rgb(0,135,0)">return</span> <span class="ansi-yellow-bg">describe_ndframe</span><span class="ansi-yellow-bg">(</span>
+<span class="ansi-green-fg">  12042</span> <span class="ansi-yellow-bg">        </span><span class="ansi-yellow-bg">obj</span><span class="ansi-yellow-bg" style="color: rgb(98,98,98)">=</span><span class="ansi-yellow-bg" style="color: rgb(0,135,0)">self</span><span class="ansi-yellow-bg">,</span>
+<span class="ansi-green-fg">  12043</span> <span class="ansi-yellow-bg">        </span><span class="ansi-yellow-bg">include</span><span class="ansi-yellow-bg" style="color: rgb(98,98,98)">=</span><span class="ansi-yellow-bg">include</span><span class="ansi-yellow-bg">,</span>
+<span class="ansi-green-fg">  12044</span> <span class="ansi-yellow-bg">        </span><span class="ansi-yellow-bg">exclude</span><span class="ansi-yellow-bg" style="color: rgb(98,98,98)">=</span><span class="ansi-yellow-bg">exclude</span><span class="ansi-yellow-bg">,</span>
+<span class="ansi-green-fg">  12045</span> <span class="ansi-yellow-bg">        </span><span class="ansi-yellow-bg">percentiles</span><span class="ansi-yellow-bg" style="color: rgb(98,98,98)">=</span><span class="ansi-yellow-bg">percentiles</span><span class="ansi-yellow-bg">,</span>
+<span class="ansi-green-fg">  12046</span> <span class="ansi-yellow-bg">    </span><span class="ansi-yellow-bg">)</span><span style="color: rgb(98,98,98)">.</span>__finalize__(<span style="color: rgb(0,135,0)">self</span>, method<span style="color: rgb(98,98,98)">=</span><span style="color: rgb(175,0,0)">"</span><span style="color: rgb(175,0,0)">describe</span><span style="color: rgb(175,0,0)">"</span>)
 
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-<thead>
-<tr style="text-align: right;">
-<th></th>
-<th>count</th>
-<th>mean</th>
-<th>std</th>
-<th>min</th>
-<th>25%</th>
-<th>50%</th>
-<th>75%</th>
-<th>max</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<th>SPY.US</th>
-<td>494.0</td>
-<td>0.000824</td>
-<td>0.010373</td>
-<td>-0.058543</td>
-<td>-0.003109</td>
-<td>0.001110</td>
-<td>0.005777</td>
-<td>0.105019</td>
-</tr>
-<tr>
-<th>VTI.US</th>
-<td>494.0</td>
-<td>0.000774</td>
-<td>0.010445</td>
-<td>-0.058683</td>
-<td>-0.003363</td>
-<td>0.001019</td>
-<td>0.006081</td>
-<td>0.101456</td>
-</tr>
-<tr>
-<th>XLK.US</th>
-<td>494.0</td>
-<td>-0.000017</td>
-<td>0.027405</td>
-<td>-0.496341</td>
-<td>-0.006256</td>
-<td>0.002190</td>
-<td>0.009404</td>
-<td>0.134257</td>
-</tr>
-<tr>
-<th>XLF.US</th>
-<td>494.0</td>
-<td>0.000812</td>
-<td>0.010600</td>
-<td>-0.073181</td>
-<td>-0.004171</td>
-<td>0.001568</td>
-<td>0.006353</td>
-<td>0.075364</td>
-</tr>
-<tr>
-<th>XLE.US</th>
-<td>494.0</td>
-<td>-0.000833</td>
-<td>0.026367</td>
-<td>-0.502060</td>
-<td>-0.006810</td>
-<td>0.001677</td>
-<td>0.007886</td>
-<td>0.077446</td>
-</tr>
-<tr>
-<th>XLV.US</th>
-<td>494.0</td>
-<td>0.000265</td>
-<td>0.009117</td>
-<td>-0.054845</td>
-<td>-0.004136</td>
-<td>0.000454</td>
-<td>0.005140</td>
-<td>0.043465</td>
-</tr>
-<tr>
-<th>XLY.US</th>
-<td>494.0</td>
-<td>-0.000279</td>
-<td>0.026247</td>
-<td>-0.497229</td>
-<td>-0.006470</td>
-<td>0.001276</td>
-<td>0.008598</td>
-<td>0.108881</td>
-</tr>
-<tr>
-<th>XLI.US</th>
-<td>494.0</td>
-<td>0.000708</td>
-<td>0.010391</td>
-<td>-0.062853</td>
-<td>-0.004891</td>
-<td>0.000640</td>
-<td>0.006813</td>
-<td>0.088816</td>
-</tr>
-<tr>
-<th>XLRE.US</th>
-<td>494.0</td>
-<td>0.000050</td>
-<td>0.010442</td>
-<td>-0.045566</td>
-<td>-0.005664</td>
-<td>0.000371</td>
-<td>0.006569</td>
-<td>0.057443</td>
-</tr>
-<tr>
-<th>IWM.US</th>
-<td>494.0</td>
-<td>0.000558</td>
-<td>0.013832</td>
-<td>-0.064196</td>
-<td>-0.007588</td>
-<td>0.000706</td>
-<td>0.008721</td>
-<td>0.085002</td>
-</tr>
-<tr>
-<th>QQQ.US</th>
-<td>494.0</td>
-<td>0.000967</td>
-<td>0.013269</td>
-<td>-0.062109</td>
-<td>-0.004413</td>
-<td>0.001593</td>
-<td>0.007856</td>
-<td>0.120031</td>
-</tr>
-<tr>
-<th>EFA.US</th>
-<td>494.0</td>
-<td>0.000547</td>
-<td>0.009513</td>
-<td>-0.065986</td>
-<td>-0.004414</td>
-<td>0.000825</td>
-<td>0.005906</td>
-<td>0.077166</td>
-</tr>
-<tr>
-<th>EEM.US</th>
-<td>494.0</td>
-<td>0.000714</td>
-<td>0.010533</td>
-<td>-0.055620</td>
-<td>-0.004461</td>
-<td>0.001121</td>
-<td>0.006474</td>
-<td>0.069315</td>
-</tr>
-<tr>
-<th>VXUS.US</th>
-<td>494.0</td>
-<td>0.000577</td>
-<td>0.009094</td>
-<td>-0.061121</td>
-<td>-0.004229</td>
-<td>0.001157</td>
-<td>0.005541</td>
-<td>0.071300</td>
-</tr>
-<tr>
-<th>IEF.US</th>
-<td>494.0</td>
-<td>0.000012</td>
-<td>0.003973</td>
-<td>-0.013290</td>
-<td>-0.002567</td>
-<td>0.000312</td>
-<td>0.002703</td>
-<td>0.015490</td>
-</tr>
-<tr>
-<th>TLT.US</th>
-<td>494.0</td>
-<td>-0.000083</td>
-<td>0.008322</td>
-<td>-0.030156</td>
-<td>-0.005686</td>
-<td>0.000444</td>
-<td>0.005580</td>
-<td>0.031162</td>
-</tr>
-<tr>
-<th>SHY.US</th>
-<td>494.0</td>
-<td>0.000021</td>
-<td>0.001221</td>
-<td>-0.005380</td>
-<td>-0.000490</td>
-<td>0.000122</td>
-<td>0.000726</td>
-<td>0.005595</td>
-</tr>
-<tr>
-<th>LQD.US</th>
-<td>494.0</td>
-<td>0.000014</td>
-<td>0.004431</td>
-<td>-0.019489</td>
-<td>-0.002427</td>
-<td>0.000092</td>
-<td>0.002813</td>
-<td>0.016713</td>
-</tr>
-<tr>
-<th>HYG.US</th>
-<td>494.0</td>
-<td>0.000089</td>
-<td>0.003371</td>
-<td>-0.016328</td>
-<td>-0.001500</td>
-<td>0.000259</td>
-<td>0.002016</td>
-<td>0.026799</td>
-</tr>
-<tr>
-<th>GLD.US</th>
-<td>494.0</td>
-<td>0.001555</td>
-<td>0.010912</td>
-<td>-0.064269</td>
-<td>-0.004374</td>
-<td>0.001866</td>
-<td>0.008229</td>
-<td>0.036991</td>
-</tr>
-<tr>
-<th>SLV.US</th>
-<td>494.0</td>
-<td>0.002276</td>
-<td>0.018946</td>
-<td>-0.082355</td>
-<td>-0.008837</td>
-<td>0.001838</td>
-<td>0.013096</td>
-<td>0.063932</td>
-</tr>
-<tr>
-<th>DBC.US</th>
-<td>494.0</td>
-<td>0.000135</td>
-<td>0.009476</td>
-<td>-0.049955</td>
-<td>-0.005398</td>
-<td>0.000448</td>
-<td>0.005932</td>
-<td>0.036210</td>
-</tr>
-<tr>
-<th>USO.US</th>
-<td>494.0</td>
-<td>0.000234</td>
-<td>0.018184</td>
-<td>-0.080727</td>
-<td>-0.011134</td>
-<td>-0.000139</td>
-<td>0.011541</td>
-<td>0.068887</td>
-</tr>
-<tr>
-<th>UNG.US</th>
-<td>494.0</td>
-<td>-0.000394</td>
-<td>0.036996</td>
-<td>-0.152493</td>
-<td>-0.024850</td>
-<td>-0.002089</td>
-<td>0.024037</td>
-<td>0.144036</td>
-</tr>
-<tr>
-<th>VNQ.US</th>
-<td>494.0</td>
-<td>0.000044</td>
-<td>0.010583</td>
-<td>-0.043399</td>
-<td>-0.005371</td>
-<td>0.000456</td>
-<td>0.006439</td>
-<td>0.059657</td>
-</tr>
-<tr>
-<th>ICLN.US</th>
-<td>494.0</td>
-<td>0.000244</td>
-<td>0.014866</td>
-<td>-0.073333</td>
-<td>-0.008742</td>
-<td>0.000000</td>
-<td>0.009471</td>
-<td>0.054164</td>
-</tr>
-</tbody>
-</table>
-</div>
+File <span class="ansi-green-intense-fg ansi-bold">c:\Users\salmank\anaconda3\envs\pymc_env_5\Lib\site-packages\pandas\core\methods\describe.py:91</span>, in <span class="ansi-cyan-fg">describe_ndframe</span><span class="ansi-blue-intense-fg ansi-bold">(obj, include, exclude, percentiles)</span>
+<span class="ansi-green-fg">     87</span>     describer <span style="color: rgb(98,98,98)">=</span> SeriesDescriber(
+<span class="ansi-green-fg">     88</span>         obj<span style="color: rgb(98,98,98)">=</span>cast(<span style="color: rgb(175,0,0)">"</span><span style="color: rgb(175,0,0)">Series</span><span style="color: rgb(175,0,0)">"</span>, obj),
+<span class="ansi-green-fg">     89</span>     )
+<span class="ansi-green-fg">     90</span> <span class="ansi-bold" style="color: rgb(0,135,0)">else</span>:
+<span class="ansi-green-intense-fg ansi-bold">---&gt; 91</span>     describer <span style="color: rgb(98,98,98)">=</span> <span class="ansi-yellow-bg">DataFrameDescriber</span><span class="ansi-yellow-bg">(</span>
+<span class="ansi-green-fg">     92</span> <span class="ansi-yellow-bg">        </span><span class="ansi-yellow-bg">obj</span><span class="ansi-yellow-bg" style="color: rgb(98,98,98)">=</span><span class="ansi-yellow-bg">cast</span><span class="ansi-yellow-bg">(</span><span class="ansi-yellow-bg" style="color: rgb(175,0,0)">"</span><span class="ansi-yellow-bg" style="color: rgb(175,0,0)">DataFrame</span><span class="ansi-yellow-bg" style="color: rgb(175,0,0)">"</span><span class="ansi-yellow-bg">,</span><span class="ansi-yellow-bg"> </span><span class="ansi-yellow-bg">obj</span><span class="ansi-yellow-bg">)</span><span class="ansi-yellow-bg">,</span>
+<span class="ansi-green-fg">     93</span> <span class="ansi-yellow-bg">        </span><span class="ansi-yellow-bg">include</span><span class="ansi-yellow-bg" style="color: rgb(98,98,98)">=</span><span class="ansi-yellow-bg">include</span><span class="ansi-yellow-bg">,</span>
+<span class="ansi-green-fg">     94</span> <span class="ansi-yellow-bg">        </span><span class="ansi-yellow-bg">exclude</span><span class="ansi-yellow-bg" style="color: rgb(98,98,98)">=</span><span class="ansi-yellow-bg">exclude</span><span class="ansi-yellow-bg">,</span>
+<span class="ansi-green-fg">     95</span> <span class="ansi-yellow-bg">    </span><span class="ansi-yellow-bg">)</span>
+<span class="ansi-green-fg">     97</span> result <span style="color: rgb(98,98,98)">=</span> describer<span style="color: rgb(98,98,98)">.</span>describe(percentiles<span style="color: rgb(98,98,98)">=</span>percentiles)
+<span class="ansi-green-fg">     98</span> <span class="ansi-bold" style="color: rgb(0,135,0)">return</span> cast(NDFrameT, result)
+
+File <span class="ansi-green-intense-fg ansi-bold">c:\Users\salmank\anaconda3\envs\pymc_env_5\Lib\site-packages\pandas\core\methods\describe.py:162</span>, in <span class="ansi-cyan-fg">DataFrameDescriber.__init__</span><span class="ansi-blue-intense-fg ansi-bold">(self, obj, include, exclude)</span>
+<span class="ansi-green-fg">    159</span> <span style="color: rgb(0,135,0)">self</span><span style="color: rgb(98,98,98)">.</span>exclude <span style="color: rgb(98,98,98)">=</span> exclude
+<span class="ansi-green-fg">    161</span> <span class="ansi-bold" style="color: rgb(0,135,0)">if</span> obj<span style="color: rgb(98,98,98)">.</span>ndim <span style="color: rgb(98,98,98)">==</span> <span style="color: rgb(98,98,98)">2</span> <span class="ansi-bold" style="color: rgb(175,0,255)">and</span> obj<span style="color: rgb(98,98,98)">.</span>columns<span style="color: rgb(98,98,98)">.</span>size <span style="color: rgb(98,98,98)">==</span> <span style="color: rgb(98,98,98)">0</span>:
+<span class="ansi-green-intense-fg ansi-bold">--&gt; 162</span>     <span class="ansi-bold" style="color: rgb(0,135,0)">raise</span> <span class="ansi-bold" style="color: rgb(215,95,95)">ValueError</span>(<span style="color: rgb(175,0,0)">"</span><span style="color: rgb(175,0,0)">Cannot describe a DataFrame without columns</span><span style="color: rgb(175,0,0)">"</span>)
+<span class="ansi-green-fg">    164</span> <span style="color: rgb(0,135,0)">super</span>()<span style="color: rgb(98,98,98)">.</span><span style="color: rgb(0,0,255)">__init__</span>(obj)
+
+<span class="ansi-red-intense-fg ansi-bold">ValueError</span>: Cannot describe a DataFrame without columns</pre>
 </div>
 </div>
 </div>
@@ -3052,7 +2863,7 @@ $$</p>
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[131]:</div><div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div><div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="CodeMirror cm-s-jupyter">
 <div class="zeroclipboard-container">
 <clipboard-copy ,="" aria-label="Copy to Clipboard" for="cell-6">
@@ -3177,7 +2988,7 @@ Optimal objective (CVaR proxy): 0.0047329620734983605
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[132]:</div><div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div><div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="CodeMirror cm-s-jupyter">
 <div class="zeroclipboard-container">
 <clipboard-copy ,="" aria-label="Copy to Clipboard" for="cell-7">
@@ -3204,7 +3015,7 @@ weights_cvar</div>
 </div>
 <div class="jp-OutputArea jp-Cell-outputArea">
 <div class="jp-OutputArea-child jp-OutputArea-executeResult">
-<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[132]:</div>
+<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[&nbsp;]:</div>
 <div class="jp-RenderedText jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/plain" tabindex="0">
 <pre>SHY.US     6.892190e-01
 GLD.US     1.733453e-01
@@ -3255,7 +3066,7 @@ dtype: float64</pre>
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[133]:</div><div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div><div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="CodeMirror cm-s-jupyter">
 <div class="zeroclipboard-container">
 <clipboard-copy ,="" aria-label="Copy to Clipboard" for="cell-8">
@@ -3341,7 +3152,7 @@ Target daily return: 0.0003782865315342665
 </div>
 </div>
 <div class="jp-OutputArea-child jp-OutputArea-executeResult">
-<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[133]:</div>
+<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[&nbsp;]:</div>
 <div class="jp-RenderedText jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/plain" tabindex="0">
 <pre>SHY.US     2.500000e-01
 HYG.US     2.500000e-01
@@ -3399,7 +3210,7 @@ If your test window is short, interpret tail metrics with care.</p>
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[134]:</div><div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div><div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="CodeMirror cm-s-jupyter">
 <div class="zeroclipboard-container">
 <clipboard-copy ,="" aria-label="Copy to Clipboard" for="cell-9">
@@ -3484,7 +3295,7 @@ Test VaR@0.90 (Equal-wt): 0.0031 | Test CVaR@0.90: 0.0048
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[135]:</div><div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div><div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="CodeMirror cm-s-jupyter">
 <div class="zeroclipboard-container">
 <clipboard-copy ,="" aria-label="Copy to Clipboard" for="cell-10">
@@ -3548,7 +3359,7 @@ plt.show()
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[136]:</div><div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div><div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="CodeMirror cm-s-jupyter">
 <div class="zeroclipboard-container">
 <clipboard-copy ,="" aria-label="Copy to Clipboard" for="cell-11">
@@ -3623,7 +3434,7 @@ plt.show()
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[137]:</div><div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div><div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="CodeMirror cm-s-jupyter">
 <div class="zeroclipboard-container">
 <clipboard-copy ,="" aria-label="Copy to Clipboard" for="cell-12">
@@ -3823,7 +3634,7 @@ def plot_tail_comparison_shaded(
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[138]:</div><div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div><div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="CodeMirror cm-s-jupyter">
 <div class="zeroclipboard-container">
 <clipboard-copy ,="" aria-label="Copy to Clipboard" for="cell-13">
@@ -3873,7 +3684,7 @@ def plot_tail_comparison_shaded(
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[139]:</div><div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div><div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="CodeMirror cm-s-jupyter">
 <div class="zeroclipboard-container">
 <clipboard-copy ,="" aria-label="Copy to Clipboard" for="cell-14">
@@ -3977,13 +3788,13 @@ def plot_tail_comparison_shaded(
         
         
           
-          <a href="../../11_intro/" class="md-footer__link md-footer__link--next" aria-label="Next: 1. Introduction and Overview">
+          <a href="../6_sinkhorn_speed_dating_ot/" class="md-footer__link md-footer__link--next" aria-label="Next: VI — Matchmaking - An Optimal Transport Case Study">
             <div class="md-footer__title">
               <span class="md-footer__direction">
                 Next
               </span>
               <div class="md-ellipsis">
-                1. Introduction and Overview
+                VI — Matchmaking - An Optimal Transport Case Study
               </div>
             </div>
             <div class="md-footer__button md-icon">
