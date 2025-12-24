@@ -2,15 +2,11 @@
 
 Up to now we have focused on problems with a single objective: minimize one convex function over a convex set. However, real-world learning, engineering, and decision-making tasks almost always involve competing criteria:
 
-- accuracy vs. regularity,
 - loss vs. fairness,
 - return vs. risk,
-- reconstruction vs. compression,
 - energy use vs. performance.
 
 Multi-objective optimization provides the mathematical framework for balancing such competing goals. In convex settings, these trade-offs have elegant geometric and analytic structure, captured by Pareto optimality and by scalarization techniques that convert multiple objectives into a single convex problem.
-
-This chapter introduces these ideas and connects them to regularization, duality, and common ML formulations.
 
 
 ## Classical Optimality (One Objective)

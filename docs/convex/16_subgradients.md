@@ -7,7 +7,7 @@ Many important convex objectives in machine learning are not differentiable ever
 - the hinge loss $ \max\{0,\, 1 - y w^\top x\} $ used in SVMs,
 - regularisers like total variation or indicator functions of convex sets.
 
-Although these functions have “kinks”, they remain convex—and convexity guarantees the existence of supporting hyperplanes at every point.
+Although these functions have “kinks”, they remain convex and convexity guarantees the existence of supporting hyperplanes at every point.
 
 ## Subgradients and the Subdifferential
 

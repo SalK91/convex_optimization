@@ -2,7 +2,6 @@
 
 Most optimization problems are constrained. The set of points that satisfy these constraints the feasible region determines where an algorithm is allowed to search. In many machine learning and convex optimization problems, this feasible region is a convex set. Convex sets have a simple but powerful geometric property: any line segment between two feasible points remains entirely within the set. This structure eliminates irregularities and makes optimization far more predictable.
 
-This chapter develops the geometric foundations needed to reason about convexity. We introduce affine sets, convex sets, hyperplanes, halfspaces, polyhedra, and supporting hyperplanes. These objects form the geometric language of convex analysis. Understanding their structure is essential for interpreting constraints, proving optimality conditions, and designing efficient algorithms for convex optimization.
 
 ## Convex sets
 
@@ -19,7 +18,7 @@ That is, the entire line segment between $x$ and $y$ lies inside the set. Convex
 - $ \ell_\infty $ balls (axis-aligned boxes): $ \{ x : \|x\|_\infty \le r \} $.  
 - Probability simplex: $ \{ x \in \mathbb{R}^n : x \ge 0, \ \sum_i x_i = 1 \} $.  
 
-A set fails to be convex whenever some segment between two feasible points leaves the set—for example, a crescent or an annulus.
+A set fails to be convex whenever some segment between two feasible points leaves the set; for example, a crescent or an annulus.
 
  
 ## Affine sets, hyperplanes, and halfspaces
@@ -55,11 +54,6 @@ Convex sets are precisely those that contain all convex combinations of their po
 
 The convex hull of a set $S$, denoted $\operatorname{conv}(S)$, is the set of all convex combinations of finitely many points in $S$. It is the smallest convex set containing $S$. Geometrically, it is the shape you obtain by stretching a tight rubber band around the points.
 
-Convex hulls are important because:
-
-- Polytopes can be represented either as intersections of halfspaces or as convex hulls of their vertices.
-- Many optimization relaxations replace a difficult nonconvex set by its convex hull, enabling the use of convex optimization techniques.
-
 
 ## Polyhedra and polytopes
 
@@ -81,7 +75,7 @@ x = \theta y + (1 - \theta) z,
 $$
 implies $ y = z = x $.
 
-Geometrically, extreme points are the “corners” of a convex set. For polytopes, the extreme points are exactly the vertices. Extreme points are essential in optimization because many convex problems—such as linear programs—achieve their optima at extreme points of the feasible region. This geometric fact underlies simplex-type algorithms and supports duality theory.
+Geometrically, extreme points are the “corners” of a convex set. For polytopes, the extreme points are exactly the vertices. Extreme points are essential in optimization because many convex problems, such as linear programs achieve their optima at extreme points of the feasible region. This geometric fact underlies simplex-type algorithms and supports duality theory.
 
 
 ## Cones
@@ -185,23 +179,20 @@ $$
 N_C(x) = \big( T_C(x) \big)^\circ.
 $$
 
-Normal cones appear directly in first-order optimality conditions. For a constrained problem  
-$$
-\min_{x \in C} f(x),
-$$
-a point $x^*$ is optimal only if
-$$
-0 \in \nabla f(x^*) + N_C(x^*).
-$$
-This expresses a balance between the objective’s slope and the “pushback’’ from the constraint set.
-
- 
-Cones,especially tangent and normal cones, are geometric tools that allow us to describe feasibility, optimality, and duality in convex optimization using directional information. They generalize the role that orthogonal complements play in linear algebra to nonlinear and constrained settings.
+> Normal cones appear directly in first-order optimality conditions. For a constrained problem  
+>
+> $$\min_{x \in C} f(x), $$
+>
+> a point $x^*$ is optimal only if
+>
+> $$0 \in \nabla f(x^*) + N_C(x^*).$$
+>
+>This expresses a balance between the objective’s slope and the “pushback’’ from the constraint set.
 
 
 ## Supporting Hyperplanes and Separation
 
-One of the most important geometric facts about convex sets is that they can be *supported* or *separated* by hyperplanes. These results show that convex sets always admit linear boundaries that describe their shape. Later, these ideas reappear in duality, subgradients, and the KKT conditions.
+One of the most important geometric facts about convex sets is that they can be *supported* or *separated* by hyperplanes. These results show that convex sets always admit linear boundaries that describe their shape.
 
 ### Supporting Hyperplane Theorem
 
@@ -231,17 +222,9 @@ $$
 
 The hyperplane $a^\top x = b$ places all points of $C$ on one side and all points of $D$ on the other. This is guaranteed purely by convexity. Separation is the geometric foundation of duality, where we attempt to separate the primal feasible region from violations of the constraints.
 
-> ### Why This Matters for Optimisation
-> These geometric results are central to convex optimisation:
-> - Subgradients correspond to supporting hyperplanes of the epigraph of a convex function.
-> - Dual variables arise from separating infeasible points from the feasible region.
-> - KKT conditions express the balance between the gradient of the objective and the normals of active constraints.
-> - Projection onto convex sets is well-defined because convex sets admit supporting hyperplanes.
->  Supporting and separating hyperplanes are therefore the geometric machinery behind optimality conditions and convex duality.
+## Mental Map
 
- ## Mental Map
-
- ```text
+```text
                Convex Sets & Geometric Fundamentals
      Feasible regions, geometry of constraints, and separation
                               │
@@ -321,6 +304,4 @@ The hyperplane $a^\top x = b$ places all points of $C$ on one side and all point
      │   ∃a,b s.t. aᵀx ≤ b ≤ aᵀy  for x∈C, y∈D                   │
      │ Why it matters: geometry behind subgradients and duality  │
      └───────────────────────────────────────────────────────────┘
-    
-
 ```

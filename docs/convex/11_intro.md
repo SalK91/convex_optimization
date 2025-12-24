@@ -6,8 +6,7 @@ Optimization is at the heart of most machine-learning methods. Whether training 
 2. Predictable behavior: algorithms like gradient descent have clear and well-studied convergence.  
 3. Solutions are easy to verify: convex problems come with simple mathematical conditions that tell us when we have reached the optimum.
 
-These features make convex optimization a reliable tool for building and analyzing machine-learning models. Even though many modern models are nonconvex, a surprising amount of ML still depends on convex ideas. Common loss functions, regularizers, and inner algorithmic steps often rely on convex structure.
- 
+
 ## Motivation: Optimization in Machine Learning
 
 Many supervised learning problems can be written in a common form:
@@ -87,4 +86,4 @@ This roadmap helps the reader see how the material progresses from foundations (
 
 
 ## Acknowledgments
-The content and structure of this web book are strongly informed by the Stanford University course EE364A: Convex Optimization I, taught by Stephen Boyd. In particular, the presentation draws inspiration from the 2023 lecture notes and course materials, which are widely regarded as a foundational reference in modern convex optimization.
+The content and structure of this web book are strongly informed by the Stanford University course EE364A: Convex Optimization I, taught by Stephen Boyd. 

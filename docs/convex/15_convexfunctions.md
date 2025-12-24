@@ -1,6 +1,6 @@
 # Chapter 5: Convex Functions
 
-This chapter develops the basic tools for understanding convex functions: their definitions, geometric characterisations, first- and second-order tests, and operations that preserve convexity. These tools will later support duality, optimality conditions, and algorithmic analysis.
+This chapter develops the basic tools for understanding convex functions: their definitions, geometric characterisations, first and second-order tests, and operations that preserve convexity. These tools will later support duality, optimality conditions, and algorithmic analysis.
 
  
 ## Definitions of convexity
@@ -20,6 +20,11 @@ $$
 \{ (x,t) \in \mathbb{R}^n \times \mathbb{R} : f(x) \le t \}.
 $$
 The function $f$ is convex if and only if its epigraph is a convex set. This connects convex functions to the convex sets studied earlier.
+
+
+![epi](images/epi.png)
+
+*A function is convex if and only if the region above its grapH is a convex set. This region is the function's epigraph.: [Wikipedia](https://en.wikipedia.org/wiki/Epigraph_(mathematics))*
 
  
 ## First-order characterisation
@@ -57,7 +62,6 @@ $$
 - If $\nabla^2 f(x) \succ 0$ everywhere, the function is strictly convex.  
 - Negative eigenvalues indicate directions of negative curvature — impossible for convex functions.
 
-This characterisation connects convexity to the spectral properties of the Hessian discussed earlier.
 
  
 ## Examples of convex functions
@@ -161,42 +165,6 @@ Examples:
 These sets enable convex constrained optimisation formulations.
 
  
-## Strict and strong convexity
-
-### Strict convexity
-
-A function is strictly convex if
-$$
-f(\theta x + (1-\theta) y)
-<
-\theta f(x) + (1-\theta) f(y)
-$$
-for all $x \neq y$ and $\theta \in (0,1)$.
-
-Strict convexity implies unique minimisers.
-
-### Strong convexity
-
-A differentiable function is $\mu$-strongly convex if
-$$
-f(y) 
-\ge 
-f(x) + \nabla f(x)^\top (y - x) + \frac{\mu}{2}\|y - x\|_2^2.
-$$
-
-Strong convexity adds *quantitative curvature*: the function grows at least quadratically away from its minimiser.
-
-Consequences:
-
-- unique minimiser,
-- gradient descent achieves linear convergence rate,  
-  error shrinks as  
-  $$
-  \|x_{k+1} - x^\star\| \le (1 - \eta\mu)\|x_k - x^\star\| ,
-  $$
-- conditioning ($\kappa = L/\mu$) governs algorithmic difficulty.
-
-Strong convexity is frequently induced by regularisation (e.g., ridge regression adds $\tfrac{\lambda}{2}\|x\|_2^2$).
  
 ## Mental Map
 
@@ -272,17 +240,6 @@ Strong convexity is frequently induced by regularisation (e.g., ridge regression
      │ - Always convex for convex f                                │
      │ - Enables convex inequality constraints                     │
      │ - Norm balls, confidence ellipsoids, feasibility regions    │
-     └─────────────────────────────────────────────────────────────┘
-                              │
-                              ▼
-     ┌─────────────────────────────────────────────────────────────┐
-     │ Strict vs Strong Convexity                                  │
-     │ Strict convexity: unique minimizer                          │
-     │ Strong convexity: f ≥ tangent + (μ/2)‖x−y‖²                 │
-     │ - Quantitative curvature                                    │
-     │ - Linear convergence of gradient descent                    │
-     │ - Conditioning κ=L/μ governs difficulty                     │
-     │ - Often induced via ℓ₂ regularization                       │
      └─────────────────────────────────────────────────────────────┘
                               
 ```

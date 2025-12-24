@@ -46,13 +46,6 @@ Thus, optimality can be seen as an equilibrium:
 - the objective’s tendency to decrease (captured by its gradient or subgradient)  
 - is exactly balanced by the geometric restrictions imposed by the feasible set.
 
-In machine learning, this appears as:
-
-- training a model until the gradient is (approximately) zero in unconstrained problems, or  
-- training until the force from regularization/constraints balances the data fit term (e.g., in $\ell_1$-regularized models).
-
-First-order optimality conditions formalize this equilibrium in both smooth and nonsmooth, constrained and unconstrained settings.
-
  
 ## Unconstrained Convex Problems
 

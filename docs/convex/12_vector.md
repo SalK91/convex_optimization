@@ -1,14 +1,6 @@
 # Chapter 2: Linear Algebra Foundations
 
-Linear algebra provides the geometric language of convex optimization. Many optimization problems in machine learning can be understood as asking how vectors, subspaces, and linear maps relate to one another. A simple example that shows this connection is linear least squares, where fitting a model $x$ to data $(A, b)$ takes the form:
-
-$$
-\min_x \ \|A x - b\|_2^2.
-$$
-
-Later in this chapter, we will see that this objective finds the point in the column space of $A$ that is closest to $b$. Concepts such as column space, null space, orthogonality, rank, and conditioning determine not only whether a solution exists, but also how fast optimization algorithms converge.
-
-This chapter develops the linear-algebra tools that appear throughout convex optimization and machine learning. We focus on geometric ideas — projections, subspaces, orthogonality, eigenvalues, singular values, and norms — because these ideas directly shape how optimization behaves. Readers familiar with basic matrix operations will find that many optimization concepts become much simpler when viewed through the right geometric lens.
+Linear algebra provides the geometric language of convex optimization. Many optimization problems in machine learning can be understood as asking how vectors, subspaces, and linear maps relate to one another. This chapter develops the linear-algebra tools that appear throughout convex optimization and machine learning. We focus on geometric ideas: projections, subspaces, orthogonality, eigenvalues, singular values, and norms  because these ideas directly shape how optimization behaves.
 
 ## Vector spaces, subspaces, and affine sets
 
@@ -23,9 +15,6 @@ Affine sets look like translated subspaces: lines or planes that do not need to 
 Affine Transformations: An affine transformation (or affine map) is a function $f : V \to W$ that can be written as $f(x) = A x + b,$ where $A$ is a linear map and $b$ is a fixed vector. Affine transformations preserve both affinity and convexity:
 if $C$ is convex, then $A C + b$ is also convex.
 is called an affine transformation. It represents a linear transformation followed by a translation. Affine transformations preserve the structure of affine sets and convex sets, meaning that if a feasible region is convex or affine, applying an affine transformation does not destroy that property. This matters for optimization because many models and algorithms implicitly perform affine transformations for example, when reparameterizing variables, scaling features, or mapping between coordinate systems. Convexity is preserved under these operations, so the essential geometry of the problem remains intact.
-
-In summary, vector spaces describe the space in which optimization algorithms move, subspaces capture structural or constraint-related directions, and affine sets model the geometric shapes defined by linear constraints. These three ideas form the basic geometric toolkit for understanding optimization problems and will reappear repeatedly throughout the rest of the webbook.
-
 
  
 ## Linear combinations, span, basis, dimension
@@ -45,6 +34,10 @@ The concept of linear independence formalizes when a set of vectors contains no 
 - The column space of $A$ is the span of its columns. Its dimension is $\mathrm{rank}(A)$.
 - The nullspace of $A$ is $\{ x : Ax = 0 \}$.
 - The rank-nullity theorem states: $\mathrm{rank}(A) + \mathrm{nullity}(A) = n,$ where $n$ is the number of columns of $A$.
+
+![Four Fundamental Subspaces](images/fundamentalspaces.png)
+
+*Figure : Four Fundamental Subspaces: [MIT Linear Algebrea](https://math.mit.edu/~gs/linearalgebra/ila5/linearalgebra5_3-5.pdf)*
 
 
 > Column Space: The column space of a matrix $ A $, denoted $ C(A) $, is the set of all possible output vectors $ b $ that can be written as $ Ax $ for some $ x $. In other words, it contains all vectors that the matrix can “reach” through linear combinations of its columns. The question “Does the system $ Ax = b $ have a solution?” is equivalent to asking whether $ b \in C(A) $. If $ b $ lies in the column space, a solution exists; otherwise, it does not.
@@ -123,9 +116,7 @@ Two vectors are orthogonal if $\langle x,y\rangle = 0$. A set of vectors $\{v_i\
 
 > Geometry from the inner product: An inner product induces a norm $\|x\| = \sqrt{\langle x,x \rangle}$ and a notion of distance $d(x,y) = \|x-y\|$. It also defines angles: $\langle x,y \rangle = 0$ means $x$ and $y$ are orthogonal. Thus, inner products generalize the geometric concepts of lengths and angles to abstract vector spaces. Many results in Euclidean geometry (like the Pythagorean theorem and law of cosines) hold in any inner product space. For example, the parallelogram law holds: $\|x+y\|^2 + \|x-y\|^2 = 2\|x\|^2 + 2\|y\|^2$.  
 
-> The Cauchy–Schwarz inequality: For any $x,y \in \mathbb{R}^n$:
-> $$|\langle x,y\rangle| \le \|x\|\|y\|~,$$
->with equality iff $x$ and $y$ are linearly dependent. Geometrically, it means the absolute inner product is maximized when $x$ and $y$ point in the same or opposite direction. 
+> The Cauchy–Schwarz inequality: For any $x,y \in \mathbb{R}^n$: $|\langle x,y\rangle| \le \|x\|\|y\|~,$ >with equality iff $x$ and $y$ are linearly dependent. Geometrically, it means the absolute inner product is maximized when $x$ and $y$ point in the same or opposite direction. 
 
 Examples of inner products:
 
@@ -134,8 +125,6 @@ Examples of inner products:
 - Weighted inner product: $\langle x,y\rangle_W = x^\top W y$ for some symmetric positive-definite matrix $W$. Here $\|x\|_W = \sqrt{x^\top W x}$ is a weighted length. Such inner products appear in preconditioning: by choosing $W$ cleverly, one can measure distances in a way that accounts for scaling in the problem (e.g. the Mahalanobis distance uses $W = \Sigma^{-1}$ for covariance $\Sigma$).  
 
 - Function space inner product: $\langle f, g \rangle = \int_a^b f(t)\,g(t)\,dt$. This turns the space of square-integrable functions on $[a,b]$ into an inner product space (a Hilbert space, $L^2[a,b]$). In machine learning, this is the basis for kernel Hilbert spaces, where one defines an inner product between functions to lift optimization into infinite-dimensional feature spaces.  
-
-> Any vector space with an inner product has an orthonormal basis (via the Gram–Schmidt process). Gram–Schmidt is fundamental in numerical algorithms to orthogonalize vectors and is used to derive the QR decomposition: any full-rank matrix $A \in \mathbb{R}^{m\times n}$ can be factored as $A = QR$ where $Q$ has orthonormal columns and $R$ is upper triangular. This factorization is widely used in least squares and optimization because it provides a stable way to solve $Ax=b$ and to analyze subspaces. For example, for an overdetermined system ($m>n$ i.e. more equations than unknowns), $Ax=b$ has a least-squares solution $x = R^{-1}(Q^\top b)$, and for underdetermined ($m<n$), $Ax=b$ has infinitely many solutions, among which one often chooses the minimal-norm solution using the orthonormal basis of the range. 
 
 
 Applications in optimization: Inner product geometry is indispensable in convex optimization.  
@@ -177,22 +166,9 @@ Every norm induces a metric (distance) $d(x,y) = |x-y|$ on the space. Norms thus
 Unit-ball geometry: The shape of the unit ball ${x: |x| \le 1}$ reveals how a norm treats different directions. For example, the $\ell_2$ unit ball in $\mathbb{R}^2$ is a perfect circle, treating all directions uniformly, whereas the $\ell_1$ unit ball is a diamond with corners along the axes, indicating that $\ell_1$ treats the coordinate axes as special (those are “cheaper” directions since the ball extends further along axes, touching them at $(\pm1,0)$ and $(0,\pm1)$). The $\ell_\infty$ unit ball is a square aligned with axes, suggesting it allows more combined motion in coordinates as long as no single coordinate exceeds the limit. These shapes are illustrated below: we see the red diamond ($\ell_1$), green circle ($\ell_2$), and blue square ($\ell_\infty$) in $\mathbb{R}^2$ . The geometry of the unit ball matters whenever we regularize or constrain solutions by a norm. For instance, using an $\ell_1$ norm ball as a constraint or regularizer encourages solutions on the corners (sparse solutions), while an $\ell_2$ ball encourages more evenly-distributed changes. An $\ell_\infty$ constraint limits the maximum absolute value of any component, leading to solutions that avoid any single large entry.
 
 
-> Dual norms. Each norm $\|\cdot\|$ has a dual norm $\|\cdot\|_*$ defined by
-> $$
-> \|y\|_* = \sup_{\|x\|\le 1} x^\top y~.
-> $$
-> For example, the dual of the $\ell_1$ norm is the $\ell_\infty$ norm, and the dual of the $\ell_2$ norm is itself.
->
-> The dual norm captures how large a linear functional can be when applied to vectors of bounded size. Geometrically, consider the unit ball $\{x : \|x\|\le 1\}$. The dot product $x^\top y$ measures how well the vector $x$ aligns with $y$. The dual norm $\|y\|_*$ is the maximum possible alignment between $y$ and any vector $x$ inside this unit ball.
->
-> If $\|y\|_*$ is large, then there exists a direction $x$ that is small according to the original norm yet strongly aligned with $y$, resulting in a large dot product. If $\|y\|_*$ is small, then $y$ is poorly aligned with all unit-norm vectors, and $x^\top y$ remains small for every feasible $x$.
->
-> This perspective explains common dual norm pairs. The dual of $\ell_1$ is $\ell_\infty$, reflecting sensitivity to the largest coordinate, while the $\ell_2$ norm is self-dual due to rotational symmetry. Dual norms are fundamental in convex optimization, appearing in optimality conditions, error bounds, and regularization analysis.
+> Norms in optimization algorithms: Different norms define different algorithmic behaviors. For example, gradient descent typically uses the Euclidean norm for step sizes and convergence analysis, but coordinate descent methods implicitly use $\ell_\infty$ (since one coordinate move at a time is like a step in $\ell_\infty$ unit ball). Mirror descent methods use non-Euclidean norms and their duals to get better performance on certain problems (e.g. using $\ell_1$ norm for sparse problems). The norm also figures in complexity bounds: an algorithm’s convergence rate may depend on the diameter of the feasible set in the chosen norm, $D = \max_{\text{feasible}}|x - x^*|$. For instance, in subgradient methods, having a smaller $\ell_2$ diameter or $\ell_1$ diameter can improve bounds. Moreover, when constraints are given by norms (like $|x|_1 \le t$), projections and proximal operators with respect to that norm become subroutines in algorithms.
 
-
-Norms in optimization algorithms: Different norms define different algorithmic behaviors. For example, gradient descent typically uses the Euclidean norm for step sizes and convergence analysis, but coordinate descent methods implicitly use $\ell_\infty$ (since one coordinate move at a time is like a step in $\ell_\infty$ unit ball). Mirror descent methods use non-Euclidean norms and their duals to get better performance on certain problems (e.g. using $\ell_1$ norm for sparse problems). The norm also figures in complexity bounds: an algorithm’s convergence rate may depend on the diameter of the feasible set in the chosen norm, $D = \max_{\text{feasible}}|x - x^*|$. For instance, in subgradient methods, having a smaller $\ell_2$ diameter or $\ell_1$ diameter can improve bounds. Moreover, when constraints are given by norms (like $|x|_1 \le t$), projections and proximal operators with respect to that norm become subroutines in algorithms.
-
-In summary, norms provide the metric backbone of optimization. They tell us how to measure progress ($|x_k - x^*|$), how to constrain solutions ($|x| \le R$), and how to bound errors. The choice of norm can induce sparsity, robustness, or other desired structure in solutions, and mastering norms and their geometry is key to understanding advanced optimization techniques.
+In summary, norms provide the metric backbone of optimization. They tell us how to measure progress ($|x_k - x^*|$), how to constrain solutions ($|x| \le R$), and how to bound errors. The choice of norm can induce sparsity, robustness, or other desired structure in solutions.
 
 ## Eigenvalues, eigenvectors, and positive semidefinite matrices
 
@@ -309,7 +285,6 @@ is the condition number of $A$. A large condition number implies that the map st
 
 The rank of $A$ is the number of nonzero singular values. When $A$ has low rank, it effectively acts on a lower-dimensional subspace. This structure can be exploited in optimization: low-rank matrices enable dimensionality reduction, fast matrix-vector products, and compact representations. In machine learning, truncated SVD is used for PCA, feature compression, and approximating large linear operators.
 
-Low-rank structure is also a modeling target. Convex formulations such as nuclear-norm minimization encourage solutions whose matrices have small rank, reflecting latent low-dimensional structure in data.
 
 
 ## Mental Map

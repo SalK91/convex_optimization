@@ -4,8 +4,7 @@ Optimization problems are ultimately questions about how a function changes when
 
 These tools form the analytical backbone of modern optimization. Gradients determine descent directions and guide first-order algorithms such as gradient descent and stochastic gradient methods. Hessians quantify curvature and enable second-order methods like Newton’s method, which adapt their steps to the shape of the objective. Jacobians and chain rules underpin backpropagation in neural networks, linking calculus to large-scale machine learning practice.
 
-This chapter develops the differential calculus needed for convex analysis and for understanding why many optimization algorithms work. We emphasize geometric intuition, how functions curve, how directions interact, and how local approximations guide global behavior, while providing the formal tools required to analyze convergence and stability in later chapters.
-
+This chapter develops the differential calculus needed for convex analysis and for understanding why many optimization algorithms work.
 
 ## Gradients and Directional Derivatives
 Let $f : \mathbb{R}^n \to \mathbb{R}$. The function is differentiable at a point $x$ if there exists a vector $\nabla f(x)$ such that
@@ -126,44 +125,6 @@ The eigenvalues of the Hessian determine its geometric behavior:
 - If the Hessian has both positive and negative eigenvalues, the point is a saddle: some directions curve up, others curve down.
 
 Thus, curvature is directly encoded in the spectrum of the Hessian. Large eigenvalues correspond to steep curvature; small eigenvalues correspond to gently sloping or flat regions.
-
-### Example: Quadratic functions
-
-Consider the quadratic function
-$$
-f(x) = \tfrac{1}{2} x^\top Q x - b^\top x,
-$$
-where $Q$ is symmetric. The gradient and Hessian are
-$$
-\nabla f(x) = Qx - b, \qquad \nabla^2 f(x) = Q.
-$$
-Setting the gradient to zero gives the stationary point
-$$
-Qx = b.
-$$
-If $Q \succ 0$, the solution
-$$
-x^* = Q^{-1} b
-$$
-is the unique minimizer. The Hessian $Q$ being positive definite confirms strict convexity.
-
-The eigenvalues of $Q$ also explain the difficulty of minimizing $f$:
-
-- Large eigenvalues produce very steep, narrow directions—optimization methods must take small steps.  
-- Small eigenvalues produce flat directions—progress is slow, especially for gradient descent.  
-
-The ratio of largest to smallest eigenvalue, the **condition number**, governs the convergence speed of first-order methods on quadratic problems. Poor conditioning (large condition number) leads to zig-zagging iterates and slow progress.
-
-### Why the Hessian matters in optimization
-
-The Hessian provides second-order information that strongly influences algorithm behavior:
-
-- Newton’s method uses the Hessian to rescale directions, effectively “whitening’’ curvature and often converging rapidly.  
-- Trust-region and quasi-Newton methods approximate Hessian structure to stabilize steps.  
-- In convex optimization, positive semidefiniteness of the Hessian is a fundamental characterization of convexity.
-
-Understanding the Hessian therefore helps us understand the geometry of an objective, predict algorithm performance, and design methods that behave reliably on challenging landscapes.
-
 
     
 ## Taylor approximation

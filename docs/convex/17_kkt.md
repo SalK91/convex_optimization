@@ -1,5 +1,4 @@
 # Chapter 8: Lagrange Multipliers and the KKT Framework
-
 We now have the ingredients for understanding optimality in convex optimization:
 
 - convex functions define well-behaved objectives,
@@ -30,8 +29,6 @@ Intuition:
 - Moving opposite the gradient decreases $f$.
 - If the gradient is Lipschitz continuous and the step size is small enough ($\alpha_k \le 1/L$), then gradient descent converges to a global minimizer.
 - If $f$ is *strongly convex*, the minimizer is unique and convergence is faster (linear rate with an appropriate step size).
-
-In machine learning, this is the foundation of back-propagation and weight training: each update follows the negative gradient of the loss.
 
 
 ## Equality-Constrained Problems and Lagrange Multipliers
@@ -129,6 +126,10 @@ Complementary slackness expresses a clear dichotomy:
 
 Only active constraints can push back against the objective.
 
+
+![kkt](images/kkt.png){: style="width:400px;"}
+[Wikipedia]([https://en.wikipedia.org/wiki/Karush%E2%80%93Kuhn%E2%80%93Tucker_conditions#)
+
 ## Slater’s Condition — Guaranteeing Strong Duality
 
 The KKT conditions always provide *necessary* conditions for optimality. For them to also be *sufficient* (and to guarantee zero duality gap), the problem must satisfy a regularity condition.
@@ -185,6 +186,5 @@ Physically:
 - In economics, they are “shadow prices’’ indicating how much the objective would improve if a constraint were relaxed.
 - Geometrically, the stationarity condition means the objective and the active constraints share a supporting hyperplane at the optimum.
 
-KKT theory unifies all earlier ideas—convexity, gradients/subgradients, feasible regions, tangent and normal cones—into one clean, general optimality framework.
 
 
