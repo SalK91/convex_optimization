@@ -642,8 +642,6 @@
       
         
       
-        
-      
     
     
     
@@ -1199,29 +1197,6 @@
 
               
             
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../50_future/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    23. The Future of Optimization — Learning, Adaptation, and Intelligence
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
           </ul>
         </nav>
       
@@ -1302,8 +1277,8 @@
 
 
 <h1 id="chapter-20-derivative-free-and-black-box-optimization">Chapter 20: Derivative-Free and Black-Box Optimization<a class="headerlink" href="#chapter-20-derivative-free-and-black-box-optimization" title="Permanent link">¶</a></h1>
-<p>In many practical optimization problems, gradients are unavailable, unreliable, or prohibitively expensive to compute. Examples include tuning hyperparameters of machine learning models, engineering design through simulation, or optimizing physical experiments. Such problems fall under the class of derivative-free or black-box optimization methods.</p>
-<p>Unlike gradient-based methods, which rely on analytical or automatic differentiation, derivative-free algorithms make progress solely from function evaluations. They are indispensable when the objective function is noisy, discontinuous, or non-differentiable.</p>
+<p>In many optimization problems, gradients are unavailable, unreliable, or prohibitively expensive to compute. Examples include tuning hyperparameters of machine learning models, engineering design through simulation, or optimizing physical experiments. Such problems fall under the class of derivative-free or black-box optimization methods.</p>
+<p>Unlike gradient-based methods, which rely on analytical or automatic differentiation, derivative-free algorithms make progress solely from function evaluations. </p>
 <h2 id="motivation-and-challenges">Motivation and Challenges<a class="headerlink" href="#motivation-and-challenges" title="Permanent link">¶</a></h2>
 <p>Let <span class="arithmatex">\(f: \mathbb{R}^n \to \mathbb{R}\)</span> be an objective function.  </p>
 <p>A derivative-free algorithm seeks to minimize <span class="arithmatex">\(f(x)\)</span> using only evaluations of <span class="arithmatex">\(f(x)\)</span>, without access to <span class="arithmatex">\(\nabla f(x)\)</span> or <span class="arithmatex">\(\nabla^2 f(x)\)</span>.</p>
@@ -1350,7 +1325,7 @@
 <h2 id="direct-search-methods">Direct Search Methods<a class="headerlink" href="#direct-search-methods" title="Permanent link">¶</a></h2>
 <p>Direct search algorithms evaluate the objective function at structured sets of points and use comparisons, not gradients, to decide where to move.</p>
 <h3 id="neldermead-simplex-method">Nelder–Mead Simplex Method<a class="headerlink" href="#neldermead-simplex-method" title="Permanent link">¶</a></h3>
-<p>Perhaps the most famous derivative-free algorithm, Nelder–Mead maintains a simplex — a polytope of <span class="arithmatex">\(n+1\)</span> vertices in <span class="arithmatex">\(\mathbb{R}^n\)</span>.</p>
+<p>Perhaps the most famous derivative-free algorithm, Nelder–Mead maintains a simplex: a polytope of <span class="arithmatex">\(n+1\)</span> vertices in <span class="arithmatex">\(\mathbb{R}^n\)</span>.</p>
 <p>At each iteration:</p>
 <ol>
 <li>Evaluate <span class="arithmatex">\(f\)</span> at all simplex vertices.</li>
@@ -1367,8 +1342,7 @@ x_{k+1} = x_k + \Delta_k d_i,
 </p>
 <p>where <span class="arithmatex">\(d_i\)</span> is a direction from a finite set (e.g., coordinate axes).<br>
 If a direction yields improvement, move there; otherwise, shrink <span class="arithmatex">\(\Delta_k\)</span>.</p>
-<h3 id="mesh-adaptive-direct-search-mads">Mesh Adaptive Direct Search (MADS)<a class="headerlink" href="#mesh-adaptive-direct-search-mads" title="Permanent link">¶</a></h3>
-<p>MADS refines pattern search by maintaining a mesh of candidate points and adaptively changing its resolution. It offers provable convergence to stationary points for certain classes of nonsmooth problems.</p>
+<p>Mesh Adaptive Direct Searcs: MADS refines pattern search by maintaining a mesh of candidate points and adaptively changing its resolution. It offers provable convergence to stationary points for certain classes of nonsmooth problems.</p>
 <h2 id="model-based-methods">Model-Based Methods<a class="headerlink" href="#model-based-methods" title="Permanent link">¶</a></h2>
 <p>Instead of exploring blindly, model-based methods construct an approximation of the objective function from past evaluations.</p>
 <h3 id="trust-region-dfo">Trust-Region DFO<a class="headerlink" href="#trust-region-dfo" title="Permanent link">¶</a></h3>
@@ -1381,41 +1355,9 @@ The next iterate solves a trust-region subproblem:
 \min_{\|x - x_k\| \le \Delta_k} m_k(x).
 </script>
 The trust region size <span class="arithmatex">\(\Delta_k\)</span> adapts based on how well <span class="arithmatex">\(m_k\)</span> predicts true function values.</p>
-<h3 id="bobyqa-bound-optimization-by-quadratic-approximation">BOBYQA (Bound Optimization BY Quadratic Approximation)<a class="headerlink" href="#bobyqa-bound-optimization-by-quadratic-approximation" title="Permanent link">¶</a></h3>
-<p>BOBYQA builds and maintains a quadratic model using interpolation of previously evaluated points. It is highly efficient for medium-scale problems with simple box constraints and no noise.</p>
-<h2 id="evolution-strategies-and-population-methods">Evolution Strategies and Population Methods<a class="headerlink" href="#evolution-strategies-and-population-methods" title="Permanent link">¶</a></h2>
-<p>These methods maintain a population of candidate solutions and update them using statistical principles.</p>
-<h3 id="covariance-matrix-adaptation-evolution-strategy-cma-es">Covariance Matrix Adaptation Evolution Strategy (CMA-ES)<a class="headerlink" href="#covariance-matrix-adaptation-evolution-strategy-cma-es" title="Permanent link">¶</a></h3>
-<p>CMA-ES is a powerful stochastic search algorithm.<br>
-It iteratively samples new points from a multivariate Gaussian distribution:
-<script type="math/tex; mode=display">
-x^{(i)}_{k+1} \sim \mathcal{N}(m_k, \sigma_k^2 C_k),
-</script>
-where <span class="arithmatex">\(m_k\)</span> is the current mean, <span class="arithmatex">\(\sigma_k\)</span> the global step-size, and <span class="arithmatex">\(C_k\)</span> the covariance matrix.</p>
-<p>After evaluating all samples, the mean is updated toward better-performing points, and the covariance matrix adapts to the landscape geometry.</p>
-<p>CMA-ES is invariant to linear transformations and excels in ill-conditioned, noisy, or nonconvex problems.</p>
-<hr>
-<h3 id="differential-evolution-de">Differential Evolution (DE)<a class="headerlink" href="#differential-evolution-de" title="Permanent link">¶</a></h3>
-<p>DE evolves a population <span class="arithmatex">\(\{x_i\}\)</span> via vector differences:
-<script type="math/tex; mode=display">
-v_i = x_{r1} + F(x_{r2} - x_{r3}),
-</script>
-<script type="math/tex; mode=display">
-u_i = \text{crossover}(x_i, v_i),
-</script>
-<script type="math/tex; mode=display">
-x_i' = \begin{cases} 
-u_i, & \text{if } f(u_i) < f(x_i),\\
-x_i, & \text{otherwise.}
-\end{cases}
-</script>
-where <span class="arithmatex">\(r1, r2, r3\)</span> are random distinct indices and <span class="arithmatex">\(F\)</span> controls mutation strength.</p>
-<p>DE combines simplicity and robustness, performing well across continuous and discrete spaces.</p>
+<p>Bound Optimization BY Quadratic Approximation: BOBYQA builds and maintains a quadratic model using interpolation of previously evaluated points. It is highly efficient for medium-scale problems with simple box constraints and no noise.</p>
 <h2 id="bayesian-optimization">Bayesian Optimization<a class="headerlink" href="#bayesian-optimization" title="Permanent link">¶</a></h2>
-<p>When function evaluations are <em>expensive</em> (e.g., training a neural network or running a CFD simulation), Bayesian Optimization (BO) is preferred.</p>
-<h3 id="core-idea">Core Idea<a class="headerlink" href="#core-idea" title="Permanent link">¶</a></h3>
-<p>Model the objective as a random function <span class="arithmatex">\(f(x) \sim \mathcal{GP}(m(x), k(x,x'))\)</span> (Gaussian Process prior).<br>
-After each evaluation, update the posterior mean and variance to quantify uncertainty.</p>
+<p>Model the objective as a random function <span class="arithmatex">\(f(x) \sim \mathcal{GP}(m(x), k(x,x'))\)</span> (Gaussian Process prior). After each evaluation, update the posterior mean and variance to quantify uncertainty.</p>
 <p>Use an acquisition function <span class="arithmatex">\(a(x)\)</span> to select the next evaluation point:
 <script type="math/tex; mode=display">
 x_{k+1} = \arg\max_x a(x),
@@ -1472,9 +1414,8 @@ balancing <em>exploration</em> (high uncertainty) and <em>exploitation</em> (low
 </tr>
 </tbody>
 </table>
-<hr>
 <p>Derivative-free optimization expands our toolkit beyond calculus, allowing us to optimize <em>anything we can evaluate</em>. It emphasizes adaptation, surrogate modeling, and population intelligence rather than analytical structure.</p>
-<p>In the next chapter, we explore metaheuristic and evolutionary algorithms, which generalize these ideas further by mimicking natural and collective behaviors — turning randomness into a powerful search strategy.</p>
+<p>In the next chapter, we explore metaheuristic and evolutionary algorithms, which generalize these ideas further by mimicking natural and collective behaviors; turning randomness into a powerful search strategy.</p>
 
 
 

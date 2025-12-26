@@ -642,8 +642,6 @@
       
         
       
-        
-      
     
     
     
@@ -1199,29 +1197,6 @@
 
               
             
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../50_future/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    23. The Future of Optimization — Learning, Adaptation, and Intelligence
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
           </ul>
         </nav>
       
@@ -1327,7 +1302,6 @@ with step size <span class="arithmatex">\(\alpha_k &gt; 0\)</span>.</p>
 <li>If the gradient is Lipschitz continuous and the step size is small enough (<span class="arithmatex">\(\alpha_k \le 1/L\)</span>), then gradient descent converges to a global minimizer.</li>
 <li>If <span class="arithmatex">\(f\)</span> is <em>strongly convex</em>, the minimizer is unique and convergence is faster (linear rate with an appropriate step size).</li>
 </ul>
-<p>In machine learning, this is the foundation of back-propagation and weight training: each update follows the negative gradient of the loss.</p>
 <h2 id="equality-constrained-problems-and-lagrange-multipliers">Equality-Constrained Problems and Lagrange Multipliers<a class="headerlink" href="#equality-constrained-problems-and-lagrange-multipliers" title="Permanent link">¶</a></h2>
 <p>Now consider minimizing <span class="arithmatex">\(f\)</span> subject to equality constraints:
 <script type="math/tex; mode=display">
@@ -1419,6 +1393,8 @@ h_j(x^*) = 0,\quad \forall j.
 <li>If a constraint is active at the boundary, it may exert a force: <span class="arithmatex">\(\mu_i^* &gt; 0\)</span>, and then <span class="arithmatex">\(g_i(x^*) = 0\)</span>.</li>
 </ul>
 <p>Only active constraints can push back against the objective.</p>
+<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../images/kkt.png" data-desc-position="bottom"><img alt="kkt" src="../images/kkt.png" style="width:400px;"></a>
+<a href="[https://en.wikipedia.org/wiki/Karush%E2%80%93Kuhn%E2%80%93Tucker_conditions#">Wikipedia</a></p>
 <h2 id="slaters-condition-guaranteeing-strong-duality">Slater’s Condition — Guaranteeing Strong Duality<a class="headerlink" href="#slaters-condition-guaranteeing-strong-duality" title="Permanent link">¶</a></h2>
 <p>The KKT conditions always provide <em>necessary</em> conditions for optimality. For them to also be <em>sufficient</em> (and to guarantee zero duality gap), the problem must satisfy a regularity condition.</p>
 <p>For convex problems with convex <span class="arithmatex">\(g_i\)</span> and affine <span class="arithmatex">\(h_j\)</span>, Slater’s condition holds if there exists a strictly feasible point:
@@ -1475,7 +1451,6 @@ p^* - d^* \ge 0.
 <li>In economics, they are “shadow prices’’ indicating how much the objective would improve if a constraint were relaxed.</li>
 <li>Geometrically, the stationarity condition means the objective and the active constraints share a supporting hyperplane at the optimum.</li>
 </ul>
-<p>KKT theory unifies all earlier ideas—convexity, gradients/subgradients, feasible regions, tangent and normal cones—into one clean, general optimality framework.</p>
 
 
 
