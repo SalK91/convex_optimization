@@ -1,37 +1,26 @@
 # Chapter 21: Metaheuristic and Evolutionary Algorithms
 
-When optimization problems are highly nonconvex, discrete, or black-box, deterministic methods often fail to find good solutions.  In these settings, metaheuristic algorithms—inspired by nature, biology, and collective behavior—provide robust and flexible alternatives.
-
-Metaheuristics are general-purpose stochastic search methods that rely on repeated sampling, adaptation, and survival of the fittest ideas. They are especially effective when the landscape is rugged, multimodal, or not well understood.
-
+When optimization problems are highly nonconvex, discrete, or black-box, deterministic methods often fail to find good solutions.  In these settings, metaheuristic algorithms—inspired by nature, biology, and collective behavior—provide robust and flexible alternatives. Metaheuristics are general-purpose stochastic search methods that rely on repeated sampling, adaptation, and survival of the fittest ideas. They are especially effective when the landscape is rugged, multimodal, or not well understood.
 
 
 ## Principles of Metaheuristic Optimization
 
 All metaheuristics share three key principles:
 
-1. Population-Based Search:  
-   Maintain multiple candidate solutions simultaneously to explore diverse regions of the search space.
+1. Population-Based Search: Maintain multiple candidate solutions simultaneously to explore diverse regions of the search space.
 
-2. Variation Operators:  
-   Create new solutions via mutation, recombination, or stochastic perturbations.
+2. Variation Operators:Create new solutions via mutation, recombination, or stochastic perturbations.
 
-3. Selection and Adaptation:  
-   Favor candidates with better objective values, guiding the search toward promising regions.
+3. Selection and Adaptation:Favor candidates with better objective values, guiding the search toward promising regions.
 
 Unlike local methods, metaheuristics balance exploration (global search) and exploitation (local refinement).
 
 
-## Genetic Algorithms (GA)
-
-### Biological Inspiration
-
+## Genetic Algorithms
 Genetic Algorithms mimic natural evolution, where populations evolve toward higher fitness through selection, crossover, and mutation.
 
 ### Representation
-
-A solution (individual) is represented as a chromosome—often a binary string, vector of reals, or permutation.  
-Each position (gene) encodes part of the decision variable.
+A solution (individual) is represented as a chromosome, often a binary string, vector of reals, or permutation. Each position (gene) encodes part of the decision variable.
 
 ### Algorithm Outline
 
@@ -49,19 +38,16 @@ Each position (gene) encodes part of the decision variable.
 - Single-point crossover: exchange genes after a random index.  
 - Gaussian mutation: add small noise to continuous parameters.  
 
-### Strengths and Weaknesses
 | Strengths | Weaknesses |
 |----------------|----------------|
 | Highly parallel, robust, domain-independent | Requires many function evaluations |
 | Effective for combinatorial and discrete optimization | Parameter tuning (mutation, crossover rates) is nontrivial |
 
  
-## Differential Evolution (DE)
+## Differential Evolution
 
-Differential Evolution is a simple yet powerful algorithm for continuous optimization.
+Differential Evolution is a simple yet powerful algorithm for continuous optimization. Mutation is performed using differences of population members:
 
-### Core Idea
-Mutation is performed using differences of population members:
 $$
 v_i = x_{r1} + F(x_{r2} - x_{r3}),
 $$
@@ -79,11 +65,9 @@ and selection chooses between $x_i$ and $u_i$ based on objective value.
 - Simple to implement, with few control parameters.
 
  
-## Particle Swarm Optimization (PSO)
+## Particle Swarm Optimization
 
-Inspired by social behavior of birds and fish, Particle Swarm Optimization maintains a swarm of particles moving through the search space.
-
-Each particle $i$ has position $x_i$ and velocity $v_i$, updated as:
+Inspired by social behavior of birds and fish, Particle Swarm Optimization maintains a swarm of particles moving through the search space. Each particle $i$ has position $x_i$ and velocity $v_i$, updated as:
 $$
 v_i \leftarrow w v_i + c_1 r_1 (p_i - x_i) + c_2 r_2 (g - x_i),
 $$
@@ -99,17 +83,9 @@ where:
 
 Particles balance individual learning (self-experience) and social learning (group knowledge).
 
-### Convergence Behavior
-Initially, the swarm explores widely; as iterations proceed, velocities decrease, and the swarm converges near optima.
+## Simulated Annealing
 
-### Strengths
-- Few parameters, easy to implement.
-- Works well for noisy or discontinuous problems.
-- Naturally parallelizable.
-
-## Simulated Annealing (SA)
-
-Simulated Annealing is one of the earliest and most fundamental stochastic optimization algorithms. It is inspired by annealing in metallurgy — a physical process in which a material is heated and then slowly cooled to minimize structural defects and reach a low-energy crystalline state. The key idea is to imitate this gradual “cooling” in the search for a global minimum.
+Simulated Annealing is one of the earliest and most fundamental stochastic optimization algorithms. It is inspired by annealing in metallurgy, a physical process in which a material is heated and then slowly cooled to minimize structural defects and reach a low-energy crystalline state. The key idea is to imitate this gradual “cooling” in the search for a global minimum.
 
  
 ### Physical Analogy
@@ -155,7 +131,6 @@ Simulated Annealing maps this principle to optimization by treating:
 
       - Repeat until $T$ becomes sufficiently small or the system stabilizes.
 
-### Interpretation
 
 - At high temperatures, SA accepts both better and worse moves → exploration.  
 
@@ -164,7 +139,6 @@ Simulated Annealing maps this principle to optimization by treating:
 This balance allows SA to escape local minima and approach the global optimum over time.
 
 
-### Cooling Schedules
 
 The temperature schedule determines convergence quality:
 
@@ -176,28 +150,6 @@ The temperature schedule determines convergence quality:
 | Adaptive | Adjust based on recent acceptance rates | Practical and self-tuning |
 
 A slower cooling schedule improves accuracy but increases computational cost.
-
-
-
-
-## Ant Colony Optimization (ACO)
-
-### Biological Basis
-Ant Colony Optimization models how real ants find shortest paths using pheromone trails.
-
-Each artificial ant builds a solution step by step, choosing components probabilistically based on pheromone intensity $\tau_{ij}$ and heuristic visibility $\eta_{ij}$:
-$$
-P_{ij} = \frac{[\tau_{ij}]^\alpha [\eta_{ij}]^\beta}{\sum_k [\tau_{ik}]^\alpha [\eta_{ik}]^\beta}.
-$$
-
-### Pheromone Update
-After all ants construct their tours:
-$$
-\tau_{ij} \leftarrow (1 - \rho)\tau_{ij} + \sum_{\text{ants}} \Delta \tau_{ij},
-$$
-where $\rho$ controls evaporation and $\Delta\tau_{ij}$ reinforces paths used by good solutions.
-
-ACO excels at combinatorial problems like the Traveling Salesman Problem (TSP) and scheduling.
 
 ## Exploration vs. Exploitation
 
@@ -213,18 +165,6 @@ Every metaheuristic must balance:
 | Random restarts | Local refinement |
 
 Adaptive control of parameters (e.g., mutation rate, inertia weight) helps maintain balance dynamically.
-
-
-## Hybrid and Memetic Algorithms
-
-Hybrid (or memetic) algorithms combine global metaheuristic exploration with local optimization refinement.
-
-Example:
-
-1. Use PSO or GA to explore broadly.  
-2. Apply gradient descent or Nelder–Mead locally near promising candidates.
-
-This hybridization often yields faster convergence and improved accuracy.
 
  
 ## Performance and Practical Tips

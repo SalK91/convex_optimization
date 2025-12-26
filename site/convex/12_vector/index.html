@@ -642,8 +642,6 @@
       
         
       
-        
-      
     
     
     
@@ -1199,29 +1197,6 @@
 
               
             
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../50_future/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    23. The Future of Optimization — Learning, Adaptation, and Intelligence
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
           </ul>
         </nav>
       
@@ -1302,12 +1277,7 @@
 
 
 <h1 id="chapter-2-linear-algebra-foundations">Chapter 2: Linear Algebra Foundations<a class="headerlink" href="#chapter-2-linear-algebra-foundations" title="Permanent link">¶</a></h1>
-<p>Linear algebra provides the geometric language of convex optimization. Many optimization problems in machine learning can be understood as asking how vectors, subspaces, and linear maps relate to one another. A simple example that shows this connection is linear least squares, where fitting a model <span class="arithmatex">\(x\)</span> to data <span class="arithmatex">\((A, b)\)</span> takes the form:</p>
-<div class="arithmatex">\[
-\min_x \ \|A x - b\|_2^2.
-\]</div>
-<p>Later in this chapter, we will see that this objective finds the point in the column space of <span class="arithmatex">\(A\)</span> that is closest to <span class="arithmatex">\(b\)</span>. Concepts such as column space, null space, orthogonality, rank, and conditioning determine not only whether a solution exists, but also how fast optimization algorithms converge.</p>
-<p>This chapter develops the linear-algebra tools that appear throughout convex optimization and machine learning. We focus on geometric ideas — projections, subspaces, orthogonality, eigenvalues, singular values, and norms — because these ideas directly shape how optimization behaves. Readers familiar with basic matrix operations will find that many optimization concepts become much simpler when viewed through the right geometric lens.</p>
+<p>Linear algebra provides the geometric language of convex optimization. Many optimization problems in machine learning can be understood as asking how vectors, subspaces, and linear maps relate to one another. This chapter develops the linear-algebra tools that appear throughout convex optimization and machine learning. We focus on geometric ideas: projections, subspaces, orthogonality, eigenvalues, singular values, and norms  because these ideas directly shape how optimization behaves.</p>
 <h2 id="vector-spaces-subspaces-and-affine-sets">Vector spaces, subspaces, and affine sets<a class="headerlink" href="#vector-spaces-subspaces-and-affine-sets" title="Permanent link">¶</a></h2>
 <p>A vector space over <span class="arithmatex">\(\mathbb{R}\)</span> is a set of vectors that can be added and scaled without leaving the set. The familiar example is <span class="arithmatex">\(\mathbb{R}^n\)</span>, where operations like <span class="arithmatex">\(\alpha x + \beta y\)</span> keep us within the same space.</p>
 <p>Within a vector space, some subsets behave particularly nicely. A subspace is a subset that is itself a vector space: it is closed under addition, closed under scalar multiplication, and contains the zero vector. Geometrically, subspaces are “flat” objects that always pass through the origin, such as lines or planes in <span class="arithmatex">\(\mathbb{R}^3\)</span>. </p>
@@ -1316,7 +1286,6 @@
 <p>Affine Transformations: An affine transformation (or affine map) is a function <span class="arithmatex">\(f : V \to W\)</span> that can be written as <span class="arithmatex">\(f(x) = A x + b,\)</span> where <span class="arithmatex">\(A\)</span> is a linear map and <span class="arithmatex">\(b\)</span> is a fixed vector. Affine transformations preserve both affinity and convexity:
 if <span class="arithmatex">\(C\)</span> is convex, then <span class="arithmatex">\(A C + b\)</span> is also convex.
 is called an affine transformation. It represents a linear transformation followed by a translation. Affine transformations preserve the structure of affine sets and convex sets, meaning that if a feasible region is convex or affine, applying an affine transformation does not destroy that property. This matters for optimization because many models and algorithms implicitly perform affine transformations for example, when reparameterizing variables, scaling features, or mapping between coordinate systems. Convexity is preserved under these operations, so the essential geometry of the problem remains intact.</p>
-<p>In summary, vector spaces describe the space in which optimization algorithms move, subspaces capture structural or constraint-related directions, and affine sets model the geometric shapes defined by linear constraints. These three ideas form the basic geometric toolkit for understanding optimization problems and will reappear repeatedly throughout the rest of the webbook.</p>
 <h2 id="linear-combinations-span-basis-dimension">Linear combinations, span, basis, dimension<a class="headerlink" href="#linear-combinations-span-basis-dimension" title="Permanent link">¶</a></h2>
 <p>Much of linear algebra revolves around understanding how vectors can be combined to generate new vectors. This idea is essential in optimization because gradients, search directions, feasible directions, and model predictions are often built from linear combinations of simpler components.</p>
 <p>Given vectors <span class="arithmatex">\(v_1,\dots,v_k\)</span>, any vector of the form<script type="math/tex">
@@ -1333,6 +1302,8 @@ The span describes the collection of directions that can be reached from these v
 <li>The nullspace of <span class="arithmatex">\(A\)</span> is <span class="arithmatex">\(\{ x : Ax = 0 \}\)</span>.</li>
 <li>The rank-nullity theorem states: <span class="arithmatex">\(\mathrm{rank}(A) + \mathrm{nullity}(A) = n,\)</span> where <span class="arithmatex">\(n\)</span> is the number of columns of <span class="arithmatex">\(A\)</span>.</li>
 </ul>
+<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../images/fundamentalspaces.png" data-desc-position="bottom"><img alt="Four Fundamental Subspaces" src="../images/fundamentalspaces.png"></a></p>
+<p><em>Figure : Four Fundamental Subspaces: <a href="https://math.mit.edu/~gs/linearalgebra/ila5/linearalgebra5_3-5.pdf">MIT Linear Algebrea</a></em></p>
 <blockquote>
 <p>Column Space: The column space of a matrix <script type="math/tex"> A </script>, denoted <script type="math/tex"> C(A) </script>, is the set of all possible output vectors <script type="math/tex"> b </script> that can be written as <script type="math/tex"> Ax </script> for some <script type="math/tex"> x </script>. In other words, it contains all vectors that the matrix can “reach” through linear combinations of its columns. The question “Does the system <script type="math/tex"> Ax = b </script> have a solution?” is equivalent to asking whether <script type="math/tex"> b \in C(A) </script>. If <script type="math/tex"> b </script> lies in the column space, a solution exists; otherwise, it does not.</p>
 <p>Null Space: The null space (or kernel) of <script type="math/tex"> A </script>, denoted <script type="math/tex"> N(A) </script>, is the set of all input vectors <script type="math/tex"> x </script> that are mapped to zero:  <script type="math/tex"> N(A) = \{ x : Ax = 0 \} </script>. It answers a different question: <em>If a solution to <script type="math/tex"> Ax = b </script> exists, is it unique?</em> If the null space contains only the zero vector (<script type="math/tex"> \mathrm{nullity}(A) = 0 </script>), the solution is unique. But if <script type="math/tex"> N(A) </script> contains nonzero vectors, there are infinitely many distinct solutions that yield the same output.</p>
@@ -1405,9 +1376,7 @@ An inner product on <span class="arithmatex">\(\mathbb{R}^n\)</span> is a map <s
 <blockquote>
 <p>More generally, an inner product endows <span class="arithmatex">\(V\)</span> with a geometric structure, turning it into an inner product space (and if complete, a Hilbert space). Inner products allow us to talk about orthogonality (perpendicular vectors) and orthogonal projections, and to define the all-important concept of a gradient in optimization. </p>
 <p>Geometry from the inner product: An inner product induces a norm <span class="arithmatex">\(\|x\| = \sqrt{\langle x,x \rangle}\)</span> and a notion of distance <span class="arithmatex">\(d(x,y) = \|x-y\|\)</span>. It also defines angles: <span class="arithmatex">\(\langle x,y \rangle = 0\)</span> means <span class="arithmatex">\(x\)</span> and <span class="arithmatex">\(y\)</span> are orthogonal. Thus, inner products generalize the geometric concepts of lengths and angles to abstract vector spaces. Many results in Euclidean geometry (like the Pythagorean theorem and law of cosines) hold in any inner product space. For example, the parallelogram law holds: <span class="arithmatex">\(\|x+y\|^2 + \|x-y\|^2 = 2\|x\|^2 + 2\|y\|^2\)</span>.  </p>
-<p>The Cauchy–Schwarz inequality: For any <span class="arithmatex">\(x,y \in \mathbb{R}^n\)</span>:
-<span class="arithmatex">\(<span class="arithmatex">\(|\langle x,y\rangle| \le \|x\|\|y\|~,\)</span>\)</span>
-with equality iff <span class="arithmatex">\(x\)</span> and <span class="arithmatex">\(y\)</span> are linearly dependent. Geometrically, it means the absolute inner product is maximized when <span class="arithmatex">\(x\)</span> and <span class="arithmatex">\(y\)</span> point in the same or opposite direction. </p>
+<p>The Cauchy–Schwarz inequality: For any <span class="arithmatex">\(x,y \in \mathbb{R}^n\)</span>: <span class="arithmatex">\(|\langle x,y\rangle| \le \|x\|\|y\|~,\)</span> &gt;with equality iff <span class="arithmatex">\(x\)</span> and <span class="arithmatex">\(y\)</span> are linearly dependent. Geometrically, it means the absolute inner product is maximized when <span class="arithmatex">\(x\)</span> and <span class="arithmatex">\(y\)</span> point in the same or opposite direction. </p>
 </blockquote>
 <p>Examples of inner products:</p>
 <ul>
@@ -1421,9 +1390,6 @@ with equality iff <span class="arithmatex">\(x\)</span> and <span class="arithma
 <p>Function space inner product: <span class="arithmatex">\(\langle f, g \rangle = \int_a^b f(t)\,g(t)\,dt\)</span>. This turns the space of square-integrable functions on <span class="arithmatex">\([a,b]\)</span> into an inner product space (a Hilbert space, <span class="arithmatex">\(L^2[a,b]\)</span>). In machine learning, this is the basis for kernel Hilbert spaces, where one defines an inner product between functions to lift optimization into infinite-dimensional feature spaces.  </p>
 </li>
 </ul>
-<blockquote>
-<p>Any vector space with an inner product has an orthonormal basis (via the Gram–Schmidt process). Gram–Schmidt is fundamental in numerical algorithms to orthogonalize vectors and is used to derive the QR decomposition: any full-rank matrix <span class="arithmatex">\(A \in \mathbb{R}^{m\times n}\)</span> can be factored as <span class="arithmatex">\(A = QR\)</span> where <span class="arithmatex">\(Q\)</span> has orthonormal columns and <span class="arithmatex">\(R\)</span> is upper triangular. This factorization is widely used in least squares and optimization because it provides a stable way to solve <span class="arithmatex">\(Ax=b\)</span> and to analyze subspaces. For example, for an overdetermined system (<span class="arithmatex">\(m&gt;n\)</span> i.e. more equations than unknowns), <span class="arithmatex">\(Ax=b\)</span> has a least-squares solution <span class="arithmatex">\(x = R^{-1}(Q^\top b)\)</span>, and for underdetermined (<span class="arithmatex">\(m&lt;n\)</span>), <span class="arithmatex">\(Ax=b\)</span> has infinitely many solutions, among which one often chooses the minimal-norm solution using the orthonormal basis of the range. </p>
-</blockquote>
 <p>Applications in optimization: Inner product geometry is indispensable in convex optimization.  </p>
 <ul>
 <li>
@@ -1466,17 +1432,9 @@ Common examples on <span class="arithmatex">\(\mathbb{R}^n\)</span>:  </p>
 <p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../images/norms.png" data-desc-position="bottom"><img alt="Alt text" src="../images/norms.png" style="float:right; margin-right:15px; width:400px;"></a></p>
 <p>Unit-ball geometry: The shape of the unit ball <span class="arithmatex">\({x: |x| \le 1}\)</span> reveals how a norm treats different directions. For example, the <span class="arithmatex">\(\ell_2\)</span> unit ball in <span class="arithmatex">\(\mathbb{R}^2\)</span> is a perfect circle, treating all directions uniformly, whereas the <span class="arithmatex">\(\ell_1\)</span> unit ball is a diamond with corners along the axes, indicating that <span class="arithmatex">\(\ell_1\)</span> treats the coordinate axes as special (those are “cheaper” directions since the ball extends further along axes, touching them at <span class="arithmatex">\((\pm1,0)\)</span> and <span class="arithmatex">\((0,\pm1)\)</span>). The <span class="arithmatex">\(\ell_\infty\)</span> unit ball is a square aligned with axes, suggesting it allows more combined motion in coordinates as long as no single coordinate exceeds the limit. These shapes are illustrated below: we see the red diamond (<span class="arithmatex">\(\ell_1\)</span>), green circle (<span class="arithmatex">\(\ell_2\)</span>), and blue square (<span class="arithmatex">\(\ell_\infty\)</span>) in <span class="arithmatex">\(\mathbb{R}^2\)</span> . The geometry of the unit ball matters whenever we regularize or constrain solutions by a norm. For instance, using an <span class="arithmatex">\(\ell_1\)</span> norm ball as a constraint or regularizer encourages solutions on the corners (sparse solutions), while an <span class="arithmatex">\(\ell_2\)</span> ball encourages more evenly-distributed changes. An <span class="arithmatex">\(\ell_\infty\)</span> constraint limits the maximum absolute value of any component, leading to solutions that avoid any single large entry.</p>
 <blockquote>
-<p>Dual norms. Each norm <span class="arithmatex">\(\|\cdot\|\)</span> has a dual norm <span class="arithmatex">\(\|\cdot\|_*\)</span> defined by
-<script type="math/tex; mode=display">
-\|y\|_* = \sup_{\|x\|\le 1} x^\top y~.
-</script>
-For example, the dual of the <span class="arithmatex">\(\ell_1\)</span> norm is the <span class="arithmatex">\(\ell_\infty\)</span> norm, and the dual of the <span class="arithmatex">\(\ell_2\)</span> norm is itself.</p>
-<p>The dual norm captures how large a linear functional can be when applied to vectors of bounded size. Geometrically, consider the unit ball <span class="arithmatex">\(\{x : \|x\|\le 1\}\)</span>. The dot product <span class="arithmatex">\(x^\top y\)</span> measures how well the vector <span class="arithmatex">\(x\)</span> aligns with <span class="arithmatex">\(y\)</span>. The dual norm <span class="arithmatex">\(\|y\|_*\)</span> is the maximum possible alignment between <span class="arithmatex">\(y\)</span> and any vector <span class="arithmatex">\(x\)</span> inside this unit ball.</p>
-<p>If <span class="arithmatex">\(\|y\|_*\)</span> is large, then there exists a direction <span class="arithmatex">\(x\)</span> that is small according to the original norm yet strongly aligned with <span class="arithmatex">\(y\)</span>, resulting in a large dot product. If <span class="arithmatex">\(\|y\|_*\)</span> is small, then <span class="arithmatex">\(y\)</span> is poorly aligned with all unit-norm vectors, and <span class="arithmatex">\(x^\top y\)</span> remains small for every feasible <span class="arithmatex">\(x\)</span>.</p>
-<p>This perspective explains common dual norm pairs. The dual of <span class="arithmatex">\(\ell_1\)</span> is <span class="arithmatex">\(\ell_\infty\)</span>, reflecting sensitivity to the largest coordinate, while the <span class="arithmatex">\(\ell_2\)</span> norm is self-dual due to rotational symmetry. Dual norms are fundamental in convex optimization, appearing in optimality conditions, error bounds, and regularization analysis.</p>
-</blockquote>
 <p>Norms in optimization algorithms: Different norms define different algorithmic behaviors. For example, gradient descent typically uses the Euclidean norm for step sizes and convergence analysis, but coordinate descent methods implicitly use <span class="arithmatex">\(\ell_\infty\)</span> (since one coordinate move at a time is like a step in <span class="arithmatex">\(\ell_\infty\)</span> unit ball). Mirror descent methods use non-Euclidean norms and their duals to get better performance on certain problems (e.g. using <span class="arithmatex">\(\ell_1\)</span> norm for sparse problems). The norm also figures in complexity bounds: an algorithm’s convergence rate may depend on the diameter of the feasible set in the chosen norm, <span class="arithmatex">\(D = \max_{\text{feasible}}|x - x^*|\)</span>. For instance, in subgradient methods, having a smaller <span class="arithmatex">\(\ell_2\)</span> diameter or <span class="arithmatex">\(\ell_1\)</span> diameter can improve bounds. Moreover, when constraints are given by norms (like <span class="arithmatex">\(|x|_1 \le t\)</span>), projections and proximal operators with respect to that norm become subroutines in algorithms.</p>
-<p>In summary, norms provide the metric backbone of optimization. They tell us how to measure progress (<span class="arithmatex">\(|x_k - x^*|\)</span>), how to constrain solutions (<span class="arithmatex">\(|x| \le R\)</span>), and how to bound errors. The choice of norm can induce sparsity, robustness, or other desired structure in solutions, and mastering norms and their geometry is key to understanding advanced optimization techniques.</p>
+</blockquote>
+<p>In summary, norms provide the metric backbone of optimization. They tell us how to measure progress (<span class="arithmatex">\(|x_k - x^*|\)</span>), how to constrain solutions (<span class="arithmatex">\(|x| \le R\)</span>), and how to bound errors. The choice of norm can induce sparsity, robustness, or other desired structure in solutions.</p>
 <h2 id="eigenvalues-eigenvectors-and-positive-semidefinite-matrices">Eigenvalues, eigenvectors, and positive semidefinite matrices<a class="headerlink" href="#eigenvalues-eigenvectors-and-positive-semidefinite-matrices" title="Permanent link">¶</a></h2>
 <p>If <span class="arithmatex">\(A \in \mathbb{R}^{n\times n}\)</span> is linear, a nonzero <span class="arithmatex">\(v\)</span> is an eigenvector with eigenvalue <span class="arithmatex">\(\lambda\)</span> if</p>
 <div class="arithmatex">\[
@@ -1565,7 +1523,6 @@ where <span class="arithmatex">\(U\)</span> and <span class="arithmatex">\(V\)</
 is the condition number of <span class="arithmatex">\(A\)</span>. A large condition number implies that the map stretches some directions much more than others, leading to slow or unstable convergence in gradient methods. A small condition number means <span class="arithmatex">\(A\)</span> behaves more like a uniform scaling, which is ideal for optimization.</p>
 <h3 id="low-rank-structure">Low-rank structure<a class="headerlink" href="#low-rank-structure" title="Permanent link">¶</a></h3>
 <p>The rank of <span class="arithmatex">\(A\)</span> is the number of nonzero singular values. When <span class="arithmatex">\(A\)</span> has low rank, it effectively acts on a lower-dimensional subspace. This structure can be exploited in optimization: low-rank matrices enable dimensionality reduction, fast matrix-vector products, and compact representations. In machine learning, truncated SVD is used for PCA, feature compression, and approximating large linear operators.</p>
-<p>Low-rank structure is also a modeling target. Convex formulations such as nuclear-norm minimization encourage solutions whose matrices have small rank, reflecting latent low-dimensional structure in data.</p>
 <h2 id="mental-map">Mental Map<a class="headerlink" href="#mental-map" title="Permanent link">¶</a></h2>
 <div class="highlight"><pre><span></span><code>                 Linear Algebra Foundations for Convex Optimization
                Geometry + Computation for Understanding Algorithms

@@ -502,15 +502,6 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#problem-definition" class="md-nav__link">
-    <span class="md-ellipsis">
-      Problem Definition
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
   <a href="#formulation" class="md-nav__link">
     <span class="md-ellipsis">
       Formulation
@@ -736,8 +727,6 @@
   
     
     
-      
-        
       
         
       
@@ -1327,29 +1316,6 @@
 
               
             
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../50_future/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    23. The Future of Optimization — Learning, Adaptation, and Intelligence
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
           </ul>
         </nav>
       
@@ -1404,15 +1370,6 @@
       Table of contents
     </label>
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#problem-definition" class="md-nav__link">
-    <span class="md-ellipsis">
-      Problem Definition
-    </span>
-  </a>
-  
-</li>
       
         <li class="md-nav__item">
   <a href="#formulation" class="md-nav__link">
@@ -1975,15 +1932,15 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h1 id="i-transportation-optimization-a-linear-programming-case-study">I - Transportation Optimization: A Linear Programming Case Study.<a class="anchor-link" href="#i-transportation-optimization-a-linear-programming-case-study">¶</a></h1><h3 id="problem-definition">Problem Definition<a class="anchor-link" href="#problem-definition">¶</a></h3><p>We consider a classical transportation optimization problem, also known as the minimum-cost flow problem, arising in supply chain and logistics planning. A set of production facilities (plants) must ship goods to a set of customer orders at minimum total transportation cost, subject to supply, demand, and routing constraints.</p>
+<h1 id="i-transportation-optimization-a-linear-programming-case-study">I - Transportation Optimization: A Linear Programming Case Study.<a class="anchor-link" href="#i-transportation-optimization-a-linear-programming-case-study">¶</a></h1><p>We consider a classical transportation optimization problem, also known as the minimum-cost flow problem, arising in supply chain and logistics planning. A set of production facilities (plants) must ship goods to a set of customer orders at minimum total transportation cost, subject to supply, demand, and routing constraints.</p>
 <h3 id="formulation">Formulation<a class="anchor-link" href="#formulation">¶</a></h3><p>We assume the following information is known:</p>
 <ul>
 <li>Supply capacity at each plant</li>
 <li>Demand requirement for each order</li>
-<li>Transportation cost between feasible plant–order pairs</li>
+<li>Transportation cost between feasible plant order pairs</li>
 <li>Feasible shipping lanes (not all plants can serve all orders)</li>
 </ul>
-<p>We must determine how much product to ship from each plant to each order in order to minimize total transportation cost while fully satisfying demand and respecting supply limits.</p>
+<p>Question - determine how much product to ship from each plant to each order in order to minimize total transportation cost while fully satisfying demand and respecting supply limits</p>
 <h4 id="objective-function">Objective Function<a class="anchor-link" href="#objective-function">¶</a></h4><ul>
 <li>Minimize total transportation cost:  $\min \sum_{i \in P} \sum_{j \in O} c_{ij} x_{ij}$</li>
 </ul>
@@ -2012,7 +1969,7 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[1]:</div><div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[2]:</div><div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="CodeMirror cm-s-jupyter">
 <div class="zeroclipboard-container">
 <clipboard-copy ,="" aria-label="Copy to Clipboard" for="cell-1">
@@ -2041,7 +1998,7 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[2]:</div><div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[3]:</div><div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="CodeMirror cm-s-jupyter">
 <div class="zeroclipboard-container">
 <clipboard-copy ,="" aria-label="Copy to Clipboard" for="cell-2">
@@ -2084,7 +2041,7 @@ from matplotlib.colors import PowerNorm</div>
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[3]:</div><div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[4]:</div><div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="CodeMirror cm-s-jupyter">
 <div class="zeroclipboard-container">
 <clipboard-copy ,="" aria-label="Copy to Clipboard" for="cell-3">
@@ -2113,7 +2070,7 @@ np.random.seed(42)</div>
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[4]:</div><div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[5]:</div><div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="CodeMirror cm-s-jupyter">
 <div class="zeroclipboard-container">
 <clipboard-copy ,="" aria-label="Copy to Clipboard" for="cell-4">
@@ -2193,7 +2150,7 @@ np.random.seed(42)</div>
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[5]:</div><div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[6]:</div><div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="CodeMirror cm-s-jupyter">
 <div class="zeroclipboard-container">
 <clipboard-copy ,="" aria-label="Copy to Clipboard" for="cell-5">
@@ -2206,9 +2163,8 @@ np.random.seed(42)</div>
 </div>
 </clipboard-copy>
 </div>
-<div class="highlight-ipynb hl-python"><pre><span></span><span class="c1"># -----------------------------</span>
-<span class="c1"># Data Cleaning Utilities</span>
-<span class="c1"># -----------------------------</span>
+<div class="highlight-ipynb hl-python"><pre><span></span><span class="c1"># Data Cleaning Utilities</span>
+
 <span class="k">def</span> <span class="nf">canon</span><span class="p">(</span><span class="n">s</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">"""Canonical column name: lowercase, strip, replace non-alnum with underscore."""</span>
     <span class="n">s</span> <span class="o">=</span> <span class="n">s</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
@@ -2236,9 +2192,8 @@ np.random.seed(42)</div>
     <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Loaded </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">sheets</span><span class="p">)</span><span class="si">}</span><span class="s2"> sheets: </span><span class="si">{</span><span class="nb">list</span><span class="p">(</span><span class="n">sheets</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">sheets</span>
 </pre></div>
-<div class="clipboard-copy-txt" id="cell-5"># -----------------------------
-# Data Cleaning Utilities
-# -----------------------------
+<div class="clipboard-copy-txt" id="cell-5"># Data Cleaning Utilities
+
 def canon(s: str) -&gt; str:
     """Canonical column name: lowercase, strip, replace non-alnum with underscore."""
     s = s.strip().lower()
@@ -2276,7 +2231,7 @@ def load_excel_sheets(xlsx_path: Path) -&gt; Dict[str, pd.DataFrame]:
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[6]:</div><div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[7]:</div><div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="CodeMirror cm-s-jupyter">
 <div class="zeroclipboard-container">
 <clipboard-copy ,="" aria-label="Copy to Clipboard" for="cell-6">
@@ -2319,7 +2274,7 @@ Loaded 7 sheets: ['orderlist', 'freightrates', 'whcosts', 'whcapacities', 'produ
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[7]:</div><div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[8]:</div><div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="CodeMirror cm-s-jupyter">
 <div class="zeroclipboard-container">
 <clipboard-copy ,="" aria-label="Copy to Clipboard" for="cell-7">
@@ -2332,9 +2287,7 @@ Loaded 7 sheets: ['orderlist', 'freightrates', 'whcosts', 'whcapacities', 'produ
 </div>
 </clipboard-copy>
 </div>
-<div class="highlight-ipynb hl-python"><pre><span></span><span class="c1"># ----------------------------</span>
-<span class="c1"># Demand measure</span>
-<span class="c1"># ----------------------------</span>
+<div class="highlight-ipynb hl-python"><pre><span></span><span class="c1"># Demand</span>
 <span class="n">orders</span> <span class="o">=</span> <span class="n">sheets</span><span class="p">[</span><span class="s1">'orderlist'</span><span class="p">][[</span><span class="s1">'order_id'</span><span class="p">,</span> <span class="s1">'weight'</span><span class="p">]]</span>
 <span class="n">orders</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"order_id"</span><span class="p">,</span> <span class="s2">"demand"</span><span class="p">]</span>
 <span class="n">orders</span> <span class="o">=</span> <span class="n">orders</span><span class="p">[</span><span class="n">orders</span><span class="p">[</span><span class="s2">"demand"</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
@@ -2360,9 +2313,7 @@ Loaded 7 sheets: ['orderlist', 'freightrates', 'whcosts', 'whcapacities', 'produ
 
 <span class="c1">#orders.head()</span>
 </pre></div>
-<div class="clipboard-copy-txt" id="cell-7"># ----------------------------
-# Demand measure
-# ----------------------------
+<div class="clipboard-copy-txt" id="cell-7"># Demand
 orders = sheets['orderlist'][['order_id', 'weight']]
 orders.columns = ["order_id", "demand"]
 orders = orders[orders["demand"] &gt; 0].copy()
@@ -2414,7 +2365,7 @@ Total demand capacity: 129698.9734391597
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[8]:</div><div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[9]:</div><div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="CodeMirror cm-s-jupyter">
 <div class="zeroclipboard-container">
 <clipboard-copy ,="" aria-label="Copy to Clipboard" for="cell-8">
@@ -2427,9 +2378,8 @@ Total demand capacity: 129698.9734391597
 </div>
 </clipboard-copy>
 </div>
-<div class="highlight-ipynb hl-python"><pre><span></span><span class="c1"># ----------------------------</span>
-<span class="c1"># Plant capacities</span>
-<span class="c1"># ----------------------------</span>
+<div class="highlight-ipynb hl-python"><pre><span></span><span class="c1"># Plant capacities</span>
+
 <span class="n">plants</span> <span class="o">=</span> <span class="n">sheets</span><span class="p">[</span><span class="s1">'whcapacities'</span><span class="p">]</span>
 <span class="n">plants</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"plant_id"</span><span class="p">,</span> <span class="s2">"supply_cap"</span><span class="p">]</span>
 <span class="n">plants</span><span class="p">[</span><span class="s2">"plant_id"</span><span class="p">]</span> <span class="o">=</span> <span class="n">plants</span><span class="p">[</span><span class="s2">"plant_id"</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">str</span><span class="p">)</span>
@@ -2452,9 +2402,8 @@ Total demand capacity: 129698.9734391597
 
 <span class="c1">#plants.head()</span>
 </pre></div>
-<div class="clipboard-copy-txt" id="cell-8"># ----------------------------
-# Plant capacities
-# ----------------------------
+<div class="clipboard-copy-txt" id="cell-8"># Plant capacities
+
 plants = sheets['whcapacities']
 plants.columns = ["plant_id", "supply_cap"]
 plants["plant_id"] = plants["plant_id"].astype(str)
@@ -2475,8 +2424,7 @@ total_supply = plants["supply_cap"].sum()
 print(f"Total plants: {len(plants)}")
 print(f"Total supply capacity: {total_supply}")
 
-#plants.head()
-</div>
+#plants.head()</div>
 </div>
 </div>
 </div>
@@ -2502,7 +2450,7 @@ Total supply capacity: 159720.0
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[9]:</div><div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[10]:</div><div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="CodeMirror cm-s-jupyter">
 <div class="zeroclipboard-container">
 <clipboard-copy ,="" aria-label="Copy to Clipboard" for="cell-9">
@@ -2533,7 +2481,7 @@ if total_supply &lt; total_demand:
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[10]:</div><div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[11]:</div><div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="CodeMirror cm-s-jupyter">
 <div class="zeroclipboard-container">
 <clipboard-copy ,="" aria-label="Copy to Clipboard" for="cell-10">
@@ -2578,8 +2526,6 @@ if total_supply &lt; total_demand:
 
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Total lanes (plant-order pairs): </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">lanes</span><span class="p">)</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Total lanes (plant-order pairs) if we had full connectivity: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">plants</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="nb">len</span><span class="p">(</span><span class="n">orders</span><span class="p">)</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
-
-<span class="c1">#lanes.head()</span>
 </pre></div>
 <div class="clipboard-copy-txt" id="cell-10"># ----------------------------
 # Build lane table (arc list) and unit costs
@@ -2612,10 +2558,7 @@ for _, o in orders.iterrows():
 lanes = pd.DataFrame(lanes, columns=["plant_id", "order_id", "unit_cost"])
 
 print(f"Total lanes (plant-order pairs): {len(lanes)}")
-print(f"Total lanes (plant-order pairs) if we had full connectivity: {len(plants) * len(orders)}")
-
-#lanes.head()
-</div>
+print(f"Total lanes (plant-order pairs) if we had full connectivity: {len(plants) * len(orders)}")</div>
 </div>
 </div>
 </div>
@@ -2641,7 +2584,7 @@ Total lanes (plant-order pairs) if we had full connectivity: 10000
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[11]:</div><div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[12]:</div><div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="CodeMirror cm-s-jupyter">
 <div class="zeroclipboard-container">
 <clipboard-copy ,="" aria-label="Copy to Clipboard" for="cell-11">
@@ -2654,9 +2597,7 @@ Total lanes (plant-order pairs) if we had full connectivity: 10000
 </div>
 </clipboard-copy>
 </div>
-<div class="highlight-ipynb hl-python"><pre><span></span><span class="c1"># ----------------------------</span>
-<span class="c1"># Drop plants / orders with no lanes</span>
-<span class="c1"># ----------------------------</span>
+<div class="highlight-ipynb hl-python"><pre><span></span><span class="c1"># Drop plants / orders with no lanes</span>
 
 <span class="nb">print</span><span class="p">(</span>
     <span class="sa">f</span><span class="s2">"Before cleanup: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">plants</span><span class="p">)</span><span class="si">}</span><span class="s2"> plants, "</span>
@@ -2695,9 +2636,7 @@ Total lanes (plant-order pairs) if we had full connectivity: 10000
     <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">lanes</span><span class="p">)</span><span class="si">}</span><span class="s2"> lanes"</span>
 <span class="p">)</span>
 </pre></div>
-<div class="clipboard-copy-txt" id="cell-11"># ----------------------------
-# Drop plants / orders with no lanes
-# ----------------------------
+<div class="clipboard-copy-txt" id="cell-11"># Drop plants / orders with no lanes
 
 print(
     f"Before cleanup: {len(plants)} plants, "
@@ -2734,8 +2673,7 @@ print(
     f"After cleanup: {len(plants_with_lanes)} plants, "
     f"{len(orders_with_lanes)} orders, "
     f"{len(lanes)} lanes"
-)
-</div>
+)</div>
 </div>
 </div>
 </div>
@@ -2762,7 +2700,7 @@ After cleanup: 10 plants, 999 orders, 5048 lanes
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[12]:</div><div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[13]:</div><div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="CodeMirror cm-s-jupyter">
 <div class="zeroclipboard-container">
 <clipboard-copy ,="" aria-label="Copy to Clipboard" for="cell-12">
@@ -2805,7 +2743,7 @@ if not orders_with_lanes["order_id"].is_unique:
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[13]:</div><div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[14]:</div><div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="CodeMirror cm-s-jupyter">
 <div class="zeroclipboard-container">
 <clipboard-copy ,="" aria-label="Copy to Clipboard" for="cell-13">
@@ -2862,7 +2800,7 @@ lanes = (lanes.groupby(["plant_id", "order_id"], as_index=False).agg({'unit_cost
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[14]:</div><div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[15]:</div><div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="CodeMirror cm-s-jupyter">
 <div class="zeroclipboard-container">
 <clipboard-copy ,="" aria-label="Copy to Clipboard" for="cell-14">
@@ -2932,7 +2870,7 @@ arc_j = arc_j.astype(int)
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[15]:</div><div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[16]:</div><div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="CodeMirror cm-s-jupyter">
 <div class="zeroclipboard-container">
 <clipboard-copy ,="" aria-label="Copy to Clipboard" for="cell-15">
@@ -2986,12 +2924,12 @@ if len(missing_orders) &gt; 0:
 </div>
 </div>
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell">
-<div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=72c61f48">
+<div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=0def1f25">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[16]:</div><div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[17]:</div><div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="CodeMirror cm-s-jupyter">
 <div class="zeroclipboard-container">
 <clipboard-copy ,="" aria-label="Copy to Clipboard" for="cell-16">
@@ -3069,7 +3007,7 @@ plt.show()
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[17]:</div><div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[18]:</div><div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="CodeMirror cm-s-jupyter">
 <div class="zeroclipboard-container">
 <clipboard-copy ,="" aria-label="Copy to Clipboard" for="cell-17">
@@ -3124,7 +3062,7 @@ A_order</div>
 </div>
 <div class="jp-OutputArea jp-Cell-outputArea">
 <div class="jp-OutputArea-child jp-OutputArea-executeResult">
-<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[17]:</div>
+<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[18]:</div>
 <div class="jp-RenderedText jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/plain" tabindex="0">
 <pre>&lt;Compressed Sparse Row sparse matrix of dtype 'float64'
 	with 5048 stored elements and shape (999, 5048)&gt;</pre>
@@ -3150,7 +3088,7 @@ A_order</div>
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[18]:</div><div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[19]:</div><div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="CodeMirror cm-s-jupyter">
 <div class="zeroclipboard-container">
 <clipboard-copy ,="" aria-label="Copy to Clipboard" for="cell-18">
@@ -3294,7 +3232,7 @@ Objective value: 113265.87945592123
 </div>
 </div>
 <div class="jp-OutputArea-child jp-OutputArea-executeResult">
-<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[18]:</div>
+<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[19]:</div>
 <div class="jp-RenderedText jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/plain" tabindex="0">
 <pre>{'status': 'optimal',
  'objective': 113265.87945592123,
@@ -3310,12 +3248,12 @@ Objective value: 113265.87945592123
 </div>
 </div>
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell">
-<div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=09926488">
+<div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=67dd9945">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[19]:</div><div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[20]:</div><div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="CodeMirror cm-s-jupyter">
 <div class="zeroclipboard-container">
 <clipboard-copy ,="" aria-label="Copy to Clipboard" for="cell-19">

@@ -642,8 +642,6 @@
       
         
       
-        
-      
     
     
     
@@ -1199,29 +1197,6 @@
 
               
             
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../50_future/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    23. The Future of Optimization — Learning, Adaptation, and Intelligence
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
           </ul>
         </nav>
       
@@ -1302,31 +1277,25 @@
 
 
 <h1 id="chapter-21-metaheuristic-and-evolutionary-algorithms">Chapter 21: Metaheuristic and Evolutionary Algorithms<a class="headerlink" href="#chapter-21-metaheuristic-and-evolutionary-algorithms" title="Permanent link">¶</a></h1>
-<p>When optimization problems are highly nonconvex, discrete, or black-box, deterministic methods often fail to find good solutions.  In these settings, metaheuristic algorithms—inspired by nature, biology, and collective behavior—provide robust and flexible alternatives.</p>
-<p>Metaheuristics are general-purpose stochastic search methods that rely on repeated sampling, adaptation, and survival of the fittest ideas. They are especially effective when the landscape is rugged, multimodal, or not well understood.</p>
+<p>When optimization problems are highly nonconvex, discrete, or black-box, deterministic methods often fail to find good solutions.  In these settings, metaheuristic algorithms—inspired by nature, biology, and collective behavior—provide robust and flexible alternatives. Metaheuristics are general-purpose stochastic search methods that rely on repeated sampling, adaptation, and survival of the fittest ideas. They are especially effective when the landscape is rugged, multimodal, or not well understood.</p>
 <h2 id="principles-of-metaheuristic-optimization">Principles of Metaheuristic Optimization<a class="headerlink" href="#principles-of-metaheuristic-optimization" title="Permanent link">¶</a></h2>
 <p>All metaheuristics share three key principles:</p>
 <ol>
 <li>
-<p>Population-Based Search:<br>
-   Maintain multiple candidate solutions simultaneously to explore diverse regions of the search space.</p>
+<p>Population-Based Search: Maintain multiple candidate solutions simultaneously to explore diverse regions of the search space.</p>
 </li>
 <li>
-<p>Variation Operators:<br>
-   Create new solutions via mutation, recombination, or stochastic perturbations.</p>
+<p>Variation Operators:Create new solutions via mutation, recombination, or stochastic perturbations.</p>
 </li>
 <li>
-<p>Selection and Adaptation:<br>
-   Favor candidates with better objective values, guiding the search toward promising regions.</p>
+<p>Selection and Adaptation:Favor candidates with better objective values, guiding the search toward promising regions.</p>
 </li>
 </ol>
 <p>Unlike local methods, metaheuristics balance exploration (global search) and exploitation (local refinement).</p>
-<h2 id="genetic-algorithms-ga">Genetic Algorithms (GA)<a class="headerlink" href="#genetic-algorithms-ga" title="Permanent link">¶</a></h2>
-<h3 id="biological-inspiration">Biological Inspiration<a class="headerlink" href="#biological-inspiration" title="Permanent link">¶</a></h3>
+<h2 id="genetic-algorithms">Genetic Algorithms<a class="headerlink" href="#genetic-algorithms" title="Permanent link">¶</a></h2>
 <p>Genetic Algorithms mimic natural evolution, where populations evolve toward higher fitness through selection, crossover, and mutation.</p>
 <h3 id="representation">Representation<a class="headerlink" href="#representation" title="Permanent link">¶</a></h3>
-<p>A solution (individual) is represented as a chromosome—often a binary string, vector of reals, or permutation.<br>
-Each position (gene) encodes part of the decision variable.</p>
+<p>A solution (individual) is represented as a chromosome, often a binary string, vector of reals, or permutation. Each position (gene) encodes part of the decision variable.</p>
 <h3 id="algorithm-outline">Algorithm Outline<a class="headerlink" href="#algorithm-outline" title="Permanent link">¶</a></h3>
 <ol>
 <li>Initialize a population <span class="arithmatex">\(\{x_i\}_{i=1}^N\)</span> randomly.  </li>
@@ -1348,7 +1317,6 @@ Each position (gene) encodes part of the decision variable.</p>
 <li>Single-point crossover: exchange genes after a random index.  </li>
 <li>Gaussian mutation: add small noise to continuous parameters.  </li>
 </ul>
-<h3 id="strengths-and-weaknesses">Strengths and Weaknesses<a class="headerlink" href="#strengths-and-weaknesses" title="Permanent link">¶</a></h3>
 <table>
 <thead>
 <tr>
@@ -1367,10 +1335,9 @@ Each position (gene) encodes part of the decision variable.</p>
 </tr>
 </tbody>
 </table>
-<h2 id="differential-evolution-de">Differential Evolution (DE)<a class="headerlink" href="#differential-evolution-de" title="Permanent link">¶</a></h2>
-<p>Differential Evolution is a simple yet powerful algorithm for continuous optimization.</p>
-<h3 id="core-idea">Core Idea<a class="headerlink" href="#core-idea" title="Permanent link">¶</a></h3>
-<p>Mutation is performed using differences of population members:
+<h2 id="differential-evolution">Differential Evolution<a class="headerlink" href="#differential-evolution" title="Permanent link">¶</a></h2>
+<p>Differential Evolution is a simple yet powerful algorithm for continuous optimization. Mutation is performed using differences of population members:</p>
+<p>
 <script type="math/tex; mode=display">
 v_i = x_{r1} + F(x_{r2} - x_{r3}),
 </script>
@@ -1386,9 +1353,8 @@ and selection chooses between <span class="arithmatex">\(x_i\)</span> and <span 
 <li>Suitable for continuous, multimodal functions.</li>
 <li>Simple to implement, with few control parameters.</li>
 </ul>
-<h2 id="particle-swarm-optimization-pso">Particle Swarm Optimization (PSO)<a class="headerlink" href="#particle-swarm-optimization-pso" title="Permanent link">¶</a></h2>
-<p>Inspired by social behavior of birds and fish, Particle Swarm Optimization maintains a swarm of particles moving through the search space.</p>
-<p>Each particle <span class="arithmatex">\(i\)</span> has position <span class="arithmatex">\(x_i\)</span> and velocity <span class="arithmatex">\(v_i\)</span>, updated as:
+<h2 id="particle-swarm-optimization">Particle Swarm Optimization<a class="headerlink" href="#particle-swarm-optimization" title="Permanent link">¶</a></h2>
+<p>Inspired by social behavior of birds and fish, Particle Swarm Optimization maintains a swarm of particles moving through the search space. Each particle <span class="arithmatex">\(i\)</span> has position <span class="arithmatex">\(x_i\)</span> and velocity <span class="arithmatex">\(v_i\)</span>, updated as:
 <script type="math/tex; mode=display">
 v_i \leftarrow w v_i + c_1 r_1 (p_i - x_i) + c_2 r_2 (g - x_i),
 </script>
@@ -1403,16 +1369,8 @@ where:</p>
 <li><span class="arithmatex">\(r_1\)</span>, <span class="arithmatex">\(r_2\)</span> are random numbers in <span class="arithmatex">\([0,1]\)</span>.</li>
 </ul>
 <p>Particles balance individual learning (self-experience) and social learning (group knowledge).</p>
-<h3 id="convergence-behavior">Convergence Behavior<a class="headerlink" href="#convergence-behavior" title="Permanent link">¶</a></h3>
-<p>Initially, the swarm explores widely; as iterations proceed, velocities decrease, and the swarm converges near optima.</p>
-<h3 id="strengths">Strengths<a class="headerlink" href="#strengths" title="Permanent link">¶</a></h3>
-<ul>
-<li>Few parameters, easy to implement.</li>
-<li>Works well for noisy or discontinuous problems.</li>
-<li>Naturally parallelizable.</li>
-</ul>
-<h2 id="simulated-annealing-sa">Simulated Annealing (SA)<a class="headerlink" href="#simulated-annealing-sa" title="Permanent link">¶</a></h2>
-<p>Simulated Annealing is one of the earliest and most fundamental stochastic optimization algorithms. It is inspired by annealing in metallurgy — a physical process in which a material is heated and then slowly cooled to minimize structural defects and reach a low-energy crystalline state. The key idea is to imitate this gradual “cooling” in the search for a global minimum.</p>
+<h2 id="simulated-annealing">Simulated Annealing<a class="headerlink" href="#simulated-annealing" title="Permanent link">¶</a></h2>
+<p>Simulated Annealing is one of the earliest and most fundamental stochastic optimization algorithms. It is inspired by annealing in metallurgy, a physical process in which a material is heated and then slowly cooled to minimize structural defects and reach a low-energy crystalline state. The key idea is to imitate this gradual “cooling” in the search for a global minimum.</p>
 <h3 id="physical-analogy">Physical Analogy<a class="headerlink" href="#physical-analogy" title="Permanent link">¶</a></h3>
 <p>In thermodynamics, a system at temperature <span class="arithmatex">\(T\)</span> has probability of occupying a state with energy <span class="arithmatex">\(E\)</span> given by the Boltzmann distribution:</p>
 <div class="arithmatex">\[
@@ -1462,18 +1420,14 @@ P(E) \propto e^{-E / (kT)}.
 </li>
 </ul>
 </li>
-</ol>
-<h3 id="interpretation">Interpretation<a class="headerlink" href="#interpretation" title="Permanent link">¶</a></h3>
-<ul>
 <li>
 <p>At high temperatures, SA accepts both better and worse moves → exploration.  </p>
 </li>
 <li>
 <p>At low temperatures, it becomes increasingly selective → exploitation.</p>
 </li>
-</ul>
+</ol>
 <p>This balance allows SA to escape local minima and approach the global optimum over time.</p>
-<h3 id="cooling-schedules">Cooling Schedules<a class="headerlink" href="#cooling-schedules" title="Permanent link">¶</a></h3>
 <p>The temperature schedule determines convergence quality:</p>
 <table>
 <thead>
@@ -1507,21 +1461,6 @@ P(E) \propto e^{-E / (kT)}.
 </tbody>
 </table>
 <p>A slower cooling schedule improves accuracy but increases computational cost.</p>
-<h2 id="ant-colony-optimization-aco">Ant Colony Optimization (ACO)<a class="headerlink" href="#ant-colony-optimization-aco" title="Permanent link">¶</a></h2>
-<h3 id="biological-basis">Biological Basis<a class="headerlink" href="#biological-basis" title="Permanent link">¶</a></h3>
-<p>Ant Colony Optimization models how real ants find shortest paths using pheromone trails.</p>
-<p>Each artificial ant builds a solution step by step, choosing components probabilistically based on pheromone intensity <span class="arithmatex">\(\tau_{ij}\)</span> and heuristic visibility <span class="arithmatex">\(\eta_{ij}\)</span>:
-<script type="math/tex; mode=display">
-P_{ij} = \frac{[\tau_{ij}]^\alpha [\eta_{ij}]^\beta}{\sum_k [\tau_{ik}]^\alpha [\eta_{ik}]^\beta}.
-</script>
-</p>
-<h3 id="pheromone-update">Pheromone Update<a class="headerlink" href="#pheromone-update" title="Permanent link">¶</a></h3>
-<p>After all ants construct their tours:
-<script type="math/tex; mode=display">
-\tau_{ij} \leftarrow (1 - \rho)\tau_{ij} + \sum_{\text{ants}} \Delta \tau_{ij},
-</script>
-where <span class="arithmatex">\(\rho\)</span> controls evaporation and <span class="arithmatex">\(\Delta\tau_{ij}\)</span> reinforces paths used by good solutions.</p>
-<p>ACO excels at combinatorial problems like the Traveling Salesman Problem (TSP) and scheduling.</p>
 <h2 id="exploration-vs-exploitation">Exploration vs. Exploitation<a class="headerlink" href="#exploration-vs-exploitation" title="Permanent link">¶</a></h2>
 <p>Every metaheuristic must balance:</p>
 <ul>
@@ -1551,14 +1490,6 @@ where <span class="arithmatex">\(\rho\)</span> controls evaporation and <span cl
 </tbody>
 </table>
 <p>Adaptive control of parameters (e.g., mutation rate, inertia weight) helps maintain balance dynamically.</p>
-<h2 id="hybrid-and-memetic-algorithms">Hybrid and Memetic Algorithms<a class="headerlink" href="#hybrid-and-memetic-algorithms" title="Permanent link">¶</a></h2>
-<p>Hybrid (or memetic) algorithms combine global metaheuristic exploration with local optimization refinement.</p>
-<p>Example:</p>
-<ol>
-<li>Use PSO or GA to explore broadly.  </li>
-<li>Apply gradient descent or Nelder–Mead locally near promising candidates.</li>
-</ol>
-<p>This hybridization often yields faster convergence and improved accuracy.</p>
 <h2 id="performance-and-practical-tips">Performance and Practical Tips<a class="headerlink" href="#performance-and-practical-tips" title="Permanent link">¶</a></h2>
 <table>
 <thead>

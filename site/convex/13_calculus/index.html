@@ -642,8 +642,6 @@
       
         
       
-        
-      
     
     
     
@@ -1199,29 +1197,6 @@
 
               
             
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../50_future/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    23. The Future of Optimization — Learning, Adaptation, and Intelligence
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
           </ul>
         </nav>
       
@@ -1304,7 +1279,7 @@
 <h1 id="chapter-3-multivariable-calculus-for-optimization">Chapter 3: Multivariable Calculus for Optimization<a class="headerlink" href="#chapter-3-multivariable-calculus-for-optimization" title="Permanent link">¶</a></h1>
 <p>Optimization problems are ultimately questions about how a function changes when we move in different directions. To understand this behavior, we rely on multivariable calculus. Concepts such as gradients, Jacobians, Hessians, and Taylor expansions describe how a real-valued function behaves locally and how its value varies as we adjust its inputs.</p>
 <p>These tools form the analytical backbone of modern optimization. Gradients determine descent directions and guide first-order algorithms such as gradient descent and stochastic gradient methods. Hessians quantify curvature and enable second-order methods like Newton’s method, which adapt their steps to the shape of the objective. Jacobians and chain rules underpin backpropagation in neural networks, linking calculus to large-scale machine learning practice.</p>
-<p>This chapter develops the differential calculus needed for convex analysis and for understanding why many optimization algorithms work. We emphasize geometric intuition, how functions curve, how directions interact, and how local approximations guide global behavior, while providing the formal tools required to analyze convergence and stability in later chapters.</p>
+<p>This chapter develops the differential calculus needed for convex analysis and for understanding why many optimization algorithms work.</p>
 <h2 id="gradients-and-directional-derivatives">Gradients and Directional Derivatives<a class="headerlink" href="#gradients-and-directional-derivatives" title="Permanent link">¶</a></h2>
 <p>Let <span class="arithmatex">\(f : \mathbb{R}^n \to \mathbb{R}\)</span>. The function is differentiable at a point <span class="arithmatex">\(x\)</span> if there exists a vector <span class="arithmatex">\(\nabla f(x)\)</span> such that
 <script type="math/tex; mode=display">
@@ -1427,38 +1402,6 @@ Thus, locally, the nonlinear map <span class="arithmatex">\(F\)</span> behaves l
 <li>If the Hessian has both positive and negative eigenvalues, the point is a saddle: some directions curve up, others curve down.</li>
 </ul>
 <p>Thus, curvature is directly encoded in the spectrum of the Hessian. Large eigenvalues correspond to steep curvature; small eigenvalues correspond to gently sloping or flat regions.</p>
-<h3 id="example-quadratic-functions">Example: Quadratic functions<a class="headerlink" href="#example-quadratic-functions" title="Permanent link">¶</a></h3>
-<p>Consider the quadratic function
-<script type="math/tex; mode=display">
-f(x) = \tfrac{1}{2} x^\top Q x - b^\top x,
-</script>
-where <span class="arithmatex">\(Q\)</span> is symmetric. The gradient and Hessian are
-<script type="math/tex; mode=display">
-\nabla f(x) = Qx - b, \qquad \nabla^2 f(x) = Q.
-</script>
-Setting the gradient to zero gives the stationary point
-<script type="math/tex; mode=display">
-Qx = b.
-</script>
-If <span class="arithmatex">\(Q \succ 0\)</span>, the solution
-<script type="math/tex; mode=display">
-x^* = Q^{-1} b
-</script>
-is the unique minimizer. The Hessian <span class="arithmatex">\(Q\)</span> being positive definite confirms strict convexity.</p>
-<p>The eigenvalues of <span class="arithmatex">\(Q\)</span> also explain the difficulty of minimizing <span class="arithmatex">\(f\)</span>:</p>
-<ul>
-<li>Large eigenvalues produce very steep, narrow directions—optimization methods must take small steps.  </li>
-<li>Small eigenvalues produce flat directions—progress is slow, especially for gradient descent.  </li>
-</ul>
-<p>The ratio of largest to smallest eigenvalue, the <strong>condition number</strong>, governs the convergence speed of first-order methods on quadratic problems. Poor conditioning (large condition number) leads to zig-zagging iterates and slow progress.</p>
-<h3 id="why-the-hessian-matters-in-optimization">Why the Hessian matters in optimization<a class="headerlink" href="#why-the-hessian-matters-in-optimization" title="Permanent link">¶</a></h3>
-<p>The Hessian provides second-order information that strongly influences algorithm behavior:</p>
-<ul>
-<li>Newton’s method uses the Hessian to rescale directions, effectively “whitening’’ curvature and often converging rapidly.  </li>
-<li>Trust-region and quasi-Newton methods approximate Hessian structure to stabilize steps.  </li>
-<li>In convex optimization, positive semidefiniteness of the Hessian is a fundamental characterization of convexity.</li>
-</ul>
-<p>Understanding the Hessian therefore helps us understand the geometry of an objective, predict algorithm performance, and design methods that behave reliably on challenging landscapes.</p>
 <h2 id="taylor-approximation">Taylor approximation<a class="headerlink" href="#taylor-approximation" title="Permanent link">¶</a></h2>
 <p>Taylor expansions provide local approximations of a function using its derivatives. These approximations form the basis of nearly all gradient-based optimization methods.</p>
 <h3 id="first-order-approximation">First-order approximation<a class="headerlink" href="#first-order-approximation" title="Permanent link">¶</a></h3>

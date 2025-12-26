@@ -642,8 +642,6 @@
       
         
       
-        
-      
     
     
     
@@ -1199,29 +1197,6 @@
 
               
             
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../50_future/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    23. The Future of Optimization — Learning, Adaptation, and Intelligence
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
           </ul>
         </nav>
       
@@ -1304,14 +1279,11 @@
 <h1 id="chapter-10-multi-objective-convex-optimization">Chapter 10: Multi-Objective Convex Optimization<a class="headerlink" href="#chapter-10-multi-objective-convex-optimization" title="Permanent link">¶</a></h1>
 <p>Up to now we have focused on problems with a single objective: minimize one convex function over a convex set. However, real-world learning, engineering, and decision-making tasks almost always involve competing criteria:</p>
 <ul>
-<li>accuracy vs. regularity,</li>
 <li>loss vs. fairness,</li>
 <li>return vs. risk,</li>
-<li>reconstruction vs. compression,</li>
 <li>energy use vs. performance.</li>
 </ul>
 <p>Multi-objective optimization provides the mathematical framework for balancing such competing goals. In convex settings, these trade-offs have elegant geometric and analytic structure, captured by Pareto optimality and by scalarization techniques that convert multiple objectives into a single convex problem.</p>
-<p>This chapter introduces these ideas and connects them to regularization, duality, and common ML formulations.</p>
 <h2 id="classical-optimality-one-objective">Classical Optimality (One Objective)<a class="headerlink" href="#classical-optimality-one-objective" title="Permanent link">¶</a></h2>
 <p>In standard convex optimization, we solve:</p>
 <div class="arithmatex">\[

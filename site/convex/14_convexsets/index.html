@@ -642,8 +642,6 @@
       
         
       
-        
-      
     
     
     
@@ -1199,29 +1197,6 @@
 
               
             
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../50_future/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    23. The Future of Optimization — Learning, Adaptation, and Intelligence
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
           </ul>
         </nav>
       
@@ -1303,7 +1278,6 @@
 
 <h1 id="chapter-4-convex-sets-and-geometric-fundamentals">Chapter 4: Convex Sets and Geometric Fundamentals<a class="headerlink" href="#chapter-4-convex-sets-and-geometric-fundamentals" title="Permanent link">¶</a></h1>
 <p>Most optimization problems are constrained. The set of points that satisfy these constraints the feasible region determines where an algorithm is allowed to search. In many machine learning and convex optimization problems, this feasible region is a convex set. Convex sets have a simple but powerful geometric property: any line segment between two feasible points remains entirely within the set. This structure eliminates irregularities and makes optimization far more predictable.</p>
-<p>This chapter develops the geometric foundations needed to reason about convexity. We introduce affine sets, convex sets, hyperplanes, halfspaces, polyhedra, and supporting hyperplanes. These objects form the geometric language of convex analysis. Understanding their structure is essential for interpreting constraints, proving optimality conditions, and designing efficient algorithms for convex optimization.</p>
 <h2 id="convex-sets">Convex sets<a class="headerlink" href="#convex-sets" title="Permanent link">¶</a></h2>
 <p>A set <script type="math/tex"> C \subseteq \mathbb{R}^n </script> is convex if for any two points <script type="math/tex"> x, y \in C </script> and any <script type="math/tex"> \theta \in [0,1] </script>,
 <script type="math/tex; mode=display">
@@ -1319,7 +1293,7 @@ That is, the entire line segment between <span class="arithmatex">\(x\)</span> a
 <script type="math/tex"> \ell_\infty </script> balls (axis-aligned boxes): <script type="math/tex"> \{ x : \|x\|_\infty \le r \} </script>.  </li>
 <li>Probability simplex: <script type="math/tex"> \{ x \in \mathbb{R}^n : x \ge 0, \ \sum_i x_i = 1 \} </script>.  </li>
 </ul>
-<p>A set fails to be convex whenever some segment between two feasible points leaves the set—for example, a crescent or an annulus.</p>
+<p>A set fails to be convex whenever some segment between two feasible points leaves the set; for example, a crescent or an annulus.</p>
 <h2 id="affine-sets-hyperplanes-and-halfspaces">Affine sets, hyperplanes, and halfspaces<a class="headerlink" href="#affine-sets-hyperplanes-and-halfspaces" title="Permanent link">¶</a></h2>
 <p>Affine sets generalize linear subspaces by allowing a shift. A set <span class="arithmatex">\(A\)</span> is affine if for some point <span class="arithmatex">\(x_0\)</span> and subspace <span class="arithmatex">\(S\)</span>,
 <script type="math/tex; mode=display">
@@ -1345,11 +1319,6 @@ Halfspaces are convex and serve as basic local approximations to general convex 
 </script>
 Convex sets are precisely those that contain all convex combinations of their points.</p>
 <p>The convex hull of a set <span class="arithmatex">\(S\)</span>, denoted <span class="arithmatex">\(\operatorname{conv}(S)\)</span>, is the set of all convex combinations of finitely many points in <span class="arithmatex">\(S\)</span>. It is the smallest convex set containing <span class="arithmatex">\(S\)</span>. Geometrically, it is the shape you obtain by stretching a tight rubber band around the points.</p>
-<p>Convex hulls are important because:</p>
-<ul>
-<li>Polytopes can be represented either as intersections of halfspaces or as convex hulls of their vertices.</li>
-<li>Many optimization relaxations replace a difficult nonconvex set by its convex hull, enabling the use of convex optimization techniques.</li>
-</ul>
 <h2 id="polyhedra-and-polytopes">Polyhedra and polytopes<a class="headerlink" href="#polyhedra-and-polytopes" title="Permanent link">¶</a></h2>
 <p>A polyhedron is an intersection of finitely many halfspaces:
 <script type="math/tex; mode=display">
@@ -1364,7 +1333,7 @@ x = \theta y + (1 - \theta) z,
 \qquad 0 < \theta < 1, \qquad y, z \in C,
 </script>
 implies <script type="math/tex"> y = z = x </script>.</p>
-<p>Geometrically, extreme points are the “corners” of a convex set. For polytopes, the extreme points are exactly the vertices. Extreme points are essential in optimization because many convex problems—such as linear programs—achieve their optima at extreme points of the feasible region. This geometric fact underlies simplex-type algorithms and supports duality theory.</p>
+<p>Geometrically, extreme points are the “corners” of a convex set. For polytopes, the extreme points are exactly the vertices. Extreme points are essential in optimization because many convex problems, such as linear programs achieve their optima at extreme points of the feasible region. This geometric fact underlies simplex-type algorithms and supports duality theory.</p>
 <h2 id="cones">Cones<a class="headerlink" href="#cones" title="Permanent link">¶</a></h2>
 <p>Cones generalize the idea of “directions” in geometry. They capture sets that are closed under nonnegative scaling and play a central role in convex analysis and constrained optimization.</p>
 <h3 id="basic-definition">Basic definition<a class="headerlink" href="#basic-definition" title="Permanent link">¶</a></h3>
@@ -1453,18 +1422,15 @@ v : \langle v, y - x \rangle \le 0 \ \forall y \in C
 N_C(x) = \big( T_C(x) \big)^\circ.
 </script>
 </p>
-<p>Normal cones appear directly in first-order optimality conditions. For a constrained problem<br>
-<script type="math/tex; mode=display">
-\min_{x \in C} f(x),
-</script>
-a point <span class="arithmatex">\(x^*\)</span> is optimal only if
-<script type="math/tex; mode=display">
-0 \in \nabla f(x^*) + N_C(x^*).
-</script>
-This expresses a balance between the objective’s slope and the “pushback’’ from the constraint set.</p>
-<p>Cones,especially tangent and normal cones, are geometric tools that allow us to describe feasibility, optimality, and duality in convex optimization using directional information. They generalize the role that orthogonal complements play in linear algebra to nonlinear and constrained settings.</p>
+<blockquote>
+<p>Normal cones appear directly in first-order optimality conditions. For a constrained problem  </p>
+<div class="arithmatex">\[\min_{x \in C} f(x), \]</div>
+<p>a point <span class="arithmatex">\(x^*\)</span> is optimal only if</p>
+<div class="arithmatex">\[0 \in \nabla f(x^*) + N_C(x^*).\]</div>
+<p>This expresses a balance between the objective’s slope and the “pushback’’ from the constraint set.</p>
+</blockquote>
 <h2 id="supporting-hyperplanes-and-separation">Supporting Hyperplanes and Separation<a class="headerlink" href="#supporting-hyperplanes-and-separation" title="Permanent link">¶</a></h2>
-<p>One of the most important geometric facts about convex sets is that they can be <em>supported</em> or <em>separated</em> by hyperplanes. These results show that convex sets always admit linear boundaries that describe their shape. Later, these ideas reappear in duality, subgradients, and the KKT conditions.</p>
+<p>One of the most important geometric facts about convex sets is that they can be <em>supported</em> or <em>separated</em> by hyperplanes. These results show that convex sets always admit linear boundaries that describe their shape.</p>
 <h3 id="supporting-hyperplane-theorem">Supporting Hyperplane Theorem<a class="headerlink" href="#supporting-hyperplane-theorem" title="Permanent link">¶</a></h3>
 <p>Let <span class="arithmatex">\(C \subseteq \mathbb{R}^n\)</span> be nonempty, closed, and convex, and let <span class="arithmatex">\(x_0\)</span> be a boundary point of <span class="arithmatex">\(C\)</span>. Then there exists a nonzero vector <span class="arithmatex">\(a\)</span> such that</p>
 <div class="arithmatex">\[
@@ -1483,18 +1449,8 @@ a^\top x \le b \quad \forall x \in C,
 a^\top y \ge b \quad \forall y \in D.
 \]</div>
 <p>The hyperplane <span class="arithmatex">\(a^\top x = b\)</span> places all points of <span class="arithmatex">\(C\)</span> on one side and all points of <span class="arithmatex">\(D\)</span> on the other. This is guaranteed purely by convexity. Separation is the geometric foundation of duality, where we attempt to separate the primal feasible region from violations of the constraints.</p>
-<blockquote>
-<h3 id="why-this-matters-for-optimisation">Why This Matters for Optimisation<a class="headerlink" href="#why-this-matters-for-optimisation" title="Permanent link">¶</a></h3>
-<p>These geometric results are central to convex optimisation:
-- Subgradients correspond to supporting hyperplanes of the epigraph of a convex function.
-- Dual variables arise from separating infeasible points from the feasible region.
-- KKT conditions express the balance between the gradient of the objective and the normals of active constraints.
-- Projection onto convex sets is well-defined because convex sets admit supporting hyperplanes.
- Supporting and separating hyperplanes are therefore the geometric machinery behind optimality conditions and convex duality.</p>
-</blockquote>
-<p>## Mental Map</p>
-<p>```text
-               Convex Sets &amp; Geometric Fundamentals
+<h2 id="mental-map">Mental Map<a class="headerlink" href="#mental-map" title="Permanent link">¶</a></h2>
+<div class="highlight"><pre><span></span><code>               Convex Sets &amp; Geometric Fundamentals
      Feasible regions, geometry of constraints, and separation
                               │
                               ▼
@@ -1572,8 +1528,8 @@ a^\top y \ge b \quad \forall y \in D.
      │ Separating hyperplane for disjoint convex sets C,D:       │
      │   ∃a,b s.t. aᵀx ≤ b ≤ aᵀy  for x∈C, y∈D                   │
      │ Why it matters: geometry behind subgradients and duality  │
-     └───────────────────────────────────────────────────────────┘</p>
-<p>```</p>
+     └───────────────────────────────────────────────────────────┘
+</code></pre></div>
 
 
 

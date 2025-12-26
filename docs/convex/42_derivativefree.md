@@ -1,9 +1,8 @@
 # Chapter 20: Derivative-Free and Black-Box Optimization
 
-In many practical optimization problems, gradients are unavailable, unreliable, or prohibitively expensive to compute. Examples include tuning hyperparameters of machine learning models, engineering design through simulation, or optimizing physical experiments. Such problems fall under the class of derivative-free or black-box optimization methods.
+In many optimization problems, gradients are unavailable, unreliable, or prohibitively expensive to compute. Examples include tuning hyperparameters of machine learning models, engineering design through simulation, or optimizing physical experiments. Such problems fall under the class of derivative-free or black-box optimization methods.
 
-Unlike gradient-based methods, which rely on analytical or automatic differentiation, derivative-free algorithms make progress solely from function evaluations. They are indispensable when the objective function is noisy, discontinuous, or non-differentiable.
-
+Unlike gradient-based methods, which rely on analytical or automatic differentiation, derivative-free algorithms make progress solely from function evaluations. 
 
 
 ## Motivation and Challenges
@@ -38,7 +37,7 @@ Derivative-free optimization is thus a trade-off between exploration and exploit
 Direct search algorithms evaluate the objective function at structured sets of points and use comparisons, not gradients, to decide where to move.
 
 ### Nelder–Mead Simplex Method
-Perhaps the most famous derivative-free algorithm, Nelder–Mead maintains a simplex — a polytope of $n+1$ vertices in $\mathbb{R}^n$.
+Perhaps the most famous derivative-free algorithm, Nelder–Mead maintains a simplex: a polytope of $n+1$ vertices in $\mathbb{R}^n$.
 
 At each iteration:
 
@@ -61,8 +60,7 @@ where $d_i$ is a direction from a finite set (e.g., coordinate axes).
 If a direction yields improvement, move there; otherwise, shrink $\Delta_k$.
 
 
-### Mesh Adaptive Direct Search (MADS)
-MADS refines pattern search by maintaining a mesh of candidate points and adaptively changing its resolution. It offers provable convergence to stationary points for certain classes of nonsmooth problems.
+Mesh Adaptive Direct Searcs: MADS refines pattern search by maintaining a mesh of candidate points and adaptively changing its resolution. It offers provable convergence to stationary points for certain classes of nonsmooth problems.
 
 
 ## Model-Based Methods
@@ -81,54 +79,12 @@ $$
 The trust region size $\Delta_k$ adapts based on how well $m_k$ predicts true function values.
 
  
-### BOBYQA (Bound Optimization BY Quadratic Approximation)
-BOBYQA builds and maintains a quadratic model using interpolation of previously evaluated points. It is highly efficient for medium-scale problems with simple box constraints and no noise.
+Bound Optimization BY Quadratic Approximation: BOBYQA builds and maintains a quadratic model using interpolation of previously evaluated points. It is highly efficient for medium-scale problems with simple box constraints and no noise.
 
- 
-## Evolution Strategies and Population Methods
-
-These methods maintain a population of candidate solutions and update them using statistical principles.
-
-### Covariance Matrix Adaptation Evolution Strategy (CMA-ES)
-CMA-ES is a powerful stochastic search algorithm.  
-It iteratively samples new points from a multivariate Gaussian distribution:
-$$
-x^{(i)}_{k+1} \sim \mathcal{N}(m_k, \sigma_k^2 C_k),
-$$
-where $m_k$ is the current mean, $\sigma_k$ the global step-size, and $C_k$ the covariance matrix.
-
-After evaluating all samples, the mean is updated toward better-performing points, and the covariance matrix adapts to the landscape geometry.
-
-CMA-ES is invariant to linear transformations and excels in ill-conditioned, noisy, or nonconvex problems.
-
---- 
-
-### Differential Evolution (DE)
-DE evolves a population $\{x_i\}$ via vector differences:
-$$
-v_i = x_{r1} + F(x_{r2} - x_{r3}),
-$$
-$$
-u_i = \text{crossover}(x_i, v_i),
-$$
-$$
-x_i' = \begin{cases} 
-u_i, & \text{if } f(u_i) < f(x_i),\\
-x_i, & \text{otherwise.}
-\end{cases}
-$$
-where $r1, r2, r3$ are random distinct indices and $F$ controls mutation strength.
-
-DE combines simplicity and robustness, performing well across continuous and discrete spaces.
 
  
 ## Bayesian Optimization
-
-When function evaluations are *expensive* (e.g., training a neural network or running a CFD simulation), Bayesian Optimization (BO) is preferred.
-
-### Core Idea
-Model the objective as a random function $f(x) \sim \mathcal{GP}(m(x), k(x,x'))$ (Gaussian Process prior).  
-After each evaluation, update the posterior mean and variance to quantify uncertainty.
+Model the objective as a random function $f(x) \sim \mathcal{GP}(m(x), k(x,x'))$ (Gaussian Process prior). After each evaluation, update the posterior mean and variance to quantify uncertainty.
 
 Use an acquisition function $a(x)$ to select the next evaluation point:
 $$
@@ -174,8 +130,7 @@ Such hybridization reflects a pragmatic view: no single optimizer is best — ad
 | Box constraints | Methods like BOBYQA, DE, or PSO |
 | Parallel computation available | Population-based methods excel |
 
----
 
 Derivative-free optimization expands our toolkit beyond calculus, allowing us to optimize *anything we can evaluate*. It emphasizes adaptation, surrogate modeling, and population intelligence rather than analytical structure.
 
-In the next chapter, we explore metaheuristic and evolutionary algorithms, which generalize these ideas further by mimicking natural and collective behaviors — turning randomness into a powerful search strategy.
+In the next chapter, we explore metaheuristic and evolutionary algorithms, which generalize these ideas further by mimicking natural and collective behaviors; turning randomness into a powerful search strategy.

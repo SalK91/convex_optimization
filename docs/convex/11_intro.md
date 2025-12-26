@@ -80,9 +80,7 @@ These roles make convex optimization a key component of modern ML toolkits, even
 
 * Chapter 22: Advanced Topics in Combinatorial Optimization. Combinatorial optimization problems and convex relaxations.
 
-* Chapter 23: The Future of Optimization – Learning, Adaptation, Intelligence. Emerging trends (e.g. data-driven optimization, connections to machine learning).
-
-This roadmap helps the reader see how the material progresses from foundations (Ch.2–5) to theory (Ch.6–11) to algorithms (Ch.12–15) and on to specialized and modern topics (Ch.16–23).
+This roadmap helps the reader see how the material progresses from foundations (Ch.2–5) to theory (Ch.6–11) to algorithms (Ch.12–15) and on to specialized and modern topics (Ch.16–22).
 
 
 ## Acknowledgments

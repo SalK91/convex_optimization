@@ -642,8 +642,6 @@
       
         
       
-        
-      
     
     
     
@@ -1199,29 +1197,6 @@
 
               
             
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../50_future/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    23. The Future of Optimization — Learning, Adaptation, and Intelligence
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
           </ul>
         </nav>
       
@@ -1302,7 +1277,7 @@
 
 
 <h1 id="chapter-15-advanced-large-scale-and-structured-methods">Chapter 15: Advanced Large-Scale and Structured Methods<a class="headerlink" href="#chapter-15-advanced-large-scale-and-structured-methods" title="Permanent link">¶</a></h1>
-<p>Modern convex optimization often runs at massive scale: millions (or billions) of variables, datasets too large to fit in memory, and constraints spread across machines or devices. Classical Newton or interior-point methods are beautiful mathematically, but their per-iteration cost and memory usage often make them impractical for these regimes.</p>
+<p>Modern convex optimization often runs at massive scale: millions (or billions) of variables, datasets too large to fit in memory, and constraints spread across machines or devices. Per-iteration cost and memory usage often of often makes classical solutions impractical for these regimes.</p>
 <p>This chapter introduces methods that exploit structure, sparsity, separability, and stochasticity to make convex optimization scalable. These ideas underpin the optimization engines behind most modern machine learning systems.</p>
 <h2 id="motivation-structure-and-scale">Motivation: Structure and Scale<a class="headerlink" href="#motivation-structure-and-scale" title="Permanent link">¶</a></h2>
 <p>In large-scale convex optimization, the challenge is not “does a solution exist?” but rather “can we compute it in time and memory?”.</p>

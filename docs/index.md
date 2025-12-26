@@ -19,4 +19,3 @@ These lectures develop intuition, mathematical rigor, and practical algorithmic 
 - Large-scale optimization strategies that power real-world machine learning systems
 
 
-## RESUME FROM 19X

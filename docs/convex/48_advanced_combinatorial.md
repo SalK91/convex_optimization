@@ -1,8 +1,6 @@
 # Chapter 22: Advanced Topics in Combinatorial Optimization
 
-In many of the most challenging optimization problems, variables are discrete, decisions are binary or integral, and the underlying structure is inherently combinatorial.  Convex analysis gives way to graph theory, integer programming, and search algorithms built on discrete mathematics.
-
-Combinatorial optimization lies at the intersection of mathematics, computer science, and operations research, offering powerful tools for scheduling, routing, allocation, and design problems.
+In many of the most challenging optimization problems, variables are discrete, decisions are binary or integral, and the underlying structure is inherently combinatorial.  Convex analysis gives way to graph theory, integer programming, and search algorithms built on discrete mathematics. Combinatorial optimization lies at the intersection of mathematics, computer science, and operations research, offering powerful tools for scheduling, routing, allocation, and design problems.
 
  
 ## Nature of Combinatorial Problems
@@ -151,28 +149,5 @@ Examples:
 
 Approximation theory blends combinatorics with convex relaxation insights.
 
-
-## Advanced Topics: Constraint Programming and Decomposition
-
-### Constraint Programming (CP)
-CP models problems as logical constraints rather than algebraic ones. Combines symbolic reasoning with domain reduction and backtracking.
-
-### Benders and Dantzig–Wolfe Decomposition
-Divide large mixed-integer problems into master and subproblems, coordinating them iteratively. Widely used in logistics, energy, and planning.
-
-### Cutting Plane Methods
-Iteratively add valid inequalities (cuts) to tighten the feasible region of a relaxed problem.
-
-## Applications Across Domains
-
-| Field | Combinatorial Problem Examples |
-|-------------|----------------------------------|
-| Logistics | Vehicle routing, warehouse layout |
-| Telecommunications | Network design, channel allocation |
-| Machine Learning | Feature selection, clustering, model compression |
-| Finance | Portfolio optimization with integer positions |
-| Bioinformatics | Genome assembly, protein structure inference |
-
-Combinatorial optimization forms the backbone of modern infrastructure and decision systems.
 
 Combinatorial optimization embodies the art of solving discrete, structured problems where convexity no longer applies.  It draws from graph theory, algebra, logic, and probabilistic reasoning. Relaxation and approximation techniques build a bridge between the continuous and the discrete, uniting convex and combinatorial worlds.

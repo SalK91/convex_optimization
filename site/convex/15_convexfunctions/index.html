@@ -642,8 +642,6 @@
       
         
       
-        
-      
     
     
     
@@ -1199,29 +1197,6 @@
 
               
             
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../50_future/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    23. The Future of Optimization — Learning, Adaptation, and Intelligence
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
           </ul>
         </nav>
       
@@ -1302,7 +1277,7 @@
 
 
 <h1 id="chapter-5-convex-functions">Chapter 5: Convex Functions<a class="headerlink" href="#chapter-5-convex-functions" title="Permanent link">¶</a></h1>
-<p>This chapter develops the basic tools for understanding convex functions: their definitions, geometric characterisations, first- and second-order tests, and operations that preserve convexity. These tools will later support duality, optimality conditions, and algorithmic analysis.</p>
+<p>This chapter develops the basic tools for understanding convex functions: their definitions, geometric characterisations, first and second-order tests, and operations that preserve convexity. These tools will later support duality, optimality conditions, and algorithmic analysis.</p>
 <h2 id="definitions-of-convexity">Definitions of convexity<a class="headerlink" href="#definitions-of-convexity" title="Permanent link">¶</a></h2>
 <p>A function <span class="arithmatex">\(f : \mathbb{R}^n \to \mathbb{R}\)</span> is convex if for all <span class="arithmatex">\(x,y\)</span> in its domain and all <span class="arithmatex">\(\theta \in [0,1]\)</span>,
 <script type="math/tex; mode=display">
@@ -1318,6 +1293,8 @@ f(\theta x + (1-\theta) y)
 \{ (x,t) \in \mathbb{R}^n \times \mathbb{R} : f(x) \le t \}.
 </script>
 The function <span class="arithmatex">\(f\)</span> is convex if and only if its epigraph is a convex set. This connects convex functions to the convex sets studied earlier.</p>
+<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../images/epi.png" data-desc-position="bottom"><img alt="epi" src="../images/epi.png"></a></p>
+<p><em>A function is convex if and only if the region above its grapH is a convex set. This region is the function's epigraph.: <a href="https://en.wikipedia.org/wiki/Epigraph_(mathematics)">Wikipedia</a></em></p>
 <h2 id="first-order-characterisation">First-order characterisation<a class="headerlink" href="#first-order-characterisation" title="Permanent link">¶</a></h2>
 <p>If <span class="arithmatex">\(f\)</span> is differentiable, then <span class="arithmatex">\(f\)</span> is convex if and only if
 <script type="math/tex; mode=display">
@@ -1348,7 +1325,6 @@ f \text{ is convex } \iff \nabla^2 f(x) \succeq 0 \text{ for all } x.
 <li>If <span class="arithmatex">\(\nabla^2 f(x) \succ 0\)</span> everywhere, the function is strictly convex.  </li>
 <li>Negative eigenvalues indicate directions of negative curvature — impossible for convex functions.</li>
 </ul>
-<p>This characterisation connects convexity to the spectral properties of the Hessian discussed earlier.</p>
 <h2 id="examples-of-convex-functions">Examples of convex functions<a class="headerlink" href="#examples-of-convex-functions" title="Permanent link">¶</a></h2>
 <ol>
 <li>
@@ -1458,37 +1434,6 @@ This property is crucial because inequalities <span class="arithmatex">\(f(x) \l
 <span class="arithmatex">\(\{ x : \|Ax - b\|_2 \le \epsilon \}\)</span></li>
 </ul>
 <p>These sets enable convex constrained optimisation formulations.</p>
-<h2 id="strict-and-strong-convexity">Strict and strong convexity<a class="headerlink" href="#strict-and-strong-convexity" title="Permanent link">¶</a></h2>
-<h3 id="strict-convexity">Strict convexity<a class="headerlink" href="#strict-convexity" title="Permanent link">¶</a></h3>
-<p>A function is strictly convex if
-<script type="math/tex; mode=display">
-f(\theta x + (1-\theta) y)
-<
-\theta f(x) + (1-\theta) f(y)
-</script>
-for all <span class="arithmatex">\(x \neq y\)</span> and <span class="arithmatex">\(\theta \in (0,1)\)</span>.</p>
-<p>Strict convexity implies unique minimisers.</p>
-<h3 id="strong-convexity">Strong convexity<a class="headerlink" href="#strong-convexity" title="Permanent link">¶</a></h3>
-<p>A differentiable function is <span class="arithmatex">\(\mu\)</span>-strongly convex if
-<script type="math/tex; mode=display">
-f(y) 
-\ge 
-f(x) + \nabla f(x)^\top (y - x) + \frac{\mu}{2}\|y - x\|_2^2.
-</script>
-</p>
-<p>Strong convexity adds <em>quantitative curvature</em>: the function grows at least quadratically away from its minimiser.</p>
-<p>Consequences:</p>
-<ul>
-<li>unique minimiser,</li>
-<li>gradient descent achieves linear convergence rate,<br>
-  error shrinks as<br>
-<script type="math/tex; mode=display">
-  \|x_{k+1} - x^\star\| \le (1 - \eta\mu)\|x_k - x^\star\| ,
-  </script>
-</li>
-<li>conditioning (<span class="arithmatex">\(\kappa = L/\mu\)</span>) governs algorithmic difficulty.</li>
-</ul>
-<p>Strong convexity is frequently induced by regularisation (e.g., ridge regression adds <span class="arithmatex">\(\tfrac{\lambda}{2}\|x\|_2^2\)</span>).</p>
 <h2 id="mental-map">Mental Map<a class="headerlink" href="#mental-map" title="Permanent link">¶</a></h2>
 <div class="highlight"><pre><span></span><code>                      Convex Functions
       Objective landscapes with predictable geometry and guarantees
@@ -1561,17 +1506,6 @@ f(x) + \nabla f(x)^\top (y - x) + \frac{\mu}{2}\|y - x\|_2^2.
      │ - Always convex for convex f                                │
      │ - Enables convex inequality constraints                     │
      │ - Norm balls, confidence ellipsoids, feasibility regions    │
-     └─────────────────────────────────────────────────────────────┘
-                              │
-                              ▼
-     ┌─────────────────────────────────────────────────────────────┐
-     │ Strict vs Strong Convexity                                  │
-     │ Strict convexity: unique minimizer                          │
-     │ Strong convexity: f ≥ tangent + (μ/2)‖x−y‖²                 │
-     │ - Quantitative curvature                                    │
-     │ - Linear convergence of gradient descent                    │
-     │ - Conditioning κ=L/μ governs difficulty                     │
-     │ - Often induced via ℓ₂ regularization                       │
      └─────────────────────────────────────────────────────────────┘
 </code></pre></div>
 

@@ -1,6 +1,6 @@
 # Chapter 15: Advanced Large-Scale and Structured Methods
 
-Modern convex optimization often runs at massive scale: millions (or billions) of variables, datasets too large to fit in memory, and constraints spread across machines or devices. Classical Newton or interior-point methods are beautiful mathematically, but their per-iteration cost and memory usage often make them impractical for these regimes.
+Modern convex optimization often runs at massive scale: millions (or billions) of variables, datasets too large to fit in memory, and constraints spread across machines or devices. Per-iteration cost and memory usage often of often makes classical solutions impractical for these regimes.
 
 This chapter introduces methods that exploit structure, sparsity, separability, and stochasticity to make convex optimization scalable. These ideas underpin the optimization engines behind most modern machine learning systems.
 
