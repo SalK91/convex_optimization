@@ -1234,64 +1234,19 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#recursive-least-squares" class="md-nav__link">
+  <a href="#theory-and-pre-requisite-knowledge" class="md-nav__link">
     <span class="md-ellipsis">
-      Recursive Least Squares
+      Theory and Pre-requisite Knowledge
     </span>
   </a>
   
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#kalman-filter-from-recursive-least-squares-to-dynamic-state-estimation" class="md-nav__link">
-    <span class="md-ellipsis">
-      Kalman filter: from recursive least squares to dynamic state estimation
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#state-space-model" class="md-nav__link">
-    <span class="md-ellipsis">
-      State-space model
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="State-space model">
+    <nav class="md-nav" aria-label="Theory and Pre-requisite Knowledge">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#state-and-observations" class="md-nav__link">
+  <a href="#recursive-least-squares" class="md-nav__link">
     <span class="md-ellipsis">
-      State and observations
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#inputs-and-noise" class="md-nav__link">
-    <span class="md-ellipsis">
-      Inputs and noise
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#interpretation-of-system-matrices" class="md-nav__link">
-    <span class="md-ellipsis">
-      Interpretation of system matrices
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#example-models" class="md-nav__link">
-    <span class="md-ellipsis">
-      Example models
+      Recursive Least Squares
     </span>
   </a>
   
@@ -1303,11 +1258,35 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#kalman-filter-from-recursive-least-squares-to-dynamic-state-estimation" class="md-nav__link">
+    <span class="md-ellipsis">
+      Kalman filter: from recursive least squares to dynamic state estimation
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Kalman filter: from recursive least squares to dynamic state estimation">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#state-space-model" class="md-nav__link">
+    <span class="md-ellipsis">
+      State-space model
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#what-is-being-estimated" class="md-nav__link">
     <span class="md-ellipsis">
       What is being estimated?
     </span>
   </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -1970,7 +1949,7 @@ To reduce sensitivity to outliers, we replace the quadratic measurement penalty 
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h2 id="recursive-least-squares">Recursive Least Squares<a class="anchor-link" href="#recursive-least-squares">¶</a></h2><p>Suppose we observe a sequence of data pairs $(\phi_t, y_t)$, where
+<h2 id="theory-and-pre-requisite-knowledge">Theory and Pre-requisite Knowledge<a class="anchor-link" href="#theory-and-pre-requisite-knowledge">¶</a></h2><h3 id="recursive-least-squares">Recursive Least Squares<a class="anchor-link" href="#recursive-least-squares">¶</a></h3><p>Suppose we observe a sequence of data pairs $(\phi_t, y_t)$, where
 $y_t \in \mathbb{R}$ is a scalar measurement and
 $\phi_t \in \mathbb{R}^d$ is a known feature (regressor) vector.
 We assume a linear measurement model</p>
@@ -2011,8 +1990,7 @@ K_t
 {\lambda + \phi_t^\top P_{t-1}\phi_t}.
 $$</p>
 <p>Here, $P_t \in \mathbb{R}^{d \times d}$ is a symmetric positive-definite matrix that quantifies the uncertainty in the parameter estimate. When uncertainty is large or the new data is highly informative, the correction is larger; when uncertainty is small, updates are more conservative.</p>
-<p>RLS is particularly useful in online parameter estimation problems, such as system identification, adaptive control, and signal processing, where data arrives sequentially and model parameters may change slowly over time.</p>
-<p>The central idea behind RLS is to maintain both an estimate of the unknown parameters and a measure of confidence in that estimate, updating both efficiently as new information becomes available.</p>
+<p>RLS is particularly useful in online parameter estimation problems, such as system identification, adaptive control, and signal processing, where data arrives sequentially and model parameters may change slowly over time. The central idea behind RLS is to maintain both an estimate of the unknown parameters and a measure of confidence in that estimate, updating both efficiently as new information becomes available.</p>
 </div>
 </div>
 </div>
@@ -2023,8 +2001,7 @@ $$</p>
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h2 id="kalman-filter-from-recursive-least-squares-to-dynamic-state-estimation">Kalman filter: from recursive least squares to dynamic state estimation<a class="anchor-link" href="#kalman-filter-from-recursive-least-squares-to-dynamic-state-estimation">¶</a></h2><p>Recursive least squares is designed to estimate unknown but essentially static parameters from sequential data. While it is effective for online regression and system identification, it does not explicitly model how the quantity being estimated evolves over time. Any temporal variation must be handled indirectly through mechanisms such as forgetting factors.</p>
-<p>In many real-world problems, however, the unknown quantity is not static. The state of a physical system—such as the position and velocity of a car—changes continuously according to known physical laws, while also being subject to random disturbances. In these settings, we need an estimator that explicitly accounts for system dynamics rather than treating each observation as an independent regression problem.</p>
+<h2 id="kalman-filter-from-recursive-least-squares-to-dynamic-state-estimation">Kalman filter: from recursive least squares to dynamic state estimation<a class="anchor-link" href="#kalman-filter-from-recursive-least-squares-to-dynamic-state-estimation">¶</a></h2><p>Recursive least squares is designed to estimate unknown but essentially static parameters from sequential data. While it is effective for online regression and system identification, it does not explicitly model how the quantity being estimated evolves over time. Any temporal variation must be handled indirectly through mechanisms such as forgetting factors. In many real-world problems, however, the unknown quantity is not static. The state of a physical system—such as the position and velocity of a car—changes continuously according to known physical laws, while also being subject to random disturbances. In these settings, we need an estimator that explicitly accounts for system dynamics rather than treating each observation as an independent regression problem.</p>
 <p>The Kalman filter addresses this limitation by introducing a motion model that describes how the state evolves from one time step to the next, together with a measurement model that links the hidden state to noisy sensor observations. Both models are assumed to be linear, and uncertainty is modeled using Gaussian noise.</p>
 <p>The objective of the Kalman filter is to estimate the hidden state of a dynamical system by optimally combining:</p>
 <ol>
@@ -2043,86 +2020,35 @@ $$</p>
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h2 id="state-space-model">State-space model<a class="anchor-link" href="#state-space-model">¶</a></h2><p>In contrast to recursive least squares, where the unknown quantity is assumed to be static (or slowly varying), the Kalman filter explicitly models how the unknown state evolves over time. This is done using a state-space representation that combines system dynamics with a measurement process.</p>
-<p>We model a discrete-time linear dynamical system as</p>
+<h3 id="state-space-model">State-space model<a class="anchor-link" href="#state-space-model">¶</a></h3><p>We model a discrete-time linear dynamical system as</p>
 <p>$$
 \begin{aligned}
-\text{Motion model:}\quad
+\text{Motion model (State Equation):}\quad
 x_{t+1} &amp;= A x_t + B u_t + w_t, \\
-\text{Measurement model:}\quad
+\text{Measurement model (Observation Equation):}\quad
 y_t &amp;= C x_t + v_t,
 \end{aligned}
 \qquad t = 0,\dots,N-1.
 $$</p>
 <p>The motion model describes how the system state evolves from one time step to the next, while the measurement model specifies how the hidden state gives rise to observable sensor readings.</p>
-<h4 id="state-and-observations">State and observations<a class="anchor-link" href="#state-and-observations">¶</a></h4><p>In a typical vehicle tracking example, the state vector is</p>
-<p>$$
-x_t = (p_x, p_y, v_x, u_y) \in \mathbb{R}^4,
-$$</p>
-<p>where $(p_x, p_y)$ denotes position and $(u_x, u_y)$ denotes velocity.</p>
-<p>The measurement vector is</p>
-<p>$$
-y_t \in \mathbb{R}^2,
-$$</p>
-<p>representing observed position data, for example from a GPS sensor.</p>
-<h3 id="inputs-and-noise">Inputs and noise<a class="anchor-link" href="#inputs-and-noise">¶</a></h3><p>The model includes both control inputs and stochastic disturbances:</p>
+<p>State and observations: In a typical vehicle tracking example, the state vector is $x_t = (p_x, p_y, v_x, u_y) \in \mathbb{R}^4$ where $(p_x, p_y)$ denotes position and $(u_x, u_y)$ denotes velocity. The measurement vector is $y_t \in \mathbb{R}^2$  representing observed position data, for example from a GPS sensor.</p>
+<p>Inputs and noise: The model includes both control inputs and stochastic disturbances:</p>
 <ul>
-<li><p>$u_t \in \mathbb{R}^2$ is a known control input, such as commanded acceleration.<br>
-If the input is unknown, it can be:</p>
-<p>(i) incorporated into the state,
-(ii) absorbed into the process noise, or
-(iii) estimated separately using more advanced smoothing or robust formulations.</p>
-</li>
-<li><p>$w_t \in \mathbb{R}^4$ is process (motion) noise, capturing unmodeled dynamics and random disturbances. It is typically modeled as
-$$
-w_t \sim \mathcal{N}(0, Q),
-$$
-where $Q$ is the process noise covariance.</p>
-</li>
-<li><p>$v_t \in \mathbb{R}^2$ is measurement noise, capturing sensor inaccuracies, modeled as
-$$
-v_t \sim \mathcal{N}(0, R),
-$$
-where $R$ is the measurement noise covariance.</p>
-</li>
+<li>$u_t$ is a known control input, such as commanded acceleration.</li>
+<li>$w_t$ is process (motion) noise, capturing unmodeled dynamics and random disturbances. It is typically modeled as $w_t \sim \mathcal{N}(0, Q)$ where $Q$ is the process noise covariance.</li>
+<li>$v_t$ is measurement noise, capturing sensor inaccuracies, modeled as $v_t \sim \mathcal{N}(0, R)$ where $R$ is the measurement noise covariance.</li>
 </ul>
-<h3 id="interpretation-of-system-matrices">Interpretation of system matrices<a class="anchor-link" href="#interpretation-of-system-matrices">¶</a></h3><ul>
+<p>Interpretation of system matrices:</p>
+<ul>
 <li>$A$ is the state transition matrix; it describes the deterministic evolution of the state.</li>
 <li>$B$ maps the control input $u_t$ into the state.</li>
 <li>$C$ maps the state to the measurement space, indicating which components of the state are observable.</li>
 <li>$Q$ and $R$ quantify uncertainty in the motion and measurement models, respectively.</li>
 </ul>
 <p>Importantly, $A$, $B$, and $C$ describe system structure, not uncertainty; only $Q$ and $R$ are covariance matrices.</p>
-<h3 id="example-models">Example models<a class="anchor-link" href="#example-models">¶</a></h3><p>When a GPS sensor measures position only, the measurement matrix is</p>
-<p>$$
-C =
-\begin{bmatrix}
-1 &amp; 0 &amp; 0 &amp; 0 \\
-0 &amp; 1 &amp; 0 &amp; 0
-\end{bmatrix}.
-$$</p>
-<p>For a constant-velocity motion model with time step $\Delta t$, a common choice is</p>
-<p>$$
-A =
-\begin{bmatrix}
-1 &amp; 0 &amp; \Delta t &amp; 0 \\
-0 &amp; 1 &amp; 0 &amp; \Delta t \\
-0 &amp; 0 &amp; 1 &amp; 0 \\
-0 &amp; 0 &amp; 0 &amp; 1
-\end{bmatrix},
-\qquad
-B =
-\begin{bmatrix}
-\frac{\Delta t^2}{2} &amp; 0 \\
-0 &amp; \frac{\Delta t^2}{2} \\
-\Delta t &amp; 0 \\
-0 &amp; \Delta t
-\end{bmatrix},
-$$</p>
-<p>when $u_t$ represents acceleration inputs in the $x$ and $y$ directions.</p>
-<h2 id="what-is-being-estimated">What is being estimated?<a class="anchor-link" href="#what-is-being-estimated">¶</a></h2><p>At each time step $t$, the Kalman filter maintains two coupled quantities:</p>
+<h3 id="what-is-being-estimated">What is being estimated?<a class="anchor-link" href="#what-is-being-estimated">¶</a></h3><p>At each time step $t$, the Kalman filter maintains two coupled quantities:</p>
 <ul>
-<li>$\hat x_{t|t}$: the estimate of the state after incorporating measurements up to time $t$,</li>
+<li>$\hat x_{t+1|t}$: the estimate of the state after incorporating measurements up to time $t$,</li>
 <li>$P_{t|t}$: the covariance of the estimation error,
 $$
 P_{t|t}
