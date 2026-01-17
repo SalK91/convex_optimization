@@ -62,23 +62,22 @@ theme:
 # Plugins
 # ==========================================================
 plugins:
-#  - social:
-#      cards_layout_options:
-#        background_image: convex/images/optimization.png
-#        #background_color: "#ff149366"
+
   - social:
       cards_layout_options:
-        background_color: "#2C3E56"
+        background_image: layouts/background-v2.png
+        background_color: transparent
+        logo: layouts/background-v2.png
 
   - search
   - autorefs
   - glightbox       # image lightbox support
   - mkdocs-jupyter
-  - print-site:
-      add_to_navigation: true
-      print_page_title: "Print/PDF"
-      include_nav: false
-      include_footer: true
+ # - print-site:
+ #     add_to_navigation: true
+ #     print_page_title: "Print/PDF"
+ #     include_nav: false
+ #     include_footer: true
   
 
       
