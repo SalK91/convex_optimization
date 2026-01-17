@@ -1,14 +1,14 @@
 # ==========================================================
 # Project Information
 # ==========================================================
-site_name: Machine Learning Lecture Notes -  Optimization & Algorithms
+site_name: Optimization & Algorithms
 site_description: "Structured lecture notes on optimization, convex analysis, and algorithms."
 site_author: "Salman Khan"
-repo_url: "https://github.com/SalK91/convex_optimization"
+repo_url: "https://github.com/salmanstack/convex_optimization"
 edit_uri: edit/main/docs/
 repo_name: "GitHub"
 site_url: "https://salk91.github.io/convex_optimization"
-copyright: "© 2025 Salman Khan — Educational Use Only"
+copyright: "© 2026 Salman Khan — Educational Use Only"
 
 # ==========================================================
 # Theme Configuration (Material)
@@ -106,8 +106,17 @@ extra_css:
 extra:
   social:
     - icon: fontawesome/brands/github
-      link: https://github.com/SalK91/convex_optimization
+      link: https://github.com/salmanstack/convex_optimization
   generator: false
+
+  # Social preview image
+  meta:
+    - property: og:image
+      content: images/optimization.png
+    - property: og:title
+      content: Optimization & Algorithms
+    - property: og:description
+      content: Structured lecture notes on optimization, convex analysis, and algorithms.
 
 # ==========================================================
 # Navigation
