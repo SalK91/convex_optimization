@@ -1,13 +1,13 @@
 # ==========================================================
 # Project Information
 # ==========================================================
-site_name: Optimization & Algorithms
-site_description: "Structured lecture notes on optimization, convex analysis, and algorithms."
+site_name: Optimization Algorithms
+site_description: "Case studies and structured notes on optimization, convex analysis, and algorithms."
 site_author: "Salman Khan"
 repo_url: "https://github.com/salmanstack/convex_optimization"
 edit_uri: edit/main/docs/
 repo_name: "GitHub"
-site_url: "https://salk91.github.io/convex_optimization"
+site_url: "https://salmanstack.github.io/convex_optimization"
 copyright: "© 2026 Salman Khan — Educational Use Only"
 
 # ==========================================================
@@ -62,6 +62,14 @@ theme:
 # Plugins
 # ==========================================================
 plugins:
+#  - social:
+#      cards_layout_options:
+#        background_image: convex/images/optimization.png
+#        #background_color: "#ff149366"
+  - social:
+      cards_layout_options:
+        background_color: "#2C3E56"
+
   - search
   - autorefs
   - glightbox       # image lightbox support
@@ -71,6 +79,8 @@ plugins:
       print_page_title: "Print/PDF"
       include_nav: false
       include_footer: true
+  
+
       
 
 # ==========================================================
@@ -91,6 +101,7 @@ markdown_extensions:
       permalink: true
       toc_depth: 1   # only top-level headings in sidebar
 
+
 # ==========================================================
 # Extra JavaScript and Styling
 # ==========================================================
@@ -103,38 +114,15 @@ extra_css:
 # ==========================================================
 # Footer and Social Links
 # ==========================================================
-extra:
-  social:
-    - icon: fontawesome/brands/github
-      link: https://github.com/salmanstack/convex_optimization
-  generator: false
 
-  # Social preview image
-  meta:
-    - property: og:image
-      content: images/optimization.png
-    - property: og:title
-      content: Optimization & Algorithms
-    - property: og:description
-      content: Structured lecture notes on optimization, convex analysis, and algorithms.
-
+ 
 # ==========================================================
 # Navigation
 # ==========================================================
 nav:
-  - Home: "index.md"
-
-  - Case-studies:
-  
-      - 1. I - Linear Programming for Transportation Problems: "convex/tutorials/1_lp_transport.ipynb"
-      - 2. II - Portfolio Optimization: "convex/tutorials/2_portfolio.ipynb"
-      - 3. III - Vehicle Routing with Time Windows: "convex/tutorials/3_meta.ipynb"
-      - 4. IV – Cancer Gene Expression Feature Selection: "convex/tutorials/4_ga.ipynb"
-      - 5. V – Tail-Risk Portfolio Optimization: "convex/tutorials/5_cvar_portfolio.ipynb"
-      - 6. VI – Matchmaking - An Optimal Transport Case Study: "convex/tutorials/6_sinkhorn_speed_dating_ot.ipynb"
-       
 
   - Convex Optimization:
+      - "index.md"
       - 1. Introduction and Overview: "convex/11_intro.md"
       - 2. Linear Algebra Foundations: "convex/12_vector.md"
       - 3. Multivariable Calculus for Optimization: "convex/13_calculus.md"
@@ -158,3 +146,14 @@ nav:
       - 21. Metaheuristic and Evolutionary Optimization: "convex/44_metaheuristic.md"
       - 22. Advanced Topics in Combinatorial Optimization: "convex/48_advanced_combinatorial.md"
  
+  - Case-studies:
+  
+      - 1. I - Linear Programming for Transportation Problems: "convex/tutorials/1_lp_transport.ipynb"
+      - 2. II - Portfolio Optimization: "convex/tutorials/2_portfolio.ipynb"
+      - 3. III - Vehicle Routing with Time Windows: "convex/tutorials/3_meta.ipynb"
+      - 4. IV – Cancer Gene Expression Feature Selection: "convex/tutorials/4_ga.ipynb"
+      - 5. V – Tail-Risk Portfolio Optimization: "convex/tutorials/5_cvar_portfolio.ipynb"
+      - 6. VI – Matchmaking - An Optimal Transport Case Study: "convex/tutorials/6_sinkhorn_speed_dating_ot.ipynb"
+       
+
+  

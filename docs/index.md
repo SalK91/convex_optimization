@@ -1,6 +1,6 @@
 # Lectures on Optimization
 
-Welcome to *Lectures on Optimization*, a structured set of lecture notes designed to build the mathematical foundations required to understand, analyze, and implement modern optimization algorithms, with a strong focus on convex analysis and scalable algorithmic methods central to machine learning.
+Welcome to *Lectures on Optimization*, a structured set of notes designed to build the mathematical foundations required to understand, analyze, and implement modern optimization algorithms, with a strong focus on convex analysis and scalable algorithmic methods central to machine learning.
 
 These notes are inspired by and draw heavily on material from:
 
@@ -16,6 +16,7 @@ The goal is not to reproduce the content from these courses, but to distill, reo
 - Scalable and practical methods used in ML, deep learning, and NLP optimization
 
 These lectures develop intuition, mathematical rigor, and practical algorithmic insight across major areas including:
+
 - Convex sets, convex functions, and problem modeling
 - Gradient, subgradient, Newton, and proximal methods
 - Constrained optimization, duality, and KKT theory
@@ -23,3 +24,6 @@ These lectures develop intuition, mathematical rigor, and practical algorithmic 
 - Large-scale optimization strategies that power real-world machine learning systems
 
 
+
+References:
+* Cover Image from: Amini, Alexander, et al. "Spatial uncertainty sampling for end-to-end control." arXiv preprint arXiv:1805.04829 (2018).
